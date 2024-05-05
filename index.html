@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Binocu - Desarrollador de Software</title>
+    <title>Binocu - Latam</title>
     <style>
         body {
             background-color: #f0f0f0;
@@ -16,25 +16,47 @@
             font-size: 20px;
             font-family: Arial, sans-serif;
         }
-        .container {
+        .container, .legal-note {
             text-align: center;
             padding: 20px;
         }
-        a {
+        a, .button {
             color: #007bff;
             text-decoration: none;
+            padding: 10px 20px;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 10px 5px;
+            transition: background-color 0.3s, color 0.3s;
         }
-        a:hover {
-            text-decoration: underline;
+        a:hover, .button:hover {
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+        }
+        .legal-note {
+            font-size: 14px;
+            margin-top: 40px;
+        }
+        .support-email {
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Binocu</h1>
-        <p>Bienvenidos a Binocu, una empresa de desarrollo de software con sede en Colombia, América Latina. Esta página es una vista previa de nuestro trabajo mientras nuestro sitio web está en desarrollo.</p>
-        <p>Para conocer más sobre nuestras aplicaciones ya publicadas, por favor visite nuestra <a href="https://play.google.com/store/apps/developer?id=Binocu" target="_blank">página en Google Play Store</a>.</p>
-        <p>Estamos comprometidos en crear software interesante y de alta calidad para nuestros usuarios.</p>
+        <p>Somos el equipo detrás de Infr4net y Conejoz</p>
+        <div>
+            <a href="https://play.google.com/store/apps/details?id=com.binocu.conejoz&hl=en_US&gl=US&pli=1" class="button" target="_blank">Explorar Conejoz</a>
+            <a href="https://www.infr4net.io/" class="button" target="_blank">Descubrir Infr4net</a>
+        </div>
+        <p>Para más información o asistencia, contáctenos en <a href="mailto:soporte@binocu.io">soporte@binocu.io</a>.</p>
+    </div>
+    <div class="legal-note">
+        <p>Binocu SAS, Colombia. NIT: 901792850-1</p>
+        <p>Creado con amor por <a href="https://github.com/ivanrobayo" target="_blank">Iván Robayo</a>. Programador Indie. Visita mi <a href="https://ivanrobayo.com" target="_blank">sitio web personal</a>.</p>
     </div>
 </body>
 </html>
