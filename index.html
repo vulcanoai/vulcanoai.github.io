@@ -4,35 +4,41 @@
     <meta charset="UTF-8">
     <title>Binocu - Latam</title>
     <style>
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
         body {
-            background-color: #f0f0f0;
+            background-color: #000;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            color: #333;
+            color: #0f0;
             font-size: 20px;
-            font-family: Arial, sans-serif;
+            font-family: 'Courier New', Courier, monospace;
         }
         .container, .legal-note {
             text-align: center;
             padding: 20px;
         }
         a, .button {
-            color: #007bff;
+            color: #0f0;
             text-decoration: none;
             padding: 10px 20px;
-            border: 1px solid #007bff;
+            border: 1px solid #0f0;
             border-radius: 5px;
             display: inline-block;
             margin: 10px 5px;
             transition: background-color 0.3s, color 0.3s;
+            animation: blink 1s step-end infinite;
         }
         a:hover, .button:hover {
-            background-color: #007bff;
-            color: #fff;
+            background-color: #0f0;
+            color: #000;
             text-decoration: none;
         }
         .legal-note {
@@ -52,11 +58,11 @@
             <a href="https://play.google.com/store/apps/details?id=com.binocu.conejoz&hl=en_US&gl=US&pli=1" class="button" target="_blank">Explorar Conejoz</a>
             <a href="https://www.infr4net.io/" class="button" target="_blank">Descubrir Infr4net</a>
         </div>
-        <p>Para más información o asistencia, contáctenos en <a href="mailto:soporte@binocu.io">soporte@binocu.io</a>.</p>
+        <p>Puedes contactarnos en cualquier momento en <a href="mailto:soporte@binocu.io">soporte@binocu.io</a></p>
     </div>
     <div class="legal-note">
         <p>Binocu SAS, Colombia. NIT: 901792850-1</p>
-        <p>Creado con amor por <a href="https://github.com/ivanrobayo" target="_blank">Iván Robayo</a>. Programador Indie. Visita mi <a href="https://ivanrobayo.com" target="_blank">sitio web personal</a>.</p>
+        <p>Creado con amor por <a href="https://github.com/navirobayo" target="_blank">Ivan Robayo</a> Programador Indie. Puedes conocer más en mi <a href="https://navirobayo.wixstudio.io/about" target="_blank">sitio web personal</a></p>
     </div>
 </body>
 </html>
