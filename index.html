@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
-    <title>Vulcano.ai - Please Stand by - Vulcano.ai - Please Stand by Vulcano.ai - Please Stand by.</title>
+    <title>Vulcano.ai - Please Stand by</title>
     <style>
         body {
             background-color: #ffffff;
@@ -44,6 +44,24 @@
 
             100% {
                 transform: rotate(360deg);
+            }
+        }
+
+        .pulsate {
+            animation: pulsate 2s infinite;
+        }
+
+        @keyframes pulsate {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 1;
             }
         }
 
@@ -91,9 +109,9 @@
 <body>
     <div class="container">
         <img src="assets/Vulcano-Blue-Transparent.png" alt="Vulcano">
-        <p>Estamos codificando nuestra nave espacial. Stand by.</p>
-        <p>Software Escrito en Colombia. Stand by.</p>
-        <p>Somos Vulcano.ai</p>
+        <p class="pulsate">Estamos codificando nuestra nave espacial. Please Stand By.</p>
+        <p class="pulsate">Software Escrito en Colombia. Please Stand By.</p>
+        <p class="pulsate">Somos Vulcano.ai</p>
         <div class="social-links">
             <a href="https://www.instagram.com/vulcano.ai" target="_blank">Instagram | </a>
             <a href="https://www.linkedin.com/company/vulcano-ai" target="_blank">LinkedIn</a>
