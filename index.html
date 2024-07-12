@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
-    <title>Estamos configurando nuestra nave espacial. Stand by. </title>
+    <title>Estamos codificando nuestro proyecto. Stand by.</title>
     <style>
         body {
             background-color: #000;
@@ -21,9 +21,7 @@
             font-family: 'Space Grotesk', Courier, monospace;
         }
 
-        .container,
-
-        img {
+        .container {
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -31,14 +29,45 @@
             width: 50%;
             margin-bottom: 20px;
         }
+
+        img {
+            width: 50%;
+            margin-bottom: 20px;
+            animation: spin 5s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-links a {
+            color: #0f0;
+            text-decoration: none;
+            font-size: 24px;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <img src="assets/transparent_binocu_green.png" alt="Binocu">
-        <p>Estamos configurando nuestra nave espacial. Stand by.</p>
-
+        <img src="assets/vulcano-white.png" alt="Vulcano">
+        <p>Estamos codificando nuestro proyecto. Stand by.</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/yourprofile" target="_blank">Instagram</a>
+            <a href="https://www.linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
+        </div>
+    </div>
 </body>
 
 </html>
