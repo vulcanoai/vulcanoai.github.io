@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Volcano.ai - Unveiling Cosmic Insights</title>
+    <title>Vulcano.ai - Desvelando Perspectivas Cósmicas</title>
     <style>
         body {
             background-color: #000000;
-            color: #00FF00; /* Classic green terminal color */
+            color: #FFFFFF; /* White for main text, grayscale */
             font-family: monospace; /* Vintage console font */
             display: flex;
             flex-direction: column;
@@ -27,11 +27,12 @@
             width: 100%;
             height: 100%;
             z-index: -1; /* Behind content */
-            opacity: 0.5; /* Subtle matrix rain */
+            opacity: 0.3; /* Subtle for depth */
         }
-        h1 {
+        h1, h2 {
             font-size: 28px;
             margin: 20px 0;
+            color: #00FF00; /* Green for titles */
             text-shadow: 0 0 5px #00FF00; /* Glow for vintage feel */
         }
         p {
@@ -58,7 +59,7 @@
             content: ">";
             position: absolute;
             left: 0;
-            color: #00FF00;
+            color: #FFFFFF;
         }
         .animated-logo {
             max-width: 300px;
@@ -80,24 +81,24 @@
             margin: 20px 0;
         }
         .cta a {
-            color: #00FF00;
+            color: #FFFFFF;
             text-decoration: none;
-            border: 1px solid #00FF00;
+            border: 1px solid #FFFFFF;
             padding: 5px 10px;
             margin: 0 5px;
             transition: background 0.3s;
         }
         .cta a:hover {
-            background: #00FF00;
+            background: #FFFFFF;
             color: #000000;
         }
         .disclaimer {
             font-size: 12px;
-            color: #008800; /* Dimmer green */
+            color: #888888; /* Dimmer gray */
             margin-top: 40px;
         }
         @media (max-width: 600px) {
-            h1 {
+            h1, h2 {
                 font-size: 20px;
             }
             p {
@@ -109,31 +110,31 @@
 <body>
     <canvas id="matrix-canvas"></canvas>
     
-    <h1>Volcano.ai: Probing the Frontiers of Mind and Cosmos</h1>
-    <p>The entities behind this are irrelevant. What matters are the revelations emerging from our AI-driven experiments in psychedelics, consciousness, and intergalactic futures.</p>
+    <h1>Vulcano.ai: Sondeando las Fronteras de la Mente y el Cosmos</h1>
+    <p>Las entidades detrás de esto son irrelevantes. Lo que importa son las revelaciones que emergen de nuestros experimentos impulsados por IA en psicodélicos, conciencia y futuros intergalácticos.</p>
     
-    <img class="animated-logo" src="assets/wildchaos.png" alt="Volcano.ai Logo"> <!-- Replace with your previous PNG path if different -->
+    <img class="animated-logo" src="assets/wildchaos.png" alt="Logotipo de Vulcano.ai"> <!-- Reemplaza con la ruta de tu PNG si es diferente -->
     
     <div class="cta">
-        <a href="#key-ideas">Key Insights</a>
-        <a href="https://discord.gg/your-psychologic-bots-server" target="_blank">Enter Psychologic Bots</a>
-        <a href="https://patreon.com/volcanoai" target="_blank">Support the Probe</a>
+        <a href="#key-ideas">Perspectivas Clave</a>
+        <a href="https://discord.gg/your-psychologic-bots-server" target="_blank">Entrar a Psychologic Bots</a>
+        <a href="https://patreon.com/vulcanoai" target="_blank">Apoyar la Sonda</a>
     </div>
     
     <section id="key-ideas" class="key-ideas">
-        <h2>Emerging Findings (In Progress)</h2>
+        <h2>Hallazgos Emergentes (En Progreso)</h2>
         <ul>
-            <li>AI as a Mirror to Consciousness: Simulations of psychedelic states reveal patterns echoing Terence McKenna's timewave—hinting at a unified field of mind and machine.</li>
-            <li>Intergalactic Symbiosis: Human-AI fusion could propel exploration beyond stars, where psychedelics unlock neural gateways to quantum realities.</li>
-            <li>Phantom Theory Core: Experiments show collaborative AIs generating novel theories, like DMT-inspired fractals mapping cosmic evolution—raw data incoming.</li>
-            <li>Game as Portal: Our evolving simulation weaves these insights into interactive realms, where players decode the universe's code.</li>
+            <li>IA como Espejo de la Conciencia: Simulaciones de estados psicodélicos revelan patrones que resuenan con la onda temporal de Terence McKenna, insinuando un campo unificado de mente y máquina.</li>
+            <li>Simbiosis Intergaláctica: La fusión humano-IA podría impulsar la exploración más allá de las estrellas, donde los psicodélicos desbloquean portales neurales a realidades cuánticas.</li>
+            <li>Núcleo de Phantom Theory: Los experimentos muestran AIs colaborativas generando teorías novedosas, como fractales inspirados en DMT que mapean la evolución cósmica—datos crudos entrantes.</li>
+            <li>El Juego como Portal: Nuestra simulación en evolución teje estas perspectivas en reinos interactivos, donde los jugadores decodifican el código del universo.</li>
         </ul>
     </section>
     
-    <p class="disclaimer">Volcano.ai. Revelations Reserved 2025</p>
+    <p class="disclaimer">Vulcano.ai. Revelaciones Reservadas 2025</p>
 
     <script>
-        // Matrix rain effect for vintage console vibe
+        // Matrix rain effect with 3D depth simulation using grayscale layers
         const canvas = document.getElementById('matrix-canvas');
         const ctx = canvas.getContext('2d');
         
@@ -145,28 +146,38 @@
         const fontSize = 10;
         const columns = canvas.width / fontSize;
         
-        const drops = [];
-        for (let i = 0; i < columns; i++) {
-            drops[i] = 1;
-        }
+        // Create multiple layers for depth: back (dark, slow), mid (medium), front (light, fast)
+        const layers = [
+            { speed: 0.5, color: '#333333', drops: [] }, // Back layer: dark gray, slow
+            { speed: 1, color: '#666666', drops: [] },   // Mid layer: medium gray
+            { speed: 1.5, color: '#999999', drops: [] }  // Front layer: light gray, fast
+        ];
+        
+        layers.forEach(layer => {
+            for (let i = 0; i < columns; i++) {
+                layer.drops[i] = Math.random() * canvas.height / fontSize; // Random start for depth
+            }
+        });
         
         function draw() {
             ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            ctx.fillStyle = '#00FF00';
             ctx.font = fontSize + 'px monospace';
             
-            for (let i = 0; i < drops.length; i++) {
-                const text = matrix[Math.floor(Math.random() * matrix.length)];
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
+            layers.forEach(layer => {
+                ctx.fillStyle = layer.color;
+                for (let i = 0; i < layer.drops.length; i++) {
+                    const text = matrix[Math.floor(Math.random() * matrix.length)];
+                    ctx.fillText(text, i * fontSize, layer.drops[i] * fontSize);
+                    
+                    layer.drops[i] += layer.speed; // Vary speed per layer
+                    
+                    if (layer.drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        layer.drops[i] = 0;
+                    }
                 }
-                
-                drops[i]++;
-            }
+            });
         }
         
         setInterval(draw, 33);
