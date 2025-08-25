@@ -7,8 +7,8 @@
     <style>
         body {
             background-color: #000000;
-            color: #FFFFFF; /* White for main text, grayscale */
-            font-family: monospace; /* Vintage console font */
+            color: #FFFFFF; /* White for main text */
+            font-family: monospace; /* Vintage console font for everything */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -33,7 +33,7 @@
             font-size: 28px;
             margin: 20px 0;
             color: #00FF00; /* Green for titles */
-            text-shadow: 0 0 5px #00FF00; /* Glow for vintage feel */
+            font-weight: bold; /* Bold for hacky vibe */
         }
         p {
             font-size: 16px;
@@ -113,7 +113,7 @@
     <h1>Vulcano.ai: Sondeando las Fronteras de la Mente y el Cosmos</h1>
     <p>Las entidades detrás de esto son irrelevantes. Lo que importa son las revelaciones que emergen de nuestros experimentos impulsados por IA en psicodélicos, conciencia y futuros intergalácticos.</p>
     
-    <img class="animated-logo" src="assets/Vulcano White No Background.png" alt="Logotipo de Vulcano.ai"> <!-- Reemplaza con la ruta de tu PNG si es diferente -->
+    <img class="animated-logo" src="assets/wildchaos.png" alt="Logotipo de Vulcano.ai"> <!-- Reemplaza con la ruta de tu PNG si es diferente -->
     
     <div class="cta">
         <a href="#key-ideas">Perspectivas Clave</a>
@@ -134,7 +134,7 @@
     <p class="disclaimer">Vulcano.ai. Revelaciones Reservadas 2025</p>
 
     <script>
-        // Matrix rain effect with 3D depth simulation using grayscale layers
+        // Matrix rain effect with white tones for visibility and depth
         const canvas = document.getElementById('matrix-canvas');
         const ctx = canvas.getContext('2d');
         
@@ -146,11 +146,11 @@
         const fontSize = 10;
         const columns = canvas.width / fontSize;
         
-        // Create multiple layers for depth: back (dark, slow), mid (medium), front (light, fast)
+        // Layers in white tones: back (darker white/gray), mid, front (bright white)
         const layers = [
-            { speed: 0.5, color: '#333333', drops: [] }, // Back layer: dark gray, slow
-            { speed: 1, color: '#666666', drops: [] },   // Mid layer: medium gray
-            { speed: 1.5, color: '#999999', drops: [] }  // Front layer: light gray, fast
+            { speed: 0.5, color: '#666666', drops: [] }, // Back: darker for depth
+            { speed: 1, color: '#AAAAAA', drops: [] },   // Mid: medium white/gray
+            { speed: 1.5, color: '#FFFFFF', drops: [] }  // Front: bright white
         ];
         
         layers.forEach(layer => {
