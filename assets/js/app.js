@@ -124,10 +124,16 @@ async function initLegal(container){
     box.className='timeline-item';
     const d = it.fecha ? new Date(it.fecha).toLocaleDateString('es-ES') : '';
     box.innerHTML = `
-      <div class="head"><span class="tag">${it.pais}</span><span class="tag">${it.estado}</span></div>
+      <div class="head">
+        <span class="tag">${it.pais}</span>
+        <span class="tag">${it.estado}</span>
+        <span class="item" style="margin-left:auto; display:inline-flex; align-items:center; gap:6px">
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#calendar"></use></svg>${d}
+        </span>
+      </div>
       <h4 class="title">${it.titulo}</h4>
       <p>${it.resumen||''}</p>
-      <div class="meta"><a href="${it.url}" target="_blank" rel="noopener">Fuente oficial</a></div>
+      <div class="meta"><a href="${it.url}" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#link"></use></svg> Fuente oficial</a></div>
     `;
     container.appendChild(box);
   }

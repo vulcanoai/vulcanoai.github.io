@@ -28,7 +28,7 @@ body{
 .site-header{position:sticky; top:0; z-index:50; background:rgba(11,12,16,.8); backdrop-filter: blur(8px); border-bottom:1px solid var(--line)}
 .header-inner{display:flex; align-items:center; gap:16px; padding:10px 0}
 .brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text)}
-.logo{width:32px; height:32px}
+.logo{width:32px; height:32px; color:var(--brand)}
 .logo.small{width:24px; height:24px}
 .brand-text{font-weight:700; letter-spacing:.5px}
 .site-nav{margin-left:auto; display:flex; gap:14px}
@@ -74,11 +74,12 @@ h2{margin:0 0 16px}
 @media (max-width: 900px){ .news-grid{grid-template-columns:repeat(2,1fr)} }
 @media (max-width: 620px){ .news-grid{grid-template-columns:1fr} .nav-toggle{display:block} .site-nav{display:none} }
 
-.card{background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; display:flex; flex-direction:column}
-.card .media{aspect-ratio:16/9; background:#0e0f13}
+.card{background:var(--panel); border:1px solid var(--line); border-radius:14px; display:flex; flex-direction:column}
 .card .body{padding:12px; display:flex; flex-direction:column; gap:8px}
 .card .title{font-size:16px; margin:0}
-.card .meta{display:flex; gap:8px; flex-wrap:wrap; color:var(--muted); font-size:13px}
+.card .meta{display:flex; gap:12px; flex-wrap:wrap; color:var(--muted); font-size:13px}
+.meta .item{display:inline-flex; align-items:center; gap:6px}
+.icon{width:14px; height:14px; display:inline-block}
 .chip{display:inline-flex; align-items:center; gap:6px; padding:4px 8px; border-radius:999px; border:1px solid var(--line); background:rgba(255,255,255,.02); color:var(--muted); font-size:12px}
 .chip.ok{border-color:rgba(25,195,125,.35); color:#9af0c8}
 .chip.warn{border-color:rgba(251,191,36,.35); color:#ffe29c}
@@ -115,6 +116,8 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
 /* Links */
 a{color:#cde1ff}
 a:hover{color:#fff}
+.chip a{color:inherit; text-decoration:none}
+.chip a:hover{color:#fff}
 
 /* Utility */
 .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0}

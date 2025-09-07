@@ -41,10 +41,11 @@
     topics: a.topics || a.temas || [],
     language: a.language || a.idioma || 'es',
     published_at: a.published_at || a.fecha || new Date().toISOString(),
-    image_url: a.image_url || a.imagen || '',
+    // image_url intencionalmente ignorado para UI mínima sin imágenes
     relevance: a.relevance || a.relevancia || 0,
     sentiment: a.sentiment || a.sentimiento || 'neutral',
-    author: a.author || a.autor || ''
+    author: a.author || a.autor || '',
+    curator: a.curator || a.curador || 'Agente IA'
   });
 
   async function fetchJSON(url){
@@ -124,26 +125,45 @@
     }
   }
 
+  function qp(params){
+    const p = new URLSearchParams(params);
+    return `/pages/noticias.html?${p.toString()}`;
+  }
+
+  function icon(id){
+    const s = document.createElementNS('http://www.w3.org/2000/svg','svg');
+    s.setAttribute('class','icon');
+    s.setAttribute('aria-hidden','true');
+    const u = document.createElementNS('http://www.w3.org/2000/svg','use');
+    u.setAttributeNS('http://www.w3.org/1999/xlink','href',`/assets/icons.svg#${id}`);
+    s.appendChild(u);
+    return s;
+  }
+
   function card(a){
     const el = create('article','card');
-    const media = create('div','media');
-    if (a.image_url){
-      const img = new Image(); img.loading='lazy'; img.alt = a.title; img.src = a.image_url; img.style.width='100%'; img.style.height='100%'; img.style.objectFit='cover';
-      media.appendChild(img);
-    }
     const body = create('div','body');
     const title = create('h3','title');
     const link = create('a'); link.href=a.url; link.target='_blank'; link.rel='noopener'; link.textContent=a.title; title.appendChild(link);
     const summary = create('p'); summary.textContent = a.summary || '';
+
+    // Chips enlazables
+    const chips = create('div','meta');
+    const countryChip = create('span','chip'); countryChip.innerHTML = `<a href="${qp({pais:a.country})}">${a.country}</a>`; chips.appendChild(countryChip);
+    for(const t of (a.topics||[]).slice(0,2)){
+      const c = create('span','chip'); c.innerHTML = `<a href="${qp({tema:t})}">${t}</a>`; chips.appendChild(c);
+    }
+
+    // Meta compacta con iconos
     const meta = create('div','meta');
-    meta.innerHTML = `
-      <span class="chip">${a.country}</span>
-      ${a.topics.slice(0,2).map(t=>`<span class="chip">${t}</span>`).join('')}
-      <span>${a.source}</span>
-      <span>· ${fmtDate(a.published_at)}</span>
-    `;
-    body.append(title, summary, meta);
-    el.append(media, body);
+    const mDate = create('span','item'); mDate.append(icon('calendar'), document.createTextNode(fmtDate(a.published_at)));
+    const mSource = create('span','item'); const srcA = create('a'); srcA.href = qp({fuente:a.source}); srcA.textContent = a.source; mSource.append(icon('source'), srcA);
+    const mAuthor = create('span','item'); mAuthor.append(icon('user'), document.createTextNode(a.author || '—'));
+    const mCur = create('span','item'); mCur.append(icon('robot'), document.createTextNode(a.curator));
+    meta.append(mDate, mSource, mAuthor, mCur);
+
+    body.append(title, summary, chips, meta);
+    el.append(body);
     return el;
   }
 

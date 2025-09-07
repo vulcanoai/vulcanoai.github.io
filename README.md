@@ -22,7 +22,8 @@ pages/
 assets/
   css/styles.css
   js/{config.js,feed.js,app.js}
-  img/{logo.svg,favicon.svg}
+  icons.svg
+  img/{favicon.svg}
 data/
   sample-feed.json
   agents.json
@@ -126,13 +127,14 @@ Sugerencias de agentes: rastreadores por país (Senado/Cámara, diarios oficiale
 
 ## Marca y contenido
 
-- Cambia logo/favicon en `assets/img/`
+- Sin fotografías/stock. La UI usa iconos en `assets/icons.svg` (heredan `currentColor`).
+- Cambia favicon en `assets/img/`
 - Ajusta colores en `assets/css/styles.css`
 - Edita textos de navegación y footer en cada HTML
 
 ## SEO básico
 
-- Completa `og:image` en `index.html` (sube un banner a `assets/img/og-banner.png`)
+- Define `og:image` en `index.html` (puedes usar un SVG ligero `assets/img/og-banner.svg`)
 - Opcional: agrega `sitemap.xml` y `robots.txt`
 
 ## Licencias y fuentes
