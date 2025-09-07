@@ -200,6 +200,7 @@ Consulta `SECURITY.md` para detalles y práctica recomendada.
 - WhatsApp: +57 319 362 0926 — abre `https://wa.me/573193620926` y escribe “ALTA DIARIO” o “ALTA SEMANAL”.
 - Instagram: https://instagram.com/vulcanoai.solutions
 - X (Twitter): https://x.com/VulcanoAi
+- LinkedIn: https://www.linkedin.com/company/vulcano-ai/
 
 Página dedicada: `pages/actualizaciones.html`. El formulario compone el mensaje y abre WhatsApp con el texto sugerido. La frecuencia no se guarda en el cliente; el manejo se realiza en n8n/WA Business.
 

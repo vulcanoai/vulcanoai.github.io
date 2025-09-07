@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="color-scheme" content="dark light" />
-    <title>Actualizaciones — Vulcano Ai</title>
+    <title>Apoya el proyecto — Vulcano Ai</title>
     <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="/assets/css/styles.css" />
   </head>
@@ -20,6 +20,7 @@
           <a href="/pages/noticias.html">Noticias</a>
           <a href="/pages/panorama.html">Panorama</a>
           <a href="/pages/observatorio-legal.html">Observatorio legal</a>
+          <a href="/pages/actualizaciones.html">Actualizaciones</a>
           <a href="/pages/agentes.html">Agentes</a>
           <a href="/pages/fuentes.html">Fuentes</a>
           <a href="/pages/vulcano.html">Qué es Vulcano AI</a>
@@ -28,34 +29,43 @@
     </header>
     <main class="section" id="main">
       <div class="container">
-        <h1>Actualizaciones</h1>
-        <div class="panel">
-          <h3>WhatsApp</h3>
-          <p>Recibe noticias de IA en LATAM directamente en tu WhatsApp, a la hora y frecuencia que prefieras.</p>
-          <form id="wa-form" class="form-grid">
-            <label>Frecuencia</label>
-            <div>
-              <label><input type="radio" name="freq" value="diarias" checked> Diarias</label>
-              <label style="margin-left:10px"><input type="radio" name="freq" value="semanales"> Semanales</label>
+        <h1><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#heart"></use></svg> Apoya el proyecto</h1>
+        <p class="muted">Vulcano Ai es independiente. Si te aporta valor, puedes apoyar con una contribución económica o uniéndote a la comunidad.</p>
+
+        <div class="donate-grid">
+          <div class="donate-card">
+            <div class="left"><svg class="icon"><use href="/assets/icons.svg#patreon"></use></svg> Patreon</div>
+            <a class="btn" href="https://patreon.com/vulcanoai?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink" target="_blank" rel="noopener">Abrir</a>
+          </div>
+          <div class="donate-card">
+            <div class="left"><svg class="icon"><use href="/assets/icons.svg#mercadopago"></use></svg> MercadoPago</div>
+            <a class="btn" href="https://link.mercadopago.com.co/vulcanoai" target="_blank" rel="noopener">Abrir</a>
+          </div>
+          <div class="donate-card">
+            <div class="left"><svg class="icon"><use href="/assets/icons.svg#nequi"></use></svg> Nequi</div>
+            <div class="right"><span class="chip">+57 319 362 0926</span> <button class="btn copy-btn" data-copy="+57 319 362 0926">Copiar</button></div>
+          </div>
+          <div class="donate-card">
+            <div class="left"><svg class="icon"><use href="/assets/icons.svg#link"></use></svg> Bre-b (P2P)</div>
+            <div class="right" id="breb-box">
+              <code class="chip" data-key data-label="Bre-b Principal">breb1qxy2kgdygjrsqtzq2n0...</code>
+              <button class="btn copy-btn" data-copy="breb1qxy2kgdygjrsqtzq2n0...">Copiar</button>
             </div>
-            <div></div>
-            <div class="form-actions">
-              <a id="wa-link" class="btn primary" target="_blank" rel="noopener"><svg class="icon"><use href="/assets/icons.svg#whatsapp"></use></svg> Abrir WhatsApp</a>
-              <span class="note">Número: +57 319 362 0926. Mensaje de alta sugerido: “ALTA {DIARIO|SEMANAL}”.</span>
-            </div>
-          </form>
-        </div>
-        <div class="panel" style="margin-top:12px">
-          <h3>Redes</h3>
-          <div class="social-row">
-            <a href="https://instagram.com/vulcanoai.solutions" target="_blank" rel="noopener"><svg class="icon"><use href="/assets/icons.svg#instagram"></use></svg> Instagram</a>
-            <a href="https://x.com/VulcanoAi" target="_blank" rel="noopener"><svg class="icon"><use href="/assets/icons.svg#x"></use></svg> X</a>
-            <a href="https://www.linkedin.com/company/vulcano-ai/" target="_blank" rel="noopener"><svg class="icon"><use href="/assets/icons.svg#linkedin"></use></svg> LinkedIn</a>
           </div>
         </div>
+
         <div class="panel" style="margin-top:12px">
-          <h3>Privacidad</h3>
-          <p class="note">Los mensajes por WhatsApp pueden contener datos personales. Consulta nuestra <a href="/pages/legal/privacidad.html">Política de Privacidad</a>. Puedes darte de baja en cualquier momento escribiendo “BAJA”.</p>
+          <h3>Comunidad</h3>
+          <div class="social-row">
+            <a href="https://discord.gg/7AjU7kkH" target="_blank" rel="noopener"><svg class="icon"><use href="/assets/icons.svg#link"></use></svg> Discord</a>
+            <a href="https://www.twitch.tv/vulcanoai" target="_blank" rel="noopener"><svg class="icon"><use href="/assets/icons.svg#sparkles"></use></svg> Twitch</a>
+          </div>
+          <p class="note">En Discord conversamos sobre ideas y desarrollo. En Twitch transmitimos avances y hacemos Q&A.</p>
+        </div>
+
+        <div class="panel" style="margin-top:12px">
+          <h3>Transparencia</h3>
+          <p class="note">Tu contribución apoya la infraestructura, el tiempo de cómputo y el desarrollo abierto. Publicaremos resúmenes de uso de fondos periódicamente.</p>
         </div>
       </div>
     </main>
@@ -78,3 +88,4 @@
     <script src="/assets/js/app.js"></script>
   </body>
   </html>
+

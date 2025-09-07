@@ -133,6 +133,14 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
 .social-row a:hover{background:#30363d}
 .social-row .icon{width:16px; height:16px}
 
+/* Donate grid */
+.donate-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
+@media (max-width: 700px){ .donate-grid{grid-template-columns:1fr} }
+.donate-card{display:flex; align-items:center; justify-content:space-between; padding:12px; border:1px solid var(--line); border-radius:8px; background:var(--panel)}
+.donate-card .left{display:flex; align-items:center; gap:10px}
+.donate-card .icon{width:18px; height:18px}
+.copy-btn{margin-left:8px}
+
 /* Legal observatory */
 .legal-grid{display:grid; grid-template-columns:2fr 1fr; gap:16px}
 @media (max-width: 900px){ .legal-grid{grid-template-columns:1fr} }
