@@ -1,4 +1,4 @@
-# AI LATAM — Estructura base del sitio
+# Vulcano Ai — Estructura base del sitio
 
 Sitio estático en español para coordinar y visualizar un canal de noticias del ecosistema de IA en América Latina. Incluye:
 

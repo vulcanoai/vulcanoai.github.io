@@ -7,9 +7,9 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="color-scheme" content="dark light" />
-    <title>AI LATAM — Noticias y panorama del ecosistema</title>
+    <title>Vulcano Ai — Noticias y panorama del ecosistema</title>
     <meta name="description" content="Canal de noticias y panorama del ecosistema de IA en América Latina: investigación, inversión, regulación y startups, curado por agentes autónomos." />
-    <meta property="og:title" content="AI LATAM — Noticias y panorama del ecosistema" />
+    <meta property="og:title" content="Vulcano Ai — Noticias y panorama del ecosistema" />
     <meta property="og:description" content="Noticias y análisis sobre IA en América Latina. Curado automáticamente, verificado por humanos." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="/" />
@@ -29,7 +29,7 @@
         <a class="brand" href="/">
           <!-- Inline icon logo for minimal, image-free UI -->
           <svg class="logo" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>
-          <span class="brand-text">AI LATAM</span>
+          <span class="brand-text">Vulcano Ai</span>
         </a>
         <button class="nav-toggle" aria-label="Abrir menú">☰</button>
         <nav class="site-nav" aria-label="Principal">
@@ -113,9 +113,51 @@
       <section class="section">
         <div class="container">
           <div class="panel">
-            <h3>El experimento AI LATAM</h3>
+            <h3>El experimento Vulcano Ai</h3>
             <p>Este proyecto es un experimento abierto de curaduría automatizada por agentes + verificación humana. La meta: organizar con rigor científico las señales de IA en Latinoamérica, correlacionando fuentes, fechas, autores/as y curadores, sin tomar partido editorial.</p>
             <p class="note">Metodología, transparencia de fuentes y trazabilidad están detalladas en <a href="/pages/fuentes.html">Fuentes y metodología</a>.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hook: búsqueda en tiempo real + trigger de actualización -->
+      <section class="section">
+        <div class="container">
+          <div class="grid" style="grid-template-columns:2fr 1fr; gap:16px">
+            <div class="panel" id="live-search">
+              <h3><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#search"></use></svg> Búsqueda en tiempo real</h3>
+              <p class="note">Explora noticias personalizadas. Un agente de IA buscará y devolverá resultados. Tus hallazgos se agregarán al feed con autoría anónima (hash) y podrás reclamar coautoría al final.</p>
+              <form id="live-search-form" class="form-grid">
+                <label for="live-q">¿Qué te interesa?</label>
+                <input id="live-q" name="q" placeholder="Ej.: regulación deepfakes en México, 2024‑2025" />
+                <label for="live-country">País (opcional)</label>
+                <input id="live-country" name="country" placeholder="México, Colombia, Regional…" />
+                <label for="live-topics">Temas (opcional)</label>
+                <input id="live-topics" name="topics" placeholder="Regulación, Startups" />
+                <div></div>
+                <div class="form-actions">
+                  <button type="submit" class="btn primary"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#sparkles"></use></svg> Buscar ahora</button>
+                  <span data-live-status class="note"></span>
+                </div>
+              </form>
+              <div id="live-claim" class="panel" style="display:none; margin-top:12px">
+                <h4>¿Quieres aparecer como coautor/a?</h4>
+                <form id="claim-form" class="form-grid">
+                  <label for="alias">Alias</label>
+                  <input id="alias" name="alias" placeholder="tu-nombre-o-seudónimo" />
+                  <label for="email">Email</label>
+                  <input id="email" name="email" type="email" placeholder="Opcional, para confirmar" />
+                  <div></div>
+                  <div class="form-actions"><button class="btn">Reclamar autoría</button><span data-claim-status class="note"></span></div>
+                </form>
+              </div>
+            </div>
+            <div class="panel">
+              <h3><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#refresh"></use></svg> Regar la planta</h3>
+              <p>Haz ping para que los agentes actualicen señales (cuando está habilitado). Esto ayuda a “regar” el ecosistema.</p>
+              <button id="trigger-update" class="btn"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#refresh"></use></svg> Actualizar señales</button>
+              <div id="trigger-status" class="note" style="margin-top:8px"></div>
+            </div>
           </div>
         </div>
       </section>
@@ -151,7 +193,7 @@
         <div class="footer-brand">
           <svg class="logo small" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>
           <div>
-            <strong>AI LATAM</strong>
+            <strong>Vulcano Ai</strong>
             <div class="muted">Vulcano Ai Digital Solutions S.A.S - 2025 Todos los derechos reservados</div>
           </div>
         </div>

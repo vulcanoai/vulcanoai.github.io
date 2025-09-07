@@ -42,6 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Indie submission form if present
   const indie = document.getElementById('indie-form');
   if (indie){ initIndieForm(indie).catch(console.error); }
+
+  // Live search + trigger update (home)
+  const ls = document.getElementById('live-search-form');
+  if (ls){ initLiveSearch(ls).catch(console.error); }
+  const tu = document.getElementById('trigger-update');
+  if (tu){ initTriggerUpdate(tu).catch(console.error); }
 });
 
 async function initSources(container){
@@ -197,5 +203,75 @@ async function initIndieForm(form){
       status.textContent = 'No se pudo enviar. Intenta más tarde o usa PR en GitHub.';
       status.className = 'chip err';
     }
+  });
+}
+
+// Live search: envía prompt al agente y agrega resultados al feed
+async function initLiveSearch(form){
+  const cfg = window.AILatamConfig?.api || {};
+  const endpoint = cfg.searchAgentUrl || '';
+  const status = form.querySelector('[data-live-status]');
+  const qEl = form.querySelector('#live-q');
+  const claimBox = document.getElementById('live-claim');
+  const claimForm = document.getElementById('claim-form');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    status.textContent = '';
+    const data = Object.fromEntries(new FormData(form).entries());
+    const prompt = data.q || '';
+    if (!prompt){ status.textContent = 'Escribe un tema o pregunta.'; return; }
+
+    if (!endpoint){
+      status.textContent = 'Agente no configurado. Añade searchAgentUrl en config y en CSP connect-src.';
+      status.className = 'note'; return;
+    }
+    try{
+      status.textContent = 'Buscando…';
+      const res = await fetch(endpoint, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ prompt, country: data.country||'', topics: (data.topics||'').split(',').map(s=>s.trim()).filter(Boolean) }) });
+      if(!res.ok) throw new Error('HTTP '+res.status);
+      const json = await res.json();
+      const items = Array.isArray(json) ? json : (json.items || json.articles || []);
+      // Autoría anónima con hash
+      const anon = 'anon-' + crypto.getRandomValues(new Uint32Array(1))[0].toString(16).slice(0,8);
+      const mapped = items.map(x => ({...x, author: anon, curator: 'Agente IA (búsqueda)'}));
+      if (window.AILatamFeed?.addItems){ window.AILatamFeed.addItems(mapped); }
+      status.textContent = `Añadido al feed (${mapped.length} resultados). Hash autor: ${anon}`;
+      status.className = 'chip ok';
+      if (claimBox) claimBox.style.display = 'block';
+      if (claimForm){
+        claimForm.onsubmit = async (ev)=>{
+          ev.preventDefault();
+          const cd = Object.fromEntries(new FormData(claimForm).entries());
+          const claimStatus = claimForm.querySelector('[data-claim-status]');
+          if (!cfg.claimAuthorUrl){ claimStatus.textContent = 'Configura claimAuthorUrl para registrar autoría.'; claimStatus.className='note'; return; }
+          try{
+            const r = await fetch(cfg.claimAuthorUrl, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ hash: anon, alias: cd.alias||'', email: cd.email||'' }) });
+            if(!r.ok) throw new Error('HTTP '+r.status);
+            claimStatus.textContent = 'Autoría registrada. ¡Gracias!';
+            claimStatus.className = 'chip ok';
+          }catch(err){ claimStatus.textContent = 'No se pudo registrar.'; claimStatus.className='chip err'; }
+        };
+      }
+    }catch(err){
+      console.error(err);
+      status.textContent = 'Fallo en la búsqueda.'; status.className = 'chip err';
+    }
+  });
+}
+
+// Trigger update: ping a n8n para refrescar señales
+async function initTriggerUpdate(button){
+  const cfg = window.AILatamConfig?.api || {};
+  const endpoint = cfg.updateTriggerUrl || '';
+  const status = document.getElementById('trigger-status');
+  button.addEventListener('click', async ()=>{
+    if(!endpoint){ status.textContent = 'Configura updateTriggerUrl y CSP connect-src.'; status.className='note'; return; }
+    try{
+      status.textContent = 'Enviando ping…';
+      const r = await fetch(endpoint, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ reason:'user-trigger' }) });
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      status.textContent = 'Agentes notificados. Actualizando pronto.'; status.className='chip ok';
+    }catch(err){ status.textContent = 'No se pudo notificar.'; status.className='chip err'; }
   });
 }

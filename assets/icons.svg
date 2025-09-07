@@ -1,11 +1,26 @@
 <!--
-  AI LATAM — Icon set (inline-friendly)
+  Vulcano Ai — Icon set (inline-friendly)
   Usage: <svg class="icon"><use href="/assets/icons.svg#calendar"/></svg>
   Icons are monochrome and inherit currentColor.
 -->
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
   <symbol id="logo" viewBox="0 0 64 64">
-    <path d="M8 52 L32 12 L56 52 Z" fill="currentColor"/>
+    <g fill="none" stroke="currentColor" stroke-width="1.5">
+      <circle cx="32" cy="32" r="20"/>
+      <ellipse cx="32" cy="32" rx="20" ry="6"/>
+      <ellipse cx="32" cy="32" rx="20" ry="12"/>
+      <ellipse cx="32" cy="32" rx="20" ry="18"/>
+      <g transform="rotate(30 32 32)">
+        <ellipse cx="32" cy="32" rx="20" ry="6"/>
+        <ellipse cx="32" cy="32" rx="20" ry="12"/>
+        <ellipse cx="32" cy="32" rx="20" ry="18"/>
+      </g>
+      <g transform="rotate(60 32 32)">
+        <ellipse cx="32" cy="32" rx="20" ry="6"/>
+        <ellipse cx="32" cy="32" rx="20" ry="12"/>
+        <ellipse cx="32" cy="32" rx="20" ry="18"/>
+      </g>
+    </g>
   </symbol>
   <symbol id="calendar" viewBox="0 0 24 24">
     <path fill="currentColor" d="M7 2v2H5a2 2 0 0 0-2 2v2h18V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2H7zm14 8H3v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V10zM7 14h4v4H7v-4z"/>
@@ -31,5 +46,13 @@
   <symbol id="link" viewBox="0 0 24 24">
     <path fill="currentColor" d="M3.9 12a5 5 0 0 1 5-5h3v2h-3a3 3 0 0 0 0 6h3v2h-3a5 5 0 0 1-5-5Zm11.2-3h-3v2h3a3 3 0 1 1 0 6h-3v2h3a5 5 0 0 0 0-10Z"/>
   </symbol>
+  <symbol id="refresh" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M12 6V3l4 4-4 4V8a5 5 0 1 0 5 5h2a7 7 0 1 1-7-7z"/>
+  </symbol>
+  <symbol id="search" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M10 2a8 8 0 1 0 5.3 14l4.4 4.4 1.4-1.4-4.4-4.4A8 8 0 0 0 10 2zm0 2a6 6 0 1 1 0 12A6 6 0 0 1 10 4z"/>
+  </symbol>
+  <symbol id="sparkles" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M12 2l1.5 4.5L18 8l-4.5 1.5L12 14l-1.5-4.5L6 8l4.5-1.5L12 2zm7 7l.8 2.2L22 12l-2.2.8L19 15l-.8-2.2L16 12l2.2-.8L19 9zM5 14l.8 2.2L8 17l-2.2.8L5 20l-.8-2.2L2 17l2.2-.8L5 14z"/>
+  </symbol>
 </svg>
-

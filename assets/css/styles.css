@@ -1,5 +1,5 @@
 /*
-  AI LATAM — styles.css
+  Vulcano Ai — styles.css
   Notas para mantenedores (humanos o agentes):
   - Tokens centralizados para rebranding rápido.
   - Tema inspirado en GitHub (oscuro), sin dependencias externas.
@@ -28,7 +28,7 @@ body{
 .site-header{position:sticky; top:0; z-index:50; background:rgba(13,17,23,.85); backdrop-filter: blur(8px); border-bottom:1px solid var(--line)}
 .header-inner{display:flex; align-items:center; gap:16px; padding:10px 0}
 .brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text)}
-.logo{width:32px; height:32px; color:var(--brand)}
+.logo{width:32px; height:32px; color:#ff5a2a}
 .logo.small{width:24px; height:24px}
 .brand-text{font-weight:700; letter-spacing:.5px}
 .site-nav{margin-left:auto; display:flex; gap:6px}
@@ -78,6 +78,8 @@ h2{margin:0 0 16px}
   padding:10px 12px; border-radius:10px; outline:none; width:100%
 }
 .form-actions{display:flex; gap:10px; margin-top:12px}
+.form-grid h3{grid-column:1/-1}
+.panel h3 .icon{margin-right:6px}
 
 .grid{display:grid; gap:14px}
 .news-grid{grid-template-columns:repeat(3,1fr)}

@@ -1,4 +1,4 @@
-# Contribuir a AI LATAM
+# Contribuir a Vulcano Ai
 
 Gracias por tu interés. Buscamos un flujo claro y auditable.
 
@@ -18,4 +18,3 @@ Gracias por tu interés. Buscamos un flujo claro y auditable.
 ## Reporte de seguridad
 
 Consulta `SECURITY.md` y `.well-known/security.txt`.
-

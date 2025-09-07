@@ -12,10 +12,16 @@ window.AILatamConfig = window.AILatamConfig || {
     panoramaUrl: '/data/panorama.json',
     legalUrl: '/data/legal-sample.json',
     // Endpoint opcional n8n para recibir envíos independientes (POST JSON)
-    indieSubmitUrl: ''
+    indieSubmitUrl: '',
+    // Agente de búsqueda personalizada (POST {prompt, country?, topics?} -> [{...article}])
+    searchAgentUrl: '',
+    // Disparador de actualización (POST {reason})
+    updateTriggerUrl: '',
+    // Reclamación de autoría (POST {hash, alias, email})
+    claimAuthorUrl: ''
   },
   site: {
-    name: 'AI LATAM',
+    name: 'Vulcano Ai',
     baseUrl: '/',
   }
 };

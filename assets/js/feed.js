@@ -246,5 +246,24 @@
     }
   }
 
-  window.AILatamFeed = { initFeed, initRegHighlights };
+  // Inyección de items (desde búsqueda en tiempo real u otras fuentes controladas)
+  function addItems(rawItems){
+    const items = (rawItems||[]).map(normalize);
+    // Deduplicar por url o id
+    const seen = new Set(state.all.map(x => x.url || x.id));
+    for (const it of items){
+      const key = it.url || it.id;
+      if (key && !seen.has(key)){
+        state.all.unshift(it);
+        seen.add(key);
+      }
+    }
+    buildFacets(state.all);
+    populateFilters();
+    applyFilters();
+    render();
+    renderMetrics();
+  }
+
+  window.AILatamFeed = { initFeed, initRegHighlights, addItems };
 })();
