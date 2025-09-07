@@ -7,9 +7,7 @@
   <symbol id="logo" viewBox="0 0 64 64">
     <g fill="none" stroke="currentColor" stroke-width="1.5">
       <circle cx="32" cy="32" r="20"/>
-      <ellipse cx="32" cy="32" rx="20" ry="6"/>
-      <ellipse cx="32" cy="32" rx="20" ry="12"/>
-      <ellipse cx="32" cy="32" rx="20" ry="18"/>
+      <!-- Sin latitudes horizontales para evitar eje estático -->
       <g transform="rotate(30 32 32)">
         <ellipse cx="32" cy="32" rx="20" ry="6"/>
         <ellipse cx="32" cy="32" rx="20" ry="12"/>

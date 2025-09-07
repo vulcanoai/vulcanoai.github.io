@@ -3,7 +3,7 @@
   Objetivo: que el logo sea reproducible por código en cualquier visualización vectorial.
 
   Firma (signature) del logo Vulcano Ai:
-  - R = 140 (base), latitudes = 6 visibles, longitudes = 12
+  - R = 140 (base), latitudes = 0 (sin ejes horizontales estáticos), longitudes = 12
   - Rotaciones: 0°, 30°, 60° sobre el centro
   - Trazo: #ff5a2a, opacidad 0.85, grosor escalable
 
@@ -12,7 +12,7 @@
 (function(){
   const SIG = {
     radius: 140,
-    lats: 6,
+    lats: 0,
     lons: 12,
     rotations: [0, 30, 60],
     stroke: '#ff5a2a'
@@ -36,14 +36,16 @@
     circle.setAttribute('class','stroke');
     g.appendChild(circle);
 
-    // Latitudes (horizontales): elipses con rx=R y ry variando por seno
-    for(let i=1;i<=cfg.lats;i++){
-      const ry = Math.max(2, cfg.radius * Math.sin((i*Math.PI)/(cfg.lats*2)));
-      const e = createNS('ellipse');
-      e.setAttribute('rx', cfg.radius);
-      e.setAttribute('ry', ry);
-      e.setAttribute('class','stroke');
-      g.appendChild(e);
+    // Latitudes desactivadas por diseño (evitar eje horizontal estático)
+    if (cfg.lats && cfg.lats > 0){
+      for(let i=1;i<=cfg.lats;i++){
+        const ry = Math.max(2, cfg.radius * Math.sin((i*Math.PI)/(cfg.lats*2)));
+        const e = createNS('ellipse');
+        e.setAttribute('rx', cfg.radius);
+        e.setAttribute('ry', ry);
+        e.setAttribute('class','stroke');
+        g.appendChild(e);
+      }
     }
 
     // Longitudes: duplicamos elipses verticales con varias rotaciones

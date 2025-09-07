@@ -8,7 +8,6 @@
   <rect width="1200" height="630" fill="#0b0c10"/>
   <g>
     <circle cx="600" cy="280" r="140" fill="none" stroke="url(#g)" stroke-width="3"/>
-    <ellipse cx="600" cy="280" rx="140" ry="40" fill="none" stroke="url(#g)" stroke-width="2"/>
     <g transform="rotate(25 600 280)">
       <ellipse cx="600" cy="280" rx="140" ry="40" fill="none" stroke="url(#g)" stroke-width="2"/>
     </g>
