@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tablero de agentes — AI LATAM</title>
+    <meta name="description" content="Estado de los agentes de recolección, clasificación, resumen y publicación." />
+    <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/"><img src="/assets/img/logo.svg" alt="AI LATAM" class="logo" /><span class="brand-text">AI LATAM</span></a>
+        <button class="nav-toggle" aria-label="Abrir menú">☰</button>
+        <nav class="site-nav" aria-label="Principal">
+          <a href="/pages/noticias.html">Noticias</a>
+          <a href="/pages/agentes.html" aria-current="page">Agentes</a>
+          <a href="/pages/fuentes.html">Fuentes</a>
+          <a href="/pages/acerca.html">Acerca</a>
+        </nav>
+      </div>
+    </header>
+    <main class="section">
+      <div class="container">
+        <h1>Tablero de agentes</h1>
+        <p class="muted">Monitoreo de pipelines y salud del sistema.</p>
+        <div class="panel" style="overflow:auto">
+          <table id="agents-table">
+            <thead>
+              <tr>
+                <th>Agente</th>
+                <th>Estado</th>
+                <th>Última ejecución</th>
+                <th>Ritmo</th>
+                <th>Notas</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="5" class="muted">Cargando…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <img src="/assets/img/logo.svg" alt="AI LATAM" class="logo small" />
+          <div>
+            <strong>AI LATAM</strong>
+            <div class="muted">Operación y transparencia.</div>
+          </div>
+        </div>
+        <nav class="footer-nav">
+          <a href="/pages/legal/privacidad.html">Privacidad</a>
+          <a href="/pages/legal/terminos.html">Términos</a>
+        </nav>
+      </div>
+    </footer>
+    <script src="/assets/js/config.js"></script>
+    <script src="/assets/js/app.js"></script>
+  </body>
+  </html>
+

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Noticias — AI LATAM</title>
+    <meta name="description" content="Explora el flujo completo de noticias de IA en América Latina con filtros por país, tema y fuente." />
+    <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/"><img src="/assets/img/logo.svg" alt="AI LATAM" class="logo" /><span class="brand-text">AI LATAM</span></a>
+        <button class="nav-toggle" aria-label="Abrir menú">☰</button>
+        <nav class="site-nav" aria-label="Principal">
+          <a href="/pages/noticias.html" aria-current="page">Noticias</a>
+          <a href="/pages/agentes.html">Agentes</a>
+          <a href="/pages/fuentes.html">Fuentes</a>
+          <a href="/pages/acerca.html">Acerca</a>
+        </nav>
+      </div>
+    </header>
+    <main class="section">
+      <div class="container">
+        <h1>Todas las noticias</h1>
+        <div class="filters" id="filters">
+          <input type="search" id="search" placeholder="Buscar por título o resumen" aria-label="Buscar" />
+          <select id="filter-country" aria-label="Filtrar por país"></select>
+          <select id="filter-topic" aria-label="Filtrar por tema"></select>
+          <select id="filter-source" aria-label="Filtrar por fuente"></select>
+          <select id="sort-by" aria-label="Ordenar">
+            <option value="recent">Más recientes</option>
+            <option value="relevance">Más relevantes</option>
+          </select>
+        </div>
+        <div id="news-list" class="grid news-grid" aria-live="polite">
+          <div class="loading">Cargando noticias…</div>
+        </div>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <img src="/assets/img/logo.svg" alt="AI LATAM" class="logo small" />
+          <div>
+            <strong>AI LATAM</strong>
+            <div class="muted">Noticias y datos del ecosistema.</div>
+          </div>
+        </div>
+        <nav class="footer-nav">
+          <a href="/pages/legal/privacidad.html">Privacidad</a>
+          <a href="/pages/legal/terminos.html">Términos</a>
+        </nav>
+      </div>
+    </footer>
+    <script src="/assets/js/config.js"></script>
+    <script src="/assets/js/feed.js"></script>
+    <script src="/assets/js/app.js"></script>
+  </body>
+  </html>
+

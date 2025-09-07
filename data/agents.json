@@ -1,0 +1,12 @@
+[
+  {"nombre":"Rastreador RSS","estado":"Activo","ultimo_ejecucion":"2025-09-07T10:15:00Z","throughput":120,"notas":"45 feeds monitoreados"},
+  {"nombre":"Scraper Prensa MX","estado":"Activo","ultimo_ejecucion":"2025-09-07T10:10:00Z","throughput":18,"notas":"anti‑bot ok"},
+  {"nombre":"Clasificador Temas","estado":"Activo","ultimo_ejecucion":"2025-09-07T10:16:00Z","throughput":140,"notas":"modelo v2.3"},
+  {"nombre":"Detector País","estado":"Activo","ultimo_ejecucion":"2025-09-07T10:16:10Z","throughput":140,"notas":"NER + heurísticas"},
+  {"nombre":"Deduplicador","estado":"Activo","ultimo_ejecucion":"2025-09-07T10:16:30Z","throughput":140,"notas":"similitud semántica"},
+  {"nombre":"Generador Resumen","estado":"Pausado","ultimo_ejecucion":"2025-09-07T09:50:00Z","throughput":0,"notas":"ajuste de prompts"},
+  {"nombre":"Análisis de Sentimiento","estado":"Activo","ultimo_ejecucion":"2025-09-07T10:16:40Z","throughput":140,"notas":"batch"},
+  {"nombre":"Publicador Twitter","estado":"Fallo","ultimo_ejecucion":"2025-09-07T08:10:00Z","throughput":0,"notas":"token inválido"},
+  {"nombre":"Publicador LinkedIn","estado":"Activo","ultimo_ejecucion":"2025-09-07T10:17:00Z","throughput":12,"notas":"buffer 12/h"}
+]
+

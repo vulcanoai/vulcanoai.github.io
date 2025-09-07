@@ -1,201 +1,115 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vulcano Ai - Experimentos Activos</title>
-    <style>
-        body {
-            background-color: #000000;
-            color: #FFFFFF; /* White for main text */
-            font-family: monospace; /* Vintage console font for everything */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            text-align: center;
-            padding: 20px;
-            overflow: hidden; /* For matrix effect */
-            position: relative;
-        }
-        #matrix-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1; /* Behind content */
-            opacity: 0.3; /* Subtle for depth */
-        }
-        h1 {
-            font-size: 28px;
-            margin: 20px 0;
-            color: #FFFFFF; /* Brand in white */
-            font-weight: bold; /* Bold for hacky vibe */
-        }
-        h2 {
-            font-size: 28px;
-            margin: 20px 0;
-            color: #00FF00; /* Green for section titles */
-            font-weight: bold; /* Bold for hacky vibe */
-        }
-        p {
-            font-size: 16px;
-            max-width: 800px;
-            margin: 10px 0;
-            line-height: 1.5;
-        }
-        .key-ideas {
-            text-align: left;
-            max-width: 800px;
-            margin: 20px auto;
-        }
-        .key-ideas ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        .key-ideas li {
-            margin: 10px 0;
-            position: relative;
-            padding-left: 20px;
-        }
-        .key-ideas li::before {
-            content: ">";
-            position: absolute;
-            left: 0;
-            color: #FFFFFF;
-        }
-        .animated-logo {
-            max-width: 300px;
-            width: 100%;
-            height: auto;
-            margin: 20px 0;
-            animation: glitch 2s infinite alternate; /* Vintage glitch animation */
-        }
-        @keyframes glitch {
-            0% { transform: translate(0); opacity: 1; }
-            20% { transform: translate(-2px, 2px); opacity: 0.8; }
-            40% { transform: translate(2px, -2px); opacity: 1; }
-            60% { transform: translate(-2px, 2px); opacity: 0.8; }
-            80% { transform: translate(2px, -2px); opacity: 1; }
-            100% { transform: translate(0); opacity: 1; }
-        }
-        .cta {
-            font-size: 18px;
-            margin: 20px 0;
-        }
-        .cta a {
-            color: #FFFFFF;
-            text-decoration: none;
-            border: 1px solid #FFFFFF;
-            padding: 5px 10px;
-            margin: 0 5px;
-            transition: background 0.3s;
-        }
-        .cta a:hover {
-            background: #FFFFFF;
-            color: #000000;
-        }
-        .disclaimer {
-            font-size: 12px;
-            color: #888888; /* Dimmer gray */
-            margin-top: 40px;
-        }
-        @media (max-width: 600px) {
-            h1, h2 {
-                font-size: 20px;
-            }
-            p {
-                font-size: 14px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <canvas id="matrix-canvas"></canvas>
-    
-    <h1>Vulcano Ai</h1>
-    <p>Entidad legal colombiana dedicada a experimentar con inteligencia artificial.</p>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI LATAM — Noticias y panorama del ecosistema</title>
+    <meta name="description" content="Canal de noticias y panorama del ecosistema de IA en América Latina: investigación, inversión, regulación y startups, curado por agentes autónomos." />
+    <meta property="og:title" content="AI LATAM — Noticias y panorama del ecosistema" />
+    <meta property="og:description" content="Noticias y análisis sobre IA en América Latina. Curado automáticamente, verificado por humanos." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="/" />
+    <meta property="og:image" content="/assets/img/og-banner.png" />
+    <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/">
+          <img src="/assets/img/logo.svg" alt="AI LATAM" class="logo" />
+          <span class="brand-text">AI LATAM</span>
+        </a>
+        <button class="nav-toggle" aria-label="Abrir menú">☰</button>
+        <nav class="site-nav" aria-label="Principal">
+          <a href="/pages/noticias.html">Noticias</a>
+          <a href="/pages/agentes.html">Agentes</a>
+          <a href="/pages/fuentes.html">Fuentes</a>
+          <a href="/pages/acerca.html">Acerca</a>
+        </nav>
+      </div>
+    </header>
 
-    <img class="animated-logo" src="assets/Vulcano White No Background.png" alt="Logotipo de Vulcano Ai">
+    <main>
+      <section class="hero">
+        <div class="container">
+          <h1>Panorama de IA en América Latina</h1>
+          <p class="tagline">Noticias, datos y señales del ecosistema latinoamericano de IA. Recolectado por agentes, validado por humanos.</p>
+          <div class="cta-row">
+            <a class="btn primary" href="/pages/noticias.html">Ver noticias</a>
+            <a class="btn ghost" href="/pages/fuentes.html">Ver metodología</a>
+          </div>
+        </div>
+      </section>
 
-    <h2>Proyecto activo: Phantom Theory</h2>
-    <p>Sigue nuestro proyecto más ambicioso en <a href="https://phantomtheory.ai" target="_blank">phantomtheory.ai</a>.</p>
+      <section class="section">
+        <div class="container">
+          <h2>Últimas noticias</h2>
+          <div class="filters" id="filters">
+            <input type="search" id="search" placeholder="Buscar por título o resumen" aria-label="Buscar" />
+            <select id="filter-country" aria-label="Filtrar por país"></select>
+            <select id="filter-topic" aria-label="Filtrar por tema"></select>
+            <select id="filter-source" aria-label="Filtrar por fuente"></select>
+            <select id="sort-by" aria-label="Ordenar">
+              <option value="recent">Más recientes</option>
+              <option value="relevance">Más relevantes</option>
+            </select>
+          </div>
 
-    <h2>Registro de experimentos</h2>
-    <div class="key-ideas">
-        <ul>
-            <li><a href="https://phantomtheory.ai" target="_blank">Phantom Theory</a> – proyecto principal en desarrollo.</li>
-            <li><a href="https://discord.gg/xJWX7WVu" target="_blank">Experimento 001: Debate psicodélico en Discord</a></li>
-        </ul>
-    </div>
+          <div id="news-list" class="grid news-grid" aria-live="polite">
+            <div class="loading">Cargando noticias…</div>
+          </div>
 
-    <div class="cta">
-        <a href="https://www.instagram.com/vulcanoai.solutions/" target="_blank">Instagram</a>
-        <a href="http://linkedin.com/company/vulcano-ai" target="_blank">LinkedIn</a>
-        <a href="https://www.twitch.tv/vulcanoai" target="_blank">Twitch</a>
-        <a href="https://www.youtube.com/@vulcanoai" target="_blank">YouTube</a>
-        <a href="https://patreon.com/vulcanoai" target="_blank">Patreon</a>
-    </div>
+          <div class="actions">
+            <a class="btn" href="/pages/noticias.html">Explorar todas las noticias</a>
+          </div>
+        </div>
+      </section>
 
-    <p class="disclaimer">Vulcano Ai Digital Solutions S.A.S - Todos los derechos reservados 2025</p>
+      <section class="section alt">
+        <div class="container">
+          <h2>Métricas del ecosistema</h2>
+          <div class="metrics">
+            <div class="metric"><div class="value" id="metric-articles">—</div><div class="label">Artículos indexados</div></div>
+            <div class="metric"><div class="value" id="metric-sources">—</div><div class="label">Fuentes activas</div></div>
+            <div class="metric"><div class="value" id="metric-countries">—</div><div class="label">Países</div></div>
+            <div class="metric"><div class="value" id="metric-topics">—</div><div class="label">Temas</div></div>
+          </div>
+        </div>
+      </section>
 
-    <script>
-        // Matrix rain effect with white tones for visibility and depth
-        const canvas = document.getElementById('matrix-canvas');
-        const ctx = canvas.getContext('2d');
-        
-        canvas.height = window.innerHeight;
-        canvas.width = window.innerWidth;
-        
-        const matrix = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}'.split('');
-        
-        const fontSize = 10;
-        const columns = canvas.width / fontSize;
-        
-        // Layers in white tones: back (darker white/gray), mid, front (bright white)
-        const layers = [
-            { speed: 0.5, color: '#666666', drops: [] }, // Back: darker for depth
-            { speed: 1, color: '#AAAAAA', drops: [] },   // Mid: medium white/gray
-            { speed: 1.5, color: '#FFFFFF', drops: [] }  // Front: bright white
-        ];
-        
-        layers.forEach(layer => {
-            for (let i = 0; i < columns; i++) {
-                layer.drops[i] = Math.random() * canvas.height / fontSize; // Random start for depth
-            }
-        });
-        
-        function draw() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            ctx.font = fontSize + 'px monospace';
-            
-            layers.forEach(layer => {
-                ctx.fillStyle = layer.color;
-                for (let i = 0; i < layer.drops.length; i++) {
-                    const text = matrix[Math.floor(Math.random() * matrix.length)];
-                    ctx.fillText(text, i * fontSize, layer.drops[i] * fontSize);
-                    
-                    layer.drops[i] += layer.speed; // Vary speed per layer
-                    
-                    if (layer.drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                        layer.drops[i] = 0;
-                    }
-                }
-            });
-        }
-        
-        setInterval(draw, 33);
-        
-        // Resize canvas on window resize
-        window.addEventListener('resize', () => {
-            canvas.height = window.innerHeight;
-            canvas.width = window.innerWidth;
-        });
-    </script>
-</body>
+      <section class="section">
+        <div class="container">
+          <div class="panel">
+            <h3>¿Cómo funciona?</h3>
+            <p>Agentes autónomos rastrean fuentes públicas (RSS, prensa, blogs, reguladores) y clasifican el contenido por país, tema y relevancia. Los resultados pasan por deduplicación, resumen y moderación humana antes de publicarse.</p>
+            <p>Integra tu fuente o API escribiendo a <a href="mailto:equipo@ailatam.news">equipo@ailatam.news</a>.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <img src="/assets/img/logo.svg" alt="AI LATAM" class="logo small" />
+          <div>
+            <strong>AI LATAM</strong>
+            <div class="muted">Una iniciativa de investigación y curaduría.
+            </div>
+          </div>
+        </div>
+        <nav class="footer-nav">
+          <a href="/pages/legal/privacidad.html">Privacidad</a>
+          <a href="/pages/legal/terminos.html">Términos</a>
+          <a href="/pages/acerca.html">Acerca</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script src="/assets/js/config.js"></script>
+    <script src="/assets/js/feed.js"></script>
+    <script src="/assets/js/app.js"></script>
+  </body>
 </html>
+

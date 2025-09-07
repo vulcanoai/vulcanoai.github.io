@@ -1,0 +1,13 @@
+[
+  {"nombre":"El Economista","url":"https://www.eleconomista.com.mx/","pais":"México","tipo":"Prensa"},
+  {"nombre":"La República","url":"https://www.larepublica.co/","pais":"Colombia","tipo":"Prensa"},
+  {"nombre":"Bloomberg Línea","url":"https://www.bloomberglinea.com/","pais":"Regional","tipo":"Prensa"},
+  {"nombre":"Folha de S.Paulo","url":"https://www.folha.uol.com.br/","pais":"Brasil","tipo":"Prensa"},
+  {"nombre":"Gestión","url":"https://gestion.pe/","pais":"Perú","tipo":"Prensa"},
+  {"nombre":"El País Uruguay","url":"https://www.elpais.com.uy/","pais":"Uruguay","tipo":"Prensa"},
+  {"nombre":"Gobierno de Colombia","url":"https://www.gov.co/","pais":"Colombia","tipo":"Gobierno"},
+  {"nombre":"Gobierno de Chile","url":"https://www.gob.cl/","pais":"Chile","tipo":"Gobierno"},
+  {"nombre":"arXiv AI","url":"https://arxiv.org/list/cs.AI/recent","pais":"Global","tipo":"Académico"},
+  {"nombre":"LATAM Tech Blogroll","url":"https://ejemplo.latam/blogroll","pais":"Regional","tipo":"Blogs"}
+]
+
