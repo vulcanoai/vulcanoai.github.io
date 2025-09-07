@@ -9,9 +9,38 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.querySelector('.nav-toggle');
   const nav = document.querySelector('.site-nav');
   if (toggle && nav){
+    // a11y wiring
+    if (!nav.id) nav.id = 'primary-nav';
+    toggle.setAttribute('aria-controls', nav.id);
+    toggle.setAttribute('aria-expanded', 'false');
+
+    // backdrop for mobile
+    let backdrop = document.querySelector('.nav-backdrop');
+    if (!backdrop){
+      backdrop = document.createElement('div');
+      backdrop.className = 'nav-backdrop';
+      document.body.appendChild(backdrop);
+    }
+
+    const close = () => {
+      nav.classList.remove('open');
+      backdrop.classList.remove('show');
+      toggle.setAttribute('aria-expanded', 'false');
+    };
+    const open = () => {
+      nav.classList.add('open');
+      backdrop.classList.add('show');
+      toggle.setAttribute('aria-expanded', 'true');
+    };
+
     toggle.addEventListener('click', () => {
-      const isOpen = nav.style.display === 'flex';
-      nav.style.display = isOpen ? 'none' : 'flex';
+      const isOpen = nav.classList.contains('open');
+      isOpen ? close() : open();
+    });
+    backdrop.addEventListener('click', close);
+    window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 640) close();
     });
   }
 

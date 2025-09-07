@@ -141,7 +141,39 @@ Sugerencias de agentes: rastreadores por país (Senado/Cámara, diarios oficiale
 - Cambia favicon en `assets/img/`
 - Ajusta colores en `assets/css/styles.css`
 - Edita textos de navegación y footer en cada HTML
- - Línea legal usada en footer: “Vulcano Ai Digital Solutions S.A.S - 2025 Todos los derechos reservados”
+- Línea legal usada en footer: “Vulcano Ai Digital Solutions S.A.S - 2025 Todos los derechos reservados”
+
+### Logo oficial (wireframe)
+
+El logo de Vulcano Ai es una esfera de alambre generada por código, con una “firma” determinística que la hace reproducible en cualquier visualización vectorial.
+
+- Parámetros (firma): `R=140`, `latitudes=0` (sin ejes horizontales), `longitudes=12`, `rotaciones=[0°,30°,60°]`, trazo `#ff5a2a`.
+- Símbolo SVG listo para usar: `<svg class="logo"><use href="/assets/icons.svg#logo"/></svg>` (naranja por `--logo`).
+- Generador JS para render dinámico y responsive: `assets/js/logo.js`.
+
+Uso rápido (inline):
+
+```html
+<svg class="logo" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>
+```
+
+Uso por código (recomendado para tamaños variables):
+
+```html
+<div id="my-orb"></div>
+<script src="/assets/js/logo.js"></script>
+<script>
+  // Dibuja el logo con la firma oficial
+  VulcanoLogo.drawWireSphere(document.getElementById('my-orb'), {
+    radius: 120,        // ajusta tamaño
+    lats: 0,            // sin latitudes horizontales
+    lons: 12,
+    rotations: [0,30,60]
+  });
+</script>
+```
+
+Nota: el color se controla con la CSS variable `--logo` (por defecto `#ff5a2a`).
 
 ## SEO básico
 
