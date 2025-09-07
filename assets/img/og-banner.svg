@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#ff5a2a"/>
+      <stop offset="1" stop-color="#ff8a4a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#0b0c10"/>
+  <g>
+    <path d="M150 540 L600 120 L1050 540 Z" fill="url(#g)" opacity="0.75"/>
+    <text x="160" y="520" font-family="system-ui,Segoe UI,Roboto" font-size="64" fill="#e8eaed">AI LATAM — Noticias y panorama</text>
+  </g>
+</svg>
+

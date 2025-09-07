@@ -1,0 +1,122 @@
+[
+  {
+    "slug": "startups",
+    "titulo": "Startups",
+    "descripcion": "Rastrea compañías emergentes de IA en la región para detectar colaboración, empleo e inspiración (ej. cómo empresas chilenas aplican IA a clima).",
+    "valor_para_usuarios": "Descubrir actores, ofertas y tendencias por país/sector.",
+    "claves": [
+      "Clasificación por sector (agrotech, fintech, salud)",
+      "Ranking por país (Top 10 México vs. Argentina)",
+      "Fechas de fundación, tamaño equipo, productos",
+      "Ganchos de noticia (lanzamientos, pivotes)"
+    ],
+    "fuentes": [
+      "RSS de Crunchbase/perfiles",
+      "Búsquedas en X de #StartupsIA + país",
+      "Auto-clasificación por keywords ('machine learning' → ML) con actualización diaria"
+    ]
+  },
+  {
+    "slug": "inversion",
+    "titulo": "Financiamiento e inversiones",
+    "descripcion": "Resalta flujos de capital en IA, útil para fundadores e inversores (ej. VC de EE.UU. impulsando LATAM).",
+    "valor_para_usuarios": "Mapear deals, jugadores y tendencias de crecimiento.",
+    "claves": [
+      "Tipo de ronda (seed, Serie A) y montos",
+      "Inversionistas (locales vs. internacionales)",
+      "Tendencias (post-pandemia en salud IA)",
+      "Historias de impacto (empleo en Bogotá)"
+    ],
+    "fuentes": [
+      "Crunchbase/PitchBook para deals",
+      "Búsquedas web 'AI funding Latin America [mes]'",
+      "n8n: filtrar >$50K, alertas por email, graficar funding en el tiempo"
+    ]
+  },
+  {
+    "slug": "regulacion",
+    "titulo": "Políticas y regulación",
+    "descripcion": "Monitorea ética, leyes de datos y adopción estatal (ej. PL IA de Brasil vs. estrategia digital de Colombia).",
+    "valor_para_usuarios": "Navegar marcos regulatorios y riesgos de cumplimiento.",
+    "claves": [
+      "Nuevas leyes/proyectos (deepfakes, IA en el Estado)",
+      "Comparativas regionales (CEPAL, ONU)",
+      "Ejecución (multas, implementaciones)",
+      "Consultas públicas o debates"
+    ],
+    "fuentes": [
+      "Sitios gubernamentales y RSS de congresos (ej. Senado Brasil)",
+      "Búsquedas en X 'política IA Latinoamérica'",
+      "Auto-tag por urgencia ('votación pendiente'); resumir en ES/PT"
+    ]
+  },
+  {
+    "slug": "tendencias",
+    "titulo": "Tendencias y sentimiento público",
+    "descripcion": "Captura buzz y opiniones para separar hype de realidad (ej. miedos al desplazamiento laboral en México vs. optimismo en minería peruana).",
+    "valor_para_usuarios": "Tomar el pulso social por tema/país.",
+    "claves": [
+      "Hashtags/topicos (#IAenLatam)",
+      "Puntajes de sentimiento",
+      "Historias virales (equidad educativa)",
+      "Variaciones regionales (urbano vs. rural)"
+    ],
+    "fuentes": [
+      "Búsquedas semánticas en X",
+      "Reddit/foros (r/LatinAmerica)",
+      "n8n: análisis básico de sentimiento y heatmaps semanales"
+    ]
+  },
+  {
+    "slug": "patentes",
+    "titulo": "Innovación y patentes",
+    "descripcion": "Ilumina avances técnicos y posibles solapamientos de IP (ej. patentes de agrotech para café en Colombia).",
+    "valor_para_usuarios": "Prevenir conflictos y detectar oportunidades de transferencia.",
+    "claves": [
+      "Solicitudes por tipo (NLP, visión)",
+      "Inventores/empresas",
+      "Estatus y resúmenes",
+      "Vínculos a prototipos/demos"
+    ],
+    "fuentes": [
+      "USPTO/EPO/WIPO filtradas por origen LATAM",
+      "arXiv (autores regionales)",
+      "Auto-categorización por campo; archivo histórico"
+    ]
+  },
+  {
+    "slug": "eventos",
+    "titulo": "Eventos y colaboraciones",
+    "descripcion": "Lista encuentros y alianzas (ej. cumbres regionales que fomentan vínculos transfronterizos).",
+    "valor_para_usuarios": "Hacer networking efectivo y seguimiento de resultados.",
+    "claves": [
+      "Fechas, sedes, temas (virtual accesible)",
+      "Speakers/partners (ej. Google con unis colombianas)",
+      "Outcomes (alianzas)",
+      "Acceso gratuito vs. pago"
+    ],
+    "fuentes": [
+      "Eventbrite/Meetup 'AI Latin America'",
+      "Búsquedas web 'conferencias IA Latinoamérica 2025'",
+      "n8n: invites de calendario / WhatsApp; seguimiento post-evento"
+    ]
+  },
+  {
+    "slug": "talento",
+    "titulo": "Talento y educación",
+    "descripcion": "Mapea habilidades y oportunidades para la juventud (ej. cursos gratuitos en español, evitar fuga de talento).",
+    "valor_para_usuarios": "Acceso a empleos y formación de calidad.",
+    "claves": [
+      "Empleos IA",
+      "Programas de formación/universidades",
+      "Migración (brain drain)",
+      "Casos de éxito"
+    ],
+    "fuentes": [
+      "RSS LinkedIn/Indeed 'AI jobs Colombia'",
+      "Coursera/edX actualizaciones regionales",
+      "n8n: filtro roles entry-level; tablero de talento"
+    ]
+  }
+]
+

@@ -4,6 +4,7 @@ Sitio estático en español para coordinar y visualizar un canal de noticias del
 
 - Página principal con feed y filtros por país/tema/fuente
 - Páginas de Agentes (estado de pipelines) y Fuentes (metodología)
+- Páginas nuevas: Panorama (categorías y automatización) y Observatorio legal
 - Datos de ejemplo (`/data`) y configuración cliente (`/assets/js/config.js`)
 
 ## Estructura
@@ -26,6 +27,8 @@ data/
   sample-feed.json
   agents.json
   sources.json
+  panorama.json
+  legal-sample.json
 ```
 
 ## Ejecutar localmente
@@ -92,6 +95,35 @@ Para el tablero de agentes, publica `agents.json` con:
 
 Y para fuentes, `sources.json` con `{ nombre, url, pais, tipo }`.
 
+### Observatorio legal (propuesta)
+
+Publicar `legal.json` con el siguiente esquema mínimo:
+
+```json
+{
+  "pais": "Brasil",
+  "titulo": "PL 2338/2023 — Marco de IA",
+  "estado": "Borrador|Debate|Aprobado|Reglamentación|Consulta",
+  "fecha": "ISO-8601",
+  "url": "https://…",
+  "resumen": "texto breve",
+  "organismo": "Senado|Ministerio|Agencia",
+  "temas": ["riesgo", "transparencia", "deepfakes"]
+}
+```
+
+Sugerencias de agentes: rastreadores por país (Senado/Cámara, diarios oficiales), alertas de palabras clave, deduplicación y normalización de estados.
+
+### Panorama (categorías)
+
+`panorama.json` describe categorías, elementos clave y fuentes/automatización. Los agentes pueden actualizarlo o generar variantes por país.
+
+## Notas de mantenimiento asistido por IA
+
+- Los archivos JS incluyen comentarios "TODO" y puntos de extensión.
+- Mantener consistencia en campos y normalizadores (ver `assets/js/feed.js`).
+- Si se crece, considerar un generador estático (Eleventy, Astro) para reusar layouts.
+
 ## Marca y contenido
 
 - Cambia logo/favicon en `assets/img/`
@@ -106,4 +138,3 @@ Y para fuentes, `sources.json` con `{ nombre, url, pais, tipo }`.
 ## Licencias y fuentes
 
 Este repositorio no incluye contenido de terceros. Al enlazar artículos, respeta derechos y licencias de cada medio.
-

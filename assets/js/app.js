@@ -1,3 +1,9 @@
+/*
+  app.js — Inicializador por página
+  - Detecta componentes por ID y carga módulos ligeros.
+  - Mantener puro y defensivo: no asume presencia de elementos.
+  - Agentes: añadir inicializaciones nuevas aquí con comprobación de existencia.
+*/
 document.addEventListener('DOMContentLoaded', () => {
   // Mobile nav toggle
   const toggle = document.querySelector('.nav-toggle');
@@ -13,6 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (window.AILatamFeed && typeof window.AILatamFeed.initFeed === 'function'){
     window.AILatamFeed.initFeed();
   }
+  // Regulatory highlights block (home)
+  if (window.AILatamFeed && typeof window.AILatamFeed.initRegHighlights === 'function'){
+     window.AILatamFeed.initRegHighlights();
+  }
 
   // Initialize sources page if present
   const sourcesList = document.getElementById('sources-list');
@@ -21,6 +31,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize agents page if present
   const agentsTable = document.getElementById('agents-table');
   if (agentsTable){ initAgents(agentsTable).catch(console.error); }
+
+  // Panorama (categorías) if present
+  const pano = document.getElementById('panorama-grid');
+  if (pano){ initPanorama(pano).catch(console.error); }
+  // Legal observatory if present
+  const legal = document.getElementById('legal-timeline');
+  if (legal){ initLegal(legal).catch(console.error); }
 });
 
 async function initSources(container){
@@ -71,3 +88,47 @@ async function initAgents(table){
   }
 }
 
+// Panorama: carga categorías, descripciones y propuestas de automatización
+async function initPanorama(container){
+  const url = (window.AILatamConfig?.api?.panoramaUrl) || '/data/panorama.json';
+  const res = await fetch(url, { cache:'no-store' });
+  const cats = await res.json();
+  container.innerHTML='';
+  for (const c of cats){
+    const card = document.createElement('article');
+    card.className='category-card';
+    card.innerHTML = `
+      <h3 class="title">${c.titulo}</h3>
+      <p class="desc">${c.descripcion}</p>
+      <div class="meta">
+        <span class="badge">Valor: ${c.valor_para_usuarios}</span>
+      </div>
+      <h4>Elementos a coordinar</h4>
+      <ul class="bullets">${(c.claves||[]).map(x=>`<li>${x}</li>`).join('')}</ul>
+      <h4>Fuentes y automatización</h4>
+      <ul class="bullets">${(c.fuentes||[]).map(x=>`<li>${x}</li>`).join('')}</ul>
+      <div class="note">Borrador: esta sección se poblará vía agentes n8n dedicados para ${c.slug}.</div>
+    `;
+    container.appendChild(card);
+  }
+}
+
+// Observatorio Legal: línea temporal básica de items normativos
+async function initLegal(container){
+  const url = (window.AILatamConfig?.api?.legalUrl) || '/data/legal-sample.json';
+  const res = await fetch(url, { cache:'no-store' });
+  const items = await res.json();
+  container.innerHTML='';
+  for (const it of items){
+    const box = document.createElement('div');
+    box.className='timeline-item';
+    const d = it.fecha ? new Date(it.fecha).toLocaleDateString('es-ES') : '';
+    box.innerHTML = `
+      <div class="head"><span class="tag">${it.pais}</span><span class="tag">${it.estado}</span></div>
+      <h4 class="title">${it.titulo}</h4>
+      <p>${it.resumen||''}</p>
+      <div class="meta"><a href="${it.url}" target="_blank" rel="noopener">Fuente oficial</a></div>
+    `;
+    container.appendChild(box);
+  }
+}

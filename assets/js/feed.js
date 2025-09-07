@@ -1,3 +1,11 @@
+/*
+  feed.js — Lógica del feed de noticias
+  Notas para agentes:
+  - Normaliza entradas heterogéneas (RSS, scrapers, APIs).
+  - Usa facets dinámicos para filtros; evitar hardcodear.
+  - Si el endpoint es grande, paginar y hacer streaming incremental.
+  - Pendiente: persistir filtros en querystring y localStorage.
+*/
 (() => {
   const cfg = () => (window.AILatamConfig || {}).api || {};
 
@@ -48,6 +56,7 @@
   async function loadFeed(){
     const url = cfg().feedUrl || '/data/sample-feed.json';
     try {
+      // TODO(automation): soportar compresión (gzip/br) y ETag/If-None-Match
       const raw = await fetchJSON(url);
       return (Array.isArray(raw) ? raw : (raw.items || raw.articles || [])).map(normalize);
     } catch (e){
@@ -108,6 +117,7 @@
       list.appendChild(empty);
       return;
     }
+    // NOTE: home muestra tope 12; páginas dedicadas pueden listar todo
     const take = Math.min(12, state.filtered.length);
     for(let i=0;i<take;i++){
       list.appendChild(card(state.filtered[i]));
@@ -190,6 +200,30 @@
     }
   }
 
-  window.AILatamFeed = { initFeed };
-})();
+  // Observatorio Legal (destacados):
+  // Si existe #regulatory-highlights en la página, filtra 6 ítems por temas [Regulación, Gobierno, Ética]
+  async function initRegHighlights(){
+    const container = document.getElementById('regulatory-highlights');
+    if(!container) return;
+    try{
+      const all = await loadFeed();
+      const topics = new Set(['Regulación','Gobierno','Política pública','Ética']);
+      const items = all.filter(a => (a.topics||[]).some(t => topics.has(t)) )
+                       .sort((x,y)=> new Date(y.published_at) - new Date(x.published_at))
+                       .slice(0,6);
+      container.innerHTML='';
+      if(items.length===0){
+        const empty = document.createElement('div');
+        empty.className='note';
+        empty.textContent='No hay señales recientes. Revisa el Observatorio Legal.';
+        container.appendChild(empty);
+        return;
+      }
+      for(const a of items){ container.appendChild(card(a)); }
+    }catch(e){
+      container.innerHTML='<div class="panel">No se pudo cargar destacados regulatorios.</div>';
+    }
+  }
 
+  window.AILatamFeed = { initFeed, initRegHighlights };
+})();

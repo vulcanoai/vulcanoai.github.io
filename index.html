@@ -9,11 +9,17 @@
     <meta property="og:description" content="Noticias y análisis sobre IA en América Latina. Curado automáticamente, verificado por humanos." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="/" />
-    <meta property="og:image" content="/assets/img/og-banner.png" />
+    <meta property="og:image" content="/assets/img/og-banner.svg" />
     <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="/assets/css/styles.css" />
   </head>
   <body>
+    <!--
+      Cabecera principal
+      Notas:
+      - La navegación se replica en todas las páginas. Si agregas una ruta nueva, actualiza en bloque.
+      - Un agente podría sincronizar el menú desde un fragmento/partial común si migramos a un generador estático.
+    -->
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand" href="/">
@@ -23,6 +29,8 @@
         <button class="nav-toggle" aria-label="Abrir menú">☰</button>
         <nav class="site-nav" aria-label="Principal">
           <a href="/pages/noticias.html">Noticias</a>
+          <a href="/pages/panorama.html">Panorama</a>
+          <a href="/pages/observatorio-legal.html">Observatorio legal</a>
           <a href="/pages/agentes.html">Agentes</a>
           <a href="/pages/fuentes.html">Fuentes</a>
           <a href="/pages/acerca.html">Acerca</a>
@@ -31,6 +39,12 @@
     </header>
 
     <main>
+      <!--
+        Hero: mensaje principal
+        - CTA 1 → Noticias completas
+        - CTA 2 → Metodología/Fuentes
+        - Sugerencia: añadir un CTA 3 hacia Observatorio legal si interesa priorizar regulación.
+      -->
       <section class="hero">
         <div class="container">
           <h1>Panorama de IA en América Latina</h1>
@@ -38,10 +52,17 @@
           <div class="cta-row">
             <a class="btn primary" href="/pages/noticias.html">Ver noticias</a>
             <a class="btn ghost" href="/pages/fuentes.html">Ver metodología</a>
+            <a class="btn ghost" href="/pages/observatorio-legal.html">Observatorio legal</a>
           </div>
         </div>
       </section>
 
+      <!--
+        Últimas noticias (home)
+        - Este bloque usa feed.js para cargar y renderizar.
+        - Los filtros son dinámicos; los valores provienen del feed.
+        - TODO: persistir filtros en URL/localStorage.
+      -->
       <section class="section">
         <div class="container">
           <h2>Últimas noticias</h2>
@@ -66,6 +87,10 @@
         </div>
       </section>
 
+      <!--
+        Bloque de métricas simples.
+        - Sugerencia: los agentes pueden actualizar contadores con estadísticas diarias.
+      -->
       <section class="section alt">
         <div class="container">
           <h2>Métricas del ecosistema</h2>
@@ -75,6 +100,21 @@
             <div class="metric"><div class="value" id="metric-countries">—</div><div class="label">Países</div></div>
             <div class="metric"><div class="value" id="metric-topics">—</div><div class="label">Temas</div></div>
           </div>
+        </div>
+      </section>
+
+      <!--
+        Observatorio Legal — destacados
+        - Resalta señales regulatorias recientes. Implementación simple: filtro en feed por temas.
+        - Para profundidad, ver página dedicada.
+      -->
+      <section class="section">
+        <div class="container">
+          <h2>Señales regulatorias recientes</h2>
+          <div id="regulatory-highlights" class="grid news-grid">
+            <div class="loading">Cargando…</div>
+          </div>
+          <div class="actions"><a class="btn" href="/pages/observatorio-legal.html">Abrir Observatorio legal</a></div>
         </div>
       </section>
 
@@ -112,4 +152,3 @@
     <script src="/assets/js/app.js"></script>
   </body>
 </html>
-

@@ -1,0 +1,34 @@
+[
+  {
+    "pais": "Brasil",
+    "titulo": "PL 2338/2023 — Marco de IA",
+    "estado": "Debate",
+    "fecha": "2025-08-20T00:00:00Z",
+    "url": "https://www25.senado.leg.br/web/atividade/materias/-/materia/162312",
+    "resumen": "Proyecto de ley que establece principios, derechos y obligaciones para sistemas de IA; temas de transparencia, evaluación de riesgo y sanciones.
+    ",
+    "organismo": "Senado Federal",
+    "temas": ["riesgo", "transparencia", "sanciones"]
+  },
+  {
+    "pais": "Colombia",
+    "titulo": "Guía ética para IA en sector público (borrador)",
+    "estado": "Consulta",
+    "fecha": "2025-09-03T00:00:00Z",
+    "url": "https://www.gov.co/",
+    "resumen": "Principios de transparencia, seguridad y evaluación de impacto; solicita comentarios públicos.",
+    "organismo": "Gobierno de Colombia",
+    "temas": ["ética", "sector público"]
+  },
+  {
+    "pais": "México",
+    "titulo": "Lineamientos sobre contenido sintético y deepfakes (propuesta)",
+    "estado": "Borrador",
+    "fecha": "2025-07-15T00:00:00Z",
+    "url": "https://www.ifetel.gob.mx/",
+    "resumen": "Propuesta para etiquetado y sanciones por uso malicioso; coordinación con plataformas.",
+    "organismo": "Autoridad audiovisual",
+    "temas": ["deepfakes", "contenido sintético"]
+  }
+]
+
