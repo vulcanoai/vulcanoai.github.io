@@ -23,5 +23,12 @@ window.AILatamConfig = window.AILatamConfig || {
   site: {
     name: 'Vulcano Ai',
     baseUrl: '/',
+  },
+  social: {
+    instagram: 'https://instagram.com/vulcanoai.solutions',
+    x: 'https://x.com/VulcanoAi',
+    whatsappNumber: '+573193620926',
+    whatsappLink: 'https://wa.me/573193620926',
+    whatsappDefaultText: 'Hola Vulcano Ai, quiero recibir noticias {frecuencia}.'
   }
 };

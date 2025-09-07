@@ -127,6 +127,12 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
 .footer-nav{display:flex; gap:12px}
 .footer-nav a{color:var(--muted); text-decoration:none}
 
+/* Social row */
+.social-row{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+.social-row a{display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border:1px solid var(--line); border-radius:999px; text-decoration:none; color:var(--text); background:#21262d}
+.social-row a:hover{background:#30363d}
+.social-row .icon{width:16px; height:16px}
+
 /* Legal observatory */
 .legal-grid{display:grid; grid-template-columns:2fr 1fr; gap:16px}
 @media (max-width: 900px){ .legal-grid{grid-template-columns:1fr} }

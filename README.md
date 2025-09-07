@@ -7,6 +7,7 @@ Sitio estático en español para coordinar y visualizar un canal de noticias del
 - Páginas nuevas: Panorama (categorías y automatización) y Observatorio legal
 - Envíos independientes con formulario + PR a GitHub
  - Página “Qué es Vulcano AI” con historia, colaboración y entidad legal
+ - Canal de WhatsApp y redes para actualizaciones
 - Datos de ejemplo (`/data`) y configuración cliente (`/assets/js/config.js`)
 
 ## Estructura
@@ -193,3 +194,17 @@ Este repositorio no incluye contenido de terceros. Al enlazar artículos, respet
 - Recomendado: que n8n cree PRs con cambios de datos (para revisión y trazabilidad) en lugar de publicar directo.
 
 Consulta `SECURITY.md` para detalles y práctica recomendada.
+
+## Canales de actualización
+
+- WhatsApp: +57 319 362 0926 — abre `https://wa.me/573193620926` y escribe “ALTA DIARIO” o “ALTA SEMANAL”.
+- Instagram: https://instagram.com/vulcanoai.solutions
+- X (Twitter): https://x.com/VulcanoAi
+
+Página dedicada: `pages/actualizaciones.html`. El formulario compone el mensaje y abre WhatsApp con el texto sugerido. La frecuencia no se guarda en el cliente; el manejo se realiza en n8n/WA Business.
+
+### n8n (sugerido)
+
+- Webhook WA Business/Cloud API ↔ n8n: parsear mensajes “ALTA DIARIO/SEMANAL” y “BAJA”.
+- Lista de envíos (diaria/semanal) + publicación de resúmenes en WhatsApp.
+- Opcional: confirmación y ayuda automatizada.

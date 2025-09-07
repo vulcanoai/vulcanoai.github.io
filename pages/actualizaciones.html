@@ -6,8 +6,7 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="color-scheme" content="dark light" />
-    <title>Fuentes y metodología — Vulcano Ai</title>
-    <meta name="description" content="Listado de fuentes y metodología de recolección y clasificación automática de contenidos." />
+    <title>Actualizaciones — Vulcano Ai</title>
     <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="/assets/css/styles.css" />
   </head>
@@ -21,25 +20,41 @@
           <a href="/pages/noticias.html">Noticias</a>
           <a href="/pages/panorama.html">Panorama</a>
           <a href="/pages/observatorio-legal.html">Observatorio legal</a>
-          <a href="/pages/actualizaciones.html">Actualizaciones</a>
           <a href="/pages/agentes.html">Agentes</a>
-          <a href="/pages/fuentes.html" aria-current="page">Fuentes</a>
+          <a href="/pages/fuentes.html">Fuentes</a>
           <a href="/pages/vulcano.html">Qué es Vulcano AI</a>
         </nav>
       </div>
     </header>
     <main class="section" id="main">
       <div class="container">
-        <h1>Fuentes y metodología</h1>
+        <h1>Actualizaciones</h1>
         <div class="panel">
-          <h3>Metodología</h3>
-          <p>Agregamos contenidos de RSS, portales de noticias, blogs técnicos, comunicados oficiales, publicaciones académicas y boletines regulatorios. Un pipeline de agentes clasifica por país, tema e idioma; deduplica; resume; y calcula señales de relevancia. Operamos con trazabilidad y filtros anti‑spam.</p>
-          <p>¿Tienes una fuente para agregar? Escríbenos: <a href="mailto:equipo@ailatam.news">equipo@ailatam.news</a>.</p>
-          <p><strong>NUEVO:</strong> categoría <em>Independiente</em> para que investigadores y autores publiquen trabajos propios. Puedes enviar tu paper o escrito aquí: <a class="btn" href="/pages/independiente.html">Publicar trabajo independiente</a>.</p>
+          <h3>WhatsApp</h3>
+          <p>Recibe noticias de IA en LATAM directamente en tu WhatsApp, a la hora y frecuencia que prefieras.</p>
+          <form id="wa-form" class="form-grid">
+            <label>Frecuencia</label>
+            <div>
+              <label><input type="radio" name="freq" value="diarias" checked> Diarias</label>
+              <label style="margin-left:10px"><input type="radio" name="freq" value="semanales"> Semanales</label>
+            </div>
+            <div></div>
+            <div class="form-actions">
+              <a id="wa-link" class="btn primary" target="_blank" rel="noopener"><svg class="icon"><use href="/assets/icons.svg#whatsapp"></use></svg> Abrir WhatsApp</a>
+              <span class="note">Número: +57 319 362 0926. Mensaje de alta sugerido: “ALTA {DIARIO|SEMANAL}”.</span>
+            </div>
+          </form>
         </div>
-        <h2>Fuentes activas</h2>
-        <div id="sources-list" class="grid" style="grid-template-columns:1fr; gap:16px">
-          <div class="loading">Cargando fuentes…</div>
+        <div class="panel" style="margin-top:12px">
+          <h3>Redes</h3>
+          <div class="social-row">
+            <a href="https://instagram.com/vulcanoai.solutions" target="_blank" rel="noopener"><svg class="icon"><use href="/assets/icons.svg#instagram"></use></svg> Instagram</a>
+            <a href="https://x.com/VulcanoAi" target="_blank" rel="noopener"><svg class="icon"><use href="/assets/icons.svg#x"></use></svg> X</a>
+          </div>
+        </div>
+        <div class="panel" style="margin-top:12px">
+          <h3>Privacidad</h3>
+          <p class="note">Los mensajes por WhatsApp pueden contener datos personales. Consulta nuestra <a href="/pages/legal/privacidad.html">Política de Privacidad</a>. Puedes darte de baja en cualquier momento escribiendo “BAJA”.</p>
         </div>
       </div>
     </main>
@@ -55,7 +70,6 @@
         <nav class="footer-nav">
           <a href="/pages/legal/privacidad.html">Privacidad</a>
           <a href="/pages/legal/terminos.html">Términos</a>
-          <a href="/pages/vulcano.html">Qué es Vulcano AI</a>
         </nav>
       </div>
     </footer>
@@ -63,3 +77,4 @@
     <script src="/assets/js/app.js"></script>
   </body>
   </html>
+

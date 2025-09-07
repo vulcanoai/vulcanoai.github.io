@@ -99,6 +99,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // WhatsApp form link
+  const wa = document.getElementById('wa-form');
+  if (wa){ initWhatsApp(wa); }
 });
 
 async function initSources(container){
@@ -325,4 +329,17 @@ async function initTriggerUpdate(button){
       status.textContent = 'Agentes notificados. Actualizando pronto.'; status.className='chip ok';
     }catch(err){ status.textContent = 'No se pudo notificar.'; status.className='chip err'; }
   });
+}
+
+function initWhatsApp(form){
+  const cfg = window.AILatamConfig?.social || {};
+  const link = form.querySelector('#wa-link');
+  const render = () => {
+    const freq = (new FormData(form).get('freq') || 'diarias');
+    const base = cfg.whatsappLink || 'https://wa.me/573193620926';
+    const text = (cfg.whatsappDefaultText || 'Hola Vulcano Ai, quiero recibir noticias {frecuencia}.').replace('{frecuencia}', freq);
+    link.href = `${base}?text=${encodeURIComponent(text)}`;
+  };
+  form.addEventListener('change', render);
+  render();
 }
