@@ -48,6 +48,28 @@ document.addEventListener('DOMContentLoaded', () => {
   if (ls){ initLiveSearch(ls).catch(console.error); }
   const tu = document.getElementById('trigger-update');
   if (tu){ initTriggerUpdate(tu).catch(console.error); }
+
+  // Contemplative mode toggle
+  const cm = document.getElementById('toggle-contemplative');
+  if (cm){
+    cm.addEventListener('click', () => {
+      const on = document.body.classList.toggle('mode-contemplative');
+      cm.setAttribute('aria-pressed', on ? 'true' : 'false');
+      cm.textContent = on ? 'Salir de modo contemplativo' : 'Modo contemplativo';
+    });
+  }
+
+  // Mark active nav link when no aria-current
+  const nav = document.querySelector('.site-nav');
+  if (nav){
+    const here = location.pathname.replace(/index\.html$/, '/');
+    nav.querySelectorAll('a').forEach(a => {
+      const href = a.getAttribute('href') || '';
+      if (!a.hasAttribute('aria-current') && (here.endsWith(href) || here===href)){
+        a.classList.add('active');
+      }
+    });
+  }
 });
 
 async function initSources(container){

@@ -17,6 +17,7 @@
   --ok:#238636;        /* success */
   --warn:#9e6a03;      /* attention */
   --err:#da3633;       /* danger */
+  --logo:#ff5a2a;      /* Vulcano orange for logo */
 }
 *{box-sizing:border-box}
 html,body{height:100%}
@@ -24,16 +25,19 @@ body{
   margin:0; font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;
   background:var(--bg); color:var(--text);
 }
+.skip-link{position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden}
+.skip-link:focus{left:10px; top:10px; width:auto; height:auto; padding:6px 10px; background:#21262d; border:1px solid var(--line); border-radius:6px}
 .container{max-width:1100px; margin:0 auto; padding:0 20px}
 .site-header{position:sticky; top:0; z-index:50; background:rgba(13,17,23,.85); backdrop-filter: blur(8px); border-bottom:1px solid var(--line)}
 .header-inner{display:flex; align-items:center; gap:16px; padding:10px 0}
 .brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text)}
-.logo{width:32px; height:32px; color:#ff5a2a}
+.logo{width:32px; height:32px; color:var(--logo)}
 .logo.small{width:24px; height:24px}
 .brand-text{font-weight:700; letter-spacing:.5px}
 .site-nav{margin-left:auto; display:flex; gap:6px}
 .site-nav a{color:var(--text); text-decoration:none; padding:6px 10px; border:1px solid transparent; border-radius:6px}
 .site-nav a:hover{background:#21262d; border-color:var(--line)}
+.site-nav a[aria-current="page"], .site-nav a.active{background:#1f6feb22; border-color:#1f6feb44}
 .nav-toggle{display:none; margin-left:auto; background:#21262d; border:1px solid var(--line); color:var(--text); padding:6px 10px; border-radius:6px}
 
 .hero{padding:48px 0; background:linear-gradient(180deg, rgba(46,51,59,.3), transparent 50%), var(--bg); border-bottom:1px solid var(--line)}
@@ -44,10 +48,17 @@ body{
 .btn:hover{background:#30363d}
 .btn.primary{background:var(--brand); border-color:#1f6feb; color:#111}
 .btn.ghost{background:transparent}
+.btn.subtle{background:transparent; border-color:transparent; color:var(--muted)}
+.btn.subtle:hover{background:#21262d; color:var(--text)}
 
 .section{padding:36px 0}
 .section.alt{background:var(--panel); border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
 h2{margin:0 0 16px}
+.hero h1{font-weight:800; letter-spacing:.2px}
+h1{font-size:2.25rem}
+h2{font-size:1.25rem}
+h3{font-size:1.05rem}
+.kicker{font-size:.9rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em}
 .panel{background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px}
 .muted{color:var(--muted)}
 
@@ -68,6 +79,7 @@ h2{margin:0 0 16px}
   background:var(--panel); color:var(--text); border:1px solid var(--line);
   padding:10px 12px; border-radius:10px; outline:none; min-width:180px
 }
+input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-visible, a:focus-visible{outline:2px solid #1f6feb; outline-offset:2px; border-color:#1f6feb}
 
 /* Simple forms */
 .form-grid{display:grid; grid-template-columns:1fr 2fr; gap:10px; align-items:center}
@@ -141,3 +153,25 @@ pre{background:#0d1117; border:1px solid var(--line); padding:12px; border-radiu
 
 /* Utility */
 .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0}
+
+/* Hero orb (wireframe sphere) */
+.hero-grid{display:grid; grid-template-columns:1.2fr .8fr; gap:18px; align-items:center}
+@media (max-width: 900px){ .hero-grid{grid-template-columns:1fr} }
+.orb-wrap{display:flex; align-items:center; justify-content:center}
+.orb{width:320px; height:320px; max-width:100%}
+.orb svg{width:100%; height:100%}
+.orb .stroke{stroke:var(--logo); fill:none; opacity:.85}
+.orb .spin-slow{animation:spin 36s linear infinite}
+.orb .spin-med{animation:spin 48s linear infinite reverse}
+.orb .spin-fast{animation:spin 64s linear infinite}
+@keyframes spin{from{transform:rotate(0turn)} to{transform:rotate(1turn)}}
+@media (prefers-reduced-motion: reduce){ .orb .spin-slow, .orb .spin-med, .orb .spin-fast{animation:none} }
+/* Contemplative mode */
+.toggle-row{display:flex; gap:8px; align-items:center; margin-top:10px}
+.mode-contemplative .hero{padding:64px 0}
+.mode-contemplative .orb{width:min(60vh,680px); height:min(60vh,680px)}
+.mode-contemplative .cta-row{opacity:.9}
+
+/* Mini orb mascot */
+.orb-mini{width:120px; height:120px}
+.orb-mini .stroke{stroke:var(--logo)}

@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/assets/css/styles.css" />
   </head>
   <body>
+    <a href="#main" class="skip-link">Saltar al contenido</a>
     <!--
       Cabecera principal
       Notas:
@@ -43,7 +44,7 @@
       </div>
     </header>
 
-    <main>
+    <main id="main">
       <!--
         Hero: mensaje principal
         - CTA 1 → Noticias completas
@@ -51,14 +52,24 @@
         - Sugerencia: añadir un CTA 3 hacia Observatorio legal si interesa priorizar regulación.
       -->
       <section class="hero">
-        <div class="container">
-          <h1>Panorama de IA en América Latina</h1>
-          <p class="tagline">Noticias, datos y señales del ecosistema latinoamericano de IA. Recolectado por agentes, validado por humanos.</p>
-          <div class="cta-row">
-            <a class="btn primary" href="/pages/noticias.html">Ver noticias</a>
-            <a class="btn ghost" href="/pages/fuentes.html">Ver metodología</a>
-            <a class="btn ghost" href="/pages/observatorio-legal.html">Observatorio legal</a>
-            <a class="btn" href="/pages/independiente.html">Publicar trabajo independiente</a>
+        <div class="container hero-grid">
+          <div>
+            <h1><svg class="logo" aria-hidden="true" style="vertical-align:-4px; margin-right:8px"><use href="/assets/icons.svg#logo"></use></svg>Panorama de IA en América Latina</h1>
+            <p class="tagline">Noticias, datos y señales del ecosistema latinoamericano de IA. Recolectado por agentes, validado por humanos.</p>
+            <div class="cta-row">
+              <a class="btn primary" href="/pages/noticias.html">Ver noticias</a>
+              <a class="btn ghost" href="/pages/fuentes.html">Ver metodología</a>
+              <a class="btn ghost" href="/pages/observatorio-legal.html">Observatorio legal</a>
+              <a class="btn" href="/pages/independiente.html">Publicar trabajo independiente</a>
+            </div>
+          </div>
+          <div class="orb-wrap">
+            <!-- SVG generado por código para mantener una firma del logo -->
+            <div id="hero-orb" class="orb" aria-hidden="true"></div>
+            <span class="sr-only">Logo esférico de Vulcano Ai</span>
+            <div class="toggle-row">
+              <button id="toggle-contemplative" class="btn subtle" aria-pressed="false">Modo contemplativo</button>
+            </div>
           </div>
         </div>
       </section>
@@ -206,6 +217,7 @@
     </footer>
 
     <script src="/assets/js/config.js"></script>
+    <script src="/assets/js/logo.js"></script>
     <script src="/assets/js/feed.js"></script>
     <script src="/assets/js/app.js"></script>
   </body>
