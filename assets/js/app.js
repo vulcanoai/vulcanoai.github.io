@@ -343,3 +343,21 @@ function initWhatsApp(form){
   form.addEventListener('change', render);
   render();
 }
+
+// Generic copy-to-clipboard for [data-copy] buttons
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('[data-copy]');
+  if (!btn) return;
+  const val = btn.getAttribute('data-copy');
+  if (!val) return;
+  navigator.clipboard.writeText(val).then(()=>{
+    btn.textContent = 'Copiado';
+    setTimeout(()=>{ btn.textContent = 'Copiar'; }, 1200);
+  }).catch(()=>{
+    // fallback: select text if next sibling code
+    const prev = btn.previousElementSibling;
+    if (prev && prev.textContent){
+      const range = document.createRange(); range.selectNodeContents(prev); const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
+    }
+  });
+});
