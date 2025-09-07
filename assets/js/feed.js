@@ -149,9 +149,10 @@
 
     // Chips enlazables
     const chips = create('div','meta');
-    const countryChip = create('span','chip'); countryChip.innerHTML = `<a href="${qp({pais:a.country})}">${a.country}</a>`; chips.appendChild(countryChip);
+    const countryChip = create('span','chip');
+    const cLink = create('a'); cLink.href = qp({pais:a.country}); cLink.textContent = a.country; countryChip.appendChild(cLink); chips.appendChild(countryChip);
     for(const t of (a.topics||[]).slice(0,2)){
-      const c = create('span','chip'); c.innerHTML = `<a href="${qp({tema:t})}">${t}</a>`; chips.appendChild(c);
+      const c = create('span','chip'); const aLink = create('a'); aLink.href = qp({tema:t}); aLink.textContent = t; c.appendChild(aLink); chips.appendChild(c);
     }
 
     // Meta compacta con iconos

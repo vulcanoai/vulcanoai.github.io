@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="color-scheme" content="dark light" />
+    <title>Publicar trabajo independiente — AI LATAM</title>
+    <meta name="description" content="Envía tu paper o escrito independiente para ser indexado y correlacionado en el ecosistema." />
+    <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/"><svg class="logo" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg><span class="brand-text">AI LATAM</span></a>
+        <button class="nav-toggle" aria-label="Abrir menú">☰</button>
+        <nav class="site-nav" aria-label="Principal">
+          <a href="/pages/noticias.html">Noticias</a>
+          <a href="/pages/panorama.html">Panorama</a>
+          <a href="/pages/observatorio-legal.html">Observatorio legal</a>
+          <a href="/pages/agentes.html">Agentes</a>
+          <a href="/pages/fuentes.html">Fuentes</a>
+          <a href="/pages/vulcano.html">Qué es Vulcano AI</a>
+        </nav>
+      </div>
+    </header>
+    <main class="section">
+      <div class="container">
+        <h1>Publicar trabajo independiente</h1>
+        <div class="panel">
+          <p>Esta vía está pensada para autores que quieran compartir papers, informes o escritos técnicos. Curamos entradas para correlacionarlas con países, temas y fuentes. No almacenamos archivos; comparte un enlace público (PDF o sitio web) y los metadatos básicos.</p>
+        </div>
+
+        <section class="section">
+          <div class="panel">
+            <h3>Enviar vía formulario</h3>
+            <p class="note">Si tenemos un endpoint activo (n8n), tu envío será procesado automáticamente.</p>
+            <form id="indie-form" class="form-grid">
+              <label for="titulo">Título</label>
+              <input id="titulo" name="titulo" required placeholder="Título del trabajo" />
+
+              <label for="autor">Autor/a</label>
+              <input id="autor" name="autor" placeholder="Tu nombre" />
+
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="Opcional (para contacto)" />
+
+              <label for="pais">País</label>
+              <input id="pais" name="pais" placeholder="México, Colombia, Regional…" />
+
+              <label for="temas">Temas</label>
+              <input id="temas" name="temas" placeholder="separa por coma: Startups, Regulación" />
+
+              <label for="enlace">Enlace al documento</label>
+              <input id="enlace" name="enlace" required placeholder="https://… (PDF o página)" />
+
+              <label for="resumen">Resumen</label>
+              <textarea id="resumen" name="resumen" rows="4" placeholder="Descripción breve"></textarea>
+
+              <label for="licencia">Licencia</label>
+              <select id="licencia" name="licencia">
+                <option>CC BY</option>
+                <option>CC BY-SA</option>
+                <option>CC BY-NC</option>
+                <option>All rights reserved</option>
+              </select>
+
+              <label for="acuerdo">Términos</label>
+              <div>
+                <input id="acuerdo" name="acuerdo" type="checkbox" required />
+                <label for="acuerdo">Confirmo que tengo derechos para compartir este enlace y acepto que AI LATAM solo enlaza y muestra metadatos.</label>
+              </div>
+
+              <div></div>
+              <div class="form-actions">
+                <button class="btn primary" type="submit">Enviar</button>
+                <span data-status class="note"></span>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="panel" id="indie-pr" style="display:none">
+            <h3>Enviar vía Pull Request (recomendado)</h3>
+            <p>Publica un archivo JSON con tus metadatos en nuestro repositorio público. Esto deja trazabilidad y versión pública.</p>
+            <ol>
+              <li>Visita el repo: <a href="https://github.com/vulcanoai/vulcanoai.github.io" target="_blank" rel="noopener">github.com/vulcanoai/vulcanoai.github.io</a></li>
+              <li>Crea un archivo en <code>submissions/independiente/AAAA-MM/tu-trabajo.json</code> con este esquema:</li>
+            </ol>
+            <pre>{
+  "tipo": "independiente",
+  "title": "…",
+  "author": "…",
+  "country": "México|Colombia|Regional",
+  "topics": ["…"],
+  "url": "https://…",
+  "summary": "…",
+  "license": "CC BY|CC BY-SA|…"
+}</pre>
+            <p>Abre un Pull Request. Nuestro pipeline de agentes validará y lo integrará al índice.</p>
+          </div>
+        </section>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <svg class="logo small" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>
+          <div>
+            <strong>AI LATAM</strong>
+            <div class="muted">Vulcano Ai Digital Solutions S.A.S - 2025 Todos los derechos reservados</div>
+          </div>
+        </div>
+        <nav class="footer-nav">
+          <a href="/pages/legal/privacidad.html">Privacidad</a>
+          <a href="/pages/legal/terminos.html">Términos</a>
+        </nav>
+      </div>
+    </footer>
+    <script src="/assets/js/config.js"></script>
+    <script src="/assets/js/app.js"></script>
+  </body>
+  </html>

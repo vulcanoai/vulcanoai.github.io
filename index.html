@@ -3,6 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Seguridad: CSP estricta; actualiza connect-src si usas endpoints externos -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="color-scheme" content="dark light" />
     <title>AI LATAM — Noticias y panorama del ecosistema</title>
     <meta name="description" content="Canal de noticias y panorama del ecosistema de IA en América Latina: investigación, inversión, regulación y startups, curado por agentes autónomos." />
     <meta property="og:title" content="AI LATAM — Noticias y panorama del ecosistema" />
@@ -34,7 +38,7 @@
           <a href="/pages/observatorio-legal.html">Observatorio legal</a>
           <a href="/pages/agentes.html">Agentes</a>
           <a href="/pages/fuentes.html">Fuentes</a>
-          <a href="/pages/acerca.html">Acerca</a>
+          <a href="/pages/vulcano.html">Qué es Vulcano AI</a>
         </nav>
       </div>
     </header>
@@ -54,6 +58,7 @@
             <a class="btn primary" href="/pages/noticias.html">Ver noticias</a>
             <a class="btn ghost" href="/pages/fuentes.html">Ver metodología</a>
             <a class="btn ghost" href="/pages/observatorio-legal.html">Observatorio legal</a>
+            <a class="btn" href="/pages/independiente.html">Publicar trabajo independiente</a>
           </div>
         </div>
       </section>
@@ -104,6 +109,17 @@
         </div>
       </section>
 
+      <!-- Experimento: descripción clara desde el inicio -->
+      <section class="section">
+        <div class="container">
+          <div class="panel">
+            <h3>El experimento AI LATAM</h3>
+            <p>Este proyecto es un experimento abierto de curaduría automatizada por agentes + verificación humana. La meta: organizar con rigor científico las señales de IA en Latinoamérica, correlacionando fuentes, fechas, autores/as y curadores, sin tomar partido editorial.</p>
+            <p class="note">Metodología, transparencia de fuentes y trazabilidad están detalladas en <a href="/pages/fuentes.html">Fuentes y metodología</a>.</p>
+          </div>
+        </div>
+      </section>
+
       <!--
         Observatorio Legal — destacados
         - Resalta señales regulatorias recientes. Implementación simple: filtro en feed por temas.
@@ -124,7 +140,7 @@
           <div class="panel">
             <h3>¿Cómo funciona?</h3>
             <p>Agentes autónomos rastrean fuentes públicas (RSS, prensa, blogs, reguladores) y clasifican el contenido por país, tema y relevancia. Los resultados pasan por deduplicación, resumen y moderación humana antes de publicarse.</p>
-            <p>Integra tu fuente o API escribiendo a <a href="mailto:equipo@ailatam.news">equipo@ailatam.news</a>.</p>
+            <p>Integra tu fuente o API escribiendo a <a href="mailto:equipo@ailatam.news">equipo@ailatam.news</a>. También puedes colaborar directamente con Pull Requests: <a href="https://github.com/vulcanoai/vulcanoai.github.io" target="_blank" rel="noopener">Repo público en GitHub</a>. El registro de cambios es público por diseño.</p>
           </div>
         </div>
       </section>
@@ -136,14 +152,13 @@
           <svg class="logo small" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>
           <div>
             <strong>AI LATAM</strong>
-            <div class="muted">Una iniciativa de investigación y curaduría.
-            </div>
+            <div class="muted">Vulcano Ai Digital Solutions S.A.S - 2025 Todos los derechos reservados</div>
           </div>
         </div>
         <nav class="footer-nav">
           <a href="/pages/legal/privacidad.html">Privacidad</a>
           <a href="/pages/legal/terminos.html">Términos</a>
-          <a href="/pages/acerca.html">Acerca</a>
+          <a href="/pages/vulcano.html">Qué es Vulcano AI</a>
         </nav>
       </div>
     </footer>

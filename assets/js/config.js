@@ -10,7 +10,9 @@ window.AILatamConfig = window.AILatamConfig || {
     agentsUrl: '/data/agents.json',
     sourcesUrl: '/data/sources.json',
     panoramaUrl: '/data/panorama.json',
-    legalUrl: '/data/legal-sample.json'
+    legalUrl: '/data/legal-sample.json',
+    // Endpoint opcional n8n para recibir envíos independientes (POST JSON)
+    indieSubmitUrl: ''
   },
   site: {
     name: 'AI LATAM',

@@ -38,6 +38,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Legal observatory if present
   const legal = document.getElementById('legal-timeline');
   if (legal){ initLegal(legal).catch(console.error); }
+
+  // Indie submission form if present
+  const indie = document.getElementById('indie-form');
+  if (indie){ initIndieForm(indie).catch(console.error); }
 });
 
 async function initSources(container){
@@ -58,7 +62,9 @@ async function initSources(container){
     const ul = document.createElement('ul');
     for (const s of arr){
       const li = document.createElement('li');
-      li.innerHTML = `<a href="${s.url}" target="_blank" rel="noopener">${s.nombre}</a> <span class="muted">(${s.pais || 'Regional'})</span>`;
+      const a = document.createElement('a'); a.href = s.url; a.target = '_blank'; a.rel = 'noopener'; a.textContent = s.nombre;
+      const sp = document.createElement('span'); sp.className = 'muted'; sp.textContent = ` (${s.pais || 'Regional'})`;
+      li.appendChild(a); li.appendChild(sp);
       ul.appendChild(li);
     }
     section.appendChild(ul);
@@ -75,15 +81,15 @@ async function initAgents(table){
   for (const a of agents){
     const tr = document.createElement('tr');
     const st = (a.estado || 'desconocido').toLowerCase();
-    const statusChip = `<span class="chip ${st==='activo'?'ok':st==='fallo'?'err':st==='pausado'?'warn':''}">${a.estado}</span>`;
     const last = a.ultimo_ejecucion || a.lastRun || '';
-    tr.innerHTML = `
-      <td>${a.nombre}</td>
-      <td>${statusChip}</td>
-      <td>${last ? new Date(last).toLocaleString('es-ES') : '—'}</td>
-      <td>${a.throughput ? a.throughput + '/h' : '—'}</td>
-      <td class="muted">${a.notas || ''}</td>
-    `;
+
+    const tdName = document.createElement('td'); tdName.textContent = a.nombre || '';
+    const tdState = document.createElement('td'); const chip = document.createElement('span'); chip.className = 'chip ' + (st==='activo'?'ok':st==='fallo'?'err':st==='pausado'?'warn':''); chip.textContent = a.estado || ''; tdState.appendChild(chip);
+    const tdLast = document.createElement('td'); tdLast.textContent = last ? new Date(last).toLocaleString('es-ES') : '—';
+    const tdRate = document.createElement('td'); tdRate.textContent = a.throughput ? (a.throughput + '/h') : '—';
+    const tdNotes = document.createElement('td'); tdNotes.className = 'muted'; tdNotes.textContent = a.notas || '';
+
+    tr.append(tdName, tdState, tdLast, tdRate, tdNotes);
     tbody.appendChild(tr);
   }
 }
@@ -122,19 +128,74 @@ async function initLegal(container){
   for (const it of items){
     const box = document.createElement('div');
     box.className='timeline-item';
+    const head = document.createElement('div'); head.className='head';
+    const tagPais = document.createElement('span'); tagPais.className='tag'; tagPais.textContent = it.pais || '';
+    const tagEstado = document.createElement('span'); tagEstado.className='tag'; tagEstado.textContent = it.estado || '';
+    const dateItem = document.createElement('span'); dateItem.className='item'; dateItem.style.marginLeft='auto'; dateItem.style.display='inline-flex'; dateItem.style.alignItems='center'; dateItem.style.gap='6px';
+    const cal = document.createElementNS('http://www.w3.org/2000/svg','svg'); cal.setAttribute('class','icon'); cal.setAttribute('aria-hidden','true'); const use = document.createElementNS('http://www.w3.org/2000/svg','use'); use.setAttributeNS('http://www.w3.org/1999/xlink','href','/assets/icons.svg#calendar'); cal.appendChild(use);
     const d = it.fecha ? new Date(it.fecha).toLocaleDateString('es-ES') : '';
-    box.innerHTML = `
-      <div class="head">
-        <span class="tag">${it.pais}</span>
-        <span class="tag">${it.estado}</span>
-        <span class="item" style="margin-left:auto; display:inline-flex; align-items:center; gap:6px">
-          <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#calendar"></use></svg>${d}
-        </span>
-      </div>
-      <h4 class="title">${it.titulo}</h4>
-      <p>${it.resumen||''}</p>
-      <div class="meta"><a href="${it.url}" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#link"></use></svg> Fuente oficial</a></div>
-    `;
+    dateItem.append(cal, document.createTextNode(d));
+    head.append(tagPais, tagEstado, dateItem);
+
+    const h4 = document.createElement('h4'); h4.className='title'; h4.textContent = it.titulo || '';
+    const p = document.createElement('p'); p.textContent = it.resumen || '';
+    const meta = document.createElement('div'); meta.className='meta';
+    const a = document.createElement('a'); a.href = it.url || '#'; a.target = '_blank'; a.rel = 'noopener';
+    const linkIcon = document.createElementNS('http://www.w3.org/2000/svg','svg'); linkIcon.setAttribute('class','icon'); linkIcon.setAttribute('aria-hidden','true'); const use2 = document.createElementNS('http://www.w3.org/2000/svg','use'); use2.setAttributeNS('http://www.w3.org/1999/xlink','href','/assets/icons.svg#link'); linkIcon.appendChild(use2);
+    a.append(linkIcon, document.createTextNode(' Fuente oficial'));
+    meta.appendChild(a);
+
+    box.append(head, h4, p, meta);
     container.appendChild(box);
   }
+}
+
+// Envío de trabajos independientes: POST JSON a n8n si hay endpoint; si no, guía para PR en GitHub
+async function initIndieForm(form){
+  const cfg = window.AILatamConfig?.api || {};
+  const endpoint = cfg.indieSubmitUrl || '';
+  const status = form.querySelector('[data-status]');
+  const prBox = document.getElementById('indie-pr');
+  // Si no hay endpoint, mostramos preferentemente la ruta PR
+  if (!endpoint && prBox){ prBox.style.display = 'block'; }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    status.textContent = '';
+    const data = Object.fromEntries(new FormData(form).entries());
+    // Normalización mínima
+    const payload = {
+      tipo: 'independiente',
+      title: data.titulo || '',
+      author: data.autor || '',
+      email: data.email || '',
+      country: data.pais || 'Regional',
+      topics: (data.temas || '').split(',').map(s=>s.trim()).filter(Boolean),
+      url: data.enlace || '',
+      summary: data.resumen || '',
+      license: data.licencia || 'unspecified',
+      agreement: data.acuerdo === 'on',
+      submitted_at: new Date().toISOString()
+    };
+
+    if (!endpoint){
+      status.textContent = 'No hay endpoint configurado. Usa la opción de Pull Request en GitHub (recomendado).';
+      status.className = 'note';
+      return;
+    }
+
+    try{
+      const res = await fetch(endpoint, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
+      });
+      if (!res.ok) throw new Error('HTTP '+res.status);
+      status.textContent = 'Enviado correctamente. Gracias por tu contribución.';
+      status.className = 'chip ok';
+      form.reset();
+    } catch (err){
+      console.error(err);
+      status.textContent = 'No se pudo enviar. Intenta más tarde o usa PR en GitHub.';
+      status.className = 'chip err';
+    }
+  });
 }

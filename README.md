@@ -5,6 +5,8 @@ Sitio estático en español para coordinar y visualizar un canal de noticias del
 - Página principal con feed y filtros por país/tema/fuente
 - Páginas de Agentes (estado de pipelines) y Fuentes (metodología)
 - Páginas nuevas: Panorama (categorías y automatización) y Observatorio legal
+- Envíos independientes con formulario + PR a GitHub
+ - Página “Qué es Vulcano AI” con historia, colaboración y entidad legal
 - Datos de ejemplo (`/data`) y configuración cliente (`/assets/js/config.js`)
 
 ## Estructura
@@ -50,6 +52,8 @@ El sitio cliente carga el feed desde `window.AILatamConfig.api.feedUrl` (ver `as
 
 1. Expón un endpoint n8n que devuelva JSON de artículos (CORS habilitado).
 2. Actualiza `feedUrl` para apuntar a tu webhook o a un archivo JSON en S3/Cloud Storage/CDN.
+
+Para envíos independientes (formulario), configura un webhook en `AILatamConfig.api.indieSubmitUrl` que reciba POST JSON. Si no está configurado, el sitio mostrará la ruta de Pull Request como alternativa principal.
 
 ### Esquema esperado del artículo
 
@@ -119,6 +123,12 @@ Sugerencias de agentes: rastreadores por país (Senado/Cámara, diarios oficiale
 
 `panorama.json` describe categorías, elementos clave y fuentes/automatización. Los agentes pueden actualizarlo o generar variantes por país.
 
+### Envíos independientes
+
+- Página: `pages/independiente.html`
+- Formulario envía JSON a `api.indieSubmitUrl` con: `{ tipo:"independiente", title, author, email, country, topics[], url, summary, license, agreement }`.
+- Alternativa: Pull Request al repo `vulcanoai/vulcanoai.github.io` creando archivos en `submissions/independiente/AAAA-MM/*.json`.
+
 ## Notas de mantenimiento asistido por IA
 
 - Los archivos JS incluyen comentarios "TODO" y puntos de extensión.
@@ -131,6 +141,7 @@ Sugerencias de agentes: rastreadores por país (Senado/Cámara, diarios oficiale
 - Cambia favicon en `assets/img/`
 - Ajusta colores en `assets/css/styles.css`
 - Edita textos de navegación y footer en cada HTML
+ - Línea legal usada en footer: “Vulcano Ai Digital Solutions S.A.S - 2025 Todos los derechos reservados”
 
 ## SEO básico
 
@@ -140,3 +151,13 @@ Sugerencias de agentes: rastreadores por país (Senado/Cámara, diarios oficiale
 ## Licencias y fuentes
 
 Este repositorio no incluye contenido de terceros. Al enlazar artículos, respeta derechos y licencias de cada medio.
+
+## Modelo de publicación y seguridad
+
+- Sitio estático, sin claves en el cliente. Secretos viven en n8n.
+- Por defecto, el cliente solo lee `data/*.json` incluidos en el repo (resultado de PRs aprobados).
+- Opcional: usar un CDN de solo lectura para `feedUrl`/`legalUrl`/`panoramaUrl`. Restringe CORS al dominio del sitio.
+- CSP estricta en HTML: si apuntas a endpoints externos, añade su origen a `connect-src`.
+- Recomendado: que n8n cree PRs con cambios de datos (para revisión y trazabilidad) en lugar de publicar directo.
+
+Consulta `SECURITY.md` para detalles y práctica recomendada.

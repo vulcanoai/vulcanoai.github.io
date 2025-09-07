@@ -9,5 +9,5 @@
   {"nombre":"Gobierno de Chile","url":"https://www.gob.cl/","pais":"Chile","tipo":"Gobierno"},
   {"nombre":"arXiv AI","url":"https://arxiv.org/list/cs.AI/recent","pais":"Global","tipo":"Académico"},
   {"nombre":"LATAM Tech Blogroll","url":"https://ejemplo.latam/blogroll","pais":"Regional","tipo":"Blogs"}
+  ,{"nombre":"Comunidad Vulcano — Envíos independientes","url":"https://github.com/vulcanoai/vulcanoai.github.io","pais":"Regional","tipo":"Independiente"}
 ]
-

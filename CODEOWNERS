@@ -1,0 +1,9 @@
+# Reglas de revisión obligatoria
+# Más info: https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Propietario principal
+* @navirobayo
+
+data/ @navirobayo
+assets/js/config.js @navirobayo
+pages/independiente.html @navirobayo
