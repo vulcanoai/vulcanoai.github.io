@@ -69,9 +69,6 @@
             <!-- SVG generado por código para mantener una firma del logo -->
             <div id="hero-orb" class="orb" aria-hidden="true"></div>
             <span class="sr-only">Logo esférico de Vulcano Ai</span>
-            <div class="toggle-row">
-              <button id="toggle-contemplative" class="btn subtle" aria-pressed="false">Modo contemplativo</button>
-            </div>
           </div>
         </div>
       </section>
@@ -215,27 +212,29 @@
         </div>
       </section>
 
-      <!--
-        Observatorio Legal — destacados
-        - Resalta señales regulatorias recientes. Implementación simple: filtro en feed por temas.
-        - Para profundidad, ver página dedicada.
-      -->
-      <section class="section">
-        <div class="container">
-          <h2>Señales regulatorias recientes</h2>
-          <div id="regulatory-highlights" class="grid news-grid">
-            <div class="loading">Cargando…</div>
-          </div>
-          <div class="actions"><a class="btn" href="/pages/observatorio-legal.html">Abrir Observatorio legal</a></div>
-        </div>
-      </section>
+      
 
       <section class="section">
         <div class="container">
           <div class="panel">
             <h3>¿Cómo funciona?</h3>
             <p>Agentes autónomos rastrean fuentes públicas (RSS, prensa, blogs, reguladores) y clasifican el contenido por país, tema y relevancia. Los resultados pasan por deduplicación, resumen y moderación humana antes de publicarse.</p>
+            <p>Este proyecto es un experimento abierto de curaduría automatizada por agentes + verificación humana. La meta: organizar con rigor científico las señales de IA en Latinoamérica, correlacionando fuentes, fechas, autores/as y curadores, sin tomar partido editorial.</p>
+            <p class="note">Metodología, transparencia de fuentes y trazabilidad están detalladas en <a href="/pages/fuentes.html">Fuentes y metodología</a>.</p>
             <p>Integra tu fuente o API escribiendo a <a href="mailto:equipo@ailatam.news">equipo@ailatam.news</a>. También puedes colaborar directamente con Pull Requests: <a href="https://github.com/vulcanoai/vulcanoai.github.io" target="_blank" rel="noopener">Repo público en GitHub</a>. El registro de cambios es público por diseño.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Métricas del ecosistema -->
+      <section class="section alt">
+        <div class="container">
+          <h2>Métricas del ecosistema</h2>
+          <div class="metrics">
+            <div class="metric"><div class="value" id="metric-articles">—</div><div class="label">Artículos indexados</div></div>
+            <div class="metric"><div class="value" id="metric-sources">—</div><div class="label">Fuentes activas</div></div>
+            <div class="metric"><div class="value" id="metric-countries">—</div><div class="label">Países</div></div>
+            <div class="metric"><div class="value" id="metric-topics">—</div><div class="label">Temas</div></div>
           </div>
         </div>
       </section>
