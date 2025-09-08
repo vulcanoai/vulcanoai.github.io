@@ -22,7 +22,7 @@
 
   function drawWireSphere(el, opts={}){
     const cfg = Object.assign({}, SIG, opts);
-    const size = (cfg.radius*2)+10;
+    const size = Math.max(20, (cfg.radius*2)+10);
     const svg = createNS('svg');
     svg.setAttribute('viewBox', `0 0 ${size} ${size}`);
     svg.setAttribute('width', size);
@@ -77,26 +77,35 @@
     el.appendChild(svg);
   }
 
-  function initHeroOrb(){
-    const target = document.getElementById('hero-orb');
-    if (!target) return;
-    // tamaño responsivo
-    const w = Math.min(420, target.clientWidth || 320);
-    drawWireSphere(target, { radius: Math.max(80, Math.floor(w/2)-10) });
+  function registerOrb(target, base){
+    if (!target || target.dataset.orbReady) return;
+    const redraw = () => {
+      const w = target.clientWidth || parseInt(getComputedStyle(target).width)|| 320;
+      const r = Math.max(60, Math.floor(Math.min(480, w)/2)-10);
+      drawWireSphere(target, Object.assign({}, base||{}, { radius: r }));
+    };
+    // initial draw after layout
+    requestAnimationFrame(()=>{ redraw(); });
+    // resize observer
+    if (window.ResizeObserver){
+      const ro = new ResizeObserver(()=> redraw()); ro.observe(target);
+    } else {
+      window.addEventListener('resize', redraw);
+    }
+    // mutation guard (if some script wipes content)
+    const mo = new MutationObserver((m)=>{
+      if (!target.querySelector('svg')) redraw();
+    });
+    mo.observe(target, { childList:true });
+    target.dataset.orbReady = '1';
+    // also redraw on window load
+    window.addEventListener('load', redraw, { once:true });
   }
 
   function initPageOrbs(){
-    initHeroOrb();
-    const v = document.getElementById('vulcano-orb');
-    if (v){
-      const w = Math.min(240, v.clientWidth || 120);
-      drawWireSphere(v, { radius: Math.max(50, Math.floor(w/2)-6) });
-    }
-    const ch = document.getElementById('crypto-orb-home');
-    if (ch){
-      const w2 = Math.min(240, ch.clientWidth || 120);
-      drawWireSphere(ch, { radius: Math.max(50, Math.floor(w2/2)-6), lons: 12, rotations:[15,45,75] });
-    }
+    registerOrb(document.getElementById('hero-orb'), {});
+    registerOrb(document.getElementById('vulcano-orb'), { radius: 60 });
+    registerOrb(document.getElementById('crypto-orb-home'), { lons: 12, rotations:[15,45,75] });
   }
 
   window.addEventListener('DOMContentLoaded', initPageOrbs);
