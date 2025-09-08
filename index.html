@@ -1,241 +1,255 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Seguridad: CSP estricta; actualiza connect-src si usas endpoints externos -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
-    <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <meta name="color-scheme" content="dark light" />
-    <title>Vulcano Ai — Noticias y panorama del ecosistema</title>
-    <meta name="description" content="Canal de noticias y panorama del ecosistema de IA en América Latina: investigación, inversión, regulación y startups, curado por agentes autónomos." />
-    <meta property="og:title" content="Vulcano Ai — Noticias y panorama del ecosistema" />
-    <meta property="og:description" content="Noticias y análisis sobre IA en América Latina. Curado automáticamente, verificado por humanos." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="/" />
-    <meta property="og:image" content="/assets/img/og-banner.svg" />
-    <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="/assets/css/styles.css" />
-  </head>
-  <body>
-    <a href="#main" class="skip-link">Saltar al contenido</a>
-    <!--
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Seguridad: CSP estricta; actualiza connect-src si usas endpoints externos -->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="color-scheme" content="dark light" />
+  <title>Vulcano Ai — Noticias y panorama del ecosistema</title>
+  <meta name="description"
+    content="Canal de noticias y panorama del ecosistema de IA en América Latina: investigación, inversión, regulación y startups, curado por agentes autónomos." />
+  <meta property="og:title" content="Vulcano Ai — Noticias y panorama del ecosistema" />
+  <meta property="og:description"
+    content="Noticias y análisis sobre IA en América Latina. Curado automáticamente, verificado por humanos." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="/" />
+  <meta property="og:image" content="/assets/img/og-banner.svg" />
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+</head>
+
+<body>
+  <a href="#main" class="skip-link">Saltar al contenido</a>
+  <!--
       Cabecera principal
       Notas:
       - La navegación se replica en todas las páginas. Si agregas una ruta nueva, actualiza en bloque.
       - Un agente podría sincronizar el menú desde un fragmento/partial común si migramos a un generador estático.
     -->
-    <header class="site-header">
-      <div class="container header-inner">
-        <a class="brand" href="/">
-          <!-- Inline icon logo for minimal, image-free UI -->
-          <svg class="logo" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>
-          <span class="brand-text">Vulcano Ai</span>
-        </a>
-        <button class="nav-toggle" aria-label="Abrir menú">☰</button>
-        <nav class="site-nav" aria-label="Principal">
-          <a href="/pages/noticias.html">Noticias</a>
-          <a href="/pages/panorama.html">Panorama</a>
-          <a href="/pages/observatorio-legal.html">Observatorio legal</a>
-          <a href="/pages/actualizaciones.html">Actualizaciones</a>
-          <a href="/pages/apoya.html">Apoyar</a>
-          <a href="/pages/agentes.html">Agentes</a>
-          <a href="/pages/fuentes.html">Fuentes</a>
-          <a href="/pages/vulcano.html">Qué es Vulcano AI</a>
-        </nav>
-      </div>
-    </header>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/">
+        <!-- Inline icon logo for minimal, image-free UI -->
+        <svg class="logo" aria-hidden="true">
+          <use href="/assets/icons.svg#logo"></use>
+        </svg>
+        <span class="brand-text">Vulcano Ai</span>
+      </a>
+      <button class="nav-toggle" aria-label="Abrir menú">☰</button>
+      <nav class="site-nav" aria-label="Principal">
+        <a href="/pages/noticias.html">Noticias</a>
+        <a href="/pages/panorama.html">Panorama</a>
+        <a href="/pages/observatorio-legal.html">Observatorio legal</a>
+        <a href="/pages/actualizaciones.html">Actualizaciones</a>
+        <a href="/pages/apoya.html">Apoyar</a>
+        <a href="/pages/agentes.html">Agentes</a>
+        <a href="/pages/fuentes.html">Fuentes</a>
+        <a href="/pages/vulcano.html">Qué es Vulcano AI</a>
+      </nav>
+    </div>
+  </header>
 
-    <main id="main">
-      <!--
+  <main id="main">
+    <!--
         Hero: mensaje principal
         - CTA 1 → Noticias completas
         - CTA 2 → Metodología/Fuentes
         - Sugerencia: añadir un CTA 3 hacia Observatorio legal si interesa priorizar regulación.
       -->
-      <section class="hero">
-        <div class="container hero-grid">
-          <div>
-            <h1><svg class="logo" aria-hidden="true" style="vertical-align:-4px; margin-right:8px"><use href="/assets/icons.svg#logo"></use></svg>Panorama de IA en América Latina</h1>
-            <p class="tagline">Noticias, datos y señales del ecosistema latinoamericano de IA. Recolectado por agentes, validado por humanos.</p>
-            <div class="cta-row">
-              <a class="btn primary" href="/pages/noticias.html">Ver noticias</a>
-              <a class="btn ghost" href="/pages/fuentes.html">Ver metodología</a>
-              <a class="btn ghost" href="/pages/observatorio-legal.html">Observatorio legal</a>
-              <a class="btn" href="/pages/independiente.html">Publicar trabajo independiente</a>
-            </div>
-          </div>
-          <div class="orb-wrap">
-            <!-- SVG generado por código para mantener una firma del logo -->
-            <div id="hero-orb" class="orb" aria-hidden="true"></div>
-            <span class="sr-only">Logo esférico de Vulcano Ai</span>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <h1><svg class="logo" aria-hidden="true" style="vertical-align:-4px; margin-right:8px">
+              <use href="/assets/icons.svg#logo"></use>
+            </svg>Panorama de IA en América Latina</h1>
+          <p class="tagline">Noticias, datos y señales del ecosistema latinoamericano de IA. Recolectado por agentes,
+            validado por humanos.</p>
+          <div class="cta-row">
+            <a class="btn primary" href="/pages/noticias.html">Ver noticias</a>
+            <a class="btn ghost" href="/pages/fuentes.html">Ver metodología</a>
+            <a class="btn ghost" href="/pages/observatorio-legal.html">Observatorio legal</a>
+            <a class="btn" href="/pages/independiente.html">Publicar trabajo independiente</a>
           </div>
         </div>
-      </section>
-
-      <!-- Suscripción por WhatsApp y redes -->
-      <section class="section alt">
-        <div class="container">
-          <h2>Actualizaciones en tu WhatsApp</h2>
-          <div class="panel">
-            <p>Vulcano Ai te envía noticias de IA en LATAM directo a tu WhatsApp. Recibe un resumen diario o semanal en tu chat.</p>
-            <a id="wa-link" class="btn primary" target="_blank" rel="noopener">
-              <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#whatsapp"></use></svg>
-              Abrir WhatsApp
-            </a>
-          </div>
-          <div class="social-row" style="margin-top:12px">
-            <a href="https://instagram.com/vulcanoai.solutions" target="_blank" rel="noopener" aria-label="Instagram Vulcano Ai">
-              <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#instagram"></use></svg>
-              Instagram
-            </a>
-            <a href="https://x.com/VulcanoAi" target="_blank" rel="noopener" aria-label="X (Twitter) Vulcano Ai">
-              <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#x"></use></svg>
-              X
-            </a>
-            <a href="https://www.linkedin.com/company/vulcano-ai/" target="_blank" rel="noopener" aria-label="LinkedIn Vulcano Ai">
-              <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#linkedin"></use></svg>
-              LinkedIn
-            </a>
-            <a href="/pages/actualizaciones.html" aria-label="Más opciones de actualización" class="btn subtle">Más opciones</a>
-          </div>
+        <div class="orb-wrap">
+          <!-- SVG generado por código para mantener una firma del logo -->
+          <div id="hero-orb" class="orb" aria-hidden="true"></div>
+          <span class="sr-only">Logo esférico de Vulcano Ai</span>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!--
+    <!-- Suscripción por WhatsApp y redes -->
+    <section class="section alt">
+      <div class="container">
+        <h2>Actualizaciones en tu WhatsApp</h2>
+        <div class="panel">
+          <p>Vulcano Ai te envía noticias de IA en LATAM directo a tu WhatsApp. Recibe un resumen diario o semanal en tu
+            chat.</p>
+          <a id="wa-link" class="btn primary" target="_blank" rel="noopener">
+            <svg class="icon" aria-hidden="true">
+              <use href="/assets/icons.svg#whatsapp"></use>
+            </svg>
+            Abrir WhatsApp
+          </a>
+        </div>
+        <div class="social-row" style="margin-top:12px">
+          <a href="https://instagram.com/vulcanoai.solutions" target="_blank" rel="noopener"
+            aria-label="Instagram Vulcano Ai">
+            <svg class="icon" aria-hidden="true">
+              <use href="/assets/icons.svg#instagram"></use>
+            </svg>
+            Instagram
+          </a>
+          <a href="https://x.com/VulcanoAi" target="_blank" rel="noopener" aria-label="X (Twitter) Vulcano Ai">
+            <svg class="icon" aria-hidden="true">
+              <use href="/assets/icons.svg#x"></use>
+            </svg>
+            X
+          </a>
+          <a href="https://www.linkedin.com/company/vulcano-ai/" target="_blank" rel="noopener"
+            aria-label="LinkedIn Vulcano Ai">
+            <svg class="icon" aria-hidden="true">
+              <use href="/assets/icons.svg#linkedin"></use>
+            </svg>
+            LinkedIn
+          </a>
+          <a href="/pages/actualizaciones.html" aria-label="Más opciones de actualización" class="btn subtle">Más
+            opciones</a>
+        </div>
+      </div>
+    </section>
+
+    <!--
         Últimas noticias (home)
         - Este bloque usa feed.js para cargar y renderizar.
         - Los filtros son dinámicos; los valores provienen del feed.
         - TODO: persistir filtros en URL/localStorage.
       -->
-      <section class="section">
-        <div class="container">
-          <h2>Últimas noticias</h2>
-          <div class="filters" id="filters">
-            <input type="search" id="search" placeholder="Buscar por título o resumen" aria-label="Buscar" />
-            <select id="filter-country" aria-label="Filtrar por país"></select>
-            <select id="filter-topic" aria-label="Filtrar por tema"></select>
-            <select id="filter-source" aria-label="Filtrar por fuente"></select>
-            <select id="sort-by" aria-label="Ordenar">
-              <option value="recent">Más recientes</option>
-              <option value="relevance">Más relevantes</option>
-            </select>
-          </div>
-
-          <div id="news-list" class="grid news-grid" aria-live="polite">
-            <div class="loading">Cargando noticias…</div>
-          </div>
-
-          <div class="actions">
-            <a class="btn" href="/pages/noticias.html">Explorar todas las noticias</a>
-          </div>
+    <section class="section">
+      <div class="container">
+        <h2>Últimas noticias</h2>
+        <div class="filters" id="filters">
+          <input type="search" id="search" placeholder="Buscar por título o resumen" aria-label="Buscar" />
+          <select id="filter-country" aria-label="Filtrar por país"></select>
+          <select id="filter-topic" aria-label="Filtrar por tema"></select>
+          <select id="filter-source" aria-label="Filtrar por fuente"></select>
+          <select id="sort-by" aria-label="Ordenar">
+            <option value="recent">Más recientes</option>
+            <option value="relevance">Más relevantes</option>
+          </select>
         </div>
-      </section>
 
-      <!--
-        Bloque de métricas simples.
-        - Sugerencia: los agentes pueden actualizar contadores con estadísticas diarias.
-      -->
-      <section class="section alt">
-        <div class="container">
-          <h2>Métricas del ecosistema</h2>
-          <div class="metrics">
-            <div class="metric"><div class="value" id="metric-articles">—</div><div class="label">Artículos indexados</div></div>
-            <div class="metric"><div class="value" id="metric-sources">—</div><div class="label">Fuentes activas</div></div>
-            <div class="metric"><div class="value" id="metric-countries">—</div><div class="label">Países</div></div>
-            <div class="metric"><div class="value" id="metric-topics">—</div><div class="label">Temas</div></div>
-          </div>
+        <div id="news-list" class="grid news-grid" aria-live="polite">
+          <div class="loading">Cargando noticias…</div>
         </div>
-      </section>
 
-      <!-- Experimento: descripción clara desde el inicio -->
-      <section class="section">
-        <div class="container">
-          <div class="panel">
-            <h3>El experimento Vulcano Ai</h3>
-            <p>Este proyecto es un experimento abierto de curaduría automatizada por agentes + verificación humana. La meta: organizar con rigor científico las señales de IA en Latinoamérica, correlacionando fuentes, fechas, autores/as y curadores, sin tomar partido editorial.</p>
-            <p class="note">Metodología, transparencia de fuentes y trazabilidad están detalladas en <a href="/pages/fuentes.html">Fuentes y metodología</a>.</p>
-          </div>
+        <div class="actions">
+          <a class="btn" href="/pages/noticias.html">Explorar todas las noticias</a>
         </div>
-      </section>
-
-      <!-- Hook: búsqueda en tiempo real + trigger de actualización -->
-      <section class="section">
-        <div class="container">
-          <div class="grid two-col" style="gap:16px">
-            <div class="panel" id="live-search">
-              <h3><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#search"></use></svg> Búsqueda en tiempo real</h3>
-              <p class="note">Explora noticias personalizadas. Un agente de IA buscará y devolverá resultados. Tus hallazgos se agregarán al feed con autoría anónima (hash) y podrás reclamar coautoría al final.</p>
-              <form id="live-search-form" class="form-grid">
-                <label for="live-q">¿Qué te interesa?</label>
-                <input id="live-q" name="q" placeholder="Ej.: regulación deepfakes en México, 2024‑2025" />
-                <label for="live-country">País (opcional)</label>
-                <input id="live-country" name="country" placeholder="México, Colombia, Regional…" />
-                <label for="live-topics">Temas (opcional)</label>
-                <input id="live-topics" name="topics" placeholder="Regulación, Startups" />
-                <div></div>
-                <div class="form-actions">
-                  <button type="submit" class="btn primary"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#sparkles"></use></svg> Buscar ahora</button>
-                  <span data-live-status class="note"></span>
-                </div>
-              </form>
-              <div id="live-claim" class="panel" style="display:none; margin-top:12px">
-                <h4>¿Quieres aparecer como coautor/a?</h4>
-                <form id="claim-form" class="form-grid">
-                  <label for="alias">Alias</label>
-                  <input id="alias" name="alias" placeholder="tu-nombre-o-seudónimo" />
-                  <label for="email">Email</label>
-                  <input id="email" name="email" type="email" placeholder="Opcional, para confirmar" />
-                  <div></div>
-                  <div class="form-actions"><button class="btn">Reclamar autoría</button><span data-claim-status class="note"></span></div>
-                </form>
-              </div>
-            </div>
-            <div class="panel">
-              <h3><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#refresh"></use></svg> Regar la planta</h3>
-              <p>Haz ping para que los agentes actualicen señales (cuando está habilitado). Esto ayuda a “regar” el ecosistema.</p>
-              <button id="trigger-update" class="btn"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#refresh"></use></svg> Actualizar señales</button>
-              <div id="trigger-status" class="note" style="margin-top:8px"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      
-
-      <section class="section">
-        <div class="container">
-          <div class="panel">
-            <h3>¿Cómo funciona?</h3>
-            <p>Agentes autónomos rastrean fuentes públicas (RSS, prensa, blogs, reguladores) y clasifican el contenido por país, tema y relevancia. Los resultados pasan por deduplicación, resumen y moderación humana antes de publicarse.</p>
-            <p>Integra tu fuente o API escribiendo a <a href="mailto:equipo@ailatam.news">equipo@ailatam.news</a>. También puedes colaborar directamente con Pull Requests: <a href="https://github.com/vulcanoai/vulcanoai.github.io" target="_blank" rel="noopener">Repo público en GitHub</a>. El registro de cambios es público por diseño.</p>
-          </div>
-        </div>
-      </section>
-
-      
-    </main>
-
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <div class="footer-brand">
-          <svg class="logo small" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>
-          <div>
-            <strong>Vulcano Ai</strong>
-            <div class="muted">Vulcano Ai Digital Solutions S.A.S - 2025 Todos los derechos reservados</div>
-          </div>
-        </div>
-        <nav class="footer-nav">
-          <a href="/pages/legal/privacidad.html">Privacidad</a>
-          <a href="/pages/legal/terminos.html">Términos</a>
-          <a href="/pages/vulcano.html">Qué es Vulcano AI</a>
-        </nav>
       </div>
-    </footer>
+    </section>
 
-    <script src="/assets/js/config.js"></script>
-    <script src="/assets/js/logo.js"></script>
-    <script src="/assets/js/feed.js"></script>
-    <script src="/assets/js/app.js"></script>
-  </body>
+    <!-- Hook: búsqueda en tiempo real + trigger de actualización -->
+    <section class="section">
+      <div class="container">
+        <div class="grid two-col" style="gap:16px">
+          <div class="panel" id="live-search">
+            <h3><svg class="icon" aria-hidden="true">
+                <use href="/assets/icons.svg#search"></use>
+              </svg> Búsqueda en tiempo real</h3>
+            <p class="note">Explora noticias personalizadas. Un agente de IA buscará y devolverá resultados. Tus
+              hallazgos se agregarán al feed con autoría anónima (hash) y podrás reclamar coautoría al final.</p>
+            <form id="live-search-form" class="form-grid">
+              <label for="live-q">¿Qué te interesa?</label>
+              <input id="live-q" name="q" placeholder="Ej.: regulación deepfakes en México, 2024‑2025" />
+              <label for="live-country">País (opcional)</label>
+              <input id="live-country" name="country" placeholder="México, Colombia, Regional…" />
+              <label for="live-topics">Temas (opcional)</label>
+              <input id="live-topics" name="topics" placeholder="Regulación, Startups" />
+              <div></div>
+              <div class="form-actions">
+                <button type="submit" class="btn primary"><svg class="icon" aria-hidden="true">
+                    <use href="/assets/icons.svg#sparkles"></use>
+                  </svg> Buscar ahora</button>
+                <span data-live-status class="note"></span>
+              </div>
+            </form>
+            <div id="live-claim" class="panel" style="display:none; margin-top:12px">
+              <h4>¿Quieres aparecer como coautor/a?</h4>
+              <form id="claim-form" class="form-grid">
+                <label for="alias">Alias</label>
+                <input id="alias" name="alias" placeholder="tu-nombre-o-seudónimo" />
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="Opcional, para confirmar" />
+                <div></div>
+                <div class="form-actions"><button class="btn">Reclamar autoría</button><span data-claim-status
+                    class="note"></span></div>
+              </form>
+            </div>
+          </div>
+          <div class="panel">
+            <h3><svg class="icon" aria-hidden="true">
+                <use href="/assets/icons.svg#refresh"></use>
+              </svg> Regar la planta</h3>
+            <p>Haz ping para que los agentes actualicen señales (cuando está habilitado). Esto ayuda a “regar” el
+              ecosistema.</p>
+            <button id="trigger-update" class="btn"><svg class="icon" aria-hidden="true">
+                <use href="/assets/icons.svg#refresh"></use>
+              </svg> Actualizar señales</button>
+            <div id="trigger-status" class="note" style="margin-top:8px"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <section class="section">
+      <div class="container">
+        <div class="panel">
+          <h3>¿Cómo funciona?</h3>
+          <p>Agentes autónomos rastrean fuentes públicas (RSS, prensa, blogs, reguladores) y clasifican el contenido por
+            país, tema y relevancia. Los resultados pasan por deduplicación, resumen y moderación humana antes de
+            publicarse.</p>
+          <p>Integra tu fuente o API escribiendo a <a href="mailto:equipo@ailatam.news">equipo@ailatam.news</a>. También
+            puedes colaborar directamente con Pull Requests: <a href="https://github.com/vulcanoai/vulcanoai.github.io"
+              target="_blank" rel="noopener">Repo público en GitHub</a>. El registro de cambios es público por diseño.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <svg class="logo small" aria-hidden="true">
+          <use href="/assets/icons.svg#logo"></use>
+        </svg>
+        <div>
+          <strong>Vulcano Ai</strong>
+          <div class="muted">Vulcano Ai Digital Solutions S.A.S - 2025 Todos los derechos reservados</div>
+        </div>
+      </div>
+      <nav class="footer-nav">
+        <a href="/pages/legal/privacidad.html">Privacidad</a>
+        <a href="/pages/legal/terminos.html">Términos</a>
+        <a href="/pages/vulcano.html">Qué es Vulcano AI</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="/assets/js/config.js"></script>
+  <script src="/assets/js/logo.js"></script>
+  <script src="/assets/js/feed.js"></script>
+  <script src="/assets/js/app.js"></script>
+</body>
+
 </html>
