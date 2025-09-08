@@ -50,7 +50,7 @@
     relevance: a.relevance || a.relevancia || 0,
     sentiment: a.sentiment || a.sentimiento || 'neutral',
     author: a.author || a.autor || '',
-    curator: a.curator || a.curador || 'Lukas (Ai)'
+    curator: a.curator || a.curador || 'Lucas AI'
   });
 
   async function fetchJSON(url){
@@ -165,31 +165,16 @@
     const link = create('a'); link.href=a.url; link.target='_blank'; link.rel='noopener'; link.textContent=a.title; title.appendChild(link);
     const summary = create('p'); summary.textContent = a.summary || '';
 
-    // Chips enlazables
+    // Chips minimalistas: solo país
     const chips = create('div','meta');
-    const countryChip = create('span','chip');
-    const cSlug = slugify(a.country||''); if (cSlug) countryChip.classList.add('tag-country-'+cSlug);
+    const countryChip = create('span','chip brand');
     const cLink = create('a'); cLink.href = qp({pais:a.country}); cLink.textContent = a.country; countryChip.appendChild(cLink); chips.appendChild(countryChip);
-    for(const t of (a.topics||[]).slice(0,2)){
-      const c = create('span','chip'); const tSlug = slugify(t); if (tSlug) c.classList.add('tag-topic-'+tSlug);
-      const aLink = create('a'); aLink.href = qp({tema:t}); aLink.textContent = t; c.appendChild(aLink); chips.appendChild(c);
-    }
-    // Ruta/almacenamiento + adjuntos
-    const routeLabel = a.route || ((a.url||'').startsWith('/') ? 'wiki' : 'external');
-    const routeChip = create('span',`chip ${routeLabel==='wiki'?'route-wiki':'route-external'}`);
-    routeChip.textContent = routeLabel==='wiki' ? 'Wiki' : 'Fuente externa';
-    chips.appendChild(routeChip);
-    if ((a.attachments||0) > 0){
-      const att = create('span','chip attach'); att.textContent = `Adjuntos (${a.attachments})`; chips.appendChild(att);
-    }
 
     // Meta compacta con iconos
     const meta = create('div','meta');
     const mDate = create('span','chip meta-date'); mDate.append(icon('calendar'), document.createTextNode(fmtDate(a.published_at)));
-    const mSource = create('span','chip meta-source'); const srcA = create('a'); srcA.href = qp({fuente:a.source}); srcA.textContent = a.source; mSource.append(icon('source'), srcA);
-    const mAuthor = create('span','chip meta-author'); mAuthor.append(icon('user'), document.createTextNode(a.author || '—'));
-    const mCur = create('span','chip meta-curator'); mCur.append(icon('robot'), document.createTextNode(a.curator || 'Lukas (Ai)'));
-    meta.append(mDate, mSource, mAuthor, mCur);
+    const mCur = create('span','chip meta-curator lucas'); mCur.append(icon('robot'), document.createTextNode(a.curator || 'Lucas AI'));
+    meta.append(mDate, mCur);
 
     body.append(title, summary, chips, meta);
     el.append(body);
@@ -227,13 +212,13 @@
     const topT = Array.from(state.counts?.topics?.entries?.() || []).sort((a,b)=>b[1]-a[1]).slice(0,6).map(x=>x[0]);
     const gC = create('div','group');
     for (const c of topC){
-      const a = create('a','chip tag-country-'+slugify(c)); a.href = qp({pais:c}); a.textContent = c; a.setAttribute('data-pais', c); gC.appendChild(a);
+      const a = create('a','chip brand'); a.href = qp({pais:c}); a.textContent = c; a.setAttribute('data-pais', c); gC.appendChild(a);
     }
     row.appendChild(gC);
     const sep = create('span','sep'); row.appendChild(sep);
     const gT = create('div','group');
     for (const t of topT){
-      const a = create('a','chip tag-topic-'+slugify(t)); a.href = qp({tema:t}); a.textContent = t; a.setAttribute('data-tema', t); gT.appendChild(a);
+      const a = create('a','chip brand'); a.href = qp({tema:t}); a.textContent = t; a.setAttribute('data-tema', t); gT.appendChild(a);
     }
     row.appendChild(gT);
     const reset = create('a','chip'); reset.href = qp({}); reset.textContent = 'Limpiar filtros'; reset.setAttribute('data-reset','1'); row.appendChild(reset);

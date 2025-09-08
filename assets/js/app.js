@@ -46,6 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const sm = document.getElementById('smart-marquee');
   if (sm){ initSmartMarquee(sm).catch(console.error); }
 
+  // Drag taste interactions (demo-only, no reorder)
+  attachDragTaste('#news-list .card');
+  attachDragTaste('.mobile-nav a', { max:6, rotate:0 });
+  attachDragTaste('#smart-marquee .chip', { max:4, rotate:0 });
+
   // Contemplative mode toggle
   const cm = document.getElementById('toggle-contemplative');
   if (cm){
@@ -146,7 +151,7 @@ async function initSmartMarquee(container){
     if(!track) return;
     const buildChip = (tag) => {
       const a = document.createElement('a');
-      a.className = 'chip glassy ' + (tag.kind==='topic' ? ('tag-topic-'+slugify(tag.value)) : ('tag-country-'+slugify(tag.value)));
+      a.className = 'chip glassy brand';
       a.href = tag.kind==='topic' ? (`/pages/noticias.html?tema=${encodeURIComponent(tag.value)}`) : (`/pages/noticias.html?pais=${encodeURIComponent(tag.value)}`);
       a.textContent = tag.value;
       return a;
@@ -365,7 +370,7 @@ async function initLiveSearch(form){
       const items = Array.isArray(json) ? json : (json.items || json.articles || []);
       // Autoría anónima con hash
       const anon = 'anon-' + crypto.getRandomValues(new Uint32Array(1))[0].toString(16).slice(0,8);
-      const mapped = items.map(x => ({...x, author: anon, curator: 'Lukas (Ai)'}));
+      const mapped = items.map(x => ({...x, author: anon, curator: 'Lucas AI'}));
       if (window.AILatamFeed?.addItems){ window.AILatamFeed.addItems(mapped); }
       status.textContent = `Añadido al feed (${mapped.length} resultados). Hash autor: ${anon}`;
       status.className = 'chip ok';
@@ -476,3 +481,23 @@ document.addEventListener('click', (e) => {
     }
   });
 });
+function attachDragTaste(selector, opts){
+  const opt = Object.assign({ max:8, rotate:2 }, opts||{});
+  const els = Array.from(document.querySelectorAll(selector));
+  for (const el of els){ if (el.dataset.dragTasteApplied) continue; el.dataset.dragTasteApplied='1'; makeDraggable(el, opt); }
+}
+
+function makeDraggable(el, opt){
+  let startX=0, startY=0, down=false, moved=false;
+  el.classList.add('draggable');
+  const onDown = (e)=>{
+    down=true; moved=false; startX = e.clientX || (e.touches&&e.touches[0]?.clientX)||0; startY = e.clientY || (e.touches&&e.touches[0]?.clientY)||0; el.classList.add('dragging'); el.setPointerCapture?.(e.pointerId||0);
+  };
+  const onMove = (e)=>{
+    if(!down) return; const x = e.clientX || (e.touches&&e.touches[0]?.clientX)||0; const y = e.clientY || (e.touches&&e.touches[0]?.clientY)||0; let dx = x-startX, dy=y-startY; if (Math.abs(dx)+Math.abs(dy) > 1) moved=true; const clamp = (v,m)=>Math.max(-m, Math.min(m, v)); dx=clamp(dx, opt.max); dy=clamp(dy, opt.max); const rot = (opt.rotate||0) ? clamp(dx/4, opt.rotate) : 0; el.style.transform = `translate(${dx}px, ${dy}px) rotate(${rot}deg)`;
+  };
+  const onUp = (e)=>{
+    down=false; el.classList.remove('dragging'); el.style.transform='translate(0,0) rotate(0)';
+  };
+  el.addEventListener('pointerdown', onDown); el.addEventListener('pointermove', onMove); el.addEventListener('pointerup', onUp); el.addEventListener('pointercancel', onUp);
+}

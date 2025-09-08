@@ -12,7 +12,7 @@
     "published_at": "2025-09-08T12:00:00Z",
     "relevance": 10,
     "author": "Equipo Vulcano",
-    "curator": "Lukas (Ai)"
+    "curator": "Lucas AI"
   },
   {
     "id": "latam-brief-2025-09-08",
@@ -26,8 +26,8 @@
     "language": "es",
     "published_at": "2025-09-08T11:30:00Z",
     "relevance": 7,
-    "author": "Lukas (Ai)",
-    "curator": "Lukas (Ai)"
+    "author": "Lucas AI",
+    "curator": "Lucas AI"
   },
   {
     "id": "mx-startup-01",
@@ -42,7 +42,7 @@
     "published_at": "2025-09-01T13:00:00Z",
     "relevance": 8,
     "author": "Redacción",
-    "curator": "Lukas (Ai)"
+    "curator": "Lucas AI"
   },
   {
     "id": "co-reg-01",
@@ -56,7 +56,7 @@
     "language": "es",
     "published_at": "2025-09-03T09:00:00Z",
     "relevance": 9,
-    "curator": "Lukas (Ai)"
+    "curator": "Lucas AI"
   },
   {
     "id": "ar-research-01",
@@ -70,7 +70,7 @@
     "language": "es",
     "published_at": "2025-08-28T18:30:00Z",
     "relevance": 7,
-    "curator": "Lukas (Ai)"
+    "curator": "Lucas AI"
   },
   {
     "id": "br-enterprise-01",
@@ -84,7 +84,7 @@
     "language": "pt",
     "published_at": "2025-09-02T14:10:00Z",
     "relevance": 6,
-    "curator": "Lukas (Ai)"
+    "curator": "Lucas AI"
   },
   {
     "id": "cl-policy-01",
@@ -98,7 +98,7 @@
     "language": "es",
     "published_at": "2025-09-04T11:00:00Z",
     "relevance": 5,
-    "curator": "Lukas (Ai)"
+    "curator": "Lucas AI"
   },
   {
     "id": "pe-startup-01",
@@ -112,7 +112,7 @@
     "language": "es",
     "published_at": "2025-08-30T16:20:00Z",
     "relevance": 6,
-    "curator": "Lukas (Ai)"
+    "curator": "Lucas AI"
   },
   {
     "id": "uy-ethics-01",
@@ -126,7 +126,7 @@
     "language": "es",
     "published_at": "2025-08-27T10:00:00Z",
     "relevance": 4,
-    "curator": "Lukas (Ai)"
+    "curator": "Lucas AI"
   },
   {
     "id": "latam-invest-01",
@@ -140,6 +140,6 @@
     "language": "es",
     "published_at": "2025-09-05T08:45:00Z",
     "relevance": 9,
-    "curator": "Lukas (Ai)"
+    "curator": "Lucas AI"
   }
 ]
