@@ -209,3 +209,10 @@ Página dedicada: `pages/actualizaciones.html`. El formulario compone el mensaje
 - Webhook WA Business/Cloud API ↔ n8n: parsear mensajes “ALTA DIARIO/SEMANAL” y “BAJA”.
 - Lista de envíos (diaria/semanal) + publicación de resúmenes en WhatsApp.
 - Opcional: confirmación y ayuda automatizada.
+
+### Snapshots diarios del feed
+
+- Convención de archivos: `data/feed-YYYY-MM-DD.json` (ej. `data/feed-2025-09-08.json`).
+- `assets/js/config.js` puede apuntar al snapshot del día. Si el archivo no existe, el cliente hace fallback a `data/sample-feed.json`.
+- Esquema de artículo: ver más arriba. Mantener `published_at` en ISO‑8601.
+- Recomendado: que n8n genere el archivo del día (CDN o PR) y, opcionalmente, actualice un alias estable `data/feed.json`.

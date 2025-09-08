@@ -6,7 +6,8 @@
 */
 window.AILatamConfig = window.AILatamConfig || {
   api: {
-    feedUrl: '/data/sample-feed.json',
+    // Por defecto mostramos el snapshot del día (si existe). Fallback: sample-feed.json
+    feedUrl: '/data/feed-2025-09-08.json',
     agentsUrl: '/data/agents.json',
     sourcesUrl: '/data/sources.json',
     panoramaUrl: '/data/panorama.json',
