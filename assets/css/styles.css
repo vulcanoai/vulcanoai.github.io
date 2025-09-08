@@ -32,7 +32,7 @@ body.nav-open{overflow:hidden}
 .site-header{position:sticky; top:0; z-index:50; background:rgba(13,17,23,.85); backdrop-filter: blur(8px); border-bottom:1px solid var(--line)}
 .header-inner{display:flex; align-items:center; gap:16px; padding:10px 0}
 .brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text)}
-.logo{width:32px; height:32px; color:var(--logo)}
+.logo{width:32px; height:32px; color:var(--logo); stroke-width:2}
 .logo.small{width:24px; height:24px}
 .brand-text{font-weight:700; letter-spacing:.5px}
 .site-nav{margin-left:auto; display:flex; gap:6px}

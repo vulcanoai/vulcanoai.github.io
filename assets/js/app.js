@@ -46,6 +46,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const sm = document.getElementById('smart-marquee');
   if (sm){ initSmartMarquee(sm).catch(console.error); }
 
+  // SVG <use> polyfill for xlink:href (logo/icons visibility)
+  try{
+    document.querySelectorAll('use[href]').forEach(u=>{
+      const v = u.getAttribute('href');
+      if (v) u.setAttributeNS('http://www.w3.org/1999/xlink','href', v);
+    });
+  }catch(_){ /* noop */ }
+
   // (drag demo removed — keeping UI estática)
 
   // Contemplative mode toggle
@@ -275,8 +283,9 @@ async function initLegal(container){
     tagPais.appendChild(aPais);
     // Estado mapeado a paleta de agentes
     const state = (it.estado||'').toLowerCase();
-    const stClass = state.includes('apro')||state.includes('vigente') ? 'ok' : (state.includes('debate')||state.includes('proy') ? 'warn' : '');
-    const tagEstado = document.createElement('span'); tagEstado.className = 'chip' + (stClass? (' '+stClass) : ''); tagEstado.textContent = it.estado || '';
+    const stClass = state.includes('apro')||state.includes('vigente') ? 'ok'
+                   : (state.includes('debate')||state.includes('proy')||state.includes('consulta')||state.includes('borrador') ? 'warn' : 'brand');
+    const tagEstado = document.createElement('span'); tagEstado.className = 'chip ' + stClass; tagEstado.textContent = it.estado || '';
     // Fecha como meta chip
     const dateItem = document.createElement('span'); dateItem.className='chip meta-date';
     const cal = document.createElementNS('http://www.w3.org/2000/svg','svg'); cal.setAttribute('class','icon'); cal.setAttribute('aria-hidden','true'); const use = document.createElementNS('http://www.w3.org/2000/svg','use'); use.setAttributeNS('http://www.w3.org/1999/xlink','href','/assets/icons.svg#calendar'); cal.appendChild(use);
