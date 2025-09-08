@@ -110,6 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // simple link mode (no form)
   const waLinkOnly = document.getElementById('wa-link');
   if (!waForm && waLinkOnly){ initWhatsAppSimple(waLinkOnly); }
+  // WhatsApp modal auto-prompt
+  initWhatsAppModal();
 });
 
 async function initSources(container){
@@ -341,23 +343,55 @@ async function initTriggerUpdate(button){
 function initWhatsApp(form){
   const cfg = window.AILatamConfig?.social || {};
   const link = form.querySelector('#wa-link');
-  const render = () => {
-    const freq = (new FormData(form).get('freq') || 'diarias');
-    const base = cfg.whatsappLink || 'https://wa.me/573193620926';
-    const text = (cfg.whatsappDefaultText || 'Hola Vulcano Ai, quiero recibir noticias {frecuencia}.').replace('{frecuencia}', freq);
-    link.href = `${base}?text=${encodeURIComponent(text)}`;
-  };
+  const render = () => { link.href = getWhatsAppHref((new FormData(form).get('freq') || 'diarias')); };
   form.addEventListener('change', render);
   render();
 }
 
 function initWhatsAppSimple(link){
-  const cfg = window.AILatamConfig?.social || {};
-  const base = cfg.whatsappLink || 'https://wa.me/573193620926';
-  const text = (cfg.whatsappDefaultText || 'Hola Vulcano Ai, quiero recibir noticias {frecuencia}.').replace('{frecuencia}','diarias');
-  link.href = `${base}?text=${encodeURIComponent(text)}`;
+  link.href = getWhatsAppHref('diarias');
 }
 
+function getWhatsAppHref(freq){
+  const cfg = window.AILatamConfig?.social || {};
+  const base = cfg.whatsappLink || 'https://wa.me/573193620926';
+  const text = (cfg.whatsappDefaultText || 'Hola Vulcano Ai, quiero recibir noticias {frecuencia}.').replace('{frecuencia}', freq || 'diarias');
+  return `${base}?text=${encodeURIComponent(text)}`;
+}
+
+function initWhatsAppModal(){
+  try{
+    const STORAGE_KEY = 'waModalDismissedAt';
+    const last = Number(localStorage.getItem(STORAGE_KEY)||0);
+    const now = Date.now();
+    const threeDays = 3*24*60*60*1000;
+    if (now-last < threeDays) return;
+
+    const backdrop = document.createElement('div'); backdrop.className = 'modal-backdrop';
+    const win = document.createElement('div'); win.className='modal-window';
+    const card = document.createElement('div'); card.className='modal-card'; card.setAttribute('role','dialog'); card.setAttribute('aria-modal','true');
+    const head = document.createElement('div'); head.className='modal-head';
+    const title = document.createElement('div'); title.className='modal-title'; title.innerHTML = '<svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#whatsapp"></use></svg> Notificaciones en WhatsApp';
+    const close = document.createElement('button'); close.className='btn link'; close.textContent='Cerrar'; close.setAttribute('aria-label','Cerrar');
+    head.append(title, close);
+    const body = document.createElement('div');
+    body.innerHTML = '<p>Vulcano Ai te envía noticias de IA en LATAM directo a tu WhatsApp. Súmate con un toque.</p>';
+    const actions = document.createElement('div'); actions.className='modal-actions';
+    const go = document.createElement('a'); go.className='btn primary'; go.target='_blank'; go.rel='noopener'; go.href = getWhatsAppHref('diarias'); go.innerHTML = '<svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#whatsapp"></use></svg> Abrir WhatsApp';
+    const later = document.createElement('button'); later.className='btn link'; later.textContent='Quizás luego';
+    actions.append(go, later);
+    card.append(head, body, actions);
+    win.appendChild(card);
+    document.body.append(backdrop, win);
+
+    const open = ()=>{ backdrop.classList.add('show'); win.classList.add('show'); card.focus?.(); };
+    const closeAll = ()=>{ backdrop.classList.remove('show'); win.classList.remove('show'); localStorage.setItem(STORAGE_KEY, String(Date.now())); };
+    backdrop.addEventListener('click', closeAll); close.addEventListener('click', closeAll); later.addEventListener('click', closeAll);
+    window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeAll(); });
+
+    setTimeout(open, 5000);
+  }catch(e){ /* noop */ }
+}
 // Generic copy-to-clipboard for [data-copy] buttons
 document.addEventListener('click', (e) => {
   const btn = e.target.closest('[data-copy]');

@@ -177,6 +177,18 @@ pre{background:#0d1117; border:1px solid var(--line); padding:12px; border-radiu
 .nav-backdrop{position:fixed; inset:0; background:rgba(0,0,0,.35); display:none; z-index:900}
 .nav-backdrop.show{display:block}
 
+/* Modal (WhatsApp prompt) */
+.modal-backdrop{position:fixed; inset:0; background:rgba(0,0,0,.5); display:none; z-index:1200}
+.modal-backdrop.show{display:block}
+.modal-window{position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:1201}
+.modal-window.show{display:flex}
+.modal-card{width:min(520px,92vw); background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px; box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.modal-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:8px}
+.modal-title{display:flex; align-items:center; gap:8px; font-weight:700}
+.modal-actions{display:flex; gap:8px; margin-top:12px}
+.btn.link{background:transparent; border-color:transparent; color:var(--muted); padding:6px 8px}
+.btn.link:hover{background:#21262d; color:var(--text)}
+
 /* Utility */
 .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0}
 
