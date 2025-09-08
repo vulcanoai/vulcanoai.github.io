@@ -115,9 +115,14 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function initSources(container){
-  const url = (window.AILatamConfig?.api?.sourcesUrl) || '/data/sources.json';
-  const res = await fetch(url, { cache:'no-store' });
-  const data = await res.json();
+  let data;
+  try{
+    const url = (window.AILatamConfig?.api?.sourcesUrl) || '/data/sources.json';
+    const res = await fetch(url, { cache:'no-store' });
+    data = await res.json();
+  } catch(e){
+    data = window.VULCANO_DEMO?.sources || [];
+  }
   const byType = new Map();
   for (const src of data){
     const t = src.tipo || 'otro';
@@ -143,9 +148,14 @@ async function initSources(container){
 }
 
 async function initAgents(table){
-  const url = (window.AILatamConfig?.api?.agentsUrl) || '/data/agents.json';
-  const res = await fetch(url, { cache:'no-store' });
-  const agents = await res.json();
+  let agents;
+  try{
+    const url = (window.AILatamConfig?.api?.agentsUrl) || '/data/agents.json';
+    const res = await fetch(url, { cache:'no-store' });
+    agents = await res.json();
+  } catch(e){
+    agents = window.VULCANO_DEMO?.agents || [];
+  }
   const tbody = table.querySelector('tbody');
   tbody.innerHTML = '';
   for (const a of agents){
@@ -166,9 +176,12 @@ async function initAgents(table){
 
 // Panorama: carga categorías, descripciones y propuestas de automatización
 async function initPanorama(container){
-  const url = (window.AILatamConfig?.api?.panoramaUrl) || '/data/panorama.json';
-  const res = await fetch(url, { cache:'no-store' });
-  const cats = await res.json();
+  let cats;
+  try{
+    const url = (window.AILatamConfig?.api?.panoramaUrl) || '/data/panorama.json';
+    const res = await fetch(url, { cache:'no-store' });
+    cats = await res.json();
+  } catch(e){ cats = window.VULCANO_DEMO?.panorama || []; }
   container.innerHTML='';
   for (const c of cats){
     const card = document.createElement('article');
@@ -191,9 +204,12 @@ async function initPanorama(container){
 
 // Observatorio Legal: línea temporal básica de items normativos
 async function initLegal(container){
-  const url = (window.AILatamConfig?.api?.legalUrl) || '/data/legal-sample.json';
-  const res = await fetch(url, { cache:'no-store' });
-  const items = await res.json();
+  let items;
+  try{
+    const url = (window.AILatamConfig?.api?.legalUrl) || '/data/legal-sample.json';
+    const res = await fetch(url, { cache:'no-store' });
+    items = await res.json();
+  } catch(e){ items = window.VULCANO_DEMO?.legal || []; }
   container.innerHTML='';
   for (const it of items){
     const box = document.createElement('div');

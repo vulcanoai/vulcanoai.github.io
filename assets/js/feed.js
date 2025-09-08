@@ -62,8 +62,13 @@
       return (Array.isArray(raw) ? raw : (raw.items || raw.articles || [])).map(normalize);
     } catch (e){
       console.warn('Fallo al cargar feed, usando muestra:', e);
-      const raw = await fetchJSON('/data/sample-feed.json');
-      return raw.map(normalize);
+      try{
+        const raw = await fetchJSON('/data/sample-feed.json');
+        return raw.map(normalize);
+      } catch(_) {
+        if (window.VULCANO_DEMO?.feed){ return window.VULCANO_DEMO.feed.map(normalize); }
+        return [];
+      }
     }
   }
 
