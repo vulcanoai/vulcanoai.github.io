@@ -26,11 +26,15 @@ document.addEventListener('DOMContentLoaded', () => {
       nav.classList.remove('open');
       backdrop.classList.remove('show');
       toggle.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('nav-open');
     };
     const open = () => {
+      const header = document.querySelector('.site-header');
+      if (header){ nav.style.top = header.offsetHeight + 'px'; }
       nav.classList.add('open');
       backdrop.classList.add('show');
       toggle.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('nav-open');
     };
 
     toggle.addEventListener('click', () => {
@@ -101,8 +105,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // WhatsApp form link
-  const wa = document.getElementById('wa-form');
-  if (wa){ initWhatsApp(wa); }
+  const waForm = document.getElementById('wa-form');
+  if (waForm){ initWhatsApp(waForm); }
+  // simple link mode (no form)
+  const waLinkOnly = document.getElementById('wa-link');
+  if (!waForm && waLinkOnly){ initWhatsAppSimple(waLinkOnly); }
 });
 
 async function initSources(container){
@@ -342,6 +349,13 @@ function initWhatsApp(form){
   };
   form.addEventListener('change', render);
   render();
+}
+
+function initWhatsAppSimple(link){
+  const cfg = window.AILatamConfig?.social || {};
+  const base = cfg.whatsappLink || 'https://wa.me/573193620926';
+  const text = (cfg.whatsappDefaultText || 'Hola Vulcano Ai, quiero recibir noticias {frecuencia}.').replace('{frecuencia}','diarias');
+  link.href = `${base}?text=${encodeURIComponent(text)}`;
 }
 
 // Generic copy-to-clipboard for [data-copy] buttons
