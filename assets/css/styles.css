@@ -123,7 +123,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
 .chip.route-wiki{border-color: rgba(255,90,42,.45); color: #ffbfa8}
 .chip.route-external{border-color: rgba(47,129,247,.45); color:#a8c7ff}
 .chip.attach{border-color: rgba(168,85,247,.45); color:#d9b8ff}
-.chip.active{background:#1f6feb22; border-color:#1f6feb66; color:#d6e5ff}
+.chip.active{background:#1f6feb33; border-color:#1f6feb88; color:#e6efff}
 .actions{margin-top:16px}
 .loading{color:var(--muted)}
 
@@ -174,35 +174,39 @@ a:hover{color:#fff}
 .chip a:hover{color:#fff}
 
 /* Smart tags row */
-.smart-tags{display:flex; flex-wrap:wrap; gap:8px 10px; align-items:center; margin:8px 0 6px}
-.smart-tags .label{font-size:12px; color:var(--muted); margin-right:4px}
+.smart-tags{display:flex; flex-wrap:wrap; gap:8px 10px; align-items:center; margin:10px 0 12px}
+.smart-tags .label{font-size:12px; color:var(--muted); margin-right:6px}
 .smart-tags .group{display:flex; flex-wrap:wrap; gap:8px; align-items:center}
 .smart-tags .sep{width:1px; height:16px; background:var(--line); margin:0 6px}
+.smart-tags .chip{font-weight:600}
 
 /* Thematic color mapping for common topics/countries */
 /* Topics */
-.chip.tag-topic-startups{border-color:#60a5fa99; color:#b9d4ff}
-.chip.tag-topic-inversion{border-color:#a78bfa99; color:#dfd5ff}
-.chip.tag-topic-empresas{border-color:#2f81f799; color:#a8c7ff}
-.chip.tag-topic-educacion{border-color:#2dd4bf99; color:#bdf5ee}
-.chip.tag-topic-investigacion{border-color:#c084fc99; color:#ecd4ff}
-.chip.tag-topic-modelo-de-lenguaje{border-color:#fb718599; color:#ffc9d2}
-.chip.tag-topic-industria{border-color:#fb923c99; color:#ffd6b3}
-.chip.tag-topic-adopcion{border-color:#84cc1699; color:#d7f2a6}
-.chip.tag-topic-regulacion{border-color:#f59e0b99; color:#ffd89a}
-.chip.tag-topic-gobierno{border-color:#fbbf2499; color:#ffe6ad}
-.chip.tag-topic-etica{border-color:#f472b699; color:#ffd2ea}
-.chip.tag-topic-politica-publica{border-color:#f59e0b99; color:#ffd89a}
+.chip.tag-topic-startups{border-color:#60a5fa; color:#dcecff; background:rgba(96,165,250,.18)}
+.chip.tag-topic-inversion{border-color:#a78bfa; color:#efe9ff; background:rgba(167,139,250,.18)}
+.chip.tag-topic-empresas{border-color:#2f81f7; color:#d7e7ff; background:rgba(47,129,247,.18)}
+.chip.tag-topic-educacion{border-color:#2dd4bf; color:#e6fffb; background:rgba(45,212,191,.18)}
+.chip.tag-topic-investigacion{border-color:#c084fc; color:#f6e9ff; background:rgba(192,132,252,.18)}
+.chip.tag-topic-modelo-de-lenguaje{border-color:#fb7185; color:#ffe5ea; background:rgba(251,113,133,.18)}
+.chip.tag-topic-industria{border-color:#fb923c; color:#ffead6; background:rgba(251,146,60,.18)}
+.chip.tag-topic-adopcion{border-color:#84cc16; color:#effad1; background:rgba(132,204,22,.18)}
+.chip.tag-topic-regulacion{border-color:#f59e0b; color:#ffefcf; background:rgba(245,158,11,.18)}
+.chip.tag-topic-gobierno{border-color:#fbbf24; color:#fff2cc; background:rgba(251,191,36,.18)}
+.chip.tag-topic-etica{border-color:#f472b6; color:#ffe7f4; background:rgba(244,114,182,.18)}
+.chip.tag-topic-politica-publica{border-color:#f59e0b; color:#ffefcf; background:rgba(245,158,11,.18)}
 
 /* Countries */
-.chip.tag-country-regional{border-color:#8b5cf699; color:#e0d4ff}
-.chip.tag-country-mexico{border-color:#22c55e99; color:#b8f7cf}
-.chip.tag-country-colombia{border-color:#facc1599; color:#ffe9a6}
-.chip.tag-country-argentina{border-color:#38bdf899; color:#c4f1ff}
-.chip.tag-country-brasil{border-color:#16a34a99; color:#b4f2c5}
-.chip.tag-country-chile{border-color:#ef444499; color:#ffc2c2}
-.chip.tag-country-peru{border-color:#f9731699; color:#ffd2b0}
-.chip.tag-country-uruguay{border-color:#06b6d499; color:#bcf2ff}
+.chip.tag-country-regional{border-color:#8b5cf6; color:#efe9ff; background:rgba(139,92,246,.18)}
+.chip.tag-country-mexico{border-color:#22c55e; color:#e9fff1; background:rgba(34,197,94,.18)}
+.chip.tag-country-colombia{border-color:#facc15; color:#fff5d1; background:rgba(250,204,21,.18)}
+.chip.tag-country-argentina{border-color:#38bdf8; color:#e8f9ff; background:rgba(56,189,248,.18)}
+.chip.tag-country-brasil{border-color:#16a34a; color:#e9fff1; background:rgba(22,163,74,.18)}
+.chip.tag-country-chile{border-color:#ef4444; color:#ffe5e5; background:rgba(239,68,68,.18)}
+.chip.tag-country-peru{border-color:#f97316; color:#ffecd9; background:rgba(249,115,22,.18)}
+.chip.tag-country-uruguay{border-color:#06b6d4; color:#e7fbff; background:rgba(6,182,212,.18)}
+
+/* Hover emphasis for colored tags */
+.chip[class*="tag-topic-"]:hover, .chip[class*="tag-country-"]:hover{ filter:brightness(1.12) }
 
 /* Code look */
 code, pre{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
