@@ -159,13 +159,21 @@
     for(const t of (a.topics||[]).slice(0,2)){
       const c = create('span','chip'); const aLink = create('a'); aLink.href = qp({tema:t}); aLink.textContent = t; c.appendChild(aLink); chips.appendChild(c);
     }
+    // Ruta/almacenamiento + adjuntos
+    const routeLabel = a.route || ((a.url||'').startsWith('/') ? 'wiki' : 'external');
+    const routeChip = create('span',`chip ${routeLabel==='wiki'?'route-wiki':'route-external'}`);
+    routeChip.textContent = routeLabel==='wiki' ? 'Wiki' : 'Fuente externa';
+    chips.appendChild(routeChip);
+    if ((a.attachments||0) > 0){
+      const att = create('span','chip attach'); att.textContent = `Adjuntos (${a.attachments})`; chips.appendChild(att);
+    }
 
     // Meta compacta con iconos
     const meta = create('div','meta');
     const mDate = create('span','item'); mDate.append(icon('calendar'), document.createTextNode(fmtDate(a.published_at)));
     const mSource = create('span','item'); const srcA = create('a'); srcA.href = qp({fuente:a.source}); srcA.textContent = a.source; mSource.append(icon('source'), srcA);
     const mAuthor = create('span','item'); mAuthor.append(icon('user'), document.createTextNode(a.author || '—'));
-    const mCur = create('span','item'); mCur.append(icon('robot'), document.createTextNode(a.curator));
+    const mCur = create('span','item'); mCur.append(icon('robot'), document.createTextNode(a.curator || 'Lukas (iA)'));
     meta.append(mDate, mSource, mAuthor, mCur);
 
     body.append(title, summary, chips, meta);
