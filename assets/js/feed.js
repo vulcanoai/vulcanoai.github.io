@@ -19,6 +19,11 @@
 
   function $(sel){ return document.querySelector(sel); }
   function create(el, cls){ const n=document.createElement(el); if(cls) n.className=cls; return n; }
+  // CSS-friendly slug (accents stripped, lowercase, hyphenated)
+  function slugify(str){
+    return (str||'').toString().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+      .toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+  }
 
   const fmtDate = (iso) => {
     const d = new Date(iso);
@@ -79,6 +84,14 @@
     const sources = s(items, 'source');
     const languages = s(items, 'language');
     state.facets = { countries, topics, sources, languages };
+    // counts for smart tags
+    const cMap = new Map();
+    const tMap = new Map();
+    for (const it of items){
+      const c = (it.country||'').toString(); if(c){ cMap.set(c, (cMap.get(c)||0)+1); }
+      for (const t of (it.topics||[])){ if(t){ tMap.set(t, (tMap.get(t)||0)+1); } }
+    }
+    state.counts = { countries: cMap, topics: tMap };
   }
 
   function populateFilters(){
@@ -155,9 +168,11 @@
     // Chips enlazables
     const chips = create('div','meta');
     const countryChip = create('span','chip');
+    const cSlug = slugify(a.country||''); if (cSlug) countryChip.classList.add('tag-country-'+cSlug);
     const cLink = create('a'); cLink.href = qp({pais:a.country}); cLink.textContent = a.country; countryChip.appendChild(cLink); chips.appendChild(countryChip);
     for(const t of (a.topics||[]).slice(0,2)){
-      const c = create('span','chip'); const aLink = create('a'); aLink.href = qp({tema:t}); aLink.textContent = t; c.appendChild(aLink); chips.appendChild(c);
+      const c = create('span','chip'); const tSlug = slugify(t); if (tSlug) c.classList.add('tag-topic-'+tSlug);
+      const aLink = create('a'); aLink.href = qp({tema:t}); aLink.textContent = t; c.appendChild(aLink); chips.appendChild(c);
     }
     // Ruta/almacenamiento + adjuntos
     const routeLabel = a.route || ((a.url||'').startsWith('/') ? 'wiki' : 'external');
@@ -194,10 +209,49 @@
     const { search, country, topic, source, sort } = state.els;
     const update = () => { applyFilters(); render(); };
     search.addEventListener('input', (e)=>{ state.filters.q = e.target.value; update(); });
-    country.addEventListener('change', (e)=>{ state.filters.country = e.target.value; update(); });
-    topic.addEventListener('change', (e)=>{ state.filters.topic = e.target.value; update(); });
+    country.addEventListener('change', (e)=>{ state.filters.country = e.target.value; update(); updateSmartTagActives(); });
+    topic.addEventListener('change', (e)=>{ state.filters.topic = e.target.value; update(); updateSmartTagActives(); });
     source.addEventListener('change', (e)=>{ state.filters.source = e.target.value; update(); });
     sort.addEventListener('change', (e)=>{ state.filters.sort = e.target.value; update(); });
+  }
+
+  function renderSmartTags(){
+    const filtersBox = document.getElementById('filters');
+    if(!filtersBox) return;
+    // Remove existing smart-tags sibling (if any)
+    const sib = filtersBox.nextElementSibling;
+    if (sib && sib.classList && sib.classList.contains('smart-tags')) sib.remove();
+    const row = create('div','smart-tags');
+    const label = create('span','label'); label.textContent = 'Explorar rápido:'; row.appendChild(label);
+    const topC = Array.from(state.counts?.countries?.entries?.() || []).sort((a,b)=>b[1]-a[1]).slice(0,6).map(x=>x[0]);
+    const topT = Array.from(state.counts?.topics?.entries?.() || []).sort((a,b)=>b[1]-a[1]).slice(0,6).map(x=>x[0]);
+    const gC = create('div','group');
+    for (const c of topC){
+      const a = create('a','chip tag-country-'+slugify(c)); a.href = qp({pais:c}); a.textContent = c; a.setAttribute('data-pais', c); gC.appendChild(a);
+    }
+    row.appendChild(gC);
+    const sep = create('span','sep'); row.appendChild(sep);
+    const gT = create('div','group');
+    for (const t of topT){
+      const a = create('a','chip tag-topic-'+slugify(t)); a.href = qp({tema:t}); a.textContent = t; a.setAttribute('data-tema', t); gT.appendChild(a);
+    }
+    row.appendChild(gT);
+    const reset = create('a','chip'); reset.href = qp({}); reset.textContent = 'Limpiar filtros'; reset.setAttribute('data-reset','1'); row.appendChild(reset);
+    filtersBox.parentNode.insertBefore(row, filtersBox.nextSibling);
+    updateSmartTagActives();
+  }
+
+  function updateSmartTagActives(){
+    const row = document.querySelector('.smart-tags'); if(!row) return;
+    row.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
+    if (state.filters.country && state.filters.country !== 'todos'){
+      const el = row.querySelector(`.chip[data-pais="${CSS.escape(state.filters.country)}"]`);
+      if (el) el.classList.add('active');
+    }
+    if (state.filters.topic && state.filters.topic !== 'todos'){
+      const el = row.querySelector(`.chip[data-tema="${CSS.escape(state.filters.topic)}"]`);
+      if (el) el.classList.add('active');
+    }
   }
 
   async function initFeed(){
@@ -218,6 +272,7 @@
       state.all = await loadFeed();
       buildFacets(state.all);
       populateFilters();
+      renderSmartTags();
       // seed UI
       state.els.search.value = state.filters.q;
       state.els.country.value = state.filters.country;
@@ -228,6 +283,7 @@
       render();
       renderMetrics();
       bind();
+      updateSmartTagActives();
     } catch (e){
       list.innerHTML = '<div class="panel">No se pudo cargar el feed.</div>';
       console.error(e);
@@ -273,9 +329,11 @@
     }
     buildFacets(state.all);
     populateFilters();
+    renderSmartTags();
     applyFilters();
     render();
     renderMetrics();
+    updateSmartTagActives();
   }
 
   window.AILatamFeed = { initFeed, initRegHighlights, addItems };
