@@ -42,6 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const tu = document.getElementById('trigger-update');
   if (tu){ initTriggerUpdate(tu).catch(console.error); }
 
+  // Smart marquee (hero)
+  const sm = document.getElementById('smart-marquee');
+  if (sm){ initSmartMarquee(sm).catch(console.error); }
+
   // Contemplative mode toggle
   const cm = document.getElementById('toggle-contemplative');
   if (cm){
@@ -111,6 +115,54 @@ function buildUnifiedNav(){
     if (here.endsWith(it.href) || here===it.href){ a.classList.add('active'); }
     inner.appendChild(a);
   }
+}
+
+// Smart marquee: scrolling glossy chips from existing categories
+async function initSmartMarquee(container){
+  try{
+    const cfg = window.AILatamConfig?.api || {};
+    const url = cfg.feedUrl || '/data/sample-feed.json';
+    const items = await (await fetch(url, { cache:'no-store' })).json();
+    const norm = (a) => ({
+      country: a.country || a.pais || 'Regional',
+      topics: a.topics || a.temas || []
+    });
+    const rows = Array.isArray(items) ? items : (items.items || items.articles || []);
+    const data = rows.map(norm);
+    const topics = Array.from(new Set(data.flatMap(x=>x.topics||[]))).filter(Boolean).sort();
+    const countries = Array.from(new Set(data.map(x=>x.country||'').filter(Boolean))).sort();
+    const tags = [];
+    const take = (arr, n) => arr.slice(0, Math.min(arr.length, n));
+    const tSel = take(topics, 12);
+    const cSel = take(countries, 8);
+    // Interleave for variety
+    const max = Math.max(tSel.length, cSel.length);
+    for (let i=0;i<max;i++){
+      if (i < tSel.length) tags.push({ kind:'topic', value:tSel[i] });
+      if (i < cSel.length) tags.push({ kind:'country', value:cSel[i] });
+    }
+    // Build track
+    const track = container.querySelector('.track');
+    if(!track) return;
+    const buildChip = (tag) => {
+      const a = document.createElement('a');
+      a.className = 'chip glassy ' + (tag.kind==='topic' ? ('tag-topic-'+slugify(tag.value)) : ('tag-country-'+slugify(tag.value)));
+      a.href = tag.kind==='topic' ? (`/pages/noticias.html?tema=${encodeURIComponent(tag.value)}`) : (`/pages/noticias.html?pais=${encodeURIComponent(tag.value)}`);
+      a.textContent = tag.value;
+      return a;
+    };
+    const slugify = (str) => (str||'').toString().normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+    const frag = document.createDocumentFragment();
+    for (const t of tags){ frag.appendChild(buildChip(t)); }
+    // Duplicate for seamless loop
+    const frag2 = document.createDocumentFragment();
+    for (const t of tags){ frag2.appendChild(buildChip(t)); }
+    track.innerHTML='';
+    track.append(frag, frag2);
+    // Tune speed based on amount
+    const dur = Math.max(24, Math.min(60, tags.length * 2));
+    track.style.setProperty('--marquee-duration', dur + 's');
+  }catch(e){ /* non-blocking */ }
 }
 
 async function initSources(container){
