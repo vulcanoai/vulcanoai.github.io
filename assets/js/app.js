@@ -5,48 +5,8 @@
   - Agentes: añadir inicializaciones nuevas aquí con comprobación de existencia.
 */
 document.addEventListener('DOMContentLoaded', () => {
-  // Mobile nav toggle
-  const toggle = document.querySelector('.nav-toggle');
-  const nav = document.querySelector('.site-nav');
-  if (toggle && nav){
-    // a11y wiring
-    if (!nav.id) nav.id = 'primary-nav';
-    toggle.setAttribute('aria-controls', nav.id);
-    toggle.setAttribute('aria-expanded', 'false');
-
-    // backdrop for mobile
-    let backdrop = document.querySelector('.nav-backdrop');
-    if (!backdrop){
-      backdrop = document.createElement('div');
-      backdrop.className = 'nav-backdrop';
-      document.body.appendChild(backdrop);
-    }
-
-    const close = () => {
-      nav.classList.remove('open');
-      backdrop.classList.remove('show');
-      toggle.setAttribute('aria-expanded', 'false');
-      document.body.classList.remove('nav-open');
-    };
-    const open = () => {
-      const header = document.querySelector('.site-header');
-      if (header){ nav.style.top = header.offsetHeight + 'px'; }
-      nav.classList.add('open');
-      backdrop.classList.add('show');
-      toggle.setAttribute('aria-expanded', 'true');
-      document.body.classList.add('nav-open');
-    };
-
-    toggle.addEventListener('click', () => {
-      const isOpen = nav.classList.contains('open');
-      isOpen ? close() : open();
-    });
-    backdrop.addEventListener('click', close);
-    window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > 640) close();
-    });
-  }
+  // Build header nav and mobile bottom nav from config
+  buildUnifiedNav();
 
   // Initialize feed if present
   if (window.AILatamFeed && typeof window.AILatamFeed.initFeed === 'function'){
@@ -92,17 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Mark active nav link when no aria-current
-  const nav = document.querySelector('.site-nav');
-  if (nav){
-    const here = location.pathname.replace(/index\.html$/, '/');
-    nav.querySelectorAll('a').forEach(a => {
-      const href = a.getAttribute('href') || '';
-      if (!a.hasAttribute('aria-current') && (here.endsWith(href) || here===href)){
-        a.classList.add('active');
-      }
-    });
-  }
+  // Active state handled inside buildUnifiedNav
 
   // WhatsApp form link
   const waForm = document.getElementById('wa-form');
@@ -113,6 +63,55 @@ document.addEventListener('DOMContentLoaded', () => {
   // WhatsApp modal auto-prompt
   initWhatsAppModal();
 });
+
+function buildUnifiedNav(){
+  const cfg = window.AILatamConfig || {};
+  const items = (cfg.site && cfg.site.nav) || [
+    { label:'Noticias', href:'/pages/noticias.html', icon:'calendar' },
+    { label:'Panorama', href:'/pages/panorama.html', icon:'tag' },
+    { label:'Legal', href:'/pages/observatorio-legal.html', icon:'scale' },
+    { label:'Agentes', href:'/pages/agentes.html', icon:'robot' },
+    { label:'Fuentes', href:'/pages/fuentes.html', icon:'source' },
+  ];
+  const here = location.pathname.replace(/index\.html$/, '/');
+
+  // Header nav sync
+  const headerNav = document.querySelector('.site-nav');
+  if (headerNav){
+    headerNav.innerHTML = '';
+    for (const it of items){
+      const a = document.createElement('a'); a.href = it.href; a.textContent = it.label;
+      if (here.endsWith(it.href) || here===it.href){ a.setAttribute('aria-current','page'); }
+      headerNav.appendChild(a);
+    }
+    // Add extra static links if present in config
+    if (cfg.site && cfg.site.extraNav){
+      for (const it of cfg.site.extraNav){ const a = document.createElement('a'); a.href=it.href; a.textContent=it.label; headerNav.appendChild(a); }
+    }
+  }
+
+  // Footer nav sync (optional)
+  const footerNav = document.querySelector('.footer-nav');
+  if (footerNav && footerNav.children.length<3){ // preserve legal links
+    for (const it of items.slice(0,3)){
+      const a = document.createElement('a'); a.href=it.href; a.textContent=it.label; footerNav.appendChild(a);
+    }
+  }
+
+  // Mobile bottom nav
+  let mobile = document.querySelector('.mobile-nav');
+  if (!mobile){ mobile = document.createElement('nav'); mobile.className='mobile-nav'; mobile.innerHTML = '<div class="inner"></div>'; document.body.appendChild(mobile); }
+  const inner = mobile.querySelector('.inner'); inner.innerHTML='';
+  for (const it of items){
+    const a = document.createElement('a'); a.href = it.href;
+    const svg = document.createElementNS('http://www.w3.org/2000/svg','svg'); svg.setAttribute('class','icon'); svg.setAttribute('aria-hidden','true');
+    const use = document.createElementNS('http://www.w3.org/2000/svg','use'); use.setAttributeNS('http://www.w3.org/1999/xlink','href','/assets/icons.svg#'+(it.icon||'tag'));
+    svg.appendChild(use);
+    a.append(svg, document.createTextNode(it.label));
+    if (here.endsWith(it.href) || here===it.href){ a.classList.add('active'); }
+    inner.appendChild(a);
+  }
+}
 
 async function initSources(container){
   let data;
@@ -314,7 +313,7 @@ async function initLiveSearch(form){
       const items = Array.isArray(json) ? json : (json.items || json.articles || []);
       // Autoría anónima con hash
       const anon = 'anon-' + crypto.getRandomValues(new Uint32Array(1))[0].toString(16).slice(0,8);
-      const mapped = items.map(x => ({...x, author: anon, curator: 'Agente IA (búsqueda)'}));
+      const mapped = items.map(x => ({...x, author: anon, curator: 'Lukas (Ai)'}));
       if (window.AILatamFeed?.addItems){ window.AILatamFeed.addItems(mapped); }
       status.textContent = `Añadido al feed (${mapped.length} resultados). Hash autor: ${anon}`;
       status.className = 'chip ok';

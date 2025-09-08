@@ -50,7 +50,7 @@
     relevance: a.relevance || a.relevancia || 0,
     sentiment: a.sentiment || a.sentimiento || 'neutral',
     author: a.author || a.autor || '',
-    curator: a.curator || a.curador || 'Agente IA'
+    curator: a.curator || a.curador || 'Lukas (Ai)'
   });
 
   async function fetchJSON(url){
@@ -185,10 +185,10 @@
 
     // Meta compacta con iconos
     const meta = create('div','meta');
-    const mDate = create('span','item'); mDate.append(icon('calendar'), document.createTextNode(fmtDate(a.published_at)));
-    const mSource = create('span','item'); const srcA = create('a'); srcA.href = qp({fuente:a.source}); srcA.textContent = a.source; mSource.append(icon('source'), srcA);
-    const mAuthor = create('span','item'); mAuthor.append(icon('user'), document.createTextNode(a.author || '—'));
-    const mCur = create('span','item'); mCur.append(icon('robot'), document.createTextNode(a.curator || 'Lukas (iA)'));
+    const mDate = create('span','chip meta-date'); mDate.append(icon('calendar'), document.createTextNode(fmtDate(a.published_at)));
+    const mSource = create('span','chip meta-source'); const srcA = create('a'); srcA.href = qp({fuente:a.source}); srcA.textContent = a.source; mSource.append(icon('source'), srcA);
+    const mAuthor = create('span','chip meta-author'); mAuthor.append(icon('user'), document.createTextNode(a.author || '—'));
+    const mCur = create('span','chip meta-curator'); mCur.append(icon('robot'), document.createTextNode(a.curator || 'Lukas (Ai)'));
     meta.append(mDate, mSource, mAuthor, mCur);
 
     body.append(title, summary, chips, meta);

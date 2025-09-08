@@ -24,6 +24,17 @@ window.AILatamConfig = window.AILatamConfig || {
   site: {
     name: 'Vulcano Ai',
     baseUrl: '/',
+    nav: [
+      { label:'Noticias', href:'/pages/noticias.html', icon:'calendar' },
+      { label:'Panorama', href:'/pages/panorama.html', icon:'tag' },
+      { label:'Legal', href:'/pages/observatorio-legal.html', icon:'scale' },
+      { label:'Agentes', href:'/pages/agentes.html', icon:'robot' },
+      { label:'Fuentes', href:'/pages/fuentes.html', icon:'source' }
+    ],
+    extraNav: [
+      { label:'Apoyar', href:'/pages/apoya.html' },
+      { label:'Qué es Vulcano AI', href:'/pages/vulcano.html' }
+    ]
   },
   social: {
     instagram: 'https://instagram.com/vulcanoai.solutions',
