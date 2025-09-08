@@ -92,6 +92,11 @@
       const w = Math.min(240, v.clientWidth || 120);
       drawWireSphere(v, { radius: Math.max(50, Math.floor(w/2)-6) });
     }
+    const ch = document.getElementById('crypto-orb-home');
+    if (ch){
+      const w2 = Math.min(240, ch.clientWidth || 120);
+      drawWireSphere(ch, { radius: Math.max(50, Math.floor(w2/2)-6), lons: 12, rotations:[15,45,75] });
+    }
   }
 
   window.addEventListener('DOMContentLoaded', initPageOrbs);

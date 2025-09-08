@@ -7,6 +7,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Build header nav and mobile bottom nav from config
   buildUnifiedNav();
+  enhanceFooter();
 
   // Initialize feed if present
   if (window.AILatamFeed && typeof window.AILatamFeed.initFeed === 'function'){
@@ -76,6 +77,21 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!waForm && waLinkOnly){ initWhatsAppSimple(waLinkOnly); }
   // WhatsApp modal auto-prompt
   initWhatsAppModal();
+
+  // Crypto studio (demo orbs)
+  const cog = document.getElementById('crypto-orb-grid');
+  if (cog && window.VulcanoLogo){
+    const cfgs = [
+      { radius: 42, lons: 10, rotations:[0,30,60] },
+      { radius: 42, lons: 12, rotations:[15,45,75] },
+      { radius: 42, lons: 14, rotations:[0,20,40] },
+      { radius: 42, lons: 16, rotations:[10,50,70] }
+    ];
+    cfgs.forEach((opt, i)=>{
+      const cell = document.createElement('div'); cell.className='orb orb-mini'; cog.appendChild(cell);
+      window.VulcanoLogo.drawWireSphere(cell, opt);
+    });
+  }
 });
 
 function buildUnifiedNav(){
@@ -124,6 +140,34 @@ function buildUnifiedNav(){
     a.append(svg, document.createTextNode(it.label));
     if (here.endsWith(it.href) || here===it.href){ a.classList.add('active'); }
     inner.appendChild(a);
+  }
+}
+
+function enhanceFooter(){
+  const cfg = window.AILatamConfig || {};
+  const soc = (cfg.social||{});
+  const footer = document.querySelector('.footer-inner');
+  if (!footer) return;
+  // Ensure Apoyar link in footer-nav
+  const nav = footer.querySelector('.footer-nav');
+  if (nav && !Array.from(nav.querySelectorAll('a')).some(a=>/\/pages\/apoya\.html$/.test(a.getAttribute('href')||''))){
+    const a = document.createElement('a'); a.href='/pages/apoya.html'; a.textContent='Apoyar'; nav.appendChild(a);
+  }
+  // Social row
+  if (!footer.querySelector('.social-row')){
+    const row = document.createElement('div'); row.className='social-row';
+    const add = (href, label, icon) => {
+      if(!href) return; const a=document.createElement('a'); a.href=href; a.target='_blank'; a.rel='noopener'; a.setAttribute('aria-label', label);
+      const s=document.createElementNS('http://www.w3.org/2000/svg','svg'); s.setAttribute('class','icon'); s.setAttribute('aria-hidden','true');
+      const u=document.createElementNS('http://www.w3.org/2000/svg','use'); u.setAttributeNS('http://www.w3.org/1999/xlink','href','/assets/icons.svg#'+icon); s.appendChild(u);
+      a.append(s, document.createTextNode(' '+label)); row.appendChild(a);
+    };
+    add(soc.instagram, 'Instagram', 'instagram');
+    add(soc.x, 'X', 'x');
+    add(soc.linkedin, 'LinkedIn', 'linkedin');
+    // Apoyar quick link
+    const ap = document.createElement('a'); ap.href='/pages/apoya.html'; ap.textContent='Apoyar'; ap.className='btn'; row.appendChild(ap);
+    footer.appendChild(row);
   }
 }
 

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="color-scheme" content="dark light" />
+    <title>Crypto — Vulcano Ai</title>
+    <meta name="description" content="Señales de criptoeconomía y activos digitales en LATAM, filtradas desde el feed con enfoque científico." />
+    <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/assets/css/styles.css?v=3" />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Saltar al contenido</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/"><svg class="logo" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg><span class="brand-text">Vulcano Ai</span></a>
+        <button class="nav-toggle" aria-label="Abrir menú">☰</button>
+        <nav class="site-nav" aria-label="Principal">
+          <!-- buildUnifiedNav reemplaza este contenido -->
+          <a href="/pages/noticias.html">Noticias</a>
+          <a href="/pages/panorama.html">Panorama</a>
+          <a href="/pages/crypto.html" aria-current="page">Crypto</a>
+          <a href="/pages/observatorio-legal.html">Observatorio legal</a>
+          <a href="/pages/agentes.html">Agentes</a>
+          <a href="/pages/fuentes.html">Fuentes</a>
+          <a href="/pages/apoya.html">Apoyar</a>
+          <a href="/pages/vulcano.html">Qué es Vulcano AI</a>
+        </nav>
+      </div>
+    </header>
+    <main class="section" id="main">
+      <div class="container">
+        <div class="container hero-grid" style="margin-bottom:12px">
+          <div>
+            <h1><svg class="logo" aria-hidden="true" style="vertical-align:-4px; margin-right:8px"><use href="/assets/icons.svg#logo"></use></svg>Crypto y activos digitales</h1>
+            <p class="tagline">Hook para audiencias artísticas y técnicas: señales cripto sin inflar datos, con trazabilidad y filtros.</p>
+          </div>
+          <div class="orb-wrap">
+            <div id="hero-orb" class="orb orb-mini" aria-hidden="true"></div>
+            <span class="sr-only">Logo esférico de Vulcano Ai</span>
+          </div>
+        </div>
+        <p class="muted">Módulo experimental: filtra el feed por <span class="chip crypto">Crypto</span> para mapear adopción, regulación y cultura digital en LATAM sin inventar métricas. Cada entrada mantiene su fuente y fecha.</p>
+
+        <!-- Smart chips auto (feed.js) + filtro inicial a Crypto por data-attribute -->
+        <div class="filters" id="filters">
+          <input type="search" id="search" placeholder="Buscar en Crypto" aria-label="Buscar" />
+          <select id="filter-country" aria-label="Filtrar por país"></select>
+          <select id="filter-topic" aria-label="Filtrar por tema"></select>
+          <select id="filter-source" aria-label="Filtrar por fuente"></select>
+          <select id="sort-by" aria-label="Ordenar">
+            <option value="recent">Más recientes</option>
+            <option value="relevance">Más relevantes</option>
+          </select>
+        </div>
+
+        <div class="grid two-col" style="gap:16px">
+          <section>
+            <div id="news-list" class="grid news-grid" aria-live="polite" data-default-topic="Crypto">
+              <!-- feed.js pobla dinámicamente (máx 12 para home; aquí listará todo filtrado) -->
+            </div>
+          </section>
+          <aside>
+            <div class="panel">
+              <h3>Enfoque</h3>
+              <p class="note">Capa de filtros sobre el <em>mismo</em> feed. Sin números inventados: solo señales con país, fecha y curaduría <span class="chip lucas"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#robot"></use></svg> Lucas AI</span>.</p>
+            </div>
+            <div class="panel">
+              <h3>Explorar rápido</h3>
+              <div class="smart-tags">
+                <div class="group">
+                  <a class="chip crypto" href="/pages/noticias.html?tema=Crypto">Crypto</a>
+                  <a class="chip brand" href="/pages/noticias.html?pais=México">México</a>
+                  <a class="chip brand" href="/pages/noticias.html?pais=Brasil">Brasil</a>
+                  <a class="chip brand" href="/pages/noticias.html?pais=Colombia">Colombia</a>
+                </div>
+              </div>
+              <p class="note">Próximo paso: análisis comparativo de términos (stablecoins/DeFi/NFT) por país, con metodología abierta.</p>
+            </div>
+            <div class="panel">
+              <h3>Studio NFT (demo)</h3>
+              <p class="note">Previsualizaciones generativas (sin acuñar, sin wallet). Ilustran firmas visuales reproducibles por código.</p>
+              <div id="crypto-orb-grid" class="grid" style="grid-template-columns:repeat(4,1fr); gap:10px"></div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <svg class="logo small" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>
+          <div><strong>Vulcano Ai</strong><div class="muted">Vulcano Ai Digital Solutions S.A.S - 2025 Todos los derechos reservados</div></div>
+        </div>
+        <nav class="footer-nav">
+          <a href="/pages/legal/privacidad.html">Privacidad</a>
+          <a href="/pages/legal/terminos.html">Términos</a>
+          <a href="/pages/apoya.html">Apoyar</a>
+          <a href="/pages/vulcano.html">Qué es Vulcano AI</a>
+        </nav>
+      </div>
+    </footer>
+    <script src="/assets/js/config.js"></script>
+    <script src="/assets/js/demo-data.js"></script>
+    <script src="/assets/js/logo.js"></script>
+    <script src="/assets/js/feed.js?v=2"></script>
+    <script src="/assets/js/app.js?v=3"></script>
+  </body>
+  </html>

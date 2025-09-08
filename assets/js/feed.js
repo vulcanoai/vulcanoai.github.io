@@ -255,6 +255,14 @@
     };
 
     readQuery();
+    // Defaults from dataset (per-page): data-default-topic/country/source/sort
+    try{
+      const ds = list.dataset || {};
+      if (state.filters.topic==='todos' && ds.defaultTopic){ state.filters.topic = ds.defaultTopic; }
+      if (state.filters.country==='todos' && ds.defaultCountry){ state.filters.country = ds.defaultCountry; }
+      if (state.filters.source==='todas' && ds.defaultSource){ state.filters.source = ds.defaultSource; }
+      if (ds.defaultSort && (ds.defaultSort==='recent' || ds.defaultSort==='relevance')){ state.filters.sort = ds.defaultSort; }
+    }catch(_){ /* noop */ }
     try {
       state.all = await loadFeed();
       buildFacets(state.all);

@@ -231,8 +231,8 @@ a:hover{color:#fff}
 
 /* Mobile bottom navigation */
 .mobile-nav{position:fixed; left:0; right:0; bottom:0; display:none; background:rgba(13,17,23,.96); backdrop-filter: blur(10px); border-top:1px solid var(--line); z-index:1100}
-.mobile-nav .inner{display:grid; grid-template-columns:repeat(5,1fr); max-width:1100px; margin:0 auto}
-.mobile-nav a{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; padding:8px 4px; color:var(--muted); text-decoration:none}
+.mobile-nav .inner{display:flex; align-items:center; justify-content:space-around; gap:2px; max-width:1100px; margin:0 auto; padding:0 6px}
+.mobile-nav a{flex:1 1 auto; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; padding:8px 4px; color:var(--muted); text-decoration:none; min-width:0}
 .mobile-nav a .icon{width:18px; height:18px}
 .mobile-nav a.active{color:#fff; background:#161b22}
 
