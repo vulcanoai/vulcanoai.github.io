@@ -106,11 +106,10 @@
     "source": "Bloomberg Línea",
     "source_url": "https://www.bloomberlinea.com/",
     "country": "Regional",
-    "topics": ["Inversión", "Startups"],
+    "topics": ["Inversión", "Startups", "Crypto"],
     "language": "es",
     "published_at": "2025-09-05T08:45:00Z",
     "image_url": "https://picsum.photos/seed/latam1/800/450",
     "relevance": 9
   }
 ]
-

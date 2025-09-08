@@ -17,6 +17,23 @@
     ]
   },
   {
+    "slug": "crypto",
+    "titulo": "Crypto y activos digitales",
+    "descripcion": "Señales de criptoeconomía, stablecoins, DAOs y arte digital en LATAM; foco en casos de uso reales (pagos, remesas, identidad).",
+    "valor_para_usuarios": "Entender el cruce IA/cripto, regulación y adopción cultural.",
+    "claves": [
+      "Pagos y remesas en cripto",
+      "NFT/Arte generativo y comunidades",
+      "Regulación de exchanges y criptoactivos",
+      "Casos locales (on/off ramps)"
+    ],
+    "fuentes": [
+      "Blogs y foros técnicos cripto (ES/PT)",
+      "RSS de exchanges/reguladores",
+      "n8n: detección de 'Crypto'/'Cripto' en títulos"
+    ]
+  },
+  {
     "slug": "inversion",
     "titulo": "Financiamiento e inversiones",
     "descripcion": "Resalta flujos de capital en IA, útil para fundadores e inversores (ej. VC de EE.UU. impulsando LATAM).",
@@ -119,4 +136,3 @@
     ]
   }
 ]
-

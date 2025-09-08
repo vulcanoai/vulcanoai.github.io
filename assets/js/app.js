@@ -46,10 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const sm = document.getElementById('smart-marquee');
   if (sm){ initSmartMarquee(sm).catch(console.error); }
 
-  // Drag taste interactions (demo-only, no reorder)
-  attachDragTaste('#news-list .card');
-  attachDragTaste('.mobile-nav a', { max:6, rotate:0 });
-  attachDragTaste('#smart-marquee .chip', { max:4, rotate:0 });
+  // (drag demo removed — keeping UI estática)
 
   // Contemplative mode toggle
   const cm = document.getElementById('toggle-contemplative');
@@ -151,7 +148,8 @@ async function initSmartMarquee(container){
     if(!track) return;
     const buildChip = (tag) => {
       const a = document.createElement('a');
-      a.className = 'chip glassy brand';
+      const isCrypto = /^crypto$/i.test(tag.value) || /^cripto$/i.test(tag.value);
+      a.className = 'chip glassy ' + (isCrypto ? 'crypto' : 'brand');
       a.href = tag.kind==='topic' ? (`/pages/noticias.html?tema=${encodeURIComponent(tag.value)}`) : (`/pages/noticias.html?pais=${encodeURIComponent(tag.value)}`);
       a.textContent = tag.value;
       return a;
@@ -271,18 +269,26 @@ async function initLegal(container){
     const box = document.createElement('div');
     box.className='timeline-item';
     const head = document.createElement('div'); head.className='head';
-    const tagPais = document.createElement('span'); tagPais.className='tag'; tagPais.textContent = it.pais || '';
-    const tagEstado = document.createElement('span'); tagEstado.className='tag'; tagEstado.textContent = it.estado || '';
-    const dateItem = document.createElement('span'); dateItem.className='item'; dateItem.style.marginLeft='auto'; dateItem.style.display='inline-flex'; dateItem.style.alignItems='center'; dateItem.style.gap='6px';
+    // País como smart chip (brand, enlazable)
+    const tagPais = document.createElement('span'); tagPais.className='chip brand';
+    const aPais = document.createElement('a'); aPais.href = `/pages/noticias.html?pais=${encodeURIComponent(it.pais||'')}`; aPais.textContent = it.pais || '';
+    tagPais.appendChild(aPais);
+    // Estado mapeado a paleta de agentes
+    const state = (it.estado||'').toLowerCase();
+    const stClass = state.includes('apro')||state.includes('vigente') ? 'ok' : (state.includes('debate')||state.includes('proy') ? 'warn' : '');
+    const tagEstado = document.createElement('span'); tagEstado.className = 'chip' + (stClass? (' '+stClass) : ''); tagEstado.textContent = it.estado || '';
+    // Fecha como meta chip
+    const dateItem = document.createElement('span'); dateItem.className='chip meta-date';
     const cal = document.createElementNS('http://www.w3.org/2000/svg','svg'); cal.setAttribute('class','icon'); cal.setAttribute('aria-hidden','true'); const use = document.createElementNS('http://www.w3.org/2000/svg','use'); use.setAttributeNS('http://www.w3.org/1999/xlink','href','/assets/icons.svg#calendar'); cal.appendChild(use);
     const d = it.fecha ? new Date(it.fecha).toLocaleDateString('es-ES') : '';
     dateItem.append(cal, document.createTextNode(d));
+    dateItem.style.marginLeft = 'auto';
     head.append(tagPais, tagEstado, dateItem);
 
     const h4 = document.createElement('h4'); h4.className='title'; h4.textContent = it.titulo || '';
     const p = document.createElement('p'); p.textContent = it.resumen || '';
     const meta = document.createElement('div'); meta.className='meta';
-    const a = document.createElement('a'); a.href = it.url || '#'; a.target = '_blank'; a.rel = 'noopener';
+    const a = document.createElement('a'); a.className='chip brand'; a.href = it.url || '#'; a.target = '_blank'; a.rel = 'noopener';
     const linkIcon = document.createElementNS('http://www.w3.org/2000/svg','svg'); linkIcon.setAttribute('class','icon'); linkIcon.setAttribute('aria-hidden','true'); const use2 = document.createElementNS('http://www.w3.org/2000/svg','use'); use2.setAttributeNS('http://www.w3.org/1999/xlink','href','/assets/icons.svg#link'); linkIcon.appendChild(use2);
     a.append(linkIcon, document.createTextNode(' Fuente oficial'));
     meta.appendChild(a);
@@ -481,23 +487,4 @@ document.addEventListener('click', (e) => {
     }
   });
 });
-function attachDragTaste(selector, opts){
-  const opt = Object.assign({ max:8, rotate:2 }, opts||{});
-  const els = Array.from(document.querySelectorAll(selector));
-  for (const el of els){ if (el.dataset.dragTasteApplied) continue; el.dataset.dragTasteApplied='1'; makeDraggable(el, opt); }
-}
-
-function makeDraggable(el, opt){
-  let startX=0, startY=0, down=false, moved=false;
-  el.classList.add('draggable');
-  const onDown = (e)=>{
-    down=true; moved=false; startX = e.clientX || (e.touches&&e.touches[0]?.clientX)||0; startY = e.clientY || (e.touches&&e.touches[0]?.clientY)||0; el.classList.add('dragging'); el.setPointerCapture?.(e.pointerId||0);
-  };
-  const onMove = (e)=>{
-    if(!down) return; const x = e.clientX || (e.touches&&e.touches[0]?.clientX)||0; const y = e.clientY || (e.touches&&e.touches[0]?.clientY)||0; let dx = x-startX, dy=y-startY; if (Math.abs(dx)+Math.abs(dy) > 1) moved=true; const clamp = (v,m)=>Math.max(-m, Math.min(m, v)); dx=clamp(dx, opt.max); dy=clamp(dy, opt.max); const rot = (opt.rotate||0) ? clamp(dx/4, opt.rotate) : 0; el.style.transform = `translate(${dx}px, ${dy}px) rotate(${rot}deg)`;
-  };
-  const onUp = (e)=>{
-    down=false; el.classList.remove('dragging'); el.style.transform='translate(0,0) rotate(0)';
-  };
-  el.addEventListener('pointerdown', onDown); el.addEventListener('pointermove', onMove); el.addEventListener('pointerup', onUp); el.addEventListener('pointercancel', onUp);
-}
+// (drag helpers removed)

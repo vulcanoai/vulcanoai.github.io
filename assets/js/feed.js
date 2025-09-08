@@ -218,7 +218,9 @@
     const sep = create('span','sep'); row.appendChild(sep);
     const gT = create('div','group');
     for (const t of topT){
-      const a = create('a','chip brand'); a.href = qp({tema:t}); a.textContent = t; a.setAttribute('data-tema', t); gT.appendChild(a);
+      const isCrypto = /^crypto$/i.test(t) || /^cripto$/i.test(t);
+      const a = create('a', 'chip ' + (isCrypto ? 'crypto' : 'brand'));
+      a.href = qp({tema:t}); a.textContent = t; a.setAttribute('data-tema', t); gT.appendChild(a);
     }
     row.appendChild(gT);
     const reset = create('a','chip'); reset.href = qp({}); reset.textContent = 'Limpiar filtros'; reset.setAttribute('data-reset','1'); row.appendChild(reset);
