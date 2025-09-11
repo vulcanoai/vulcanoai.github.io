@@ -24,6 +24,8 @@ html,body{height:100%}
 body{
   margin:0; font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;
   background:var(--bg); color:var(--text);
+  /* Prevent accidental horizontal scroll from animated/absolute elements */
+  overflow-x:hidden;
 }
 body.nav-open{overflow:hidden}
 .skip-link{position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden}
@@ -32,7 +34,7 @@ body.nav-open{overflow:hidden}
 .site-header{position:sticky; top:0; z-index:50; background:rgba(13,17,23,.85); backdrop-filter: blur(8px); border-bottom:1px solid var(--line)}
 .header-inner{display:flex; align-items:center; gap:16px; padding:10px 0}
 .brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text)}
-.logo{width:32px; height:32px; color:var(--logo); stroke-width:2}
+.logo{width:32px; height:32px; color:var(--logo); stroke-width:2; display:inline-block; vertical-align:middle}
 .logo.small{width:24px; height:24px}
 .brand-text{font-weight:700; letter-spacing:.5px}
 .site-nav{margin-left:auto; display:flex; gap:6px}
@@ -243,11 +245,11 @@ a:hover{color:#fff}
 }
 
 /* Chip marquee (hero banner) */
-.chip-marquee{position:relative; overflow:hidden; border:1px solid var(--line); border-radius:999px; background:rgba(22,27,34,.7); backdrop-filter: blur(8px); padding:6px 0; margin:8px 0 10px}
-.chip-marquee::before,.chip-marquee::after{content:""; position:absolute; top:0; width:40px; height:100%; z-index:1}
+.chip-marquee{position:relative; overflow:hidden; border:1px solid var(--line); border-radius:999px; background:rgba(22,27,34,.7); backdrop-filter: blur(8px); padding:6px 0; margin:8px 0 10px; width:100%}
+.chip-marquee::before,.chip-marquee::after{content:""; position:absolute; top:0; width:40px; height:100%; z-index:1; pointer-events:none}
 .chip-marquee::before{left:0; background:linear-gradient(90deg, rgba(13,17,23,1), rgba(13,17,23,0))}
 .chip-marquee::after{right:0; background:linear-gradient(270deg, rgba(13,17,23,1), rgba(13,17,23,0))}
-.chip-marquee .inner{position:relative}
+.chip-marquee .inner{position:relative; overflow:hidden}
 .chip-marquee .track{display:flex; gap:10px; align-items:center; white-space:nowrap; will-change:transform; animation:scroll-x var(--marquee-duration, 36s) linear infinite}
 .chip-marquee .track:hover{animation-play-state:paused}
 .chip-marquee .track > a{margin:0 4px}

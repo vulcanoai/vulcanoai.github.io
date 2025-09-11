@@ -47,6 +47,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const sm = document.getElementById('smart-marquee');
   if (sm){ initSmartMarquee(sm).catch(console.error); }
 
+  // Mobile/tablet nav toggle
+  try{
+    const btn = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('.site-nav');
+    if (btn && nav){
+      let backdrop = document.querySelector('.nav-backdrop');
+      if (!backdrop){
+        backdrop = document.createElement('div');
+        backdrop.className = 'nav-backdrop';
+        document.body.appendChild(backdrop);
+      }
+      const close = ()=>{ nav.classList.remove('open'); backdrop.classList.remove('show'); document.body.classList.remove('nav-open'); };
+      btn.addEventListener('click', () => {
+        const willOpen = !nav.classList.contains('open');
+        if (willOpen){ nav.classList.add('open'); backdrop.classList.add('show'); document.body.classList.add('nav-open'); }
+        else { close(); }
+      });
+      backdrop.addEventListener('click', close);
+      window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+    }
+  }catch(_){ /* noop */ }
+
   // SVG <use> polyfill for xlink:href (logo/icons visibility)
   try{
     document.querySelectorAll('use[href]').forEach(u=>{
