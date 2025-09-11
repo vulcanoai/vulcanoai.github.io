@@ -50,7 +50,7 @@
     relevance: a.relevance || a.relevancia || 0,
     sentiment: a.sentiment || a.sentimiento || 'neutral',
     author: a.author || a.autor || '',
-    curator: a.curator || a.curador || 'Lucas AI'
+    curator: a.curator || a.curador || 'Luciano AI'
   });
 
   async function fetchJSON(url){
@@ -322,7 +322,7 @@
     // Curador con estilo distintivo
     const curatorClass = getCuratorClass(a.curator);
     const mCurator = create('span',`chip meta-curator ${curatorClass}`); 
-    mCurator.append(icon('robot'), document.createTextNode(' ' + (a.curator || 'Lucas AI')));
+    mCurator.append(icon('robot'), document.createTextNode(' ' + (a.curator || 'Luciano AI')));
     metaData.appendChild(mCurator);
 
     // Indicador de sentimiento si no es neutral

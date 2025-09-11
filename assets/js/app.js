@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const sm = document.getElementById('smart-marquee');
   if (sm){ initSmartMarquee(sm).catch(console.error); }
 
-  // Mobile/tablet nav toggle
+  // Mobile/tablet nav toggle - Enhanced
   try{
     const btn = document.querySelector('.nav-toggle');
     const nav = document.querySelector('.site-nav');
@@ -58,14 +58,62 @@ document.addEventListener('DOMContentLoaded', () => {
         backdrop.className = 'nav-backdrop';
         document.body.appendChild(backdrop);
       }
-      const close = ()=>{ nav.classList.remove('open'); backdrop.classList.remove('show'); document.body.classList.remove('nav-open'); };
-      btn.addEventListener('click', () => {
+      
+      const close = ()=>{ 
+        nav.classList.remove('open'); 
+        backdrop.classList.remove('show'); 
+        document.body.classList.remove('nav-open');
+        btn.setAttribute('aria-expanded', 'false');
+      };
+      
+      const open = ()=>{ 
+        nav.classList.add('open'); 
+        backdrop.classList.add('show'); 
+        document.body.classList.add('nav-open');
+        btn.setAttribute('aria-expanded', 'true');
+        // Focus first nav item for accessibility
+        const firstLink = nav.querySelector('a');
+        if (firstLink) firstLink.focus();
+      };
+      
+      // Hamburger button click
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
         const willOpen = !nav.classList.contains('open');
-        if (willOpen){ nav.classList.add('open'); backdrop.classList.add('show'); document.body.classList.add('nav-open'); }
-        else { close(); }
+        if (willOpen) open(); else close();
       });
+      
+      // Enhanced backdrop click with touch support
       backdrop.addEventListener('click', close);
-      window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+      backdrop.addEventListener('touchstart', close, { passive: true });
+      
+      // Enhanced keyboard navigation
+      window.addEventListener('keydown', (e)=>{ 
+        if(e.key==='Escape') close();
+        // Navigate with arrow keys when menu is open
+        if (nav.classList.contains('open') && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
+          e.preventDefault();
+          const links = [...nav.querySelectorAll('a')];
+          const current = document.activeElement;
+          const currentIndex = links.indexOf(current);
+          const nextIndex = e.key === 'ArrowDown' ? 
+            (currentIndex + 1) % links.length : 
+            (currentIndex - 1 + links.length) % links.length;
+          links[nextIndex]?.focus();
+        }
+      });
+      
+      // Close menu when clicking nav links
+      nav.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') {
+          close();
+        }
+      });
+      
+      // Accessibility attributes
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-controls', 'site-navigation');
+      nav.setAttribute('id', 'site-navigation');
     }
   }catch(_){ /* noop */ }
 
@@ -443,7 +491,7 @@ async function initLiveSearch(form){
       const items = Array.isArray(json) ? json : (json.items || json.articles || []);
       // Autoría anónima con hash
       const anon = 'anon-' + crypto.getRandomValues(new Uint32Array(1))[0].toString(16).slice(0,8);
-      const mapped = items.map(x => ({...x, author: anon, curator: 'Lucas AI'}));
+      const mapped = items.map(x => ({...x, author: anon, curator: 'Luciano AI'}));
       if (window.AILatamFeed?.addItems){ window.AILatamFeed.addItems(mapped); }
       status.textContent = `Añadido al feed (${mapped.length} resultados). Hash autor: ${anon}`;
       status.className = 'chip ok';

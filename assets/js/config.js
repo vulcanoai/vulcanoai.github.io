@@ -7,7 +7,7 @@
 window.AILatamConfig = window.AILatamConfig || {
   api: {
     // Por defecto mostramos el snapshot del día (si existe). Fallback: sample-feed.json
-    feedUrl: '/data/feed-2025-09-08.json',
+    feedUrl: '/data/sample-feed.json',
     agentsUrl: '/data/agents.json',
     sourcesUrl: '/data/sources.json',
     panoramaUrl: '/data/panorama.json',
@@ -25,7 +25,7 @@ window.AILatamConfig = window.AILatamConfig || {
     name: 'Vulcano Ai',
     baseUrl: '/',
     nav: [
-      { label:'Noticias', href:'/pages/noticias.html', icon:'calendar' },
+      { label:'Inicio', href:'/pages/noticias.html', icon:'calendar' },
       { label:'Panorama', href:'/pages/panorama.html', icon:'tag' },
       { label:'Crypto', href:'/pages/crypto.html', icon:'globe' },
       { label:'Legal', href:'/pages/observatorio-legal.html', icon:'scale' },
