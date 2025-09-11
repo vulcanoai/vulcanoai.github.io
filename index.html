@@ -66,13 +66,12 @@
           <h1><svg class="logo" aria-hidden="true" style="vertical-align:-4px; margin-right:8px">
               <use href="/assets/icons.svg#logo" xlink:href="/assets/icons.svg#logo"></use>
             </svg>Panorama de IA en América Latina</h1>
-          <p class="tagline">Noticias, datos y señales del ecosistema latinoamericano de IA. Recolectado por agentes,
-            validado por humanos.</p>
+          <p class="tagline">Noticias, análisis y tendencias del ecosistema de inteligencia artificial en LATAM. Curado por agentes inteligentes, verificado por humanos.</p>
           <div class="cta-row">
-            <a class="btn primary" href="/pages/noticias.html">Ver noticias</a>
-            <a class="btn ghost" href="/pages/fuentes.html">Ver metodología</a>
+            <a class="btn primary" href="/pages/noticias.html">Explorar noticias</a>
             <a class="btn ghost" href="/pages/observatorio-legal.html">Observatorio legal</a>
-            <a class="btn" href="/pages/independiente.html">Publicar trabajo independiente</a>
+            <a class="btn ghost" href="/pages/fuentes.html">Metodología</a>
+            <a class="btn" href="/pages/independiente.html">Contribuir contenido</a>
           </div>
           <div class="marquee-row">
             <span class="label">Explorar por:</span>
@@ -94,7 +93,7 @@
       <div class="container" style="display:grid; gap:16px">
         <div class="panel">
           <h3>Crypto y activos digitales</h3>
-          <p class="note">Señales cripto con enfoque científico: mismas fuentes, país y fecha; filtros reproducibles. Un espacio para la audiencia artística y técnica.</p>
+          <p class="note">Análisis cripto con enfoque técnico y científico para LATAM. Mismas fuentes, criterios transparentes y filtros reproducibles para la comunidad crypto de la región.</p>
           <div class="smart-tags">
             <div class="group">
               <a class="chip crypto" href="/pages/crypto.html">Crypto</a>
@@ -110,10 +109,9 @@
     <!-- Suscripción por WhatsApp y redes -->
     <section class="section alt">
       <div class="container">
-        <h2>Actualizaciones en tu WhatsApp</h2>
+        <h2>Noticias directo en tu WhatsApp</h2>
         <div class="panel">
-          <p>Vulcano Ai te envía noticias de IA en LATAM directo a tu WhatsApp. Recibe un resumen diario o semanal en tu
-            chat.</p>
+          <p>Recibe las noticias más importantes de IA en LATAM directo en tu WhatsApp. Resúmenes diarios y alertas de última hora sobre el ecosistema regional.</p>
           <a id="wa-link" class="btn primary" target="_blank" rel="noopener">
             <svg class="icon" aria-hidden="true">
               <use href="/assets/icons.svg#whatsapp"></use>
@@ -156,9 +154,12 @@
       -->
     <section class="section">
       <div class="container">
-        <h2>Últimas noticias</h2>
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; flex-wrap:wrap; gap:8px">
+          <h2 style="margin:0">Últimas noticias</h2>
+          <div id="results-counter" style="font-size:13px; color:var(--muted)">Cargando...</div>
+        </div>
         <div class="filters" id="filters">
-          <input type="search" id="search" placeholder="Buscar por título o resumen" aria-label="Buscar" />
+          <input type="search" id="search" placeholder="Buscar noticias, empresas, temas..." aria-label="Buscar" />
           <select id="filter-country" aria-label="Filtrar por país"></select>
           <select id="filter-topic" aria-label="Filtrar por tema"></select>
           <select id="filter-source" aria-label="Filtrar por fuente"></select>
@@ -190,16 +191,15 @@
           <div class="panel" id="live-search">
             <h3><svg class="icon" aria-hidden="true">
                 <use href="/assets/icons.svg#search"></use>
-              </svg> Búsqueda en tiempo real</h3>
-            <p class="note">Explora noticias personalizadas. Un agente de IA buscará y devolverá resultados. Tus
-              hallazgos se agregarán al feed con autoría anónima (hash) y podrás reclamar coautoría al final.</p>
+              </svg> Búsqueda inteligente</h3>
+            <p class="note">Solicita búsquedas personalizadas a nuestros agentes IA. Tus hallazgos se integrarán al feed con atribución anónima, y podrás reclamar la autoría si lo deseas.</p>
             <form id="live-search-form" class="form-grid">
               <label for="live-q">¿Qué te interesa?</label>
-              <input id="live-q" name="q" placeholder="Ej.: regulación deepfakes en México, 2024‑2025" />
+              <input id="live-q" name="q" placeholder="Ej.: startups de IA en fintech, regulación Brasil 2025" />
               <label for="live-country">País (opcional)</label>
-              <input id="live-country" name="country" placeholder="México, Colombia, Regional…" />
+              <input id="live-country" name="country" placeholder="México, Colombia, Brasil, Regional..." />
               <label for="live-topics">Temas (opcional)</label>
-              <input id="live-topics" name="topics" placeholder="Regulación, Startups" />
+              <input id="live-topics" name="topics" placeholder="Regulación, Startups, Investigación" />
               <div></div>
               <div class="form-actions">
                 <button type="submit" class="btn primary"><svg class="icon" aria-hidden="true">
@@ -209,12 +209,12 @@
               </div>
             </form>
             <div id="live-claim" class="panel" style="display:none; margin-top:12px">
-              <h4>¿Quieres aparecer como coautor/a?</h4>
+              <h4>¿Quieres que aparezca tu nombre?</h4>
               <form id="claim-form" class="form-grid">
-                <label for="alias">Alias</label>
-                <input id="alias" name="alias" placeholder="tu-nombre-o-seudónimo" />
-                <label for="email">Email</label>
-                <input id="email" name="email" type="email" placeholder="Opcional, para confirmar" />
+                <label for="alias">Nombre o alias</label>
+                <input id="alias" name="alias" placeholder="Tu nombre, organización o seudónimo" />
+                <label for="email">Email (opcional)</label>
+                <input id="email" name="email" type="email" placeholder="Para confirmaciones y seguimiento" />
                 <div></div>
                 <div class="form-actions"><button class="btn">Reclamar autoría</button><span data-claim-status
                     class="note"></span></div>
@@ -224,9 +224,8 @@
           <div class="panel">
             <h3><svg class="icon" aria-hidden="true">
                 <use href="/assets/icons.svg#refresh"></use>
-              </svg> Regar la planta</h3>
-            <p>Haz ping para que los agentes actualicen señales (cuando está habilitado). Esto ayuda a “regar” el
-              ecosistema.</p>
+              </svg> Actualizar contenido</h3>
+            <p>Solicita a los agentes que busquen las noticias más recientes y actualicen el feed con información fresca del ecosistema latinoamericano.</p>
             <button id="trigger-update" class="btn"><svg class="icon" aria-hidden="true">
                 <use href="/assets/icons.svg#refresh"></use>
               </svg> Actualizar señales</button>
@@ -241,13 +240,10 @@
     <section class="section">
       <div class="container">
         <div class="panel">
-          <h3>¿Cómo funciona?</h3>
-          <p>Agentes autónomos rastrean fuentes públicas (RSS, prensa, blogs, reguladores) y clasifican el contenido por
-            país, tema y relevancia. Los resultados pasan por deduplicación, resumen y moderación humana antes de
-            publicarse.</p>
-          <p>Puedes colaborar directamente con Pull Requests: <a href="https://github.com/vulcanoai/vulcanoai.github.io"
-              target="_blank" rel="noopener">Repo público en GitHub</a>. El registro de cambios es público por diseño.
-          </p>
+          <h3>¿Cómo funciona Vulcano AI?</h3>
+          <p>Nuestros agentes inteligentes monitorean fuentes públicas confiables (medios, gobierno, universidades, RSS) y clasifican automáticamente el contenido por país, tema y relevancia. Todo pasa por verificación humana antes de publicarse.</p>
+          <p>Es un proyecto <strong>open source</strong>: puedes contribuir en nuestro <a href="https://github.com/vulcanoai/vulcanoai.github.io"
+              target="_blank" rel="noopener">repositorio de GitHub</a>. La transparencia y colaboración son parte del ADN de Vulcano AI.</p>
         </div>
       </div>
     </section>

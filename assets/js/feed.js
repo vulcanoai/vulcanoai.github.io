@@ -61,20 +61,64 @@
 
   async function loadFeed(){
     const url = cfg().feedUrl || '/data/sample-feed.json';
+    
+    // Show loading state
+    showLoadingState('Cargando noticias...');
+    
     try {
       // TODO(automation): soportar compresión (gzip/br) y ETag/If-None-Match
       const raw = await fetchJSON(url);
+      hideLoadingState();
       return (Array.isArray(raw) ? raw : (raw.items || raw.articles || [])).map(normalize);
     } catch (e){
-      console.warn('Fallo al cargar feed, usando muestra:', e);
+      console.warn('Fallo al cargar feed principal, usando muestra:', e);
+      showLoadingState('Cargando datos de respaldo...');
+      
       try{
         const raw = await fetchJSON('/data/sample-feed.json');
+        hideLoadingState();
         return raw.map(normalize);
-      } catch(_) {
-        if (window.VULCANO_DEMO?.feed){ return window.VULCANO_DEMO.feed.map(normalize); }
+      } catch(backupError) {
+        console.error('Error cargando datos de respaldo:', backupError);
+        
+        if (window.VULCANO_DEMO?.feed){ 
+          hideLoadingState();
+          return window.VULCANO_DEMO.feed.map(normalize); 
+        }
+        
+        showErrorState('Error al cargar las noticias. Por favor, recarga la página.');
         return [];
       }
     }
+  }
+  
+  function showLoadingState(message) {
+    const list = state.els.list;
+    if (!list) return;
+    
+    list.innerHTML = `
+      <div class="panel" style="text-align:center; padding:32px; color:var(--muted)">
+        <div style="font-size:18px; margin-bottom:8px">⏳</div>
+        <div>${message}</div>
+      </div>
+    `;
+  }
+  
+  function hideLoadingState() {
+    // Loading state will be replaced by render()
+  }
+  
+  function showErrorState(message) {
+    const list = state.els.list;
+    if (!list) return;
+    
+    list.innerHTML = `
+      <div class="panel" style="text-align:center; padding:32px; background:var(--panel-alt); border-color:var(--err)">
+        <div style="font-size:18px; margin-bottom:8px; color:var(--err)">⚠️</div>
+        <div style="color:var(--text); margin-bottom:12px">${message}</div>
+        <button onclick="location.reload()" class="btn">Reintentar</button>
+      </div>
+    `;
   }
 
   function buildFacets(items){
@@ -129,19 +173,76 @@
   function render(){
     const list = state.els.list;
     if(!list) return;
+    
+    // Update results counter
+    updateResultsCounter();
+    
     list.innerHTML = '';
     if(state.filtered.length===0){
       const empty = create('div','panel');
-      empty.textContent = 'Sin resultados. Ajusta filtros o búsqueda.';
+      empty.style.textAlign = 'center';
+      empty.style.padding = '32px 16px';
+      empty.innerHTML = `
+        <div style="font-size:18px; margin-bottom:8px">📰</div>
+        <div>No se encontraron artículos con los filtros actuales</div>
+        <div style="font-size:13px; margin-top:8px; color:var(--muted)">Prueba ajustando los filtros o <a href="#" onclick="clearAllFilters(); return false;" style="color:var(--brand)">limpiar todos</a></div>
+      `;
       list.appendChild(empty);
       return;
     }
+    
     // NOTE: home muestra tope 12; páginas dedicadas pueden listar todo
-    const take = Math.min(12, state.filtered.length);
+    const isHomePage = window.location.pathname === '/' || window.location.pathname.includes('index.html');
+    const maxResults = isHomePage ? 12 : 48;
+    const take = Math.min(maxResults, state.filtered.length);
+    
     for(let i=0;i<take;i++){
       list.appendChild(card(state.filtered[i]));
     }
+    
+    // Show "load more" hint if there are more results (only on non-home pages)
+    if (!isHomePage && state.filtered.length > maxResults) {
+      const loadMore = create('div', 'panel');
+      loadMore.style.textAlign = 'center';
+      loadMore.style.marginTop = '16px';
+      loadMore.style.color = 'var(--muted)';
+      loadMore.style.fontSize = '13px';
+      loadMore.textContent = `Mostrando ${take} de ${state.filtered.length} artículos`;
+      list.parentNode.appendChild(loadMore);
+    }
   }
+  
+  function updateResultsCounter(){
+    const counter = document.getElementById('results-counter');
+    if (!counter) return;
+    
+    const total = state.all.length;
+    const showing = state.filtered.length;
+    const hasFilters = state.filters.q || state.filters.country !== 'todos' || state.filters.topic !== 'todos' || state.filters.source !== 'todas';
+    
+    if (hasFilters) {
+      counter.textContent = `${showing} de ${total} artículos`;
+      counter.style.opacity = '1';
+    } else {
+      counter.textContent = `${total} artículos`;
+      counter.style.opacity = '0.7';
+    }
+  }
+  
+  window.clearAllFilters = function() {
+    state.filters = { country: 'todos', topic: 'todos', source: 'todas', q: '', sort: 'recent' };
+    
+    // Update form elements
+    if (state.els.search) state.els.search.value = '';
+    if (state.els.country) state.els.country.value = 'todos';
+    if (state.els.topic) state.els.topic.value = 'todos'; 
+    if (state.els.source) state.els.source.value = 'todas';
+    if (state.els.sort) state.els.sort.value = 'recent';
+    
+    applyFilters();
+    render();
+    updateSmartTagActives();
+  };
 
   function qp(params){
     const p = new URLSearchParams(params);
@@ -162,23 +263,101 @@
     const el = create('article','card');
     const body = create('div','body');
     const title = create('h3','title');
-    const link = create('a'); link.href=a.url; link.target='_blank'; link.rel='noopener'; link.textContent=a.title; title.appendChild(link);
-    const summary = create('p'); summary.textContent = a.summary || '';
+    const link = create('a'); 
+    link.href = a.url.startsWith('/') ? a.url : a.url; 
+    if (!a.url.startsWith('/')) {
+      link.target = '_blank'; 
+      link.rel = 'noopener';
+    }
+    link.textContent = a.title; 
+    title.appendChild(link);
+    
+    const summary = create('p'); 
+    summary.textContent = a.summary || '';
 
-    // Chips minimalistas: solo país
-    const chips = create('div','meta');
-    const countryChip = create('span','chip brand');
-    const cLink = create('a'); cLink.href = qp({pais:a.country}); cLink.textContent = a.country; countryChip.appendChild(cLink); chips.appendChild(countryChip);
+    // Primera fila de metadata: país y temas principales
+    const topicChips = create('div','meta');
+    
+    // País con estilo temático
+    const countrySlug = slugify(a.country);
+    const countryChip = create('span',`chip tag-country-${countrySlug}`);
+    const cLink = create('a'); 
+    cLink.href = qp({pais:a.country}); 
+    cLink.textContent = a.country; 
+    countryChip.appendChild(cLink); 
+    topicChips.appendChild(countryChip);
 
-    // Meta compacta con iconos
-    const meta = create('div','meta');
-    const mDate = create('span','chip meta-date'); mDate.append(icon('calendar'), document.createTextNode(fmtDate(a.published_at)));
-    const mCur = create('span','chip meta-curator lucas'); mCur.append(icon('robot'), document.createTextNode(a.curator || 'Lucas AI'));
-    meta.append(mDate, mCur);
+    // Mostrar hasta 2 temas principales con colores temáticos
+    const topics = (a.topics || []).slice(0, 2);
+    for (const topic of topics) {
+      const topicSlug = slugify(topic);
+      const topicChip = create('span',`chip tag-topic-${topicSlug}`);
+      const tLink = create('a'); 
+      tLink.href = qp({tema:topic}); 
+      tLink.textContent = topic; 
+      topicChip.appendChild(tLink);
+      topicChips.appendChild(topicChip);
+    }
 
-    body.append(title, summary, chips, meta);
+    // Segunda fila de metadata: fecha, fuente, curador
+    const metaData = create('div','meta');
+    
+    // Fecha
+    const mDate = create('span','chip meta-date'); 
+    mDate.append(icon('calendar'), document.createTextNode(' ' + fmtDate(a.published_at)));
+    metaData.appendChild(mDate);
+
+    // Fuente si existe
+    if (a.source && a.source !== '—') {
+      const mSource = create('span','chip'); 
+      mSource.append(icon('source'), document.createTextNode(' ' + a.source));
+      metaData.appendChild(mSource);
+    }
+
+    // Autor si existe y es diferente al curador
+    if (a.author && a.author !== a.curator) {
+      const mAuthor = create('span','chip'); 
+      mAuthor.append(icon('user'), document.createTextNode(' ' + a.author));
+      metaData.appendChild(mAuthor);
+    }
+
+    // Curador con estilo distintivo
+    const curatorClass = getCuratorClass(a.curator);
+    const mCurator = create('span',`chip meta-curator ${curatorClass}`); 
+    mCurator.append(icon('robot'), document.createTextNode(' ' + (a.curator || 'Lucas AI')));
+    metaData.appendChild(mCurator);
+
+    // Indicador de sentimiento si no es neutral
+    if (a.sentiment && a.sentiment !== 'neutral') {
+      const sentIcon = a.sentiment === 'positive' ? 'trending-up' : 'trending-down';
+      const sentClass = a.sentiment === 'positive' ? 'ok' : 'warn';
+      const mSent = create('span',`chip ${sentClass}`);
+      mSent.append(icon(sentIcon));
+      mSent.title = `Sentimiento: ${a.sentiment}`;
+      metaData.appendChild(mSent);
+    }
+
+    body.append(title, summary, topicChips, metaData);
     el.append(body);
     return el;
+  }
+
+  // Función para obtener clase CSS del curador
+  function getCuratorClass(curator) {
+    if (!curator) return 'lucas';
+    const name = curator.toLowerCase();
+    if (name.includes('lucas')) return 'lucas';
+    if (name.includes('elena')) return 'elena';
+    if (name.includes('sophia')) return 'sophia';
+    if (name.includes('marcus')) return 'marcus';
+    if (name.includes('ana')) return 'ana';
+    if (name.includes('diego')) return 'diego';
+    if (name.includes('carmen')) return 'carmen';
+    if (name.includes('roberto')) return 'roberto';
+    if (name.includes('verde')) return 'verde';
+    if (name.includes('secure')) return 'secure';
+    if (name.includes('medic')) return 'medic';
+    return 'default';
   }
 
   function readQuery(){
@@ -265,23 +444,32 @@
     }catch(_){ /* noop */ }
     try {
       state.all = await loadFeed();
+      
+      if (state.all.length === 0) {
+        showErrorState('No hay noticias disponibles en este momento.');
+        return;
+      }
+      
       buildFacets(state.all);
       populateFilters();
       renderSmartTags();
-      // seed UI
-      state.els.search.value = state.filters.q;
-      state.els.country.value = state.filters.country;
-      state.els.topic.value = state.filters.topic;
-      state.els.source.value = state.filters.source;
-      state.els.sort.value = state.filters.sort;
+      
+      // seed UI elements safely
+      if (state.els.search) state.els.search.value = state.filters.q;
+      if (state.els.country) state.els.country.value = state.filters.country;
+      if (state.els.topic) state.els.topic.value = state.filters.topic;
+      if (state.els.source) state.els.source.value = state.filters.source;
+      if (state.els.sort) state.els.sort.value = state.filters.sort;
+      
       applyFilters();
       render();
       renderMetrics();
       bind();
       updateSmartTagActives();
+      
     } catch (e){
-      list.innerHTML = '<div class="panel">No se pudo cargar el feed.</div>';
-      console.error(e);
+      console.error('Error inicializando feed:', e);
+      showErrorState('Error al cargar las noticias. Verifica tu conexión e intenta nuevamente.');
     }
   }
 

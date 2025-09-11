@@ -45,8 +45,10 @@ body.nav-open{overflow:hidden}
 
 .hero{padding:64px 0 56px; background:linear-gradient(180deg, rgba(46,51,59,.3), transparent 50%), var(--bg); border-bottom:1px solid var(--line)}
 .hero h1{margin:0 0 10px; font-size:42px; letter-spacing:.2px}
+@media (max-width: 620px) { .hero h1 { font-size:28px } .hero { padding:40px 0 36px } }
 .tagline{color:var(--muted); max-width:720px}
-.cta-row{display:flex; gap:12px; margin-top:18px}
+.cta-row{display:flex; gap:12px; margin-top:18px; flex-wrap:wrap}
+@media (max-width: 620px) { .cta-row { gap:8px } }
 .btn{display:inline-block; padding:8px 12px; border-radius:6px; border:1px solid var(--line); color:var(--text); text-decoration:none; background:#21262d}
 .btn:hover{background:#30363d}
 .btn.primary{background:var(--brand); border-color:#1f6feb; color:#111}
@@ -82,6 +84,10 @@ h3{font-size:1.05rem}
   background:var(--panel); color:var(--text); border:1px solid var(--line);
   padding:10px 12px; border-radius:10px; outline:none; min-width:180px
 }
+@media (max-width: 620px) { 
+  .filters input[type="search"], .filters select { min-width:140px; font-size:16px } 
+  .filters { gap:8px; margin:8px 0 12px }
+}
 input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-visible, a:focus-visible{outline:2px solid #1f6feb; outline-offset:2px; border-color:#1f6feb}
 
 /* Simple forms */
@@ -99,7 +105,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
 .grid{display:grid; gap:14px}
 .news-grid{grid-template-columns:repeat(3,1fr)}
 @media (max-width: 900px){ .news-grid{grid-template-columns:repeat(2,1fr)} }
-@media (max-width: 620px){ .news-grid{grid-template-columns:1fr} }
+@media (max-width: 620px){ .news-grid{grid-template-columns:1fr; gap:12px} }
 /* Revista-style featured first card */
 .news-grid .card:first-child{grid-column:span 2}
 @media (max-width: 900px){ .news-grid .card:first-child{grid-column:span 2} }
@@ -117,10 +123,15 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
   .site-nav a{padding:10px 12px}
 }
 
-.card{background:var(--panel); border:1px solid var(--line); border-radius:8px; display:flex; flex-direction:column}
-.card .body{padding:12px; display:flex; flex-direction:column; gap:8px}
+.card{background:var(--panel); border:1px solid var(--line); border-radius:8px; display:flex; flex-direction:column; transition:border-color .2s ease, box-shadow .2s ease}
+.card:hover{border-color:#30363d; box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.card .body{padding:16px; display:flex; flex-direction:column; gap:10px}
 .card .title{font-size:17px; margin:0; line-height:1.3}
-.card .meta{display:flex; gap:12px; flex-wrap:wrap; color:var(--muted); font-size:13px}
+.card .title a{color:var(--text); text-decoration:none}
+.card .title a:hover{color:#cde1ff}
+.card p{margin:0; line-height:1.4; color:var(--muted)}
+.card .meta{display:flex; gap:6px; flex-wrap:wrap; color:var(--muted); font-size:13px; margin-top:2px}
+.card .meta + .meta{margin-top:8px}
 .meta .item{display:inline-flex; align-items:center; gap:6px}
 .icon{width:14px; height:14px; display:inline-block}
 .chip{display:inline-flex; align-items:center; gap:6px; padding:2px 8px; border-radius:999px; border:1px solid var(--line); background:#0d1117; color:var(--muted); font-size:12px; transition:border-color .15s ease, color .15s ease, background-color .15s ease}
@@ -204,6 +215,17 @@ a:hover{color:#fff}
 .chip.tag-topic-comunidad{border-color:#06b6d4; color:#e7fbff; background:rgba(6,182,212,.18)}
 .chip.tag-topic-boletin{border-color:#84cc16; color:#effad1; background:rgba(132,204,22,.18)}
 .chip.tag-topic-resumen{border-color:#60a5fa; color:#dcecff; background:rgba(96,165,250,.18)}
+.chip.tag-topic-producto{border-color:#8b5cf6; color:#f2e9ff; background:rgba(139,92,246,.18)}
+.chip.tag-topic-open-source{border-color:#10b981; color:#e6fffa; background:rgba(16,185,129,.18)}
+.chip.tag-topic-servicios-financieros{border-color:#059669; color:#e6fffa; background:rgba(5,150,105,.18)}
+.chip.tag-topic-capacitacion{border-color:#0ea5e9; color:#e0f2fe; background:rgba(14,165,233,.18)}
+.chip.tag-topic-sostenibilidad{border-color:#22c55e; color:#e7fdf2; background:rgba(34,197,94,.18)}
+.chip.tag-topic-agricultura{border-color:#65a30d; color:#f0fdf4; background:rgba(101,163,13,.18)}
+.chip.tag-topic-cooperacion-regional{border-color:#7c3aed; color:#f5f3ff; background:rgba(124,58,237,.18)}
+.chip.tag-topic-venture-capital{border-color:#db2777; color:#fdf2f8; background:rgba(219,39,119,.18)}
+.chip.tag-topic-fintech{border-color:#0891b2; color:#ecfeff; background:rgba(8,145,178,.18)}
+.chip.tag-topic-ciberseguridad{border-color:#dc2626; color:#fef2f2; background:rgba(220,38,38,.18)}
+.chip.tag-topic-salud{border-color:#16a34a; color:#f0fdf4; background:rgba(22,163,74,.18)}
 
 /* Countries */
 .chip.tag-country-regional{border-color:#8b5cf6; color:#efe9ff; background:rgba(139,92,246,.18)}
@@ -214,6 +236,9 @@ a:hover{color:#fff}
 .chip.tag-country-chile{border-color:#ef4444; color:#ffe5e5; background:rgba(239,68,68,.18)}
 .chip.tag-country-peru{border-color:#f97316; color:#ffecd9; background:rgba(249,115,22,.18)}
 .chip.tag-country-uruguay{border-color:#06b6d4; color:#e7fbff; background:rgba(6,182,212,.18)}
+.chip.tag-country-ecuador{border-color:#eab308; color:#fefce8; background:rgba(234,179,8,.18)}
+.chip.tag-country-panama{border-color:#3b82f6; color:#eff6ff; background:rgba(59,130,246,.18)}
+.chip.tag-country-venezuela{border-color:#dc2626; color:#fef2f2; background:rgba(220,38,38,.18)}
 
 /* Hover emphasis for colored tags */
 .chip[class*="tag-topic-"]:hover, .chip[class*="tag-country-"]:hover{ filter:brightness(1.12) }
@@ -225,6 +250,17 @@ a:hover{color:#fff}
 /* Agent-aligned accents */
 .chip.brand{border-color:#1f6feb; color:#d6e5ff; background:rgba(31,111,235,.18)}
 .chip.lucas{border-color:var(--logo); color:#ffd7c8; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)), rgba(255,90,42,.15)}
+.chip.elena{border-color:#ec4899; color:#ffe4f0; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)), rgba(236,72,153,.15)}
+.chip.sophia{border-color:#8b5cf6; color:#f2e9ff; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)), rgba(139,92,246,.15)}
+.chip.marcus{border-color:#0ea5e9; color:#e0f2fe; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)), rgba(14,165,233,.15)}
+.chip.ana{border-color:#06b6d4; color:#cff4fc; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)), rgba(6,182,212,.15)}
+.chip.diego{border-color:#84cc16; color:#edfcf1; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)), rgba(132,204,22,.15)}
+.chip.carmen{border-color:#f59e0b; color:#fff3cd; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)), rgba(245,158,11,.15)}
+.chip.roberto{border-color:#6366f1; color:#e0e7ff; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)), rgba(99,102,241,.15)}
+.chip.verde{border-color:#22c55e; color:#e7fdf2; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)), rgba(34,197,94,.15)}
+.chip.secure{border-color:#ef4444; color:#fdeaef; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)), rgba(239,68,68,.15)}
+.chip.medic{border-color:#10b981; color:#e6fffa; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)), rgba(16,185,129,.15)}
+.chip.default{border-color:#6b7280; color:#e5e7eb; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)), rgba(107,114,128,.15)}
 /* Crypto (agents warn amber) */
 .chip.crypto{border-color:#fbbf24; color:#fff1c2; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)), rgba(251,191,36,.18)}
 /* Glossy chips */

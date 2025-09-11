@@ -520,7 +520,7 @@ function initWhatsAppModal(){
     const close = document.createElement('button'); close.className='btn link'; close.textContent='Cerrar'; close.setAttribute('aria-label','Cerrar');
     head.append(title, close);
     const body = document.createElement('div');
-    body.innerHTML = '<p>Vulcano Ai te envía noticias de IA en LATAM directo a tu WhatsApp. Súmate con un toque.</p>';
+    body.innerHTML = '<p>Únete a la comunidad de IA más activa de LATAM. Recibe noticias curadas, análisis y tendencias directo en tu WhatsApp.</p><ul style="text-align:left; margin:12px 0; color:var(--muted); font-size:14px"><li>📰 Resúmenes diarios</li><li>⚡ Alertas de noticias importantes</li><li>🎯 Contenido filtrado por país</li><li>🚫 Sin spam, siempre relevante</li></ul>';
     const actions = document.createElement('div'); actions.className='modal-actions';
     const go = document.createElement('a'); go.className='btn primary'; go.target='_blank'; go.rel='noopener'; go.href = getWhatsAppHref('diarias'); go.innerHTML = '<svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#whatsapp"></use></svg> Abrir WhatsApp';
     const later = document.createElement('button'); later.className='btn link'; later.textContent='Quizás luego';

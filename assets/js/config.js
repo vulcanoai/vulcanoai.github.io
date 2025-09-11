@@ -43,7 +43,7 @@ window.AILatamConfig = window.AILatamConfig || {
     linkedin: 'https://www.linkedin.com/company/vulcano-ai/',
     whatsappNumber: '+573193620926',
     whatsappLink: 'https://wa.me/573193620926',
-    whatsappDefaultText: 'Hola Vulcano Ai, quiero recibir noticias {frecuencia}.'
+    whatsappDefaultText: '🤖 Hola! Me gustaría suscribirme a las noticias de IA en LATAM {frecuencia}. Gracias!'
   },
   donate: {
     patreon: 'https://patreon.com/vulcanoai?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink',
