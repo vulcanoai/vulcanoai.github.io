@@ -41,14 +41,14 @@ const normalize = (a) => ({
   relevance: a.relevance || a.relevancia || 0,
   sentiment: a.sentiment || a.sentimiento || 'neutral',
   author: a.author || a.autor || '',
-  curator: a.curator || a.curador || 'Lucas AI'
+  curator: a.curator || a.curador || 'Luciano AI'
 });
 ```
 
 **Agent Notes:**
 - Supports both Spanish and English field names for flexibility
 - Auto-generates UUIDs for missing article IDs
-- Defaults to 'Lucas AI' as curator for consistency
+- Defaults to 'Luciano AI' as curator for consistency
 - Regional classification falls back to 'Regional' for broad content
 
 ### **Agent Configuration Management**
@@ -134,7 +134,7 @@ const getCuratorClass = (curator) => {
   "relevance": 0-10,
   "sentiment": "positive|neutral|negative",
   "author": "string",
-  "curator": "string"
+  "curator": "Luciano AI|Esperanza AI|Sofía AI|Mateo AI|etc"
 }
 ```
 

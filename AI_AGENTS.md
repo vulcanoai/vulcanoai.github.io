@@ -110,19 +110,19 @@ All agents must adhere to the standardized article schema defined in `/data/samp
 
 ## 🎨 Curator AI Personalities
 
-Each agent can assume different curator personas for content attribution:
+Each agent embodies Latin American cultural values and regional expertise:
 
-- **Lucas AI** (🔥): Startup and investment focus
-- **Elena AI** (🏛️): Regulation and government analysis  
-- **Sophia AI** (🔬): Research and academic content
-- **Marcus AI** (🏦): Enterprise and finance
-- **Ana AI** (📚): Education and training
-- **Diego AI** (🏭): Industry applications
-- **Carmen AI** (🤝): Regional cooperation
-- **Roberto AI** (💰): Venture capital and funding
-- **Verde AI** (🌱): Sustainability and environmental
-- **Secure AI** (🔒): Cybersecurity and safety
-- **Medic AI** (⚕️): Healthcare applications
+- **Luciano AI** (🔥): Startup y inversión - "El Emprendedor"
+- **Esperanza AI** (🏛️): Gobierno y regulación - "La Legisladora"  
+- **Sofía AI** (🔬): Investigación académica - "La Científica"
+- **Mateo AI** (🏦): Finanzas y empresas - "El Analista"
+- **Amalia AI** (📚): Educación y talento - "La Educadora"
+- **Sebastián AI** (🏭): Industria y aplicaciones - "El Ingeniero"
+- **Valentina AI** (🤝): Cooperación regional - "La Conectora"
+- **Alejandro AI** (💰): Capital de riesgo - "El Inversionista"
+- **Camila AI** (🌱): Sostenibilidad - "La Ambientalista"
+- **Rodrigo AI** (🔒): Ciberseguridad - "El Guardian"
+- **Isabella AI** (⚕️): IA en salud - "La Doctora"
 
 ## 📈 Success Metrics
 
