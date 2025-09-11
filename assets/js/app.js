@@ -79,15 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // (drag demo removed — keeping UI estática)
 
-  // Contemplative mode toggle
-  const cm = document.getElementById('toggle-contemplative');
-  if (cm){
-    cm.addEventListener('click', () => {
-      const on = document.body.classList.toggle('mode-contemplative');
-      cm.setAttribute('aria-pressed', on ? 'true' : 'false');
-      cm.textContent = on ? 'Salir de modo contemplativo' : 'Modo contemplativo';
-    });
-  }
+  // (removed) contemplative mode toggle
 
   // Active state handled inside buildUnifiedNav
 

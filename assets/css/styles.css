@@ -262,6 +262,11 @@ a:hover{color:#fff}
 code, pre{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
 pre{background:#0d1117; border:1px solid var(--line); padding:12px; border-radius:8px; overflow:auto}
 
+/* Marquee row with label */
+.marquee-row{display:flex; align-items:center; gap:10px; margin:10px 0 12px}
+.marquee-row .label{font-size:12px; color:var(--muted); white-space:nowrap}
+@media (max-width: 620px){ .marquee-row{flex-direction:column; align-items:flex-start; gap:6px} }
+
 /* Mobile nav backdrop */
 .nav-backdrop{position:fixed; inset:0; background:rgba(0,0,0,.35); display:none; z-index:900}
 .nav-backdrop.show{display:block}
@@ -296,19 +301,13 @@ pre{background:#0d1117; border:1px solid var(--line); padding:12px; border-radiu
 @keyframes spin{from{transform:rotate(0turn)} to{transform:rotate(1turn)}}
 @media (prefers-reduced-motion: reduce){ .orb .spin-slow, .orb .spin-med, .orb .spin-fast{animation:none} }
 /* Emphasize hero orb size (brand presence) */
-#hero-orb{ width: clamp(360px, 36vw, 520px); height: auto; display:block; aspect-ratio:1/1 }
+#hero-orb{ width: clamp(360px, 36vw, 520px); height: clamp(360px, 36vw, 520px); display:block }
 @media (max-width: 900px){
-  #hero-orb{ width: clamp(280px, 70vw, 420px); }
+  #hero-orb{ width: clamp(280px, 70vw, 420px); height: clamp(280px, 70vw, 420px); }
 }
 /* Reserve space so async content doesn’t shift orb out of view */
 .hero-grid .orb-wrap{ min-height: clamp(360px, 36vw, 520px); }
 @media (max-width: 900px){ .hero-grid .orb-wrap{ min-height: clamp(280px, 70vw, 420px); } }
-/* Contemplative mode */
-.toggle-row{display:flex; gap:8px; align-items:center; margin-top:10px}
-.mode-contemplative .hero{padding:64px 0}
-.mode-contemplative .orb{width:min(60vh,680px); height:min(60vh,680px)}
-.mode-contemplative .cta-row{opacity:.9}
-
 /* Mini orb mascot */
 .orb-mini{width:120px; height:120px}
 .orb-mini .stroke{stroke:var(--logo)}
