@@ -315,6 +315,24 @@ async function initSources(container){
   }
 }
 
+// Helper function for curator CSS classes
+function getCuratorClassName(curator) {
+  if (!curator) return 'luciano';
+  const name = curator.toLowerCase();
+  if (name.includes('luciano')) return 'luciano';
+  if (name.includes('esperanza')) return 'esperanza';
+  if (name.includes('sofía') || name.includes('sofia')) return 'sofia';
+  if (name.includes('mateo')) return 'mateo';
+  if (name.includes('amalia')) return 'amalia';
+  if (name.includes('sebastián') || name.includes('sebastian')) return 'sebastian';
+  if (name.includes('valentina')) return 'valentina';
+  if (name.includes('alejandro')) return 'alejandro';
+  if (name.includes('camila')) return 'camila';
+  if (name.includes('rodrigo')) return 'rodrigo';
+  if (name.includes('isabella')) return 'isabella';
+  return 'luciano';
+}
+
 async function initAgents(table){
   let agents;
   try{
@@ -331,10 +349,32 @@ async function initAgents(table){
     const st = (a.estado || 'desconocido').toLowerCase();
     const last = a.ultimo_ejecucion || a.lastRun || '';
 
-    const tdName = document.createElement('td'); tdName.textContent = a.nombre || '';
-    const tdState = document.createElement('td'); const chip = document.createElement('span'); chip.className = 'chip ' + (st==='activo'?'ok':st==='fallo'?'err':st==='pausado'?'warn':''); chip.textContent = a.estado || ''; tdState.appendChild(chip);
+    // Agent name with curator chip styling
+    const tdName = document.createElement('td');
+    if (a.nombre && a.nombre.includes(' AI')) {
+      // Create curator chip for AI agents
+      const curatorClass = getCuratorClass ? getCuratorClass(a.nombre) : getCuratorClassName(a.nombre);
+      const nameChip = document.createElement('span');
+      nameChip.className = `chip ${curatorClass}`;
+      const icon = document.createElementNS('http://www.w3.org/2000/svg','svg');
+      icon.setAttribute('class','icon');
+      icon.setAttribute('aria-hidden','true');
+      const use = document.createElementNS('http://www.w3.org/2000/svg','use');
+      use.setAttributeNS('http://www.w3.org/1999/xlink','href','/assets/icons.svg#robot');
+      icon.appendChild(use);
+      nameChip.append(icon, document.createTextNode(' ' + a.nombre));
+      tdName.appendChild(nameChip);
+    } else {
+      tdName.textContent = a.nombre || '';
+    }
+    
+    const tdState = document.createElement('td'); 
+    const chip = document.createElement('span'); 
+    chip.className = 'chip ' + (st==='activo'?'ok':st==='configurando'?'warn':st==='fallo'?'err':''); 
+    chip.textContent = a.estado || ''; 
+    tdState.appendChild(chip);
     const tdLast = document.createElement('td'); tdLast.textContent = last ? new Date(last).toLocaleString('es-ES') : '—';
-    const tdRate = document.createElement('td'); tdRate.textContent = a.throughput ? (a.throughput + '/h') : '—';
+    const tdRate = document.createElement('td'); tdRate.textContent = a.throughput ? (typeof a.throughput === 'string' ? a.throughput : a.throughput + '/h') : '—';
     const tdNotes = document.createElement('td'); tdNotes.className = 'muted'; tdNotes.textContent = a.notas || '';
 
     tr.append(tdName, tdState, tdLast, tdRate, tdNotes);

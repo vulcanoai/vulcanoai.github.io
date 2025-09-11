@@ -12,7 +12,7 @@
     "published_at": "2025-09-11T12:00:00Z",
     "relevance": 10,
     "sentiment": "positive",
-    "curator": "Lucas AI"
+    "curator": "Luciano AI"
   },
   {
     "id": "mx-startup-seed-01",
@@ -28,7 +28,7 @@
     "relevance": 9,
     "sentiment": "positive",
     "author": "María González",
-    "curator": "Lucas AI"
+    "curator": "Luciano AI"
   },
   {
     "id": "co-regulation-ethics-01", 
@@ -44,7 +44,7 @@
     "relevance": 10,
     "sentiment": "neutral",
     "author": "MinTIC Prensa",
-    "curator": "Elena AI"
+    "curator": "Esperanza AI"
   },
   {
     "id": "ar-llm-research-01",
@@ -60,7 +60,7 @@
     "relevance": 8,
     "sentiment": "positive",
     "author": "Dr. Carlos Rodríguez",
-    "curator": "Sophia AI"
+    "curator": "Sofía AI"
   },
   {
     "id": "br-banking-ai-01",
@@ -76,7 +76,7 @@
     "relevance": 7,
     "sentiment": "positive",
     "author": "Fernanda Silva",
-    "curator": "Marcus AI"
+    "curator": "Mateo AI"
   },
   {
     "id": "cl-education-policy-01",
@@ -92,7 +92,7 @@
     "relevance": 6,
     "sentiment": "positive",
     "author": "Gobierno de Chile",
-    "curator": "Ana AI"
+    "curator": "Amalia AI"
   },
   {
     "id": "pe-mining-ai-01",
@@ -108,7 +108,7 @@
     "relevance": 5,
     "sentiment": "positive", 
     "author": "Redacción Gestión",
-    "curator": "Diego AI"
+    "curator": "Sebastián AI"
   },
   {
     "id": "uy-ai-governance-01",
@@ -124,7 +124,7 @@
     "relevance": 7,
     "sentiment": "neutral",
     "author": "Secretaría de Comunicación",
-    "curator": "Carmen AI"
+    "curator": "Valentina AI"
   },
   {
     "id": "latam-vc-consortium-01",
@@ -140,7 +140,7 @@
     "relevance": 9,
     "sentiment": "positive",
     "author": "Andrés López",
-    "curator": "Roberto AI"
+    "curator": "Alejandro AI"
   },
   {
     "id": "ec-agriculture-ai-01",
@@ -156,7 +156,7 @@
     "relevance": 6,
     "sentiment": "positive",
     "author": "Patricia Morales",
-    "curator": "Verde AI"
+    "curator": "Camila AI"
   },
   {
     "id": "pa-fintech-ai-01",
@@ -172,7 +172,7 @@
     "relevance": 5,
     "sentiment": "positive",
     "author": "Carlos Mendoza",
-    "curator": "Secure AI"
+    "curator": "Rodrigo AI"
   },
   {
     "id": "ve-healthcare-ai-01", 
@@ -188,6 +188,6 @@
     "relevance": 4,
     "sentiment": "positive", 
     "author": "Dr. Luis Hernández",
-    "curator": "Medic AI"
+    "curator": "Isabella AI"
   }
 ]
