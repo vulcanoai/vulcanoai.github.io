@@ -342,20 +342,20 @@
 
   // Función para obtener clase CSS del curador
   function getCuratorClass(curator) {
-    if (!curator) return 'lucas';
+    if (!curator) return 'luciano';
     const name = curator.toLowerCase();
-    if (name.includes('lucas')) return 'lucas';
-    if (name.includes('elena')) return 'elena';
-    if (name.includes('sophia')) return 'sophia';
-    if (name.includes('marcus')) return 'marcus';
-    if (name.includes('ana')) return 'ana';
-    if (name.includes('diego')) return 'diego';
-    if (name.includes('carmen')) return 'carmen';
-    if (name.includes('roberto')) return 'roberto';
-    if (name.includes('verde')) return 'verde';
-    if (name.includes('secure')) return 'secure';
-    if (name.includes('medic')) return 'medic';
-    return 'default';
+    if (name.includes('luciano')) return 'luciano';
+    if (name.includes('esperanza')) return 'esperanza';
+    if (name.includes('sofía') || name.includes('sofia')) return 'sofia';
+    if (name.includes('mateo')) return 'mateo';
+    if (name.includes('amalia')) return 'amalia';
+    if (name.includes('sebastián') || name.includes('sebastian')) return 'sebastian';
+    if (name.includes('valentina')) return 'valentina';
+    if (name.includes('alejandro')) return 'alejandro';
+    if (name.includes('camila')) return 'camila';
+    if (name.includes('rodrigo')) return 'rodrigo';
+    if (name.includes('isabella')) return 'isabella';
+    return 'luciano';
   }
 
   function readQuery(){
