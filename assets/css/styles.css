@@ -296,10 +296,13 @@ pre{background:#0d1117; border:1px solid var(--line); padding:12px; border-radiu
 @keyframes spin{from{transform:rotate(0turn)} to{transform:rotate(1turn)}}
 @media (prefers-reduced-motion: reduce){ .orb .spin-slow, .orb .spin-med, .orb .spin-fast{animation:none} }
 /* Emphasize hero orb size (brand presence) */
-#hero-orb{ width: clamp(420px, 45vw, 680px); height: clamp(420px, 45vw, 680px); }
+#hero-orb{ width: clamp(420px, 45vw, 680px); height: clamp(420px, 45vw, 680px); display:block; aspect-ratio:1/1 }
 @media (max-width: 900px){
   #hero-orb{ width: clamp(360px, 70vw, 620px); height: clamp(360px, 70vw, 620px); }
 }
+/* Reserve space so async content doesn’t shift orb out of view */
+.hero-grid .orb-wrap{ min-height: clamp(420px, 45vw, 680px); }
+@media (max-width: 900px){ .hero-grid .orb-wrap{ min-height: clamp(360px, 70vw, 620px); } }
 /* Contemplative mode */
 .toggle-row{display:flex; gap:8px; align-items:center; margin-top:10px}
 .mode-contemplative .hero{padding:64px 0}
