@@ -266,6 +266,7 @@ a:hover{color:#fff}
 .chip.tag-topic-fintech{border-color:#0891b2; color:#ecfeff; background:rgba(8,145,178,.18)}
 .chip.tag-topic-ciberseguridad{border-color:#dc2626; color:#fef2f2; background:rgba(220,38,38,.18)}
 .chip.tag-topic-salud{border-color:#16a34a; color:#f0fdf4; background:rgba(22,163,74,.18)}
+.chip.tag-topic-crypto{border-color:#fbbf24; color:#fff1c2; background:rgba(251,191,36,.18)}
 
 /* Countries */
 .chip.tag-country-regional{border-color:#8b5cf6; color:#efe9ff; background:rgba(139,92,246,.18)}
