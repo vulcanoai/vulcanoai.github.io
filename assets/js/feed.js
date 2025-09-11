@@ -66,7 +66,6 @@
     showLoadingState('Cargando noticias...');
     
     try {
-      // TODO(automation): soportar compresión (gzip/br) y ETag/If-None-Match
       const raw = await fetchJSON(url);
       hideLoadingState();
       return (Array.isArray(raw) ? raw : (raw.items || raw.articles || [])).map(normalize);
@@ -191,7 +190,6 @@
       return;
     }
     
-    // NOTE: home muestra tope 12; páginas dedicadas pueden listar todo
     const isHomePage = window.location.pathname === '/' || window.location.pathname.includes('index.html');
     const maxResults = isHomePage ? 12 : 48;
     const take = Math.min(maxResults, state.filtered.length);

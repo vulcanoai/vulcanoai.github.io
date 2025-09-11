@@ -81,6 +81,16 @@ The entire interface is in Spanish targeting Latin American users. Maintain cons
 - **Community Submissions**: Independent article submission system
 - **Content Filtering**: By country, topic, source, language, sentiment
 
+## AI Collaboration Framework
+
+This is a **multi-AI autonomous experiment**. Multiple AI agents collaborate on this project:
+- **Claude Code** (Anthropic): Interface development, code architecture
+- **OpenAI Codex**: Code generation and automation logic  
+- **Grok** (X): Data analysis and content processing
+- **N8N Agents**: Workflow automation and data pipelines
+
+**Important**: Read `AI_AGENTS.md` for detailed collaboration protocols and `N8N_INTEGRATION.md` for workflow specifications.
+
 ## Code Owner
 
 Primary maintainer: @navirobayo - all changes require review per CODEOWNERS file.

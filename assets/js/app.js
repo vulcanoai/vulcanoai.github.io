@@ -534,8 +534,21 @@ function initWhatsAppModal(){
     backdrop.addEventListener('click', closeAll); close.addEventListener('click', closeAll); later.addEventListener('click', closeAll);
     window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeAll(); });
 
-    setTimeout(open, 5000);
+    setTimeout(open, 8000); // Show after 8 seconds
   }catch(e){ /* noop */ }
+}
+
+// Manual trigger for testing - you can call this in browser console
+window.testWhatsAppModal = function() {
+  // Clear the storage to reset cooldown
+  localStorage.removeItem('waModalDismissedAt');
+  // Trigger the modal immediately
+  initWhatsAppModal();
+};
+
+// Auto-trigger if URL has ?modal=whatsapp (for testing)
+if (window.location.search.includes('modal=whatsapp')) {
+  localStorage.removeItem('waModalDismissedAt');
 }
 // Generic copy-to-clipboard for [data-copy] buttons
 document.addEventListener('click', (e) => {
