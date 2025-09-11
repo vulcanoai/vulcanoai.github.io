@@ -32,7 +32,12 @@
     <main class="section" id="main">
       <div class="container">
         <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; flex-wrap:wrap; gap:8px">
-          <h1 style="margin:0">Todas las noticias</h1>
+          <div style="display:flex; align-items:center; gap:8px">
+            <svg class="logo" aria-hidden="true" style="width:24px; height:24px; color:var(--logo); opacity:0.8">
+              <use href="/assets/icons.svg#logo"></use>
+            </svg>
+            <h1 style="margin:0">Todas las noticias</h1>
+          </div>
           <div id="results-counter" style="font-size:13px; color:var(--muted)">Cargando...</div>
         </div>
         <div class="filters" id="filters">

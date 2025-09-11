@@ -34,8 +34,17 @@ body.nav-open{overflow:hidden}
 .site-header{position:sticky; top:0; z-index:50; background:rgba(13,17,23,.85); backdrop-filter: blur(8px); border-bottom:1px solid var(--line)}
 .header-inner{display:flex; align-items:center; gap:16px; padding:10px 0}
 .brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text)}
-.logo{width:32px; height:32px; color:var(--logo); stroke-width:2; display:inline-block; vertical-align:middle}
+.logo{width:32px; height:32px; color:var(--logo); stroke-width:2; display:inline-block; vertical-align:middle; transition:color .2s ease}
 .logo.small{width:24px; height:24px}
+.logo:hover{color:#ff7043}
+/* Enhanced hero logo with glow effect */
+.logo-hero{
+  filter:drop-shadow(0 0 8px rgba(255,90,42,.3));
+  transition:filter .3s ease;
+}
+.logo-hero:hover{
+  filter:drop-shadow(0 0 12px rgba(255,90,42,.5));
+}
 .brand-text{font-weight:700; letter-spacing:.5px}
 .site-nav{margin-left:auto; display:flex; gap:6px}
 .site-nav a{color:var(--text); text-decoration:none; padding:6px 10px; border:1px solid transparent; border-radius:6px}
@@ -45,7 +54,12 @@ body.nav-open{overflow:hidden}
 
 .hero{padding:64px 0 56px; background:linear-gradient(180deg, rgba(46,51,59,.3), transparent 50%), var(--bg); border-bottom:1px solid var(--line)}
 .hero h1{margin:0 0 10px; font-size:42px; letter-spacing:.2px}
-@media (max-width: 620px) { .hero h1 { font-size:28px } .hero { padding:40px 0 36px } }
+@media (max-width: 620px) { 
+  .hero h1 { font-size:32px !important } 
+  .hero { padding:40px 0 36px } 
+  .logo-hero { width:48px !important; height:48px !important }
+  .hero .tagline { font-size:16px }
+}
 .tagline{color:var(--muted); max-width:720px}
 .cta-row{display:flex; gap:12px; margin-top:18px; flex-wrap:wrap}
 @media (max-width: 620px) { .cta-row { gap:8px } }
