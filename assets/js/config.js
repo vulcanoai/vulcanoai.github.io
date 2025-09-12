@@ -6,22 +6,22 @@
 */
 window.AILatamConfig = window.AILatamConfig || {
   api: {
-    // Por defecto intenta feed-latest.json (datos en tiempo real), fallback: snapshot del día, fallback: sample
+    // Configuración para trabajar con el workflow n8n existente
+    // Prioridad: feed-latest.json -> snapshots diarios -> sample como fallback
     feedUrl: '/data/feed-latest.json',
-    feedFallback: '/data/feed-2025-09-12.json',
-    feedSample: '/data/sample-feed.json',
     agentsUrl: '/data/agents.json',
     sourcesUrl: '/data/sources.json',
     panoramaUrl: '/data/panorama.json',
     legalUrl: '/data/legal-sample.json',
-    // Endpoint n8n para recibir envíos independientes (POST JSON)
-    indieSubmitUrl: 'https://n8n.vulcano.ai/webhook/indie-submit',
+    // Endpoints n8n (ajustar según tu instancia)
+    // Endpoint opcional n8n para recibir envíos independientes (POST JSON)
+    indieSubmitUrl: '',
     // Agente de búsqueda personalizada (POST {prompt, country?, topics?} -> [{...article}])
-    searchAgentUrl: 'https://n8n.vulcano.ai/webhook/search-agent',
-    // Disparador manual de actualización (POST {reason})
-    updateTriggerUrl: 'https://n8n.vulcano.ai/webhook/trigger-update',
+    searchAgentUrl: '',
+    // Disparador de actualización manual (usarás el botón de tu n8n)
+    updateTriggerUrl: '',
     // Reclamación de autoría (POST {hash, alias, email})
-    claimAuthorUrl: 'https://n8n.vulcano.ai/webhook/claim-author'
+    claimAuthorUrl: ''
   },
   site: {
     name: 'Vulcano Ai',

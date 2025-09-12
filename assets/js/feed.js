@@ -61,63 +61,109 @@
 
   async function loadFeed(){
     const config = cfg();
-    const urls = [
-      config.feedUrl || '/data/feed-latest.json',
-      config.feedFallback || `/data/feed-${new Date().toISOString().slice(0,10)}.json`,
-      config.feedSample || '/data/sample-feed.json'
+    
+    // Generate list of potential data sources: latest + last 7 days of snapshots + sample
+    const today = new Date();
+    const sources = [
+      { url: config.feedUrl || '/data/feed-latest.json', type: 'latest' }
     ];
+    
+    // Add last 7 days of snapshots
+    for (let i = 0; i < 7; i++) {
+      const date = new Date(today);
+      date.setDate(date.getDate() - i);
+      const dateStr = date.toISOString().slice(0, 10);
+      sources.push({ 
+        url: `/data/feed-${dateStr}.json`, 
+        type: 'snapshot', 
+        date: dateStr 
+      });
+    }
+    
+    // Add sample as final fallback
+    sources.push({ 
+      url: config.feedSample || '/data/sample-feed.json', 
+      type: 'sample' 
+    });
     
     // Show loading state
     showLoadingState('Cargando noticias...');
     
-    // Try each URL in order
-    for (let i = 0; i < urls.length; i++) {
-      const url = urls[i];
-      const isLast = i === urls.length - 1;
+    const allArticles = [];
+    const seenUrls = new Set();
+    let foundData = false;
+    
+    // Try each source and aggregate unique articles
+    for (let i = 0; i < sources.length; i++) {
+      const source = sources[i];
       
       try {
-        const raw = await fetchJSON(url);
-        hideLoadingState();
+        const raw = await fetchJSON(source.url);
         
-        // Handle different response formats
-        let articles;
+        // Handle different response formats from n8n workflow
+        let articles = [];
         if (Array.isArray(raw)) {
           articles = raw;
         } else if (raw.articles) {
           articles = raw.articles;
         } else if (raw.items) {
           articles = raw.items;
-        } else {
-          articles = [];
         }
         
-        if (articles.length > 0) {
-          console.log(`✓ Cargado feed desde: ${url} (${articles.length} artículos)`);
-          return articles.map(normalize);
+        // Deduplicate by URL and add source info
+        let newArticles = 0;
+        for (const article of articles) {
+          if (article.url && !seenUrls.has(article.url)) {
+            seenUrls.add(article.url);
+            allArticles.push({
+              ...normalize(article),
+              _dataSource: source.type,
+              _dataDate: source.date,
+              _loadedFrom: source.url
+            });
+            newArticles++;
+          }
+        }
+        
+        if (newArticles > 0) {
+          console.log(`✓ Cargados ${newArticles} artículos desde: ${source.url} (${source.type})`);
+          foundData = true;
         }
         
       } catch (e) {
-        console.warn(`✗ Error cargando ${url}:`, e.message);
-        
-        if (isLast) {
-          // Last resort: check for demo data
-          if (window.VULCANO_DEMO?.feed) { 
-            hideLoadingState();
-            console.log('✓ Usando datos demo');
-            return window.VULCANO_DEMO.feed.map(normalize); 
-          }
-          
-          // Final fallback: show error
-          showErrorState('Error al cargar las noticias. Por favor, recarga la página.');
-          return [];
-        } else {
-          // Try next URL
-          showLoadingState(`Probando fuente alternativa...`);
+        // Silently continue to next source unless it's the sample fallback
+        if (source.type === 'sample') {
+          console.warn(`✗ Error cargando fallback ${source.url}:`, e.message);
         }
       }
     }
     
-    return [];
+    hideLoadingState();
+    
+    if (allArticles.length === 0) {
+      // Last resort: check for demo data
+      if (window.VULCANO_DEMO?.feed) { 
+        console.log('✓ Usando datos demo como última opción');
+        return window.VULCANO_DEMO.feed.map(normalize); 
+      }
+      
+      // Final fallback: show error
+      showErrorState('No se pudieron cargar noticias. Verifica tu conexión e intenta nuevamente.');
+      return [];
+    }
+    
+    // Sort by publication date (newest first), then by relevance
+    allArticles.sort((a, b) => {
+      const dateA = new Date(a.published_at);
+      const dateB = new Date(b.published_at);
+      if (dateB.getTime() !== dateA.getTime()) {
+        return dateB.getTime() - dateA.getTime();
+      }
+      return (b.relevance || 0) - (a.relevance || 0);
+    });
+    
+    console.log(`✓ Feed cargado: ${allArticles.length} artículos únicos de ${foundData ? 'datos reales' : 'fallback'}`);
+    return allArticles;
   }
   
   function showLoadingState(message) {
