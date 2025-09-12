@@ -6,20 +6,22 @@
 */
 window.AILatamConfig = window.AILatamConfig || {
   api: {
-    // Por defecto mostramos el snapshot del día (si existe). Fallback: sample-feed.json
-    feedUrl: '/data/sample-feed.json',
+    // Por defecto intenta feed-latest.json (datos en tiempo real), fallback: snapshot del día, fallback: sample
+    feedUrl: '/data/feed-latest.json',
+    feedFallback: '/data/feed-2025-09-12.json',
+    feedSample: '/data/sample-feed.json',
     agentsUrl: '/data/agents.json',
     sourcesUrl: '/data/sources.json',
     panoramaUrl: '/data/panorama.json',
     legalUrl: '/data/legal-sample.json',
-    // Endpoint opcional n8n para recibir envíos independientes (POST JSON)
-    indieSubmitUrl: '',
+    // Endpoint n8n para recibir envíos independientes (POST JSON)
+    indieSubmitUrl: 'https://n8n.vulcano.ai/webhook/indie-submit',
     // Agente de búsqueda personalizada (POST {prompt, country?, topics?} -> [{...article}])
-    searchAgentUrl: '',
-    // Disparador de actualización (POST {reason})
-    updateTriggerUrl: '',
+    searchAgentUrl: 'https://n8n.vulcano.ai/webhook/search-agent',
+    // Disparador manual de actualización (POST {reason})
+    updateTriggerUrl: 'https://n8n.vulcano.ai/webhook/trigger-update',
     // Reclamación de autoría (POST {hash, alias, email})
-    claimAuthorUrl: ''
+    claimAuthorUrl: 'https://n8n.vulcano.ai/webhook/claim-author'
   },
   site: {
     name: 'Vulcano Ai',

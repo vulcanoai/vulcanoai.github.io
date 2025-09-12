@@ -60,35 +60,64 @@
   }
 
   async function loadFeed(){
-    const url = cfg().feedUrl || '/data/sample-feed.json';
+    const config = cfg();
+    const urls = [
+      config.feedUrl || '/data/feed-latest.json',
+      config.feedFallback || `/data/feed-${new Date().toISOString().slice(0,10)}.json`,
+      config.feedSample || '/data/sample-feed.json'
+    ];
     
     // Show loading state
     showLoadingState('Cargando noticias...');
     
-    try {
-      const raw = await fetchJSON(url);
-      hideLoadingState();
-      return (Array.isArray(raw) ? raw : (raw.items || raw.articles || [])).map(normalize);
-    } catch (e){
-      console.warn('Fallo al cargar feed principal, usando muestra:', e);
-      showLoadingState('Cargando datos de respaldo...');
+    // Try each URL in order
+    for (let i = 0; i < urls.length; i++) {
+      const url = urls[i];
+      const isLast = i === urls.length - 1;
       
-      try{
-        const raw = await fetchJSON('/data/sample-feed.json');
+      try {
+        const raw = await fetchJSON(url);
         hideLoadingState();
-        return raw.map(normalize);
-      } catch(backupError) {
-        console.error('Error cargando datos de respaldo:', backupError);
         
-        if (window.VULCANO_DEMO?.feed){ 
-          hideLoadingState();
-          return window.VULCANO_DEMO.feed.map(normalize); 
+        // Handle different response formats
+        let articles;
+        if (Array.isArray(raw)) {
+          articles = raw;
+        } else if (raw.articles) {
+          articles = raw.articles;
+        } else if (raw.items) {
+          articles = raw.items;
+        } else {
+          articles = [];
         }
         
-        showErrorState('Error al cargar las noticias. Por favor, recarga la página.');
-        return [];
+        if (articles.length > 0) {
+          console.log(`✓ Cargado feed desde: ${url} (${articles.length} artículos)`);
+          return articles.map(normalize);
+        }
+        
+      } catch (e) {
+        console.warn(`✗ Error cargando ${url}:`, e.message);
+        
+        if (isLast) {
+          // Last resort: check for demo data
+          if (window.VULCANO_DEMO?.feed) { 
+            hideLoadingState();
+            console.log('✓ Usando datos demo');
+            return window.VULCANO_DEMO.feed.map(normalize); 
+          }
+          
+          // Final fallback: show error
+          showErrorState('Error al cargar las noticias. Por favor, recarga la página.');
+          return [];
+        } else {
+          // Try next URL
+          showLoadingState(`Probando fuente alternativa...`);
+        }
       }
     }
+    
+    return [];
   }
   
   function showLoadingState(message) {
