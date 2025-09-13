@@ -1,3 +1,7 @@
 assets/.DS_Store
 \# Ignore local n8n workflow exports (keep secrets out of repo)
+# Ignore local n8n workflow exports (keep secrets out of repo)
 n8n/workflows/*.json
+
+# Allow publishing sanitized, import-ready variants
+!n8n/workflows/*-fixed.json
