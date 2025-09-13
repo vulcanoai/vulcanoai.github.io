@@ -1,0 +1,65 @@
+{
+  "version": "v1.0",
+  "articles": [
+    {
+      "id": "https://elcomercio.pe/tecnologia/peru-aprueba-nueva-politica-de-ciberseguridad-2023-noticia/",
+      "title": "Perú aprueba nueva política de ciberseguridad para proteger datos nacionales",
+      "summary": "El gobierno peruano implementa una política de ciberseguridad para fortalecer la protección de datos sensibles y prevenir ataques cibernéticos en instituciones públicas.",
+      "url": "https://elcomercio.pe/tecnologia/peru-aprueba-nueva-politica-de-ciberseguridad-2023-noticia/",
+      "source": "El Comercio",
+      "source_url": "https://elcomercio.pe",
+      "country": "Perú",
+      "topics": [
+        "Regulación",
+        "Ciberseguridad"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T15:00:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Lucía Fernández",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.reforma.com/startup-mexicana-movilidad-sostenible-recibe-inversion-2023/",
+      "title": "Startup mexicana de movilidad sostenible recibe fondo de inversión",
+      "summary": "Una empresa emergente en México enfocada en soluciones de movilidad sostenible logra captar 3 millones de dólares para expandir su red de vehículos eléctricos.",
+      "url": "https://www.reforma.com/startup-mexicana-movilidad-sostenible-recibe-inversion-2023/",
+      "source": "Reforma",
+      "source_url": "https://www.reforma.com",
+      "country": "México",
+      "topics": [
+        "Startups",
+        "Sostenibilidad"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T14:00:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Diego Morales",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.eclac.org/es/noticias/comercio-electronico-crece-25-latinoamerica-2023",
+      "title": "Informe regional destaca crecimiento de comercio electrónico en LATAM",
+      "summary": "Un estudio de la Cámara de Comercio Electrónico de América Latina revela un aumento del 25% en las ventas online durante el último año, liderado por Brasil y México.",
+      "url": "https://www.eclac.org/es/noticias/comercio-electronico-crece-25-latinoamerica-2023",
+      "source": "ECLAC",
+      "source_url": "https://www.eclac.org",
+      "country": "Regional",
+      "topics": [
+        "Tecnología",
+        "E-commerce"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T12:30:00Z",
+      "relevance": 9,
+      "sentiment": "positive",
+      "author": "Equipo ECLAC",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T13:00:59.081Z",
+  "params": {}
+}
