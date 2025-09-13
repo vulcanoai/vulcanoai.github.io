@@ -1,0 +1,65 @@
+{
+  "version": "v1.0",
+  "articles": [
+    {
+      "id": "https://www.lanacion.com.ar/economia/argentina-proyecto-ley-criptomonedas-nid05102023/",
+      "title": "Argentina impulsa proyecto de ley para regular criptomonedas",
+      "summary": "El gobierno argentino presenta un proyecto de ley para establecer un marco regulatorio para el uso y comercio de criptomonedas, buscando prevenir el lavado de dinero.",
+      "url": "https://www.lanacion.com.ar/economia/argentina-proyecto-ley-criptomonedas-nid05102023/",
+      "source": "La Nación",
+      "source_url": "https://www.lanacion.com.ar",
+      "country": "Argentina",
+      "topics": [
+        "Regulación",
+        "Criptomonedas"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T15:20:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Sofía Martínez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.emol.com/noticias/Economia/2023/10/05/1109875/startup-chilena-energias-renovables.html",
+      "title": "Startup chilena de energías renovables recibe inversión millonaria",
+      "summary": "Una empresa emergente de Santiago enfocada en soluciones de energía solar ha captado $5 millones en una ronda de financiación liderada por inversionistas internacionales.",
+      "url": "https://www.emol.com/noticias/Economia/2023/10/05/1109875/startup-chilena-energias-renovables.html",
+      "source": "Emol",
+      "source_url": "https://www.emol.com",
+      "country": "Chile",
+      "topics": [
+        "Startups",
+        "Energía"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T13:10:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Diego Vargas",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://elcomercio.pe/economia/peru-digitalizacion-servicios-publicos-2025-noticia/",
+      "title": "Perú avanza en la digitalización de servicios públicos",
+      "summary": "El gobierno peruano anuncia un plan para digitalizar el 80% de los trámites públicos antes de 2025, con el objetivo de mejorar la accesibilidad y reducir la burocracia.",
+      "url": "https://elcomercio.pe/economia/peru-digitalizacion-servicios-publicos-2025-noticia/",
+      "source": "El Comercio",
+      "source_url": "https://elcomercio.pe",
+      "country": "Perú",
+      "topics": [
+        "Tecnología",
+        "Gobierno"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T11:30:00Z",
+      "relevance": 6,
+      "sentiment": "positive",
+      "author": "Ana López",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T20:00:58.042Z",
+  "params": {}
+}
