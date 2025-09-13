@@ -1,0 +1,65 @@
+{
+  "version": "v1.0",
+  "articles": [
+    {
+      "id": "https://www.laprensa.hn/honduras/honduras-capacitacion-tecnologia-jovenes-2023-KN1234567",
+      "title": "Honduras impulsa capacitación en tecnología para jóvenes",
+      "summary": "El gobierno hondureño lanza un programa de formación en habilidades digitales para jóvenes, buscando reducir la brecha tecnológica en el país.",
+      "url": "https://www.laprensa.hn/honduras/honduras-capacitacion-tecnologia-jovenes-2023-KN1234567",
+      "source": "La Prensa Honduras",
+      "source_url": "https://www.laprensa.hn",
+      "country": "Honduras",
+      "topics": [
+        "Tecnología",
+        "Educación"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T22:00:00Z",
+      "relevance": 6,
+      "sentiment": "positive",
+      "author": "María Torres",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.prensalibre.com/economia/guatemala-regulacion-fintech-desafios-2023/",
+      "title": "Guatemala enfrenta desafíos en la regulación de fintech",
+      "summary": "Autoridades guatemaltecas debaten un marco legal para las empresas fintech, ante el crecimiento de plataformas de pagos digitales y préstamos online.",
+      "url": "https://www.prensalibre.com/economia/guatemala-regulacion-fintech-desafios-2023/",
+      "source": "Prensa Libre",
+      "source_url": "https://www.prensalibre.com",
+      "country": "Guatemala",
+      "topics": [
+        "Regulación",
+        "Fintech"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T20:30:00Z",
+      "relevance": 7,
+      "sentiment": "neutral",
+      "author": "José Morales",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.elespectador.com/economia/startup-colombiana-movilidad-sostenible-premio-2023/",
+      "title": "Startup colombiana de movilidad sostenible gana premio internacional",
+      "summary": "Una empresa colombiana que desarrolla soluciones de movilidad eléctrica recibe un reconocimiento global por su impacto en la sostenibilidad urbana.",
+      "url": "https://www.elespectador.com/economia/startup-colombiana-movilidad-sostenible-premio-2023/",
+      "source": "El Espectador",
+      "source_url": "https://www.elespectador.com",
+      "country": "Colombia",
+      "topics": [
+        "Startups",
+        "Movilidad Sostenible"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T18:00:00Z",
+      "relevance": 8,
+      "sentiment": "positive",
+      "author": "Camila Rodríguez",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T03:34:55.469Z",
+  "params": {}
+}
