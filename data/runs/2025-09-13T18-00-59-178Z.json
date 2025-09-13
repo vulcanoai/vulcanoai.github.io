@@ -1,0 +1,65 @@
+{
+  "version": "v1.0",
+  "articles": [
+    {
+      "id": "https://www.reforma.com/mexico-lanza-iniciativa-digitalizacion-pymes-2023/gr/",
+      "title": "México lanza iniciativa para digitalizar pequeñas empresas",
+      "summary": "El gobierno de México ha anunciado un programa para apoyar la digitalización de PYMES, ofreciendo subsidios y capacitación en herramientas tecnológicas.",
+      "url": "https://www.reforma.com/mexico-lanza-iniciativa-digitalizacion-pymes-2023/gr/",
+      "source": "Reforma",
+      "source_url": "https://www.reforma.com",
+      "country": "México",
+      "topics": [
+        "Tecnología",
+        "Regulación"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T16:00:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Laura Martínez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.estadao.com.br/economia/startup-brasileira-saude-digital-investimento-recorde/",
+      "title": "Startup brasileña de salud digital capta inversión récord",
+      "summary": "Una startup de salud digital en Brasil ha levantado 10 millones de dólares en una ronda de financiación, con planes de expandirse a otros países de la región.",
+      "url": "https://www.estadao.com.br/economia/startup-brasileira-saude-digital-investimento-recorde/",
+      "source": "Estadão",
+      "source_url": "https://www.estadao.com.br",
+      "country": "Brasil",
+      "topics": [
+        "Startups",
+        "Healthtech"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-05T14:20:00Z",
+      "relevance": 8,
+      "sentiment": "positive",
+      "author": "João Ferreira",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.elcolombiano.com/tecnologia/colombia-regulacion-inteligencia-artificial-2023",
+      "title": "Colombia avanza en regulación de inteligencia artificial",
+      "summary": "El gobierno colombiano presenta un proyecto de ley para regular el desarrollo y uso de inteligencia artificial, buscando equilibrar innovación y ética.",
+      "url": "https://www.elcolombiano.com/tecnologia/colombia-regulacion-inteligencia-artificial-2023",
+      "source": "El Colombiano",
+      "source_url": "https://www.elcolombiano.com",
+      "country": "Colombia",
+      "topics": [
+        "Regulación",
+        "Inteligencia Artificial"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T12:30:00Z",
+      "relevance": 9,
+      "sentiment": "neutral",
+      "author": "Camila Torres",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T18:00:56.997Z",
+  "params": {}
+}
