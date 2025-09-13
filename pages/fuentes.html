@@ -15,8 +15,37 @@
     <a href="#main" class="skip-link">Saltar al contenido</a>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="/"><svg class="logo" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg><span class="brand-text">Vulcano Ai</span></a>
-        <button class="nav-toggle" aria-label="Abrir menú">☰</button>
+        <a class="brand" href="/pages/noticias.html">
+          <svg class="logo" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>
+          <span class="brand-text">Vulcano AI</span>
+        </a>
+        
+        <!-- Global Time Zone Indicators -->
+        <div class="global-time" id="global-time">
+          <div class="time-zone" data-tz="America/Mexico_City">
+            <span class="tz-label">MX</span>
+            <span class="tz-time">--:--</span>
+          </div>
+          <div class="time-zone" data-tz="America/Bogota">
+            <span class="tz-label">COL</span>
+            <span class="tz-time">--:--</span>
+          </div>
+          <div class="time-zone" data-tz="America/Argentina/Buenos_Aires">
+            <span class="tz-label">AR</span>
+            <span class="tz-time">--:--</span>
+          </div>
+          <div class="time-zone" data-tz="America/Sao_Paulo">
+            <span class="tz-label">BR</span>
+            <span class="tz-time">--:--</span>
+          </div>
+        </div>
+        
+        <button class="nav-toggle" aria-label="Abrir menú">
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+        </button>
+        
         <nav class="site-nav" aria-label="Principal">
           <a href="/pages/noticias.html">Inicio</a>
           <a href="/pages/panorama.html">Panorama</a>
@@ -31,53 +60,313 @@
     </header>
     <main class="section" id="main">
       <div class="container">
-        <h1>Fuentes y metodología</h1>
-        <div class="panel">
-          <h3>Metodología</h3>
-          <p>Agregamos contenidos de RSS, portales de noticias, blogs técnicos, comunicados oficiales, publicaciones académicas y boletines regulatorios. Un pipeline de agentes clasifica por país, tema e idioma; deduplica; resume; y calcula señales de relevancia. Operamos con trazabilidad y filtros anti‑spam.</p>
-          <p>¿Tienes una fuente para agregar? Escríbenos: <a href="mailto:ivan@vulcano.ai">ivan@vulcano.ai</a>.</p>
-          <p><strong>NUEVO:</strong> categoría <em>Independiente</em> para que investigadores y autores publiquen trabajos propios. Puedes enviar tu paper o escrito aquí: <a class="btn" href="/pages/independiente.html">Publicar trabajo independiente</a>.</p>
+        <!-- Sources Hero Section -->
+        <div class="sources-hero">
+          <div class="sources-background">
+            <div class="data-flow" id="data-flow">
+              <!-- Animated data streams will be generated here -->
+            </div>
+          </div>
+          
+          <div class="hero-content">
+            <div class="hero-header">
+              <div class="sources-icon-stack">
+                <div class="sources-orb" id="sources-orb">
+                  <svg class="hero-icon" aria-hidden="true">
+                    <use href="/assets/icons.svg#rss"></use>
+                  </svg>
+                </div>
+                <div class="data-elements">
+                  <div class="data-symbol rss">📡</div>
+                  <div class="data-symbol api">🔗</div>
+                  <div class="data-symbol filter">⚡</div>
+                </div>
+              </div>
+              
+              <div class="hero-text">
+                <h1>Fuentes y Metodología</h1>
+                <p class="hero-subtitle">Pipeline de datos y clasificación automática en América Latina</p>
+              </div>
+            </div>
+            
+            <div class="sources-stats">
+              <div class="stat-card sources-themed">
+                <div class="stat-value" id="sources-count">Cargando...</div>
+                <div class="stat-label">Fuentes activas</div>
+              </div>
+              <div class="stat-card sources-themed">
+                <div class="stat-value" id="articles-processed">--</div>
+                <div class="stat-label">Artículos procesados</div>
+              </div>
+              <div class="stat-card sources-themed">
+                <div class="stat-value" id="accuracy-rate">--</div>
+                <div class="stat-label">Precisión IA</div>
+              </div>
+            </div>
+            
+            <div class="sources-tagline">
+              <div class="tagline-content">
+                <svg class="tagline-icon" aria-hidden="true">
+                  <use href="/assets/icons.svg#sparkles"></use>
+                </svg>
+                <span>Trazabilidad completa • Filtros anti-spam • Clasificación automática</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <h2>Fuentes activas</h2>
-        <div id="sources-list" class="grid" style="grid-template-columns:1fr; gap:16px">
-          <section class="panel"><h3>PRENSA</h3><ul>
-            <li><a href="https://www.eleconomista.com.mx/" target="_blank" rel="noopener">El Economista</a> <span class="muted">(México)</span></li>
-            <li><a href="https://www.larepublica.co/" target="_blank" rel="noopener">La República</a> <span class="muted">(Colombia)</span></li>
-            <li><a href="https://www.bloomberglinea.com/" target="_blank" rel="noopener">Bloomberg Línea</a> <span class="muted">(Regional)</span></li>
-            <li><a href="https://www.folha.uol.com.br/" target="_blank" rel="noopener">Folha de S.Paulo</a> <span class="muted">(Brasil)</span></li>
-            <li><a href="https://gestion.pe/" target="_blank" rel="noopener">Gestión</a> <span class="muted">(Perú)</span></li>
-            <li><a href="https://www.elpais.com.uy/" target="_blank" rel="noopener">El País Uruguay</a> <span class="muted">(Uruguay)</span></li>
-          </ul></section>
-          <section class="panel"><h3>GOBIERNO</h3><ul>
-            <li><a href="https://www.gov.co/" target="_blank" rel="noopener">Gobierno de Colombia</a> <span class="muted">(Colombia)</span></li>
-            <li><a href="https://www.gob.cl/" target="_blank" rel="noopener">Gobierno de Chile</a> <span class="muted">(Chile)</span></li>
-          </ul></section>
-          <section class="panel"><h3>ACADÉMICO</h3><ul>
-            <li><a href="https://arxiv.org/list/cs.AI/recent" target="_blank" rel="noopener">arXiv AI</a> <span class="muted">(Global)</span></li>
-          </ul></section>
-          <section class="panel"><h3>BLOGS</h3><ul>
-            <li><a href="https://ejemplo.latam/blogroll" target="_blank" rel="noopener">LATAM Tech Blogroll</a> <span class="muted">(Regional)</span></li>
-          </ul></section>
-          <section class="panel"><h3>INDEPENDIENTE</h3><ul>
-            <li><a href="https://github.com/vulcanoai/vulcanoai.github.io" target="_blank" rel="noopener">Comunidad Vulcano — Envíos independientes</a> <span class="muted">(Regional)</span></li>
-          </ul><p class="note">¿Quieres agregar la tuya? <a href="/pages/independiente.html">Publica tu trabajo</a>.</p></section>
+        
+        <!-- Methodology Section -->
+        <div class="methodology-section">
+          <div class="section-header">
+            <h2>Metodología de datos</h2>
+            <p class="section-subtitle">Pipeline de agentes para clasificación automática y análisis de contenido</p>
+          </div>
+          
+          <div class="methodology-grid">
+            <div class="method-card">
+              <div class="method-icon">📥</div>
+              <h3>Recolección</h3>
+              <p>RSS, APIs, web scraping de portales oficiales, blogs técnicos y publicaciones académicas en tiempo real</p>
+            </div>
+            <div class="method-card">
+              <div class="method-icon">🔍</div>
+              <h3>Clasificación</h3>
+              <p>Pipeline de agentes clasifica por país, tema, idioma y calcula señales de relevancia usando IA</p>
+            </div>
+            <div class="method-card">
+              <div class="method-icon">⚡</div>
+              <h3>Filtrado</h3>
+              <p>Deduplicación inteligente, filtros anti-spam y validación de fuentes para máxima calidad</p>
+            </div>
+            <div class="method-card">
+              <div class="method-icon">📊</div>
+              <h3>Análisis</h3>
+              <p>Resúmenes automáticos, análisis de sentimiento y métricas de impacto para cada artículo</p>
+            </div>
+          </div>
+          
+          <div class="methodology-actions">
+            <div class="action-group">
+              <h3>¿Tienes una fuente para agregar?</h3>
+              <p>Escríbenos para incluir tu medio, blog o portal en nuestro pipeline</p>
+              <a href="mailto:ivan@vulcano.ai" class="btn primary">Sugerir fuente</a>
+            </div>
+            <div class="action-group">
+              <h3>Publicación independiente</h3>
+              <p>Investigadores y autores pueden publicar trabajos propios directamente</p>
+              <a href="/pages/independiente.html" class="btn secondary">Publicar trabajo</a>
+            </div>
+          </div>
+        </div>
+        <!-- Active Sources Section -->
+        <div class="sources-directory">
+          <div class="section-header">
+            <h2>Directorio de fuentes activas</h2>
+            <p class="section-subtitle">Medios, gobiernos y organizaciones que alimentan nuestro pipeline de datos</p>
+          </div>
+          
+          <div class="sources-grid" id="sources-list">
+            <div class="source-category">
+              <div class="category-header">
+                <div class="category-icon">📰</div>
+                <h3>Prensa y Medios</h3>
+                <span class="source-count">6 fuentes</span>
+              </div>
+              <div class="sources-list">
+                <div class="source-item">
+                  <div class="source-info">
+                    <a href="https://www.eleconomista.com.mx/" target="_blank" rel="noopener" class="source-name">El Economista</a>
+                    <span class="source-country mx">México</span>
+                  </div>
+                  <div class="source-status active"></div>
+                </div>
+                <div class="source-item">
+                  <div class="source-info">
+                    <a href="https://www.larepublica.co/" target="_blank" rel="noopener" class="source-name">La República</a>
+                    <span class="source-country co">Colombia</span>
+                  </div>
+                  <div class="source-status active"></div>
+                </div>
+                <div class="source-item">
+                  <div class="source-info">
+                    <a href="https://www.bloomberglinea.com/" target="_blank" rel="noopener" class="source-name">Bloomberg Línea</a>
+                    <span class="source-country regional">Regional</span>
+                  </div>
+                  <div class="source-status active"></div>
+                </div>
+                <div class="source-item">
+                  <div class="source-info">
+                    <a href="https://www.folha.uol.com.br/" target="_blank" rel="noopener" class="source-name">Folha de S.Paulo</a>
+                    <span class="source-country br">Brasil</span>
+                  </div>
+                  <div class="source-status active"></div>
+                </div>
+                <div class="source-item">
+                  <div class="source-info">
+                    <a href="https://gestion.pe/" target="_blank" rel="noopener" class="source-name">Gestión</a>
+                    <span class="source-country pe">Perú</span>
+                  </div>
+                  <div class="source-status active"></div>
+                </div>
+                <div class="source-item">
+                  <div class="source-info">
+                    <a href="https://www.elpais.com.uy/" target="_blank" rel="noopener" class="source-name">El País Uruguay</a>
+                    <span class="source-country uy">Uruguay</span>
+                  </div>
+                  <div class="source-status active"></div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="source-category">
+              <div class="category-header">
+                <div class="category-icon">🏦</div>
+                <h3>Fuentes Oficiales</h3>
+                <span class="source-count">2 fuentes</span>
+              </div>
+              <div class="sources-list">
+                <div class="source-item">
+                  <div class="source-info">
+                    <a href="https://www.gov.co/" target="_blank" rel="noopener" class="source-name">Gobierno de Colombia</a>
+                    <span class="source-country co">Colombia</span>
+                  </div>
+                  <div class="source-status active"></div>
+                </div>
+                <div class="source-item">
+                  <div class="source-info">
+                    <a href="https://www.gob.cl/" target="_blank" rel="noopener" class="source-name">Gobierno de Chile</a>
+                    <span class="source-country cl">Chile</span>
+                  </div>
+                  <div class="source-status active"></div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="source-category">
+              <div class="category-header">
+                <div class="category-icon">🎓</div>
+                <h3>Fuentes Académicas</h3>
+                <span class="source-count">1 fuente</span>
+              </div>
+              <div class="sources-list">
+                <div class="source-item">
+                  <div class="source-info">
+                    <a href="https://arxiv.org/list/cs.AI/recent" target="_blank" rel="noopener" class="source-name">arXiv AI</a>
+                    <span class="source-country global">Global</span>
+                  </div>
+                  <div class="source-status active"></div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="source-category">
+              <div class="category-header">
+                <div class="category-icon">✍️</div>
+                <h3>Blogs y Comunidad</h3>
+                <span class="source-count">2 fuentes</span>
+              </div>
+              <div class="sources-list">
+                <div class="source-item">
+                  <div class="source-info">
+                    <a href="https://ejemplo.latam/blogroll" target="_blank" rel="noopener" class="source-name">LATAM Tech Blogroll</a>
+                    <span class="source-country regional">Regional</span>
+                  </div>
+                  <div class="source-status active"></div>
+                </div>
+                <div class="source-item">
+                  <div class="source-info">
+                    <a href="https://github.com/vulcanoai/vulcanoai.github.io" target="_blank" rel="noopener" class="source-name">Comunidad Vulcano</a>
+                    <span class="source-country regional">Independiente</span>
+                  </div>
+                  <div class="source-status active"></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>
-    <footer class="site-footer">
+    <footer class="site-footer enhanced">
+      <div class="footer-background">
+        <div class="footer-glow"></div>
+      </div>
       <div class="container footer-inner">
-        <div class="footer-brand">
-          <svg class="logo small" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>
-          <div>
-            <strong>Vulcano Ai</strong>
-            <div class="muted">Vulcano Ai Digital Solutions S.A.S - 2025 Todos los derechos reservados</div>
+        <div class="footer-main">
+          <div class="footer-brand">
+            <div class="brand-logo">
+              <svg class="logo" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>
+            </div>
+            <div class="brand-info">
+              <div class="brand-name">Vulcano AI</div>
+              <div class="brand-tagline">Inteligencia artificial para América Latina</div>
+            </div>
+          </div>
+          
+          <div class="footer-sections">
+            <div class="footer-section">
+              <h3>Plataforma</h3>
+              <nav class="footer-links">
+                <a href="/pages/noticias.html">Noticias IA</a>
+                <a href="/pages/panorama.html">Panorama</a>
+                <a href="/pages/observatorio-legal.html">Observatorio Legal</a>
+                <a href="/pages/agentes.html">Agentes</a>
+              </nav>
+            </div>
+            
+            <div class="footer-section">
+              <h3>Recursos</h3>
+              <nav class="footer-links">
+                <a href="/pages/fuentes.html">Fuentes</a>
+                <a href="/pages/actualizaciones.html">Actualizaciones</a>
+                <a href="/pages/independiente.html">Publicar trabajo</a>
+                <a href="mailto:ivan@vulcano.ai">Contacto</a>
+              </nav>
+            </div>
+            
+            <div class="footer-section">
+              <h3>Compañía</h3>
+              <nav class="footer-links">
+                <a href="/pages/vulcano.html">Qué es Vulcano AI</a>
+                <a href="/pages/apoya.html">Apoyar proyecto</a>
+                <a href="/pages/legal/privacidad.html">Privacidad</a>
+                <a href="/pages/legal/terminos.html">Términos</a>
+              </nav>
+            </div>
+            
+            <div class="footer-section social">
+              <h3>Colaboración</h3>
+              <div class="social-links">
+                <a href="https://github.com/vulcanoai" target="_blank" rel="noopener" class="social-link github">
+                  <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#github"></use></svg>
+                  <span>GitHub</span>
+                </a>
+                <a href="mailto:ivan@vulcano.ai" class="social-link email">
+                  <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#mail"></use></svg>
+                  <span>Email</span>
+                </a>
+              </div>
+              <div class="ai-collaboration">
+                <span class="collaboration-badge">
+                  <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#robot"></use></svg>
+                  Multi-AI Project
+                </span>
+              </div>
+            </div>
           </div>
         </div>
-        <nav class="footer-nav">
-          <a href="/pages/legal/privacidad.html">Privacidad</a>
-          <a href="/pages/legal/terminos.html">Términos</a>
-          <a href="/pages/vulcano.html">Qué es Vulcano AI</a>
-        </nav>
+        
+        <div class="footer-bottom">
+          <div class="footer-legal">
+            <span class="copyright">© 2025 Vulcano AI Digital Solutions S.A.S</span>
+            <span class="separator">•</span>
+            <span class="location">Bogotá, Colombia</span>
+            <span class="separator">•</span>
+            <span class="status">Todos los derechos reservados</span>
+          </div>
+          <div class="footer-updates">
+            <span class="last-update" id="footer-update">Última actualización: --:--</span>
+          </div>
+        </div>
       </div>
     </footer>
     <script src="/assets/js/config.js"></script>

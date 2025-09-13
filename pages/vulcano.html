@@ -13,10 +13,37 @@
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="/"><svg class="logo" aria-hidden="true">
-          <use href="/assets/icons.svg#logo"></use>
-        </svg><span class="brand-text">Vulcano Ai</span></a>
-      <button class="nav-toggle" aria-label="Abrir menú">☰</button>
+      <a class="brand" href="/pages/noticias.html">
+        <svg class="logo" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>
+        <span class="brand-text">Vulcano AI</span>
+      </a>
+      
+      <!-- Global Time Zone Indicators -->
+      <div class="global-time" id="global-time">
+        <div class="time-zone" data-tz="America/Mexico_City">
+          <span class="tz-label">MX</span>
+          <span class="tz-time">--:--</span>
+        </div>
+        <div class="time-zone" data-tz="America/Bogota">
+          <span class="tz-label">COL</span>
+          <span class="tz-time">--:--</span>
+        </div>
+        <div class="time-zone" data-tz="America/Argentina/Buenos_Aires">
+          <span class="tz-label">AR</span>
+          <span class="tz-time">--:--</span>
+        </div>
+        <div class="time-zone" data-tz="America/Sao_Paulo">
+          <span class="tz-label">BR</span>
+          <span class="tz-time">--:--</span>
+        </div>
+      </div>
+      
+      <button class="nav-toggle" aria-label="Abrir menú">
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+      </button>
+      
       <nav class="site-nav" aria-label="Principal">
         <a href="/pages/noticias.html">Inicio</a>
         <a href="/pages/panorama.html">Panorama</a>
@@ -30,71 +57,329 @@
     </div>
   </header>
   <main class="section">
-    <div class="container hero-grid" style="margin-bottom:18px">
-      <div>
-        <h1><svg class="logo" aria-hidden="true" style="vertical-align:-4px; margin-right:8px">
-            <use href="/assets/icons.svg#logo"></use>
-          </svg>Qué es Vulcano AI</h1>
-        <p class="tagline">Una iniciativa independiente para mapear el ecosistema de IA en LATAM con agentes y
-          verificación humana — simple, abierta y auditable.</p>
-        <div class="social-row" style="margin-top:10px">
-          <a href="https://instagram.com/vulcanoai.solutions" target="_blank" rel="noopener"><svg class="icon">
-              <use href="/assets/icons.svg#instagram"></use>
-            </svg> Instagram</a>
-          <a href="https://x.com/VulcanoAi" target="_blank" rel="noopener"><svg class="icon">
-              <use href="/assets/icons.svg#x"></use>
-            </svg> X</a>
-          <a href="https://www.linkedin.com/company/vulcano-ai/" target="_blank" rel="noopener"><svg class="icon">
-              <use href="/assets/icons.svg#linkedin"></use>
-            </svg> LinkedIn</a>
+    <div class="container">
+      <!-- Company Hero Section -->
+      <div class="company-hero">
+        <div class="company-background">
+          <div class="neural-network" id="neural-network">
+            <!-- Animated neural connections will be generated here -->
+          </div>
+        </div>
+        
+        <div class="hero-content">
+          <div class="hero-header">
+            <div class="company-icon-stack">
+              <div class="company-orb" id="company-orb">
+                <svg class="hero-icon" aria-hidden="true">
+                  <use href="/assets/icons.svg#logo"></use>
+                </svg>
+              </div>
+              <div class="ai-elements">
+                <div class="ai-symbol neural">🧠</div>
+                <div class="ai-symbol robot">🤖</div>
+                <div class="ai-symbol spark">✨</div>
+              </div>
+            </div>
+            
+            <div class="hero-text">
+              <h1>Qué es Vulcano AI</h1>
+              <p class="hero-subtitle">Plataforma independiente para el ecosistema de IA en América Latina</p>
+            </div>
+          </div>
+          
+          <div class="company-stats">
+            <div class="stat-card company-themed">
+              <div class="stat-value" id="since-year">2025</div>
+              <div class="stat-label">Fundado</div>
+            </div>
+            <div class="stat-card company-themed">
+              <div class="stat-value" id="team-size">Multi-AI</div>
+              <div class="stat-label">Equipo</div>
+            </div>
+            <div class="stat-card company-themed">
+              <div class="stat-value" id="open-source">100%</div>
+              <div class="stat-label">Código abierto</div>
+            </div>
+          </div>
+          
+          <div class="company-tagline">
+            <div class="tagline-content">
+              <svg class="tagline-icon" aria-hidden="true">
+                <use href="/assets/icons.svg#sparkles"></use>
+              </svg>
+              <span>Simple, abierta y auditable • Verificación humana • Colaboración global</span>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="orb-wrap">
-        <div id="vulcano-orb" class="orb orb-mini" aria-hidden="true"></div>
-        <span class="sr-only">Logo esférico de Vulcano Ai</span>
+      
+      <!-- Mission and Vision -->
+      <div class="mission-vision">
+        <div class="section-header">
+          <h2>Nuestra misión</h2>
+          <p class="section-subtitle">Democratizar el acceso a información de IA para América Latina</p>
+        </div>
+        
+        <div class="vision-grid">
+          <div class="vision-card primary">
+            <div class="vision-icon">🌍</div>
+            <h3>Visión Regional</h3>
+            <p>Mapear y conectar el ecosistema de inteligencia artificial en América Latina, creando puentes entre países, investigadores, empresas y políticas públicas</p>
+          </div>
+          <div class="vision-card">
+            <div class="vision-icon">🔍</div>
+            <h3>Transparencia Total</h3>
+            <p>Metodología abierta, código fuente público y procesos auditables para garantizar la confianza en nuestros datos y análisis</p>
+          </div>
+          <div class="vision-card">
+            <div class="vision-icon">🤝</div>
+            <h3>Colaboración Abierta</h3>
+            <p>Plataforma que invita a investigadores, desarrolladores y entusiastas a contribuir con conocimiento y perspectivas únicas</p>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="container">
-      <div class="panel">
-        <p>Vulcano AI nació como una idea de Ivan Robayo, en 2025, con la intención de poder acceder organizar
-          información sobre IA en Latinoamérica de forma abierta, replicable y útil para entusiastas de la computación,
-          científicos, político o política que si haga su trabajo y cualquier persona del común que quiera estar al
-          tanto de cómo podemos aprovechar estas tencologías en nuestras regiones.</p>
-        <p>Encuentras a Ivan en YouTube o Instagram como <a href="https://instagram.com/navirobayo" target="_blank"
-            rel="noopener">@navirobayo</a>.</p>
-        <p>Buscamos crear una red independiente de entusiastas de la computación y de la región latinoamericana (desde
-          cualquier lugar del mundo) para mantener este mapa vivo.</p>
+      
+      <!-- Founder Story -->
+      <div class="founder-section">
+        <div class="section-header">
+          <h2>Historia y fundador</h2>
+          <p class="section-subtitle">La visión detrás de Vulcano AI</p>
+        </div>
+        
+        <div class="founder-story">
+          <div class="story-content">
+            <div class="founder-intro">
+              <h3>Ivan Robayo</h3>
+              <p class="founder-title">Fundador y Visionario</p>
+            </div>
+            
+            <div class="story-text">
+              <p>Vulcano AI nació en 2025 como una idea de <strong>Ivan Robayo</strong>, con la intención de organizar información sobre IA en Latinoamérica de forma abierta, replicable y útil para:</p>
+              
+              <ul class="audience-list">
+                <li>💻 <strong>Entusiastas de la computación</strong> que buscan estar al día</li>
+                <li>🎓 <strong>Científicos e investigadores</strong> que necesitan datos confiables</li>
+                <li>🏦 <strong>Políticos y legisladores</strong> que trabajan en regulación</li>
+                <li>👥 <strong>Público general</strong> interesado en el futuro de la tecnología</li>
+              </ul>
+              
+              <p>La visión es crear una <strong>red independiente</strong> de entusiastas de la computación y de la región latinoamericana (desde cualquier lugar del mundo) para mantener este mapa vivo y actualizado.</p>
+            </div>
+            
+            <div class="social-connections">
+              <h4>Conecta con Ivan</h4>
+              <div class="social-links-grid">
+                <a href="https://instagram.com/navirobayo" target="_blank" rel="noopener" class="social-link instagram">
+                  <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#instagram"></use></svg>
+                  <span>@navirobayo</span>
+                </a>
+                <a href="https://x.com/VulcanoAi" target="_blank" rel="noopener" class="social-link twitter">
+                  <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#x"></use></svg>
+                  <span>@VulcanoAi</span>
+                </a>
+                <a href="https://www.linkedin.com/company/vulcano-ai/" target="_blank" rel="noopener" class="social-link linkedin">
+                  <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#linkedin"></use></svg>
+                  <span>Vulcano AI</span>
+                </a>
+                <a href="https://instagram.com/vulcanoai.solutions" target="_blank" rel="noopener" class="social-link company">
+                  <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#instagram"></use></svg>
+                  <span>@vulcanoai.solutions</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="panel" style="margin-top:12px">
-        <h3>Colabora</h3>
-        <p>Este sitio es de código abierto. Aceptamos Pull Requests con mejoras, fuentes y datos. El registro y los
-          cambios se guardan públicamente en el repositorio.</p>
-        <p><a class="btn" href="https://github.com/vulcanoai/vulcanoai.github.io" target="_blank" rel="noopener">Abrir
-            repositorio en GitHub</a></p>
-        <p class="note">Puedes enviar trabajos independientes también desde <a href="/pages/independiente.html">esta
-            página</a>.</p>
+      
+      <!-- Open Source Section -->
+      <div class="opensource-section">
+        <div class="section-header">
+          <h2>Código abierto y colaboración</h2>
+          <p class="section-subtitle">Transparencia total en desarrollo y metodología</p>
+        </div>
+        
+        <div class="opensource-grid">
+          <div class="opensource-card featured">
+            <div class="opensource-icon github">🚀</div>
+            <h3>Repositorio Principal</h3>
+            <p>Todo el código fuente, metodología y datos están disponibles públicamente. Acepta Pull Requests con mejoras, fuentes y datos.</p>
+            <a href="https://github.com/vulcanoai/vulcanoai.github.io" target="_blank" rel="noopener" class="btn primary">
+              <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#github"></use></svg>
+              Ver en GitHub
+            </a>
+          </div>
+          
+          <div class="opensource-card">
+            <div class="opensource-icon contributions">✍️</div>
+            <h3>Contribuciones</h3>
+            <p>Investigadores y autores pueden enviar trabajos independientes directamente a la plataforma</p>
+            <a href="/pages/independiente.html" class="btn secondary">
+              <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#edit"></use></svg>
+              Enviar trabajo
+            </a>
+          </div>
+          
+          <div class="opensource-card">
+            <div class="opensource-icon community">👥</div>
+            <h3>Comunidad</h3>
+            <p>Participa en Discord y Twitch para discusiones en tiempo real sobre desarrollo y análisis</p>
+            <a href="/pages/apoya.html" class="btn secondary">
+              <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#heart"></use></svg>
+              Unirse
+            </a>
+          </div>
+        </div>
       </div>
-      <div class="panel" style="margin-top:12px">
-        <h3>Entidad legal</h3>
-        <p>Nombre legal: <strong>Vulcano Ai Digital Solutions S.A.S - 2025 Todos los derechos reservados</strong>.</p>
+      
+      <!-- Multi-AI Collaboration -->
+      <div class="ai-collaboration">
+        <div class="section-header">
+          <h2>Colaboración Multi-AI</h2>
+          <p class="section-subtitle">Experimento autónomo con múltiples sistemas de IA</p>
+        </div>
+        
+        <div class="ai-partners">
+          <div class="ai-partner">
+            <div class="partner-logo claude">🤖</div>
+            <h4>Claude Code</h4>
+            <p>Desarrollo de interfaz y arquitectura de código</p>
+          </div>
+          <div class="ai-partner">
+            <div class="partner-logo openai">🧠</div>
+            <h4>OpenAI Codex</h4>
+            <p>Generación de código y lógica de automatización</p>
+          </div>
+          <div class="ai-partner">
+            <div class="partner-logo grok">⚡</div>
+            <h4>Grok (X)</h4>
+            <p>Análisis de datos y procesamiento de contenido</p>
+          </div>
+          <div class="ai-partner">
+            <div class="partner-logo n8n">🔗</div>
+            <h4>N8N Agents</h4>
+            <p>Automatización de workflows y pipelines de datos</p>
+          </div>
+        </div>
+        
+        <div class="collaboration-note">
+          <p><strong>Experimento pionero:</strong> Este proyecto representa uno de los primeros casos de colaboración autónoma entre múltiples sistemas de IA para crear y mantener una plataforma completa de información.</p>
+        </div>
+      </div>
+      
+      <!-- Legal Entity -->
+      <div class="legal-section">
+        <div class="section-header">
+          <h2>Información legal</h2>
+          <p class="section-subtitle">Entidad registrada y marco legal</p>
+        </div>
+        
+        <div class="legal-info">
+          <div class="legal-card">
+            <div class="legal-icon">🏢</div>
+            <div class="legal-details">
+              <h4>Razón social</h4>
+              <p><strong>Vulcano AI Digital Solutions S.A.S</strong></p>
+            </div>
+          </div>
+          <div class="legal-card">
+            <div class="legal-icon">📍</div>
+            <div class="legal-details">
+              <h4>Ubicación</h4>
+              <p>Bogotá, Colombia</p>
+            </div>
+          </div>
+          <div class="legal-card">
+            <div class="legal-icon">©️</div>
+            <div class="legal-details">
+              <h4>Derechos</h4>
+              <p>2025 - Todos los derechos reservados</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </main>
-  <footer class="site-footer">
+  <footer class="site-footer enhanced">
+    <div class="footer-background">
+      <div class="footer-glow"></div>
+    </div>
     <div class="container footer-inner">
-      <div class="footer-brand">
-        <svg class="logo small" aria-hidden="true">
-          <use href="/assets/icons.svg#logo"></use>
-        </svg>
-        <div>
-          <strong>Vulcano Ai</strong>
-          <div class="muted">Vulcano Ai Digital Solutions S.A.S - 2025 Todos los derechos reservados</div>
+      <div class="footer-main">
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <svg class="logo" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>
+          </div>
+          <div class="brand-info">
+            <div class="brand-name">Vulcano AI</div>
+            <div class="brand-tagline">Inteligencia artificial para América Latina</div>
+          </div>
+        </div>
+        
+        <div class="footer-sections">
+          <div class="footer-section">
+            <h3>Plataforma</h3>
+            <nav class="footer-links">
+              <a href="/pages/noticias.html">Noticias IA</a>
+              <a href="/pages/panorama.html">Panorama</a>
+              <a href="/pages/observatorio-legal.html">Observatorio Legal</a>
+              <a href="/pages/agentes.html">Agentes</a>
+            </nav>
+          </div>
+          
+          <div class="footer-section">
+            <h3>Recursos</h3>
+            <nav class="footer-links">
+              <a href="/pages/fuentes.html">Fuentes</a>
+              <a href="/pages/actualizaciones.html">Actualizaciones</a>
+              <a href="/pages/independiente.html">Publicar trabajo</a>
+              <a href="mailto:ivan@vulcano.ai">Contacto</a>
+            </nav>
+          </div>
+          
+          <div class="footer-section">
+            <h3>Compañía</h3>
+            <nav class="footer-links">
+              <a href="/pages/vulcano.html">Qué es Vulcano AI</a>
+              <a href="/pages/apoya.html">Apoyar proyecto</a>
+              <a href="/pages/legal/privacidad.html">Privacidad</a>
+              <a href="/pages/legal/terminos.html">Términos</a>
+            </nav>
+          </div>
+          
+          <div class="footer-section social">
+            <h3>Colaboración</h3>
+            <div class="social-links">
+              <a href="https://github.com/vulcanoai" target="_blank" rel="noopener" class="social-link github">
+                <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#github"></use></svg>
+                <span>GitHub</span>
+              </a>
+              <a href="mailto:ivan@vulcano.ai" class="social-link email">
+                <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#mail"></use></svg>
+                <span>Email</span>
+              </a>
+            </div>
+            <div class="ai-collaboration">
+              <span class="collaboration-badge">
+                <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#robot"></use></svg>
+                Multi-AI Project
+              </span>
+            </div>
+          </div>
         </div>
       </div>
-      <nav class="footer-nav">
-        <a href="/pages/legal/privacidad.html">Privacidad</a>
-        <a href="/pages/legal/terminos.html">Términos</a>
-      </nav>
+      
+      <div class="footer-bottom">
+        <div class="footer-legal">
+          <span class="copyright">© 2025 Vulcano AI Digital Solutions S.A.S</span>
+          <span class="separator">•</span>
+          <span class="location">Bogotá, Colombia</span>
+          <span class="separator">•</span>
+          <span class="status">Todos los derechos reservados</span>
+        </div>
+        <div class="footer-updates">
+          <span class="last-update" id="footer-update">Última actualización: --:--</span>
+        </div>
+      </div>
     </div>
   </footer>
     <script src="/assets/js/config.js"></script>

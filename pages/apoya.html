@@ -14,13 +14,43 @@
     <a href="#main" class="skip-link">Saltar al contenido</a>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="/"><svg class="logo" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg><span class="brand-text">Vulcano Ai</span></a>
-        <button class="nav-toggle" aria-label="Abrir menú">☰</button>
+        <a class="brand" href="/pages/noticias.html">
+          <svg class="logo" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>
+          <span class="brand-text">Vulcano AI</span>
+        </a>
+        
+        <!-- Global Time Zone Indicators -->
+        <div class="global-time" id="global-time">
+          <div class="time-zone" data-tz="America/Mexico_City">
+            <span class="tz-label">MX</span>
+            <span class="tz-time">--:--</span>
+          </div>
+          <div class="time-zone" data-tz="America/Bogota">
+            <span class="tz-label">COL</span>
+            <span class="tz-time">--:--</span>
+          </div>
+          <div class="time-zone" data-tz="America/Argentina/Buenos_Aires">
+            <span class="tz-label">AR</span>
+            <span class="tz-time">--:--</span>
+          </div>
+          <div class="time-zone" data-tz="America/Sao_Paulo">
+            <span class="tz-label">BR</span>
+            <span class="tz-time">--:--</span>
+          </div>
+        </div>
+        
+        <button class="nav-toggle" aria-label="Abrir menú">
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+        </button>
+        
         <nav class="site-nav" aria-label="Principal">
           <a href="/pages/noticias.html">Inicio</a>
           <a href="/pages/panorama.html">Panorama</a>
           <a href="/pages/observatorio-legal.html">Observatorio legal</a>
           <a href="/pages/actualizaciones.html">Actualizaciones</a>
+          <a href="/pages/apoya.html" aria-current="page">Apoyar</a>
           <a href="/pages/agentes.html">Agentes</a>
           <a href="/pages/fuentes.html">Fuentes</a>
           <a href="/pages/vulcano.html">Qué es Vulcano AI</a>
@@ -29,56 +59,345 @@
     </header>
     <main class="section" id="main">
       <div class="container">
-        <h1><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#heart"></use></svg> Apoya el proyecto</h1>
-        <p class="muted">Vulcano Ai es independiente. Si te aporta valor, puedes apoyar con una contribución económica o uniéndote a la comunidad.</p>
-
-        <div class="donate-grid">
-          <div class="donate-card">
-            <div class="left"><svg class="icon"><use href="/assets/icons.svg#patreon"></use></svg> Patreon</div>
-            <a class="btn" href="https://patreon.com/vulcanoai?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink" target="_blank" rel="noopener">Abrir</a>
+        <!-- Support Hero Section -->
+        <div class="support-hero">
+          <div class="support-background">
+            <div class="hearts-animation" id="hearts-animation">
+              <!-- Animated hearts will be generated here -->
+            </div>
           </div>
-          <div class="donate-card">
-            <div class="left"><svg class="icon"><use href="/assets/icons.svg#mercadopago"></use></svg> MercadoPago</div>
-            <a class="btn" href="https://link.mercadopago.com.co/vulcanoai" target="_blank" rel="noopener">Abrir</a>
-          </div>
-          <div class="donate-card">
-            <div class="left"><svg class="icon"><use href="/assets/icons.svg#nequi"></use></svg> Nequi</div>
-            <div class="right"><span class="chip">+57 319 362 0926</span> <button class="btn copy-btn" data-copy="+57 319 362 0926">Copiar</button></div>
-          </div>
-          <div class="donate-card">
-            <div class="left"><svg class="icon"><use href="/assets/icons.svg#link"></use></svg> Bre-b (P2P)</div>
-            <div class="right" id="breb-box">
-              <code class="chip" data-key data-label="Bre-b Principal">breb1qxy2kgdygjrsqtzq2n0...</code>
-              <button class="btn copy-btn" data-copy="breb1qxy2kgdygjrsqtzq2n0...">Copiar</button>
+          
+          <div class="hero-content">
+            <div class="hero-header">
+              <div class="support-icon-stack">
+                <div class="support-orb" id="support-orb">
+                  <svg class="hero-icon" aria-hidden="true">
+                    <use href="/assets/icons.svg#heart"></use>
+                  </svg>
+                </div>
+                <div class="heart-elements">
+                  <div class="heart-symbol small">❤️</div>
+                  <div class="heart-symbol medium">💙</div>
+                  <div class="heart-symbol large">💚</div>
+                </div>
+              </div>
+              
+              <div class="hero-text">
+                <h1>Apoya el Proyecto</h1>
+                <p class="hero-subtitle">Construyendo el futuro de la IA en América Latina juntos</p>
+              </div>
+            </div>
+            
+            <div class="support-stats">
+              <div class="stat-card support-themed">
+                <div class="stat-value" id="supporters-count">Cargando...</div>
+                <div class="stat-label">Colaboradores</div>
+              </div>
+              <div class="stat-card support-themed">
+                <div class="stat-value" id="monthly-goal">--</div>
+                <div class="stat-label">Meta mensual</div>
+              </div>
+              <div class="stat-card support-themed">
+                <div class="stat-value" id="independence-level">--</div>
+                <div class="stat-label">Independencia</div>
+              </div>
+            </div>
+            
+            <div class="support-tagline">
+              <div class="tagline-content">
+                <svg class="tagline-icon" aria-hidden="true">
+                  <use href="/assets/icons.svg#sparkles"></use>
+                </svg>
+                <span>100% independiente • Sin publicidad • Transparencia total</span>
+              </div>
             </div>
           </div>
         </div>
-
-        <div class="panel" style="margin-top:12px">
-          <h3>Comunidad</h3>
-          <div class="social-row">
-            <a href="https://discord.gg/7AjU7kkH" target="_blank" rel="noopener"><svg class="icon"><use href="/assets/icons.svg#link"></use></svg> Discord</a>
-            <a href="https://www.twitch.tv/vulcanoai" target="_blank" rel="noopener"><svg class="icon"><use href="/assets/icons.svg#sparkles"></use></svg> Twitch</a>
-          </div>
-          <p class="note">En Discord conversamos sobre ideas y desarrollo. En Twitch transmitimos avances y hacemos Q&A.</p>
-        </div>
-
         
+        <!-- Mission Statement -->
+        <div class="mission-section">
+          <div class="section-header">
+            <h2>Nuestra misión</h2>
+            <p class="section-subtitle">Democratizar el acceso a información de IA de calidad en América Latina</p>
+          </div>
+          
+          <div class="mission-grid">
+            <div class="mission-card">
+              <div class="mission-icon">🌍</div>
+              <h3>Cobertura Regional</h3>
+              <p>Monitoreamos fuentes en español y portugués para ofrecer perspectiva latinoamericana única</p>
+            </div>
+            <div class="mission-card">
+              <div class="mission-icon">🤖</div>
+              <h3>IA Transparente</h3>
+              <p>Todos nuestros algoritmos y metodologías son abiertas y auditables por la comunidad</p>
+            </div>
+            <div class="mission-card">
+              <div class="mission-icon">📈</div>
+              <h3>Datos Libres</h3>
+              <p>API abierta, feeds públicos y acceso gratuito para investigadores y desarrolladores</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Donation Options -->
+        <div class="donation-section">
+          <div class="section-header">
+            <h2>Formas de apoyo</h2>
+            <p class="section-subtitle">Elige la opción que mejor se adapte a ti</p>
+          </div>
+          
+          <div class="donation-grid">
+            <div class="donation-tier featured">
+              <div class="tier-header">
+                <div class="tier-icon">🚀</div>
+                <h3>Patrocinador</h3>
+                <div class="tier-price">$10+ USD/mes</div>
+              </div>
+              <div class="tier-benefits">
+                <div class="benefit">✓ Acceso anticipado a features</div>
+                <div class="benefit">✓ API con mayor rate limit</div>
+                <div class="benefit">✓ Mención en créditos</div>
+                <div class="benefit">✓ Discord VIP</div>
+              </div>
+              <a href="https://patreon.com/vulcanoai?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink" target="_blank" rel="noopener" class="btn primary tier-btn">
+                <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#heart"></use></svg>
+                Unirse en Patreon
+              </a>
+            </div>
+            
+            <div class="donation-tier">
+              <div class="tier-header">
+                <div class="tier-icon">☕</div>
+                <h3>Colaborador</h3>
+                <div class="tier-price">$5 USD/mes</div>
+              </div>
+              <div class="tier-benefits">
+                <div class="benefit">✓ Soporte al proyecto</div>
+                <div class="benefit">✓ Newsletter exclusivo</div>
+                <div class="benefit">✓ Acceso a Discord</div>
+              </div>
+              <a href="https://patreon.com/vulcanoai" target="_blank" rel="noopener" class="btn secondary tier-btn">
+                <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#heart"></use></svg>
+                Apoyar en Patreon
+              </a>
+            </div>
+            
+            <div class="donation-tier">
+              <div class="tier-header">
+                <div class="tier-icon">❤️</div>
+                <h3>Donación Única</h3>
+                <div class="tier-price">Cualquier monto</div>
+              </div>
+              <div class="tier-benefits">
+                <div class="benefit">✓ Contribución puntual</div>
+                <div class="benefit">✓ Sin compromisos</div>
+                <div class="benefit">✓ Muy apreciada</div>
+              </div>
+              <a href="https://link.mercadopago.com.co/vulcanoai" target="_blank" rel="noopener" class="btn secondary tier-btn">
+                <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#link"></use></svg>
+                Donar MercadoPago
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Alternative Payment Methods -->
+        <div class="payment-methods">
+          <div class="section-header">
+            <h3>Métodos alternativos</h3>
+            <p class="section-subtitle">Opciones adicionales para Colombia y la región</p>
+          </div>
+          
+          <div class="payment-grid">
+            <div class="payment-card">
+              <div class="payment-header">
+                <div class="payment-icon nequi">📱</div>
+                <div class="payment-info">
+                  <h4>Nequi</h4>
+                  <p>Transferencia directa</p>
+                </div>
+              </div>
+              <div class="payment-details">
+                <span class="payment-number">+57 319 362 0926</span>
+                <button class="btn copy-btn" data-copy="+57 319 362 0926">
+                  <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#copy"></use></svg>
+                  Copiar
+                </button>
+              </div>
+            </div>
+            
+            <div class="payment-card">
+              <div class="payment-header">
+                <div class="payment-icon crypto">₿</div>
+                <div class="payment-info">
+                  <h4>Bre-b (P2P)</h4>
+                  <p>Blockchain descentralizada</p>
+                </div>
+              </div>
+              <div class="payment-details">
+                <code class="payment-address" data-key data-label="Bre-b Principal">breb1qxy2kgdygjrsqtzq2n0...</code>
+                <button class="btn copy-btn" data-copy="breb1qxy2kgdygjrsqtzq2n0...">
+                  <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#copy"></use></svg>
+                  Copiar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Community Section -->
+        <div class="community-section">
+          <div class="section-header">
+            <h2>Unirse a la comunidad</h2>
+            <p class="section-subtitle">Colabora, aprende y conecta con otros entusiastas de la IA</p>
+          </div>
+          
+          <div class="community-grid">
+            <div class="community-card discord">
+              <div class="community-icon">💬</div>
+              <h3>Discord</h3>
+              <p>Conversaciones sobre desarrollo, ideas y análisis de IA en tiempo real</p>
+              <div class="community-stats">
+                <span class="stat">👥 500+ miembros</span>
+                <span class="stat">💬 24/7 activo</span>
+              </div>
+              <a href="https://discord.gg/7AjU7kkH" target="_blank" rel="noopener" class="btn community-btn">
+                <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#link"></use></svg>
+                Unirse a Discord
+              </a>
+            </div>
+            
+            <div class="community-card twitch">
+              <div class="community-icon">📺</div>
+              <h3>Twitch</h3>
+              <p>Transmisiones en vivo de desarrollo, Q&A y análisis de tendencias</p>
+              <div class="community-stats">
+                <span class="stat">📺 Live coding</span>
+                <span class="stat">❓ Q&A sessions</span>
+              </div>
+              <a href="https://www.twitch.tv/vulcanoai" target="_blank" rel="noopener" class="btn community-btn">
+                <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#sparkles"></use></svg>
+                Seguir en Twitch
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Impact Transparency -->
+        <div class="impact-section">
+          <div class="section-header">
+            <h2>Transparencia de impacto</h2>
+            <p class="section-subtitle">Así utilizamos los recursos para maximizar el impacto</p>
+          </div>
+          
+          <div class="impact-breakdown">
+            <div class="breakdown-item">
+              <div class="breakdown-percentage">60%</div>
+              <div class="breakdown-info">
+                <h4>Desarrollo e infraestructura</h4>
+                <p>Servidores, APIs, herramientas de desarrollo y mantenimiento técnico</p>
+              </div>
+            </div>
+            <div class="breakdown-item">
+              <div class="breakdown-percentage">25%</div>
+              <div class="breakdown-info">
+                <h4>Investigación y contenido</h4>
+                <p>Análisis profundos, investigación original y mejora de algoritmos</p>
+              </div>
+            </div>
+            <div class="breakdown-item">
+              <div class="breakdown-percentage">15%</div>
+              <div class="breakdown-info">
+                <h4>Comunidad y eventos</h4>
+                <p>Meetups, conferencias, material educativo y growth de comunidad</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
-    <footer class="site-footer">
+    <footer class="site-footer enhanced">
+      <div class="footer-background">
+        <div class="footer-glow"></div>
+      </div>
       <div class="container footer-inner">
-        <div class="footer-brand">
-          <svg class="logo small" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>
-          <div>
-            <strong>Vulcano Ai</strong>
-            <div class="muted">Vulcano Ai Digital Solutions S.A.S - 2025 Todos los derechos reservados</div>
+        <div class="footer-main">
+          <div class="footer-brand">
+            <div class="brand-logo">
+              <svg class="logo" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>
+            </div>
+            <div class="brand-info">
+              <div class="brand-name">Vulcano AI</div>
+              <div class="brand-tagline">Inteligencia artificial para América Latina</div>
+            </div>
+          </div>
+          
+          <div class="footer-sections">
+            <div class="footer-section">
+              <h3>Plataforma</h3>
+              <nav class="footer-links">
+                <a href="/pages/noticias.html">Noticias IA</a>
+                <a href="/pages/panorama.html">Panorama</a>
+                <a href="/pages/observatorio-legal.html">Observatorio Legal</a>
+                <a href="/pages/agentes.html">Agentes</a>
+              </nav>
+            </div>
+            
+            <div class="footer-section">
+              <h3>Recursos</h3>
+              <nav class="footer-links">
+                <a href="/pages/fuentes.html">Fuentes</a>
+                <a href="/pages/actualizaciones.html">Actualizaciones</a>
+                <a href="/pages/independiente.html">Publicar trabajo</a>
+                <a href="mailto:ivan@vulcano.ai">Contacto</a>
+              </nav>
+            </div>
+            
+            <div class="footer-section">
+              <h3>Compañía</h3>
+              <nav class="footer-links">
+                <a href="/pages/vulcano.html">Qué es Vulcano AI</a>
+                <a href="/pages/apoya.html">Apoyar proyecto</a>
+                <a href="/pages/legal/privacidad.html">Privacidad</a>
+                <a href="/pages/legal/terminos.html">Términos</a>
+              </nav>
+            </div>
+            
+            <div class="footer-section social">
+              <h3>Colaboración</h3>
+              <div class="social-links">
+                <a href="https://github.com/vulcanoai" target="_blank" rel="noopener" class="social-link github">
+                  <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#github"></use></svg>
+                  <span>GitHub</span>
+                </a>
+                <a href="mailto:ivan@vulcano.ai" class="social-link email">
+                  <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#mail"></use></svg>
+                  <span>Email</span>
+                </a>
+              </div>
+              <div class="ai-collaboration">
+                <span class="collaboration-badge">
+                  <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#robot"></use></svg>
+                  Multi-AI Project
+                </span>
+              </div>
+            </div>
           </div>
         </div>
-        <nav class="footer-nav">
-          <a href="/pages/legal/privacidad.html">Privacidad</a>
-          <a href="/pages/legal/terminos.html">Términos</a>
-        </nav>
+        
+        <div class="footer-bottom">
+          <div class="footer-legal">
+            <span class="copyright">© 2025 Vulcano AI Digital Solutions S.A.S</span>
+            <span class="separator">•</span>
+            <span class="location">Bogotá, Colombia</span>
+            <span class="separator">•</span>
+            <span class="status">Todos los derechos reservados</span>
+          </div>
+          <div class="footer-updates">
+            <span class="last-update" id="footer-update">Última actualización: --:--</span>
+          </div>
+        </div>
       </div>
     </footer>
     <script src="/assets/js/config.js"></script>
