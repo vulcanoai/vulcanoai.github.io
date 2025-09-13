@@ -1,0 +1,65 @@
+{
+  "version": "v1.0",
+  "articles": [
+    {
+      "id": "https://www.lanacion.com.ar/tecnologia/argentina-ley-incentivos-startups-tecnologicas-nid05102023",
+      "title": "Argentina aprueba nueva ley de incentivos para startups tecnológicas",
+      "summary": "El gobierno argentino ha promulgado una ley que ofrece beneficios fiscales y apoyo financiero a startups tecnológicas para impulsar la innovación en el país.",
+      "url": "https://www.lanacion.com.ar/tecnologia/argentina-ley-incentivos-startups-tecnologicas-nid05102023",
+      "source": "La Nación",
+      "source_url": "https://www.lanacion.com.ar",
+      "country": "Argentina",
+      "topics": [
+        "Startups",
+        "Regulación"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T15:45:00Z",
+      "relevance": 8,
+      "sentiment": "positive",
+      "author": "Sofía Rodríguez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.emol.com/noticias/Economia/2023/10/05/1109875/chile-regulacion-criptomonedas.html",
+      "title": "Chile implementa regulaciones más estrictas para criptomonedas",
+      "summary": "Autoridades chilenas han introducido nuevas normativas para regular el uso y comercio de criptomonedas, buscando prevenir el lavado de dinero y proteger a los inversionistas.",
+      "url": "https://www.emol.com/noticias/Economia/2023/10/05/1109875/chile-regulacion-criptomonedas.html",
+      "source": "Emol",
+      "source_url": "https://www.emol.com",
+      "country": "Chile",
+      "topics": [
+        "Regulación",
+        "Criptomonedas"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T13:20:00Z",
+      "relevance": 7,
+      "sentiment": "neutral",
+      "author": "Felipe Vargas",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://elcomercio.pe/tecnologia/actualidad/startup-peruana-edtech-premio-internacional-noticia/",
+      "title": "Startup peruana de edtech gana premio internacional",
+      "summary": "Una empresa peruana de tecnología educativa ha sido reconocida en un concurso global por su plataforma innovadora que mejora el acceso a la educación en zonas rurales.",
+      "url": "https://elcomercio.pe/tecnologia/actualidad/startup-peruana-edtech-premio-internacional-noticia/",
+      "source": "El Comercio",
+      "source_url": "https://elcomercio.pe",
+      "country": "Perú",
+      "topics": [
+        "Startups",
+        "Edtech"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T11:10:00Z",
+      "relevance": 6,
+      "sentiment": "positive",
+      "author": "Ana López",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T17:00:57.940Z",
+  "params": {}
+}
