@@ -1,0 +1,64 @@
+{
+  "articles": [
+    {
+      "id": "https://www.eluniversal.com.mx/techbit/mexico-iniciativa-ciberseguridad-pymes-2023/",
+      "title": "México lanza iniciativa para fomentar la ciberseguridad en pymes",
+      "summary": "El gobierno mexicano, en colaboración con empresas tecnológicas, ha presentado un programa para capacitar a pequeñas y medianas empresas en la prevención de ciberataques.",
+      "url": "https://www.eluniversal.com.mx/techbit/mexico-iniciativa-ciberseguridad-pymes-2023/",
+      "source": "El Universal",
+      "source_url": "https://www.eluniversal.com.mx",
+      "country": "México",
+      "topics": [
+        "Ciberseguridad",
+        "Pymes"
+      ],
+      "language": "es",
+      "published_at": "2023-10-06T00:10:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Gabriela Martínez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.eltiempo.com/tecnologia/colombia-inclusion-tecnologica-indigenas-2023/",
+      "title": "Colombia fortalece políticas de inclusión tecnológica en comunidades indígenas",
+      "summary": "Un nuevo proyecto busca llevar acceso a internet y formación digital a comunidades indígenas en regiones apartadas de Colombia, promoviendo la equidad tecnológica.",
+      "url": "https://www.eltiempo.com/tecnologia/colombia-inclusion-tecnologica-indigenas-2023/",
+      "source": "El Tiempo",
+      "source_url": "https://www.eltiempo.com",
+      "country": "Colombia",
+      "topics": [
+        "Tecnología",
+        "Inclusión Digital"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T22:45:00Z",
+      "relevance": 8,
+      "sentiment": "positive",
+      "author": "Juan Pérez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.folha.uol.com.br/cultura/2023/10/brasil-regulacao-plataformas-streaming.shtml",
+      "title": "Brasil debate nuevas regulaciones para plataformas de streaming",
+      "summary": "Legisladores brasileños discuten una propuesta de ley que obligaría a las plataformas de streaming a incluir un porcentaje de contenido local en sus catálogos.",
+      "url": "https://www.folha.uol.com.br/cultura/2023/10/brasil-regulacao-plataformas-streaming.shtml",
+      "source": "Folha de S.Paulo",
+      "source_url": "https://www.folha.uol.com.br",
+      "country": "Brasil",
+      "topics": [
+        "Regulación",
+        "Streaming"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-05T23:30:00Z",
+      "relevance": 6,
+      "sentiment": "neutral",
+      "author": "Fernanda Silva",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T00:57:53.992Z",
+  "params": {}
+}
