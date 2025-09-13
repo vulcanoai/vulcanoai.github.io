@@ -1,0 +1,65 @@
+{
+  "version": "v1.0",
+  "articles": [
+    {
+      "id": "https://www.eluniversal.com.mx/economia/mexico-aprueba-nueva-regulacion-para-fintechs",
+      "title": "México aprueba nueva regulación para fintechs en el sector financiero",
+      "summary": "El gobierno mexicano ha implementado nuevas normativas para regular las operaciones de empresas fintech, buscando mayor transparencia y protección al consumidor.",
+      "url": "https://www.eluniversal.com.mx/economia/mexico-aprueba-nueva-regulacion-para-fintechs",
+      "source": "El Universal",
+      "source_url": "https://www.eluniversal.com.mx",
+      "country": "México",
+      "topics": [
+        "Fintech",
+        "Regulación"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T14:30:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Juan Pérez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.eltiempo.com/economia/empresas/startup-colombiana-de-logistica-recibe-inversion-millonaria-2023",
+      "title": "Startup colombiana de logística recibe inversión millonaria",
+      "summary": "Una startup de logística en Colombia ha asegurado una ronda de financiación de 5 millones de dólares para expandir sus operaciones en América Latina.",
+      "url": "https://www.eltiempo.com/economia/empresas/startup-colombiana-de-logistica-recibe-inversion-millonaria-2023",
+      "source": "El Tiempo",
+      "source_url": "https://www.eltiempo.com",
+      "country": "Colombia",
+      "topics": [
+        "Startups",
+        "Inversión"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T12:15:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "María Gómez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.folha.uol.com.br/poder/2023/10/brasil-debate-novas-leis-de-protecao-de-dados.shtml",
+      "title": "Brasil debate nuevas leyes de protección de datos en tecnología",
+      "summary": "El Congreso brasileño discute un proyecto de ley para reforzar la protección de datos personales en plataformas digitales, con impacto en empresas tecnológicas.",
+      "url": "https://www.folha.uol.com.br/poder/2023/10/brasil-debate-novas-leis-de-protecao-de-dados.shtml",
+      "source": "Folha de S.Paulo",
+      "source_url": "https://www.folha.uol.com.br",
+      "country": "Brasil",
+      "topics": [
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-05T10:45:00Z",
+      "relevance": 9,
+      "sentiment": "neutral",
+      "author": "Carlos Silva",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T07:00:57.109Z",
+  "params": {}
+}
