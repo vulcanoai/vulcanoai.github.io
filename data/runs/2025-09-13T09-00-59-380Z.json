@@ -1,0 +1,68 @@
+{
+  "version": "v1.0",
+  "articles": [
+    {
+      "id": "https://www.lanacion.com.ar/tecnologia/argentina-nueva-ley-plataformas-digitales-nid25102023",
+      "title": "Argentina impulsa nueva ley para regular plataformas digitales",
+      "summary": "El gobierno argentino propone una legislación para supervisar el funcionamiento de plataformas digitales y redes sociales, con foco en la protección de datos.",
+      "url": "https://www.lanacion.com.ar/tecnologia/argentina-nueva-ley-plataformas-digitales-nid25102023",
+      "source": "La Nación",
+      "source_url": "https://www.lanacion.com.ar",
+      "country": "Argentina",
+      "topics": [
+        "Regulación",
+        "Tecnología",
+        "Datos"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T18:20:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Carlos Fernández",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://elcomercio.pe/tecnologia/startup-peruana-edtech-premio-internacional-noticia",
+      "title": "Startup peruana de edtech gana premio internacional",
+      "summary": "Una empresa de tecnología educativa con sede en Lima recibe reconocimiento por su plataforma de aprendizaje inclusivo para estudiantes de zonas rurales.",
+      "url": "https://elcomercio.pe/tecnologia/startup-peruana-edtech-premio-internacional-noticia",
+      "source": "El Comercio",
+      "source_url": "https://elcomercio.pe",
+      "country": "Perú",
+      "topics": [
+        "Startups",
+        "Edtech",
+        "Innovación"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T15:10:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Lucía Vargas",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.emol.com/noticias/Tecnologia/2023/10/25/chile-ia-sector-publico.html",
+      "title": "Chile apuesta por la inteligencia artificial en el sector público",
+      "summary": "El gobierno chileno anuncia un plan para implementar soluciones de IA en la gestión pública, buscando mayor eficiencia y transparencia.",
+      "url": "https://www.emol.com/noticias/Tecnologia/2023/10/25/chile-ia-sector-publico.html",
+      "source": "Emol",
+      "source_url": "https://www.emol.com",
+      "country": "Chile",
+      "topics": [
+        "Tecnología",
+        "Inteligencia Artificial",
+        "Gobierno"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T13:45:00Z",
+      "relevance": 9,
+      "sentiment": "positive",
+      "author": "Rodrigo Silva",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T09:00:57.119Z",
+  "params": {}
+}
