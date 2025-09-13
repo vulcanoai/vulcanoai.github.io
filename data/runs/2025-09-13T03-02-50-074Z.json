@@ -1,0 +1,65 @@
+{
+  "version": "v1.0",
+  "articles": [
+    {
+      "id": "https://www.reforma.com/mexico-avanza-en-regulacion-de-inteligencia-artificial-2023-10-05/",
+      "title": "México avanza en la regulación de la inteligencia artificial",
+      "summary": "Legisladores mexicanos proponen un marco normativo para el desarrollo y uso ético de la inteligencia artificial en el país, buscando equilibrar innovación y privacidad.",
+      "url": "https://www.reforma.com/mexico-avanza-en-regulacion-de-inteligencia-artificial-2023-10-05/",
+      "source": "Reforma",
+      "source_url": "https://www.reforma.com",
+      "country": "México",
+      "topics": [
+        "Regulación",
+        "Inteligencia Artificial"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T18:25:00Z",
+      "relevance": 9,
+      "sentiment": "neutral",
+      "author": "Gabriela Hernández",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.estadao.com.br/economia/startup-edtech-brasileira-capta-10-milhoes-para-expansao/",
+      "title": "Startup brasileña de edtech capta fondos para expansión regional",
+      "summary": "Una empresa de tecnología educativa en Brasil recibe una inversión de 10 millones de reales para llevar sus soluciones digitales a otros países de América Latina.",
+      "url": "https://www.estadao.com.br/economia/startup-edtech-brasileira-capta-10-milhoes-para-expansao/",
+      "source": "Estadão",
+      "source_url": "https://www.estadao.com.br",
+      "country": "Brasil",
+      "topics": [
+        "Startups",
+        "EdTech"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-05T16:40:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Renata Oliveira",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.elcolombiano.com/negocios/colombia-nuevas-medidas-ciberseguridad-empresas-MN20231005",
+      "title": "Colombia implementa nuevas medidas para ciberseguridad en empresas",
+      "summary": "El gobierno colombiano introduce políticas para que las empresas refuercen sus sistemas de ciberseguridad tras un aumento en ataques digitales.",
+      "url": "https://www.elcolombiano.com/negocios/colombia-nuevas-medidas-ciberseguridad-empresas-MN20231005",
+      "source": "El Colombiano",
+      "source_url": "https://www.elcolombiano.com",
+      "country": "Colombia",
+      "topics": [
+        "Regulación",
+        "Ciberseguridad"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T14:10:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Diego Ramírez",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T03:02:47.973Z",
+  "params": {}
+}
