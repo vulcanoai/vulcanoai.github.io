@@ -25,16 +25,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Generate status
+      - name: Generate status + catalog
         run: |
           python3 scripts/generate_status.py
+          python3 scripts/generate_catalog.py
       - name: Commit changes
         run: |
           if ! git diff --quiet; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data/index/status.json
-            git commit -m "status: refresh data/index/status.json"
+            git add data/index/status.json data/index/catalog.json
+            git commit -m "status: refresh data/index files"
             git push
           else
             echo "No status changes."
