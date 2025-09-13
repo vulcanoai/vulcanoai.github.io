@@ -23,8 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (sourcesList){ initSources(sourcesList).catch(console.error); }
 
   // Initialize agents page if present
-  const agentsTable = document.getElementById('agents-table');
-  if (agentsTable){ initAgents(agentsTable).catch(console.error); }
+  const agentsGrid = document.getElementById('agents-grid');
+  if (agentsGrid){ initAgents(agentsGrid).catch(console.error); }
 
   // Panorama (categorías) if present
   const pano = document.getElementById('panorama-grid');
@@ -444,7 +444,10 @@ async function mountNavNewBadge(){
   }catch(_){ /* noop */ }
 }
 
-async function initAgents(table){
+async function initAgents(container){
+  // Show loading state
+  showAgentsLoadingState();
+  
   async function loadAgents(){
     try{
       const url = (window.AILatamConfig?.api?.agentsUrl) || '/data/agents.json';
@@ -452,98 +455,223 @@ async function initAgents(table){
       return await res.json();
     }catch(e){ return window.VULCANO_DEMO?.agents || []; }
   }
+  
   async function loadStatus(){
     try{
       const res = await fetch('/data/index/status.json', { cache:'no-store' });
       if (!res.ok) return null; return await res.json();
     }catch(_){ return null; }
   }
-  const [agents, status] = await Promise.all([loadAgents(), loadStatus()]);
+  
+  try {
+    const [agents, status] = await Promise.all([loadAgents(), loadStatus()]);
 
-  // Summary header cell (replaces legacy column headings)
-  const summaryTh = document.getElementById('agents-summary');
-  if (summaryTh) summaryTh.textContent = 'Cargando…';
-  // Remove legacy status box to avoid duplication
-  const statusBox = document.getElementById('agents-status');
-  if (statusBox) { try { statusBox.remove(); } catch(_) { statusBox.style.display='none'; } }
-
-  const tbody = table.querySelector('tbody');
-  tbody.innerHTML = '';
-  for (const a of agents){
-    const tr = document.createElement('tr');
-    const st = (a.estado || 'desconocido').toLowerCase();
-    const last = a.ultimo_ejecucion || a.lastRun || '';
-
-    const tdName = document.createElement('td');
-    if (a.nombre && a.nombre.includes(' AI')) {
-      const curatorClass = getCuratorClass ? getCuratorClass(a.nombre) : getCuratorClassName(a.nombre);
-      const nameChip = document.createElement('span');
-      nameChip.className = `chip ${curatorClass}`;
-      const icon = document.createElementNS('http://www.w3.org/2000/svg','svg');
-      icon.setAttribute('class','icon');
-      icon.setAttribute('aria-hidden','true');
-      const use = document.createElementNS('http://www.w3.org/2000/svg','use');
-      use.setAttributeNS('http://www.w3.org/1999/xlink','href','/assets/icons.svg#robot');
-      icon.appendChild(use);
-      nameChip.append(icon, document.createTextNode(' ' + a.nombre));
-      tdName.appendChild(nameChip);
-    } else {
-      tdName.textContent = a.nombre || '';
+    // Update status summary
+    const summaryEl = document.getElementById('agents-summary');
+    if (summaryEl) {
+      summaryEl.textContent = 'Cargando métricas del ecosistema...';
     }
-    const tdState = document.createElement('td');
-    const chip = document.createElement('span'); chip.className = 'chip ' + (st==='activo'?'ok':st==='configurando'?'warn':st==='fallo'?'err':''); chip.textContent = a.estado || '';
-    tdState.appendChild(chip);
-    const tdLast = document.createElement('td'); tdLast.textContent = last ? new Date(last).toLocaleString('es-ES') : '—';
-    const tdRate = document.createElement('td'); tdRate.textContent = a.throughput ? (typeof a.throughput === 'string' ? a.throughput : a.throughput + '/h') : '—';
-    const tdNotes = document.createElement('td'); tdNotes.className = 'muted'; tdNotes.textContent = a.notas || '';
 
-    tr.append(tdName, tdState, tdLast, tdRate, tdNotes);
-    tbody.appendChild(tr);
+    // Render agents grid
+    const agentsGrid = document.getElementById('agents-grid');
+    if (agentsGrid) {
+      agentsGrid.innerHTML = '';
+      
+      for (const agent of agents) {
+        const card = createAgentCard(agent);
+        agentsGrid.appendChild(card);
+      }
+    }
+
+    // Render metrics and status
+    await renderAgentMetrics(status);
+    
+    // Update controls
+    setupAgentControls(container);
+    
+    // Auto-refresh setup
+    clearInterval(window.__agentsRefresh);
+    if (window.__agentsAuto !== false){
+      window.__agentsRefresh = setInterval(() => { initAgents(container).catch(console.error); }, 60000);
+    }
+    
+  } catch (error) {
+    console.error('Error loading agents:', error);
+    showAgentsErrorState(error.message);
   }
+}
 
-  // Metrics from live feed (optional)
-  try{
+function createAgentCard(agent) {
+  const card = document.createElement('article');
+  card.className = 'agent-card';
+  
+  const state = (agent.estado || 'desconocido').toLowerCase();
+  const statusClass = state === 'activo' ? 'ok' : state === 'configurando' ? 'warn' : state === 'fallo' ? 'err' : '';
+  const lastExecution = agent.ultimo_ejecucion || agent.lastRun || '';
+  const throughput = agent.throughput || '—';
+  const notes = agent.notas || '';
+  
+  // Get curator color class
+  const curatorClass = getCuratorClassName(agent.nombre);
+  
+  card.innerHTML = `
+    <div class="agent-header">
+      <div class="agent-avatar ${curatorClass}">
+        <svg class="icon" aria-hidden="true">
+          <use href="/assets/icons.svg#robot"></use>
+        </svg>
+      </div>
+      <div class="agent-info">
+        <h3>${agent.nombre || 'Agente desconocido'}</h3>
+        <div class="agent-status">
+          <span class="chip ${statusClass}">${agent.estado || 'Desconocido'}</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="agent-body">
+      <div class="agent-specialization">
+        ${notes || 'Sin especialización definida'}
+      </div>
+      
+      <div class="agent-metrics">
+        <div class="agent-metric">
+          <div class="value">${throughput}</div>
+          <div class="label">Rendimiento</div>
+        </div>
+        <div class="agent-metric">
+          <div class="value">${lastExecution ? timeAgo(new Date(lastExecution)) : '—'}</div>
+          <div class="label">Última actividad</div>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  return card;
+}
+
+async function renderAgentMetrics(status) {
+  try {
+    // Load feed data for metrics
     const feedUrl = (window.AILatamConfig?.api?.feedUrl) || '/data/feed-latest.json';
     const raw = await (await fetch(feedUrl, { cache:'no-store' })).json();
     const arr = Array.isArray(raw) ? raw : (raw.articles || raw.items || []);
+    
     const uniq = (xs) => Array.from(new Set(xs));
     const countries = uniq(arr.map(x => (x.country||'').toString().trim()).filter(Boolean));
     const sources = uniq(arr.map(x => (x.source||'').toString().trim()).filter(Boolean));
     const topics = uniq(arr.flatMap(x => x.topics || []));
-    const m = document.getElementById('agents-metrics');
-    if (m){
-      m.innerHTML = '';
-      const mk = (label, value) => { const d=document.createElement('div'); d.className='gh-card'; d.innerHTML=`<div class="label">${label}</div><div class="value">${value}</div>`; return d; };
-      m.append(mk('Artículos', arr.length||0), mk('Fuentes', sources.length||0), mk('Países', countries.length||0), mk('Temas', topics.length||0));
+    
+    // Render metrics grid
+    const metricsGrid = document.getElementById('agents-metrics');
+    if (metricsGrid) {
+      metricsGrid.innerHTML = '';
+      
+      const metrics = [
+        { label: 'Artículos', value: arr.length || 0, description: 'Total en el feed' },
+        { label: 'Fuentes', value: sources.length || 0, description: 'Fuentes activas' },
+        { label: 'Países', value: countries.length || 0, description: 'Cobertura regional' },
+        { label: 'Temas', value: topics.length || 0, description: 'Categorías' }
+      ];
+      
+      metrics.forEach(metric => {
+        const card = document.createElement('div');
+        card.className = 'metric-card';
+        card.innerHTML = `
+          <div class="value">${metric.value}</div>
+          <div class="label">${metric.label}</div>
+        `;
+        card.title = metric.description;
+        metricsGrid.appendChild(card);
+      });
     }
-    // Build compact summary line
-    const todayStr = new Date().toISOString().slice(0,10);
-    const todayCount = arr.filter(a => (a.published_at||'').slice(0,10) === todayStr).length;
-    let dayCount = 0;
-    try { const cat = await (await fetch('/data/index/catalog.json', { cache:'no-store' })).json(); dayCount = Array.isArray(cat?.days) ? cat.days.length : 0; } catch(_){ }
-    const lastRun = status?.last_run_iso ? new Date(status.last_run_iso).toLocaleString('es-ES') : '—';
-    const lastFeed = status?.last_feed_update ? new Date(status.last_feed_update).toLocaleString('es-ES') : '—';
-    const feedCount = status?.feed_count ?? (arr.length||0);
-    if (summaryTh){ summaryTh.textContent = `Datos: ${feedCount} • Última corrida: ${lastRun} • Últ. feed: ${lastFeed} • Días: ${dayCount} • Hoy: ${todayCount}`; }
-  }catch(_){ /* non-blocking */ }
+    
+    // Update status summary
+    const summaryEl = document.getElementById('agents-summary');
+    if (summaryEl && status) {
+      const todayStr = new Date().toISOString().slice(0,10);
+      const todayCount = arr.filter(a => (a.published_at||'').slice(0,10) === todayStr).length;
+      
+      let dayCount = 0;
+      try { 
+        const cat = await (await fetch('/data/index/catalog.json', { cache:'no-store' })).json(); 
+        dayCount = Array.isArray(cat?.days) ? cat.days.length : 0; 
+      } catch(_) { }
+      
+      const lastRun = status.last_run_iso ? new Date(status.last_run_iso).toLocaleString('es-ES') : '—';
+      const lastFeed = status.last_feed_update ? new Date(status.last_feed_update).toLocaleString('es-ES') : '—';
+      const feedCount = status.feed_count ?? (arr.length || 0);
+      
+      summaryEl.textContent = `${feedCount} artículos procesados • Última actualización: ${timeAgo(new Date(status.last_feed_update || status.last_run_iso))} • ${dayCount} días de histórico • ${todayCount} publicados hoy`;
+    }
+    
+  } catch (error) {
+    console.error('Error rendering metrics:', error);
+  }
+}
 
-  // Controls: manual refresh + toggle auto-refresh
+function setupAgentControls(container) {
   const btnNow = document.getElementById('agents-refresh-now');
   const btnToggle = document.getElementById('agents-refresh-toggle');
-  if (btnNow){ btnNow.onclick = () => initAgents(table).catch(console.error); }
-  if (btnToggle){
-    const apply = () => {
-      const on = window.__agentsAuto !== false;
-      btnToggle.textContent = `Auto‑actualizar: ${on ? 'ON' : 'OFF'}`;
-    };
-    btnToggle.onclick = () => { window.__agentsAuto = window.__agentsAuto === false ? true : false; apply(); };
-    apply();
+  
+  if (btnNow) {
+    btnNow.onclick = () => initAgents(container).catch(console.error);
   }
+  
+  if (btnToggle) {
+    const updateToggleText = () => {
+      const on = window.__agentsAuto !== false;
+      const toggleText = btnToggle.querySelector('.toggle-text');
+      if (toggleText) {
+        toggleText.textContent = `Auto-actualizar: ${on ? 'ON' : 'OFF'}`;
+      }
+      btnToggle.className = `btn secondary ${on ? 'active' : ''}`;
+    };
+    
+    btnToggle.onclick = () => { 
+      window.__agentsAuto = window.__agentsAuto === false ? true : false; 
+      updateToggleText(); 
+    };
+    
+    updateToggleText();
+  }
+}
 
-  // Auto-refresh every 60s if enabled
-  clearInterval(window.__agentsRefresh);
-  if (window.__agentsAuto !== false){
-    window.__agentsRefresh = setInterval(() => { initAgents(table).catch(console.error); }, 60000);
+function showAgentsLoadingState() {
+  const agentsGrid = document.getElementById('agents-grid');
+  const metricsGrid = document.getElementById('agents-metrics');
+  
+  if (agentsGrid) {
+    agentsGrid.innerHTML = `
+      <div class="loading-state">
+        <div class="loading-spinner"></div>
+        <p>Cargando estado de los agentes...</p>
+      </div>
+    `;
+  }
+  
+  if (metricsGrid) {
+    metricsGrid.innerHTML = Array.from({length: 4}, () => `
+      <div class="metric-card loading">
+        <div class="value">⏳</div>
+        <div class="label">Cargando...</div>
+      </div>
+    `).join('');
+  }
+}
+
+function showAgentsErrorState(message) {
+  const agentsGrid = document.getElementById('agents-grid');
+  
+  if (agentsGrid) {
+    agentsGrid.innerHTML = `
+      <div class="error-state">
+        <div class="error-icon">⚠️</div>
+        <h3>Error al cargar agentes</h3>
+        <p>${message}</p>
+        <button class="btn primary" onclick="location.reload()">Reintentar</button>
+      </div>
+    `;
   }
 }
 

@@ -31,27 +31,81 @@
     </header>
     <main class="section" id="main">
       <div class="container">
-        <div class="agents-hero panel">
-          <h1>Tablero de agentes</h1>
-          <p class="muted">Sistemas autónomos de IA que investigan, validan y publican datos en tiempo real.</p>
-          <div class="agents-controls">
-            <span id="agents-refresh-now" class="chip clickable">Actualizar</span>
-            <span id="agents-refresh-toggle" class="chip clickable">Auto‑actualizar: ON</span>
+        <!-- Hero Section -->
+        <div class="agents-hero">
+          <div class="hero-content">
+            <div class="hero-header">
+              <svg class="hero-icon" aria-hidden="true">
+                <use href="/assets/icons.svg#robot"></use>
+              </svg>
+              <div class="hero-text">
+                <h1>Tablero de agentes</h1>
+                <p class="hero-subtitle">Sistemas autónomos de IA que investigan, validan y publican datos en tiempo real</p>
+              </div>
+            </div>
+            
+            <!-- Status Overview -->
+            <div class="status-overview">
+              <div class="status-card">
+                <div class="status-indicator">
+                  <div class="status-dot ok"></div>
+                  <span class="status-text">Sistemas operacionales</span>
+                </div>
+                <div id="agents-summary" class="status-summary">Cargando estado del ecosistema...</div>
+              </div>
+            </div>
+            
+            <!-- Controls -->
+            <div class="agents-controls">
+              <button id="agents-refresh-now" class="btn secondary">
+                <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#refresh"></use></svg>
+                Actualizar
+              </button>
+              <button id="agents-refresh-toggle" class="btn secondary">
+                <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#refresh"></use></svg>
+                <span class="toggle-text">Auto‑actualizar: ON</span>
+              </button>
+            </div>
           </div>
-          <div id="agents-status" class="note">Cargando estado…</div>
-          <div id="agents-metrics" class="gh-metrics"></div>
         </div>
-        <div class="panel" style="overflow:auto">
-          <table id="agents-table" class="agents-table">
-            <thead>
-              <tr>
-                <th id="agents-summary" class="agents-summary" colspan="5">Cargando…</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Content loaded dynamically from agents.json -->
-            </tbody>
-          </table>
+        
+        <!-- Metrics Cards -->
+        <div id="agents-metrics" class="metrics-grid"></div>
+        
+        <!-- Agents Grid -->
+        <div class="agents-section">
+          <div class="section-header">
+            <h2>Agentes especializados</h2>
+            <p class="section-subtitle">Cada agente se especializa en dominios específicos del ecosistema de IA en LATAM</p>
+          </div>
+          
+          <div id="agents-grid" class="agents-grid">
+            <!-- Agents loaded dynamically -->
+          </div>
+          
+          <!-- Fallback table for detailed view -->
+          <div class="table-section" style="display: none;">
+            <div class="table-header">
+              <h3>Vista detallada</h3>
+              <button class="btn link" onclick="document.querySelector('.agents-grid').style.display='grid'; this.parentElement.parentElement.style.display='none';">Volver a tarjetas</button>
+            </div>
+            <div class="table-container">
+              <table id="agents-table" class="agents-table">
+                <thead>
+                  <tr>
+                    <th>Agente</th>
+                    <th>Estado</th>
+                    <th>Última ejecución</th>
+                    <th>Rendimiento</th>
+                    <th>Especialización</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Content loaded dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </main>
