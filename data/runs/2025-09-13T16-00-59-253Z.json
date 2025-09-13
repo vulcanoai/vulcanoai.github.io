@@ -1,0 +1,65 @@
+{
+  "version": "v1.0",
+  "articles": [
+    {
+      "id": "https://www.eluniversal.com.mx/tech/mexico-nuevas-regulaciones-plataformas-digitales",
+      "title": "México impulsa nuevas regulaciones para plataformas digitales",
+      "summary": "El gobierno mexicano propone un marco regulatorio para plataformas digitales con el objetivo de garantizar la privacidad de datos y fomentar la competencia justa en el mercado tecnológico.",
+      "url": "https://www.eluniversal.com.mx/tech/mexico-nuevas-regulaciones-plataformas-digitales",
+      "source": "El Universal",
+      "source_url": "https://www.eluniversal.com.mx",
+      "country": "México",
+      "topics": [
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T14:30:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Juan Pérez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.eltiempo.com/economia/empresas/startup-colombiana-fintech-inversion-2023",
+      "title": "Startup colombiana de fintech recibe inversión millonaria",
+      "summary": "Una startup de tecnología financiera en Colombia ha asegurado una ronda de financiación de 5 millones de dólares para expandir sus operaciones en América Latina.",
+      "url": "https://www.eltiempo.com/economia/empresas/startup-colombiana-fintech-inversion-2023",
+      "source": "El Tiempo",
+      "source_url": "https://www.eltiempo.com",
+      "country": "Colombia",
+      "topics": [
+        "Startups",
+        "Fintech"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T12:15:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "María Gómez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://g1.globo.com/tecnologia/noticia/brasil-debate-ciberseguranca.ghtml",
+      "title": "Brasil debate nuevas políticas de ciberseguridad",
+      "summary": "El Congreso brasileño analiza un proyecto de ley para fortalecer la ciberseguridad en el país, tras recientes ataques a instituciones públicas.",
+      "url": "https://g1.globo.com/tecnologia/noticia/brasil-debate-ciberseguranca.ghtml",
+      "source": "G1 Globo",
+      "source_url": "https://g1.globo.com",
+      "country": "Brasil",
+      "topics": [
+        "Regulación",
+        "Ciberseguridad"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-05T10:00:00Z",
+      "relevance": 9,
+      "sentiment": "neutral",
+      "author": "Carlos Silva",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T16:00:57.200Z",
+  "params": {}
+}
