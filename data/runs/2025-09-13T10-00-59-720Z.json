@@ -1,0 +1,68 @@
+{
+  "version": "v1.0",
+  "articles": [
+    {
+      "id": "https://www.excelsior.com.mx/nacional/mexico-iniciativa-digitalizacion-pymes/1612345",
+      "title": "México lanza iniciativa para digitalizar pequeñas empresas",
+      "summary": "El gobierno mexicano presenta un programa para apoyar a las PYMES en la adopción de herramientas digitales, con subsidios y capacitación.",
+      "url": "https://www.excelsior.com.mx/nacional/mexico-iniciativa-digitalizacion-pymes/1612345",
+      "source": "Excélsior",
+      "source_url": "https://www.excelsior.com.mx",
+      "country": "México",
+      "topics": [
+        "Tecnología",
+        "PYMES",
+        "Gobierno"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T19:15:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Ana López",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.eltiempo.com/economia/empresas/startup-colombiana-movilidad-electrica-crece-822345",
+      "title": "Startup de movilidad eléctrica crece en Colombia",
+      "summary": "Una empresa colombiana de scooters eléctricos expande operaciones en Bogotá y Medellín tras recibir financiación internacional.",
+      "url": "https://www.eltiempo.com/economia/empresas/startup-colombiana-movilidad-electrica-crece-822345",
+      "source": "El Tiempo",
+      "source_url": "https://www.eltiempo.com",
+      "country": "Colombia",
+      "topics": [
+        "Startups",
+        "Movilidad",
+        "Sostenibilidad"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T17:30:00Z",
+      "relevance": 8,
+      "sentiment": "positive",
+      "author": "Diego Martínez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.folha.uol.com.br/tec/2023/10/brasil-debate-protecao-dados-apps.shtml",
+      "title": "Brasil debate nuevas reglas para protección de datos en apps",
+      "summary": "Legisladores brasileños discuten un proyecto para endurecer las normas de privacidad en aplicaciones móviles, tras recientes filtraciones de datos.",
+      "url": "https://www.folha.uol.com.br/tec/2023/10/brasil-debate-protecao-dados-apps.shtml",
+      "source": "Folha de S.Paulo",
+      "source_url": "https://www.folha.uol.com.br",
+      "country": "Brasil",
+      "topics": [
+        "Regulación",
+        "Privacidad",
+        "Tecnología"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-25T14:50:00Z",
+      "relevance": 9,
+      "sentiment": "neutral",
+      "author": "Mariana Costa",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T10:00:57.626Z",
+  "params": {}
+}
