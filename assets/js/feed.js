@@ -433,6 +433,17 @@
       mJson.title = 'Ver archivo JSON (trazabilidad)';
       mJson.textContent = 'JSON';
       metaData.appendChild(mJson);
+      // Details dropdown (snapshot/index links)
+      const details = document.createElement('details'); details.className='card-details';
+      const sum = document.createElement('summary'); sum.className='chip clickable'; sum.textContent='Detalles'; details.appendChild(sum);
+      const row = create('div','details-row');
+      const addLink = (href, label) => { const a = document.createElement('a'); a.href=href; a.target='_blank'; a.rel='noopener'; a.className='chip'; a.textContent=label; row.appendChild(a); };
+      addLink(`/data/feed-${dateStr}.json`, 'Snapshot diario');
+      addLink(`/data/entries/${dateStr}/index.json`, 'Índice diario');
+      addLink(`/data/index/by-topic.json`, 'Por tema');
+      addLink(`/data/index/by-country.json`, 'Por país');
+      details.appendChild(row);
+      body.appendChild(details);
     }catch(_){ /* optional */ }
 
     body.append(title, summary, topicChips, metaData);

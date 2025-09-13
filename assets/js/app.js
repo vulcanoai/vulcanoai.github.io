@@ -50,6 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // World clock + last update, subtle footer row
   mountWorldClock().catch(console.error);
 
+  // Noticias: compact "new since last visit" badge in header nav
+  mountNavNewBadge().catch(console.error);
+
   // Mobile/tablet nav toggle - Enhanced
   try{
     const btn = document.querySelector('.nav-toggle');
@@ -419,6 +422,28 @@ function timeAgo(date){
   const days = Math.floor(diff/86400); return `hace ${days} d`;
 }
 
+// Compact badge in header nav for Noticias page
+async function mountNavNewBadge(){
+  try{
+    const isNoticias = /\/pages\/noticias\.html$/.test(location.pathname);
+    if (!isNoticias) return; // only on Noticias
+    const last = Number(localStorage.getItem('lastVisit')||0);
+    if (!last) return; // first visit, no badge yet
+    const feedUrl = (window.AILatamConfig?.api?.feedUrl) || '/data/feed-latest.json';
+    const raw = await (await fetch(feedUrl, { cache:'no-store' })).json();
+    const arr = Array.isArray(raw) ? raw : (raw.articles || raw.items || []);
+    const count = arr.filter(a => { const t = new Date(a.published_at||a.fecha||null).getTime(); return isFinite(t) && t > last; }).length;
+    if (!count) return;
+    const nav = document.querySelector('.site-nav'); if (!nav) return;
+    const link = Array.from(nav.querySelectorAll('a')).find(a => /\/pages\/noticias\.html$/.test(a.getAttribute('href')||''));
+    if (!link) return;
+    // remove existing
+    const ex = link.querySelector('.nav-badge'); if (ex) ex.remove();
+    const b = document.createElement('span'); b.className='nav-badge'; b.textContent = `+${count}`; b.title = 'Nuevos desde tu última visita';
+    link.appendChild(b);
+  }catch(_){ /* noop */ }
+}
+
 async function initAgents(table){
   async function loadAgents(){
     try{
@@ -545,6 +570,21 @@ async function initPanorama(container){
     `;
     container.appendChild(card);
   }
+  // Quick filters from live topic counts
+  try{
+    const feedUrl = (window.AILatamConfig?.api?.feedUrl) || '/data/feed-latest.json';
+    const raw = await (await fetch(feedUrl, { cache:'no-store' })).json();
+    const arr = Array.isArray(raw) ? raw : (raw.articles || raw.items || []);
+    const counts = new Map();
+    for (const a of arr){ for (const t of (a.topics||[])){ const k=(t||'').toString().trim(); if(k) counts.set(k,(counts.get(k)||0)+1); } }
+    const top = Array.from(counts.entries()).sort((a,b)=>b[1]-a[1]).slice(0,10);
+    if (top.length){
+      const row = document.createElement('div'); row.className='quick-tags';
+      const label = document.createElement('span'); label.className='label'; label.textContent='Temas populares:'; row.appendChild(label);
+      for (const [t,n] of top){ const a=document.createElement('a'); a.className='chip brand'; a.href=`/pages/noticias.html?tema=${encodeURIComponent(t)}`; a.textContent=`${t}`; a.title=`${n} notas`; row.appendChild(a); }
+      container.parentNode.insertBefore(row, container);
+    }
+  }catch(_){ /* non-blocking */ }
 }
 
 // Observatorio Legal: línea temporal básica de items normativos
