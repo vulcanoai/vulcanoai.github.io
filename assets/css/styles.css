@@ -1138,6 +1138,586 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
   background: var(--brand-2);
   border-color: var(--brand-2);
 }
+
+/* Crypto Page Styles */
+.crypto-hero {
+  background: linear-gradient(135deg, rgba(255,215,0,.08) 0%, rgba(31,111,235,.12) 50%, rgba(138,43,226,.08) 100%);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 56px;
+  margin-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+  min-height: 400px;
+}
+
+.crypto-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.1;
+}
+
+.blockchain-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(rgba(255,215,0,.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,215,0,.1) 1px, transparent 1px);
+  background-size: 30px 30px;
+  animation: blockchainFlow 20s linear infinite;
+}
+
+@keyframes blockchainFlow {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(30px, 30px); }
+}
+
+.crypto-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #ffd700, #ff6b35, #8a2be2, transparent);
+  animation: cryptoGlow 3s ease-in-out infinite;
+}
+
+@keyframes cryptoGlow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.crypto-hero::after {
+  content: '';
+  position: absolute;
+  top: 20%;
+  right: 10%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255,215,0,.1), transparent 70%);
+  border-radius: 50%;
+  animation: cryptoPulse 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes cryptoPulse {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
+  50% { transform: scale(1.2) rotate(180deg); opacity: 0.6; }
+}
+
+.crypto-icon-stack {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.crypto-orb {
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(255,215,0,.2), rgba(255,107,53,.1));
+  border: 2px solid rgba(255,215,0,.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  animation: cryptoFloat 4s ease-in-out infinite;
+  margin: 0 auto;
+}
+
+@keyframes cryptoFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-8px) rotate(90deg); }
+  50% { transform: translateY(-4px) rotate(180deg); }
+  75% { transform: translateY(-12px) rotate(270deg); }
+}
+
+.crypto-orb .hero-icon {
+  width: 60px;
+  height: 60px;
+  color: #ffd700;
+  filter: drop-shadow(0 0 15px rgba(255,215,0,.5));
+}
+
+.floating-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.crypto-symbol {
+  position: absolute;
+  font-size: 20px;
+  font-weight: bold;
+  opacity: 0.7;
+  animation: cryptoOrbit 8s linear infinite;
+}
+
+.crypto-symbol.btc {
+  color: #f7931a;
+  top: 10%;
+  right: 10%;
+  animation-delay: 0s;
+}
+
+.crypto-symbol.eth {
+  color: #627eea;
+  bottom: 20%;
+  left: 15%;
+  animation-delay: -2.7s;
+}
+
+.crypto-symbol.sol {
+  color: #9945ff;
+  top: 30%;
+  left: 5%;
+  animation-delay: -5.3s;
+}
+
+@keyframes cryptoOrbit {
+  0% { transform: rotate(0deg) translateX(80px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(80px) rotate(-360deg); }
+}
+
+.hero-text h1 {
+  margin: 0;
+  font-size: 3.8rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffd700 0%, #ff6b35 50%, #8a2be2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+
+.crypto-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.stat-card.crypto-themed {
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,215,0,.2);
+  border-radius: 16px;
+  padding: 28px;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card.crypto-themed::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,215,0,.1), transparent);
+  transition: left 0.8s ease;
+}
+
+.stat-card.crypto-themed:hover::before {
+  left: 100%;
+}
+
+.stat-card.crypto-themed:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255,215,0,.4);
+  box-shadow: 0 15px 40px rgba(255,215,0,.1);
+}
+
+.crypto-tagline {
+  text-align: center;
+  margin-top: 32px;
+}
+
+.tagline-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 32px;
+  background: rgba(255,255,255,.02);
+  border: 1px solid rgba(255,215,0,.15);
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+/* Crypto Feed Section */
+.crypto-feed-section {
+  margin-top: 48px;
+}
+
+.crypto-feed-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.crypto-feed-header h2 {
+  margin: 0 0 12px 0;
+  font-size: 2.2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #fff 0%, #ffd700 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.crypto-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 32px;
+}
+
+.crypto-main {
+  min-height: 400px;
+}
+
+.crypto-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.crypto-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Crypto Panel Styles */
+.crypto-panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.3s ease;
+}
+
+.crypto-panel:hover {
+  border-color: rgba(255,215,0,.2);
+  transform: translateY(-2px);
+}
+
+.crypto-panel h3 {
+  margin: 0 0 16px 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* Market Overview */
+.market-overview .panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.market-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+}
+
+.indicator-dot.pulse {
+  animation: pulse 2s infinite;
+}
+
+.market-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.market-stat {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: rgba(255,255,255,.02);
+  border-radius: 12px;
+}
+
+.stat-icon {
+  font-size: 1.5rem;
+  width: 40px;
+  text-align: center;
+}
+
+.stat-info {
+  flex: 1;
+}
+
+.stat-info .stat-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ffd700;
+  margin-bottom: 4px;
+}
+
+.stat-info .stat-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Quick Explorer */
+.crypto-tags {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tag-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.tag-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--muted);
+  min-width: 70px;
+}
+
+.crypto-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.crypto-tag.defi {
+  background: rgba(34, 197, 94, .15);
+  color: #4ade80;
+  border-color: rgba(34, 197, 94, .3);
+}
+
+.crypto-tag.nft {
+  background: rgba(168, 85, 247, .15);
+  color: #c084fc;
+  border-color: rgba(168, 85, 247, .3);
+}
+
+.crypto-tag.cbdc {
+  background: rgba(59, 130, 246, .15);
+  color: #60a5fa;
+  border-color: rgba(59, 130, 246, .3);
+}
+
+.crypto-tag.country {
+  background: rgba(255, 215, 0, .15);
+  color: #ffd700;
+  border-color: rgba(255, 215, 0, .3);
+}
+
+.crypto-tag:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.2);
+}
+
+/* Methodology */
+.methodology-points {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.method-point {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.point-icon {
+  font-size: 1.2rem;
+  margin-top: 2px;
+}
+
+.point-text {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+.curator-info {
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+
+/* NFT Studio */
+.nft-studio .studio-desc {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+.nft-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.studio-note {
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-align: center;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1100px) {
+  .crypto-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .crypto-sidebar {
+    order: -1;
+  }
+}
+
+@media (max-width: 900px) {
+  .crypto-hero {
+    padding: 40px 24px;
+  }
+  
+  .hero-text h1 {
+    font-size: 2.8rem;
+  }
+  
+  .crypto-stats {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .crypto-orb {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .crypto-orb .hero-icon {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 600px) {
+  .crypto-hero {
+    padding: 32px 20px;
+  }
+  
+  .hero-text h1 {
+    font-size: 2.2rem;
+  }
+  
+  .tagline-content {
+    padding: 16px 24px;
+    font-size: 1rem;
+  }
+  
+  .crypto-panel {
+    padding: 20px;
+  }
+  
+  .nft-preview-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Enhanced Crypto News Cards */
+.crypto-grid .card {
+  border: 1px solid rgba(255,215,0,.1);
+  transition: all 0.3s ease;
+}
+
+.crypto-grid .card:hover {
+  border-color: rgba(255,215,0,.3);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(255,215,0,.1);
+}
+
+.crypto-grid .card .title a:hover {
+  color: #ffd700;
+}
+
+/* Crypto-specific chip enhancement */
+.crypto-grid .chip {
+  position: relative;
+  overflow: hidden;
+}
+
+.crypto-grid .chip::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,215,0,.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.crypto-grid .card:hover .chip::before {
+  left: 100%;
+}
+
+/* Loading animation for crypto stats */
+@keyframes cryptoShimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+
+.stat-card.crypto-themed.loading .stat-value {
+  background: linear-gradient(90deg, #333 25%, #444 50%, #333 75%);
+  background-size: 200px 100%;
+  animation: cryptoShimmer 2s infinite;
+  color: transparent;
+}
+
+.stat-card.crypto-themed.loading .stat-value::after {
+  content: '⚡';
+  color: #ffd700;
+  display: block;
+  font-size: 1.5rem;
+  margin-top: -0.5rem;
+}
 .quick-tags{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:8px 0}
 .quick-tags .label{color:var(--muted); font-size:12px}
 

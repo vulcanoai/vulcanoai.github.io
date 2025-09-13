@@ -15,34 +15,106 @@
     <a href="#main" class="skip-link">Saltar al contenido</a>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="/"><svg class="logo" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg><span class="brand-text">Vulcano Ai</span></a>
-        <button class="nav-toggle" aria-label="Abrir menú">☰</button>
+        <a class="brand" href="/pages/noticias.html">
+          <svg class="logo" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>
+          <span class="brand-text">Vulcano AI</span>
+        </a>
+        
+        <!-- Global Time Zone Indicators -->
+        <div class="global-time" id="global-time">
+          <div class="time-zone" data-tz="America/Mexico_City">
+            <span class="tz-label">MX</span>
+            <span class="tz-time">--:--</span>
+          </div>
+          <div class="time-zone" data-tz="America/Bogota">
+            <span class="tz-label">COL</span>
+            <span class="tz-time">--:--</span>
+          </div>
+          <div class="time-zone" data-tz="America/Argentina/Buenos_Aires">
+            <span class="tz-label">AR</span>
+            <span class="tz-time">--:--</span>
+          </div>
+          <div class="time-zone" data-tz="America/Sao_Paulo">
+            <span class="tz-label">BR</span>
+            <span class="tz-time">--:--</span>
+          </div>
+        </div>
+        
+        <button class="nav-toggle" aria-label="Abrir menú">
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+        </button>
+        
         <nav class="site-nav" aria-label="Principal">
-          <!-- buildUnifiedNav reemplaza este contenido -->
           <a href="/pages/noticias.html">Inicio</a>
           <a href="/pages/panorama.html">Panorama</a>
           <a href="/pages/crypto.html" aria-current="page">Crypto</a>
           <a href="/pages/observatorio-legal.html">Observatorio legal</a>
+          <a href="/pages/actualizaciones.html">Actualizaciones</a>
+          <a href="/pages/apoya.html">Apoyar</a>
           <a href="/pages/agentes.html">Agentes</a>
           <a href="/pages/fuentes.html">Fuentes</a>
-          <a href="/pages/apoya.html">Apoyar</a>
           <a href="/pages/vulcano.html">Qué es Vulcano AI</a>
         </nav>
       </div>
     </header>
     <main class="section" id="main">
       <div class="container">
-        <div class="container hero-grid" style="margin-bottom:12px">
-          <div>
-            <h1><svg class="logo" aria-hidden="true" style="vertical-align:-4px; margin-right:8px"><use href="/assets/icons.svg#logo"></use></svg>Crypto y activos digitales</h1>
-            <p class="tagline">Hook para audiencias artísticas y técnicas: señales cripto sin inflar datos, con trazabilidad y filtros.</p>
+        <!-- Crypto Hero Section -->
+        <div class="crypto-hero">
+          <div class="crypto-background">
+            <div class="blockchain-grid" id="blockchain-grid">
+              <!-- Animated blockchain nodes will be generated here -->
+            </div>
           </div>
-          <div class="orb-wrap">
-            <div id="hero-orb" class="orb orb-mini" aria-hidden="true"></div>
-            <span class="sr-only">Logo esférico de Vulcano Ai</span>
+          
+          <div class="hero-content">
+            <div class="hero-header">
+              <div class="crypto-icon-stack">
+                <div class="crypto-orb" id="hero-orb">
+                  <svg class="hero-icon" aria-hidden="true">
+                    <use href="/assets/icons.svg#logo"></use>
+                  </svg>
+                </div>
+                <div class="floating-elements">
+                  <div class="crypto-symbol btc">₿</div>
+                  <div class="crypto-symbol eth">Ξ</div>
+                  <div class="crypto-symbol sol">◎</div>
+                </div>
+              </div>
+              
+              <div class="hero-text">
+                <h1>Cripto en LATAM</h1>
+                <p class="hero-subtitle">Activos digitales, blockchain y Web3 en América Latina</p>
+              </div>
+            </div>
+            
+            <div class="crypto-stats">
+              <div class="stat-card crypto-themed">
+                <div class="stat-value" id="crypto-count">Cargando...</div>
+                <div class="stat-label">Señales cripto</div>
+              </div>
+              <div class="stat-card crypto-themed">
+                <div class="stat-value" id="crypto-countries">--</div>
+                <div class="stat-label">Países activos</div>
+              </div>
+              <div class="stat-card crypto-themed">
+                <div class="stat-value" id="crypto-sources">--</div>
+                <div class="stat-label">Fuentes verificadas</div>
+              </div>
+            </div>
+            
+            <div class="crypto-tagline">
+              <div class="tagline-content">
+                <svg class="tagline-icon" aria-hidden="true">
+                  <use href="/assets/icons.svg#sparkles"></use>
+                </svg>
+                <span>Datos sin inflar • Trazabilidad completa • Metodología abierta</span>
+              </div>
+            </div>
           </div>
         </div>
-        <p class="muted">Módulo experimental: filtra el feed por <span class="chip crypto">Crypto</span> para mapear adopción, regulación y cultura digital en LATAM sin inventar métricas. Cada entrada mantiene su fuente y fecha.</p>
 
         <!-- Smart chips auto (feed.js) + filtro inicial a Crypto por data-attribute -->
         <div class="filters" id="filters">
@@ -56,35 +128,101 @@
           </select>
         </div>
 
-        <div class="grid two-col" style="gap:16px">
-          <section>
-            <div id="news-list" class="grid news-grid" aria-live="polite" data-default-topic="Crypto">
-              <!-- feed.js pobla dinámicamente (máx 12 para home; aquí listará todo filtrado) -->
-            </div>
-          </section>
-          <aside>
-            <div class="panel">
-              <h3>Enfoque</h3>
-              <p class="note">Capa de filtros sobre el <em>mismo</em> feed. Sin números inventados: solo señales con país, fecha y curaduría <span class="chip luciano"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#robot"></use></svg> Luciano AI</span>.</p>
-            </div>
-            <div class="panel">
-              <h3>Explorar rápido</h3>
-              <div class="smart-tags">
-                <div class="group">
-                  <a class="chip crypto" href="/pages/noticias.html?tema=Crypto">Crypto</a>
-                  <a class="chip brand" href="/pages/noticias.html?pais=México">México</a>
-                  <a class="chip brand" href="/pages/noticias.html?pais=Brasil">Brasil</a>
-                  <a class="chip brand" href="/pages/noticias.html?pais=Colombia">Colombia</a>
+        <!-- Crypto Feed Section -->
+        <div class="crypto-feed-section">
+          <div class="crypto-feed-header">
+            <h2>Últimas señales</h2>
+            <p class="section-subtitle">Noticias de blockchain, DeFi, stablecoins y regulación crypto en América Latina</p>
+          </div>
+          
+          <div class="crypto-layout">
+            <section class="crypto-main">
+              <div id="news-list" class="crypto-grid" aria-live="polite" data-default-topic="Crypto">
+                <!-- Content loaded dynamically from feed.js -->
+              </div>
+            </section>
+            
+            <aside class="crypto-sidebar">
+              <!-- Market Overview Card -->
+              <div class="crypto-panel market-overview">
+                <div class="panel-header">
+                  <h3>Panorama regional</h3>
+                  <div class="market-indicator">
+                    <div class="indicator-dot pulse"></div>
+                    <span>Monitoreo activo</span>
+                  </div>
+                </div>
+                <div class="market-stats">
+                  <div class="market-stat">
+                    <div class="stat-icon">🌎</div>
+                    <div class="stat-info">
+                      <div class="stat-value" id="regional-coverage">--</div>
+                      <div class="stat-label">Países cubiertos</div>
+                    </div>
+                  </div>
+                  <div class="market-stat">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-info">
+                      <div class="stat-value" id="weekly-signals">--</div>
+                      <div class="stat-label">Señales esta semana</div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <p class="note">Próximo paso: análisis comparativo de términos (stablecoins/DeFi/NFT) por país, con metodología abierta.</p>
-            </div>
-            <div class="panel">
-              <h3>Studio NFT (demo)</h3>
-              <p class="note">Previsualizaciones generativas (sin acuñar, sin wallet). Ilustran firmas visuales reproducibles por código.</p>
-              <div id="crypto-orb-grid" class="grid" style="grid-template-columns:repeat(4,1fr); gap:10px"></div>
-            </div>
-          </aside>
+              
+              <!-- Quick Explorer -->
+              <div class="crypto-panel quick-explorer">
+                <h3>Exploración rápida</h3>
+                <div class="crypto-tags">
+                  <div class="tag-group">
+                    <span class="tag-label">Sectores:</span>
+                    <a class="crypto-tag defi" href="/pages/noticias.html?tema=DeFi">DeFi</a>
+                    <a class="crypto-tag nft" href="/pages/noticias.html?tema=NFT">NFT</a>
+                    <a class="crypto-tag cbdc" href="/pages/noticias.html?tema=CBDC">CBDC</a>
+                  </div>
+                  <div class="tag-group">
+                    <span class="tag-label">Países:</span>
+                    <a class="crypto-tag country" href="/pages/noticias.html?pais=México">México</a>
+                    <a class="crypto-tag country" href="/pages/noticias.html?pais=Brasil">Brasil</a>
+                    <a class="crypto-tag country" href="/pages/noticias.html?pais=Argentina">Argentina</a>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Methodology Card -->
+              <div class="crypto-panel methodology">
+                <h3>Metodología</h3>
+                <div class="methodology-points">
+                  <div class="method-point">
+                    <div class="point-icon">🔍</div>
+                    <div class="point-text">Filtrado automático por IA del feed principal</div>
+                  </div>
+                  <div class="method-point">
+                    <div class="point-icon">📈</div>
+                    <div class="point-text">Sin métricas infladas ni datos especulativos</div>
+                  </div>
+                  <div class="method-point">
+                    <div class="point-icon">🔗</div>
+                    <div class="point-text">Trazabilidad completa a fuentes originales</div>
+                  </div>
+                </div>
+                <div class="curator-info">
+                  <span class="chip luciano">
+                    <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#robot"></use></svg>
+                    Curado por Luciano AI
+                  </span>
+                </div>
+              </div>
+              
+              <!-- Generative Studio -->
+              <div class="crypto-panel nft-studio">
+                <h3>Studio generativo</h3>
+                <p class="studio-desc">Visualizaciones algorítmicas de datos crypto (sin acuñar)</p>
+                <div id="crypto-orb-grid" class="nft-preview-grid"></div>
+                <p class="studio-note">Patrones reproducibles por código • Sin wallet requerida</p>
+              </div>
+            </aside>
+          </div>
         </div>
       </div>
     </main>

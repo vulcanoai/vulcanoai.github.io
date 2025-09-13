@@ -24,6 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Initialize homepage hero stats
   initHeroStats();
+  
+  // Initialize crypto page if present
+  initCryptoPage();
 
   // Initialize sources page if present
   const sourcesList = document.getElementById('sources-list');
@@ -1082,6 +1085,207 @@ async function initHeroStats() {
     if (statsElements.countries) statsElements.countries.textContent = '--';
   }
 }
+
+// Crypto Page Initialization
+async function initCryptoPage() {
+  // Only run on crypto page
+  if (!document.querySelector('.crypto-hero')) return;
+  
+  try {
+    // Initialize blockchain animation
+    initBlockchainAnimation();
+    
+    // Load and populate crypto stats
+    await loadCryptoStats();
+    
+    // Initialize NFT studio preview
+    initNFTStudio();
+    
+  } catch (error) {
+    console.error('Error initializing crypto page:', error);
+  }
+}
+
+// Blockchain Grid Animation
+function initBlockchainAnimation() {
+  const blockchainGrid = document.getElementById('blockchain-grid');
+  if (!blockchainGrid) return;
+  
+  // Create animated blockchain nodes
+  for (let i = 0; i < 12; i++) {
+    const node = document.createElement('div');
+    node.className = 'blockchain-node';
+    node.style.cssText = `
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #ffd700;
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: blockchainPulse ${2 + Math.random() * 3}s ease-in-out infinite;
+      animation-delay: ${Math.random() * 2}s;
+      left: ${Math.random() * 100}%;
+      top: ${Math.random() * 100}%;
+    `;
+    blockchainGrid.appendChild(node);
+  }
+  
+  // Add CSS animation for blockchain nodes
+  if (!document.querySelector('#blockchain-styles')) {
+    const style = document.createElement('style');
+    style.id = 'blockchain-styles';
+    style.textContent = `
+      @keyframes blockchainPulse {
+        0%, 100% { opacity: 0.2; transform: scale(1); }
+        50% { opacity: 0.8; transform: scale(1.5); }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+}
+
+// Load Crypto Statistics
+async function loadCryptoStats() {
+  const statsElements = {
+    cryptoCount: document.getElementById('crypto-count'),
+    cryptoCountries: document.getElementById('crypto-countries'),
+    cryptoSources: document.getElementById('crypto-sources'),
+    regionalCoverage: document.getElementById('regional-coverage'),
+    weeklySignals: document.getElementById('weekly-signals')
+  };
+  
+  try {
+    // Load feed data
+    const feedUrl = (window.AILatamConfig?.api?.feedUrl) || '/data/feed-latest.json';
+    const raw = await fetch(feedUrl, { cache: 'no-store' });
+    if (!raw.ok) throw new Error('Failed to load feed');
+    
+    const data = await raw.json();
+    const arr = Array.isArray(data) ? data : (data.articles || data.items || []);
+    
+    // Filter crypto-related content
+    const cryptoKeywords = ['crypto', 'bitcoin', 'ethereum', 'blockchain', 'defi', 'nft', 'stablecoin', 'cbdc', 'web3'];
+    const cryptoArticles = arr.filter(article => {
+      const searchText = (article.title + ' ' + article.summary + ' ' + (article.topics || []).join(' ')).toLowerCase();
+      return cryptoKeywords.some(keyword => searchText.includes(keyword));
+    });
+    
+    // Calculate stats
+    const countries = new Set(cryptoArticles.map(x => (x.country || '').trim()).filter(Boolean));
+    const sources = new Set(cryptoArticles.map(x => (x.source || '').trim()).filter(Boolean));
+    
+    // Calculate weekly signals (last 7 days)
+    const weekAgo = new Date();
+    weekAgo.setDate(weekAgo.getDate() - 7);
+    const weeklyArticles = cryptoArticles.filter(article => {
+      const publishedDate = new Date(article.published_at || article.date || 0);
+      return publishedDate >= weekAgo;
+    });
+    
+    // Animate the values with crypto-themed effect
+    const animateValue = (element, start, end, duration = 1500, suffix = '') => {
+      if (!element) return;
+      
+      const range = end - start;
+      const minTimer = 50;
+      const stepTime = Math.abs(Math.floor(duration / range));
+      
+      let current = start;
+      const timer = setInterval(() => {
+        current += 1;
+        element.textContent = current.toLocaleString() + suffix;
+        
+        // Add golden glow effect during animation
+        element.style.textShadow = '0 0 10px rgba(255,215,0,0.5)';
+        
+        if (current >= end) {
+          clearInterval(timer);
+          // Remove glow after animation
+          setTimeout(() => {
+            element.style.textShadow = '';
+          }, 500);
+        }
+      }, Math.max(stepTime, minTimer));
+    };
+    
+    // Animate the values with staggered timing
+    setTimeout(() => animateValue(statsElements.cryptoCount, 0, cryptoArticles.length), 300);
+    setTimeout(() => animateValue(statsElements.cryptoCountries, 0, countries.size), 700);
+    setTimeout(() => animateValue(statsElements.cryptoSources, 0, sources.size), 1100);
+    setTimeout(() => animateValue(statsElements.regionalCoverage, 0, countries.size), 1500);
+    setTimeout(() => animateValue(statsElements.weeklySignals, 0, weeklyArticles.length), 1900);
+    
+  } catch (error) {
+    console.error('Error loading crypto stats:', error);
+    // Set fallback values
+    Object.values(statsElements).forEach(el => {
+      if (el) el.textContent = '--';
+    });
+  }
+}
+
+// NFT Studio Preview
+function initNFTStudio() {
+  const grid = document.getElementById('crypto-orb-grid');
+  if (!grid) return;
+  
+  // Generate 8 unique NFT previews using algorithmic patterns
+  for (let i = 0; i < 8; i++) {
+    const nft = document.createElement('div');
+    nft.className = 'nft-preview';
+    
+    // Generate unique patterns based on index
+    const hue = (i * 45) % 360;
+    const pattern = i % 4;
+    
+    nft.style.cssText = `
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 8px;
+      border: 1px solid rgba(255,215,0,0.2);
+      background: linear-gradient(${45 * i}deg, 
+        hsl(${hue}, 70%, 20%) 0%,
+        hsl(${(hue + 60) % 360}, 60%, 15%) 100%);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    `;
+    
+    // Add pattern overlay
+    const overlay = document.createElement('div');
+    overlay.style.cssText = `
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at ${30 + (i * 15)}% ${40 + (i * 10)}%, 
+          rgba(255,215,0,0.1) 0%, 
+          transparent 50%);
+      mix-blend-mode: overlay;
+    `;
+    
+    nft.appendChild(overlay);
+    
+    // Add hover effect
+    nft.addEventListener('mouseenter', () => {
+      nft.style.transform = 'scale(1.05) rotate(2deg)';
+      nft.style.borderColor = 'rgba(255,215,0,0.5)';
+      nft.style.boxShadow = '0 8px 25px rgba(255,215,0,0.2)';
+    });
+    
+    nft.addEventListener('mouseleave', () => {
+      nft.style.transform = '';
+      nft.style.borderColor = 'rgba(255,215,0,0.2)';
+      nft.style.boxShadow = '';
+    });
+    
+    grid.appendChild(nft);
+  }
+}
+
 // Generic copy-to-clipboard for [data-copy] buttons
 document.addEventListener('click', (e) => {
   const btn = e.target.closest('[data-copy]');
