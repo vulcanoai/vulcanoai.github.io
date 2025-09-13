@@ -1,0 +1,64 @@
+{
+  "articles": [
+    {
+      "id": "https://www.diariolibre.com/tecnologia/2023/10/05/rep-dom-avanza-conectividad-fibra-optica/1234567",
+      "title": "República Dominicana avanza en conectividad con proyecto de fibra óptica",
+      "summary": "El gobierno dominicano anuncia una inversión para expandir la red de fibra óptica, buscando mejorar el acceso a internet en zonas rurales.",
+      "url": "https://www.diariolibre.com/tecnologia/2023/10/05/rep-dom-avanza-conectividad-fibra-optica/1234567",
+      "source": "Diario Libre",
+      "source_url": "https://www.diariolibre.com",
+      "country": "República Dominicana",
+      "topics": [
+        "Tecnología",
+        "Infraestructura"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T20:10:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "María Guzmán",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.portafolio.co/innovacion/startup-colombiana-fintech-reconocimiento-2023-123456",
+      "title": "Startup colombiana de fintech recibe reconocimiento regional",
+      "summary": "Una empresa emergente de tecnología financiera en Colombia es premiada por su innovación en soluciones de pago digital para pequeñas empresas.",
+      "url": "https://www.portafolio.co/innovacion/startup-colombiana-fintech-reconocimiento-2023-123456",
+      "source": "Portafolio",
+      "source_url": "https://www.portafolio.co",
+      "country": "Colombia",
+      "topics": [
+        "Startups",
+        "Fintech"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T18:45:00Z",
+      "relevance": 8,
+      "sentiment": "positive",
+      "author": "Andrés Pérez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.el-nacional.com/economia/venezuela-desafios-regulacion-criptoactivos-2023/",
+      "title": "Venezuela enfrenta desafíos en la regulación de criptoactivos",
+      "summary": "Expertos advierten sobre la falta de un marco regulatorio claro para las criptomonedas en Venezuela, lo que genera incertidumbre en el mercado.",
+      "url": "https://www.el-nacional.com/economia/venezuela-desafios-regulacion-criptoactivos-2023/",
+      "source": "El Nacional",
+      "source_url": "https://www.el-nacional.com",
+      "country": "Venezuela",
+      "topics": [
+        "Regulación",
+        "Fintech"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T16:20:00Z",
+      "relevance": 6,
+      "sentiment": "negative",
+      "author": "José Ramírez",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T01:35:29.618Z",
+  "params": {}
+}
