@@ -334,14 +334,34 @@ function getCuratorClassName(curator) {
 }
 
 async function initAgents(table){
-  let agents;
-  try{
-    const url = (window.AILatamConfig?.api?.agentsUrl) || '/data/agents.json';
-    const res = await fetch(url, { cache:'no-store' });
-    agents = await res.json();
-  } catch(e){
-    agents = window.VULCANO_DEMO?.agents || [];
+  async function loadAgents(){
+    try{
+      const url = (window.AILatamConfig?.api?.agentsUrl) || '/data/agents.json';
+      const res = await fetch(url, { cache:'no-store' });
+      return await res.json();
+    }catch(e){ return window.VULCANO_DEMO?.agents || []; }
   }
+  async function loadStatus(){
+    try{
+      const res = await fetch('/data/index/status.json', { cache:'no-store' });
+      if (!res.ok) return null; return await res.json();
+    }catch(_){ return null; }
+  }
+  const [agents, status] = await Promise.all([loadAgents(), loadStatus()]);
+
+  // Optional status header
+  const statusBox = document.getElementById('agents-status');
+  if (statusBox){
+    if (status){
+      const last = status.last_run_iso ? new Date(status.last_run_iso).toLocaleString('es-ES') : '—';
+      statusBox.className = 'note';
+      statusBox.textContent = `Última corrida: ${last} • Artículos en feed: ${status.feed_count} • Estado: ${status.ok ? 'OK' : 'Atención'}`;
+    } else {
+      statusBox.className = 'note';
+      statusBox.textContent = 'Sin estado reciente';
+    }
+  }
+
   const tbody = table.querySelector('tbody');
   tbody.innerHTML = '';
   for (const a of agents){
@@ -349,10 +369,8 @@ async function initAgents(table){
     const st = (a.estado || 'desconocido').toLowerCase();
     const last = a.ultimo_ejecucion || a.lastRun || '';
 
-    // Agent name with curator chip styling
     const tdName = document.createElement('td');
     if (a.nombre && a.nombre.includes(' AI')) {
-      // Create curator chip for AI agents
       const curatorClass = getCuratorClass ? getCuratorClass(a.nombre) : getCuratorClassName(a.nombre);
       const nameChip = document.createElement('span');
       nameChip.className = `chip ${curatorClass}`;
@@ -367,11 +385,8 @@ async function initAgents(table){
     } else {
       tdName.textContent = a.nombre || '';
     }
-    
-    const tdState = document.createElement('td'); 
-    const chip = document.createElement('span'); 
-    chip.className = 'chip ' + (st==='activo'?'ok':st==='configurando'?'warn':st==='fallo'?'err':''); 
-    chip.textContent = a.estado || ''; 
+    const tdState = document.createElement('td');
+    const chip = document.createElement('span'); chip.className = 'chip ' + (st==='activo'?'ok':st==='configurando'?'warn':st==='fallo'?'err':''); chip.textContent = a.estado || '';
     tdState.appendChild(chip);
     const tdLast = document.createElement('td'); tdLast.textContent = last ? new Date(last).toLocaleString('es-ES') : '—';
     const tdRate = document.createElement('td'); tdRate.textContent = a.throughput ? (typeof a.throughput === 'string' ? a.throughput : a.throughput + '/h') : '—';
@@ -379,6 +394,11 @@ async function initAgents(table){
 
     tr.append(tdName, tdState, tdLast, tdRate, tdNotes);
     tbody.appendChild(tr);
+  }
+
+  // Simple auto-refresh every 60s (single instance)
+  if (!window.__agentsRefresh){
+    window.__agentsRefresh = setInterval(() => { initAgents(table).catch(console.error); }, 60000);
   }
 }
 

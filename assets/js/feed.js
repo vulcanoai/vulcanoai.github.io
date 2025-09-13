@@ -37,23 +37,32 @@
     return d.toLocaleDateString('es-ES', { day:'2-digit', month:'short', year:'numeric' });
   };
 
-  const normalize = (a) => ({
-    id: a.id || crypto.randomUUID(),
-    title: a.title || a.titulo || 'Sin título',
-    summary: a.summary || a.resumen || '',
-    url: a.url || a.link || '#',
-    source: a.source || a.fuente || '—',
-    source_url: a.source_url || a.fuente_url || '',
-    country: a.country || a.pais || 'Regional',
-    topics: a.topics || a.temas || [],
-    language: a.language || a.idioma || 'es',
-    published_at: a.published_at || a.fecha || new Date().toISOString(),
-    // image_url intencionalmente ignorado para UI mínima sin imágenes
-    relevance: a.relevance || a.relevancia || 0,
-    sentiment: a.sentiment || a.sentimiento || 'neutral',
-    author: a.author || a.autor || '',
-    curator: a.curator || a.curador || 'Luciano AI'
-  });
+  const normalize = (a) => {
+    const val = (x, def='') => (x == null ? def : String(x)).trim();
+    const title = val(a.title || a.titulo, 'Sin título');
+    const url = val(a.url || a.link, '#');
+    const country = val(a.country || a.pais, 'Regional');
+    const topics = (a.topics || a.temas || []).map(t => val(t)).filter(Boolean);
+    const language = val(a.language || a.idioma || 'es').slice(0,2).toLowerCase();
+    let published_at = val(a.published_at || a.fecha);
+    if (!published_at) published_at = new Date().toISOString();
+    return {
+      id: a.id || url || crypto.randomUUID(),
+      title,
+      summary: val(a.summary || a.resumen),
+      url,
+      source: val(a.source || a.fuente, '—'),
+      source_url: val(a.source_url || a.fuente_url),
+      country,
+      topics,
+      language,
+      published_at,
+      relevance: a.relevance || a.relevancia || 0,
+      sentiment: val(a.sentiment || a.sentimiento || 'neutral'),
+      author: val(a.author || a.autor),
+      curator: val(a.curator || a.curador || 'Luciano AI')
+    };
+  };
 
   async function fetchJSON(url){
     const res = await fetch(url, { cache:'no-store' });
@@ -188,7 +197,7 @@
   }
 
   function buildFacets(items){
-    const s = (arr, key) => Array.from(new Set(arr.map(x => (x[key] || '').toString()))).filter(Boolean).sort();
+    const s = (arr, key) => Array.from(new Set(arr.map(x => (x[key] || '').toString().trim()))).filter(Boolean).sort();
     const topics = Array.from(new Set(items.flatMap(x => x.topics || []))).sort();
     const countries = s(items, 'country');
     const sources = s(items, 'source');
