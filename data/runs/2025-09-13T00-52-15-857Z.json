@@ -1,0 +1,64 @@
+{
+  "articles": [
+    {
+      "id": "https://www.listindiario.com/la-republica/2023/10/05/795123/republica-dominicana-ia-educacion",
+      "title": "República Dominicana apuesta por la inteligencia artificial en educación",
+      "summary": "El Ministerio de Educación dominicano ha anunciado un plan para integrar herramientas de inteligencia artificial en las aulas, buscando mejorar los procesos de aprendizaje.",
+      "url": "https://www.listindiario.com/la-republica/2023/10/05/795123/republica-dominicana-ia-educacion",
+      "source": "Listín Diario",
+      "source_url": "https://www.listindiario.com",
+      "country": "República Dominicana",
+      "topics": [
+        "Educación",
+        "Inteligencia Artificial"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T23:00:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "María Guzmán",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.abc.com.py/nacionales/2023/10/05/paraguay-regula-criptomonedas-fraudes/",
+      "title": "Paraguay regula el uso de criptomonedas para prevenir fraudes",
+      "summary": "El gobierno paraguayo ha introducido una normativa para supervisar las transacciones con criptomonedas, con el objetivo de evitar estafas y actividades ilícitas.",
+      "url": "https://www.abc.com.py/nacionales/2023/10/05/paraguay-regula-criptomonedas-fraudes/",
+      "source": "ABC Color",
+      "source_url": "https://www.abc.com.py",
+      "country": "Paraguay",
+      "topics": [
+        "Regulación",
+        "Criptomonedas"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T21:30:00Z",
+      "relevance": 6,
+      "sentiment": "neutral",
+      "author": "Roberto Díaz",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.elsalvador.com/noticias/nacional/el-salvador-blockchain-finanzas-2023/",
+      "title": "El Salvador impulsa adopción de tecnología blockchain en finanzas",
+      "summary": "Tras la implementación de Bitcoin como moneda de curso legal, El Salvador explora nuevas aplicaciones de blockchain para modernizar su sistema financiero.",
+      "url": "https://www.elsalvador.com/noticias/nacional/el-salvador-blockchain-finanzas-2023/",
+      "source": "El Salvador.com",
+      "source_url": "https://www.elsalvador.com",
+      "country": "El Salvador",
+      "topics": [
+        "Tecnología",
+        "Blockchain"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T20:00:00Z",
+      "relevance": 8,
+      "sentiment": "positive",
+      "author": "Ana Beltrán",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T00:52:14.122Z",
+  "params": {}
+}
