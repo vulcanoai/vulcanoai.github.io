@@ -1,0 +1,64 @@
+{
+  "articles": [
+    {
+      "id": "https://www.infobae.com/economia/2023/10/05/argentina-nuevas-normas-comercio-electronico/",
+      "title": "Argentina implementa nuevas normas para comercio electrónico",
+      "summary": "El gobierno argentino ha introducido regulaciones para proteger a los consumidores en plataformas de comercio electrónico, incluyendo políticas de devolución y transparencia en precios.",
+      "url": "https://www.infobae.com/economia/2023/10/05/argentina-nuevas-normas-comercio-electronico/",
+      "source": "Infobae",
+      "source_url": "https://www.infobae.com",
+      "country": "Argentina",
+      "topics": [
+        "Regulación",
+        "Comercio Electrónico"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T20:10:00Z",
+      "relevance": 7,
+      "sentiment": "neutral",
+      "author": "Mariana López",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.estadao.com.br/economia/startup-brasileira-saude-digital-financiamento-2023/",
+      "title": "Startup brasileña de salud digital recibe financiación récord",
+      "summary": "Una empresa de tecnología en salud con sede en São Paulo ha obtenido una inversión de 15 millones de reales para expandir su plataforma de telemedicina en el país.",
+      "url": "https://www.estadao.com.br/economia/startup-brasileira-saude-digital-financiamento-2023/",
+      "source": "Estadão",
+      "source_url": "https://www.estadao.com.br",
+      "country": "Brasil",
+      "topics": [
+        "Startups",
+        "Salud Digital"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-05T16:40:00Z",
+      "relevance": 8,
+      "sentiment": "positive",
+      "author": "João Mendes",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.laestrella.com.pa/economia/panama-hub-tecnologico-centroamerica-2023/",
+      "title": "Panamá busca convertirse en hub tecnológico de Centroamérica",
+      "summary": "Con incentivos fiscales y nuevas políticas, Panamá apuesta por atraer empresas tecnológicas y startups para consolidarse como un centro de innovación en la región.",
+      "url": "https://www.laestrella.com.pa/economia/panama-hub-tecnologico-centroamerica-2023/",
+      "source": "La Estrella de Panamá",
+      "source_url": "https://www.laestrella.com.pa",
+      "country": "Panamá",
+      "topics": [
+        "Tecnología",
+        "Innovación"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T15:20:00Z",
+      "relevance": 6,
+      "sentiment": "positive",
+      "author": "Gabriel Ortiz",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T00:49:34.394Z",
+  "params": {}
+}
