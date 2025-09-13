@@ -1,0 +1,64 @@
+{
+  "articles": [
+    {
+      "id": "https://www.eluniversal.com.mx/nacion/mexico-aprueba-ley-para-regular-plataformas-digitales",
+      "title": "México aprueba nueva ley para regular plataformas digitales",
+      "summary": "El Congreso de México ha aprobado una legislación que busca regular el funcionamiento de plataformas digitales, con énfasis en la protección de datos y la transparencia de algoritmos.",
+      "url": "https://www.eluniversal.com.mx/nacion/mexico-aprueba-ley-para-regular-plataformas-digitales",
+      "source": "El Universal",
+      "source_url": "https://www.eluniversal.com.mx",
+      "country": "México",
+      "topics": [
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T14:30:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Juan Pérez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.eltiempo.com/economia/empresas/startup-colombiana-de-fintech-recibe-inversion-de-5-millones-123456",
+      "title": "Startup colombiana de fintech recibe inversión millonaria",
+      "summary": "Una startup colombiana enfocada en soluciones de pago digital ha cerrado una ronda de financiación Serie A por 5 millones de dólares, liderada por un fondo internacional.",
+      "url": "https://www.eltiempo.com/economia/empresas/startup-colombiana-de-fintech-recibe-inversion-de-5-millones-123456",
+      "source": "El Tiempo",
+      "source_url": "https://www.eltiempo.com",
+      "country": "Colombia",
+      "topics": [
+        "Startups",
+        "Fintech"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T16:45:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "María Gómez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://g1.globo.com/economia/noticia/2023/10/05/brasil-lidera-energias-renovaveis-na-america-latina.ghtml",
+      "title": "Brasil lidera adopción de energías renovables en América Latina",
+      "summary": "Un informe reciente destaca a Brasil como el país con mayor inversión en energías renovables en la región, impulsado por proyectos de energía solar y eólica.",
+      "url": "https://g1.globo.com/economia/noticia/2023/10/05/brasil-lidera-energias-renovaveis-na-america-latina.ghtml",
+      "source": "G1 Globo",
+      "source_url": "https://g1.globo.com",
+      "country": "Brasil",
+      "topics": [
+        "Energía",
+        "Sostenibilidad"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-05T12:10:00Z",
+      "relevance": 9,
+      "sentiment": "positive",
+      "author": "Carlos Silva",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T00:33:40.659Z",
+  "params": {}
+}
