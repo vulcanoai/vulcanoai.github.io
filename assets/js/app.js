@@ -1057,13 +1057,22 @@ async function initHeroStats() {
   if (!statsElements.articles) return;
   
   try {
-    // Load feed data
+    // Load feed data and status in parallel
     const feedUrl = (window.AILatamConfig?.api?.feedUrl) || '/data/feed-latest.json';
-    const raw = await fetch(feedUrl, { cache: 'no-store' });
-    if (!raw.ok) throw new Error('Failed to load feed');
-    
-    const data = await raw.json();
-    const arr = Array.isArray(data) ? data : (data.articles || data.items || []);
+    const [rawFeed, rawStatus] = await Promise.allSettled([
+      fetch(feedUrl, { cache: 'no-store' }),
+      fetch('/data/index/status.json', { cache: 'no-store' })
+    ]);
+
+    let arr = [];
+    if (rawFeed.status === 'fulfilled' && rawFeed.value.ok) {
+      const data = await rawFeed.value.json();
+      arr = Array.isArray(data) ? data : (data.articles || data.items || []);
+    }
+    let status = null;
+    if (rawStatus.status === 'fulfilled' && rawStatus.value.ok) {
+      status = await rawStatus.value.json();
+    }
     
     // Calculate stats
     const countries = new Set(arr.map(x => (x.country || '').trim()).filter(Boolean));
@@ -1085,8 +1094,10 @@ async function initHeroStats() {
       }, Math.max(stepTime, minTimer));
     };
     
+    const totalArticles = (status && typeof status.feed_count === 'number') ? status.feed_count : arr.length;
+    
     // Animate the values
-    setTimeout(() => animateValue(statsElements.articles, 0, arr.length), 200);
+    setTimeout(() => animateValue(statsElements.articles, 0, totalArticles), 200);
     setTimeout(() => animateValue(statsElements.sources, 0, sources.size), 600);
     setTimeout(() => animateValue(statsElements.countries, 0, countries.size), 1000);
     

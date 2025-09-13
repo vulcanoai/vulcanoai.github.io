@@ -15,7 +15,8 @@
     newSince: 0,
     facets: { countries: [], topics: [], sources: [], languages: [] },
     filters: { country: 'todos', topic: 'todos', source: 'todas', q: '', sort: 'recent' },
-    els: {}
+    els: {},
+    totalCountFromIndex: 0
   };
 
   function $(sel){ return document.querySelector(sel); }
@@ -76,9 +77,33 @@
     
     // Generate list of potential data sources: latest + last 7 days of snapshots + sample
     const today = new Date();
-    const sources = [
-      { url: config.feedUrl || '/data/feed-latest.json', type: 'latest' }
-    ];
+    const sources = [];
+
+    // Try to include last run file based on status.json (most up-to-date hourly batch)
+    try {
+      const status = await fetchJSON('/data/index/status.json');
+      if (status && typeof status.feed_count === 'number') {
+        state.totalCountFromIndex = status.feed_count;
+      }
+      if (status && status.last_run_iso) {
+        const file = status.last_run_iso
+          .replace(/:/g, '-')
+          .replace(/\./g, '-') + '.json';
+        sources.push({ url: `/data/runs/${file}`, type: 'run', date: status.last_run_iso.slice(0,10) });
+      }
+      // Try runs manifest to include several latest runs
+      try{
+        const runs = await fetchJSON('/data/index/runs.json');
+        if (runs && Array.isArray(runs.runs)){
+          for (const r of runs.runs.slice(0, 12)){
+            if (r && r.file){ sources.push({ url: `/data/runs/${r.file}`, type: 'run', date: (r.timestamp||'').slice(0,10) }); }
+          }
+        }
+      }catch(_){ /* ignore */ }
+    } catch (_) { /* optional */ }
+
+    // Always include latest consolidated feed
+    sources.push({ url: config.feedUrl || '/data/feed-latest.json', type: 'latest' });
     
     // Add last 7 days of snapshots
     for (let i = 0; i < 7; i++) {
@@ -92,7 +117,7 @@
       });
     }
     
-    // No sample fallback: rely only on live + snapshots
+    // No sample fallback: rely only on live + snapshots + last run
     
     // Show loading state
     showLoadingState('Cargando noticias...');
@@ -292,7 +317,14 @@
     const counter = document.getElementById('results-counter');
     if (!counter) return;
 
-    const total = state.all.length;
+    const totalRaw = state.all.length;
+    const total = (state.totalCountFromIndex && state.filters &&
+                   state.filters.country === 'todos' &&
+                   state.filters.topic === 'todos' &&
+                   state.filters.source === 'todas' &&
+                   (state.filters.q||'').trim() === '')
+      ? state.totalCountFromIndex
+      : totalRaw;
     const showing = state.filtered.length;
     const hasFilters = state.filters.q || state.filters.country !== 'todos' || state.filters.topic !== 'todos' || state.filters.source !== 'todas';
 
