@@ -1,0 +1,64 @@
+{
+  "articles": [
+    {
+      "id": "https://www.laprensa.hn/honduras/honduras-formacion-tecnologica-brecha-digital-2023/",
+      "title": "Honduras invierte en formación tecnológica para reducir la brecha digital",
+      "summary": "El gobierno hondureño, en alianza con organizaciones internacionales, lanza un programa de capacitación en habilidades digitales para jóvenes y adultos en áreas urbanas y rurales.",
+      "url": "https://www.laprensa.hn/honduras/honduras-formacion-tecnologica-brecha-digital-2023/",
+      "source": "La Prensa Honduras",
+      "source_url": "https://www.laprensa.hn",
+      "country": "Honduras",
+      "topics": [
+        "Educación",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-06T04:00:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Mariela Torres",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.prensalibre.com/economia/guatemala-banca-digital-retos-2023/",
+      "title": "Guatemala enfrenta retos en la implementación de la banca digital",
+      "summary": "Aunque la banca digital crece en Guatemala, expertos señalan que la falta de infraestructura y educación financiera limita su adopción masiva entre la población.",
+      "url": "https://www.prensalibre.com/economia/guatemala-banca-digital-retos-2023/",
+      "source": "Prensa Libre",
+      "source_url": "https://www.prensalibre.com",
+      "country": "Guatemala",
+      "topics": [
+        "Tecnología",
+        "Finanzas"
+      ],
+      "language": "es",
+      "published_at": "2023-10-06T03:30:00Z",
+      "relevance": 6,
+      "sentiment": "negative",
+      "author": "José Ramírez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.emol.com/noticias/Economia/2023/10/06/chile-fondo-startups-tecnologicas.html",
+      "title": "Chile promueve startups tecnológicas con fondo de inversión estatal",
+      "summary": "Un nuevo fondo estatal en Chile busca financiar startups tecnológicas con alto potencial, fomentando la innovación y el emprendimiento en el país.",
+      "url": "https://www.emol.com/noticias/Economia/2023/10/06/chile-fondo-startups-tecnologicas.html",
+      "source": "Emol",
+      "source_url": "https://www.emol.com",
+      "country": "Chile",
+      "topics": [
+        "Startups",
+        "Innovación"
+      ],
+      "language": "es",
+      "published_at": "2023-10-06T02:45:00Z",
+      "relevance": 8,
+      "sentiment": "positive",
+      "author": "Valentina Muñoz",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T01:10:07.908Z",
+  "params": {}
+}
