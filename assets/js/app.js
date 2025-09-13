@@ -47,6 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const sm = document.getElementById('smart-marquee');
   if (sm){ initSmartMarquee(sm).catch(console.error); }
 
+  // World clock + last update, subtle footer row
+  mountWorldClock().catch(console.error);
+
   // Mobile/tablet nav toggle - Enhanced
   try{
     const btn = document.querySelector('.nav-toggle');
@@ -331,6 +334,52 @@ function getCuratorClassName(curator) {
   if (name.includes('rodrigo')) return 'rodrigo';
   if (name.includes('isabella')) return 'isabella';
   return 'luciano';
+}
+
+// World clock + last update ribbon (site-wide)
+async function mountWorldClock(){
+  try{
+    const footer = document.querySelector('.footer-inner');
+    if (!footer) return;
+    // Remove existing row
+    const existing = document.getElementById('world-clock');
+    if (existing) existing.remove();
+    const row = document.createElement('div'); row.id = 'world-clock'; row.className = 'clock-row';
+    const zones = [
+      { id:'UTC', tz:'UTC' },
+      { id:'MX', tz:'America/Mexico_City' },
+      { id:'BOG', tz:'America/Bogota' },
+      { id:'BA', tz:'America/Argentina/Buenos_Aires' },
+      { id:'SP', tz:'America/Sao_Paulo' },
+    ];
+    const fmt = (tz) => new Intl.DateTimeFormat('es-ES',{ hour:'2-digit', minute:'2-digit', timeZone:tz, hour12:false }).format(new Date());
+    const frag = document.createDocumentFragment();
+    for (const z of zones){
+      const span = document.createElement('span'); span.className='time'; span.setAttribute('data-tz', z.tz);
+      span.textContent = `${z.id} ${fmt(z.tz)}`; frag.appendChild(span);
+    }
+    const sep = document.createElement('span'); sep.className='sep'; sep.textContent = '•'; frag.appendChild(sep);
+    const last = document.createElement('span'); last.className='time'; last.id='last-update'; last.textContent='Actualización: —'; frag.appendChild(last);
+    row.appendChild(frag);
+    footer.appendChild(row);
+    // Update clocks every minute
+    setInterval(() => {
+      row.querySelectorAll('[data-tz]').forEach(el => { const tz=el.getAttribute('data-tz'); el.textContent = `${tz.split('/').pop().slice(0,2).toUpperCase()} ${fmt(tz)}`; });
+    }, 60000);
+    // Load status.json for last update
+    try{
+      const r = await fetch('/data/index/status.json', { cache:'no-store' });
+      if (r.ok){ const s = await r.json(); const t = s.last_feed_update || s.last_run_iso || s.generated_at; if (t){ const d=new Date(t); const rel = timeAgo(d); last.textContent = `Actualización: ${rel}`; last.title = d.toLocaleString('es-ES'); } }
+    }catch(_){ /* optional */ }
+  }catch(_){ /* noop */ }
+}
+
+function timeAgo(date){
+  const diff = Math.floor((Date.now() - date.getTime())/1000);
+  if (diff < 60) return 'hace segundos';
+  if (diff < 3600) return `hace ${Math.floor(diff/60)} min`;
+  if (diff < 86400) return `hace ${Math.floor(diff/3600)} h`;
+  const days = Math.floor(diff/86400); return `hace ${days} d`;
 }
 
 async function initAgents(table){

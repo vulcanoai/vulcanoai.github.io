@@ -12,6 +12,7 @@
   const state = {
     all: [],
     filtered: [],
+    newSince: 0,
     facets: { countries: [], topics: [], sources: [], languages: [] },
     filters: { country: 'todos', topic: 'todos', source: 'todas', q: '', sort: 'recent' },
     els: {}
@@ -345,6 +346,16 @@
     }
     link.textContent = a.title; 
     title.appendChild(link);
+    // NEW badge if newer than last visit
+    try{
+      const lv = Number(localStorage.getItem('lastVisit')||0);
+      const ts = new Date(a.published_at).getTime();
+      if (lv && ts > lv){
+        const newChip = create('span','chip new'); newChip.textContent = 'Nuevo';
+        title.appendChild(document.createTextNode(' '));
+        title.appendChild(newChip);
+      }
+    }catch(_){ /* noop */ }
     
     const summary = create('p'); 
     summary.textContent = a.summary || '';
@@ -531,6 +542,13 @@
     }catch(_){ /* noop */ }
     try {
       state.all = await loadFeed();
+      // Compute new items since last visit
+      try{
+        const lv = Number(localStorage.getItem('lastVisit')||0);
+        if (lv){
+          state.newSince = state.all.filter(a => new Date(a.published_at).getTime() > lv).length;
+        } else { state.newSince = 0; }
+      }catch(_){ state.newSince = 0; }
       
       if (state.all.length === 0) {
         showErrorState('No hay noticias disponibles en este momento.');
@@ -539,6 +557,7 @@
       
       buildFacets(state.all);
       populateFilters();
+      renderLastVisitedBanner();
       renderSmartTags();
       
       // seed UI elements safely
@@ -557,6 +576,30 @@
     } catch (e){
       console.error('Error inicializando feed:', e);
       showErrorState('Error al cargar las noticias. Verifica tu conexión e intenta nuevamente.');
+    }
+  }
+
+  function renderLastVisitedBanner(){
+    const filtersBox = document.getElementById('filters');
+    if (!filtersBox) return;
+    // Remove existing banner
+    const sib = filtersBox.previousElementSibling;
+    if (sib && sib.classList && sib.classList.contains('last-visit')) sib.remove();
+    const bar = create('div','last-visit');
+    const lv = Number(localStorage.getItem('lastVisit')||0);
+    if (state.newSince > 0){
+      bar.innerHTML = `<span class="chip ok">${state.newSince} nuevos desde tu última visita</span> <button class="btn subtle" id="mark-seen">Marcar como visto</button>`;
+      bar.querySelector('#mark-seen').onclick = () => {
+        localStorage.setItem('lastVisit', String(Date.now()));
+        bar.remove();
+        applyFilters();
+        render();
+      };
+      filtersBox.parentNode.insertBefore(bar, filtersBox);
+    } else if (!lv) {
+      // First visit message
+      bar.innerHTML = `<span class="note">Bienvenido. Las nuevas historias aparecerán resaltadas.</span>`;
+      filtersBox.parentNode.insertBefore(bar, filtersBox);
     }
   }
 

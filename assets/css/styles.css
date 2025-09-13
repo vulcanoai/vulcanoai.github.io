@@ -178,6 +178,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
 .chip.ok{border-color:rgba(25,195,125,.35); color:#9af0c8}
 .chip.warn{border-color:rgba(251,191,36,.35); color:#ffe29c}
 .chip.err{border-color:rgba(239,68,68,.35); color:#ffaaaa}
+.chip.new{border-color:rgba(56,189,248,.35); color:#b3e8ff}
 .chip.route-wiki{border-color: rgba(255,90,42,.45); color: #ffbfa8}
 .chip.route-external{border-color: rgba(47,129,247,.45); color:#a8c7ff}
 .chip.attach{border-color: rgba(168,85,247,.45); color:#d9b8ff}
@@ -189,6 +190,10 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
 .metric{background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px}
 .metric .value{font-size:24px; font-weight:700}
 .metric .label{color:var(--muted)}
+.last-visit{display:flex; gap:10px; align-items:center; margin:6px 0 2px}
+.clock-row{display:flex; gap:12px; align-items:center; color:var(--muted); font-size:12px}
+.clock-row .time{background:rgba(255,255,255,.04); border:1px solid var(--line); padding:2px 8px; border-radius:999px}
+.clock-row .sep{opacity:.6}
 
 /* Agents — GitHub-like central board */
 .agents-hero{padding:20px; background:linear-gradient(180deg, rgba(31,111,235,.08), transparent 60%)}
