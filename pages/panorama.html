@@ -16,8 +16,37 @@
     <!-- Navegación replicada (ver nota en index.html) -->
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="/pages/noticias.html"><svg class="logo" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg><span class="brand-text">Vulcano AI</span></a>
-        <button class="nav-toggle" aria-label="Abrir menú">☰</button>
+        <a class="brand" href="/pages/noticias.html">
+          <svg class="logo" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>
+          <span class="brand-text">Vulcano AI</span>
+        </a>
+
+        <!-- Global Time Zone Indicators -->
+        <div class="global-time" id="global-time">
+          <div class="time-zone" data-tz="America/Mexico_City">
+            <span class="tz-label">MX</span>
+            <span class="tz-time">--:--</span>
+          </div>
+          <div class="time-zone" data-tz="America/Bogota">
+            <span class="tz-label">COL</span>
+            <span class="tz-time">--:--</span>
+          </div>
+          <div class="time-zone" data-tz="America/Argentina/Buenos_Aires">
+            <span class="tz-label">AR</span>
+            <span class="tz-time">--:--</span>
+          </div>
+          <div class="time-zone" data-tz="America/Sao_Paulo">
+            <span class="tz-label">BR</span>
+            <span class="tz-time">--:--</span>
+          </div>
+        </div>
+
+        <button class="nav-toggle" aria-label="Abrir menú">
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+        </button>
+
         <nav class="site-nav" aria-label="Principal">
           <a href="/pages/noticias.html">Inicio</a>
           <a href="/pages/panorama.html" aria-current="page">Panorama</a>
@@ -73,17 +102,87 @@
         </div>
       </div>
     </main>
-    <footer class="site-footer">
+    <footer class="site-footer enhanced">
+      <div class="footer-background">
+        <div class="footer-glow"></div>
+      </div>
       <div class="container footer-inner">
-        <div class="footer-brand">
-          <svg class="logo small" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>
-          <div><strong>Vulcano Ai</strong><div class="muted">Vulcano Ai Digital Solutions S.A.S - 2025 Todos los derechos reservados</div></div>
+        <div class="footer-main">
+          <div class="footer-brand">
+            <div class="brand-logo">
+              <svg class="logo" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>
+            </div>
+            <div class="brand-info">
+              <div class="brand-name">Vulcano AI</div>
+              <div class="brand-tagline">Inteligencia artificial para América Latina</div>
+            </div>
+          </div>
+
+          <div class="footer-sections">
+            <div class="footer-section">
+              <h3>Plataforma</h3>
+              <nav class="footer-links">
+                <a href="/pages/noticias.html">Noticias IA</a>
+                <a href="/pages/panorama.html">Panorama</a>
+                <a href="/pages/observatorio-legal.html">Observatorio Legal</a>
+                <a href="/pages/agentes.html">Agentes</a>
+              </nav>
+            </div>
+
+            <div class="footer-section">
+              <h3>Recursos</h3>
+              <nav class="footer-links">
+                <a href="/pages/fuentes.html">Fuentes</a>
+                <a href="/pages/actualizaciones.html">Actualizaciones</a>
+                <a href="/pages/independiente.html">Publicar trabajo</a>
+                <a href="mailto:ivan@vulcano.ai">Contacto</a>
+              </nav>
+            </div>
+
+            <div class="footer-section">
+              <h3>Compañía</h3>
+              <nav class="footer-links">
+                <a href="/pages/vulcano.html">Qué es Vulcano AI</a>
+                <a href="/pages/apoya.html">Apoyar proyecto</a>
+                <a href="/pages/legal/privacidad.html">Privacidad</a>
+                <a href="/pages/legal/terminos.html">Términos</a>
+              </nav>
+            </div>
+
+            <div class="footer-section social">
+              <h3>Colaboración</h3>
+              <div class="social-links">
+                <a href="https://github.com/vulcanoai" target="_blank" rel="noopener" class="social-link github">
+                  <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#github"></use></svg>
+                  <span>GitHub</span>
+                </a>
+                <a href="mailto:ivan@vulcano.ai" class="social-link email">
+                  <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#mail"></use></svg>
+                  <span>Email</span>
+                </a>
+              </div>
+              <div class="ai-collaboration">
+                <span class="collaboration-badge">
+                  <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#robot"></use></svg>
+                  Multi-AI Project
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
-        <nav class="footer-nav">
-          <a href="/pages/legal/privacidad.html">Privacidad</a>
-          <a href="/pages/legal/terminos.html">Términos</a>
-          <a href="/pages/vulcano.html">Qué es Vulcano AI</a>
-        </nav>
+
+        <div class="footer-bottom">
+          <div class="footer-legal">
+            <span class="copyright">© 2025 Vulcano AI Digital Solutions S.A.S</span>
+            <span class="separator">•</span>
+            <span class="location">Bogotá, Colombia</span>
+            <span class="separator">•</span>
+            <span class="status">Todos los derechos reservados</span>
+          </div>
+          <div class="footer-updates">
+            <span class="last-update" id="footer-update">Última actualización: --:--</span>
+          </div>
+        </div>
       </div>
     </footer>
     <script src="/assets/js/config.js"></script>
