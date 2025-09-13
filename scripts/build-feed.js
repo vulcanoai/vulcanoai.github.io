@@ -252,7 +252,34 @@ async function build(){
     await writeJSON(path.join(todayDir, fname), { ...a, generated_at: nowISO, date: dateStr });
   }
   log('Wrote entries for today:', todays.length);
+
+  // Entries for recent days (last 7 by run timestamp)
+  const uniqueDays = Array.from(new Set(runs.map(r => (r.timestamp||'').slice(0,10)).filter(Boolean))).sort();
+  const recentDays = uniqueDays.slice(-7);
+  for (const day of recentDays){
+    // Skip today (already generated above)
+    if (day === today) continue;
+    const dayRuns = runs.filter(r => (r.timestamp||'').slice(0,10) === day);
+    const dayArticles = dedupeArticles((dayRuns.flatMap(r=>r.articles)||[]).map(normalizeArticle))
+      .sort((x,y)=> new Date(y.published_at) - new Date(x.published_at));
+    const dir = path.join(ENTRIES_DIR, day);
+    await ensureDir(dir);
+    await writeJSON(path.join(dir, 'index.json'), {
+      date: day,
+      count: dayArticles.length,
+      topics: groupCounts(dayArticles, 'topics'),
+      countries: groupCounts(dayArticles, 'country'),
+      generated_at: nowISO
+    });
+    // Per-article trace files for historical days as well
+    for (const a of dayArticles){
+      const slug = slugify(a.title);
+      const uniq = shortHash(a.url || a.id || a.title || '');
+      const fname = `${slug}-${uniq}.json`;
+      await writeJSON(path.join(dir, fname), { ...a, generated_at: nowISO, date: day });
+    }
+    log(`Wrote entries for ${day}:`, dayArticles.length);
+  }
 }
 
 build().catch(err => { console.error(err); process.exit(1); });
-

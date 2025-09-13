@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="color-scheme" content="dark light" />
+    <title>Archivo — Vulcano AI</title>
+    <meta name="description" content="Histórico de días procesados con enlaces a snapshots y entradas por día." />
+    <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/assets/css/styles.css?v=3" />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Saltar al contenido</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/pages/noticias.html">
+          <svg class="logo" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>
+          <span class="brand-text">Vulcano AI</span>
+        </a>
+        <div class="global-time" id="global-time">
+          <div class="time-zone" data-tz="America/Mexico_City"><span class="tz-label">MX</span><span class="tz-time">--:--</span></div>
+          <div class="time-zone" data-tz="America/Bogota"><span class="tz-label">COL</span><span class="tz-time">--:--</span></div>
+          <div class="time-zone" data-tz="America/Argentina/Buenos_Aires"><span class="tz-label">AR</span><span class="tz-time">--:--</span></div>
+          <div class="time-zone" data-tz="America/Sao_Paulo"><span class="tz-label">BR</span><span class="tz-time">--:--</span></div>
+        </div>
+        <div class="theme-selector">
+          <button class="theme-toggle" aria-label="Cambiar tema" id="theme-toggle">
+            <svg class="theme-icon" aria-hidden="true"><use href="/assets/icons.svg#palette"></use></svg>
+          </button>
+        </div>
+        <button class="nav-toggle" aria-label="Abrir menú">
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+        </button>
+        <nav class="site-nav" aria-label="Principal">
+          <a href="/pages/noticias.html">Inicio</a>
+          <a href="/pages/archivo.html" aria-current="page">Archivo</a>
+          <a href="/pages/crypto.html">Crypto</a>
+          <a href="/pages/observatorio-legal.html">Observatorio</a>
+          <a href="/pages/apoya.html">Apoyar</a>
+          <a href="/pages/agentes.html">Agentes</a>
+          <a href="/pages/fuentes.html">Fuentes</a>
+          <a href="/pages/vulcano.html">Qué es Vulcano AI</a>
+        </nav>
+      </div>
+    </header>
+    <main class="section" id="main">
+      <div class="container">
+        <div class="news-hero">
+          <div class="hero-content">
+            <div class="hero-header">
+              <svg class="hero-icon" aria-hidden="true"><use href="/assets/icons.svg#calendar"></use></svg>
+              <div class="hero-text">
+                <h1>Archivo de Vulcano AI</h1>
+                <p class="hero-subtitle">Días procesados, snapshots y resúmenes por país/tema</p>
+              </div>
+            </div>
+            <div class="hero-stats">
+              <div class="stat-card">
+                <div class="stat-value" id="archive-days">--</div>
+                <div class="stat-label">Días en archivo</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value" id="archive-latest">--</div>
+                <div class="stat-label">Última actualización</div>
+              </div>
+            </div>
+            <div class="filters" id="archive-filters">
+              <select id="archive-filter-country" aria-label="Filtrar por país"><option value="todos">Todos los países</option></select>
+              <select id="archive-filter-topic" aria-label="Filtrar por tema"><option value="todos">Todos los temas</option></select>
+            </div>
+          </div>
+        </div>
+
+        <div id="archive-list" class="grid"></div>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <svg class="logo small" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>
+          <div>
+            <strong>Vulcano Ai</strong>
+            <div class="muted">Vulcano Ai Digital Solutions S.A.S - 2025 Todos los derechos reservados</div>
+          </div>
+        </div>
+        <nav class="footer-nav">
+          <a href="/pages/legal/privacidad.html">Privacidad</a>
+          <a href="/pages/legal/terminos.html">Términos</a>
+          <a href="/pages/vulcano.html">Qué es Vulcano AI</a>
+        </nav>
+      </div>
+    </footer>
+    <script src="/assets/js/config.js"></script>
+    <script src="/assets/js/theme.js"></script>
+    <script src="/assets/js/app.js?v=9"></script>
+  </body>
+  </html>
+

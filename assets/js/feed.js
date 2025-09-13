@@ -16,7 +16,8 @@
     facets: { countries: [], topics: [], sources: [], languages: [] },
     filters: { country: 'todos', topic: 'todos', source: 'todas', q: '', sort: 'recent' },
     els: {},
-    totalCountFromIndex: 0
+    totalCountFromIndex: 0,
+    pagination: { page: 1, size: 48, sizeHome: 12, totalPages: 1 }
   };
 
   function $(sel){ return document.querySelector(sel); }
@@ -250,18 +251,26 @@
 
   function applyFilters(){
     const q = state.filters.q.trim().toLowerCase();
-    let arr = state.all.filter(a => (
-      (state.filters.country==='todos' || a.country===state.filters.country) &&
-      (state.filters.topic==='todos' || (a.topics||[]).includes(state.filters.topic)) &&
-      (state.filters.source==='todas' || a.source===state.filters.source) &&
-      (q==='' || a.title.toLowerCase().includes(q) || a.summary.toLowerCase().includes(q))
-    ));
+    let arr = state.all.filter(a => {
+      const byCountry = (state.filters.country==='todos' || a.country===state.filters.country);
+      const byTopic = (state.filters.topic==='todos' || (a.topics||[]).includes(state.filters.topic));
+      const bySource = (state.filters.source==='todas' || a.source===state.filters.source);
+      const byQuery = (q==='' || a.title.toLowerCase().includes(q) || a.summary.toLowerCase().includes(q));
+      const byDay = (()=>{
+        const d = (state.filters.day||'').trim(); if(!d) return true;
+        const pub = (a.published_at||'').slice(0,10);
+        const disc = (a._dataDate||'');
+        return (pub===d) || (disc===d);
+      })();
+      return byCountry && byTopic && bySource && byQuery && byDay;
+    });
     if (state.filters.sort==='recent'){
       arr.sort((x,y)=> new Date(y.published_at) - new Date(x.published_at));
     } else {
       arr.sort((x,y)=> (y.relevance||0) - (x.relevance||0));
     }
     state.filtered = arr;
+    updatePaginationTotals();
   }
 
   function renderMetrics(){
@@ -290,27 +299,19 @@
         <div style="font-size:13px; margin-top:8px; color:var(--muted)">Prueba ajustando los filtros o <a href="#" onclick="clearAllFilters(); return false;" style="color:var(--brand)">limpiar todos</a></div>
       `;
       list.appendChild(empty);
+      renderPagination();
       return;
     }
     
     const isHomePage = window.location.pathname === '/' || window.location.pathname.includes('index.html');
-    const maxResults = isHomePage ? 12 : 48;
-    const take = Math.min(maxResults, state.filtered.length);
-    
-    for(let i=0;i<take;i++){
+    const pageSize = isHomePage ? state.pagination.sizeHome : state.pagination.size;
+    const page = Math.max(1, Math.min(state.pagination.page, Math.ceil(state.filtered.length / pageSize) || 1));
+    const start = (page - 1) * pageSize;
+    const end = Math.min(start + pageSize, state.filtered.length);
+    for(let i=start;i<end;i++){
       list.appendChild(card(state.filtered[i]));
     }
-    
-    // Show "load more" hint if there are more results (only on non-home pages)
-    if (!isHomePage && state.filtered.length > maxResults) {
-      const loadMore = create('div', 'panel');
-      loadMore.style.textAlign = 'center';
-      loadMore.style.marginTop = '16px';
-      loadMore.style.color = 'var(--muted)';
-      loadMore.style.fontSize = '13px';
-      loadMore.textContent = `Mostrando ${take} de ${state.filtered.length} artículos`;
-      list.parentNode.appendChild(loadMore);
-    }
+    renderPagination();
   }
   
   function updateResultsCounter(){
@@ -325,16 +326,17 @@
                    (state.filters.q||'').trim() === '')
       ? state.totalCountFromIndex
       : totalRaw;
-    const showing = state.filtered.length;
+    const isHomePage = window.location.pathname === '/' || window.location.pathname.includes('index.html');
+    const pageSize = isHomePage ? state.pagination.sizeHome : state.pagination.size;
+    const page = Math.max(1, Math.min(state.pagination.page, Math.ceil(state.filtered.length / pageSize) || 1));
+    const start = state.filtered.length ? (page - 1) * pageSize + 1 : 0;
+    const end = Math.min(page * pageSize, state.filtered.length);
     const hasFilters = state.filters.q || state.filters.country !== 'todos' || state.filters.topic !== 'todos' || state.filters.source !== 'todas';
 
-    if (hasFilters) {
-      counter.textContent = `${showing} de ${total}`;
-      counter.style.opacity = '1';
-    } else {
-      counter.textContent = `${total}`;
-      counter.style.opacity = '0.7';
-    }
+    const displayTotal = hasFilters ? state.filtered.length : total;
+    const rangeText = (start && end) ? `${start}–${end}` : '0';
+    counter.textContent = `${rangeText} de ${displayTotal}`;
+    counter.style.opacity = hasFilters ? '1' : '0.85';
   }
 
   function updateLiveStats(){
@@ -354,7 +356,8 @@
   }
   
   window.clearAllFilters = function() {
-    state.filters = { country: 'todos', topic: 'todos', source: 'todas', q: '', sort: 'recent' };
+    state.filters = { country: 'todos', topic: 'todos', source: 'todas', q: '', sort: 'recent', day: '' };
+    state.pagination.page = 1;
     
     // Update form elements
     if (state.els.search) state.els.search.value = '';
@@ -363,10 +366,92 @@
     if (state.els.source) state.els.source.value = 'todas';
     if (state.els.sort) state.els.sort.value = 'recent';
     
+    syncPageToQuery();
     applyFilters();
     render();
     updateSmartTagActives();
   };
+
+  function updatePaginationTotals(){
+    const isHomePage = window.location.pathname === '/' || window.location.pathname.includes('index.html');
+    const pageSize = isHomePage ? state.pagination.sizeHome : state.pagination.size;
+    state.pagination.totalPages = Math.max(1, Math.ceil(state.filtered.length / pageSize));
+    if (state.pagination.page > state.pagination.totalPages) state.pagination.page = state.pagination.totalPages;
+  }
+
+  function renderPagination(){
+    const list = state.els.list; if (!list) return;
+    const isHomePage = window.location.pathname === '/' || window.location.pathname.includes('index.html');
+    const pageSize = isHomePage ? state.pagination.sizeHome : state.pagination.size;
+    const total = state.filtered.length;
+    const totalPages = Math.max(1, Math.ceil(total / pageSize));
+    const page = Math.max(1, Math.min(state.pagination.page, totalPages));
+
+    let pager = document.getElementById('pagination');
+    if (!pager){
+      pager = document.createElement('nav');
+      pager.id = 'pagination';
+      pager.className = 'pagination';
+      const parent = list.parentNode;
+      parent.insertBefore(pager, list.nextSibling);
+    }
+    pager.innerHTML = '';
+    if (totalPages <= 1){ pager.style.display='none'; return; }
+    pager.style.display='flex';
+
+    const mkBtn = (label, targetPage, disabled=false, current=false) => {
+      const a = document.createElement('a');
+      a.href = '#'; a.className = 'chip'; a.textContent = label;
+      if (disabled){ a.classList.add('muted'); a.setAttribute('aria-disabled','true'); }
+      if (current){ a.classList.add('brand'); a.setAttribute('aria-current','page'); }
+      a.addEventListener('click', (e)=>{
+        e.preventDefault();
+        if (disabled || current) return;
+        state.pagination.page = targetPage;
+        syncPageToQuery();
+        render();
+        window.scrollTo({ top: list.offsetTop - 16, behavior: 'smooth' });
+      });
+      return a;
+    };
+
+    // Go to first page fast
+    if (page>1){
+      const home = mkBtn('Ir a hoy', 1, false, false);
+      pager.appendChild(home);
+    }
+    // Prev
+    pager.appendChild(mkBtn('«', 1, page===1));
+    pager.appendChild(mkBtn('‹', page-1, page===1));
+
+    // Page numbers window
+    const windowSize = 7;
+    let start = Math.max(1, page - Math.floor(windowSize/2));
+    let end = Math.min(totalPages, start + windowSize - 1);
+    start = Math.max(1, Math.min(start, Math.max(1, end - windowSize + 1)));
+
+    if (start > 1){ pager.appendChild(mkBtn('1', 1)); if (start > 2){ const el=document.createElement('span'); el.className='sep'; el.textContent='…'; pager.appendChild(el);} }
+    for (let p=start; p<=end; p++){ pager.appendChild(mkBtn(String(p), p, false, p===page)); }
+    if (end < totalPages){ if (end < totalPages-1){ const el=document.createElement('span'); el.className='sep'; el.textContent='…'; pager.appendChild(el);} pager.appendChild(mkBtn(String(totalPages), totalPages)); }
+
+    // Next
+    pager.appendChild(mkBtn('›', page+1, page===totalPages));
+    pager.appendChild(mkBtn('»', totalPages, page===totalPages));
+  }
+
+  function syncPageToQuery(){
+    try{
+      const url = new URL(location.href);
+      url.searchParams.set('p', String(state.pagination.page));
+      if (state.filters.q) url.searchParams.set('q', state.filters.q); else url.searchParams.delete('q');
+      if (state.filters.country && state.filters.country!=='todos') url.searchParams.set('pais', state.filters.country); else url.searchParams.delete('pais');
+      if (state.filters.topic && state.filters.topic!=='todos') url.searchParams.set('tema', state.filters.topic); else url.searchParams.delete('tema');
+      if (state.filters.source && state.filters.source!=='todas') url.searchParams.set('fuente', state.filters.source); else url.searchParams.delete('fuente');
+      if (state.filters.sort && state.filters.sort!=='recent') url.searchParams.set('orden', state.filters.sort); else url.searchParams.delete('orden');
+      if (state.filters.day) url.searchParams.set('dia', state.filters.day); else url.searchParams.delete('dia');
+      history.replaceState(null, '', url.toString());
+    }catch(_){ /* noop */ }
+  }
 
   function qp(params){
     const p = new URLSearchParams(params);
@@ -525,16 +610,21 @@
     state.filters.topic = p.get('tema') || 'todos';
     state.filters.source = p.get('fuente') || 'todas';
     state.filters.sort = p.get('orden') || 'recent';
+    const pageParam = parseInt(p.get('p') || p.get('page') || '1', 10);
+    state.pagination.page = isFinite(pageParam) && pageParam>0 ? pageParam : 1;
+    // Optional day filter to show only items discovered that day or published that day
+    state.filters.day = p.get('dia') || p.get('day') || '';
   }
 
   function bind(){
     const { search, country, topic, source, sort } = state.els;
     const update = () => { applyFilters(); render(); };
-    search.addEventListener('input', (e)=>{ state.filters.q = e.target.value; update(); });
-    country.addEventListener('change', (e)=>{ state.filters.country = e.target.value; update(); updateSmartTagActives(); });
-    topic.addEventListener('change', (e)=>{ state.filters.topic = e.target.value; update(); updateSmartTagActives(); });
-    source.addEventListener('change', (e)=>{ state.filters.source = e.target.value; update(); });
-    sort.addEventListener('change', (e)=>{ state.filters.sort = e.target.value; update(); });
+    const resetToFirst = () => { state.pagination.page = 1; syncPageToQuery(); };
+    search.addEventListener('input', (e)=>{ state.filters.q = e.target.value; resetToFirst(); update(); });
+    country.addEventListener('change', (e)=>{ state.filters.country = e.target.value; resetToFirst(); update(); updateSmartTagActives(); });
+    topic.addEventListener('change', (e)=>{ state.filters.topic = e.target.value; resetToFirst(); update(); updateSmartTagActives(); });
+    source.addEventListener('change', (e)=>{ state.filters.source = e.target.value; resetToFirst(); update(); });
+    sort.addEventListener('change', (e)=>{ state.filters.sort = e.target.value; resetToFirst(); update(); });
   }
 
   function renderSmartTags(){

@@ -35,6 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initSourcesPage();
   const sourcesList = document.getElementById('sources-list');
   if (sourcesList){ initSources(sourcesList).catch(console.error); }
+
+  // Initialize archive page if present
+  const archiveList = document.getElementById('archive-list');
+  if (archiveList){ initArchivePage(archiveList).catch(console.error); }
   
   // Initialize support page if present
   initSupportPage();
@@ -475,6 +479,8 @@ async function initAgents(container){
 
     // Render metrics and status
     await renderAgentMetrics(status);
+    // Render pipeline (runs + consolidation)
+    await renderPipeline(status);
     
     // Update controls
     setupAgentControls(container);
@@ -488,6 +494,100 @@ async function initAgents(container){
   } catch (error) {
     console.error('Error loading agents:', error);
     showAgentsErrorState(error.message);
+  }
+}
+
+// Archive (historical) page
+async function initArchivePage(container){
+  try{
+    // Loading state
+    container.innerHTML = '<div class="panel" style="text-align:center; padding:24px">Cargando archivo…</div>';
+
+    // Load catalog (days)
+    const [catRes, stRes] = await Promise.all([
+      fetch('/data/index/catalog.json', { cache:'no-store' }),
+      fetch('/data/index/status.json', { cache:'no-store' })
+    ]);
+    const catalog = catRes.ok ? await catRes.json() : { days: [] };
+    const status = stRes.ok ? await stRes.json() : null;
+    const days = Array.isArray(catalog.days) ? [...catalog.days].sort((a,b)=> b.localeCompare(a)) : [];
+
+    // Short-circuit if empty
+    if (!days.length){ container.innerHTML = '<div class="panel">No hay días en el archivo.</div>'; return; }
+
+    // Fetch per-day indices and build facets
+    const maxDays = Math.min(days.length, 60); // cap initial load
+    const subset = days.slice(0, maxDays);
+    const dayData = [];
+    const allTopics = new Set();
+    const allCountries = new Set();
+    for (const d of subset){
+      try{
+        const idxRes = await fetch(`/data/entries/${d}/index.json`, { cache:'no-store' });
+        const idx = idxRes.ok ? await idxRes.json() : { count: 0, topics:{}, countries:{} };
+        Object.keys(idx.topics||{}).forEach(t=> allTopics.add(t));
+        Object.keys(idx.countries||{}).forEach(c=> allCountries.add(c));
+        dayData.push({ day: d, index: idx });
+      }catch(_){ dayData.push({ day: d, index: { count: 0, topics:{}, countries:{} } }); }
+    }
+
+    // Populate hero stats
+    const daysEl = document.getElementById('archive-days'); if (daysEl) daysEl.textContent = String(days.length);
+    const latestEl = document.getElementById('archive-latest'); 
+    if (latestEl){
+      const t = status?.last_feed_update || status?.last_run_iso;
+      latestEl.textContent = t ? timeAgo(new Date(t)) : '--';
+    }
+
+    // Populate filters
+    const selCountry = document.getElementById('archive-filter-country');
+    const selTopic = document.getElementById('archive-filter-topic');
+    if (selCountry){ selCountry.innerHTML = '<option value="todos">Todos los países</option>' + Array.from(allCountries).sort().map(c=>`<option>${c}</option>`).join(''); }
+    if (selTopic){ selTopic.innerHTML = '<option value="todos">Todos los temas</option>' + Array.from(allTopics).sort().map(t=>`<option>${t}</option>`).join(''); }
+
+    const render = () => {
+      const fc = selCountry ? selCountry.value : 'todos';
+      const ft = selTopic ? selTopic.value : 'todos';
+      container.innerHTML = '';
+      let shown = 0;
+      for (const { day, index } of dayData){
+        const matchCountry = fc==='todos' || (index.countries||{})[fc] > 0;
+        const matchTopic = ft==='todos' || (index.topics||{})[ft] > 0;
+        if (!matchCountry || !matchTopic) continue;
+        const card = document.createElement('article'); card.className='panel';
+        const d = new Date(day);
+        const title = d.toLocaleDateString('es-ES', { day:'2-digit', month:'short', year:'numeric' });
+        const count = index.count || 0;
+        const head = document.createElement('div'); head.className='panel-head'; head.innerHTML = `<h3>${title}</h3><span class="muted">${count} artículos</span>`;
+        const meta = document.createElement('div'); meta.className='meta';
+        // Quick links
+        const linkNoticias = document.createElement('a'); linkNoticias.className='chip brand'; linkNoticias.href=`/pages/noticias.html?dia=${day}`; linkNoticias.textContent='Ver noticias del día';
+        const linkSnap = document.createElement('a'); linkSnap.className='chip'; linkSnap.href=`/data/feed-${day}.json`; linkSnap.target='_blank'; linkSnap.rel='noopener'; linkSnap.textContent='Snapshot JSON';
+        const linkIndex = document.createElement('a'); linkIndex.className='chip'; linkIndex.href=`/data/entries/${day}/index.json`; linkIndex.target='_blank'; linkIndex.rel='noopener'; linkIndex.textContent='Índice del día';
+        meta.append(linkNoticias, linkSnap, linkIndex);
+        // Top countries
+        const rowC = document.createElement('div'); rowC.className='smart-tags';
+        const labelC = document.createElement('span'); labelC.className='label'; labelC.textContent='Países:'; rowC.appendChild(labelC);
+        const entriesC = Object.entries(index.countries||{}).sort((a,b)=>b[1]-a[1]).slice(0,6);
+        for (const [c,n] of entriesC){ const a=document.createElement('a'); a.className='chip'; a.href=`/pages/noticias.html?dia=${day}&pais=${encodeURIComponent(c)}`; a.textContent=`${c} (${n})`; rowC.appendChild(a); }
+        // Top topics
+        const rowT = document.createElement('div'); rowT.className='smart-tags';
+        const labelT = document.createElement('span'); labelT.className='label'; labelT.textContent='Temas:'; rowT.appendChild(labelT);
+        const entriesT = Object.entries(index.topics||{}).sort((a,b)=>b[1]-a[1]).slice(0,6);
+        for (const [t,n] of entriesT){ const a=document.createElement('a'); a.className='chip'; a.href=`/pages/noticias.html?dia=${day}&tema=${encodeURIComponent(t)}`; a.textContent=`${t} (${n})`; rowT.appendChild(a); }
+        card.append(head, meta, rowC, rowT);
+        container.appendChild(card);
+        shown++;
+      }
+      if (shown===0){ container.innerHTML = '<div class="panel">No hay días que coincidan con el filtro.</div>'; }
+    };
+
+    if (selCountry) selCountry.addEventListener('change', render);
+    if (selTopic) selTopic.addEventListener('change', render);
+    render();
+  }catch(e){
+    console.error('Error loading archive:', e);
+    container.innerHTML = '<div class="panel">No se pudo cargar el archivo.</div>';
   }
 }
 
@@ -597,6 +697,118 @@ async function renderAgentMetrics(status) {
     
   } catch (error) {
     console.error('Error rendering metrics:', error);
+  }
+}
+
+// Pipeline timeline and health
+async function renderPipeline(status){
+  try{
+    const summaryEl = document.getElementById('pipeline-summary');
+    const timelineEl = document.getElementById('pipeline-timeline');
+    const chartEl = document.getElementById('pipeline-chart');
+    const linksEl = document.getElementById('pipeline-links');
+    if (!summaryEl || !timelineEl) return;
+
+    // Load runs manifest
+    let runs = [];
+    try{
+      const r = await fetch('/data/index/runs.json', { cache:'no-store' });
+      if (r.ok){ const j = await r.json(); runs = Array.isArray(j.runs) ? j.runs : []; }
+    }catch(_){ runs = []; }
+
+    // Compute health
+    const now = Date.now();
+    const lastRunISO = status?.last_run_iso || (runs[0]?.timestamp) || null;
+    const lastRunMs = lastRunISO ? new Date(lastRunISO).getTime() : 0;
+    const ageMin = lastRunMs ? Math.round((now - lastRunMs)/60000) : null;
+    const state = ageMin == null ? 'unknown' : (ageMin <= 90 ? 'ok' : ageMin <= 180 ? 'warn' : 'err');
+
+    const runs24 = runs.filter(r => {
+      const t = new Date(r.timestamp||0).getTime();
+      return now - t <= 24*60*60*1000;
+    });
+    const thru = runs24.length ? Math.round(runs24.reduce((a,b)=>a+(b.count||0),0)/runs24.length) : 0;
+    const today = new Date().toISOString().slice(0,10);
+    const todayRuns = runs.filter(r => (r.timestamp||'').slice(0,10) === today);
+    const todayCount = todayRuns.reduce((a,b)=>a+(b.count||0),0);
+
+    // Summary text
+    const dotClass = state==='ok'?'ok':state==='warn'?'warn':'err';
+    const lastText = lastRunISO ? timeAgo(new Date(lastRunISO)) : '—';
+    const nextETA = (()=>{
+      const d = new Date(); d.setMinutes(0,0,0); d.setHours(d.getHours()+1);
+      return d.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'});
+    })();
+    // Alerts: throughput trend and gaps
+    const last6 = runs.slice(0,6).map(r=>r.count||0);
+    const prev6 = runs.slice(6,12).map(r=>r.count||0);
+    const avg = (arr)=> arr.length? Math.round(arr.reduce((a,b)=>a+b,0)/arr.length) : 0;
+    const avgLast = avg(last6), avgPrev = avg(prev6);
+    const dropPct = (avgPrev>0) ? Math.round((1 - (avgLast/avgPrev))*100) : 0;
+    const gapWarn = ageMin!=null && ageMin>120;
+    const gapErr = ageMin!=null && ageMin>240;
+
+    let alertChips = '';
+    if (avgPrev>0 && dropPct >= 40){ alertChips += `<span class="chip warn">Throughput ↓ ${dropPct}%</span>`; }
+    if (gapErr){ alertChips += `<span class="chip err">Demora: sin run hace ${Math.floor(ageMin/60)}h</span>`; }
+    else if (gapWarn){ alertChips += `<span class="chip warn">Demora: sin run hace ${ageMin} min</span>`; }
+    if (last6.filter(x=>x===0).length>=2){ alertChips += `<span class="chip warn">Runs vacíos recientes</span>`; }
+
+    summaryEl.innerHTML = `
+      <span class="chip ${dotClass}">Pipeline ${state==='ok'?'operacional':state==='warn'?'lento':'demorado'}</span>
+      <span class="chip">Último run: ${lastText}</span>
+      <span class="chip">Runs 24h: ${runs24.length}</span>
+      <span class="chip">Throughput medio: ${thru}/run</span>
+      <span class="chip brand">Hoy: ${todayCount} señales</span>
+      <span class="chip">Próxima ejecución: ${nextETA}</span>
+      ${alertChips}
+    `;
+
+    // Timeline chips (latest 12)
+    timelineEl.innerHTML = '';
+    const take = runs.slice(0,12);
+    for (const r of take){
+      const el = document.createElement('a');
+      el.className = 'chip ' + ((r.count||0) ? 'brand' : 'warn');
+      const t = r.timestamp ? new Date(r.timestamp) : null;
+      const time = t ? t.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'}) : '—';
+      el.textContent = `${time} • ${r.count||0}`;
+      el.href = `/data/runs/${encodeURIComponent(r.file)}`;
+      el.target = '_blank'; el.rel='noopener';
+      timelineEl.appendChild(el);
+    }
+
+    // Links to raw JSON
+    if (linksEl){
+      linksEl.innerHTML='';
+      const add = (href, label)=>{ const a=document.createElement('a'); a.href=href; a.target='_blank'; a.rel='noopener'; a.className='chip'; a.textContent=label; linksEl.appendChild(a); };
+      add('/data/index/status.json','status.json');
+      add('/data/index/runs.json','runs.json');
+      add('/data/feed-latest.json','feed-latest.json');
+    }
+
+    // Sparkline chart for last 24 runs
+    if (chartEl){
+      const N = Math.min(24, runs.length);
+      const pts = runs.slice(0,N).map(r=> Math.max(0, r.count||0)).reverse(); // oldest->newest
+      const max = Math.max(1, ...pts);
+      const w = Math.max(120, N*10);
+      const h = 40;
+      const pad = 4;
+      const step = (w - pad*2) / Math.max(1, N-1);
+      const y = v => h - pad - (v/max)*(h - pad*2);
+      const x = i => pad + i*step;
+      let d = '';
+      pts.forEach((v,i)=>{ d += (i? ' L':'M') + x(i).toFixed(1) + ' ' + y(v).toFixed(1); });
+      const area = d + ` L ${x(N-1).toFixed(1)} ${y(0).toFixed(1)} L ${x(0).toFixed(1)} ${y(0).toFixed(1)} Z`;
+      chartEl.innerHTML = `
+        <svg width="100%" height="${h}" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-label="Actividad del pipeline (últimos ${N} runs)">
+          <path d="${area}" fill="var(--brand-fade, rgba(255,215,0,0.12))"></path>
+          <path d="${d}" fill="none" stroke="var(--brand, #ffd700)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+        </svg>`;
+    }
+  }catch(e){
+    console.error('Error rendering pipeline:', e);
   }
 }
 
