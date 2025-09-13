@@ -80,11 +80,7 @@
       });
     }
     
-    // Add sample as final fallback
-    sources.push({ 
-      url: config.feedSample || '/data/sample-feed.json', 
-      type: 'sample' 
-    });
+    // No sample fallback: rely only on live + snapshots
     
     // Show loading state
     showLoadingState('Cargando noticias...');
@@ -141,13 +137,7 @@
     hideLoadingState();
     
     if (allArticles.length === 0) {
-      // Last resort: check for demo data
-      if (window.VULCANO_DEMO?.feed) { 
-        console.log('✓ Usando datos demo como última opción');
-        return window.VULCANO_DEMO.feed.map(normalize); 
-      }
-      
-      // Final fallback: show error
+      // Final fallback: show error (no demo data)
       showErrorState('No se pudieron cargar noticias. Verifica tu conexión e intenta nuevamente.');
       return [];
     }

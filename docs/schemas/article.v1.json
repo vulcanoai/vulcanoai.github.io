@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vulcano.ai/schemas/article.v1.json",
+  "title": "Article v1",
+  "type": "object",
+  "required": ["id", "title", "url", "country", "topics", "language", "published_at"],
+  "properties": {
+    "version": { "type": "string", "default": "v1.0" },
+    "id": { "type": "string" },
+    "title": { "type": "string" },
+    "summary": { "type": "string" },
+    "url": { "type": "string", "format": "uri" },
+    "source": { "type": "string" },
+    "source_url": { "type": "string", "format": "uri" },
+    "country": { "type": "string" },
+    "topics": { "type": "array", "items": { "type": "string" } },
+    "language": { "type": "string" },
+    "published_at": { "type": "string", "format": "date-time" },
+    "relevance": { "type": "integer", "minimum": 0, "maximum": 10 },
+    "sentiment": { "type": "string", "enum": ["positive", "neutral", "negative"] },
+    "author": { "type": "string" },
+    "curator": { "type": "string" },
+    "image_url": { "type": "string", "format": "uri" }
+  },
+  "additionalProperties": true
+}
+
