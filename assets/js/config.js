@@ -30,7 +30,7 @@ window.AILatamConfig = window.AILatamConfig || {
       { label:'Inicio', href:'/pages/noticias.html', icon:'calendar' },
       { label:'Panorama', href:'/pages/panorama.html', icon:'tag' },
       { label:'Crypto', href:'/pages/crypto.html', icon:'globe' },
-      { label:'Legal', href:'/pages/observatorio-legal.html', icon:'scale' },
+      { label:'Observatorio', href:'/pages/observatorio-legal.html', icon:'scale' },
       { label:'Agentes', href:'/pages/agentes.html', icon:'robot' },
       { label:'Fuentes', href:'/pages/fuentes.html', icon:'source' }
     ],
