@@ -1,0 +1,64 @@
+{
+  "articles": [
+    {
+      "id": "https://www.eluniverso.com/noticias/economia/ecuador-incentivos-startups-tecnologicas-2023/",
+      "title": "Ecuador impulsa incentivos para startups tecnológicas",
+      "summary": "El gobierno ecuatoriano ha anunciado un paquete de incentivos fiscales y programas de apoyo para fomentar el crecimiento de startups tecnológicas en el país.",
+      "url": "https://www.eluniverso.com/noticias/economia/ecuador-incentivos-startups-tecnologicas-2023/",
+      "source": "El Universo",
+      "source_url": "https://www.eluniverso.com",
+      "country": "Ecuador",
+      "topics": [
+        "Startups",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T21:00:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Andrea Morales",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.elpais.com.uy/informacion/politica/uruguay-ley-proteccion-datos-personales-2023",
+      "title": "Uruguay aprueba ley para protección de datos personales",
+      "summary": "Uruguay ha actualizado su legislación sobre protección de datos, alineándose con estándares internacionales para garantizar la privacidad de los ciudadanos en el entorno digital.",
+      "url": "https://www.elpais.com.uy/informacion/politica/uruguay-ley-proteccion-datos-personales-2023",
+      "source": "El País Uruguay",
+      "source_url": "https://www.elpais.com.uy",
+      "country": "Uruguay",
+      "topics": [
+        "Regulación",
+        "Privacidad"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T18:50:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Martín Gómez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.nacion.com/economia/costa-rica-lider-energias-limpias-centroamerica/",
+      "title": "Costa Rica lidera en adopción de energías limpias en Centroamérica",
+      "summary": "Un informe reciente destaca a Costa Rica como referente regional en el uso de energías renovables, con más del 90% de su electricidad proveniente de fuentes sostenibles.",
+      "url": "https://www.nacion.com/economia/costa-rica-lider-energias-limpias-centroamerica/",
+      "source": "La Nación",
+      "source_url": "https://www.nacion.com",
+      "country": "Costa Rica",
+      "topics": [
+        "Energía",
+        "Sostenibilidad"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T17:25:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Laura Sánchez",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T00:50:27.363Z",
+  "params": {}
+}
