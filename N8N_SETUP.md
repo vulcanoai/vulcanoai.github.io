@@ -1,16 +1,19 @@
 # 🚀 N8N Integration Setup for Vulcano AI
 
-**Status**: Ready for your existing `latam-news-autopublish.json` workflow!
+**Status**: Stable on `DEBUG006` (Sep 13, 2025)
 
 ## 🎯 How It Works
 
-Your existing n8n workflow (`latam-news-autopublish.json`) is designed to:
+The current stable n8n workflow (`DEBUG006`) is designed to:
 
 1. **Research Agent**: Uses Grok to find AI news in LATAM
 2. **Validation & Deduplication**: Processes and filters articles  
-3. **GitHub Publishing**: Commits to both:
-   - `data/feed-latest.json` (live feed)
-   - `data/feed-YYYY-MM-DD.json` (daily snapshot)
+3. **GitHub Publishing**: Commits the following artifacts:
+   - `data/runs/<ISO>.json` (per‑run snapshot)
+   - `data/entries/YYYY‑MM‑DD/*.json` (per‑article entries)
+   - `data/entries/YYYY‑MM‑DD/index.json` (daily index summary)
+   - `data/feed-latest.json` (rolling feed, merged)
+   - `data/feed-YYYY-MM-DD.json` (daily feed, merged)
 
 The website is now configured to work perfectly with this workflow!
 
@@ -27,11 +30,11 @@ The website will now:
 
 ### In your n8n instance:
 
-1. **Import your workflow** (`latam-news-autopublish.json`) 
+1. **Import your workflow** (`DEBUG006.json`) 
 2. **Configure credentials**:
    - Grok API key 
    - GitHub token with repo access
-3. **Set repository params**:
+3. **Set repository params** (defaults are preconfigured):
    - `repoOwner`: `vulcanoai` 
    - `repoName`: `vulcanoai.github.io`
 4. **Hit the manual trigger button** 🚀
@@ -41,13 +44,15 @@ The website will now:
 1. Grok researches recent LATAM AI news
 2. Articles get classified and validated
 3. **COMMITS TO GITHUB**: 
-   - Updates `data/feed-latest.json`
-   - Creates `data/feed-2025-09-12.json` snapshot
+   - Adds `data/runs/<ISO>.json`
+   - Creates/updates per‑article files under `data/entries/YYYY‑MM‑DD/`
+   - Creates/updates daily index `data/entries/YYYY‑MM‑DD/index.json`
+   - Merges into `data/feed-latest.json` and `data/feed-YYYY-MM-DD.json`
 4. **Website updates instantly** with real articles!
 
 ## 📂 Data Structure Expected
 
-Your workflow outputs this exact structure (which the website now handles):
+Your workflow outputs article objects with this structure (handled by the website):
 
 ```json
 [
@@ -73,8 +78,8 @@ Your workflow outputs this exact structure (which the website now handles):
 ## 🎯 Testing Steps
 
 1. **Trigger your n8n workflow manually**
-2. **Check GitHub commits**: Should see new commit to `data/feed-latest.json`  
-3. **Refresh website**: You'll see real articles instead of sample data!
+2. **Check GitHub commits**: Should see new files in `data/runs/` and `data/entries/YYYY‑MM‑DD/`  
+3. **Refresh website**: You'll see real articles from `feed-latest.json` (which now merges data across runs)
 4. **Check console logs**: Will show "Cargados X artículos desde: /data/feed-latest.json (latest)"
 
 ## 📈 7-Day Persistence 
@@ -91,11 +96,15 @@ Make sure your GitHub repository has:
 
 ```
 /data/
-├── feed-latest.json          # ← Your n8n workflow writes here
-├── feed-2025-09-12.json     # ← Daily snapshots  
-├── feed-2025-09-11.json
-├── feed-2025-09-10.json
-└── sample-feed.json         # ← Fallback only
+├── entries/
+│   └── YYYY‑MM‑DD/
+│       ├── <slug>-<hash>.json     # one per article
+│       └── index.json             # daily index (topics/countries counts)
+├── runs/
+│   └── <ISO>.json                 # per‑run snapshot
+├── feed-latest.json               # rolling (merged) feed
+├── feed-YYYY‑MM‑DD.json           # daily snapshot (merged)
+└── sample-feed.json               # fallback only
 ```
 
 ## 🎉 Ready to Go Live!

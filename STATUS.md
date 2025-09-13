@@ -2,6 +2,7 @@
 
 **Date**: September 12, 2025  
 **Status**: ✅ **PRODUCTION READY**  
+**Stable Workflow**: DEBUG006 (n8n) — Sep 13, 2025  
 **Version**: 2.0 Enhanced
 
 ## 🚀 **Deployment Status**
@@ -60,8 +61,11 @@ All agents are now **ACTIVE** and operational:
 - **Curator assignment** based on expertise areas
 
 ### **Stage 3: Publishing Pipeline**
-- **Live feed**: `data/feed-latest.json` (real-time updates)
-- **Daily snapshots**: `data/feed-YYYY-MM-DD.json` (archival)
+- **Per-run snapshots**: `data/runs/<ISO>.json`
+- **Per-article entries**: `data/entries/YYYY‑MM‑DD/*.json`
+- **Daily index**: `data/entries/YYYY‑MM‑DD/index.json`
+- **Live feed**: `data/feed-latest.json` (merged updates)
+- **Daily snapshots**: `data/feed-YYYY-MM-DD.json` (merged)
 - **Agent status**: `data/agents.json` (real-time health monitoring)
 
 ## 🌐 **Frontend Features**
