@@ -286,20 +286,53 @@ async function initSmartMarquee(container){
 }
 
 async function initSources(container){
-  let data;
+  // Load configured sources
+  let sources;
   try{
     const url = (window.AILatamConfig?.api?.sourcesUrl) || '/data/sources.json';
     const res = await fetch(url, { cache:'no-store' });
-    data = await res.json();
+    sources = await res.json();
   } catch(e){
-    data = window.VULCANO_DEMO?.sources || [];
+    sources = window.VULCANO_DEMO?.sources || [];
   }
+  // Load current feed to compute coverage metrics per source
+  let feed = [];
+  try{
+    const fUrl = (window.AILatamConfig?.api?.feedUrl) || '/data/feed-latest.json';
+    const raw = await (await fetch(fUrl, { cache:'no-store' })).json();
+    feed = Array.isArray(raw) ? raw : (raw.articles || raw.items || []);
+  }catch(_){ feed = []; }
+
+  const trim = (s) => (s||'').toString().trim();
+  const counts = new Map();
+  const countries = new Map();
+  for (const a of feed){
+    const src = trim(a.source);
+    if (!src) continue;
+    counts.set(src, (counts.get(src)||0) + 1);
+    const c = trim(a.country);
+    if (c){ const set = countries.get(src) || new Set(); set.add(c); countries.set(src, set); }
+  }
+
+  // Index configured sources by name for easy lookup
+  const idx = new Map(sources.map(s => [trim(s.nombre), s]));
+  // Detect sources present in the feed but not in sources.json
+  const unknown = [];
+  for (const [src, n] of counts.entries()){
+    if (!idx.has(src)){
+      unknown.push({ nombre: src, url: '#', pais: Array.from(countries.get(src)||[]).join(', ')||'—', tipo: 'Detectadas', count: n });
+    }
+  }
+
+  const all = sources.map(s => ({...s, count: counts.get(trim(s.nombre))||0, cover: Array.from(countries.get(trim(s.nombre))||[]) }));
   const byType = new Map();
-  for (const src of data){
-    const t = src.tipo || 'otro';
+  for (const src of all){
+    const t = src.tipo || 'Otro';
     if(!byType.has(t)) byType.set(t, []);
     byType.get(t).push(src);
   }
+  if (unknown.length) byType.set('Detectadas en el feed', unknown.sort((a,b)=> (b.count||0)-(a.count||0)));
+
   container.innerHTML = '';
   for (const [tipo, arr] of byType){
     const section = document.createElement('section');
@@ -308,9 +341,13 @@ async function initSources(container){
     const ul = document.createElement('ul');
     for (const s of arr){
       const li = document.createElement('li');
-      const a = document.createElement('a'); a.href = s.url; a.target = '_blank'; a.rel = 'noopener'; a.textContent = s.nombre;
-      const sp = document.createElement('span'); sp.className = 'muted'; sp.textContent = ` (${s.pais || 'Regional'})`;
-      li.appendChild(a); li.appendChild(sp);
+      const a = document.createElement('a'); a.href = s.url || '#'; if (s.url && s.url.startsWith('http')){ a.target = '_blank'; a.rel = 'noopener'; } a.textContent = s.nombre;
+      const meta = document.createElement('span'); meta.className = 'muted'; meta.textContent = ` (${s.pais || 'Regional'})`;
+      li.appendChild(a); li.appendChild(meta);
+      // Add count chip if present
+      if (s.count){ const chip=document.createElement('span'); chip.className='chip'; chip.textContent = `${s.count} notas`; chip.style.marginLeft='8px'; li.appendChild(chip); }
+      // Add coverage countries if available
+      if (s.cover && s.cover.length){ const cover=document.createElement('span'); cover.className='chip'; cover.textContent = s.cover.slice(0,4).join(' · '); cover.style.marginLeft='6px'; li.appendChild(cover); }
       ul.appendChild(li);
     }
     section.appendChild(ul);

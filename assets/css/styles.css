@@ -175,6 +175,8 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
 .meta .item{display:inline-flex; align-items:center; gap:6px}
 .icon{width:14px; height:14px; display:inline-block}
 .chip{display:inline-flex; align-items:center; gap:6px; padding:2px 8px; border-radius:999px; border:1px solid var(--line); background:#0d1117; color:var(--muted); font-size:12px; transition:border-color .15s ease, color .15s ease, background-color .15s ease}
+.chip.clickable{cursor:pointer}
+.chip.clickable:hover{background:#1f6feb22; border-color:#1f6feb55; color:#cfe3ff}
 .chip.ok{border-color:rgba(25,195,125,.35); color:#9af0c8}
 .chip.warn{border-color:rgba(251,191,36,.35); color:#ffe29c}
 .chip.err{border-color:rgba(239,68,68,.35); color:#ffaaaa}
