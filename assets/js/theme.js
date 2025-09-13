@@ -6,17 +6,12 @@
 class ThemeManager {
   constructor() {
     this.themes = {
-      default: 'GitHub Dark',
-      cybernetic: 'Cybernetic',
-      andromeda: 'Andromeda',
-      retro: 'Terminal',
-      arctic: 'Arctic'
+      default: 'Dark',
+      arctic: 'Light'
     };
 
     this.currentTheme = 'default';
     this.themeToggle = null;
-    this.themeMenu = null;
-    this.themeOptions = null;
 
     this.init();
   }
@@ -33,11 +28,9 @@ class ThemeManager {
   setup() {
     // Get DOM elements
     this.themeToggle = document.getElementById('theme-toggle');
-    this.themeMenu = document.getElementById('theme-menu');
-    this.themeOptions = document.querySelectorAll('.theme-option');
 
-    if (!this.themeToggle || !this.themeMenu) {
-      console.warn('Theme selector elements not found');
+    if (!this.themeToggle) {
+      console.warn('Theme toggle button not found');
       return;
     }
 
@@ -49,39 +42,14 @@ class ThemeManager {
 
     // Apply initial theme
     this.applyTheme(this.currentTheme);
-    this.updateActiveOption();
+    this.updateToggleState();
   }
 
   setupEventListeners() {
-    // Toggle menu on button click
+    // Toggle theme on button click
     this.themeToggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      this.toggleMenu();
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!this.themeMenu.contains(e.target) && !this.themeToggle.contains(e.target)) {
-        this.closeMenu();
-      }
-    });
-
-    // Handle theme option clicks
-    this.themeOptions.forEach(option => {
-      option.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const theme = option.dataset.theme;
-        this.setTheme(theme);
-        this.closeMenu();
-      });
-    });
-
-    // Close menu on Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && this.isMenuOpen()) {
-        this.closeMenu();
-        this.themeToggle.focus();
-      }
+      e.preventDefault();
+      this.toggleTheme();
     });
   }
 
@@ -104,6 +72,11 @@ class ThemeManager {
     }
   }
 
+  toggleTheme() {
+    const newTheme = this.currentTheme === 'default' ? 'arctic' : 'default';
+    this.setTheme(newTheme);
+  }
+
   setTheme(theme) {
     if (!this.themes[theme]) {
       console.warn(`Unknown theme: ${theme}`);
@@ -112,7 +85,7 @@ class ThemeManager {
 
     this.currentTheme = theme;
     this.applyTheme(theme);
-    this.updateActiveOption();
+    this.updateToggleState();
     this.saveTheme(theme);
 
     // Dispatch custom event for other scripts to listen to
@@ -158,40 +131,17 @@ class ThemeManager {
     metaThemeColor.content = themeColors[theme] || themeColors.default;
   }
 
-  updateActiveOption() {
-    this.themeOptions.forEach(option => {
-      const isActive = option.dataset.theme === this.currentTheme;
-      option.classList.toggle('active', isActive);
-    });
-  }
+  updateToggleState() {
+    // Update button appearance and label based on current theme
+    const isLight = this.currentTheme === 'arctic';
+    this.themeToggle.setAttribute('aria-label', `Cambiar a tema ${isLight ? 'oscuro' : 'claro'}`);
+    this.themeToggle.setAttribute('data-theme', this.currentTheme);
 
-  toggleMenu() {
-    const isOpen = this.isMenuOpen();
-    if (isOpen) {
-      this.closeMenu();
-    } else {
-      this.openMenu();
+    // Update icon if needed (could switch between sun/moon icons)
+    const icon = this.themeToggle.querySelector('use');
+    if (icon) {
+      icon.setAttribute('href', `/assets/icons.svg#${isLight ? 'palette' : 'palette'}`);
     }
-  }
-
-  openMenu() {
-    this.themeMenu.classList.add('open');
-    this.themeToggle.setAttribute('aria-expanded', 'true');
-
-    // Focus first theme option for keyboard navigation
-    const firstOption = this.themeMenu.querySelector('.theme-option');
-    if (firstOption) {
-      firstOption.focus();
-    }
-  }
-
-  closeMenu() {
-    this.themeMenu.classList.remove('open');
-    this.themeToggle.setAttribute('aria-expanded', 'false');
-  }
-
-  isMenuOpen() {
-    return this.themeMenu.classList.contains('open');
   }
 
   // Public API for external scripts
