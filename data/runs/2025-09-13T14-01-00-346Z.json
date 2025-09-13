@@ -1,0 +1,68 @@
+{
+  "version": "v1.0",
+  "articles": [
+    {
+      "id": "https://www.eluniversal.com.mx/tech/mexico-propone-nueva-ley-para-criptomonedas/",
+      "title": "México avanza en regulación de criptomonedas con nueva propuesta de ley",
+      "summary": "El Senado mexicano presentó una iniciativa para regular el uso de criptomonedas y blockchain, buscando fomentar la innovación mientras se protege a los usuarios.",
+      "url": "https://www.eluniversal.com.mx/tech/mexico-propone-nueva-ley-para-criptomonedas/",
+      "source": "El Universal",
+      "source_url": "https://www.eluniversal.com.mx",
+      "country": "México",
+      "topics": [
+        "Regulación",
+        "Criptomonedas",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T14:30:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Juan Pérez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.larepublica.co/empresas/startup-edtech-colombiana-recibe-inversion-2023",
+      "title": "Startup colombiana de edtech recibe inversión de 5 millones de dólares",
+      "summary": "La empresa EduTech Colombia, enfocada en educación digital, cerró una ronda de financiación para expandir sus operaciones en América Latina.",
+      "url": "https://www.larepublica.co/empresas/startup-edtech-colombiana-recibe-inversion-2023",
+      "source": "La República",
+      "source_url": "https://www.larepublica.co",
+      "country": "Colombia",
+      "topics": [
+        "Startups",
+        "Educación",
+        "Inversión"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T12:15:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "María Gómez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://g1.globo.com/tecnologia/noticia/2023/10/05/brasil-novas-politicas-ciberseguranca.ghtml",
+      "title": "Brasil implementa nuevas políticas de ciberseguridad para empresas",
+      "summary": "El gobierno brasileño anunció medidas estrictas para proteger datos sensibles de empresas frente a ciberataques, impactando a sectores tecnológicos.",
+      "url": "https://g1.globo.com/tecnologia/noticia/2023/10/05/brasil-novas-politicas-ciberseguranca.ghtml",
+      "source": "G1 Globo",
+      "source_url": "https://g1.globo.com",
+      "country": "Brasil",
+      "topics": [
+        "Regulación",
+        "Ciberseguridad",
+        "Tecnología"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-05T10:00:00Z",
+      "relevance": 9,
+      "sentiment": "neutral",
+      "author": "Carlos Silva",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T14:00:58.233Z",
+  "params": {}
+}
