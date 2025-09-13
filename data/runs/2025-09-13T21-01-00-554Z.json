@@ -1,0 +1,65 @@
+{
+  "version": "v1.0",
+  "articles": [
+    {
+      "id": "https://www.eluniversal.com.mx/nacion/mexico-aprueba-ley-de-ciberseguridad-para-datos-personales",
+      "title": "México aprueba nueva ley de ciberseguridad para proteger datos personales",
+      "summary": "El Congreso de México aprobó una reforma para fortalecer la protección de datos personales en plataformas digitales, con sanciones más estrictas a empresas que incumplan las normativas.",
+      "url": "https://www.eluniversal.com.mx/nacion/mexico-aprueba-ley-de-ciberseguridad-para-datos-personales",
+      "source": "El Universal",
+      "source_url": "https://www.eluniversal.com.mx",
+      "country": "México",
+      "topics": [
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T14:30:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Juan Pérez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.elespectador.com/economia/startup-colombiana-finTechCol-recibe-inversion-de-5-millones/",
+      "title": "Startup colombiana de fintech recibe inversión de 5 millones de dólares",
+      "summary": "La empresa bogotana FinTechCol logra cerrar una ronda de inversión Serie A para expandir sus servicios de pagos digitales en América Latina.",
+      "url": "https://www.elespectador.com/economia/startup-colombiana-finTechCol-recibe-inversion-de-5-millones/",
+      "source": "El Espectador",
+      "source_url": "https://www.elespectador.com",
+      "country": "Colombia",
+      "topics": [
+        "Startups",
+        "Fintech"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T16:00:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "María Gómez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://g1.globo.com/economia/noticia/brasil-debate-regulacao-de-streaming.ghtml",
+      "title": "Brasil debate nuevas regulaciones para plataformas de streaming",
+      "summary": "El gobierno brasileño propone un marco regulatorio para servicios de streaming, buscando equilibrar la competencia con productoras locales.",
+      "url": "https://g1.globo.com/economia/noticia/brasil-debate-regulacao-de-streaming.ghtml",
+      "source": "G1 Globo",
+      "source_url": "https://g1.globo.com",
+      "country": "Brasil",
+      "topics": [
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-25T12:15:00Z",
+      "relevance": 6,
+      "sentiment": "neutral",
+      "author": "Carlos Silva",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T21:00:57.805Z",
+  "params": {}
+}
