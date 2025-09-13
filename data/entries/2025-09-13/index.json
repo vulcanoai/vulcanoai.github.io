@@ -1,17 +1,17 @@
 {
   "date": "2025-09-13",
-  "count": 118,
+  "count": 121,
   "topics": {
-    "Regulación": 51,
-    "Tecnología": 44,
-    "Startups": 38,
+    "Regulación": 52,
+    "Tecnología": 46,
+    "Startups": 39,
     "Fintech": 13,
     "Ciberseguridad": 12,
-    "Sostenibilidad": 8,
+    "Sostenibilidad": 9,
     "Criptomonedas": 8,
     "Educación": 8,
+    "Edtech": 6,
     "Inversión": 5,
-    "Edtech": 5,
     "Innovación": 5,
     "Inteligencia Artificial": 5,
     "Energía": 5,
@@ -47,9 +47,9 @@
     "México": 16,
     "Colombia": 16,
     "Brasil": 16,
-    "Argentina": 12,
-    "Chile": 12,
-    "Perú": 10,
+    "Argentina": 13,
+    "Chile": 13,
+    "Perú": 11,
     "Bolivia": 4,
     "Panamá": 4,
     "Regional": 4,
@@ -63,5 +63,5 @@
     "Uruguay": 2,
     "Venezuela": 2
   },
-  "generated_at": "2025-09-13T21:10:25.044Z"
+  "generated_at": "2025-09-13T22:01:09.934Z"
 }
