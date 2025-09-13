@@ -237,7 +237,7 @@ function enhanceFooter(){
 async function initSmartMarquee(container){
   try{
     const cfg = window.AILatamConfig?.api || {};
-    const url = cfg.feedUrl || '/data/sample-feed.json';
+    const url = cfg.feedUrl || '/data/feed-latest.json';
     const items = await (await fetch(url, { cache:'no-store' })).json();
     const norm = (a) => ({
       country: a.country || a.pais || 'Regional',

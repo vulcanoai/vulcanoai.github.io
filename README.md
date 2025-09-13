@@ -49,7 +49,7 @@ Abre http://localhost:8080
 
 ## Integración con n8n
 
-El sitio cliente carga el feed desde `window.AILatamConfig.api.feedUrl` (ver `assets/js/config.js`). Por defecto apunta a `/data/sample-feed.json`.
+El sitio cliente carga el feed desde `window.AILatamConfig.api.feedUrl` (ver `assets/js/config.js`). Por defecto apunta a `/data/feed-latest.json`.
 
 1. Expón un endpoint n8n que devuelva JSON de artículos (CORS habilitado).
 2. Actualiza `feedUrl` para apuntar a tu webhook o a un archivo JSON en S3/Cloud Storage/CDN.
