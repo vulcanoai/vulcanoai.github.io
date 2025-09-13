@@ -15,8 +15,45 @@
     <a href="#main" class="skip-link">Saltar al contenido</a>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="/"><svg class="logo" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg><span class="brand-text">Vulcano Ai</span></a>
-        <button class="nav-toggle" aria-label="Abrir menú">☰</button>
+        <a class="brand" href="/pages/noticias.html">
+          <svg class="logo" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>
+          <span class="brand-text">Vulcano AI</span>
+        </a>
+
+        <!-- Global Time Zone Indicators -->
+        <div class="global-time" id="global-time">
+          <div class="time-zone" data-tz="America/Mexico_City">
+            <span class="tz-label">MX</span>
+            <span class="tz-time">--:--</span>
+          </div>
+          <div class="time-zone" data-tz="America/Bogota">
+            <span class="tz-label">COL</span>
+            <span class="tz-time">--:--</span>
+          </div>
+          <div class="time-zone" data-tz="America/Argentina/Buenos_Aires">
+            <span class="tz-label">AR</span>
+            <span class="tz-time">--:--</span>
+          </div>
+          <div class="time-zone" data-tz="America/Sao_Paulo">
+            <span class="tz-label">BR</span>
+            <span class="tz-time">--:--</span>
+          </div>
+        </div>
+
+        <!-- Theme Toggle -->
+        <div class="theme-selector">
+          <button class="theme-toggle" aria-label="Cambiar tema" id="theme-toggle">
+            <svg class="theme-icon" aria-hidden="true">
+              <use href="/assets/icons.svg#palette"></use>
+            </svg>
+          </button>
+        </div>
+
+        <button class="nav-toggle" aria-label="Abrir menú">
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+        </button>
         <nav class="site-nav" aria-label="Principal">
           <a href="/pages/noticias.html">Inicio</a>
           <a href="/pages/crypto.html">Crypto</a>
@@ -127,6 +164,7 @@
       </div>
     </footer>
     <script src="/assets/js/config.js"></script>
+    <script src="/assets/js/theme.js"></script>
     <script src="/assets/js/status-badge.js"></script>
     <script src="/assets/js/app.js?v=7"></script>
   </body>

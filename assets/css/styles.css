@@ -2566,6 +2566,410 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 .hero-grid .orb-wrap{margin-top:4px}
 @media (max-width: 900px){ .hero-grid .orb-wrap{margin-top:12px} }
 .orb-wrap{display:flex; align-items:center; justify-content:center}
+
+/* Experimental Section Styles */
+.experimental-hero {
+  background: linear-gradient(135deg, rgba(255,90,42,.08) 0%, rgba(47,129,247,.12) 50%, transparent 100%);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 48px;
+  margin-bottom: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.experimental-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,90,42,.6), rgba(47,129,247,.4), transparent);
+}
+
+.experimental-icon {
+  width: 72px;
+  height: 72px;
+  color: var(--logo);
+  filter: drop-shadow(0 0 20px rgba(255,90,42,.4));
+  animation: sparkle 3s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.05) rotate(5deg); }
+  50% { transform: scale(1.1) rotate(-5deg); }
+  75% { transform: scale(1.05) rotate(3deg); }
+}
+
+.experiments-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.experiment-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 24px;
+  transition: all 0.3s ease;
+}
+
+.experiment-card:hover {
+  border-color: var(--brand);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+
+.experiment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.experiment-header h3 {
+  margin: 0;
+  color: var(--text);
+}
+
+.experiment-status {
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.experiment-status.in-development {
+  background: rgba(255,90,42,0.1);
+  color: var(--logo);
+  border: 1px solid rgba(255,90,42,0.3);
+}
+
+.experiment-status.prototype {
+  background: rgba(47,129,247,0.1);
+  color: var(--brand);
+  border: 1px solid rgba(47,129,247,0.3);
+}
+
+.experiment-status.concept {
+  background: var(--panel-alt);
+  color: var(--muted);
+  border: 1px solid var(--line);
+}
+
+.experiment-description {
+  color: var(--text);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.experiment-preview {
+  background: var(--panel-alt);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.experiment-actions {
+  display: flex;
+  gap: 12px;
+}
+
+/* Node Visualization Styles */
+.node-container {
+  position: relative;
+  width: 200px;
+  height: 120px;
+}
+
+.central-node {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  background: var(--brand);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.central-node.pulsing {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.1); }
+}
+
+.satellite-node {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background: var(--panel);
+  border: 2px solid var(--line);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.satellite-node:nth-child(2) {
+  top: 10px;
+  right: 30px;
+}
+
+.satellite-node:nth-child(3) {
+  bottom: 10px;
+  right: 10px;
+}
+
+.satellite-node:nth-child(4) {
+  bottom: 20px;
+  left: 20px;
+}
+
+.satellite-node.orbiting {
+  animation: orbit 8s linear infinite;
+  animation-delay: var(--orbit-delay, 0s);
+}
+
+@keyframes orbit {
+  0% { transform: rotate(0deg) translateX(60px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
+}
+
+/* AI Collaboration Styles */
+.ai-network {
+  position: relative;
+  width: 200px;
+  height: 120px;
+}
+
+.ai-agent {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  background: var(--panel);
+  border: 2px solid var(--brand);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--brand);
+}
+
+.ai-agent[data-agent="claude"] {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.ai-agent[data-agent="gpt"] {
+  bottom: 0;
+  left: 20px;
+}
+
+.ai-agent[data-agent="grok"] {
+  bottom: 0;
+  right: 20px;
+}
+
+.ai-agent.processing {
+  animation: aiPulse 2s ease-in-out infinite;
+  animation-delay: var(--agent-delay, 0s);
+}
+
+.ai-agent.active-processing {
+  background: var(--brand);
+  color: white;
+  box-shadow: 0 0 20px rgba(47,129,247,0.5);
+}
+
+@keyframes aiPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* Organic Navigation Styles */
+.nav-evolution {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.nav-path {
+  padding: 8px 16px;
+  background: var(--panel-alt);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-size: 12px;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.nav-path.active {
+  opacity: 1;
+  background: rgba(47,129,247,0.1);
+  border-color: var(--brand);
+  color: var(--brand);
+}
+
+/* Technical Notes */
+.technical-notes {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 32px;
+}
+
+.technical-notes h2 {
+  margin-bottom: 24px;
+  color: var(--text);
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.note-card {
+  background: var(--panel-alt);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.note-card h4 {
+  margin: 0 0 12px 0;
+  color: var(--brand);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.note-card p {
+  margin: 0;
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Code Modal */
+.code-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+.code-modal-content {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.code-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.code-modal-header h3 {
+  margin: 0;
+  color: var(--text);
+}
+
+.code-modal-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+}
+
+.code-modal-close:hover {
+  color: var(--text);
+}
+
+.code-modal pre {
+  overflow: auto;
+  margin: 0;
+  padding: 20px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.code-modal code {
+  color: var(--text);
+}
+
+/* Active Experiment States */
+.experiment-preview.active-experiment {
+  border-color: var(--brand);
+  background: rgba(47,129,247,0.05);
+}
+
+.experiment-preview.active-experiment .central-node {
+  box-shadow: 0 0 20px rgba(47,129,247,0.5);
+}
+
+.dynamic-connection {
+  position: absolute;
+  width: 2px;
+  height: 60px;
+  background: linear-gradient(to bottom, var(--brand), transparent);
+  transform-origin: center top;
+  animation: connectionPulse 3s ease-in-out infinite;
+  animation-delay: calc(var(--connection-index) * 0.5s);
+}
+
+@keyframes connectionPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
 .orb{width:320px; height:320px; max-width:100%}
 .orb svg{width:100%; height:100%; display:block}
 .orb .stroke{stroke:var(--logo); fill:none; opacity:.85}
