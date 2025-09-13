@@ -1,0 +1,65 @@
+{
+  "version": "v1.0",
+  "articles": [
+    {
+      "id": "https://www.lanacion.com.ar/economia/argentina-impulsa-ley-para-regular-criptomonedas-nid05102023/",
+      "title": "Argentina impulsa ley para regular criptomonedas en 2023",
+      "summary": "El gobierno argentino presenta un proyecto de ley para regular el uso y comercio de criptomonedas, buscando frenar el lavado de dinero y proteger a los inversores.",
+      "url": "https://www.lanacion.com.ar/economia/argentina-impulsa-ley-para-regular-criptomonedas-nid05102023/",
+      "source": "La Nación",
+      "source_url": "https://www.lanacion.com.ar",
+      "country": "Argentina",
+      "topics": [
+        "Regulación",
+        "Criptomonedas"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T16:45:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Carlos Rodríguez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.estadao.com.br/economia/startup-brasileira-edtech-capta-10-milhoes-expansao/",
+      "title": "Startup brasileña de edtech capta R$ 10 millones para expansión",
+      "summary": "Una empresa de tecnología educativa en Brasil recibe una inversión significativa para llevar sus soluciones de aprendizaje digital a más escuelas en el país.",
+      "url": "https://www.estadao.com.br/economia/startup-brasileira-edtech-capta-10-milhoes-expansao/",
+      "source": "Estadão",
+      "source_url": "https://www.estadao.com.br",
+      "country": "Brasil",
+      "topics": [
+        "Startups",
+        "Edtech"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-05T13:20:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Ana Silva",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.emol.com/noticias/Economia/2023/10/05/1109875/chile-lidera-energias-renovables-latam.html",
+      "title": "Chile lidera en energías renovables en América Latina",
+      "summary": "Un informe reciente posiciona a Chile como líder regional en la adopción de energías renovables, destacando su inversión en proyectos solares y eólicos.",
+      "url": "https://www.emol.com/noticias/Economia/2023/10/05/1109875/chile-lidera-energias-renovables-latam.html",
+      "source": "Emol",
+      "source_url": "https://www.emol.com",
+      "country": "Chile",
+      "topics": [
+        "Energía",
+        "Sostenibilidad"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T11:10:00Z",
+      "relevance": 9,
+      "sentiment": "positive",
+      "author": "Felipe Vargas",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T12:01:00.230Z",
+  "params": {}
+}
