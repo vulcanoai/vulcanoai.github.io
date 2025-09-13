@@ -1,6 +1,6 @@
 {
   "version": "v1.0",
-  "generated_at": "2025-09-13T18:43:28.082Z",
+  "generated_at": "2025-09-13T19:09:11.687Z",
   "articles": [
     {
       "id": "00000000",
@@ -12,7 +12,7 @@
       "country": "Regional",
       "topics": [],
       "language": "es",
-      "published_at": "2025-09-13T18:43:28.081Z",
+      "published_at": "2025-09-13T19:09:11.686Z",
       "relevance": 0,
       "sentiment": "neutral",
       "author": "",
@@ -1473,6 +1473,25 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://www.eluniversal.com.mx/cartera/mexico-aprueba-nueva-regulacion-para-fintechs",
+      "title": "México aprueba nueva regulación para fintechs en el sector financiero",
+      "summary": "El gobierno mexicano ha anunciado una serie de reformas para regular el crecimiento de las fintechs, buscando mayor transparencia y protección al consumidor en el sector de tecnología financiera.",
+      "url": "https://www.eluniversal.com.mx/cartera/mexico-aprueba-nueva-regulacion-para-fintechs",
+      "source": "El Universal",
+      "source_url": "https://www.eluniversal.com.mx",
+      "country": "México",
+      "topics": [
+        "Regulación",
+        "Fintech"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T14:30:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Juan Pérez",
+      "curator": "Luciano AI"
+    },
+    {
       "id": "https://www.eluniversal.com.mx/tech/mexico-nuevas-regulaciones-plataformas-digitales",
       "title": "México impulsa nuevas regulaciones para plataformas digitales",
       "summary": "El gobierno mexicano propone un marco regulatorio para plataformas digitales con el objetivo de garantizar la privacidad de datos y fomentar la competencia justa en el mercado tecnológico.",
@@ -1817,6 +1836,25 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://www.eltiempo.com/economia/empresas/startup-colombiana-de-logistica-recauda-10-millones-789123",
+      "title": "Startup colombiana de logística recauda $10 millones en ronda Serie A",
+      "summary": "Una startup de logística basada en Bogotá ha logrado captar $10 millones en una ronda de inversión Serie A, con el objetivo de expandirse a otros países de América Latina.",
+      "url": "https://www.eltiempo.com/economia/empresas/startup-colombiana-de-logistica-recauda-10-millones-789123",
+      "source": "El Tiempo",
+      "source_url": "https://www.eltiempo.com",
+      "country": "Colombia",
+      "topics": [
+        "Startups",
+        "Inversión"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T12:15:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "María Gómez",
+      "curator": "Luciano AI"
+    },
+    {
       "id": "https://www.eltiempo.com/economia/empresas/startup-colombiana-fintech-inversion-2023",
       "title": "Startup colombiana de fintech recibe inversión millonaria",
       "summary": "Una startup de tecnología financiera en Colombia ha asegurado una ronda de financiación de 5 millones de dólares para expandir sus operaciones en América Latina.",
@@ -2006,6 +2044,25 @@
       "relevance": 6,
       "sentiment": "neutral",
       "author": "Andrea Castillo",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://g1.globo.com/economia/noticia/2023/10/05/brasil-ley-streaming-contenido-local.ghtml",
+      "title": "Brasil impulsa ley para regular plataformas de streaming",
+      "summary": "El Congreso brasileño debate una nueva ley que obligaría a las plataformas de streaming a incluir un porcentaje de contenido local en sus catálogos.",
+      "url": "https://g1.globo.com/economia/noticia/2023/10/05/brasil-ley-streaming-contenido-local.ghtml",
+      "source": "G1 Globo",
+      "source_url": "https://g1.globo.com",
+      "country": "Brasil",
+      "topics": [
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-05T10:45:00Z",
+      "relevance": 6,
+      "sentiment": "neutral",
+      "author": "Carlos Silva",
       "curator": "Luciano AI"
     },
     {
