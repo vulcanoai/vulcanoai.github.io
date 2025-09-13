@@ -1599,10 +1599,12 @@ async function loadLegalStats() {
   try {
     // Enhanced N8N pipeline data fetching
     let legalData = [];
+    const cfgUrl = (window.AILatamConfig?.api?.legalUrl) || '';
     const endpoints = [
-      '/data/legal-sample.json',
-      '/data/legal-realtime.json', // N8N pipeline endpoint
-      '/api/legal/initiatives' // Direct N8N webhook if available
+      cfgUrl || '/data/legal-realtime.json',
+      '/data/legal-realtime.json', // N8N pipeline endpoint (static JSON published by workflow)
+      '/api/legal/initiatives', // Direct N8N webhook if available
+      '/data/legal-sample.json' // Last-resort sample
     ];
     
     // Try multiple data sources for redundancy
