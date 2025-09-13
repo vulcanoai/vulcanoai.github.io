@@ -1,0 +1,65 @@
+{
+  "version": "v1.0",
+  "articles": [
+    {
+      "id": "https://www.la-razon.com/sociedad/2023/10/05/bolivia-digitalizacion-servicios-publicos-2023/",
+      "title": "Bolivia avanza en la digitalización de servicios públicos",
+      "summary": "El gobierno boliviano implementa una plataforma digital para agilizar trámites administrativos, buscando reducir la burocracia y mejorar el acceso ciudadano.",
+      "url": "https://www.la-razon.com/sociedad/2023/10/05/bolivia-digitalizacion-servicios-publicos-2023/",
+      "source": "La Razón Bolivia",
+      "source_url": "https://www.la-razon.com",
+      "country": "Bolivia",
+      "topics": [
+        "Tecnología",
+        "Gobierno Digital"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T23:30:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Ana Beltrán",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.diariolibre.com/actualidad/nacional/2023/10/05/startup-dominicana-edtech-premio-regional/2467890",
+      "title": "Startup dominicana de edtech gana reconocimiento regional",
+      "summary": "Una empresa de República Dominicana enfocada en soluciones educativas digitales recibe un premio por su impacto en la educación a distancia.",
+      "url": "https://www.diariolibre.com/actualidad/nacional/2023/10/05/startup-dominicana-edtech-premio-regional/2467890",
+      "source": "Diario Libre",
+      "source_url": "https://www.diariolibre.com",
+      "country": "República Dominicana",
+      "topics": [
+        "Startups",
+        "Edtech"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T22:15:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Luis Martínez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.elsalvador.com/noticias/nacional/el-salvador-regulacion-criptomonedas-2023/1098765",
+      "title": "El Salvador debate regulaciones para criptomonedas",
+      "summary": "Tras la adopción de Bitcoin como moneda de curso legal, El Salvador enfrenta nuevos retos para regular el uso de criptoactivos y prevenir riesgos financieros.",
+      "url": "https://www.elsalvador.com/noticias/nacional/el-salvador-regulacion-criptomonedas-2023/1098765",
+      "source": "El Salvador.com",
+      "source_url": "https://www.elsalvador.com",
+      "country": "El Salvador",
+      "topics": [
+        "Regulación",
+        "Criptomonedas"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T20:45:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Gabriela Flores",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T03:43:28.818Z",
+  "params": {}
+}
