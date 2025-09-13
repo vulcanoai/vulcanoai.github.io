@@ -59,6 +59,26 @@ def patch_js_build_put_entry(code: str) -> str:
                   code, count=1)
     return code
 
+def patch_js_build_put_generic(code: str) -> str:
+    # Replace the generic merge with a normalized reader for body/data and sha
+    new = (
+        "// BUILD_PUT_GENERIC — merge meta + sha from both inputs into PUT body\n"
+        "const all = $input.all();\n"
+        "const meta = all.find(i => i.json && i.json.base && i.json.path);\n"
+        "if (!meta) return [];\n"
+        "function respOf(it){ const j = it && it.json; if(!j) return {}; if(j.body && typeof j.body==='object') return j.body; if(j.data && typeof j.data==='object') return j.data; return j; }\n"
+        "const shaItem = all.find(i => { const r = respOf(i); return r && typeof r.sha === 'string'; });\n"
+        "const r = shaItem ? respOf(shaItem) : {};\n"
+        "const { base, branch, path, content, message } = meta.json;\n"
+        "const body = { message, content, branch };\n"
+        "if (typeof r.sha === 'string') body.sha = r.sha;\n"
+        "return [{ json: { url: `${base}/${path}`, body } }];\n"
+    )
+    # Only replace if it looks like the old generic snippet
+    if "BUILD_PUT_GENERIC" in code:
+        return new
+    return code
+
 def ensure_get_options(node):
     p = node.get('parameters', {})
     opts = p.setdefault('options', {})
@@ -86,6 +106,59 @@ def main():
             'GITHUB_GET_CATALOG_SHA'
         ):
             ensure_get_options(node)
+        elif name in ('BUILD_PUT_BY_TOPIC','BUILD_PUT_BY_COUNTRY','BUILD_PUT_CATALOG') and 'jsCode' in p:
+            p['jsCode'] = patch_js_build_put_generic(p['jsCode'])
+
+    # Ensure Merge nodes for topic/country/catalog to reliably combine meta + GET
+    def add_merge_if_missing(name, position):
+        if any(n.get('name') == name for n in wf.get('nodes', [])):
+            return
+        wf['nodes'].append({
+            'parameters': { 'mode': 'mergeByPosition', 'options': {} },
+            'id': name + '-id',
+            'name': name,
+            'type': 'n8n-nodes-base.merge',
+            'typeVersion': 2,
+            'position': position,
+        })
+
+    add_merge_if_missing('BY_TOPIC_SHA_MERGE', [-6992, -928])
+    add_merge_if_missing('BY_COUNTRY_SHA_MERGE', [-6992, -800])
+    add_merge_if_missing('CATALOG_SHA_MERGE', [-6992, -656])
+
+    # Rewire connections: route GET + META into MERGE, then into BUILD_PUT_*
+    con = wf.setdefault('connections', {})
+
+    # Topic
+    if 'GITHUB_GET_BY_TOPIC_SHA' in con:
+        con['GITHUB_GET_BY_TOPIC_SHA']['main'] = [[{'node':'BY_TOPIC_SHA_MERGE','type':'main','index':1}]]
+    # Replace BUILD_MASTER_INDEX path to BUILD_PUT_BY_TOPIC -> BY_TOPIC_SHA_MERGE
+    bmi = con.get('BUILD_MASTER_INDEX')
+    if bmi and 'main' in bmi and bmi['main'] and bmi['main'][0]:
+        for entry in bmi['main'][0]:
+            if entry.get('node') == 'BUILD_PUT_BY_TOPIC':
+                entry['node'] = 'BY_TOPIC_SHA_MERGE'
+    # Connect MERGE to builder
+    con['BY_TOPIC_SHA_MERGE'] = { 'main': [[{'node':'BUILD_PUT_BY_TOPIC','type':'main','index':0}]] }
+
+    # Country
+    if 'GITHUB_GET_BY_COUNTRY_SHA' in con:
+        con['GITHUB_GET_BY_COUNTRY_SHA']['main'] = [[{'node':'BY_COUNTRY_SHA_MERGE','type':'main','index':1}]]
+    if bmi and 'main' in bmi and bmi['main'] and bmi['main'][0]:
+        for entry in bmi['main'][0]:
+            if entry.get('node') == 'BUILD_PUT_BY_COUNTRY':
+                entry['node'] = 'BY_COUNTRY_SHA_MERGE'
+    con['BY_COUNTRY_SHA_MERGE'] = { 'main': [[{'node':'BUILD_PUT_BY_COUNTRY','type':'main','index':0}]] }
+
+    # Catalog
+    if 'GITHUB_GET_CATALOG_SHA' in con:
+        con['GITHUB_GET_CATALOG_SHA']['main'] = [[{'node':'CATALOG_SHA_MERGE','type':'main','index':1}]]
+    bc = con.get('BUILD_CATALOG')
+    if bc and 'main' in bc and bc['main'] and bc['main'][0]:
+        for entry in bc['main'][0]:
+            if entry.get('node') == 'BUILD_PUT_CATALOG':
+                entry['node'] = 'CATALOG_SHA_MERGE'
+    con['CATALOG_SHA_MERGE'] = { 'main': [[{'node':'BUILD_PUT_CATALOG','type':'main','index':0}]] }
 
     with open(DST, 'w') as f:
         json.dump(wf, f, indent=2)
@@ -94,4 +167,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
