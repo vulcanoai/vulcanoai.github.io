@@ -20,8 +20,37 @@
     <a href="#main" class="skip-link">Saltar al contenido</a>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="/pages/noticias.html"><svg class="logo" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg><span class="brand-text">Vulcano AI</span></a>
-        <button class="nav-toggle" aria-label="Abrir menú">☰</button>
+        <a class="brand" href="/pages/noticias.html">
+          <svg class="logo" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>
+          <span class="brand-text">Vulcano AI</span>
+        </a>
+        
+        <!-- Global Time Zone Indicators -->
+        <div class="global-time" id="global-time">
+          <div class="time-zone" data-tz="America/Mexico_City">
+            <span class="tz-label">MX</span>
+            <span class="tz-time">--:--</span>
+          </div>
+          <div class="time-zone" data-tz="America/Bogota">
+            <span class="tz-label">COL</span>
+            <span class="tz-time">--:--</span>
+          </div>
+          <div class="time-zone" data-tz="America/Argentina/Buenos_Aires">
+            <span class="tz-label">AR</span>
+            <span class="tz-time">--:--</span>
+          </div>
+          <div class="time-zone" data-tz="America/Sao_Paulo">
+            <span class="tz-label">BR</span>
+            <span class="tz-time">--:--</span>
+          </div>
+        </div>
+        
+        <button class="nav-toggle" aria-label="Abrir menú">
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+        </button>
+        
         <nav class="site-nav" aria-label="Principal">
           <a href="/pages/noticias.html" aria-current="page">Inicio</a>
           <a href="/pages/panorama.html">Panorama</a>
@@ -36,20 +65,41 @@
     </header>
     <main class="section" id="main">
       <div class="container">
-        <div style="margin-bottom:20px">
-          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; flex-wrap:wrap; gap:8px">
-            <div style="display:flex; align-items:center; gap:12px">
-              <svg class="logo" aria-hidden="true" style="width:32px; height:32px; color:var(--logo)">
+        <!-- Hero Section -->
+        <div class="news-hero">
+          <div class="hero-content">
+            <div class="hero-header">
+              <svg class="hero-icon" aria-hidden="true">
                 <use href="/assets/icons.svg#logo"></use>
               </svg>
-              <div>
-                <h1 style="margin:0; font-size:28px; line-height:1.1">Vulcano AI</h1>
-                <div style="color:var(--muted); font-size:14px; margin-top:2px">Noticias de IA en América Latina</div>
+              <div class="hero-text">
+                <h1>Vulcano AI</h1>
+                <p class="hero-subtitle">Ecosistema abierto de IA en América Latina</p>
               </div>
             </div>
-            <div id="results-counter" style="font-size:13px; color:var(--muted)">Cargando...</div>
+            
+            <div class="hero-stats">
+              <div class="stat-card">
+                <div class="stat-value" id="results-counter">Cargando...</div>
+                <div class="stat-label">Artículos procesados</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value" id="live-sources">--</div>
+                <div class="stat-label">Fuentes activas</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value" id="live-countries">--</div>
+                <div class="stat-label">Países cubiertos</div>
+              </div>
+            </div>
+            
+            <div class="hero-tagline">
+              <svg class="tagline-icon" aria-hidden="true">
+                <use href="/assets/icons.svg#sparkles"></use>
+              </svg>
+              <span>Procesado por sistemas autónomos de inteligencia artificial</span>
+            </div>
           </div>
-          <p style="color:var(--muted); margin:0; font-size:15px">Procesado por sistemas autónomos de inteligencia artificial</p>
         </div>
         <div class="filters" id="filters">
           <input type="search" id="search" placeholder="Buscar noticias, empresas, temas..." aria-label="Buscar" />
@@ -65,14 +115,28 @@
           <!-- Content loaded dynamically from demo-data.js -->
         </div>
 
-        <section class="section alt" style="margin-top:16px">
-          <div class="panel">
-            <h3>Actualizaciones en tu WhatsApp</h3>
-            <p>Vulcano Ai te envía noticias de IA en LATAM directo a tu WhatsApp. Recibe un resumen diario o semanal en tu chat.</p>
-            <a id="wa-link" class="btn primary" target="_blank" rel="noopener">
-              <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#whatsapp"></use></svg>
-              Abrir WhatsApp
-            </a>
+        <!-- Call to Action Section -->
+        <section class="cta-section">
+          <div class="cta-card">
+            <div class="cta-content">
+              <div class="cta-icon">
+                <svg aria-hidden="true"><use href="/assets/icons.svg#whatsapp"></use></svg>
+              </div>
+              <div class="cta-text">
+                <h3>Mantente al día</h3>
+                <p>Recibe noticias curadas de IA en LATAM directo en tu WhatsApp. Resúmenes diarios y alertas importantes.</p>
+              </div>
+              <div class="cta-actions">
+                <a id="wa-link" class="btn primary large" target="_blank" rel="noopener">
+                  <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#whatsapp"></use></svg>
+                  Unirse a WhatsApp
+                </a>
+                <a href="/pages/apoya.html" class="btn secondary large">
+                  <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#heart"></use></svg>
+                  Apoyar proyecto
+                </a>
+              </div>
+            </div>
           </div>
         </section>
       </div>

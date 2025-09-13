@@ -8,6 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Build header nav and mobile bottom nav from config
   buildUnifiedNav();
   enhanceFooter();
+  
+  // Initialize global header features
+  initGlobalTimeZones();
+  initEnhancedNavigation();
 
   // Initialize feed if present
   if (window.AILatamFeed && typeof window.AILatamFeed.initFeed === 'function'){
@@ -17,6 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (window.AILatamFeed && typeof window.AILatamFeed.initRegHighlights === 'function'){
      window.AILatamFeed.initRegHighlights();
   }
+  
+  // Initialize homepage hero stats
+  initHeroStats();
 
   // Initialize sources page if present
   const sourcesList = document.getElementById('sources-list');
@@ -53,11 +60,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // Noticias: compact "new since last visit" badge in header nav
   mountNavNewBadge().catch(console.error);
 
-  // Mobile/tablet nav toggle - Enhanced
+  // Legacy mobile navigation - now handled by initEnhancedNavigation()
+  // This section is maintained for compatibility but functionality moved to initEnhancedNavigation()
   try{
     const btn = document.querySelector('.nav-toggle');
     const nav = document.querySelector('.site-nav');
     if (btn && nav){
+      // Create backdrop if it doesn't exist
       let backdrop = document.querySelector('.nav-backdrop');
       if (!backdrop){
         backdrop = document.createElement('div');
@@ -65,56 +74,21 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(backdrop);
       }
       
-      const close = ()=>{ 
-        nav.classList.remove('open'); 
-        backdrop.classList.remove('show'); 
+      // Add backdrop click handler
+      backdrop.addEventListener('click', () => {
+        nav.classList.remove('open');
+        backdrop.classList.remove('show');
         document.body.classList.remove('nav-open');
         btn.setAttribute('aria-expanded', 'false');
-      };
-      
-      const open = ()=>{ 
-        nav.classList.add('open'); 
-        backdrop.classList.add('show'); 
-        document.body.classList.add('nav-open');
-        btn.setAttribute('aria-expanded', 'true');
-        // Focus first nav item for accessibility
-        const firstLink = nav.querySelector('a');
-        if (firstLink) firstLink.focus();
-      };
-      
-      // Hamburger button click
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const willOpen = !nav.classList.contains('open');
-        if (willOpen) open(); else close();
       });
       
-      // Enhanced backdrop click with touch support
-      backdrop.addEventListener('click', close);
-      backdrop.addEventListener('touchstart', close, { passive: true });
-      
-      // Enhanced keyboard navigation
-      window.addEventListener('keydown', (e)=>{ 
-        if(e.key==='Escape') close();
-        // Navigate with arrow keys when menu is open
-        if (nav.classList.contains('open') && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
-          e.preventDefault();
-          const links = [...nav.querySelectorAll('a')];
-          const current = document.activeElement;
-          const currentIndex = links.indexOf(current);
-          const nextIndex = e.key === 'ArrowDown' ? 
-            (currentIndex + 1) % links.length : 
-            (currentIndex - 1 + links.length) % links.length;
-          links[nextIndex]?.focus();
-        }
-      });
-      
-      // Close menu when clicking nav links
-      nav.addEventListener('click', (e) => {
-        if (e.target.tagName === 'A') {
-          close();
-        }
-      });
+      // Add touch support for backdrop
+      backdrop.addEventListener('touchstart', () => {
+        nav.classList.remove('open');
+        backdrop.classList.remove('show');
+        document.body.classList.remove('nav-open');
+        btn.setAttribute('aria-expanded', 'false');
+      }, { passive: true });
       
       // Accessibility attributes
       btn.setAttribute('aria-expanded', 'false');
@@ -945,6 +919,168 @@ window.testWhatsAppModal = function() {
 // Auto-trigger if URL has ?modal=whatsapp (for testing)
 if (window.location.search.includes('modal=whatsapp')) {
   localStorage.removeItem('waModalDismissedAt');
+}
+
+// Global Time Zones in Header
+function initGlobalTimeZones() {
+  const globalTime = document.getElementById('global-time');
+  if (!globalTime) return;
+  
+  function updateTimes() {
+    const zones = globalTime.querySelectorAll('.time-zone');
+    zones.forEach(zone => {
+      const tz = zone.getAttribute('data-tz');
+      const timeEl = zone.querySelector('.tz-time');
+      if (tz && timeEl) {
+        try {
+          const time = new Intl.DateTimeFormat('en-US', {
+            timeZone: tz,
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+          }).format(new Date());
+          timeEl.textContent = time;
+        } catch (e) {
+          timeEl.textContent = '--:--';
+        }
+      }
+    });
+  }
+  
+  // Update immediately and then every minute
+  updateTimes();
+  setInterval(updateTimes, 60000);
+}
+
+// Enhanced Navigation
+function initEnhancedNavigation() {
+  const toggle = document.querySelector('.nav-toggle');
+  const nav = document.querySelector('.site-nav');
+  
+  if (!toggle || !nav) return;
+  
+  // Ensure backdrop exists
+  let backdrop = document.querySelector('.nav-backdrop');
+  if (!backdrop) {
+    backdrop = document.createElement('div');
+    backdrop.className = 'nav-backdrop';
+    document.body.appendChild(backdrop);
+  }
+  
+  const closeMenu = () => {
+    nav.classList.remove('open');
+    backdrop.classList.remove('show');
+    document.body.classList.remove('nav-open');
+    toggle.setAttribute('aria-expanded', 'false');
+  };
+  
+  const openMenu = () => {
+    nav.classList.add('open');
+    backdrop.classList.add('show');
+    document.body.classList.add('nav-open');
+    toggle.setAttribute('aria-expanded', 'true');
+    
+    // Focus first nav item for accessibility
+    const firstLink = nav.querySelector('a');
+    if (firstLink) firstLink.focus();
+  };
+  
+  // Enhanced toggle functionality
+  toggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+    
+    if (!isOpen) {
+      openMenu();
+    } else {
+      closeMenu();
+    }
+  });
+  
+  // Close menu when clicking nav links
+  nav.addEventListener('click', (e) => {
+    if (e.target.tagName === 'A') {
+      closeMenu();
+    }
+  });
+  
+  // Enhanced keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeMenu();
+    }
+    
+    // Arrow key navigation when menu is open
+    if (nav.classList.contains('open') && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
+      e.preventDefault();
+      const links = [...nav.querySelectorAll('a')];
+      const current = document.activeElement;
+      const currentIndex = links.indexOf(current);
+      
+      let nextIndex;
+      if (e.key === 'ArrowDown') {
+        nextIndex = currentIndex < 0 ? 0 : (currentIndex + 1) % links.length;
+      } else {
+        nextIndex = currentIndex <= 0 ? links.length - 1 : currentIndex - 1;
+      }
+      
+      links[nextIndex]?.focus();
+    }
+  });
+}
+
+// Homepage Hero Stats
+async function initHeroStats() {
+  const statsElements = {
+    articles: document.getElementById('results-counter'),
+    sources: document.getElementById('live-sources'),
+    countries: document.getElementById('live-countries')
+  };
+  
+  // Only run on homepage
+  if (!statsElements.articles) return;
+  
+  try {
+    // Load feed data
+    const feedUrl = (window.AILatamConfig?.api?.feedUrl) || '/data/feed-latest.json';
+    const raw = await fetch(feedUrl, { cache: 'no-store' });
+    if (!raw.ok) throw new Error('Failed to load feed');
+    
+    const data = await raw.json();
+    const arr = Array.isArray(data) ? data : (data.articles || data.items || []);
+    
+    // Calculate stats
+    const countries = new Set(arr.map(x => (x.country || '').trim()).filter(Boolean));
+    const sources = new Set(arr.map(x => (x.source || '').trim()).filter(Boolean));
+    
+    // Update hero stats with animation
+    const animateValue = (element, start, end, duration = 1000) => {
+      const range = end - start;
+      const minTimer = 50;
+      const stepTime = Math.abs(Math.floor(duration / range));
+      
+      let current = start;
+      const timer = setInterval(() => {
+        current += 1;
+        element.textContent = current.toLocaleString();
+        if (current >= end) {
+          clearInterval(timer);
+        }
+      }, Math.max(stepTime, minTimer));
+    };
+    
+    // Animate the values
+    setTimeout(() => animateValue(statsElements.articles, 0, arr.length), 200);
+    setTimeout(() => animateValue(statsElements.sources, 0, sources.size), 600);
+    setTimeout(() => animateValue(statsElements.countries, 0, countries.size), 1000);
+    
+  } catch (error) {
+    console.error('Error loading hero stats:', error);
+    // Fallback values
+    if (statsElements.articles) statsElements.articles.textContent = '--';
+    if (statsElements.sources) statsElements.sources.textContent = '--';
+    if (statsElements.countries) statsElements.countries.textContent = '--';
+  }
 }
 // Generic copy-to-clipboard for [data-copy] buttons
 document.addEventListener('click', (e) => {
