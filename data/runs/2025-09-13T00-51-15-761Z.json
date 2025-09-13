@@ -1,0 +1,64 @@
+{
+  "articles": [
+    {
+      "id": "https://www.prensalibre.com/guatemala/politica/guatemala-digitalizacion-tramites-gubernamentales-2023/",
+      "title": "Guatemala impulsa digitalización de trámites gubernamentales",
+      "summary": "El gobierno guatemalteco ha lanzado una plataforma digital para agilizar trámites administrativos, buscando reducir la burocracia y mejorar el acceso a servicios públicos.",
+      "url": "https://www.prensalibre.com/guatemala/politica/guatemala-digitalizacion-tramites-gubernamentales-2023/",
+      "source": "Prensa Libre",
+      "source_url": "https://www.prensalibre.com",
+      "country": "Guatemala",
+      "topics": [
+        "Tecnología",
+        "Gobierno Digital"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T22:15:00Z",
+      "relevance": 6,
+      "sentiment": "positive",
+      "author": "Carlos Ramírez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.latercera.com/innovacion/noticia/startup-chilena-movilidad-electrica-premio-2023/",
+      "title": "Startup chilena de movilidad eléctrica recibe premio internacional",
+      "summary": "Una empresa chilena que desarrolla soluciones de movilidad eléctrica ha sido galardonada en un evento global por su innovación en transporte sostenible.",
+      "url": "https://www.latercera.com/innovacion/noticia/startup-chilena-movilidad-electrica-premio-2023/",
+      "source": "La Tercera",
+      "source_url": "https://www.latercera.com",
+      "country": "Chile",
+      "topics": [
+        "Startups",
+        "Movilidad Eléctrica"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T19:30:00Z",
+      "relevance": 8,
+      "sentiment": "positive",
+      "author": "Valeria Muñoz",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.elheraldo.hn/honduras/honduras-retos-ciberseguridad-ataques-2023/",
+      "title": "Honduras enfrenta retos en ciberseguridad tras ataques recientes",
+      "summary": "Expertos advierten sobre la necesidad de fortalecer las políticas de ciberseguridad en Honduras tras una serie de ataques digitales a instituciones públicas y privadas.",
+      "url": "https://www.elheraldo.hn/honduras/honduras-retos-ciberseguridad-ataques-2023/",
+      "source": "El Heraldo",
+      "source_url": "https://www.elheraldo.hn",
+      "country": "Honduras",
+      "topics": [
+        "Ciberseguridad",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T20:45:00Z",
+      "relevance": 7,
+      "sentiment": "negative",
+      "author": "José Fernández",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T00:51:13.899Z",
+  "params": {}
+}
