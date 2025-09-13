@@ -1,0 +1,64 @@
+{
+  "articles": [
+    {
+      "id": "https://www.lanacion.com.ar/politica/argentina-lanza-politica-de-ciberseguridad-nid05102023",
+      "title": "Argentina impulsa nueva política de ciberseguridad",
+      "summary": "El gobierno argentino anunció una serie de medidas para fortalecer la ciberseguridad nacional, incluyendo la creación de un centro de monitoreo de amenazas digitales.",
+      "url": "https://www.lanacion.com.ar/politica/argentina-lanza-politica-de-ciberseguridad-nid05102023",
+      "source": "La Nación",
+      "source_url": "https://www.lanacion.com.ar",
+      "country": "Argentina",
+      "topics": [
+        "Ciberseguridad",
+        "Regulación"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T18:20:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Sofía Rodríguez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://elcomercio.pe/tecnologia/startup-peruana-edtech-gana-premio-internacional-noticia/",
+      "title": "Startup peruana de edtech gana premio internacional",
+      "summary": "Una startup peruana enfocada en educación digital fue galardonada en un evento global por su innovadora plataforma de aprendizaje para escuelas rurales.",
+      "url": "https://elcomercio.pe/tecnologia/startup-peruana-edtech-gana-premio-internacional-noticia/",
+      "source": "El Comercio",
+      "source_url": "https://elcomercio.pe",
+      "country": "Perú",
+      "topics": [
+        "Startups",
+        "Educación"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T15:10:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Luis Vargas",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.emol.com/noticias/Tecnologia/2023/10/05/1109875/chile-regulacion-inteligencia-artificial.html",
+      "title": "Chile avanza en regulación de inteligencia artificial",
+      "summary": "El Senado chileno debate un proyecto de ley para establecer un marco ético y legal sobre el desarrollo y uso de inteligencia artificial en el país.",
+      "url": "https://www.emol.com/noticias/Tecnologia/2023/10/05/1109875/chile-regulacion-inteligencia-artificial.html",
+      "source": "Emol",
+      "source_url": "https://www.emol.com",
+      "country": "Chile",
+      "topics": [
+        "Regulación",
+        "Inteligencia Artificial"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T13:45:00Z",
+      "relevance": 9,
+      "sentiment": "neutral",
+      "author": "Camila Torres",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T00:35:42.394Z",
+  "params": {}
+}
