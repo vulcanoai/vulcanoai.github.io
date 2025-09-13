@@ -260,3 +260,12 @@ If the pipeline fails completely:
 **Maintainer**: @navirobayo
 
 For issues or questions, create an issue in the GitHub repository.
+## 🤖 Data Automation & Conflict Safety
+
+The data consolidation is automated via a GitHub Action. See `docs/DATA_PIPELINE.md` for:
+
+- Which files are inputs vs. generated
+- How the UI consumes data
+- Concurrency settings to avoid overlapping runs
+- Pull‑with‑rebase in the Action to prevent push conflicts when the platform writes data while you work locally
+- Local development flow and do/don't guidelines
