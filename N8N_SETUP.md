@@ -1,10 +1,10 @@
 # 🚀 N8N Integration Setup for Vulcano AI
 
-**Status**: Stable on `DEBUG006` (Sep 13, 2025)
+**Status**: Stable on `DEBUG007` (Sep 13, 2025)
 
 ## 🎯 How It Works
 
-The current stable n8n workflow (`DEBUG006`) is designed to:
+The current stable n8n workflow (`DEBUG007`) is designed to:
 
 1. **Research Agent**: Uses Grok to find AI news in LATAM
 2. **Validation & Deduplication**: Processes and filters articles  
@@ -30,7 +30,7 @@ The website will now:
 
 ### In your n8n instance:
 
-1. **Import your workflow** (`DEBUG006.json`) 
+1. **Import your workflow** (`DEBUG007-fixed.json`) 
 2. **Configure credentials**:
    - Grok API key 
    - GitHub token with repo access
@@ -48,6 +48,7 @@ The website will now:
    - Creates/updates per‑article files under `data/entries/YYYY‑MM‑DD/`
    - Creates/updates daily index `data/entries/YYYY‑MM‑DD/index.json`
    - Merges into `data/feed-latest.json` and `data/feed-YYYY-MM-DD.json`
+   - Updates indexes (`data/index/by-topic.json`, `data/index/by-country.json`) and catalog (`data/index/catalog.json`)
 4. **Website updates instantly** with real articles!
 
 ## 📂 Data Structure Expected
@@ -104,6 +105,10 @@ Make sure your GitHub repository has:
 │   └── <ISO>.json                 # per‑run snapshot
 ├── feed-latest.json               # rolling (merged) feed
 ├── feed-YYYY‑MM‑DD.json           # daily snapshot (merged)
+├── index/
+│   ├── by-topic.json
+│   ├── by-country.json
+│   └── catalog.json
 └── sample-feed.json               # fallback only
 ```
 
@@ -123,6 +128,11 @@ The website will show:
 - ✅ **Mobile responsive** interface with real content
 
 **LET'S GOOO!** 🚀🔥
+
+Notes
+- Prefer `DEBUG007-fixed.json` when importing — it includes normalized GET/PUT handling and merge nodes.
+- CI refreshes `data/index/status.json` and `data/index/catalog.json` after data changes.
+- For the open data contract, see `docs/DATA_LAYOUT.md` and `docs/WORKFLOW_DEBUG007.md`.
 
 ---
 

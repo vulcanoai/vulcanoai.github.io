@@ -6,16 +6,16 @@
 
 This file centralizes all AI-related development notes, TODOs, and technical comments that were previously scattered throughout the codebase. This improves collaboration between multiple AI agents working on the project.
 
-## 📋 Active TODOs
+## 📋 Active TODOs (DEBUG007 — 2025‑09‑13)
 
 ### **High Priority**
 - **[feed.js:69]** `TODO(automation)`: Implement compression support (gzip/br) and ETag/If-None-Match headers for feed endpoints
-- **[N8N Integration]** Complete workflow setup for automated content classification
-- **[Agent Status]** Implement real-time agent status monitoring dashboard
+- **[N8N Integration]** DEBUG007 is live. Import `n8n/workflows/DEBUG007-fixed.json` for robust GET/PUT + merge nodes.
+- **[Agent Status]** Centralized on `/pages/agentes.html` with compact summary and metrics. Auto‑refresh every 60s.
 
-### **Medium Priority**  
-- **[Panorama Pages]** Replace placeholder content with agent-generated category data
-- **[Legal Observatory]** Implement structured legal document processing
+### **Medium Priority**
+- **[Panorama Pages]** Quick filters now sourced from live topic counts; category content remains curated.
+- **[Legal Observatory]** Implement structured legal document processing (`legal.json`) and wire to UI.
 - **[Search Enhancement]** Improve live search with better ranking algorithms
 
 ### **Low Priority**
@@ -25,24 +25,29 @@ This file centralizes all AI-related development notes, TODOs, and technical com
 
 ## 🔧 Technical Implementation Notes
 
-### **Feed Processing Pipeline**
+### **Feed Processing Pipeline** (site)
 ```javascript
 // From feed.js - Current normalization logic
-const normalize = (a) => ({
-  id: a.id || crypto.randomUUID(),
-  title: a.title || a.titulo || 'Sin título',
-  summary: a.summary || a.resumen || '',
-  url: a.url || a.link || '#',
-  source: a.source || a.fuente || '—',
-  country: a.country || a.pais || 'Regional',
-  topics: a.topics || a.temas || [],
-  language: a.language || a.idioma || 'es',
-  published_at: a.published_at || a.fecha || new Date().toISOString(),
-  relevance: a.relevance || a.relevancia || 0,
-  sentiment: a.sentiment || a.sentimiento || 'neutral',
-  author: a.author || a.autor || '',
-  curator: a.curator || a.curador || 'Luciano AI'
-});
+// Trim/normalize to avoid filter mismatches (e.g., 'Bolivia ' vs 'Bolivia')
+const normalize = (a) => {
+  const val = (x, def='') => (x == null ? def : String(x)).trim();
+  const title = val(a.title || a.titulo, 'Sin título');
+  const url = val(a.url || a.link, '#');
+  const country = val(a.country || a.pais, 'Regional');
+  const topics = (a.topics || a.temas || []).map(t => val(t)).filter(Boolean);
+  const language = val(a.language || a.idioma || 'es').slice(0,2).toLowerCase();
+  let published_at = val(a.published_at || a.fecha);
+  if (!published_at) published_at = new Date().toISOString();
+  return {
+    id: a.id || url || crypto.randomUUID(), title,
+    summary: val(a.summary || a.resumen), url,
+    source: val(a.source || a.fuente, '—'), source_url: val(a.source_url || a.fuente_url),
+    country, topics, language, published_at,
+    relevance: a.relevance || a.relevancia || 0,
+    sentiment: val(a.sentiment || a.sentimiento || 'neutral'),
+    author: val(a.author || a.autor), curator: val(a.curator || a.curador || 'Luciano AI')
+  };
+};
 ```
 
 **Agent Notes:**
@@ -51,19 +56,10 @@ const normalize = (a) => ({
 - Defaults to 'Luciano AI' as curator for consistency
 - Regional classification falls back to 'Regional' for broad content
 
-### **Agent Configuration Management**
+### **Configuration Management**
 ```javascript
 // From config.js - Central configuration hub
-window.AILatamConfig = {
-  api: {
-    baseUrl: 'https://api.vulcano.ai',
-    feedUrl: '/data/sample-feed.json',      // Will be replaced by N8N endpoint
-    agentsUrl: '/data/agents.json',         // Real-time agent status
-    sourcesUrl: '/data/sources.json',       // Source configuration
-    legalUrl: '/data/legal-sample.json'     // Legal documents feed
-  }
-  // ... more config
-}
+// See assets/js/config.js — defaults point to /data/* JSON in this repo
 ```
 
 **Agent Notes:**
@@ -92,7 +88,22 @@ const getCuratorClass = (curator) => {
 
 ## 🤖 Agent-Specific Implementation Notes
 
-### **Claude Code (Current)**
+### **Current State Snapshot — DEBUG007**
+- Workflows: `n8n/workflows/DEBUG007-fixed.json` (import‑ready)
+- Data layout: `docs/DATA_LAYOUT.md` (open, deterministic)
+- CI: status + catalog refresh, full data validation on push/PR
+- Site wiring:
+  - Noticias/Crypto read `feed-latest.json` (7‑day fallback)
+  - Cards expose `JSON` link + `Detalles` dropdown (snapshots + indexes)
+  - Agents board: compact summary (`Datos • Última corrida • Últ. feed • Días • Hoy`), metrics, chip controls
+  - Fuentes page merges configured sources with sources detected in the live feed; shows counts and coverage
+  - Footer world clock + last update ribbon; last-visit badges on cards
+
+### **Known Issues / UI gaps**
+- Some days may miss `by-country.json` until next run; UI handles absence.
+- Legal/Observatorio still uses sample JSON; needs a legal feed.
+- Panorama content is curated; quick tags are from live topics.
+- Mobile: long tables still scroll horizontally; acceptable but can be improved with sticky first column.
 - **Frontend Architecture**: Vanilla JavaScript with no framework dependencies
 - **Responsive Design**: Mobile-first with CSS Grid and Flexbox
 - **Security**: Strict CSP headers, no external dependencies
@@ -229,8 +240,8 @@ const getCuratorClass = (curator) => {
 
 ---
 
-**Last Updated**: 2025-09-11 by Claude Code  
-**Next Review**: When new agents join or significant architecture changes occur
+**Last Updated**: 2025‑09‑13 (DEBUG007)  
+**Next Review**: After UI pass and/or workflow change
 
 ---
 
