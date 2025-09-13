@@ -1,0 +1,17 @@
+{
+  "date": "2025-09-13",
+  "count": 3,
+  "topics": {
+    "Tecnología": 1,
+    "Regulación": 2,
+    "Startups": 1,
+    "Educación": 1,
+    "Fintech": 1
+  },
+  "countries": {
+    "Argentina": 1,
+    "Perú": 1,
+    "Chile": 1
+  },
+  "generated_at": "2025-09-13T01:22:32.226Z"
+}
