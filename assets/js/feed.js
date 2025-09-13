@@ -24,6 +24,8 @@
     return (str||'').toString().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
       .toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
   }
+  // Same short hash as workflow (slug-hash filenames)
+  function shortHash(s){ let h=0; s=(s||'').toString(); for (let i=0;i<s.length;i++){ h=((h<<5)-h) + s.charCodeAt(i); h|=0; } return ('00000000'+(h>>>0).toString(16)).slice(-8); }
 
   const fmtDate = (iso) => {
     const d = new Date(iso);
@@ -362,7 +364,7 @@
       topicChips.appendChild(topicChip);
     }
 
-    // Segunda fila de metadata: fecha, fuente, curador
+    // Segunda fila de metadata: fecha, fuente, curador, traza JSON
     const metaData = create('div','meta');
     
     // Fecha
@@ -399,6 +401,19 @@
       mSent.title = `Sentimiento: ${a.sentiment}`;
       metaData.appendChild(mSent);
     }
+
+    // Enlace a archivo JSON de la entrada (trazabilidad)
+    try{
+      const dateStr = (a.published_at || new Date().toISOString()).slice(0,10);
+      const slug = slugify(a.title);
+      const uniq = shortHash(a.url || a.id || (a.title||''));
+      const entryHref = `/data/entries/${dateStr}/${slug}-${uniq}.json`;
+      const mJson = create('a','chip');
+      mJson.href = entryHref; mJson.target = '_blank'; mJson.rel = 'noopener';
+      mJson.title = 'Ver archivo JSON (trazabilidad)';
+      mJson.textContent = 'JSON';
+      metaData.appendChild(mJson);
+    }catch(_){ /* optional */ }
 
     body.append(title, summary, topicChips, metaData);
     el.append(body);
