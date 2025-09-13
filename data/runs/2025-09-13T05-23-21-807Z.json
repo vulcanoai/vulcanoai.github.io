@@ -1,0 +1,65 @@
+{
+  "version": "v1.0",
+  "articles": [
+    {
+      "id": "https://elcomercio.pe/economia/peru-impulsa-iniciativa-para-digitalizar-pequenas-empresas-noticia/",
+      "title": "Perú impulsa iniciativa para digitalizar pequeñas empresas",
+      "summary": "El gobierno peruano lanza un programa para apoyar la transformación digital de las pymes, ofreciendo capacitación y subsidios para adoptar herramientas tecnológicas.",
+      "url": "https://elcomercio.pe/economia/peru-impulsa-iniciativa-para-digitalizar-pequenas-empresas-noticia/",
+      "source": "El Comercio",
+      "source_url": "https://elcomercio.pe",
+      "country": "Perú",
+      "topics": [
+        "Tecnología",
+        "Pymes"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T15:00:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Luis Fernández",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.forbes.com.mx/startup-mexicana-movilidad-electrica-financiamiento-internacional-2023/",
+      "title": "Startup mexicana de movilidad eléctrica recibe financiamiento internacional",
+      "summary": "Una empresa mexicana enfocada en soluciones de movilidad eléctrica obtiene una inversión de 2 millones de dólares para expandir su red de estaciones de carga.",
+      "url": "https://www.forbes.com.mx/startup-mexicana-movilidad-electrica-financiamiento-internacional-2023/",
+      "source": "Forbes México",
+      "source_url": "https://www.forbes.com.mx",
+      "country": "México",
+      "topics": [
+        "Startups",
+        "Movilidad"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T14:20:00Z",
+      "relevance": 8,
+      "sentiment": "positive",
+      "author": "Ana López",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.eltiempo.com/tecnologia/colombia-fortalece-regulaciones-datos-personales-2023",
+      "title": "Colombia fortalece regulaciones para proteger datos personales en línea",
+      "summary": "Autoridades colombianas anuncian nuevas medidas para garantizar la seguridad de los datos personales en plataformas digitales, tras recientes filtraciones.",
+      "url": "https://www.eltiempo.com/tecnologia/colombia-fortalece-regulaciones-datos-personales-2023",
+      "source": "El Tiempo",
+      "source_url": "https://www.eltiempo.com",
+      "country": "Colombia",
+      "topics": [
+        "Regulación",
+        "Ciberseguridad"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T12:30:00Z",
+      "relevance": 9,
+      "sentiment": "neutral",
+      "author": "Carlos Mendoza",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T05:23:19.765Z",
+  "params": {}
+}
