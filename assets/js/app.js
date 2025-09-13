@@ -396,8 +396,39 @@ async function initAgents(table){
     tbody.appendChild(tr);
   }
 
-  // Simple auto-refresh every 60s (single instance)
-  if (!window.__agentsRefresh){
+  // Metrics from live feed (optional)
+  try{
+    const feedUrl = (window.AILatamConfig?.api?.feedUrl) || '/data/feed-latest.json';
+    const raw = await (await fetch(feedUrl, { cache:'no-store' })).json();
+    const arr = Array.isArray(raw) ? raw : (raw.articles || raw.items || []);
+    const uniq = (xs) => Array.from(new Set(xs));
+    const countries = uniq(arr.map(x => (x.country||'').toString().trim()).filter(Boolean));
+    const sources = uniq(arr.map(x => (x.source||'').toString().trim()).filter(Boolean));
+    const topics = uniq(arr.flatMap(x => x.topics || []));
+    const m = document.getElementById('agents-metrics');
+    if (m){
+      m.innerHTML = '';
+      const mk = (label, value) => { const d=document.createElement('div'); d.className='gh-card'; d.innerHTML=`<div class="label">${label}</div><div class="value">${value}</div>`; return d; };
+      m.append(mk('Artículos', arr.length||0), mk('Fuentes', sources.length||0), mk('Países', countries.length||0), mk('Temas', topics.length||0));
+    }
+  }catch(_){ /* non-blocking */ }
+
+  // Controls: manual refresh + toggle auto-refresh
+  const btnNow = document.getElementById('agents-refresh-now');
+  const btnToggle = document.getElementById('agents-refresh-toggle');
+  if (btnNow){ btnNow.onclick = () => initAgents(table).catch(console.error); }
+  if (btnToggle){
+    const apply = () => {
+      const on = window.__agentsAuto !== false;
+      btnToggle.textContent = `Auto‑actualizar: ${on ? 'ON' : 'OFF'}`;
+    };
+    btnToggle.onclick = () => { window.__agentsAuto = window.__agentsAuto === false ? true : false; apply(); };
+    apply();
+  }
+
+  // Auto-refresh every 60s if enabled
+  clearInterval(window.__agentsRefresh);
+  if (window.__agentsAuto !== false){
     window.__agentsRefresh = setInterval(() => { initAgents(table).catch(console.error); }, 60000);
   }
 }

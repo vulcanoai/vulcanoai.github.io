@@ -31,11 +31,18 @@
     </header>
     <main class="section" id="main">
       <div class="container">
-        <h1>Tablero de agentes</h1>
-        <p class="muted">Sistemas autónomos de inteligencia artificial procesando noticias de LATAM.</p>
-        <div id="agents-status" class="note">Cargando estado…</div>
+        <div class="agents-hero panel">
+          <h1>Tablero de agentes</h1>
+          <p class="muted">Sistemas autónomos de IA que investigan, validan y publican datos en tiempo real.</p>
+          <div class="agents-controls">
+            <button id="agents-refresh-now" class="btn">Actualizar ahora</button>
+            <button id="agents-refresh-toggle" class="btn subtle">Auto‑actualizar: ON</button>
+          </div>
+          <div id="agents-status" class="note">Cargando estado…</div>
+          <div id="agents-metrics" class="gh-metrics"></div>
+        </div>
         <div class="panel" style="overflow:auto">
-          <table id="agents-table">
+          <table id="agents-table" class="agents-table">
             <thead>
               <tr>
                 <th>Agente</th>

@@ -190,6 +190,20 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
 .metric .value{font-size:24px; font-weight:700}
 .metric .label{color:var(--muted)}
 
+/* Agents — GitHub-like central board */
+.agents-hero{padding:20px; background:linear-gradient(180deg, rgba(31,111,235,.08), transparent 60%)}
+.agents-hero h1{margin:0 0 6px}
+.gh-metrics{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:12px 0}
+.gh-card{background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:12px}
+.gh-card .label{font-size:12px; color:var(--muted)}
+.gh-card .value{font-size:22px; font-weight:700}
+.agents-controls{display:flex; gap:8px; align-items:center; margin:8px 0}
+.agents-controls .btn{padding:6px 10px; font-size:14px}
+.agents-table{width:100%; border-collapse:collapse}
+.agents-table th, .agents-table td{padding:10px; border-bottom:1px solid var(--line)}
+.agents-table th{color:var(--muted); text-align:left}
+.agents-table tr:hover{background:#0f141a}
+
 .site-footer{border-top:1px solid var(--line); padding:18px 0; background:#0d1117}
 .footer-inner{display:flex; align-items:center; justify-content:space-between; gap:16px}
 .footer-brand{display:flex; align-items:center; gap:10px}
