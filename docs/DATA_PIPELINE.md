@@ -29,9 +29,9 @@ GitHub Action: `.github/workflows/update-feed.yml`
 
 - Runs hourly and on manual dispatch.
 - Executes `node scripts/build-feed.js` which:
-  1. Loads the latest N runs (default 72) and indie items.
+  1. Loads all runs and indie items (no historical cap).
   2. Deduplicates by URL, sorts by `published_at`.
-  3. Writes feed, snapshots, indices, status, and entries for the last 7 days.
+  3. Writes feed, snapshots for every discovered day, indices, status, and full `entries/` for all days.
 - Commits and pushes only if there are changes.
 
 ### Triggers

@@ -103,6 +103,14 @@
       }catch(_){ /* ignore */ }
     } catch (_) { /* optional */ }
 
+    // If a specific day was requested, prioritize that snapshot
+    try {
+      const day = (state.filters && state.filters.day) ? String(state.filters.day) : '';
+      if (day && /^\d{4}-\d{2}-\d{2}$/.test(day)){
+        sources.push({ url: `/data/feed-${day}.json`, type: 'snapshot', date: day });
+      }
+    } catch(_) { /* noop */ }
+
     // Always include latest consolidated feed
     sources.push({ url: config.feedUrl || '/data/feed-latest.json', type: 'latest' });
     

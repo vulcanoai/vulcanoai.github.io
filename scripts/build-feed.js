@@ -3,7 +3,7 @@
  * Build consolidated feed and indices from data/runs and data/indie.
  * - Writes:
  *   - data/feed-latest.json
- *   - data/feed-YYYY-MM-DD.json (today snapshot by discovery)
+ *   - data/feed-YYYY-MM-DD.json (daily snapshots by discovery, for all days)
  *   - data/index/status.json
  *   - data/index/catalog.json
  *   - data/index/by-country.json
@@ -153,9 +153,8 @@ async function build(){
     return;
   }
 
-  // Gather latest N runs (e.g., last 72) to keep file small
-  const MAX_RUNS = 72;
-  const usedRuns = runs.slice(0, MAX_RUNS);
+  // Use all runs to avoid historical limits
+  const usedRuns = runs;
 
   const indie = await loadIndie();
 
@@ -180,18 +179,23 @@ async function build(){
   });
   log('Wrote feed-latest.json with', merged.length, 'articles');
 
-  // Write daily snapshot for today (by discovery time: runs from today)
+  // Write daily snapshots for all discovered days (by discovery date)
   const today = todayUTC();
-  const todaysRuns = runs.filter(r => (r.timestamp||'').slice(0,10) === today);
-  const todays = dedupeArticles((todaysRuns.flatMap(r=>r.articles)||[]).map(normalizeArticle))
-    .sort((x,y)=> new Date(y.published_at) - new Date(x.published_at));
-  await writeJSON(path.join(DATA_DIR, `feed-${today}.json`), {
-    version: 'v1.0',
-    generated_at: nowISO,
-    date: today,
-    articles: todays
-  });
-  log(`Wrote feed-${today}.json with`, todays.length, 'articles');
+  const allDays = Array.from(new Set(runs.map(r => (r.timestamp||'').slice(0,10)).filter(Boolean))).sort();
+  for (const day of allDays){
+    const dayRuns = runs.filter(r => (r.timestamp||'').slice(0,10) === day);
+    const dayArticles = dedupeArticles((dayRuns.flatMap(r=>r.articles)||[]).map(normalizeArticle))
+      .sort((x,y)=> new Date(y.published_at) - new Date(x.published_at));
+    await writeJSON(path.join(DATA_DIR, `feed-${day}.json`), {
+      version: 'v1.0',
+      generated_at: nowISO,
+      date: day,
+      articles: dayArticles
+    });
+    if (day === today){
+      log(`Wrote feed-${day}.json (today) with`, dayArticles.length, 'articles');
+    }
+  }
 
   // Indices
   const byCountry = groupCounts(merged, 'country');
@@ -209,7 +213,7 @@ async function build(){
   log('Wrote indices by country/topic/source');
 
   // Catalog of days (seen in runs)
-  const days = Array.from(new Set(runs.map(r => (r.timestamp||'').slice(0,10)).filter(Boolean))).sort();
+  const days = allDays;
   await writeJSON(path.join(INDEX_DIR, 'catalog.json'), {
     version: 'v1.0', generated_at: nowISO, days
   });
@@ -232,33 +236,8 @@ async function build(){
   log('Updated status.json');
 
   // Entries for today: index + per-article files
-  const todayDir = path.join(ENTRIES_DIR, today);
-  await ensureDir(todayDir);
-  const tByTopic = groupCounts(todays, 'topics');
-  const tByCountry = groupCounts(todays, 'country');
-  await writeJSON(path.join(todayDir, 'index.json'), {
-    date: today,
-    count: todays.length,
-    topics: tByTopic,
-    countries: tByCountry,
-    generated_at: nowISO
-  });
-  // Per-article trace files
-  for (const a of todays){
-    const dateStr = (a.published_at||nowISO).slice(0,10) || today;
-    const slug = slugify(a.title);
-    const uniq = shortHash(a.url || a.id || a.title || '');
-    const fname = `${slug}-${uniq}.json`;
-    await writeJSON(path.join(todayDir, fname), { ...a, generated_at: nowISO, date: dateStr });
-  }
-  log('Wrote entries for today:', todays.length);
-
-  // Entries for recent days (last 7 by run timestamp)
-  const uniqueDays = Array.from(new Set(runs.map(r => (r.timestamp||'').slice(0,10)).filter(Boolean))).sort();
-  const recentDays = uniqueDays.slice(-7);
-  for (const day of recentDays){
-    // Skip today (already generated above)
-    if (day === today) continue;
+  // Entries for all days (index + per-article files)
+  for (const day of days){
     const dayRuns = runs.filter(r => (r.timestamp||'').slice(0,10) === day);
     const dayArticles = dedupeArticles((dayRuns.flatMap(r=>r.articles)||[]).map(normalizeArticle))
       .sort((x,y)=> new Date(y.published_at) - new Date(x.published_at));
@@ -271,14 +250,12 @@ async function build(){
       countries: groupCounts(dayArticles, 'country'),
       generated_at: nowISO
     });
-    // Per-article trace files for historical days as well
     for (const a of dayArticles){
       const slug = slugify(a.title);
       const uniq = shortHash(a.url || a.id || a.title || '');
       const fname = `${slug}-${uniq}.json`;
       await writeJSON(path.join(dir, fname), { ...a, generated_at: nowISO, date: day });
     }
-    log(`Wrote entries for ${day}:`, dayArticles.length);
   }
 }
 

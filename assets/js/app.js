@@ -516,8 +516,7 @@ async function initArchivePage(container){
     if (!days.length){ container.innerHTML = '<div class="panel">No hay días en el archivo.</div>'; return; }
 
     // Fetch per-day indices and build facets
-    const maxDays = Math.min(days.length, 60); // cap initial load
-    const subset = days.slice(0, maxDays);
+    const subset = days; // no historical cap
     const dayData = [];
     const allTopics = new Set();
     const allCountries = new Set();
