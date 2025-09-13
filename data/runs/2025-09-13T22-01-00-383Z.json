@@ -1,0 +1,65 @@
+{
+  "version": "v1.0",
+  "articles": [
+    {
+      "id": "https://www.lanacion.com.ar/economia/argentina-ley-teletrabajo-tecnologia-nid25102023",
+      "title": "Argentina impulsa ley para regular el teletrabajo en empresas tecnológicas",
+      "summary": "El gobierno argentino presenta un proyecto de ley para establecer derechos y obligaciones en el teletrabajo, con foco en la industria tecnológica y la protección laboral.",
+      "url": "https://www.lanacion.com.ar/economia/argentina-ley-teletrabajo-tecnologia-nid25102023",
+      "source": "La Nación",
+      "source_url": "https://www.lanacion.com.ar",
+      "country": "Argentina",
+      "topics": [
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T15:45:00Z",
+      "relevance": 7,
+      "sentiment": "neutral",
+      "author": "Sofía Martínez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://elcomercio.pe/tecnologia/startup-peruana-eduinnov-premio-innovacion-nid25102023",
+      "title": "Startup peruana de edtech gana premio internacional por innovación",
+      "summary": "La empresa limeña EduInnov recibe un reconocimiento global por su plataforma de aprendizaje digital dirigida a escuelas rurales en América Latina.",
+      "url": "https://elcomercio.pe/tecnologia/startup-peruana-eduinnov-premio-innovacion-nid25102023",
+      "source": "El Comercio",
+      "source_url": "https://elcomercio.pe",
+      "country": "Perú",
+      "topics": [
+        "Startups",
+        "Edtech"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T17:20:00Z",
+      "relevance": 8,
+      "sentiment": "positive",
+      "author": "Pedro Vargas",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.emol.com/noticias/Tecnologia/2023/10/25/chile-energias-renovables-tecnologia.html",
+      "title": "Chile avanza en la adopción de energías renovables con apoyo tecnológico",
+      "summary": "Un nuevo proyecto en Chile combina inteligencia artificial y energías renovables para optimizar la gestión de redes eléctricas en el país.",
+      "url": "https://www.emol.com/noticias/Tecnologia/2023/10/25/chile-energias-renovables-tecnologia.html",
+      "source": "Emol",
+      "source_url": "https://www.emol.com",
+      "country": "Chile",
+      "topics": [
+        "Tecnología",
+        "Sostenibilidad"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T13:10:00Z",
+      "relevance": 6,
+      "sentiment": "positive",
+      "author": "Ana López",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T22:00:57.373Z",
+  "params": {}
+}
