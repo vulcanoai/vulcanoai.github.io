@@ -1,0 +1,65 @@
+{
+  "version": "v1.0",
+  "articles": [
+    {
+      "id": "https://www.lanacion.com.ar/economia/argentina-impulsa-ley-para-regular-criptomonedas-en-2023-nid05102023",
+      "title": "Argentina impulsa ley para regular criptomonedas en 2023",
+      "summary": "El gobierno argentino presenta un proyecto de ley para regular el uso y comercio de criptomonedas, buscando mayor control fiscal y protección al usuario.",
+      "url": "https://www.lanacion.com.ar/economia/argentina-impulsa-ley-para-regular-criptomonedas-en-2023-nid05102023",
+      "source": "La Nación",
+      "source_url": "https://www.lanacion.com.ar",
+      "country": "Argentina",
+      "topics": [
+        "Regulación",
+        "Criptomonedas"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T16:45:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Sofía Martínez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://g1.globo.com/economia/startup-brasileira-de-edtech-capta-fundos-para-expansao-regional.ghtml",
+      "title": "Startup brasileña de edtech capta fondos para expansión regional",
+      "summary": "Una empresa de tecnología educativa en Brasil recibe inversión de 3 millones de dólares para llevar sus soluciones de aprendizaje digital a otros países de LATAM.",
+      "url": "https://g1.globo.com/economia/startup-brasileira-de-edtech-capta-fundos-para-expansao-regional.ghtml",
+      "source": "G1 Globo",
+      "source_url": "https://g1.globo.com",
+      "country": "Brasil",
+      "topics": [
+        "Startups",
+        "Edtech"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-05T13:20:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "João Silva",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.emol.com/noticias/Tecnologia/2023/10/05/chile-debate-politicas-ciberseguridad.html",
+      "title": "Chile debate nuevas políticas de ciberseguridad tras ataques recientes",
+      "summary": "Tras una serie de ciberataques a instituciones públicas, Chile acelera la discusión de un marco normativo para fortalecer la seguridad digital en el país.",
+      "url": "https://www.emol.com/noticias/Tecnologia/2023/10/05/chile-debate-politicas-ciberseguridad.html",
+      "source": "Emol",
+      "source_url": "https://www.emol.com",
+      "country": "Chile",
+      "topics": [
+        "Ciberseguridad",
+        "Regulación"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T11:10:00Z",
+      "relevance": 9,
+      "sentiment": "negative",
+      "author": "Andrea Vargas",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T05:22:35.973Z",
+  "params": {}
+}
