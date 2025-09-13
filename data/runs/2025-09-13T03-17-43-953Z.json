@@ -1,0 +1,65 @@
+{
+  "version": "v1.0",
+  "articles": [
+    {
+      "id": "https://www.laestrella.com.pa/economia/panama-hub-innovacion-tecnologica-centroamerica-2023",
+      "title": "Panamá se posiciona como hub de innovación tecnológica en Centroamérica",
+      "summary": "El gobierno panameño presenta un plan para atraer empresas tecnológicas y startups, ofreciendo incentivos y facilidades para establecer operaciones en el país.",
+      "url": "https://www.laestrella.com.pa/economia/panama-hub-innovacion-tecnologica-centroamerica-2023",
+      "source": "La Estrella de Panamá",
+      "source_url": "https://www.laestrella.com.pa",
+      "country": "Panamá",
+      "topics": [
+        "Startups",
+        "Innovación"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T20:10:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Roberto Díaz",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.el-nacional.com/economia/venezuela-retos-pagos-digitales-2023/",
+      "title": "Venezuela enfrenta retos en la adopción de pagos digitales",
+      "summary": "Expertos señalan que la falta de infraestructura y la inestabilidad económica dificultan la implementación masiva de pagos digitales en Venezuela.",
+      "url": "https://www.el-nacional.com/economia/venezuela-retos-pagos-digitales-2023/",
+      "source": "El Nacional",
+      "source_url": "https://www.el-nacional.com",
+      "country": "Venezuela",
+      "topics": [
+        "Tecnología",
+        "Economía"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T18:45:00Z",
+      "relevance": 6,
+      "sentiment": "negative",
+      "author": "Andrea Castillo",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://g1.globo.com/economia/noticia/2023/10/05/brasil-lidera-investimento-em-energias-renovaveis-na-america-latina.ghtml",
+      "title": "Brasil lidera inversión en energías renovables en América Latina",
+      "summary": "Un informe destaca a Brasil como el principal destino de inversión en proyectos de energía renovable en la región, con foco en solar y eólica.",
+      "url": "https://g1.globo.com/economia/noticia/2023/10/05/brasil-lidera-investimento-em-energias-renovaveis-na-america-latina.ghtml",
+      "source": "G1 Globo",
+      "source_url": "https://g1.globo.com",
+      "country": "Brasil",
+      "topics": [
+        "Tecnología Verde",
+        "Inversión"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-05T16:20:00Z",
+      "relevance": 8,
+      "sentiment": "positive",
+      "author": "João Ferreira",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T03:17:41.816Z",
+  "params": {}
+}
