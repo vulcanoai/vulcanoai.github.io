@@ -250,8 +250,9 @@
     const list = state.els.list;
     if(!list) return;
     
-    // Update results counter
+    // Update results counter and live stats
     updateResultsCounter();
+    updateLiveStats();
     
     list.innerHTML = '';
     if(state.filtered.length===0){
@@ -290,17 +291,33 @@
   function updateResultsCounter(){
     const counter = document.getElementById('results-counter');
     if (!counter) return;
-    
+
     const total = state.all.length;
     const showing = state.filtered.length;
     const hasFilters = state.filters.q || state.filters.country !== 'todos' || state.filters.topic !== 'todos' || state.filters.source !== 'todas';
-    
+
     if (hasFilters) {
-      counter.textContent = `${showing} de ${total} artículos`;
+      counter.textContent = `${showing} de ${total}`;
       counter.style.opacity = '1';
     } else {
-      counter.textContent = `${total} artículos`;
+      counter.textContent = `${total}`;
       counter.style.opacity = '0.7';
+    }
+  }
+
+  function updateLiveStats(){
+    // Update live sources count
+    const sourcesEl = document.getElementById('live-sources');
+    if (sourcesEl && state.all.length > 0) {
+      const uniqueSources = new Set(state.all.map(a => a.source).filter(Boolean));
+      sourcesEl.textContent = uniqueSources.size;
+    }
+
+    // Update countries count
+    const countriesEl = document.getElementById('live-countries');
+    if (countriesEl && state.all.length > 0) {
+      const uniqueCountries = new Set(state.all.map(a => a.country).filter(Boolean));
+      countriesEl.textContent = uniqueCountries.size;
     }
   }
   
@@ -580,6 +597,9 @@
       
       applyFilters();
       render();
+
+      // Update live stats after initial load
+      updateLiveStats();
       renderMetrics();
       bind();
       updateSmartTagActives();
