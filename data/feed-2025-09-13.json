@@ -1,5 +1,7 @@
 {
   "version": "v1.0",
+  "generated_at": "2025-09-13T21:01:10.859Z",
+  "date": "2025-09-13",
   "articles": [
     {
       "id": "https://www.excelsior.com.mx/nacional/mexico-iniciativa-digitalizacion-pymes/1612345",
@@ -82,6 +84,25 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://www.elespectador.com/economia/startup-colombiana-finTechCol-recibe-inversion-de-5-millones/",
+      "title": "Startup colombiana de fintech recibe inversión de 5 millones de dólares",
+      "summary": "La empresa bogotana FinTechCol logra cerrar una ronda de inversión Serie A para expandir sus servicios de pagos digitales en América Latina.",
+      "url": "https://www.elespectador.com/economia/startup-colombiana-finTechCol-recibe-inversion-de-5-millones/",
+      "source": "El Espectador",
+      "source_url": "https://www.elespectador.com",
+      "country": "Colombia",
+      "topics": [
+        "Startups",
+        "Fintech"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T16:00:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "María Gómez",
+      "curator": "Luciano AI"
+    },
+    {
       "id": "https://elcomercio.pe/tecnologia/startup-peruana-edtech-premio-internacional-noticia",
       "title": "Startup peruana de edtech gana premio internacional",
       "summary": "Una empresa de tecnología educativa con sede en Lima recibe reconocimiento por su plataforma de aprendizaje inclusivo para estudiantes de zonas rurales.",
@@ -122,6 +143,25 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://www.eluniversal.com.mx/nacion/mexico-aprueba-ley-de-ciberseguridad-para-datos-personales",
+      "title": "México aprueba nueva ley de ciberseguridad para proteger datos personales",
+      "summary": "El Congreso de México aprobó una reforma para fortalecer la protección de datos personales en plataformas digitales, con sanciones más estrictas a empresas que incumplan las normativas.",
+      "url": "https://www.eluniversal.com.mx/nacion/mexico-aprueba-ley-de-ciberseguridad-para-datos-personales",
+      "source": "El Universal",
+      "source_url": "https://www.eluniversal.com.mx",
+      "country": "México",
+      "topics": [
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T14:30:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Juan Pérez",
+      "curator": "Luciano AI"
+    },
+    {
       "id": "https://www.eluniversal.com.mx/techbit/mexico-propone-nueva-ley-para-criptomonedas",
       "title": "México avanza en regulación de criptomonedas con nueva propuesta de ley",
       "summary": "El Senado mexicano presenta un proyecto de ley para regular el uso de criptomonedas y blockchain, buscando fomentar la innovación y proteger a los usuarios.",
@@ -159,6 +199,25 @@
       "relevance": 9,
       "sentiment": "positive",
       "author": "Rodrigo Silva",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://g1.globo.com/economia/noticia/brasil-debate-regulacao-de-streaming.ghtml",
+      "title": "Brasil debate nuevas regulaciones para plataformas de streaming",
+      "summary": "El gobierno brasileño propone un marco regulatorio para servicios de streaming, buscando equilibrar la competencia con productoras locales.",
+      "url": "https://g1.globo.com/economia/noticia/brasil-debate-regulacao-de-streaming.ghtml",
+      "source": "G1 Globo",
+      "source_url": "https://g1.globo.com",
+      "country": "Brasil",
+      "topics": [
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-25T12:15:00Z",
+      "relevance": 6,
+      "sentiment": "neutral",
+      "author": "Carlos Silva",
       "curator": "Luciano AI"
     },
     {
@@ -752,25 +811,6 @@
       "curator": "Luciano AI"
     },
     {
-      "id": "https://www.eltiempo.com/economia/sectores/colombia-aprueba-marco-regulatorio-fintech-pagos-digitales-789123",
-      "title": "Colombia aprueba marco regulatorio para fintechs y pagos digitales",
-      "summary": "El gobierno colombiano establece nuevas normas para regular empresas fintech y plataformas de pagos digitales, promoviendo la inclusión financiera.",
-      "url": "https://www.eltiempo.com/economia/sectores/colombia-aprueba-marco-regulatorio-fintech-pagos-digitales-789123",
-      "source": "El Tiempo",
-      "source_url": "https://www.eltiempo.com",
-      "country": "Colombia",
-      "topics": [
-        "Regulación",
-        "Fintech"
-      ],
-      "language": "es",
-      "published_at": "2023-10-05T19:00:00Z",
-      "relevance": 8,
-      "sentiment": "neutral",
-      "author": "Camila Rodríguez",
-      "curator": "Luciano AI"
-    },
-    {
       "id": "https://www.laestrella.com.pa/nacional/231005/panama-apuesta-digitalizacion-servicios-publicos",
       "title": "Panamá apuesta por la digitalización de servicios públicos",
       "summary": "El gobierno panameño implementa un plan para digitalizar trámites gubernamentales, buscando mayor eficiencia y transparencia en la administración pública.",
@@ -787,6 +827,25 @@
       "relevance": 7,
       "sentiment": "positive",
       "author": "Elena Castillo",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.eltiempo.com/economia/sectores/colombia-aprueba-marco-regulatorio-fintech-pagos-digitales-789123",
+      "title": "Colombia aprueba marco regulatorio para fintechs y pagos digitales",
+      "summary": "El gobierno colombiano establece nuevas normas para regular empresas fintech y plataformas de pagos digitales, promoviendo la inclusión financiera.",
+      "url": "https://www.eltiempo.com/economia/sectores/colombia-aprueba-marco-regulatorio-fintech-pagos-digitales-789123",
+      "source": "El Tiempo",
+      "source_url": "https://www.eltiempo.com",
+      "country": "Colombia",
+      "topics": [
+        "Regulación",
+        "Fintech"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T19:00:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Camila Rodríguez",
       "curator": "Luciano AI"
     },
     {
@@ -809,25 +868,6 @@
       "curator": "Luciano AI"
     },
     {
-      "id": "https://www.portafolio.co/innovacion/startup-colombiana-fintech-reconocimiento-2023-123456",
-      "title": "Startup colombiana de fintech recibe reconocimiento regional",
-      "summary": "Una empresa emergente de tecnología financiera en Colombia es premiada por su innovación en soluciones de pago digital para pequeñas empresas.",
-      "url": "https://www.portafolio.co/innovacion/startup-colombiana-fintech-reconocimiento-2023-123456",
-      "source": "Portafolio",
-      "source_url": "https://www.portafolio.co",
-      "country": "Colombia",
-      "topics": [
-        "Startups",
-        "Fintech"
-      ],
-      "language": "es",
-      "published_at": "2023-10-05T18:45:00Z",
-      "relevance": 8,
-      "sentiment": "positive",
-      "author": "Andrés Pérez",
-      "curator": "Luciano AI"
-    },
-    {
       "id": "https://www.el-nacional.com/economia/venezuela-retos-pagos-digitales-2023/",
       "title": "Venezuela enfrenta retos en la adopción de pagos digitales",
       "summary": "Expertos señalan que la falta de infraestructura y la inestabilidad económica dificultan la implementación masiva de pagos digitales en Venezuela.",
@@ -844,6 +884,25 @@
       "relevance": 6,
       "sentiment": "negative",
       "author": "Andrea Castillo",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.portafolio.co/innovacion/startup-colombiana-fintech-reconocimiento-2023-123456",
+      "title": "Startup colombiana de fintech recibe reconocimiento regional",
+      "summary": "Una empresa emergente de tecnología financiera en Colombia es premiada por su innovación en soluciones de pago digital para pequeñas empresas.",
+      "url": "https://www.portafolio.co/innovacion/startup-colombiana-fintech-reconocimiento-2023-123456",
+      "source": "Portafolio",
+      "source_url": "https://www.portafolio.co",
+      "country": "Colombia",
+      "topics": [
+        "Startups",
+        "Fintech"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T18:45:00Z",
+      "relevance": 8,
+      "sentiment": "positive",
+      "author": "Andrés Pérez",
       "curator": "Luciano AI"
     },
     {
@@ -1171,25 +1230,6 @@
       "curator": "Luciano AI"
     },
     {
-      "id": "https://www.estadao.com.br/economia/startup-brasileira-saude-digital-financiamento-2023/",
-      "title": "Startup brasileña de salud digital recibe financiación récord",
-      "summary": "Una empresa de tecnología en salud con sede en São Paulo ha obtenido una inversión de 15 millones de reales para expandir su plataforma de telemedicina en el país.",
-      "url": "https://www.estadao.com.br/economia/startup-brasileira-saude-digital-financiamento-2023/",
-      "source": "Estadão",
-      "source_url": "https://www.estadao.com.br",
-      "country": "Brasil",
-      "topics": [
-        "Startups",
-        "Salud Digital"
-      ],
-      "language": "pt",
-      "published_at": "2023-10-05T16:40:00Z",
-      "relevance": 8,
-      "sentiment": "positive",
-      "author": "João Mendes",
-      "curator": "Luciano AI"
-    },
-    {
       "id": "https://www.estadao.com.br/economia/startup-edtech-brasileira-capta-10-milhoes-para-expansao/",
       "title": "Startup brasileña de edtech capta fondos para expansión regional",
       "summary": "Una empresa de tecnología educativa en Brasil recibe una inversión de 10 millones de reales para llevar sus soluciones digitales a otros países de América Latina.",
@@ -1206,6 +1246,25 @@
       "relevance": 7,
       "sentiment": "positive",
       "author": "Renata Oliveira",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.estadao.com.br/economia/startup-brasileira-saude-digital-financiamento-2023/",
+      "title": "Startup brasileña de salud digital recibe financiación récord",
+      "summary": "Una empresa de tecnología en salud con sede en São Paulo ha obtenido una inversión de 15 millones de reales para expandir su plataforma de telemedicina en el país.",
+      "url": "https://www.estadao.com.br/economia/startup-brasileira-saude-digital-financiamento-2023/",
+      "source": "Estadão",
+      "source_url": "https://www.estadao.com.br",
+      "country": "Brasil",
+      "topics": [
+        "Startups",
+        "Salud Digital"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-05T16:40:00Z",
+      "relevance": 8,
+      "sentiment": "positive",
+      "author": "João Mendes",
       "curator": "Luciano AI"
     },
     {
@@ -1285,25 +1344,6 @@
       "curator": "Luciano AI"
     },
     {
-      "id": "https://www.elfinanciero.com.mx/tech/2023/10/05/startup-mexicana-inteligencia-artificial-logistica/",
-      "title": "Startup mexicana desarrolla inteligencia artificial para optimizar logística",
-      "summary": "Una empresa emergente en México crea una solución de IA para mejorar la eficiencia en la logística y reducir costos operativos de transporte.",
-      "url": "https://www.elfinanciero.com.mx/tech/2023/10/05/startup-mexicana-inteligencia-artificial-logistica/",
-      "source": "El Financiero",
-      "source_url": "https://www.elfinanciero.com.mx",
-      "country": "México",
-      "topics": [
-        "Startups",
-        "Logística"
-      ],
-      "language": "es",
-      "published_at": "2023-10-05T16:00:00Z",
-      "relevance": 8,
-      "sentiment": "positive",
-      "author": "Alejandra Torres",
-      "curator": "Luciano AI"
-    },
-    {
       "id": "https://www.reforma.com/mexico-lanza-iniciativa-digitalizacion-pymes-2023/gr/",
       "title": "México lanza iniciativa para digitalizar pequeñas empresas",
       "summary": "El gobierno de México ha anunciado un programa para apoyar la digitalización de PYMES, ofreciendo subsidios y capacitación en herramientas tecnológicas.",
@@ -1320,6 +1360,25 @@
       "relevance": 7,
       "sentiment": "positive",
       "author": "Laura Martínez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.elfinanciero.com.mx/tech/2023/10/05/startup-mexicana-inteligencia-artificial-logistica/",
+      "title": "Startup mexicana desarrolla inteligencia artificial para optimizar logística",
+      "summary": "Una empresa emergente en México crea una solución de IA para mejorar la eficiencia en la logística y reducir costos operativos de transporte.",
+      "url": "https://www.elfinanciero.com.mx/tech/2023/10/05/startup-mexicana-inteligencia-artificial-logistica/",
+      "source": "El Financiero",
+      "source_url": "https://www.elfinanciero.com.mx",
+      "country": "México",
+      "topics": [
+        "Startups",
+        "Logística"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T16:00:00Z",
+      "relevance": 8,
+      "sentiment": "positive",
+      "author": "Alejandra Torres",
       "curator": "Luciano AI"
     },
     {
@@ -1991,44 +2050,6 @@
       "curator": "Luciano AI"
     },
     {
-      "id": "https://www.emol.com/noticias/Economia/2023/10/05/1109875/chile-lidera-energias-renovables-latam.html",
-      "title": "Chile lidera en energías renovables en América Latina",
-      "summary": "Un informe reciente posiciona a Chile como líder regional en la adopción de energías renovables, destacando su inversión en proyectos solares y eólicos.",
-      "url": "https://www.emol.com/noticias/Economia/2023/10/05/1109875/chile-lidera-energias-renovables-latam.html",
-      "source": "Emol",
-      "source_url": "https://www.emol.com",
-      "country": "Chile",
-      "topics": [
-        "Energía",
-        "Sostenibilidad"
-      ],
-      "language": "es",
-      "published_at": "2023-10-05T11:10:00Z",
-      "relevance": 9,
-      "sentiment": "positive",
-      "author": "Felipe Vargas",
-      "curator": "Luciano AI"
-    },
-    {
-      "id": "https://www.emol.com/noticias/Tecnologia/2023/10/05/chile-debate-politicas-ciberseguridad.html",
-      "title": "Chile debate nuevas políticas de ciberseguridad tras ataques recientes",
-      "summary": "Tras una serie de ciberataques a instituciones públicas, Chile acelera la discusión de un marco normativo para fortalecer la seguridad digital en el país.",
-      "url": "https://www.emol.com/noticias/Tecnologia/2023/10/05/chile-debate-politicas-ciberseguridad.html",
-      "source": "Emol",
-      "source_url": "https://www.emol.com",
-      "country": "Chile",
-      "topics": [
-        "Ciberseguridad",
-        "Regulación"
-      ],
-      "language": "es",
-      "published_at": "2023-10-05T11:10:00Z",
-      "relevance": 9,
-      "sentiment": "negative",
-      "author": "Andrea Vargas",
-      "curator": "Luciano AI"
-    },
-    {
       "id": "https://elcomercio.pe/tecnologia/actualidad/startup-peruana-edtech-premio-internacional-noticia/",
       "title": "Startup peruana de edtech gana premio internacional",
       "summary": "Una empresa peruana de tecnología educativa ha sido reconocida en un concurso global por su plataforma innovadora que mejora el acceso a la educación en zonas rurales.",
@@ -2068,6 +2089,44 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://www.emol.com/noticias/Economia/2023/10/05/1109875/chile-lidera-energias-renovables-latam.html",
+      "title": "Chile lidera en energías renovables en América Latina",
+      "summary": "Un informe reciente posiciona a Chile como líder regional en la adopción de energías renovables, destacando su inversión en proyectos solares y eólicos.",
+      "url": "https://www.emol.com/noticias/Economia/2023/10/05/1109875/chile-lidera-energias-renovables-latam.html",
+      "source": "Emol",
+      "source_url": "https://www.emol.com",
+      "country": "Chile",
+      "topics": [
+        "Energía",
+        "Sostenibilidad"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T11:10:00Z",
+      "relevance": 9,
+      "sentiment": "positive",
+      "author": "Felipe Vargas",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.emol.com/noticias/Tecnologia/2023/10/05/chile-debate-politicas-ciberseguridad.html",
+      "title": "Chile debate nuevas políticas de ciberseguridad tras ataques recientes",
+      "summary": "Tras una serie de ciberataques a instituciones públicas, Chile acelera la discusión de un marco normativo para fortalecer la seguridad digital en el país.",
+      "url": "https://www.emol.com/noticias/Tecnologia/2023/10/05/chile-debate-politicas-ciberseguridad.html",
+      "source": "Emol",
+      "source_url": "https://www.emol.com",
+      "country": "Chile",
+      "topics": [
+        "Ciberseguridad",
+        "Regulación"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T11:10:00Z",
+      "relevance": 9,
+      "sentiment": "negative",
+      "author": "Andrea Vargas",
+      "curator": "Luciano AI"
+    },
+    {
       "id": "https://www.emol.com/noticias/Economia/2023/10/05/1101234/chile-regulacion-criptomonedas.html",
       "title": "Chile debate nuevas regulaciones para criptomonedas",
       "summary": "El Congreso chileno analiza un proyecto de ley para establecer un marco regulatorio claro para el uso y comercio de criptomonedas en el país.",
@@ -2087,25 +2146,6 @@
       "curator": "Luciano AI"
     },
     {
-      "id": "https://www.folha.uol.com.br/poder/2023/10/brasil-debate-novas-leis-de-protecao-de-dados.shtml",
-      "title": "Brasil debate nuevas leyes de protección de datos en tecnología",
-      "summary": "El Congreso brasileño discute un proyecto de ley para reforzar la protección de datos personales en plataformas digitales, con impacto en empresas tecnológicas.",
-      "url": "https://www.folha.uol.com.br/poder/2023/10/brasil-debate-novas-leis-de-protecao-de-dados.shtml",
-      "source": "Folha de S.Paulo",
-      "source_url": "https://www.folha.uol.com.br",
-      "country": "Brasil",
-      "topics": [
-        "Regulación",
-        "Tecnología"
-      ],
-      "language": "pt",
-      "published_at": "2023-10-05T10:45:00Z",
-      "relevance": 9,
-      "sentiment": "neutral",
-      "author": "Carlos Silva",
-      "curator": "Luciano AI"
-    },
-    {
       "id": "https://g1.globo.com/economia/noticia/2023/10/05/brasil-ley-streaming-contenido-local.ghtml",
       "title": "Brasil impulsa ley para regular plataformas de streaming",
       "summary": "El Congreso brasileño debate una nueva ley que obligaría a las plataformas de streaming a incluir un porcentaje de contenido local en sus catálogos.",
@@ -2120,6 +2160,25 @@
       "language": "pt",
       "published_at": "2023-10-05T10:45:00Z",
       "relevance": 6,
+      "sentiment": "neutral",
+      "author": "Carlos Silva",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.folha.uol.com.br/poder/2023/10/brasil-debate-novas-leis-de-protecao-de-dados.shtml",
+      "title": "Brasil debate nuevas leyes de protección de datos en tecnología",
+      "summary": "El Congreso brasileño discute un proyecto de ley para reforzar la protección de datos personales en plataformas digitales, con impacto en empresas tecnológicas.",
+      "url": "https://www.folha.uol.com.br/poder/2023/10/brasil-debate-novas-leis-de-protecao-de-dados.shtml",
+      "source": "Folha de S.Paulo",
+      "source_url": "https://www.folha.uol.com.br",
+      "country": "Brasil",
+      "topics": [
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-05T10:45:00Z",
+      "relevance": 9,
       "sentiment": "neutral",
       "author": "Carlos Silva",
       "curator": "Luciano AI"
