@@ -1,0 +1,65 @@
+{
+  "version": "v1.0",
+  "articles": [
+    {
+      "id": "https://www.elpais.com.uy/negocios/uruguay-incentivos-tecnologia-verde-2023",
+      "title": "Uruguay impulsa incentivos para empresas de tecnología verde",
+      "summary": "El gobierno uruguayo lanza un programa de incentivos fiscales para empresas que desarrollen tecnologías sostenibles, con foco en energías renovables.",
+      "url": "https://www.elpais.com.uy/negocios/uruguay-incentivos-tecnologia-verde-2023",
+      "source": "El País Uruguay",
+      "source_url": "https://www.elpais.com.uy",
+      "country": "Uruguay",
+      "topics": [
+        "Startups",
+        "Tecnología Verde"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T19:15:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Lucía Fernández",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.eluniverso.com/noticias/ecuador/debate-ley-proteccion-datos-personales-ecuador-noticia/",
+      "title": "Ecuador debate marco legal para protección de datos personales",
+      "summary": "Asambleístas ecuatorianos discuten una ley para regular la protección de datos personales en plataformas digitales, tras recientes filtraciones masivas.",
+      "url": "https://www.eluniverso.com/noticias/ecuador/debate-ley-proteccion-datos-personales-ecuador-noticia/",
+      "source": "El Universo",
+      "source_url": "https://www.eluniverso.com",
+      "country": "Ecuador",
+      "topics": [
+        "Regulación",
+        "Privacidad"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T17:30:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Carlos Mendoza",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.americaeconomia.com/negocios-industrias/startup-logistica-digital-latam-financiacion-2023",
+      "title": "Startup regional de logística digital recibe financiación internacional",
+      "summary": "Una startup latinoamericana enfocada en soluciones de logística digital obtiene 8 millones de dólares en una ronda liderada por inversionistas europeos.",
+      "url": "https://www.americaeconomia.com/negocios-industrias/startup-logistica-digital-latam-financiacion-2023",
+      "source": "América Economía",
+      "source_url": "https://www.americaeconomia.com",
+      "country": "Regional",
+      "topics": [
+        "Startups",
+        "Logística"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T15:50:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Mariana Torres",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T03:05:54.952Z",
+  "params": {}
+}
