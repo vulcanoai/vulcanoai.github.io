@@ -1,0 +1,65 @@
+{
+  "version": "v1.0",
+  "articles": [
+    {
+      "id": "https://www.lanacion.com.ar/politica/argentina-ley-proteccion-datos-digitales-2023-nid05102023/",
+      "title": "Argentina impulsa ley para proteger datos en plataformas digitales",
+      "summary": "El Congreso argentino debate una nueva legislación para garantizar la seguridad de los datos personales en aplicaciones y servicios digitales.",
+      "url": "https://www.lanacion.com.ar/politica/argentina-ley-proteccion-datos-digitales-2023-nid05102023/",
+      "source": "La Nación Argentina",
+      "source_url": "https://www.lanacion.com.ar",
+      "country": "Argentina",
+      "topics": [
+        "Regulación",
+        "Privacidad"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T23:00:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Sofía Pérez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://elcomercio.pe/economia/peru/startup-agritech-peruana-inversion-2023-noticia/",
+      "title": "Startup peruana de agritech recibe inversión para expansión",
+      "summary": "Una empresa peruana que utiliza tecnología para optimizar cultivos agrícolas logra captar fondos internacionales para escalar sus operaciones.",
+      "url": "https://elcomercio.pe/economia/peru/startup-agritech-peruana-inversion-2023-noticia/",
+      "source": "El Comercio Perú",
+      "source_url": "https://elcomercio.pe",
+      "country": "Perú",
+      "topics": [
+        "Startups",
+        "Agritech"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T21:30:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Juan Vargas",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.emol.com/noticias/Nacional/2023/10/05/1109875/chile-ciberseguridad-instituciones-publicas.html",
+      "title": "Chile fortalece políticas de ciberseguridad en instituciones públicas",
+      "summary": "El gobierno chileno implementa nuevas medidas para proteger datos sensibles en entidades públicas tras recientes incidentes de ciberataques.",
+      "url": "https://www.emol.com/noticias/Nacional/2023/10/05/1109875/chile-ciberseguridad-instituciones-publicas.html",
+      "source": "Emol",
+      "source_url": "https://www.emol.com",
+      "country": "Chile",
+      "topics": [
+        "Regulación",
+        "Ciberseguridad"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T19:45:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Felipe Muñoz",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T03:38:03.535Z",
+  "params": {}
+}
