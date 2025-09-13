@@ -28,7 +28,6 @@ window.AILatamConfig = window.AILatamConfig || {
     baseUrl: '/',
     nav: [
       { label:'Inicio', href:'/pages/noticias.html', icon:'calendar' },
-      { label:'Panorama', href:'/pages/panorama.html', icon:'tag' },
       { label:'Crypto', href:'/pages/crypto.html', icon:'globe' },
       { label:'Observatorio', href:'/pages/observatorio-legal.html', icon:'scale' },
       { label:'Agentes', href:'/pages/agentes.html', icon:'robot' },
