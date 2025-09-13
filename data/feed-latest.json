@@ -1,6 +1,6 @@
 {
   "version": "v1.0",
-  "generated_at": "2025-09-13T20:01:11.367Z",
+  "generated_at": "2025-09-13T20:12:33.797Z",
   "articles": [
     {
       "id": "00000000",
@@ -12,7 +12,7 @@
       "country": "Regional",
       "topics": [],
       "language": "es",
-      "published_at": "2025-09-13T20:01:11.366Z",
+      "published_at": "2025-09-13T20:12:33.796Z",
       "relevance": 0,
       "sentiment": "neutral",
       "author": "",
