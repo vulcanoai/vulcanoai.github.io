@@ -5,6 +5,7 @@
   - Tema inspirado en GitHub (oscuro), sin dependencias externas.
   - Mobile-first con puntos de quiebre simples.
 */
+/* Default Theme: GitHub Dark */
 :root{
   --bg:#0d1117;        /* GitHub dark bg */
   --panel:#161b22;     /* surface */
@@ -18,6 +19,70 @@
   --warn:#9e6a03;      /* attention */
   --err:#da3633;       /* danger */
   --logo:#ff5a2a;      /* Vulcano orange for logo */
+}
+
+/* Theme: Cybernetic Blue */
+[data-theme="cybernetic"]{
+  --bg:#0a0e1a;        /* Deep space blue */
+  --panel:#1a1f2e;     /* Blue-gray surface */
+  --panel-alt:#141927; /* Alt blue surface */
+  --text:#e0e6ff;      /* Ice blue text */
+  --muted:#7c8db5;     /* Muted blue */
+  --line:#2d3748;      /* Blue border */
+  --brand:#00d4ff;     /* Cyan accent */
+  --brand-2:#0099cc;
+  --ok:#00ff88;        /* Neon green success */
+  --warn:#ffaa00;      /* Orange warning */
+  --err:#ff3366;       /* Red danger */
+  --logo:#00d4ff;      /* Cyan logo */
+}
+
+/* Theme: Andromeda Violet */
+[data-theme="andromeda"]{
+  --bg:#1e1829;        /* Deep purple */
+  --panel:#2d1b3d;     /* Purple surface */
+  --panel-alt:#251a31; /* Alt purple surface */
+  --text:#f7f3ff;      /* Light purple text */
+  --muted:#b794c6;     /* Muted purple */
+  --line:#3f2d4f;      /* Purple border */
+  --brand:#a855f7;     /* Bright purple accent */
+  --brand-2:#9333ea;
+  --ok:#10b981;        /* Green success */
+  --warn:#f59e0b;      /* Amber warning */
+  --err:#ef4444;       /* Red danger */
+  --logo:#d946ef;      /* Magenta logo */
+}
+
+/* Theme: Retro Terminal */
+[data-theme="retro"]{
+  --bg:#001100;        /* Dark green terminal */
+  --panel:#002200;     /* Green surface */
+  --panel-alt:#001a00; /* Alt green surface */
+  --text:#00ff41;      /* Matrix green text */
+  --muted:#008f11;     /* Muted green */
+  --line:#003300;      /* Green border */
+  --brand:#00ff41;     /* Bright green accent */
+  --brand-2:#00cc33;
+  --ok:#00ff41;        /* Success green */
+  --warn:#ffff00;      /* Yellow warning */
+  --err:#ff0000;       /* Red danger */
+  --logo:#00ff41;      /* Green logo */
+}
+
+/* Theme: Arctic White */
+[data-theme="arctic"]{
+  --bg:#ffffff;        /* Pure white */
+  --panel:#f8fafc;     /* Light gray surface */
+  --panel-alt:#f1f5f9; /* Alt light surface */
+  --text:#1a202c;      /* Dark text */
+  --muted:#64748b;     /* Muted gray */
+  --line:#e2e8f0;      /* Light border */
+  --brand:#3b82f6;     /* Blue accent */
+  --brand-2:#2563eb;
+  --ok:#059669;        /* Green success */
+  --warn:#d97706;      /* Orange warning */
+  --err:#dc2626;       /* Red danger */
+  --logo:#f97316;      /* Orange logo */
 }
 *{box-sizing:border-box}
 html,body{height:100%}
@@ -192,6 +257,110 @@ body.nav-open{overflow:hidden}
 
 .nav-toggle[aria-expanded="true"] .nav-toggle-line:nth-child(3){
   transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* Theme Selector */
+.theme-selector{
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.theme-toggle{
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text);
+}
+.theme-toggle:hover{
+  background: var(--panel-alt);
+  border-color: var(--brand);
+}
+.theme-menu{
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  backdrop-filter: blur(16px);
+  min-width: 200px;
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition: all 0.2s ease;
+  z-index: 1000;
+}
+.theme-menu.open{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.theme-option{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  font-size: 14px;
+}
+.theme-option:hover{
+  background: var(--panel-alt);
+  border-color: var(--line);
+}
+.theme-option.active{
+  background: rgba(47, 129, 247, 0.1);
+  border-color: var(--brand);
+  color: var(--brand);
+}
+.theme-preview{
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+.theme-preview-dot{
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.theme-icon{
+  width: 16px;
+  height: 16px;
+}
+
+/* Theme selector mobile adjustments */
+@media (max-width: 768px) {
+  .theme-selector {
+    order: -1; /* Show before nav toggle on mobile */
+  }
+
+  .theme-menu {
+    right: -8px;
+    width: 220px;
+  }
+
+  .theme-option {
+    padding: 14px 16px;
+    font-size: 15px;
+  }
+
+  .theme-preview-dot {
+    width: 14px;
+    height: 14px;
+  }
 }
 
 /* Homepage Hero Section */
