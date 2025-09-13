@@ -460,18 +460,12 @@ async function initAgents(table){
   }
   const [agents, status] = await Promise.all([loadAgents(), loadStatus()]);
 
-  // Optional status header
+  // Summary header cell (replaces legacy column headings)
+  const summaryTh = document.getElementById('agents-summary');
+  if (summaryTh) summaryTh.textContent = 'Cargando…';
+  // Remove legacy status box to avoid duplication
   const statusBox = document.getElementById('agents-status');
-  if (statusBox){
-    if (status){
-      const last = status.last_run_iso ? new Date(status.last_run_iso).toLocaleString('es-ES') : '—';
-      statusBox.className = 'note';
-      statusBox.textContent = `Última corrida: ${last} • Artículos en feed: ${status.feed_count} • Estado: ${status.ok ? 'OK' : 'Atención'}`;
-    } else {
-      statusBox.className = 'note';
-      statusBox.textContent = 'Sin estado reciente';
-    }
-  }
+  if (statusBox) { try { statusBox.remove(); } catch(_) { statusBox.style.display='none'; } }
 
   const tbody = table.querySelector('tbody');
   tbody.innerHTML = '';
@@ -522,6 +516,15 @@ async function initAgents(table){
       const mk = (label, value) => { const d=document.createElement('div'); d.className='gh-card'; d.innerHTML=`<div class="label">${label}</div><div class="value">${value}</div>`; return d; };
       m.append(mk('Artículos', arr.length||0), mk('Fuentes', sources.length||0), mk('Países', countries.length||0), mk('Temas', topics.length||0));
     }
+    // Build compact summary line
+    const todayStr = new Date().toISOString().slice(0,10);
+    const todayCount = arr.filter(a => (a.published_at||'').slice(0,10) === todayStr).length;
+    let dayCount = 0;
+    try { const cat = await (await fetch('/data/index/catalog.json', { cache:'no-store' })).json(); dayCount = Array.isArray(cat?.days) ? cat.days.length : 0; } catch(_){ }
+    const lastRun = status?.last_run_iso ? new Date(status.last_run_iso).toLocaleString('es-ES') : '—';
+    const lastFeed = status?.last_feed_update ? new Date(status.last_feed_update).toLocaleString('es-ES') : '—';
+    const feedCount = status?.feed_count ?? (arr.length||0);
+    if (summaryTh){ summaryTh.textContent = `Datos: ${feedCount} • Última corrida: ${lastRun} • Últ. feed: ${lastFeed} • Días: ${dayCount} • Hoy: ${todayCount}`; }
   }catch(_){ /* non-blocking */ }
 
   // Controls: manual refresh + toggle auto-refresh
