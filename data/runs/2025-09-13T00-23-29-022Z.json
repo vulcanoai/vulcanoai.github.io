@@ -1,0 +1,64 @@
+{
+  "articles": [
+    {
+      "id": "https://www.eltiempo.com/economia/sectores/colombia-aprueba-marco-regulatorio-fintech-pagos-digitales-789123",
+      "title": "Colombia aprueba marco regulatorio para fintechs y pagos digitales",
+      "summary": "El gobierno colombiano establece nuevas normas para regular empresas fintech y plataformas de pagos digitales, promoviendo la inclusión financiera.",
+      "url": "https://www.eltiempo.com/economia/sectores/colombia-aprueba-marco-regulatorio-fintech-pagos-digitales-789123",
+      "source": "El Tiempo",
+      "source_url": "https://www.eltiempo.com",
+      "country": "Colombia",
+      "topics": [
+        "Regulación",
+        "Fintech"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T19:00:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Camila Rodríguez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.laestrella.com.pa/economia/231005/startup-panamena-tecnologia-drones-cultivos",
+      "title": "Startup panameña desarrolla tecnología para monitoreo de cultivos con drones",
+      "summary": "Una empresa emergente en Panamá crea una solución basada en drones para monitorear cultivos y optimizar la producción agrícola.",
+      "url": "https://www.laestrella.com.pa/economia/231005/startup-panamena-tecnologia-drones-cultivos",
+      "source": "La Estrella de Panamá",
+      "source_url": "https://www.laestrella.com.pa",
+      "country": "Panamá",
+      "topics": [
+        "Startups",
+        "AgroTech"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T17:45:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Felipe Morales",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.la-razon.com/tecnologia/2023/10/05/bolivia-capacitacion-ciberseguridad-instituciones-publicas/",
+      "title": "Bolivia impulsa capacitación en ciberseguridad para instituciones públicas",
+      "summary": "El gobierno boliviano lanza un programa de formación en ciberseguridad dirigido a funcionarios públicos para proteger datos sensibles.",
+      "url": "https://www.la-razon.com/tecnologia/2023/10/05/bolivia-capacitacion-ciberseguridad-instituciones-publicas/",
+      "source": "La Razón Bolivia",
+      "source_url": "https://www.la-razon.com",
+      "country": "Bolivia",
+      "topics": [
+        "Ciberseguridad",
+        "Capacitación"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T16:25:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Santiago Vargas",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T00:23:29.002Z",
+  "params": {}
+}
