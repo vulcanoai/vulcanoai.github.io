@@ -1,0 +1,64 @@
+{
+  "articles": [
+    {
+      "id": "https://www.laestrella.com.pa/nacional/231005/panama-apuesta-digitalizacion-servicios-publicos",
+      "title": "Panamá apuesta por la digitalización de servicios públicos",
+      "summary": "El gobierno panameño implementa un plan para digitalizar trámites gubernamentales, buscando mayor eficiencia y transparencia en la administración pública.",
+      "url": "https://www.laestrella.com.pa/nacional/231005/panama-apuesta-digitalizacion-servicios-publicos",
+      "source": "La Estrella de Panamá",
+      "source_url": "https://www.laestrella.com.pa",
+      "country": "Panamá",
+      "topics": [
+        "Tecnología",
+        "Regulación"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T19:00:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Elena Castillo",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.latercera.com/que-pasa/noticia/startup-chilena-energias-limpias-inversion-extranjera/ABC123/",
+      "title": "Startup chilena de energías limpias capta inversión extranjera",
+      "summary": "Una empresa emergente chilena enfocada en soluciones de energía renovable recibe financiamiento de un fondo europeo para expandir sus proyectos.",
+      "url": "https://www.latercera.com/que-pasa/noticia/startup-chilena-energias-limpias-inversion-extranjera/ABC123/",
+      "source": "La Tercera",
+      "source_url": "https://www.latercera.com",
+      "country": "Chile",
+      "topics": [
+        "Startups",
+        "Sostenibilidad"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T17:30:00Z",
+      "relevance": 8,
+      "sentiment": "positive",
+      "author": "Felipe Vargas",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.opinion.com.bo/articulo/economia/bolivia-busca-regular-comercio-electronico/20231005120000898765.html",
+      "title": "Bolivia busca regular el comercio electrónico con nueva ley",
+      "summary": "El gobierno boliviano propone una legislación para regular las transacciones en línea, con el objetivo de proteger a consumidores y fomentar el comercio digital.",
+      "url": "https://www.opinion.com.bo/articulo/economia/bolivia-busca-regular-comercio-electronico/20231005120000898765.html",
+      "source": "Opinión",
+      "source_url": "https://www.opinion.com.bo",
+      "country": "Bolivia",
+      "topics": [
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T15:15:00Z",
+      "relevance": 6,
+      "sentiment": "neutral",
+      "author": "Juan Morales",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T01:34:23.117Z",
+  "params": {}
+}
