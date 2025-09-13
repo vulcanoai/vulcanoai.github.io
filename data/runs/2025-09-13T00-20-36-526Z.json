@@ -1,0 +1,64 @@
+{
+  "articles": [
+    {
+      "id": "https://www.clarin.com/economia/argentina-lanza-programa-digitalizar-pymes-apoyo-tecnologico_0_5kRj9mL2pX.html",
+      "title": "Argentina lanza programa para digitalizar pymes con apoyo tecnológico",
+      "summary": "El gobierno argentino presenta una iniciativa para ayudar a pequeñas y medianas empresas a adoptar herramientas digitales y mejorar su competitividad.",
+      "url": "https://www.clarin.com/economia/argentina-lanza-programa-digitalizar-pymes-apoyo-tecnologico_0_5kRj9mL2pX.html",
+      "source": "Clarín",
+      "source_url": "https://www.clarin.com",
+      "country": "Argentina",
+      "topics": [
+        "Tecnología",
+        "Pymes"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T18:15:00Z",
+      "relevance": 8,
+      "sentiment": "positive",
+      "author": "Lucía Fernández",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.eluniverso.com/noticias/economia/ecuador-regula-uso-drones-actividades-comerciales-agricolas-nota/",
+      "title": "Ecuador regula el uso de drones para actividades comerciales y agrícolas",
+      "summary": "Ecuador establece nuevas normativas para el uso de drones en sectores comerciales y agrícolas, buscando garantizar seguridad y eficiencia.",
+      "url": "https://www.eluniverso.com/noticias/economia/ecuador-regula-uso-drones-actividades-comerciales-agricolas-nota/",
+      "source": "El Universo",
+      "source_url": "https://www.eluniverso.com",
+      "country": "Ecuador",
+      "topics": [
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T17:10:00Z",
+      "relevance": 7,
+      "sentiment": "neutral",
+      "author": "Gabriel Ortiz",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.elfinanciero.com.mx/tech/2023/10/05/startup-mexicana-inteligencia-artificial-logistica/",
+      "title": "Startup mexicana desarrolla inteligencia artificial para optimizar logística",
+      "summary": "Una empresa emergente en México crea una solución de IA para mejorar la eficiencia en la logística y reducir costos operativos de transporte.",
+      "url": "https://www.elfinanciero.com.mx/tech/2023/10/05/startup-mexicana-inteligencia-artificial-logistica/",
+      "source": "El Financiero",
+      "source_url": "https://www.elfinanciero.com.mx",
+      "country": "México",
+      "topics": [
+        "Startups",
+        "Logística"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T16:00:00Z",
+      "relevance": 8,
+      "sentiment": "positive",
+      "author": "Alejandra Torres",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T00:20:36.252Z",
+  "params": {}
+}
