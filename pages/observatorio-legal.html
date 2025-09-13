@@ -15,8 +15,37 @@
     <a href="#main" class="skip-link">Saltar al contenido</a>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="/pages/noticias.html"><svg class="logo" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg><span class="brand-text">Vulcano AI</span></a>
-        <button class="nav-toggle" aria-label="Abrir menú">☰</button>
+        <a class="brand" href="/pages/noticias.html">
+          <svg class="logo" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>
+          <span class="brand-text">Vulcano AI</span>
+        </a>
+        
+        <!-- Global Time Zone Indicators -->
+        <div class="global-time" id="global-time">
+          <div class="time-zone" data-tz="America/Mexico_City">
+            <span class="tz-label">MX</span>
+            <span class="tz-time">--:--</span>
+          </div>
+          <div class="time-zone" data-tz="America/Bogota">
+            <span class="tz-label">COL</span>
+            <span class="tz-time">--:--</span>
+          </div>
+          <div class="time-zone" data-tz="America/Argentina/Buenos_Aires">
+            <span class="tz-label">AR</span>
+            <span class="tz-time">--:--</span>
+          </div>
+          <div class="time-zone" data-tz="America/Sao_Paulo">
+            <span class="tz-label">BR</span>
+            <span class="tz-time">--:--</span>
+          </div>
+        </div>
+        
+        <button class="nav-toggle" aria-label="Abrir menú">
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+        </button>
+        
         <nav class="site-nav" aria-label="Principal">
           <a href="/pages/noticias.html">Inicio</a>
           <a href="/pages/panorama.html">Panorama</a>
@@ -31,49 +60,193 @@
     </header>
     <main class="section" id="main">
       <div class="container">
-        <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px">
-          <svg class="logo" aria-hidden="true" style="width:24px; height:24px; color:var(--logo); opacity:0.8">
-            <use href="/assets/icons.svg#logo"></use>
-          </svg>
-          <h1 style="margin:0">Observatorio legal de IA</h1>
-        </div>
-        <p class="muted">Borrador funcional: reúne señalamientos de leyes, proyectos, consultas públicas y lineamientos. Útil para fundadores, equipos legales y responsables de políticas.</p>
-        <div class="legal-grid">
-          <div>
-            <h2>Línea temporal</h2>
-            <div id="legal-timeline" class="timeline">
-              <div class="timeline-item">
-                <div class="head"><span class="tag">Brasil</span><span class="tag">Debate</span><span class="item" style="margin-left:auto; display:inline-flex; align-items:center; gap:6px"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#calendar"></use></svg>20/08/2025</span></div>
-                <h4 class="title">PL 2338/2023 — Marco de IA</h4>
-                <p>Principios, evaluación de riesgo y sanciones para sistemas de IA. En discusión en Senado.</p>
-                <div class="meta"><a href="https://www25.senado.leg.br/web/atividade/materias/-/materia/162312" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#link"></use></svg> Fuente oficial</a></div>
+        <!-- Legal Observatory Hero -->
+        <div class="legal-hero">
+          <div class="hero-background">
+            <div class="scales-animation" id="scales-animation"></div>
+          </div>
+          
+          <div class="hero-content">
+            <div class="hero-header">
+              <div class="legal-icon-stack">
+                <div class="scales-icon">
+                  <svg class="hero-icon" aria-hidden="true">
+                    <use href="/assets/icons.svg#scale"></use>
+                  </svg>
+                </div>
+                <div class="orbit-elements">
+                  <div class="legal-symbol gavel">⚖️</div>
+                  <div class="legal-symbol document">📜</div>
+                  <div class="legal-symbol balance">⚙️</div>
+                </div>
               </div>
-              <div class="timeline-item">
-                <div class="head"><span class="tag">Colombia</span><span class="tag">Consulta</span><span class="item" style="margin-left:auto; display:inline-flex; align-items:center; gap:6px"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#calendar"></use></svg>03/09/2025</span></div>
-                <h4 class="title">Guía ética para IA en sector público (borrador)</h4>
-                <p>Principios de transparencia, seguridad y evaluación de impacto; abierta a comentarios.</p>
-                <div class="meta"><a href="https://www.gov.co/" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#link"></use></svg> Fuente oficial</a></div>
+              
+              <div class="hero-text">
+                <h1>Observatorio Legal de IA</h1>
+                <p class="hero-subtitle">Mapa político hacia la Singularidad en América Latina</p>
               </div>
             </div>
-            <div class="panel" style="margin-top:14px">
-              <strong>Descargo de responsabilidad:</strong> esta información es de carácter informativo y no constituye asesoría legal. Verifica siempre en la fuente oficial y consulta especialistas.
+            
+            <div class="legal-stats">
+              <div class="stat-card legal-themed">
+                <div class="stat-value" id="legal-count">Cargando...</div>
+                <div class="stat-label">Iniciativas activas</div>
+              </div>
+              <div class="stat-card legal-themed">
+                <div class="stat-value" id="legal-countries">--</div>
+                <div class="stat-label">Países monitoreados</div>
+              </div>
+              <div class="stat-card legal-themed roadblock" id="roadblock-indicator">
+                <div class="stat-value">--</div>
+                <div class="stat-label">Nivel de restricción</div>
+              </div>
+            </div>
+            
+            <div class="legal-tagline">
+              <div class="tagline-content">
+                <svg class="tagline-icon" aria-hidden="true">
+                  <use href="/assets/icons.svg#sparkles"></use>
+                </svg>
+                <span>Para políticos, científicos y humanistas • Transparencia total • Fuentes oficiales</span>
+              </div>
             </div>
           </div>
-          <aside>
-            <div class="panel">
-              <h3>Áreas clave</h3>
-              <ul class="bullets">
-                <li>Protección de datos y privacidad</li>
-                <li>Transparencia y rendición de cuentas</li>
-                <li>Seguridad, evaluación de impacto</li>
-                <li>Contenido sintético y deepfakes</li>
-                <li>Compras públicas y uso estatal</li>
-              </ul>
-              <p class="note">Próximos pasos: comparativas por país, estados (borrador, en debate, aprobado), alertas de “votación inminente”.</p>
+        </div>
+        <!-- Singularity Timeline Section -->
+        <div class="singularity-section">
+          <div class="section-header">
+            <h2>Cronología hacia la Singularidad</h2>
+            <p class="section-subtitle">Visualización de barreras y aceleradores regulatorios por país</p>
+          </div>
+          
+          <div class="timeline-controls">
+            <div class="timeline-filters">
+              <button class="filter-btn active" data-filter="all">Todos los países</button>
+              <button class="filter-btn" data-filter="mexico">México</button>
+              <button class="filter-btn" data-filter="colombia">Colombia</button>
+              <button class="filter-btn" data-filter="brasil">Brasil</button>
+              <button class="filter-btn" data-filter="argentina">Argentina</button>
             </div>
-            <div class="panel">
-              <h3>Esquema de ítems</h3>
-              <p class="note">Los agentes deben producir objetos con: <code>pais, titulo, estado, fecha, url, resumen, organismo, temas[]</code>.</p>
+            <div class="singularity-indicator">
+              <div class="indicator-label">Proximidad AGI:</div>
+              <div class="progress-bar">
+                <div class="progress-fill" id="singularity-progress"></div>
+                <div class="progress-markers">
+                  <span class="marker restrictive">Restrictivo</span>
+                  <span class="marker balanced">Equilibrado</span>
+                  <span class="marker accelerating">Acelerador</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="interactive-timeline" id="interactive-timeline">
+            <!-- Timeline items will be populated dynamically -->
+          </div>
+        </div>
+        
+        <!-- Legal Dashboard -->
+        <div class="legal-dashboard">
+          <div class="dashboard-main">
+            <div class="country-analysis">
+              <h3>Análisis por país</h3>
+              <div class="country-grid" id="country-grid">
+                <!-- Country cards populated dynamically -->
+              </div>
+            </div>
+            
+            <div class="regulatory-heatmap">
+              <h3>Mapa de calor regulatorio</h3>
+              <div class="heatmap-container" id="regulatory-heatmap">
+                <!-- Heatmap visualization -->
+              </div>
+            </div>
+          </div>
+          
+          <aside class="legal-sidebar">
+            <!-- Threat Level Indicator -->
+            <div class="legal-panel threat-assessment">
+              <div class="panel-header">
+                <h3>Evaluación de amenazas</h3>
+                <div class="threat-level" id="threat-level">
+                  <div class="threat-dot"></div>
+                  <span>Calculando...</span>
+                </div>
+              </div>
+              <div class="threat-metrics">
+                <div class="threat-metric">
+                  <div class="metric-icon">🚫</div>
+                  <div class="metric-info">
+                    <div class="metric-value" id="restrictions-count">--</div>
+                    <div class="metric-label">Restricciones activas</div>
+                  </div>
+                </div>
+                <div class="threat-metric">
+                  <div class="metric-icon">⚠️</div>
+                  <div class="metric-info">
+                    <div class="metric-value" id="pending-votes">--</div>
+                    <div class="metric-label">Votaciones pendientes</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Key Areas Panel -->
+            <div class="legal-panel key-areas">
+              <h3>Áreas críticas</h3>
+              <div class="area-tags">
+                <div class="area-tag high-risk">
+                  <span class="area-icon">🔒</span>
+                  <span>Protección de datos</span>
+                </div>
+                <div class="area-tag medium-risk">
+                  <span class="area-icon">🔍</span>
+                  <span>Transparencia</span>
+                </div>
+                <div class="area-tag high-risk">
+                  <span class="area-icon">⚙️</span>
+                  <span>Sistemas autónomos</span>
+                </div>
+                <div class="area-tag critical-risk">
+                  <span class="area-icon">🤖</span>
+                  <span>AGI y Singularidad</span>
+                </div>
+                <div class="area-tag medium-risk">
+                  <span class="area-icon">🎨</span>
+                  <span>Contenido sintético</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Political Intelligence -->
+            <div class="legal-panel political-intel">
+              <h3>Inteligencia política</h3>
+              <div class="intel-points">
+                <div class="intel-point">
+                  <div class="point-icon">🏛️</div>
+                  <div class="point-text">Monitoreo de iniciativas legislativas en tiempo real</div>
+                </div>
+                <div class="intel-point">
+                  <div class="point-icon">📈</div>
+                  <div class="point-text">Análisis predictivo de aprobación de leyes</div>
+                </div>
+                <div class="intel-point">
+                  <div class="point-icon">🌍</div>
+                  <div class="point-text">Comparativa regional de marcos regulatorios</div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Disclaimer -->
+            <div class="legal-panel disclaimer">
+              <h3>Aviso legal</h3>
+              <p class="disclaimer-text">
+                Esta información es de carácter informativo y no constituye asesoría legal. 
+                Siempre verifica en fuentes oficiales y consulta especialistas.
+              </p>
+              <div class="verification-badge">
+                ✓ Fuentes oficiales verificadas
+              </div>
             </div>
           </aside>
         </div>

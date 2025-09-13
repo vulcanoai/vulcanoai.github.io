@@ -27,6 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Initialize crypto page if present
   initCryptoPage();
+  
+  // Initialize legal observatory if present
+  initLegalObservatory();
 
   // Initialize sources page if present
   const sourcesList = document.getElementById('sources-list');
@@ -1284,6 +1287,503 @@ function initNFTStudio() {
     
     grid.appendChild(nft);
   }
+}
+
+// Legal Observatory Initialization
+async function initLegalObservatory() {
+  // Only run on legal observatory page
+  if (!document.querySelector('.legal-hero')) return;
+  
+  try {
+    // Initialize scales animation
+    initScalesAnimation();
+    
+    // Load and populate legal stats
+    await loadLegalStats();
+    
+    // Initialize interactive timeline
+    initInteractiveTimeline();
+    
+    // Initialize country analysis
+    initCountryAnalysis();
+    
+    // Initialize singularity indicator
+    initSingularityIndicator();
+    
+  } catch (error) {
+    console.error('Error initializing legal observatory:', error);
+  }
+}
+
+// Scales Animation for Legal Hero
+function initScalesAnimation() {
+  const scalesAnimation = document.getElementById('scales-animation');
+  if (!scalesAnimation) return;
+  
+  // Create animated legal elements
+  for (let i = 0; i < 8; i++) {
+    const element = document.createElement('div');
+    element.className = 'legal-particle';
+    element.style.cssText = `
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: #da3633;
+      border-radius: 50%;
+      opacity: 0.4;
+      animation: legalFloat ${3 + Math.random() * 4}s ease-in-out infinite;
+      animation-delay: ${Math.random() * 3}s;
+      left: ${Math.random() * 100}%;
+      top: ${Math.random() * 100}%;
+    `;
+    scalesAnimation.appendChild(element);
+  }
+  
+  // Add CSS animation for legal particles
+  if (!document.querySelector('#legal-styles')) {
+    const style = document.createElement('style');
+    style.id = 'legal-styles';
+    style.textContent = `
+      @keyframes legalFloat {
+        0%, 100% { opacity: 0.2; transform: scale(1) translateY(0px); }
+        50% { opacity: 0.6; transform: scale(1.2) translateY(-20px); }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+}
+
+// Load Legal Statistics
+async function loadLegalStats() {
+  const statsElements = {
+    legalCount: document.getElementById('legal-count'),
+    legalCountries: document.getElementById('legal-countries'),
+    roadblockIndicator: document.getElementById('roadblock-indicator'),
+    restrictionsCount: document.getElementById('restrictions-count'),
+    pendingVotes: document.getElementById('pending-votes'),
+    threatLevel: document.getElementById('threat-level')
+  };
+  
+  try {
+    // Enhanced N8N pipeline data fetching
+    let legalData = [];
+    const endpoints = [
+      '/data/legal-sample.json',
+      '/data/legal-realtime.json', // N8N pipeline endpoint
+      '/api/legal/initiatives' // Direct N8N webhook if available
+    ];
+    
+    // Try multiple data sources for redundancy
+    for (const endpoint of endpoints) {
+      try {
+        const raw = await fetch(endpoint, { 
+          cache: 'no-store',
+          headers: {
+            'Accept': 'application/json',
+            'X-Source': 'vulcano-legal-observatory'
+          }
+        });
+        
+        if (raw.ok) {
+          const data = await raw.json();
+          if (Array.isArray(data) && data.length > 0) {
+            legalData = data;
+            console.log(`✅ Legal data loaded from: ${endpoint}`);
+            break;
+          }
+        }
+      } catch (error) {
+        console.warn(`⚠️ Failed to load from ${endpoint}:`, error.message);
+      }
+    }
+    
+    // Fallback to sample data if N8N pipelines are unavailable
+    if (legalData.length === 0) {
+      console.log('📊 Using fallback legal sample data');
+    }
+    
+    const initiatives = Array.isArray(legalData) ? legalData : [];
+    
+    // Enhanced threat analysis calculations
+    const countries = new Set(initiatives.map(x => (x.pais || '').trim()).filter(Boolean));
+    
+    const restrictiveInitiatives = initiatives.filter(i => {
+      const estado = (i.estado || '').toLowerCase();
+      const temas = (i.temas || []).map(t => t.toLowerCase());
+      
+      return estado.includes('debate') || 
+             estado.includes('aprobado') ||
+             estado.includes('activo') ||
+             temas.some(tema => [
+               'restricción', 'control', 'sanción', 'prohibición',
+               'riesgo', 'transparencia', 'evaluación', 'compliance'
+             ].includes(tema));
+    });
+    
+    const pendingVotesCount = initiatives.filter(i => {
+      const estado = (i.estado || '').toLowerCase();
+      return estado.includes('debate') || 
+             estado.includes('votación') ||
+             estado.includes('consulta') ||
+             estado.includes('borrador');
+    }).length;
+    
+    // Calculate roadblock level (0-100)
+    const roadblockLevel = Math.min(100, Math.round((restrictiveInitiatives.length / Math.max(initiatives.length, 1)) * 100));
+    
+    // Determine threat level
+    let threatColor = '#22c55e';
+    let threatText = 'Bajo riesgo';
+    if (roadblockLevel > 60) {
+      threatColor = '#da3633';
+      threatText = 'Alto riesgo';
+    } else if (roadblockLevel > 30) {
+      threatColor = '#ffd700';
+      threatText = 'Riesgo moderado';
+    }
+    
+    // Animate the values with legal-themed effect
+    const animateValue = (element, start, end, duration = 2000, suffix = '') => {
+      if (!element) return;
+      
+      const range = end - start;
+      const minTimer = 60;
+      const stepTime = Math.abs(Math.floor(duration / range));
+      
+      let current = start;
+      const timer = setInterval(() => {
+        current += 1;
+        element.textContent = current.toLocaleString() + suffix;
+        
+        // Add red glow effect during animation
+        element.style.textShadow = '0 0 8px rgba(218,54,51,0.4)';
+        
+        if (current >= end) {
+          clearInterval(timer);
+          // Remove glow after animation
+          setTimeout(() => {
+            element.style.textShadow = '';
+          }, 500);
+        }
+      }, Math.max(stepTime, minTimer));
+    };
+    
+    // Animate the values with staggered timing
+    setTimeout(() => animateValue(statsElements.legalCount, 0, initiatives.length), 400);
+    setTimeout(() => animateValue(statsElements.legalCountries, 0, countries.size), 800);
+    setTimeout(() => animateValue(statsElements.restrictionsCount, 0, restrictiveInitiatives.length), 1200);
+    setTimeout(() => animateValue(statsElements.pendingVotes, 0, pendingVotesCount), 1600);
+    
+    // Update roadblock indicator
+    if (statsElements.roadblockIndicator) {
+      const valueEl = statsElements.roadblockIndicator.querySelector('.stat-value');
+      if (valueEl) {
+        setTimeout(() => {
+          animateValue(valueEl, 0, roadblockLevel, 2000, '%');
+          statsElements.roadblockIndicator.style.borderColor = `${threatColor}44`;
+        }, 2000);
+      }
+    }
+    
+    // Update threat level
+    if (statsElements.threatLevel) {
+      setTimeout(() => {
+        const dot = statsElements.threatLevel.querySelector('.threat-dot');
+        const text = statsElements.threatLevel.querySelector('span');
+        if (dot && text) {
+          dot.style.background = threatColor;
+          text.textContent = threatText;
+        }
+      }, 2400);
+    }
+    
+    // Store data for other functions
+    window.legalObservatoryData = {
+      initiatives,
+      countries: Array.from(countries),
+      roadblockLevel,
+      threatColor,
+      threatText
+    };
+    
+  } catch (error) {
+    console.error('Error loading legal stats:', error);
+    // Set fallback values
+    Object.values(statsElements).forEach(el => {
+      if (el && el.querySelector) {
+        const valueEl = el.querySelector('.stat-value') || el.querySelector('.metric-value');
+        if (valueEl) valueEl.textContent = '--';
+      }
+    });
+  }
+}
+
+// Interactive Timeline
+function initInteractiveTimeline() {
+  const timeline = document.getElementById('interactive-timeline');
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  
+  if (!timeline || !window.legalObservatoryData) return;
+  
+  const { initiatives } = window.legalObservatoryData;
+  
+  function renderTimeline(filteredInitiatives = initiatives) {
+    timeline.innerHTML = '';
+    
+    // Sort by date (newest first)
+    const sortedInitiatives = [...filteredInitiatives].sort((a, b) => {
+      const dateA = new Date(a.fecha || 0);
+      const dateB = new Date(b.fecha || 0);
+      return dateB - dateA;
+    });
+    
+    sortedInitiatives.forEach((initiative, index) => {
+      const item = document.createElement('div');
+      item.className = 'timeline-item';
+      item.style.animationDelay = `${index * 0.1}s`;
+      
+      const date = new Date(initiative.fecha || Date.now());
+      const formattedDate = date.toLocaleDateString('es-ES', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      });
+      
+      // Determine item type for color coding
+      const estado = (initiative.estado || '').toLowerCase();
+      let stateClass = 'neutral';
+      if (estado.includes('aprobado')) stateClass = 'restrictive';
+      else if (estado.includes('debate')) stateClass = 'warning';
+      else if (estado.includes('borrador')) stateClass = 'draft';
+      
+      item.innerHTML = `
+        <div class="timeline-header">
+          <div class="timeline-tags">
+            <span class="country-tag">${initiative.pais || 'Sin país'}</span>
+            <span class="state-tag ${stateClass}">${initiative.estado || 'Sin estado'}</span>
+          </div>
+          <div class="timeline-date">
+            <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#calendar"></use></svg>
+            ${formattedDate}
+          </div>
+        </div>
+        <h4 class="timeline-title">${initiative.titulo || 'Sin título'}</h4>
+        <p class="timeline-summary">${initiative.resumen || 'Sin resumen disponible'}</p>
+        <div class="timeline-meta">
+          <span class="organismo">${initiative.organismo || 'Organismo no especificado'}</span>
+          ${initiative.url ? `<a href="${initiative.url}" target="_blank" rel="noopener" class="timeline-link">
+            <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#link"></use></svg>
+            Fuente oficial
+          </a>` : ''}
+        </div>
+        ${initiative.temas && initiative.temas.length ? `
+          <div class="timeline-topics">
+            ${initiative.temas.map(tema => `<span class="topic-tag">${tema}</span>`).join('')}
+          </div>
+        ` : ''}
+      `;
+      
+      timeline.appendChild(item);
+    });
+    
+    // Add CSS for timeline items if not exists
+    if (!document.querySelector('#timeline-styles')) {
+      const style = document.createElement('style');
+      style.id = 'timeline-styles';
+      style.textContent = `
+        .timeline-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          margin-bottom: 16px;
+          gap: 16px;
+        }
+        .timeline-tags {
+          display: flex;
+          gap: 8px;
+          flex-wrap: wrap;
+        }
+        .country-tag, .state-tag {
+          padding: 4px 8px;
+          border-radius: 12px;
+          font-size: 0.8rem;
+          font-weight: 600;
+        }
+        .country-tag {
+          background: rgba(31,111,235,.15);
+          color: #60a5fa;
+          border: 1px solid rgba(31,111,235,.3);
+        }
+        .state-tag.restrictive {
+          background: rgba(218,54,51,.15);
+          color: #f87171;
+          border: 1px solid rgba(218,54,51,.3);
+        }
+        .state-tag.warning {
+          background: rgba(255,215,0,.15);
+          color: #fbbf24;
+          border: 1px solid rgba(255,215,0,.3);
+        }
+        .state-tag.draft {
+          background: rgba(156,163,175,.15);
+          color: #9ca3af;
+          border: 1px solid rgba(156,163,175,.3);
+        }
+        .state-tag.neutral {
+          background: rgba(255,255,255,.05);
+          color: var(--muted);
+          border: 1px solid var(--line);
+        }
+        .timeline-date {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          color: var(--muted);
+          font-size: 0.9rem;
+          flex-shrink: 0;
+        }
+        .timeline-title {
+          margin: 0 0 12px 0;
+          font-size: 1.3rem;
+          font-weight: 700;
+          line-height: 1.3;
+        }
+        .timeline-summary {
+          margin: 0 0 16px 0;
+          color: var(--muted);
+          line-height: 1.5;
+        }
+        .timeline-meta {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 12px;
+          gap: 16px;
+        }
+        .organismo {
+          font-size: 0.9rem;
+          color: var(--muted);
+          font-style: italic;
+        }
+        .timeline-link {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          color: #da3633;
+          text-decoration: none;
+          font-size: 0.9rem;
+          font-weight: 500;
+        }
+        .timeline-link:hover {
+          color: #f87171;
+        }
+        .timeline-topics {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+        }
+        .topic-tag {
+          padding: 2px 8px;
+          background: rgba(255,255,255,.05);
+          border: 1px solid var(--line);
+          border-radius: 8px;
+          font-size: 0.75rem;
+          color: var(--muted);
+        }
+      `;
+      document.head.appendChild(style);
+    }
+  }
+  
+  // Filter functionality
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Update active state
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      const filter = btn.getAttribute('data-filter');
+      let filteredData = initiatives;
+      
+      if (filter !== 'all') {
+        filteredData = initiatives.filter(initiative => 
+          (initiative.pais || '').toLowerCase().includes(filter.toLowerCase())
+        );
+      }
+      
+      renderTimeline(filteredData);
+    });
+  });
+  
+  // Initial render
+  renderTimeline();
+}
+
+// Country Analysis
+function initCountryAnalysis() {
+  const countryGrid = document.getElementById('country-grid');
+  if (!countryGrid || !window.legalObservatoryData) return;
+  
+  const { initiatives, countries } = window.legalObservatoryData;
+  
+  countries.forEach(country => {
+    const countryInitiatives = initiatives.filter(i => i.pais === country);
+    const restrictiveCount = countryInitiatives.filter(i => 
+      (i.estado || '').toLowerCase().includes('debate') || 
+      (i.estado || '').toLowerCase().includes('aprobado')
+    ).length;
+    
+    const riskLevel = countryInitiatives.length > 0 ? 
+      Math.round((restrictiveCount / countryInitiatives.length) * 100) : 0;
+    
+    let riskClass = 'low';
+    let riskColor = '#22c55e';
+    if (riskLevel > 60) {
+      riskClass = 'high';
+      riskColor = '#da3633';
+    } else if (riskLevel > 30) {
+      riskClass = 'medium';
+      riskColor = '#ffd700';
+    }
+    
+    const card = document.createElement('div');
+    card.className = 'country-card';
+    card.innerHTML = `
+      <div class="country-header">
+        <h4 class="country-name">${country}</h4>
+        <div class="risk-indicator ${riskClass}" style="background: ${riskColor}22; border-color: ${riskColor}44;">
+          ${riskLevel}% restrictivo
+        </div>
+      </div>
+      <div class="country-stats">
+        <div class="country-stat">
+          <span class="stat-value">${countryInitiatives.length}</span>
+          <span class="stat-label">Iniciativas</span>
+        </div>
+        <div class="country-stat">
+          <span class="stat-value">${restrictiveCount}</span>
+          <span class="stat-label">Restrictivas</span>
+        </div>
+      </div>
+    `;
+    
+    countryGrid.appendChild(card);
+  });
+}
+
+// Singularity Proximity Indicator
+function initSingularityIndicator() {
+  const progressFill = document.getElementById('singularity-progress');
+  if (!progressFill || !window.legalObservatoryData) return;
+  
+  const { roadblockLevel } = window.legalObservatoryData;
+  
+  // Calculate proximity (inverse of roadblock level)
+  const proximityLevel = Math.max(10, 100 - roadblockLevel);
+  
+  setTimeout(() => {
+    progressFill.style.width = `${proximityLevel}%`;
+  }, 3000);
 }
 
 // Generic copy-to-clipboard for [data-copy] buttons
