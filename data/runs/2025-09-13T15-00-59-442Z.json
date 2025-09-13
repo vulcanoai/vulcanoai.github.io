@@ -1,0 +1,68 @@
+{
+  "version": "v1.0",
+  "articles": [
+    {
+      "id": "https://www.lanacion.com.ar/economia/argentina-nueva-ley-startups-tecnologicas-nid05102023/",
+      "title": "Argentina impulsa ley para incentivar startups tecnológicas",
+      "summary": "El gobierno argentino presentó un proyecto de ley para ofrecer beneficios fiscales a startups tecnológicas, buscando fomentar la innovación y atraer inversión.",
+      "url": "https://www.lanacion.com.ar/economia/argentina-nueva-ley-startups-tecnologicas-nid05102023/",
+      "source": "La Nación",
+      "source_url": "https://www.lanacion.com.ar",
+      "country": "Argentina",
+      "topics": [
+        "Startups",
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T16:45:00Z",
+      "relevance": 8,
+      "sentiment": "positive",
+      "author": "Sofía Rodríguez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.emol.com/noticias/Economia/2023/10/05/1109875/chile-digitalizacion-pymes.html",
+      "title": "Chile anuncia plan de digitalización para pequeñas empresas",
+      "summary": "El Ministerio de Economía de Chile lanzó un programa para apoyar a las PYMES en la adopción de herramientas digitales, con un fondo de 10 millones de dólares.",
+      "url": "https://www.emol.com/noticias/Economia/2023/10/05/1109875/chile-digitalizacion-pymes.html",
+      "source": "Emol",
+      "source_url": "https://www.emol.com",
+      "country": "Chile",
+      "topics": [
+        "Tecnología",
+        "Economía",
+        "PYMES"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T13:20:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Andrés Castillo",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://elcomercio.pe/tecnologia/peru-retrasos-implementacion-5g-noticia/",
+      "title": "Perú enfrenta desafíos en la implementación de 5G",
+      "summary": "El Ministerio de Transportes y Comunicaciones de Perú señaló retrasos en la licitación de espectro para 5G debido a problemas regulatorios y de infraestructura.",
+      "url": "https://elcomercio.pe/tecnologia/peru-retrasos-implementacion-5g-noticia/",
+      "source": "El Comercio",
+      "source_url": "https://elcomercio.pe",
+      "country": "Perú",
+      "topics": [
+        "Tecnología",
+        "Regulación",
+        "Infraestructura"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T11:10:00Z",
+      "relevance": 6,
+      "sentiment": "negative",
+      "author": "Lucía Fernández",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T15:00:57.335Z",
+  "params": {}
+}
