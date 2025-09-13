@@ -1,0 +1,65 @@
+{
+  "version": "v1.0",
+  "articles": [
+    {
+      "id": "https://www.eluniversal.com.mx/tech/mexico-nueva-regulacion-plataformas-digitales",
+      "title": "México impulsa nueva regulación para plataformas digitales",
+      "summary": "El gobierno mexicano presenta un proyecto de ley para regular el funcionamiento de plataformas digitales, buscando mayor transparencia en el manejo de datos y protección al usuario.",
+      "url": "https://www.eluniversal.com.mx/tech/mexico-nueva-regulacion-plataformas-digitales",
+      "source": "El Universal",
+      "source_url": "https://www.eluniversal.com.mx",
+      "country": "México",
+      "topics": [
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T14:30:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Juan Pérez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.larepublica.co/empresas/startup-fintech-colombia-inversion",
+      "title": "Startup colombiana de fintech recibe inversión millonaria",
+      "summary": "Una startup de tecnología financiera en Colombia asegura una ronda de inversión de 5 millones de dólares para expandir sus servicios en América Latina.",
+      "url": "https://www.larepublica.co/empresas/startup-fintech-colombia-inversion",
+      "source": "La República",
+      "source_url": "https://www.larepublica.co",
+      "country": "Colombia",
+      "topics": [
+        "Startups",
+        "Fintech"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T12:15:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "María Gómez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.americaeconomia.com/negocios-industrias/energias-renovables-crecen-en-latam",
+      "title": "Crecimiento de energías renovables en América Latina",
+      "summary": "Un informe regional destaca el aumento en la adopción de energías renovables en países como Brasil, Chile y México, con nuevas políticas de incentivo.",
+      "url": "https://www.americaeconomia.com/negocios-industrias/energias-renovables-crecen-en-latam",
+      "source": "América Economía",
+      "source_url": "https://www.americaeconomia.com",
+      "country": "Regional",
+      "topics": [
+        "Energía",
+        "Sostenibilidad"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T10:45:00Z",
+      "relevance": 9,
+      "sentiment": "positive",
+      "author": "Carlos Rodríguez",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-13T23:00:56.418Z",
+  "params": {}
+}
