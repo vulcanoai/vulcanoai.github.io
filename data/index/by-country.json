@@ -1,14 +1,14 @@
 {
   "version": "v1.0",
-  "generated_at": "2025-09-14T10:11:44.825Z",
+  "generated_at": "2025-09-14T11:01:12.595Z",
   "byCountry": {
+    "México": 24,
     "Colombia": 24,
-    "México": 23,
     "Brasil": 23,
     "Argentina": 16,
     "Chile": 16,
     "Perú": 14,
-    "Regional": 6,
+    "Regional": 7,
     "Bolivia": 4,
     "Paraguay": 4,
     "Panamá": 4,

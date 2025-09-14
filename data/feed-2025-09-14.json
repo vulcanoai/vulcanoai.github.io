@@ -1,5 +1,7 @@
 {
   "version": "v1.0",
+  "generated_at": "2025-09-14T11:01:12.595Z",
+  "date": "2025-09-14",
   "articles": [
     {
       "id": "https://www.excelsior.com.mx/nacional/mexico-regulacion-criptomonedas-lavado-dinero/1612345",
@@ -136,6 +138,25 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://www.eluniversal.com.mx/techbit/mexico-aprueba-nueva-regulacion-para-plataformas-digitales",
+      "title": "México aprueba nueva regulación para plataformas digitales",
+      "summary": "El gobierno mexicano ha implementado una serie de regulaciones que obligan a las plataformas digitales a cumplir con normativas fiscales y de protección de datos, impactando a empresas tecnológicas locales e internacionales.",
+      "url": "https://www.eluniversal.com.mx/techbit/mexico-aprueba-nueva-regulacion-para-plataformas-digitales",
+      "source": "El Universal",
+      "source_url": "https://www.eluniversal.com.mx",
+      "country": "México",
+      "topics": [
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T14:30:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Juan Pérez",
+      "curator": "Luciano AI"
+    },
+    {
       "id": "https://www.eluniversal.com.mx/techbit/mexico-propone-ley-para-regular-criptomonedas",
       "title": "México avanza en regulación de criptomonedas con nueva propuesta de ley",
       "summary": "El Congreso mexicano presentó un proyecto de ley para regular el uso de criptomonedas y blockchain, buscando fomentar la innovación y proteger a los usuarios.",
@@ -230,6 +251,44 @@
       "relevance": 9,
       "sentiment": "neutral",
       "author": "Carlos Silva",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.larepublica.co/empresas/startup-colombiana-de-fintech-recibe-inversion-millonaria-2023",
+      "title": "Startup colombiana de fintech recibe inversión millonaria",
+      "summary": "Una startup de tecnología financiera con sede en Bogotá ha asegurado una ronda de inversión de 5 millones de dólares para expandir sus operaciones en América Latina.",
+      "url": "https://www.larepublica.co/empresas/startup-colombiana-de-fintech-recibe-inversion-millonaria-2023",
+      "source": "La República",
+      "source_url": "https://www.larepublica.co",
+      "country": "Colombia",
+      "topics": [
+        "Startups",
+        "Fintech"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T12:00:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "María Gómez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.americaeconomia.com/tecnologia/avances-digitalizacion-servicios-publicos-america-latina",
+      "title": "Avances en la digitalización de servicios públicos en América Latina",
+      "summary": "Varios países de la región están implementando soluciones tecnológicas para mejorar el acceso a servicios públicos, con proyectos destacados en Brasil y Argentina.",
+      "url": "https://www.americaeconomia.com/tecnologia/avances-digitalizacion-servicios-publicos-america-latina",
+      "source": "América Economía",
+      "source_url": "https://www.americaeconomia.com",
+      "country": "Regional",
+      "topics": [
+        "Tecnología",
+        "Gobierno"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T10:15:00Z",
+      "relevance": 6,
+      "sentiment": "positive",
+      "author": "Carlos Rodríguez",
       "curator": "Luciano AI"
     },
     {
