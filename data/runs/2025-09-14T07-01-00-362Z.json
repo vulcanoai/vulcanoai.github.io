@@ -1,0 +1,65 @@
+{
+  "version": "v1.0",
+  "articles": [
+    {
+      "id": "https://www.lanacion.com.ar/economia/argentina-impulsa-proyecto-para-regular-criptomonedas-nid05102023",
+      "title": "Argentina impulsa proyecto para regular criptomonedas",
+      "summary": "El gobierno argentino presenta una iniciativa legislativa para establecer un marco regulatorio claro sobre el uso y comercio de criptomonedas en el país.",
+      "url": "https://www.lanacion.com.ar/economia/argentina-impulsa-proyecto-para-regular-criptomonedas-nid05102023",
+      "source": "La Nación",
+      "source_url": "https://www.lanacion.com.ar",
+      "country": "Argentina",
+      "topics": [
+        "Regulación",
+        "Criptomonedas"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T16:45:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Sofía Martínez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://elcomercio.pe/economia/peru/startup-peruana-edtech-cierra-ronda-financiacion-2023-noticia/",
+      "title": "Startup peruana de edtech cierra ronda de financiación",
+      "summary": "Una empresa emergente de tecnología educativa en Lima ha logrado captar 2 millones de dólares para expandir su plataforma de aprendizaje en línea en la región.",
+      "url": "https://elcomercio.pe/economia/peru/startup-peruana-edtech-cierra-ronda-financiacion-2023-noticia/",
+      "source": "El Comercio",
+      "source_url": "https://elcomercio.pe",
+      "country": "Perú",
+      "topics": [
+        "Startups",
+        "Edtech"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T13:20:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Luis Vargas",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.emol.com/noticias/Tecnologia/2023/10/05/1109876/chile-politicas-inteligencia-artificial.html",
+      "title": "Chile avanza en políticas de inteligencia artificial",
+      "summary": "El Ministerio de Ciencia y Tecnología de Chile publica un plan estratégico para el desarrollo ético y sostenible de la inteligencia artificial en el país.",
+      "url": "https://www.emol.com/noticias/Tecnologia/2023/10/05/1109876/chile-politicas-inteligencia-artificial.html",
+      "source": "Emol",
+      "source_url": "https://www.emol.com",
+      "country": "Chile",
+      "topics": [
+        "Regulación",
+        "Inteligencia Artificial"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T11:10:00Z",
+      "relevance": 9,
+      "sentiment": "positive",
+      "author": "Andrea Rojas",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-14T07:00:57.509Z",
+  "params": {}
+}
