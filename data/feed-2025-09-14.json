@@ -1,5 +1,7 @@
 {
   "version": "v1.0",
+  "generated_at": "2025-09-14T18:01:12.960Z",
+  "date": "2025-09-14",
   "articles": [
     {
       "id": "https://www.lanacion.com.ar/economia/argentina-inflacion-record-octubre-2024-nid25102024/",
@@ -251,6 +253,25 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://www.eluniversal.com.mx/nacion/aprueban-ley-de-ciberseguridad-en-mexico",
+      "title": "Nueva ley de ciberseguridad aprobada en México",
+      "summary": "El Congreso de México aprobó una ley para fortalecer la protección de datos y combatir ciberataques en el país, con énfasis en la regulación de empresas tecnológicas.",
+      "url": "https://www.eluniversal.com.mx/nacion/aprueban-ley-de-ciberseguridad-en-mexico",
+      "source": "El Universal",
+      "source_url": "https://www.eluniversal.com.mx",
+      "country": "México",
+      "topics": [
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T14:30:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Juan Pérez",
+      "curator": "Valentina AI"
+    },
+    {
       "id": "https://www.eluniversal.com.mx/nacion/aprueban-ley-de-ciberseguridad-en-mexico-para-proteger-datos-sensibles",
       "title": "Nueva ley de ciberseguridad aprobada en México",
       "summary": "El Congreso de México aprobó una ley para fortalecer la ciberseguridad en instituciones públicas y privadas, buscando proteger datos sensibles frente al aumento de ataques cibernéticos.",
@@ -386,6 +407,25 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://www.larepublica.co/empresas/startup-colombiana-fintechnow-recibe-inversion-de-5-millones-2023",
+      "title": "Startup colombiana de fintech recibe inversión millonaria",
+      "summary": "La startup colombiana FinTechNow levantó 5 millones de dólares en una ronda liderada por fondos internacionales, buscando expandirse en la región.",
+      "url": "https://www.larepublica.co/empresas/startup-colombiana-fintechnow-recibe-inversion-de-5-millones-2023",
+      "source": "La República",
+      "source_url": "https://www.larepublica.co",
+      "country": "Colombia",
+      "topics": [
+        "Startups",
+        "Finanzas"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T12:00:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "María Gómez",
+      "curator": "Valentina AI"
+    },
+    {
       "id": "https://www.larepublica.co/empresas/startup-fintech-colombiana-recibe-inversion-de-5-millones-2023",
       "title": "Startup colombiana de fintech recibe inversión millonaria",
       "summary": "Una startup de tecnología financiera en Bogotá cerró una ronda de inversión Serie A por 5 millones de dólares para expandir sus operaciones en América Latina.",
@@ -402,6 +442,25 @@
       "relevance": 7,
       "sentiment": "positive",
       "author": "María Gómez",
+      "curator": "Valentina AI"
+    },
+    {
+      "id": "https://www.cepal.org/es/noticias/acuerdo-regional-ia-etica-america-latina",
+      "title": "Acuerdo regional para promover la IA ética en América Latina",
+      "summary": "Varios países de América Latina firmaron un acuerdo para establecer principios éticos en el desarrollo y uso de inteligencia artificial.",
+      "url": "https://www.cepal.org/es/noticias/acuerdo-regional-ia-etica-america-latina",
+      "source": "CEPAL",
+      "source_url": "https://www.cepal.org",
+      "country": "Regional",
+      "topics": [
+        "Tecnología",
+        "Regulación"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T10:15:00Z",
+      "relevance": 9,
+      "sentiment": "positive",
+      "author": "Equipo CEPAL",
       "curator": "Valentina AI"
     },
     {
