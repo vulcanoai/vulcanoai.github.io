@@ -1,0 +1,68 @@
+{
+  "version": "v1.0",
+  "articles": [
+    {
+      "id": "https://www.eluniversal.com.mx/economia/mexico-aprueba-ley-para-regular-fintechs-y-criptomonedas",
+      "title": "México aprueba nueva ley para regular fintechs y criptomonedas",
+      "summary": "El Congreso de México ha aprobado una legislación que busca regular las operaciones de empresas fintech y el uso de criptomonedas, con el objetivo de fomentar la innovación y proteger a los usuarios.",
+      "url": "https://www.eluniversal.com.mx/economia/mexico-aprueba-ley-para-regular-fintechs-y-criptomonedas",
+      "source": "El Universal",
+      "source_url": "https://www.eluniversal.com.mx",
+      "country": "México",
+      "topics": [
+        "Regulación",
+        "Fintech",
+        "Criptomonedas"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T14:30:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Juan Pérez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.larepublica.co/empresas/startup-colombiana-logistica-recauda-10-millones-dolares-2023",
+      "title": "Startup colombiana de logística recauda 10 millones de dólares",
+      "summary": "Una startup colombiana enfocada en soluciones de logística ha logrado una ronda de financiación Serie A por 10 millones de dólares, liderada por un fondo internacional.",
+      "url": "https://www.larepublica.co/empresas/startup-colombiana-logistica-recauda-10-millones-dolares-2023",
+      "source": "La República",
+      "source_url": "https://www.larepublica.co",
+      "country": "Colombia",
+      "topics": [
+        "Startups",
+        "Financiamiento",
+        "Logística"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T16:00:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "María Gómez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://g1.globo.com/economia/noticia/2023/10/05/brasil-debate-incentivos-startups-tecnologicas.ghtml",
+      "title": "Brasil debate nuevas políticas de incentivos para startups tecnológicas",
+      "summary": "El gobierno brasileño está discutiendo un paquete de incentivos fiscales para startups tecnológicas, con el fin de posicionar al país como un hub de innovación en América Latina.",
+      "url": "https://g1.globo.com/economia/noticia/2023/10/05/brasil-debate-incentivos-startups-tecnologicas.ghtml",
+      "source": "G1 Globo",
+      "source_url": "https://g1.globo.com",
+      "country": "Brasil",
+      "topics": [
+        "Startups",
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-05T12:15:00Z",
+      "relevance": 6,
+      "sentiment": "positive",
+      "author": "Carlos Silva",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-14T03:00:57.602Z",
+  "params": {}
+}
