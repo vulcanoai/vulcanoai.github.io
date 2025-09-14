@@ -1,5 +1,7 @@
 {
   "version": "v1.0",
+  "generated_at": "2025-09-14T19:01:11.472Z",
+  "date": "2025-09-14",
   "articles": [
     {
       "id": "https://www.lanacion.com.ar/economia/argentina-inflacion-record-octubre-2024-nid25102024/",
@@ -194,6 +196,25 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://www.latercera.com/nacional/noticia/chile-propone-regulacion-para-plataformas-digitales/2023-10-25/",
+      "title": "Chile impulsa nueva regulación para plataformas digitales",
+      "summary": "El gobierno chileno presentó un proyecto de ley para regular el funcionamiento de plataformas digitales, buscando mayor transparencia y protección de datos de los usuarios.",
+      "url": "https://www.latercera.com/nacional/noticia/chile-propone-regulacion-para-plataformas-digitales/2023-10-25/",
+      "source": "La Tercera",
+      "source_url": "https://www.latercera.com",
+      "country": "Chile",
+      "topics": [
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T15:45:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Camila Rojas",
+      "curator": "Valentina AI"
+    },
+    {
       "id": "https://www.elcolombiano.com/negocios/colombia-lanza-plan-para-impulsar-economia-digital-MN23102023",
       "title": "Colombia implementa nuevas políticas para impulsar la economía digital",
       "summary": "El gobierno colombiano lanzó un plan para fomentar la economía digital, incluyendo incentivos fiscales para empresas tecnológicas y programas de capacitación en habilidades digitales.",
@@ -366,6 +387,25 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://www.folha.uol.com.br/educacao/2023/10/startup-brasileira-edutech-ganha-premio-internacional.shtml",
+      "title": "Startup brasileña de edtech gana premio internacional",
+      "summary": "La startup brasileña EducaTech fue reconocida en un evento global por su innovadora plataforma de educación en línea dirigida a comunidades rurales.",
+      "url": "https://www.folha.uol.com.br/educacao/2023/10/startup-brasileira-edutech-ganha-premio-internacional.shtml",
+      "source": "Folha de S.Paulo",
+      "source_url": "https://www.folha.uol.com.br",
+      "country": "Brasil",
+      "topics": [
+        "Startups",
+        "Educación"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-25T13:20:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Lucas Silva",
+      "curator": "Valentina AI"
+    },
+    {
       "id": "https://g1.globo.com/economia/noticia/2023/10/25/brasil-lanca-programa-de-incentivos-para-startups.ghtml",
       "title": "Brasil implementa nuevas políticas para startups tecnológicas",
       "summary": "El gobierno brasileño lanza un programa de incentivos fiscales para startups tecnológicas, con el objetivo de fortalecer el ecosistema de innovación.",
@@ -440,6 +480,25 @@
       "relevance": 7,
       "sentiment": "positive",
       "author": "María Gómez",
+      "curator": "Valentina AI"
+    },
+    {
+      "id": "https://www.clarin.com/tecnologia/argentina-debate-impacto-ia-empleo_0_2023-10-25.html",
+      "title": "Argentina debate el impacto de la IA en el empleo",
+      "summary": "Expertos y legisladores argentinos discutieron en un foro los desafíos y oportunidades de la inteligencia artificial en el mercado laboral del país.",
+      "url": "https://www.clarin.com/tecnologia/argentina-debate-impacto-ia-empleo_0_2023-10-25.html",
+      "source": "Clarín",
+      "source_url": "https://www.clarin.com",
+      "country": "Argentina",
+      "topics": [
+        "Tecnología",
+        "Empleo"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T11:10:00Z",
+      "relevance": 6,
+      "sentiment": "neutral",
+      "author": "Sofía Martínez",
       "curator": "Valentina AI"
     },
     {
