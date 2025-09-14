@@ -144,6 +144,13 @@ function groupCounts(arr, key){
 }
 
 async function build(){
+  // Safety guard: avoid accidental local data writes.
+  // Allow in CI or when explicitly enabled.
+  const allowLocal = process.env.CI || process.env.VULCANO_ALLOW_LOCAL_DATA_WRITE;
+  if (!allowLocal) {
+    console.error('[build-feed] Local write disabled. Set VULCANO_ALLOW_LOCAL_DATA_WRITE=1 to run locally.');
+    return;
+  }
   log('Starting');
   await Promise.all([ensureDir(DATA_DIR), ensureDir(INDEX_DIR), ensureDir(ENTRIES_DIR)]);
 
