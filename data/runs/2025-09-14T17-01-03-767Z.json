@@ -1,0 +1,65 @@
+{
+  "version": "v1.0",
+  "articles": [
+    {
+      "id": "https://www.eluniversal.com.mx/nacion/aprueban-ley-de-ciberseguridad-en-mexico-para-proteger-datos-sensibles",
+      "title": "Nueva ley de ciberseguridad aprobada en México",
+      "summary": "El Congreso de México aprobó una ley para fortalecer la ciberseguridad en instituciones públicas y privadas, buscando proteger datos sensibles frente al aumento de ataques cibernéticos.",
+      "url": "https://www.eluniversal.com.mx/nacion/aprueban-ley-de-ciberseguridad-en-mexico-para-proteger-datos-sensibles",
+      "source": "El Universal",
+      "source_url": "https://www.eluniversal.com.mx",
+      "country": "México",
+      "topics": [
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T14:30:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Juan Pérez",
+      "curator": "Valentina AI"
+    },
+    {
+      "id": "https://www.larepublica.co/empresas/startup-fintech-colombiana-recibe-inversion-de-5-millones-2023",
+      "title": "Startup colombiana de fintech recibe inversión millonaria",
+      "summary": "Una startup de tecnología financiera en Bogotá cerró una ronda de inversión Serie A por 5 millones de dólares para expandir sus operaciones en América Latina.",
+      "url": "https://www.larepublica.co/empresas/startup-fintech-colombiana-recibe-inversion-de-5-millones-2023",
+      "source": "La República",
+      "source_url": "https://www.larepublica.co",
+      "country": "Colombia",
+      "topics": [
+        "Startups",
+        "Fintech"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T12:00:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "María Gómez",
+      "curator": "Valentina AI"
+    },
+    {
+      "id": "https://g1.globo.com/economia/noticia/2023/10/25/brasil-lidera-energias-renovaveis-na-america-latina.ghtml",
+      "title": "Brasil lidera adopción de energías renovables en la región",
+      "summary": "Un informe reciente destaca a Brasil como el país con mayor inversión en energías renovables en América Latina durante el último año, con proyectos eólicos y solares en aumento.",
+      "url": "https://g1.globo.com/economia/noticia/2023/10/25/brasil-lidera-energias-renovaveis-na-america-latina.ghtml",
+      "source": "G1 Globo",
+      "source_url": "https://g1.globo.com",
+      "country": "Brasil",
+      "topics": [
+        "Energía",
+        "Sostenibilidad"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-25T10:15:00Z",
+      "relevance": 9,
+      "sentiment": "positive",
+      "author": "Ana Silva",
+      "curator": "Valentina AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-14T17:01:00.869Z",
+  "params": {}
+}
