@@ -1,17 +1,22 @@
 {
   "date": "2025-09-14",
-  "count": 3,
+  "count": 6,
   "topics": {
-    "Regulación": 2,
-    "Startups": 1,
+    "Tecnología": 3,
+    "Regulación": 3,
+    "Startups": 2,
+    "Economía": 1,
     "Finanzas": 1,
-    "Tecnología": 1,
+    "Innovación": 1,
     "Inteligencia Artificial": 1
   },
   "countries": {
+    "Perú": 1,
     "Colombia": 1,
+    "Argentina": 1,
     "México": 1,
+    "Chile": 1,
     "Brasil": 1
   },
-  "generated_at": "2025-09-14T00:01:07.660Z"
+  "generated_at": "2025-09-14T01:01:11.164Z"
 }

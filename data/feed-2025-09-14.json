@@ -1,6 +1,27 @@
 {
   "version": "v1.0",
+  "generated_at": "2025-09-14T01:01:11.164Z",
+  "date": "2025-09-14",
   "articles": [
+    {
+      "id": "https://elcomercio.pe/economia/peru/peru-lanza-programa-de-digitalizacion-para-pequenas-empresas-noticia/",
+      "title": "Perú impulsa digitalización de pequeñas empresas con apoyo estatal",
+      "summary": "El Ministerio de Producción de Perú lanzó un programa para digitalizar a más de 5,000 pequeñas empresas, ofreciendo capacitación y herramientas tecnológicas.",
+      "url": "https://elcomercio.pe/economia/peru/peru-lanza-programa-de-digitalizacion-para-pequenas-empresas-noticia/",
+      "source": "El Comercio",
+      "source_url": "https://elcomercio.pe",
+      "country": "Perú",
+      "topics": [
+        "Tecnología",
+        "Economía"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T16:10:00Z",
+      "relevance": 6,
+      "sentiment": "positive",
+      "author": "Ana López",
+      "curator": "Luciano AI"
+    },
     {
       "id": "https://www.eltiempo.com/economia/empresas/startup-colombiana-fintechpro-recibe-inversion-de-5-millones-823456",
       "title": "Startup colombiana de fintech recibe inversión millonaria",
@@ -21,6 +42,25 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://www.lanacion.com.ar/economia/argentina-lanza-fondo-de-inversion-para-startups-tecnologicas-nid25102023/",
+      "title": "Argentina lanza fondo de inversión para startups tecnológicas",
+      "summary": "El gobierno argentino anunció un fondo de 10 millones de dólares destinado a apoyar startups tecnológicas, con foco en innovación y exportación de servicios digitales.",
+      "url": "https://www.lanacion.com.ar/economia/argentina-lanza-fondo-de-inversion-para-startups-tecnologicas-nid25102023/",
+      "source": "La Nación",
+      "source_url": "https://www.lanacion.com.ar",
+      "country": "Argentina",
+      "topics": [
+        "Startups",
+        "Innovación"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T15:20:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Sofía Martínez",
+      "curator": "Luciano AI"
+    },
+    {
       "id": "https://www.eluniversal.com.mx/nacion/mexico-aprueba-ley-de-ciberseguridad-para-datos-personales",
       "title": "México aprueba nueva ley de ciberseguridad para proteger datos personales",
       "summary": "El Congreso de México aprobó una reforma que fortalece la protección de datos personales en plataformas digitales, buscando reducir el riesgo de ciberataques en el país.",
@@ -37,6 +77,25 @@
       "relevance": 8,
       "sentiment": "neutral",
       "author": "Juan Pérez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.emol.com/noticias/Economia/2023/10/25/1111234/chile-regulacion-plataformas-delivery.html",
+      "title": "Chile debate nueva regulación para plataformas de delivery",
+      "summary": "El Congreso chileno discute un proyecto de ley para regular las condiciones laborales de los trabajadores de plataformas de delivery como Rappi y Uber Eats.",
+      "url": "https://www.emol.com/noticias/Economia/2023/10/25/1111234/chile-regulacion-plataformas-delivery.html",
+      "source": "Emol",
+      "source_url": "https://www.emol.com",
+      "country": "Chile",
+      "topics": [
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T13:45:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Felipe Vargas",
       "curator": "Luciano AI"
     },
     {
