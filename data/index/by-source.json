@@ -1,6 +1,6 @@
 {
   "version": "v1.0",
-  "generated_at": "2025-09-14T07:11:35.336Z",
+  "generated_at": "2025-09-14T08:01:12.871Z",
   "bySource": {
     "La Nación": 15,
     "Emol": 14,
@@ -10,15 +10,15 @@
     "G1 Globo": 11,
     "Folha de S.Paulo": 6,
     "La República": 5,
+    "El Colombiano": 4,
     "La Estrella de Panamá": 4,
+    "Reforma": 4,
     "Estadão": 4,
     "Excélsior": 3,
-    "El Colombiano": 3,
     "América Economía": 3,
     "Prensa Libre": 3,
     "ABC Color": 3,
     "El Universo": 3,
-    "Reforma": 3,
     "El Espectador": 2,
     "La Prensa Honduras": 2,
     "La Razón Bolivia": 2,
@@ -41,6 +41,7 @@
     "Opinión": 1,
     "Forbes México": 1,
     "ECLAC": 1,
+    "G1": 1,
     "CEPAL": 1
   }
 }

@@ -1,5 +1,7 @@
 {
   "version": "v1.0",
+  "generated_at": "2025-09-14T08:01:12.871Z",
+  "date": "2025-09-14",
   "articles": [
     {
       "id": "https://www.excelsior.com.mx/nacional/mexico-regulacion-criptomonedas-lavado-dinero/1612345",
@@ -271,6 +273,25 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://www.reforma.com/mexico-lanza-iniciativa-para-impulsar-startups-tecnologicas-2023-10-05/",
+      "title": "México lanza iniciativa para impulsar startups tecnológicas",
+      "summary": "El gobierno mexicano anuncia un fondo de inversión para apoyar a emprendedores en el sector tecnológico, con el objetivo de fomentar la innovación y el empleo.",
+      "url": "https://www.reforma.com/mexico-lanza-iniciativa-para-impulsar-startups-tecnologicas-2023-10-05/",
+      "source": "Reforma",
+      "source_url": "https://www.reforma.com",
+      "country": "México",
+      "topics": [
+        "Startups",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T15:00:00Z",
+      "relevance": 8,
+      "sentiment": "positive",
+      "author": "Ana López",
+      "curator": "Luciano AI"
+    },
+    {
       "id": "https://www.eluniversal.com.mx/nacion/mexico-aprueba-ley-para-regular-plataformas-digitales",
       "title": "México aprueba nueva ley para regular plataformas digitales",
       "summary": "El Congreso de México ha aprobado una legislación que busca regular el funcionamiento de plataformas digitales, con énfasis en la protección de datos y la transparencia de algoritmos.",
@@ -368,6 +389,25 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://www.elcolombiano.com/colombia/colombia-regula-uso-de-drones-en-espacios-urbanos-MH20231005",
+      "title": "Colombia regula el uso de drones en espacios urbanos",
+      "summary": "La Aeronáutica Civil de Colombia establece nuevas normas para el uso de drones, buscando garantizar la seguridad y privacidad en áreas urbanas.",
+      "url": "https://www.elcolombiano.com/colombia/colombia-regula-uso-de-drones-en-espacios-urbanos-MH20231005",
+      "source": "El Colombiano",
+      "source_url": "https://www.elcolombiano.com",
+      "country": "Colombia",
+      "topics": [
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T12:30:00Z",
+      "relevance": 7,
+      "sentiment": "neutral",
+      "author": "Carlos Ramírez",
+      "curator": "Luciano AI"
+    },
+    {
       "id": "https://www.eltiempo.com/economia/empresas/startup-colombiana-de-fintech-recibe-inversion-millonaria-2023",
       "title": "Startup colombiana de fintech recibe inversión millonaria",
       "summary": "Una startup de tecnología financiera en Bogotá ha asegurado una ronda de inversión de 5 millones de dólares para expandir sus operaciones en América Latina.",
@@ -442,6 +482,25 @@
       "relevance": 9,
       "sentiment": "positive",
       "author": "Andrea Rojas",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://g1.globo.com/politica/noticia/2023/10/05/brasil-aprova-marco-legal-para-protecao-de-dados-em-saude.ghtml",
+      "title": "Brasil aprueba marco legal para protección de datos en salud",
+      "summary": "El Senado brasileño aprueba un proyecto de ley que refuerza la protección de datos personales en el sector salud, alineándose con la LGPD.",
+      "url": "https://g1.globo.com/politica/noticia/2023/10/05/brasil-aprova-marco-legal-para-protecao-de-dados-em-saude.ghtml",
+      "source": "G1",
+      "source_url": "https://g1.globo.com",
+      "country": "Brasil",
+      "topics": [
+        "Regulación",
+        "Salud Digital"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-05T10:20:00Z",
+      "relevance": 9,
+      "sentiment": "neutral",
+      "author": "Mariana Oliveira",
       "curator": "Luciano AI"
     },
     {
