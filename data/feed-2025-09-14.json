@@ -1,6 +1,27 @@
 {
   "version": "v1.0",
+  "generated_at": "2025-09-14T02:01:09.947Z",
+  "date": "2025-09-14",
   "articles": [
+    {
+      "id": "https://www.excelsior.com.mx/nacional/mexico-regulacion-criptomonedas-lavado-dinero/1612345",
+      "title": "México avanza en regulación de criptomonedas para combatir lavado de dinero",
+      "summary": "La Cámara de Diputados de México discute un proyecto de ley para regular el uso de criptomonedas, con el objetivo de prevenir actividades ilícitas y proteger a los usuarios.",
+      "url": "https://www.excelsior.com.mx/nacional/mexico-regulacion-criptomonedas-lavado-dinero/1612345",
+      "source": "Excélsior",
+      "source_url": "https://www.excelsior.com.mx",
+      "country": "México",
+      "topics": [
+        "Regulación",
+        "Criptomonedas"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T17:00:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Roberto Sánchez",
+      "curator": "Luciano AI"
+    },
     {
       "id": "https://elcomercio.pe/economia/peru/peru-lanza-programa-de-digitalizacion-para-pequenas-empresas-noticia/",
       "title": "Perú impulsa digitalización de pequeñas empresas con apoyo estatal",
@@ -40,6 +61,25 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://www.elcolombiano.com/negocios/colombia-lanza-plan-para-impulsar-economia-digital-MN23102023",
+      "title": "Colombia implementa nuevas políticas para impulsar la economía digital",
+      "summary": "El gobierno colombiano lanzó un plan para fomentar la economía digital, incluyendo incentivos fiscales para empresas tecnológicas y programas de capacitación en habilidades digitales.",
+      "url": "https://www.elcolombiano.com/negocios/colombia-lanza-plan-para-impulsar-economia-digital-MN23102023",
+      "source": "El Colombiano",
+      "source_url": "https://www.elcolombiano.com",
+      "country": "Colombia",
+      "topics": [
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T15:30:00Z",
+      "relevance": 8,
+      "sentiment": "positive",
+      "author": "Camila Restrepo",
+      "curator": "Luciano AI"
+    },
+    {
       "id": "https://www.lanacion.com.ar/economia/argentina-lanza-fondo-de-inversion-para-startups-tecnologicas-nid25102023/",
       "title": "Argentina lanza fondo de inversión para startups tecnológicas",
       "summary": "El gobierno argentino anunció un fondo de 10 millones de dólares destinado a apoyar startups tecnológicas, con foco en innovación y exportación de servicios digitales.",
@@ -56,6 +96,25 @@
       "relevance": 7,
       "sentiment": "positive",
       "author": "Sofía Martínez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://g1.globo.com/economia/noticia/2023/10/25/startup-edutech-brasileira-recebe-investimento-para-expansao.ghtml",
+      "title": "Startup brasileña de edtech recibe financiación para expandirse en LATAM",
+      "summary": "EducaTech, una startup brasileña de tecnología educativa, levantó 3 millones de dólares en una ronda de inversión para llevar sus plataformas de aprendizaje a otros países de la región.",
+      "url": "https://g1.globo.com/economia/noticia/2023/10/25/startup-edutech-brasileira-recebe-investimento-para-expansao.ghtml",
+      "source": "G1 Globo",
+      "source_url": "https://g1.globo.com",
+      "country": "Brasil",
+      "topics": [
+        "Startups",
+        "Educación"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-25T14:50:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Mariana Oliveira",
       "curator": "Luciano AI"
     },
     {
