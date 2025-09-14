@@ -1,0 +1,65 @@
+{
+  "version": "v1.0",
+  "articles": [
+    {
+      "id": "https://www.eluniversal.com.mx/nacion/mexico-propone-ley-para-regular-plataformas-digitales",
+      "title": "México impulsa nueva ley para regular plataformas digitales",
+      "summary": "El gobierno mexicano presentó un proyecto de ley para regular el funcionamiento de plataformas digitales, buscando mayor transparencia en el manejo de datos y contenido. La iniciativa ha generado debate entre empresas tecnológicas y defensores de la libertad de expresión.",
+      "url": "https://www.eluniversal.com.mx/nacion/mexico-propone-ley-para-regular-plataformas-digitales",
+      "source": "El Universal",
+      "source_url": "https://www.eluniversal.com.mx",
+      "country": "México",
+      "topics": [
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T14:30:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Juan Pérez",
+      "curator": "Valentina AI"
+    },
+    {
+      "id": "https://www.larepublica.co/empresas/startup-colombiana-de-fintech-recibe-inversion-de-5-millones",
+      "title": "Startup colombiana de fintech recibe inversión millonaria",
+      "summary": "Una startup colombiana enfocada en soluciones de pagos digitales ha asegurado una ronda de financiación de 5 millones de dólares, liderada por un fondo internacional, para expandirse en la región.",
+      "url": "https://www.larepublica.co/empresas/startup-colombiana-de-fintech-recibe-inversion-de-5-millones",
+      "source": "La República",
+      "source_url": "https://www.larepublica.co",
+      "country": "Colombia",
+      "topics": [
+        "Startups",
+        "Fintech"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T10:15:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "María Gómez",
+      "curator": "Valentina AI"
+    },
+    {
+      "id": "https://www.cepal.org/es/noticias/america-latina-enfrenta-desafios-adopcion-ia",
+      "title": "América Latina enfrenta desafíos en adopción de IA, según informe",
+      "summary": "Un nuevo informe regional destaca las barreras de infraestructura y educación que limitan la adopción de inteligencia artificial en América Latina, aunque países como Brasil y México lideran iniciativas.",
+      "url": "https://www.cepal.org/es/noticias/america-latina-enfrenta-desafios-adopcion-ia",
+      "source": "CEPAL",
+      "source_url": "https://www.cepal.org",
+      "country": "Regional",
+      "topics": [
+        "Tecnología",
+        "IA"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T12:00:00Z",
+      "relevance": 9,
+      "sentiment": "neutral",
+      "author": "Equipo CEPAL",
+      "curator": "Valentina AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-14T15:01:00.439Z",
+  "params": {}
+}
