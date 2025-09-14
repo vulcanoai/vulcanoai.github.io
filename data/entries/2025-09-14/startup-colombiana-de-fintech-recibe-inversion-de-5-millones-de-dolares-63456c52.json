@@ -1,14 +1,15 @@
 {
-  "id": "https://www.elespectador.com/economia/startup-colombiana-finTechCol-recibe-inversion-de-5-millones/",
+  "id": "https://www.larepublica.co/empresas/startup-fintechcol-recibe-inversion-de-5-millones-2023",
   "title": "Startup colombiana de fintech recibe inversión de 5 millones de dólares",
   "summary": "La empresa bogotana FinTechCol logra cerrar una ronda de inversión Serie A para expandir sus servicios de pagos digitales en América Latina.",
-  "url": "https://www.elespectador.com/economia/startup-colombiana-finTechCol-recibe-inversion-de-5-millones/",
-  "source": "El Espectador",
-  "source_url": "https://www.elespectador.com",
+  "url": "https://www.larepublica.co/empresas/startup-fintechcol-recibe-inversion-de-5-millones-2023",
+  "source": "La República",
+  "source_url": "https://www.larepublica.co",
   "country": "Colombia",
   "topics": [
     "Startups",
-    "Fintech"
+    "Fintech",
+    "Inversión"
   ],
   "language": "es",
   "published_at": "2023-10-25T16:00:00Z",
@@ -17,5 +18,5 @@
   "author": "María Gómez",
   "curator": "Luciano AI",
   "generated_at": "2025-09-14T10:01:12.040Z",
-  "date": "2025-09-13"
+  "date": "2025-09-14"
 }
