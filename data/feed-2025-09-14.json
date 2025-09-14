@@ -1,5 +1,7 @@
 {
   "version": "v1.0",
+  "generated_at": "2025-09-14T06:01:09.573Z",
+  "date": "2025-09-14",
   "articles": [
     {
       "id": "https://www.excelsior.com.mx/nacional/mexico-regulacion-criptomonedas-lavado-dinero/1612345",
@@ -252,6 +254,25 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://www.eluniversal.com.mx/nacion/mexico-aprueba-ley-para-regular-plataformas-digitales",
+      "title": "México aprueba nueva ley para regular plataformas digitales",
+      "summary": "El Congreso de México ha aprobado una legislación que busca regular el funcionamiento de plataformas digitales, con énfasis en la protección de datos y la transparencia de algoritmos.",
+      "url": "https://www.eluniversal.com.mx/nacion/mexico-aprueba-ley-para-regular-plataformas-digitales",
+      "source": "El Universal",
+      "source_url": "https://www.eluniversal.com.mx",
+      "country": "México",
+      "topics": [
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T14:30:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Juan Pérez",
+      "curator": "Luciano AI"
+    },
+    {
       "id": "https://www.eluniversal.com.mx/tech/mexico-aprueba-ley-regulacion-plataformas-digitales",
       "title": "México aprueba nueva ley para regular plataformas digitales",
       "summary": "El gobierno mexicano ha aprobado una legislación que busca regular las operaciones de plataformas digitales, con un enfoque en la protección de datos y la competencia justa.",
@@ -311,6 +332,25 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://www.eltiempo.com/economia/empresas/startup-colombiana-de-fintech-recibe-inversion-millonaria-2023",
+      "title": "Startup colombiana de fintech recibe inversión millonaria",
+      "summary": "Una startup de tecnología financiera en Bogotá ha asegurado una ronda de inversión de 5 millones de dólares para expandir sus operaciones en América Latina.",
+      "url": "https://www.eltiempo.com/economia/empresas/startup-colombiana-de-fintech-recibe-inversion-millonaria-2023",
+      "source": "El Tiempo",
+      "source_url": "https://www.eltiempo.com",
+      "country": "Colombia",
+      "topics": [
+        "Startups",
+        "Fintech"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T12:15:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "María Gómez",
+      "curator": "Luciano AI"
+    },
+    {
       "id": "https://g1.globo.com/economia/noticia/2023/10/05/brasil-debate-incentivos-startups-tecnologicas.ghtml",
       "title": "Brasil debate nuevas políticas de incentivos para startups tecnológicas",
       "summary": "El gobierno brasileño está discutiendo un paquete de incentivos fiscales para startups tecnológicas, con el fin de posicionar al país como un hub de innovación en América Latina.",
@@ -346,6 +386,25 @@
       "published_at": "2023-10-05T12:00:00Z",
       "relevance": 9,
       "sentiment": "positive",
+      "author": "Carlos Silva",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.folha.uol.com.br/poder/2023/10/brasil-debate-novas-politicas-de-ciberseguranca.shtml",
+      "title": "Brasil debate nuevas políticas de ciberseguridad",
+      "summary": "El gobierno brasileño discute un proyecto de ley para fortalecer la ciberseguridad en instituciones públicas y privadas tras recientes ataques digitales.",
+      "url": "https://www.folha.uol.com.br/poder/2023/10/brasil-debate-novas-politicas-de-ciberseguranca.shtml",
+      "source": "Folha de S.Paulo",
+      "source_url": "https://www.folha.uol.com.br",
+      "country": "Brasil",
+      "topics": [
+        "Regulación",
+        "Ciberseguridad"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-05T10:00:00Z",
+      "relevance": 9,
+      "sentiment": "neutral",
       "author": "Carlos Silva",
       "curator": "Luciano AI"
     }
