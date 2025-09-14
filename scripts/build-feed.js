@@ -14,6 +14,7 @@
  *   - data/entries/YYYY-MM-DD/*.json (per-article trace files, today only)
  */
 const fs = require('fs');
+const { URL } = require('url');
 const fsp = fs.promises;
 const path = require('path');
 
@@ -50,6 +51,83 @@ function shortHash(s){
   let h = 0; s = (s||'').toString();
   for (let i=0;i<s.length;i++){ h=((h<<5)-h) + s.charCodeAt(i); h|=0; }
   return ('00000000'+(h>>>0).toString(16)).slice(-8);
+}
+
+function hostnameOf(u){
+  try { const h = new URL(u).hostname.toLowerCase(); return h.startsWith('www.') ? h.slice(4) : h; } catch { return ''; }
+}
+
+function canonicalizeUrl(u){
+  try{
+    const x = new URL(u);
+    // Drop tracking params
+    const drop = new Set(['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','fbclid','mc_cid','mc_eid']);
+    for (const k of Array.from(x.searchParams.keys())){ if (drop.has(k.toLowerCase())) x.searchParams.delete(k); }
+    return x.origin + x.pathname + (x.search ? ('?'+x.searchParams.toString()) : '');
+  }catch{ return u; }
+}
+
+const STOPWORDS = new Set(['de','del','la','el','los','las','en','y','para','por','un','una','unos','unas','con','sobre','se','al','lo','a','que','su','sus','es','ai','ia']);
+function normalizeTitle(t){
+  return (t||'').toString()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .toLowerCase().replace(/[^a-z0-9\s]+/g,' ')
+    .replace(/\s+/g,' ').trim();
+}
+function titleKey(t){
+  const norm = normalizeTitle(t);
+  const toks = norm.split(' ').filter(w => w && !STOPWORDS.has(w) && w.length>=3);
+  return toks.slice(0,10).join(' ');
+}
+
+async function loadAllowedHosts(){
+  try{
+    const src = await readJSON(path.join(DATA_DIR, 'sources.json'));
+    const set = new Set();
+    for (const s of (Array.isArray(src)?src:[])){
+      const h = hostnameOf(s.url||''); if (h) set.add(h);
+    }
+    return set;
+  }catch(_){ return new Set(); }
+}
+
+function isAllowedHost(u, allow){
+  const h = hostnameOf(u); if (!h) return false;
+  if (!allow || !allow.size) return true; // if no list, allow all
+  if (allow.has(h)) return true;
+  // subdomain suffix match
+  for (const a of allow){ if (h===a || h.endsWith('.'+a)) return true; }
+  return false;
+}
+
+async function verifyLinks(items, { maxConcurrent=10, timeoutMs=8000 }={}){
+  const out = [];
+  let i = 0;
+  const worker = async () => {
+    while (i < items.length){
+      const idx = i++;
+      const a = items[idx];
+      let ok = false, finalUrl = a.url;
+      try{
+        const ctrl = new AbortController();
+        const t = setTimeout(()=>ctrl.abort(), timeoutMs);
+        let res = await fetch(a.url, { method:'HEAD', redirect:'follow', signal: ctrl.signal });
+        if (!res.ok || (res.status >= 400)){
+          // Some sites don't support HEAD; try GET with small size
+          const ctrl2 = new AbortController();
+          const t2 = setTimeout(()=>ctrl2.abort(), timeoutMs);
+          res = await fetch(a.url, { method:'GET', redirect:'follow', signal: ctrl2.signal });
+          clearTimeout(t2);
+        }
+        if (res.ok && res.status < 400){ ok = true; finalUrl = res.url || a.url; }
+        clearTimeout(t);
+      }catch(_){ ok = false; }
+      if (ok){ out.push({ ...a, url: finalUrl }); }
+    }
+  };
+  const workers = Array.from({length: Math.min(maxConcurrent, Math.max(1, items.length))}, ()=>worker());
+  await Promise.all(workers);
+  return out;
 }
 
 async function listRunFiles(){
@@ -118,16 +196,30 @@ function normalizeArticle(a){
 }
 
 function dedupeArticles(arr){
-  const seen = new Set();
-  const out = [];
+  // Pass 1: by canonical URL
+  const seenUrl = new Set();
+  const tmp = [];
   for (const a of arr){
-    const key = a.url || a.id;
+    const key = canonicalizeUrl(a.url || a.id || '');
     if (!key) continue;
-    if (seen.has(key)) continue;
-    seen.add(key);
-    out.push(a);
+    if (seenUrl.has(key)) continue;
+    seenUrl.add(key);
+    tmp.push({ ...a, url: key });
   }
-  return out;
+  // Pass 2: by (host + titleKey) keep most recent
+  const best = new Map();
+  for (const a of tmp){
+    const host = hostnameOf(a.url);
+    const tk = titleKey(a.title);
+    if (!host || !tk) { best.set(shortHash(a.url||a.id||a.title||''), a); continue; }
+    const k = host + '|' + tk;
+    const prev = best.get(k);
+    if (!prev){ best.set(k, a); continue; }
+    const at = new Date(a.published_at).getTime();
+    const pt = new Date(prev.published_at).getTime();
+    best.set(k, (isFinite(at) && isFinite(pt) && at>pt) ? a : prev);
+  }
+  return Array.from(best.values());
 }
 
 function groupCounts(arr, key){
@@ -171,8 +263,28 @@ async function build(){
     for (const a of (r.articles||[])) mergedRaw.push(normalizeArticle(a));
   }
   for (const a of indie){ mergedRaw.push(normalizeArticle(a)); }
-  const merged = dedupeArticles(mergedRaw)
+  let merged = dedupeArticles(mergedRaw)
     .sort((x,y)=> new Date(y.published_at) - new Date(x.published_at));
+
+  // Reliability filters: recent items, valid URL, allowed host, live link
+  const nowMs = Date.now();
+  const MAX_AGE_MS = Number(process.env.FEED_MAX_AGE_DAYS || 180) * 24*3600*1000;
+  const allow = await loadAllowedHosts();
+  merged = merged.filter(a => {
+    const u = (a.url||'').trim();
+    if (!/^https?:\/\//i.test(u)) return false;
+    if (!isAllowedHost(u, allow)) return false;
+    const ts = new Date(a.published_at).getTime();
+    if (!isFinite(ts)) return false;
+    if (nowMs - ts > MAX_AGE_MS) return false;
+    return true;
+  });
+  // Live link check (Network). Skip if disabled via env.
+  if (process.env.VERIFY_LINKS !== '0'){
+    const before = merged.length;
+    merged = await verifyLinks(merged, { maxConcurrent: 8, timeoutMs: 8000 });
+    log(`Verified links: ${merged.length}/${before} alive`);
+  }
 
   const now = new Date();
   const nowISO = now.toISOString();
@@ -241,6 +353,48 @@ async function build(){
     ok: true
   });
   log('Updated status.json');
+
+  // Story aggregation: cluster by normalized title across hosts
+  function buildStories(items){
+    const clusters = new Map();
+    for (const a of items){
+      const key = titleKey(a.title);
+      if (!key) continue;
+      const host = hostnameOf(a.url);
+      const src = { source: a.source || host, host, url: a.url, published_at: a.published_at };
+      if (!clusters.has(key)){
+        clusters.set(key, { key, title: a.title, summary: a.summary || '', topics: new Set(a.topics||[]), countries: new Set([a.country||'Regional']), language: a.language||'es', first_at: a.published_at, last_at: a.published_at, sources: [src] });
+      } else {
+        const c = clusters.get(key);
+        c.sources.push(src);
+        (a.topics||[]).forEach(t=> c.topics.add(t));
+        c.countries.add(a.country||'Regional');
+        const at = new Date(a.published_at).getTime();
+        const f = new Date(c.first_at).getTime();
+        const l = new Date(c.last_at).getTime();
+        if (isFinite(at) && (!isFinite(f) || at<f)) c.first_at = a.published_at;
+        if (isFinite(at) && (!isFinite(l) || at>l)) c.last_at = a.published_at;
+      }
+    }
+    const stories = Array.from(clusters.values()).map(s => ({
+      key: s.key,
+      title: s.title,
+      summary: s.summary,
+      topics: Array.from(s.topics),
+      countries: Array.from(s.countries),
+      language: s.language,
+      first_at: s.first_at,
+      last_at: s.last_at,
+      sources: s.sources.sort((x,y)=> new Date(y.published_at)-new Date(x.published_at))
+    })).sort((x,y)=> new Date(y.last_at) - new Date(x.last_at));
+    return stories;
+  }
+
+  const stories = buildStories(merged);
+  await writeJSON(path.join(INDEX_DIR, 'stories.json'), { version:'v1.0', generated_at: nowISO, count: stories.length, stories: stories.slice(0, 500) });
+  // Today’s stories snapshot
+  const today = todayUTC();
+  await writeJSON(path.join(DATA_DIR, 'stories', `${today}.json`), { version:'v1.0', date: today, generated_at: nowISO, stories });
 
   // Entries for today: index + per-article files
   // Entries for all days (index + per-article files)

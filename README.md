@@ -1,43 +1,75 @@
-# Vulcano Ai — Estructura base del sitio
+# Vulcano AI — Plataforma de noticias IA para LATAM
 
-Sitio estático en español para coordinar y visualizar un canal de noticias del ecosistema de IA en América Latina. Incluye:
+Estado: Producción activa. Este repositorio contiene el sitio estático (GitHub Pages), los artefactos de datos (`/data`) y los flujos n8n usados para automatizar el feed y sociales.
 
-- Página principal con feed y filtros por país/tema/fuente
-- Páginas de Agentes (estado de pipelines) y Fuentes (metodología)
-- Páginas nuevas: Panorama (categorías y automatización) y Observatorio legal
-- Envíos independientes con formulario + PR a GitHub
- - Página “Qué es Vulcano AI” con historia, colaboración y entidad legal
- - Canal de WhatsApp y redes para actualizaciones
-- Datos de ejemplo (`/data`) y configuración cliente (`/assets/js/config.js`)
+• Frontend: HTML/CSS/JS puro (sin dependencias externas)
+• Datos: JSON versionados en `data/` (abiertos y reproducibles)
+• Automatización: n8n publica y consolida contenido; scripts locales y CI generan índices y snapshots
 
-## Estructura
+## Arquitectura
+
+```
+[Fuentes RSS/Agentes] → [n8n Autopilots] → [Commits a /data] → [CI build-feed] → [GitHub Pages] → [Frontend]
+```
+
+- n8n obtiene, clasifica (Grok/LLMs), deduplica y publica JSON a este repo (vía API GitHub).
+- `scripts/build-feed.js` consolida y genera `feed-latest.json`, `feed-YYYY-MM-DD.json`, índices y trazabilidad por artículo en `entries/`.
+- El sitio lee `data/feed-latest.json` con fallback inteligente a snapshots recientes.
+
+## Estructura del repositorio
 
 ```
 index.html
-pages/
-  noticias.html
-  agentes.html
-  fuentes.html
-  acerca.html
-  legal/
-    privacidad.html
-    terminos.html
-assets/
-  css/styles.css
-  js/{config.js,feed.js,app.js}
-  icons.svg
-  img/{favicon.svg}
-data/
-  sample-feed.json
-  agents.json
-  sources.json
-  panorama.json
-  legal-sample.json
+assets/js/{config.js, app.js, feed.js, logo.js}
+assets/css/styles.css
+pages/*.html (noticias, archivo, agentes, fuentes, observatorio, etc.)
+data/ (feed-latest.json, feed-YYYY-MM-DD.json, runs/, entries/, index/, sources.json, agents.json)
+n8n/workflows/*.json (producción, tests y borradores)
+scripts/ (build-feed.js, validadores, backfill, hooks)
+docs/ (pipeline, layouts, guías de workflows)
 ```
+
+## Datos y archivos generados
+
+Generados por CI/script (`scripts/build-feed.js`):
+
+- `data/feed-latest.json` — Feed consolidado (ordenado por `published_at`).
+- `data/feed-YYYY-MM-DD.json` — Snapshot diario por fecha de descubrimiento.
+- `data/index/by-country.json`, `by-topic.json`, `by-source.json` — Agregaciones.
+- `data/index/catalog.json` — Días disponibles.
+- `data/index/runs.json` — Manifest de ejecuciones.
+- `data/index/status.json` — Estado/frescura del feed.
+- `data/stories/YYYY-MM-DD.json` y `data/index/stories.json` — Agrupación por historias.
+- `data/entries/YYYY-MM-DD/index.json` y `data/entries/YYYY-MM-DD/*.json` — Trazabilidad por artículo y día.
+
+Entradas (insumos que se editan/añaden): `data/runs/*.json` (agentes), `data/indie/*.json` (envíos independientes).
+
+Esquemas: ver `docs/schemas/*.json` y contratos en `docs/DATA_LAYOUT.md`.
+
+## Workflows n8n en producción
+
+Carpeta: `n8n/workflows/`
+
+- `PRODUCTION_FEED_NEWS_AUTOPILOT.json` — Pipeline de noticias (ingestión RSS, clasificación, publicación a GitHub).
+- `PRODUCTION_SOCIAL_AUTOPILOT.json` — Publicaciones sociales con pulido/validación.
+- `PRODUCTION_SOCIAL_WEEKLY_REPORT.json` — Resumen semanal por temas/países.
+- Borradores/tests: `DRAFT_SOCIALMEDIA_LEGACY.json`, `SOCIALMEDIA_*_TEST_vYYYYMMDD-HHMM.json`.
+
+Normas y ciclo de vida: `docs/N8N_WORKFLOW_GUIDELINES.md` y `n8n/README.md`.
+
+## Configuración del sitio (cliente)
+
+Archivo: `assets/js/config.js` (`window.AILatamConfig`).
+
+- `api.feedUrl`: por defecto `/data/feed-latest.json` (CORS no requerido en Pages).
+- Opcional: `indieSubmitUrl`, `searchAgentUrl`, `updateTriggerUrl` para integrar webhooks n8n o serverless.
+- Otras fuentes: `agentsUrl`, `sourcesUrl`, `panoramaUrl`, `legalUrl`.
+
+La UI intenta: latest → snapshots diarios (últimos 7+ días) → muestra data de ejemplo si todo falla.
 
 ## Ejecutar localmente
 
-Usa cualquier servidor estático. Ejemplos:
+Servidor estático (cualquiera):
 
 ```
 python3 -m http.server 8080
@@ -45,159 +77,53 @@ python3 -m http.server 8080
 npx serve .
 ```
 
-Abre http://localhost:8080
+Abrir `http://localhost:8080`.
 
-## Integración con n8n
+Reconstruir datos localmente (opcionales):
 
-El sitio cliente carga el feed desde `window.AILatamConfig.api.feedUrl` (ver `assets/js/config.js`). Por defecto apunta a `/data/feed-latest.json`.
-
-1. Expón un endpoint n8n que devuelva JSON de artículos (CORS habilitado).
-2. Actualiza `feedUrl` para apuntar a tu webhook o a un archivo JSON en S3/Cloud Storage/CDN.
-
-Para envíos independientes (formulario), configura un webhook en `AILatamConfig.api.indieSubmitUrl` que reciba POST JSON. Si no está configurado, el sitio mostrará la ruta de Pull Request como alternativa principal.
-
-### Esquema esperado del artículo
-
-```json
-{
-  "id": "string",
-  "title": "string",
-  "summary": "string",
-  "url": "https://...",
-  "source": "string",
-  "source_url": "https://...",
-  "country": "México | Colombia | ... | Regional",
-  "topics": ["Startups", "Inversión"],
-  "language": "es|pt|en",
-  "published_at": "ISO-8601",
-  "image_url": "https://...",
-  "relevance": 0,
-  "sentiment": "positive|neutral|negative",
-  "author": "string"
-}
+```
+VULCANO_ALLOW_LOCAL_DATA_WRITE=1 node scripts/build-feed.js
+# Variables útiles:
+#   FEED_MAX_AGE_DAYS=180  (filtrado por antigüedad)
+#   VERIFY_LINKS=0         (desactivar verificación HTTP de enlaces)
 ```
 
-La API también puede devolver `{ items: [...] }` o `{ articles: [...] }` y será interpretada.
+Guía completa de deployment y webhooks: `DEPLOYMENT.md`.
 
-### Flujo sugerido en n8n
+## Integración n8n
 
-- Cron (cada 10 min)
-- Rastrear RSS (múltiples) y Scrapers (prensa/reguladores)
-- Clasificar (tema/país/idioma) → deduplicar → resumen → sentimiento
-- Ordenar por `published_at` y `relevance`
-- Publicar JSON en S3/CDN (e.g. `feed.json`) o responder por webhook
+Guías detalladas: `N8N_SETUP.md` y `N8N_INTEGRATION.md`.
 
-Para el tablero de agentes, publica `agents.json` con:
+- El workflow estable publica: `data/runs/`, `data/entries/YYYY-MM-DD/`, `data/feed-latest.json`, `data/feed-YYYY-MM-DD.json` e índices.
+- Requiere credenciales en n8n (Grok/X.AI, GitHub, etc.). No hay secretos en este repo.
+- Naming y promoción de builds: ver `n8n/README.md`.
 
-```json
-{
-  "nombre": "Rastreador RSS",
-  "estado": "Activo|Pausado|Fallo",
-  "ultimo_ejecucion": "ISO-8601",
-  "throughput": 120,
-  "notas": "string"
-}
-```
+## Seguridad y buenas prácticas
 
-Y para fuentes, `sources.json` con `{ nombre, url, pais, tipo }`.
+- Sin claves en el cliente; secretos viven en credenciales de n8n / variables de entorno.
+- CSP estricta en HTML; si usas endpoints externos, añade su origen a `connect-src`.
+- `scripts/build-feed.js` escribe de forma idempotente y atómica; CI evita solapes con `concurrency`.
+- Preferir PRs generados por agentes sobre escrituras directas a `main` para trazabilidad.
 
-### Observatorio legal (propuesta)
+Más en `SECURITY.md` y `docs/DATA_PIPELINE.md` (seguridad de concurrencia y contratos de datos).
 
-Publicar `legal.json` con el siguiente esquema mínimo:
+## Documentación relacionada
 
-```json
-{
-  "pais": "Brasil",
-  "titulo": "PL 2338/2023 — Marco de IA",
-  "estado": "Borrador|Debate|Aprobado|Reglamentación|Consulta",
-  "fecha": "ISO-8601",
-  "url": "https://…",
-  "resumen": "texto breve",
-  "organismo": "Senado|Ministerio|Agencia",
-  "temas": ["riesgo", "transparencia", "deepfakes"]
-}
-```
+- `docs/DATA_LAYOUT.md` — Contrato y distribución de archivos en `data/`.
+- `docs/DATA_PIPELINE.md` — Flujo de consolidación, entradas vs. generados y CI.
+- `docs/WORKFLOW_DEBUG007.md` — Notas del workflow estable.
+- `docs/LOCAL_DEV_DATA.md` — Guardas para no versionar data generada en dev.
+- `n8n/README.md` — Normas de workflows, nombres y promoción a producción.
 
-Sugerencias de agentes: rastreadores por país (Senado/Cámara, diarios oficiales), alertas de palabras clave, deduplicación y normalización de estados.
+## Canales y soporte
 
-### Panorama (categorías)
+- WhatsApp: `https://wa.me/573193620926`
+- X/Twitter: `https://x.com/VulcanoAi`
+- LinkedIn: `https://www.linkedin.com/company/vulcano-ai/`
 
-`panorama.json` describe categorías, elementos clave y fuentes/automatización. Los agentes pueden actualizarlo o generar variantes por país.
+—
 
-### Envíos independientes
-
-- Página: `pages/independiente.html`
-- Formulario envía JSON a `api.indieSubmitUrl` con: `{ tipo:"independiente", title, author, email, country, topics[], url, summary, license, agreement }`.
-- Alternativa: Pull Request al repo `vulcanoai/vulcanoai.github.io` creando archivos en `submissions/independiente/AAAA-MM/*.json`.
-
-## Notas de mantenimiento asistido por IA
-
-- Los archivos JS incluyen comentarios "TODO" y puntos de extensión.
-- Mantener consistencia en campos y normalizadores (ver `assets/js/feed.js`).
-- Si se crece, considerar un generador estático (Eleventy, Astro) para reusar layouts.
-
-## Marca y contenido
-
-- Sin fotografías/stock. La UI usa iconos en `assets/icons.svg` (heredan `currentColor`).
-- Cambia favicon en `assets/img/`
-- Ajusta colores en `assets/css/styles.css`
-- Edita textos de navegación y footer en cada HTML
-- Línea legal usada en footer: “Vulcano Ai Digital Solutions S.A.S - 2025 Todos los derechos reservados”
-
-### Logo oficial (wireframe)
-
-El logo de Vulcano Ai es una esfera de alambre generada por código, con una “firma” determinística que la hace reproducible en cualquier visualización vectorial.
-
-- Parámetros (firma): `R=140`, `latitudes=0` (sin ejes horizontales), `longitudes=12`, `rotaciones=[0°,30°,60°]`, trazo `#ff5a2a`.
-- Símbolo SVG listo para usar: `<svg class="logo"><use href="/assets/icons.svg#logo"/></svg>` (naranja por `--logo`).
-- Generador JS para render dinámico y responsive: `assets/js/logo.js`.
-
-Uso rápido (inline):
-
-```html
-<svg class="logo" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>
-```
-
-Uso por código (recomendado para tamaños variables):
-
-```html
-<div id="my-orb"></div>
-<script src="/assets/js/logo.js"></script>
-<script>
-  // Dibuja el logo con la firma oficial
-  VulcanoLogo.drawWireSphere(document.getElementById('my-orb'), {
-    radius: 120,        // ajusta tamaño
-    lats: 0,            // sin latitudes horizontales
-    lons: 12,
-    rotations: [0,30,60]
-  });
-</script>
-```
-
-Nota: el color se controla con la CSS variable `--logo` (por defecto `#ff5a2a`).
-
-## SEO básico
-
-- Define `og:image` en `index.html` (puedes usar un SVG ligero `assets/img/og-banner.svg`)
-- Opcional: agrega `sitemap.xml` y `robots.txt`
-
-## Licencias y fuentes
-
-Este repositorio no incluye contenido de terceros. Al enlazar artículos, respeta derechos y licencias de cada medio.
-
-## Modelo de publicación y seguridad
-
-- Sitio estático, sin claves en el cliente. Secretos viven en n8n.
-- Por defecto, el cliente solo lee `data/*.json` incluidos en el repo (resultado de PRs aprobados).
-- Opcional: usar un CDN de solo lectura para `feedUrl`/`legalUrl`/`panoramaUrl`. Restringe CORS al dominio del sitio.
-- CSP estricta en HTML: si apuntas a endpoints externos, añade su origen a `connect-src`.
-- Recomendado: que n8n cree PRs con cambios de datos (para revisión y trazabilidad) en lugar de publicar directo.
-
-Consulta `SECURITY.md` para detalles y práctica recomendada.
-
-## Canales de actualización
-
-- WhatsApp: +57 319 362 0926 — abre `https://wa.me/573193620926` y escribe “ALTA DIARIO” o “ALTA SEMANAL”.
+Mantenido por Vulcano Ai Digital Solutions S.A.S. 2025.
 - Instagram: https://instagram.com/vulcanoai.solutions
 - X (Twitter): https://x.com/VulcanoAi
 - LinkedIn: https://www.linkedin.com/company/vulcano-ai/
