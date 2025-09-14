@@ -1,10 +1,10 @@
 {
   "version": "v1.0",
-  "generated_at": "2025-09-14T08:15:31.067Z",
+  "generated_at": "2025-09-14T09:01:08.154Z",
   "byTopic": {
-    "Regulación": 67,
-    "Tecnología": 56,
-    "Startups": 50,
+    "Regulación": 69,
+    "Tecnología": 57,
+    "Startups": 51,
     "Fintech": 16,
     "Ciberseguridad": 14,
     "Sostenibilidad": 11,
@@ -18,18 +18,19 @@
     "Privacidad": 4,
     "Pymes": 4,
     "Gobierno": 3,
+    "Movilidad": 3,
     "Economía": 3,
     "Salud Digital": 3,
     "Logística": 3,
     "PYMES": 2,
     "Datos": 2,
-    "Movilidad": 2,
     "Finanzas": 2,
     "Gobierno Digital": 2,
     "Infraestructura": 2,
     "Tecnología Verde": 2,
     "AgroTech": 2,
     "Financiamiento": 2,
+    "E-commerce": 2,
     "Streaming": 1,
     "Inclusión Digital": 1,
     "Agritech": 1,
@@ -41,7 +42,6 @@
     "EdTech": 1,
     "Capacitación": 1,
     "Healthtech": 1,
-    "E-commerce": 1,
     "IA": 1
   }
 }
