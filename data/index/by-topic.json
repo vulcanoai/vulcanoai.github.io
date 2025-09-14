@@ -1,11 +1,11 @@
 {
   "version": "v1.0",
-  "generated_at": "2025-09-14T22:11:25.581Z",
+  "generated_at": "2025-09-14T23:01:14.703Z",
   "byTopic": {
     "Regulación": 86,
     "Tecnología": 74,
-    "Startups": 63,
-    "Fintech": 22,
+    "Startups": 64,
+    "Fintech": 23,
     "Sostenibilidad": 14,
     "Criptomonedas": 14,
     "Ciberseguridad": 14,
@@ -14,7 +14,7 @@
     "Inteligencia Artificial": 9,
     "Edtech": 8,
     "Inversión": 7,
-    "Innovación": 6,
+    "Innovación": 7,
     "Economía": 4,
     "Gobierno": 4,
     "Privacidad": 4,
@@ -31,7 +31,6 @@
     "AgroTech": 2,
     "Financiamiento": 2,
     "E-commerce": 2,
-    "IA": 2,
     "Inflación": 1,
     "Agricultura": 1,
     "Inversiones": 1,
@@ -46,6 +45,7 @@
     "Movilidad Sostenible": 1,
     "EdTech": 1,
     "Capacitación": 1,
-    "Healthtech": 1
+    "Healthtech": 1,
+    "IA": 1
   }
 }

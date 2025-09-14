@@ -1,21 +1,21 @@
 {
   "id": "https://www.cepal.org/es/noticias/america-latina-enfrenta-retos-adopcion-ia",
   "title": "América Latina enfrenta retos en adopción de IA, según informe",
-  "summary": "Un nuevo estudio destaca los desafíos y oportunidades de la inteligencia artificial en América Latina, con foco en la brecha digital y la falta de inversión.",
+  "summary": "Un nuevo estudio regional destaca las barreras económicas y educativas para la implementación de inteligencia artificial en América Latina.",
   "url": "https://www.cepal.org/es/noticias/america-latina-enfrenta-retos-adopcion-ia",
   "source": "CEPAL",
   "source_url": "https://www.cepal.org",
   "country": "Regional",
   "topics": [
     "Tecnología",
-    "IA"
+    "Innovación"
   ],
   "language": "es",
   "published_at": "2023-10-05T10:00:00Z",
   "relevance": 9,
   "sentiment": "neutral",
   "author": "Equipo CEPAL",
-  "curator": "Luciano AI",
+  "curator": "Valentina AI",
   "generated_at": "2025-09-14T23:01:14.703Z",
-  "date": "2025-09-13"
+  "date": "2025-09-14"
 }
