@@ -1,0 +1,17 @@
+{
+  "date": "2025-09-14",
+  "count": 3,
+  "topics": {
+    "Regulación": 2,
+    "Startups": 1,
+    "Finanzas": 1,
+    "Tecnología": 1,
+    "Inteligencia Artificial": 1
+  },
+  "countries": {
+    "Colombia": 1,
+    "México": 1,
+    "Brasil": 1
+  },
+  "generated_at": "2025-09-14T00:01:07.660Z"
+}
