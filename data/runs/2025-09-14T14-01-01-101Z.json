@@ -1,0 +1,65 @@
+{
+  "version": "v1.0",
+  "articles": [
+    {
+      "id": "https://www.eluniversal.com.mx/tech/nueva-ley-de-tecnologia-busca-regular-plataformas-digitales-en-mexico",
+      "title": "Nueva ley de tecnología en México busca regular plataformas digitales",
+      "summary": "El Congreso mexicano discute una reforma para regular las plataformas digitales, con énfasis en la protección de datos y la transparencia de algoritmos.",
+      "url": "https://www.eluniversal.com.mx/tech/nueva-ley-de-tecnologia-busca-regular-plataformas-digitales-en-mexico",
+      "source": "El Universal",
+      "source_url": "https://www.eluniversal.com.mx",
+      "country": "México",
+      "topics": [
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T14:30:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Juan Pérez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.larepublica.co/empresas/startup-colombiana-de-fintech-recibe-inversion-millonaria-2023",
+      "title": "Startup colombiana de fintech recibe inversión millonaria",
+      "summary": "Una startup de tecnología financiera en Bogotá cerró una ronda de inversión de 5 millones de dólares para expandir sus operaciones en América Latina.",
+      "url": "https://www.larepublica.co/empresas/startup-colombiana-de-fintech-recibe-inversion-millonaria-2023",
+      "source": "La República",
+      "source_url": "https://www.larepublica.co",
+      "country": "Colombia",
+      "topics": [
+        "Startups",
+        "Fintech"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T12:15:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "María Gómez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://g1.globo.com/tecnologia/noticia/brasil-lidera-adocao-de-inteligencia-artificial-na-america-latina.ghtml",
+      "title": "Brasil lidera adopción de inteligencia artificial en la región",
+      "summary": "Un informe reciente destaca a Brasil como el país con mayor implementación de IA en sectores como agricultura y salud en América Latina.",
+      "url": "https://g1.globo.com/tecnologia/noticia/brasil-lidera-adocao-de-inteligencia-artificial-na-america-latina.ghtml",
+      "source": "G1 Globo",
+      "source_url": "https://g1.globo.com",
+      "country": "Brasil",
+      "topics": [
+        "Inteligencia Artificial",
+        "Tecnología"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-05T10:45:00Z",
+      "relevance": 9,
+      "sentiment": "positive",
+      "author": "Ana Silva",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-14T14:00:57.985Z",
+  "params": {}
+}
