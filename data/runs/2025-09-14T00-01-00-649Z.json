@@ -1,0 +1,65 @@
+{
+  "version": "v1.0",
+  "articles": [
+    {
+      "id": "https://www.eluniversal.com.mx/nacion/mexico-aprueba-ley-de-ciberseguridad-para-datos-personales",
+      "title": "México aprueba nueva ley de ciberseguridad para proteger datos personales",
+      "summary": "El Congreso de México aprobó una reforma que fortalece la protección de datos personales en plataformas digitales, buscando reducir el riesgo de ciberataques en el país.",
+      "url": "https://www.eluniversal.com.mx/nacion/mexico-aprueba-ley-de-ciberseguridad-para-datos-personales",
+      "source": "El Universal",
+      "source_url": "https://www.eluniversal.com.mx",
+      "country": "México",
+      "topics": [
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T14:30:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Juan Pérez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.eltiempo.com/economia/empresas/startup-colombiana-fintechpro-recibe-inversion-de-5-millones-823456",
+      "title": "Startup colombiana de fintech recibe inversión millonaria",
+      "summary": "La startup colombiana FinTechPro aseguró una ronda de financiación de 5 millones de dólares para expandir sus servicios de pagos digitales en América Latina.",
+      "url": "https://www.eltiempo.com/economia/empresas/startup-colombiana-fintechpro-recibe-inversion-de-5-millones-823456",
+      "source": "El Tiempo",
+      "source_url": "https://www.eltiempo.com",
+      "country": "Colombia",
+      "topics": [
+        "Startups",
+        "Finanzas"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T16:00:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "María Gómez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.folha.uol.com.br/poder/2023/10/brasil-propõe-regulamentacao-para-ia-no-setor-publico.shtml",
+      "title": "Brasil impulsa regulación para el uso de inteligencia artificial en el sector público",
+      "summary": "El gobierno brasileño presentó un proyecto de ley para regular el uso ético de la inteligencia artificial en servicios públicos, con énfasis en transparencia y privacidad.",
+      "url": "https://www.folha.uol.com.br/poder/2023/10/brasil-propõe-regulamentacao-para-ia-no-setor-publico.shtml",
+      "source": "Folha de S.Paulo",
+      "source_url": "https://www.folha.uol.com.br",
+      "country": "Brasil",
+      "topics": [
+        "Regulación",
+        "Inteligencia Artificial"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-25T12:15:00Z",
+      "relevance": 9,
+      "sentiment": "neutral",
+      "author": "Carlos Silva",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-14T00:00:58.611Z",
+  "params": {}
+}
