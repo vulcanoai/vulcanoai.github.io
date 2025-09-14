@@ -1,6 +1,65 @@
 {
   "version": "v1.0",
+  "generated_at": "2025-09-14T12:01:09.171Z",
+  "date": "2025-09-14",
   "articles": [
+    {
+      "id": "https://www.eluniversal.com.mx/negocios/mexico-nuevas-regulaciones-fintech-2024/",
+      "title": "México impulsa nuevas regulaciones para fintech en 2024",
+      "summary": "El gobierno mexicano propone un marco regulatorio más estricto para las empresas fintech, buscando garantizar la seguridad de los usuarios y fomentar la innovación.",
+      "url": "https://www.eluniversal.com.mx/negocios/mexico-nuevas-regulaciones-fintech-2024/",
+      "source": "El Universal",
+      "source_url": "https://www.eluniversal.com.mx",
+      "country": "México",
+      "topics": [
+        "Fintech",
+        "Regulación"
+      ],
+      "language": "es",
+      "published_at": "2024-10-25T14:30:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Juan Pérez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.larepublica.co/empresas/startup-logitech-recauda-5-millones-2024",
+      "title": "Startup colombiana de logística recauda $5 millones en ronda Serie A",
+      "summary": "La empresa LogiTech, con sede en Bogotá, ha logrado una inversión significativa para expandir sus operaciones en América Latina.",
+      "url": "https://www.larepublica.co/empresas/startup-logitech-recauda-5-millones-2024",
+      "source": "La República",
+      "source_url": "https://www.larepublica.co",
+      "country": "Colombia",
+      "topics": [
+        "Startups",
+        "Inversiones"
+      ],
+      "language": "es",
+      "published_at": "2024-10-25T12:15:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "María Gómez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.folha.uol.com.br/ambiente/2024/10/brasil-ley-energias-renovables.shtml",
+      "title": "Brasil aprueba ley para incentivar energías renovables",
+      "summary": "El Congreso brasileño ha aprobado una nueva legislación que ofrece incentivos fiscales a empresas de energías renovables, buscando reducir la dependencia de combustibles fósiles.",
+      "url": "https://www.folha.uol.com.br/ambiente/2024/10/brasil-ley-energias-renovables.shtml",
+      "source": "Folha de S.Paulo",
+      "source_url": "https://www.folha.uol.com.br",
+      "country": "Brasil",
+      "topics": [
+        "Energía",
+        "Regulación"
+      ],
+      "language": "pt",
+      "published_at": "2024-10-25T10:00:00Z",
+      "relevance": 9,
+      "sentiment": "positive",
+      "author": "Carlos Silva",
+      "curator": "Luciano AI"
+    },
     {
       "id": "https://www.excelsior.com.mx/nacional/mexico-regulacion-criptomonedas-lavado-dinero/1612345",
       "title": "México avanza en regulación de criptomonedas para combatir lavado de dinero",

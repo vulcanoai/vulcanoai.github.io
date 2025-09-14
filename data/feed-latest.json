@@ -1,5 +1,6 @@
 {
   "version": "v1.0",
+  "generated_at": "2025-09-14T12:01:09.171Z",
   "articles": [
     {
       "id": "00000000",
@@ -11,10 +12,67 @@
       "country": "Regional",
       "topics": [],
       "language": "es",
-      "published_at": "2025-09-14T11:09:19.652Z",
+      "published_at": "2025-09-14T12:01:09.170Z",
       "relevance": 0,
       "sentiment": "neutral",
       "author": "",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.eluniversal.com.mx/negocios/mexico-nuevas-regulaciones-fintech-2024/",
+      "title": "México impulsa nuevas regulaciones para fintech en 2024",
+      "summary": "El gobierno mexicano propone un marco regulatorio más estricto para las empresas fintech, buscando garantizar la seguridad de los usuarios y fomentar la innovación.",
+      "url": "https://www.eluniversal.com.mx/negocios/mexico-nuevas-regulaciones-fintech-2024/",
+      "source": "El Universal",
+      "source_url": "https://www.eluniversal.com.mx",
+      "country": "México",
+      "topics": [
+        "Fintech",
+        "Regulación"
+      ],
+      "language": "es",
+      "published_at": "2024-10-25T14:30:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Juan Pérez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.larepublica.co/empresas/startup-logitech-recauda-5-millones-2024",
+      "title": "Startup colombiana de logística recauda $5 millones en ronda Serie A",
+      "summary": "La empresa LogiTech, con sede en Bogotá, ha logrado una inversión significativa para expandir sus operaciones en América Latina.",
+      "url": "https://www.larepublica.co/empresas/startup-logitech-recauda-5-millones-2024",
+      "source": "La República",
+      "source_url": "https://www.larepublica.co",
+      "country": "Colombia",
+      "topics": [
+        "Startups",
+        "Inversiones"
+      ],
+      "language": "es",
+      "published_at": "2024-10-25T12:15:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "María Gómez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.folha.uol.com.br/ambiente/2024/10/brasil-ley-energias-renovables.shtml",
+      "title": "Brasil aprueba ley para incentivar energías renovables",
+      "summary": "El Congreso brasileño ha aprobado una nueva legislación que ofrece incentivos fiscales a empresas de energías renovables, buscando reducir la dependencia de combustibles fósiles.",
+      "url": "https://www.folha.uol.com.br/ambiente/2024/10/brasil-ley-energias-renovables.shtml",
+      "source": "Folha de S.Paulo",
+      "source_url": "https://www.folha.uol.com.br",
+      "country": "Brasil",
+      "topics": [
+        "Energía",
+        "Regulación"
+      ],
+      "language": "pt",
+      "published_at": "2024-10-25T10:00:00Z",
+      "relevance": 9,
+      "sentiment": "positive",
+      "author": "Carlos Silva",
       "curator": "Luciano AI"
     },
     {
@@ -290,6 +348,25 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://g1.globo.com/economia/noticia/2023/10/25/startup-edutech-brasileira-recebe-investimento-para-expansao.ghtml",
+      "title": "Startup brasileña de edtech recibe financiación para expandirse en LATAM",
+      "summary": "EducaTech, una startup brasileña de tecnología educativa, levantó 3 millones de dólares en una ronda de inversión para llevar sus plataformas de aprendizaje a otros países de la región.",
+      "url": "https://g1.globo.com/economia/noticia/2023/10/25/startup-edutech-brasileira-recebe-investimento-para-expansao.ghtml",
+      "source": "G1 Globo",
+      "source_url": "https://g1.globo.com",
+      "country": "Brasil",
+      "topics": [
+        "Startups",
+        "Educación"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-25T14:50:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Mariana Oliveira",
+      "curator": "Luciano AI"
+    },
+    {
       "id": "https://www.folha.uol.com.br/tec/2023/10/brasil-debate-protecao-dados-apps.shtml",
       "title": "Brasil debate nuevas reglas para protección de datos en apps",
       "summary": "Legisladores brasileños discuten un proyecto para endurecer las normas de privacidad en aplicaciones móviles, tras recientes filtraciones de datos.",
@@ -307,25 +384,6 @@
       "relevance": 9,
       "sentiment": "neutral",
       "author": "Mariana Costa",
-      "curator": "Luciano AI"
-    },
-    {
-      "id": "https://g1.globo.com/economia/noticia/2023/10/25/startup-edutech-brasileira-recebe-investimento-para-expansao.ghtml",
-      "title": "Startup brasileña de edtech recibe financiación para expandirse en LATAM",
-      "summary": "EducaTech, una startup brasileña de tecnología educativa, levantó 3 millones de dólares en una ronda de inversión para llevar sus plataformas de aprendizaje a otros países de la región.",
-      "url": "https://g1.globo.com/economia/noticia/2023/10/25/startup-edutech-brasileira-recebe-investimento-para-expansao.ghtml",
-      "source": "G1 Globo",
-      "source_url": "https://g1.globo.com",
-      "country": "Brasil",
-      "topics": [
-        "Startups",
-        "Educación"
-      ],
-      "language": "pt",
-      "published_at": "2023-10-25T14:50:00Z",
-      "relevance": 7,
-      "sentiment": "positive",
-      "author": "Mariana Oliveira",
       "curator": "Luciano AI"
     },
     {
@@ -426,6 +484,25 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://www.emol.com/noticias/Economia/2023/10/25/1111234/chile-regulacion-plataformas-delivery.html",
+      "title": "Chile debate nueva regulación para plataformas de delivery",
+      "summary": "El Congreso chileno discute un proyecto de ley para regular las condiciones laborales de los trabajadores de plataformas de delivery como Rappi y Uber Eats.",
+      "url": "https://www.emol.com/noticias/Economia/2023/10/25/1111234/chile-regulacion-plataformas-delivery.html",
+      "source": "Emol",
+      "source_url": "https://www.emol.com",
+      "country": "Chile",
+      "topics": [
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T13:45:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Felipe Vargas",
+      "curator": "Luciano AI"
+    },
+    {
       "id": "https://www.emol.com/noticias/Tecnologia/2023/10/25/chile-ia-sector-publico.html",
       "title": "Chile apuesta por la inteligencia artificial en el sector público",
       "summary": "El gobierno chileno anuncia un plan para implementar soluciones de IA en la gestión pública, buscando mayor eficiencia y transparencia.",
@@ -443,25 +520,6 @@
       "relevance": 9,
       "sentiment": "positive",
       "author": "Rodrigo Silva",
-      "curator": "Luciano AI"
-    },
-    {
-      "id": "https://www.emol.com/noticias/Economia/2023/10/25/1111234/chile-regulacion-plataformas-delivery.html",
-      "title": "Chile debate nueva regulación para plataformas de delivery",
-      "summary": "El Congreso chileno discute un proyecto de ley para regular las condiciones laborales de los trabajadores de plataformas de delivery como Rappi y Uber Eats.",
-      "url": "https://www.emol.com/noticias/Economia/2023/10/25/1111234/chile-regulacion-plataformas-delivery.html",
-      "source": "Emol",
-      "source_url": "https://www.emol.com",
-      "country": "Chile",
-      "topics": [
-        "Regulación",
-        "Tecnología"
-      ],
-      "language": "es",
-      "published_at": "2023-10-25T13:45:00Z",
-      "relevance": 8,
-      "sentiment": "neutral",
-      "author": "Felipe Vargas",
       "curator": "Luciano AI"
     },
     {
@@ -1208,25 +1266,6 @@
       "curator": "Luciano AI"
     },
     {
-      "id": "https://www.eltiempo.com/economia/sectores/colombia-aprueba-marco-regulatorio-fintech-pagos-digitales-789123",
-      "title": "Colombia aprueba marco regulatorio para fintechs y pagos digitales",
-      "summary": "El gobierno colombiano establece nuevas normas para regular empresas fintech y plataformas de pagos digitales, promoviendo la inclusión financiera.",
-      "url": "https://www.eltiempo.com/economia/sectores/colombia-aprueba-marco-regulatorio-fintech-pagos-digitales-789123",
-      "source": "El Tiempo",
-      "source_url": "https://www.eltiempo.com",
-      "country": "Colombia",
-      "topics": [
-        "Regulación",
-        "Fintech"
-      ],
-      "language": "es",
-      "published_at": "2023-10-05T19:00:00Z",
-      "relevance": 8,
-      "sentiment": "neutral",
-      "author": "Camila Rodríguez",
-      "curator": "Luciano AI"
-    },
-    {
       "id": "https://www.laestrella.com.pa/nacional/231005/panama-apuesta-digitalizacion-servicios-publicos",
       "title": "Panamá apuesta por la digitalización de servicios públicos",
       "summary": "El gobierno panameño implementa un plan para digitalizar trámites gubernamentales, buscando mayor eficiencia y transparencia en la administración pública.",
@@ -1243,6 +1282,25 @@
       "relevance": 7,
       "sentiment": "positive",
       "author": "Elena Castillo",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.eltiempo.com/economia/sectores/colombia-aprueba-marco-regulatorio-fintech-pagos-digitales-789123",
+      "title": "Colombia aprueba marco regulatorio para fintechs y pagos digitales",
+      "summary": "El gobierno colombiano establece nuevas normas para regular empresas fintech y plataformas de pagos digitales, promoviendo la inclusión financiera.",
+      "url": "https://www.eltiempo.com/economia/sectores/colombia-aprueba-marco-regulatorio-fintech-pagos-digitales-789123",
+      "source": "El Tiempo",
+      "source_url": "https://www.eltiempo.com",
+      "country": "Colombia",
+      "topics": [
+        "Regulación",
+        "Fintech"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T19:00:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Camila Rodríguez",
       "curator": "Luciano AI"
     },
     {
@@ -1265,25 +1323,6 @@
       "curator": "Luciano AI"
     },
     {
-      "id": "https://www.portafolio.co/innovacion/startup-colombiana-fintech-reconocimiento-2023-123456",
-      "title": "Startup colombiana de fintech recibe reconocimiento regional",
-      "summary": "Una empresa emergente de tecnología financiera en Colombia es premiada por su innovación en soluciones de pago digital para pequeñas empresas.",
-      "url": "https://www.portafolio.co/innovacion/startup-colombiana-fintech-reconocimiento-2023-123456",
-      "source": "Portafolio",
-      "source_url": "https://www.portafolio.co",
-      "country": "Colombia",
-      "topics": [
-        "Startups",
-        "Fintech"
-      ],
-      "language": "es",
-      "published_at": "2023-10-05T18:45:00Z",
-      "relevance": 8,
-      "sentiment": "positive",
-      "author": "Andrés Pérez",
-      "curator": "Luciano AI"
-    },
-    {
       "id": "https://www.el-nacional.com/economia/venezuela-retos-pagos-digitales-2023/",
       "title": "Venezuela enfrenta retos en la adopción de pagos digitales",
       "summary": "Expertos señalan que la falta de infraestructura y la inestabilidad económica dificultan la implementación masiva de pagos digitales en Venezuela.",
@@ -1300,6 +1339,25 @@
       "relevance": 6,
       "sentiment": "negative",
       "author": "Andrea Castillo",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.portafolio.co/innovacion/startup-colombiana-fintech-reconocimiento-2023-123456",
+      "title": "Startup colombiana de fintech recibe reconocimiento regional",
+      "summary": "Una empresa emergente de tecnología financiera en Colombia es premiada por su innovación en soluciones de pago digital para pequeñas empresas.",
+      "url": "https://www.portafolio.co/innovacion/startup-colombiana-fintech-reconocimiento-2023-123456",
+      "source": "Portafolio",
+      "source_url": "https://www.portafolio.co",
+      "country": "Colombia",
+      "topics": [
+        "Startups",
+        "Fintech"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T18:45:00Z",
+      "relevance": 8,
+      "sentiment": "positive",
+      "author": "Andrés Pérez",
       "curator": "Luciano AI"
     },
     {
@@ -1570,6 +1628,25 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://www.eltiempo.com/economia/empresas/startup-colombiana-recibe-inversion-millonaria-2023",
+      "title": "Startup colombiana recibe inversión millonaria para expansión",
+      "summary": "Una startup de tecnología en Bogotá ha asegurado una ronda de financiación de 5 millones de dólares para expandir sus operaciones en América Latina.",
+      "url": "https://www.eltiempo.com/economia/empresas/startup-colombiana-recibe-inversion-millonaria-2023",
+      "source": "El Tiempo",
+      "source_url": "https://www.eltiempo.com",
+      "country": "Colombia",
+      "topics": [
+        "Startups",
+        "Inversión"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T16:45:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "María Gómez",
+      "curator": "Luciano AI"
+    },
+    {
       "id": "https://www.lanacion.com.ar/economia/argentina-nueva-ley-startups-tecnologicas-nid05102023/",
       "title": "Argentina impulsa ley para incentivar startups tecnológicas",
       "summary": "El gobierno argentino presentó un proyecto de ley para ofrecer beneficios fiscales a startups tecnológicas, buscando fomentar la innovación y atraer inversión.",
@@ -1647,25 +1724,6 @@
       "curator": "Luciano AI"
     },
     {
-      "id": "https://www.eltiempo.com/economia/empresas/startup-colombiana-recibe-inversion-millonaria-2023",
-      "title": "Startup colombiana recibe inversión millonaria para expansión",
-      "summary": "Una startup de tecnología en Bogotá ha asegurado una ronda de financiación de 5 millones de dólares para expandir sus operaciones en América Latina.",
-      "url": "https://www.eltiempo.com/economia/empresas/startup-colombiana-recibe-inversion-millonaria-2023",
-      "source": "El Tiempo",
-      "source_url": "https://www.eltiempo.com",
-      "country": "Colombia",
-      "topics": [
-        "Startups",
-        "Inversión"
-      ],
-      "language": "es",
-      "published_at": "2023-10-05T16:45:00Z",
-      "relevance": 7,
-      "sentiment": "positive",
-      "author": "María Gómez",
-      "curator": "Luciano AI"
-    },
-    {
       "id": "https://www.eltiempo.com/economia/empresas/startup-colombiana-de-fintech-recibe-inversion-de-5-millones-123456",
       "title": "Startup colombiana de fintech recibe inversión millonaria",
       "summary": "Una startup colombiana enfocada en soluciones de pago digital ha cerrado una ronda de financiación Serie A por 5 millones de dólares, liderada por un fondo internacional.",
@@ -1685,25 +1743,6 @@
       "curator": "Luciano AI"
     },
     {
-      "id": "https://www.estadao.com.br/economia/startup-brasileira-saude-digital-financiamento-2023/",
-      "title": "Startup brasileña de salud digital recibe financiación récord",
-      "summary": "Una empresa de tecnología en salud con sede en São Paulo ha obtenido una inversión de 15 millones de reales para expandir su plataforma de telemedicina en el país.",
-      "url": "https://www.estadao.com.br/economia/startup-brasileira-saude-digital-financiamento-2023/",
-      "source": "Estadão",
-      "source_url": "https://www.estadao.com.br",
-      "country": "Brasil",
-      "topics": [
-        "Startups",
-        "Salud Digital"
-      ],
-      "language": "pt",
-      "published_at": "2023-10-05T16:40:00Z",
-      "relevance": 8,
-      "sentiment": "positive",
-      "author": "João Mendes",
-      "curator": "Luciano AI"
-    },
-    {
       "id": "https://www.estadao.com.br/economia/startup-edtech-brasileira-capta-10-milhoes-para-expansao/",
       "title": "Startup brasileña de edtech capta fondos para expansión regional",
       "summary": "Una empresa de tecnología educativa en Brasil recibe una inversión de 10 millones de reales para llevar sus soluciones digitales a otros países de América Latina.",
@@ -1720,6 +1759,25 @@
       "relevance": 7,
       "sentiment": "positive",
       "author": "Renata Oliveira",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.estadao.com.br/economia/startup-brasileira-saude-digital-financiamento-2023/",
+      "title": "Startup brasileña de salud digital recibe financiación récord",
+      "summary": "Una empresa de tecnología en salud con sede en São Paulo ha obtenido una inversión de 15 millones de reales para expandir su plataforma de telemedicina en el país.",
+      "url": "https://www.estadao.com.br/economia/startup-brasileira-saude-digital-financiamento-2023/",
+      "source": "Estadão",
+      "source_url": "https://www.estadao.com.br",
+      "country": "Brasil",
+      "topics": [
+        "Startups",
+        "Salud Digital"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-05T16:40:00Z",
+      "relevance": 8,
+      "sentiment": "positive",
+      "author": "João Mendes",
       "curator": "Luciano AI"
     },
     {
@@ -1799,25 +1857,6 @@
       "curator": "Luciano AI"
     },
     {
-      "id": "https://www.elfinanciero.com.mx/tech/2023/10/05/startup-mexicana-inteligencia-artificial-logistica/",
-      "title": "Startup mexicana desarrolla inteligencia artificial para optimizar logística",
-      "summary": "Una empresa emergente en México crea una solución de IA para mejorar la eficiencia en la logística y reducir costos operativos de transporte.",
-      "url": "https://www.elfinanciero.com.mx/tech/2023/10/05/startup-mexicana-inteligencia-artificial-logistica/",
-      "source": "El Financiero",
-      "source_url": "https://www.elfinanciero.com.mx",
-      "country": "México",
-      "topics": [
-        "Startups",
-        "Logística"
-      ],
-      "language": "es",
-      "published_at": "2023-10-05T16:00:00Z",
-      "relevance": 8,
-      "sentiment": "positive",
-      "author": "Alejandra Torres",
-      "curator": "Luciano AI"
-    },
-    {
       "id": "https://www.larepublica.co/empresas/startup-colombiana-logistica-recauda-10-millones-dolares-2023",
       "title": "Startup colombiana de logística recauda 10 millones de dólares",
       "summary": "Una startup colombiana enfocada en soluciones de logística ha logrado una ronda de financiación Serie A por 10 millones de dólares, liderada por un fondo internacional.",
@@ -1857,6 +1896,25 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://www.elfinanciero.com.mx/tech/2023/10/05/startup-mexicana-inteligencia-artificial-logistica/",
+      "title": "Startup mexicana desarrolla inteligencia artificial para optimizar logística",
+      "summary": "Una empresa emergente en México crea una solución de IA para mejorar la eficiencia en la logística y reducir costos operativos de transporte.",
+      "url": "https://www.elfinanciero.com.mx/tech/2023/10/05/startup-mexicana-inteligencia-artificial-logistica/",
+      "source": "El Financiero",
+      "source_url": "https://www.elfinanciero.com.mx",
+      "country": "México",
+      "topics": [
+        "Startups",
+        "Logística"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T16:00:00Z",
+      "relevance": 8,
+      "sentiment": "positive",
+      "author": "Alejandra Torres",
+      "curator": "Luciano AI"
+    },
+    {
       "id": "https://www.americaeconomia.com/negocios-industrias/startup-logistica-digital-latam-financiacion-2023",
       "title": "Startup regional de logística digital recibe financiación internacional",
       "summary": "Una startup latinoamericana enfocada en soluciones de logística digital obtiene 8 millones de dólares en una ronda liderada por inversionistas europeos.",
@@ -1873,25 +1931,6 @@
       "relevance": 7,
       "sentiment": "positive",
       "author": "Mariana Torres",
-      "curator": "Luciano AI"
-    },
-    {
-      "id": "https://www.lanacion.com.ar/tecnologia/argentina-ley-incentivos-startups-tecnologicas-nid05102023",
-      "title": "Argentina aprueba nueva ley de incentivos para startups tecnológicas",
-      "summary": "El gobierno argentino ha promulgado una ley que ofrece beneficios fiscales y apoyo financiero a startups tecnológicas para impulsar la innovación en el país.",
-      "url": "https://www.lanacion.com.ar/tecnologia/argentina-ley-incentivos-startups-tecnologicas-nid05102023",
-      "source": "La Nación",
-      "source_url": "https://www.lanacion.com.ar",
-      "country": "Argentina",
-      "topics": [
-        "Startups",
-        "Regulación"
-      ],
-      "language": "es",
-      "published_at": "2023-10-05T15:45:00Z",
-      "relevance": 8,
-      "sentiment": "positive",
-      "author": "Sofía Rodríguez",
       "curator": "Luciano AI"
     },
     {
@@ -1912,6 +1951,25 @@
       "relevance": 7,
       "sentiment": "positive",
       "author": "Luis Vargas",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.lanacion.com.ar/tecnologia/argentina-ley-incentivos-startups-tecnologicas-nid05102023",
+      "title": "Argentina aprueba nueva ley de incentivos para startups tecnológicas",
+      "summary": "El gobierno argentino ha promulgado una ley que ofrece beneficios fiscales y apoyo financiero a startups tecnológicas para impulsar la innovación en el país.",
+      "url": "https://www.lanacion.com.ar/tecnologia/argentina-ley-incentivos-startups-tecnologicas-nid05102023",
+      "source": "La Nación",
+      "source_url": "https://www.lanacion.com.ar",
+      "country": "Argentina",
+      "topics": [
+        "Startups",
+        "Regulación"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T15:45:00Z",
+      "relevance": 8,
+      "sentiment": "positive",
+      "author": "Sofía Rodríguez",
       "curator": "Luciano AI"
     },
     {
@@ -2470,6 +2528,25 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://www.elcolombiano.com/colombia/colombia-regula-uso-de-drones-en-espacios-urbanos-MH20231005",
+      "title": "Colombia regula el uso de drones en espacios urbanos",
+      "summary": "La Aeronáutica Civil de Colombia establece nuevas normas para el uso de drones, buscando garantizar la seguridad y privacidad en áreas urbanas.",
+      "url": "https://www.elcolombiano.com/colombia/colombia-regula-uso-de-drones-en-espacios-urbanos-MH20231005",
+      "source": "El Colombiano",
+      "source_url": "https://www.elcolombiano.com",
+      "country": "Colombia",
+      "topics": [
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T12:30:00Z",
+      "relevance": 7,
+      "sentiment": "neutral",
+      "author": "Carlos Ramírez",
+      "curator": "Luciano AI"
+    },
+    {
       "id": "https://www.elcolombiano.com/tecnologia/colombia-regulacion-inteligencia-artificial-2023",
       "title": "Colombia avanza en regulación de inteligencia artificial",
       "summary": "El gobierno colombiano presenta un proyecto de ley para regular el desarrollo y uso de inteligencia artificial, buscando equilibrar innovación y ética.",
@@ -2527,25 +2604,6 @@
       "curator": "Luciano AI"
     },
     {
-      "id": "https://www.elcolombiano.com/colombia/colombia-regula-uso-de-drones-en-espacios-urbanos-MH20231005",
-      "title": "Colombia regula el uso de drones en espacios urbanos",
-      "summary": "La Aeronáutica Civil de Colombia establece nuevas normas para el uso de drones, buscando garantizar la seguridad y privacidad en áreas urbanas.",
-      "url": "https://www.elcolombiano.com/colombia/colombia-regula-uso-de-drones-en-espacios-urbanos-MH20231005",
-      "source": "El Colombiano",
-      "source_url": "https://www.elcolombiano.com",
-      "country": "Colombia",
-      "topics": [
-        "Regulación",
-        "Tecnología"
-      ],
-      "language": "es",
-      "published_at": "2023-10-05T12:30:00Z",
-      "relevance": 7,
-      "sentiment": "neutral",
-      "author": "Carlos Ramírez",
-      "curator": "Luciano AI"
-    },
-    {
       "id": "https://www.eltiempo.com/economia/empresas/startup-colombiana-de-fintech-recibe-inversion-millonaria-2023",
       "title": "Startup colombiana de fintech recibe inversión millonaria",
       "summary": "Una startup de tecnología financiera en Bogotá ha asegurado una ronda de inversión de 5 millones de dólares para expandir sus operaciones en América Latina.",
@@ -2562,6 +2620,26 @@
       "relevance": 7,
       "sentiment": "positive",
       "author": "María Gómez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://g1.globo.com/economia/noticia/2023/10/05/brasil-debate-incentivos-startups-tecnologicas.ghtml",
+      "title": "Brasil debate nuevas políticas de incentivos para startups tecnológicas",
+      "summary": "El gobierno brasileño está discutiendo un paquete de incentivos fiscales para startups tecnológicas, con el fin de posicionar al país como un hub de innovación en América Latina.",
+      "url": "https://g1.globo.com/economia/noticia/2023/10/05/brasil-debate-incentivos-startups-tecnologicas.ghtml",
+      "source": "G1 Globo",
+      "source_url": "https://g1.globo.com",
+      "country": "Brasil",
+      "topics": [
+        "Startups",
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-05T12:15:00Z",
+      "relevance": 6,
+      "sentiment": "positive",
+      "author": "Carlos Silva",
       "curator": "Luciano AI"
     },
     {
@@ -2639,26 +2717,6 @@
       "relevance": 7,
       "sentiment": "positive",
       "author": "María Gómez",
-      "curator": "Luciano AI"
-    },
-    {
-      "id": "https://g1.globo.com/economia/noticia/2023/10/05/brasil-debate-incentivos-startups-tecnologicas.ghtml",
-      "title": "Brasil debate nuevas políticas de incentivos para startups tecnológicas",
-      "summary": "El gobierno brasileño está discutiendo un paquete de incentivos fiscales para startups tecnológicas, con el fin de posicionar al país como un hub de innovación en América Latina.",
-      "url": "https://g1.globo.com/economia/noticia/2023/10/05/brasil-debate-incentivos-startups-tecnologicas.ghtml",
-      "source": "G1 Globo",
-      "source_url": "https://g1.globo.com",
-      "country": "Brasil",
-      "topics": [
-        "Startups",
-        "Regulación",
-        "Tecnología"
-      ],
-      "language": "pt",
-      "published_at": "2023-10-05T12:15:00Z",
-      "relevance": 6,
-      "sentiment": "positive",
-      "author": "Carlos Silva",
       "curator": "Luciano AI"
     },
     {
@@ -2757,44 +2815,6 @@
       "curator": "Luciano AI"
     },
     {
-      "id": "https://www.emol.com/noticias/Economia/2023/10/05/1109875/chile-lidera-energias-renovables-latam.html",
-      "title": "Chile lidera en energías renovables en América Latina",
-      "summary": "Un informe reciente posiciona a Chile como líder regional en la adopción de energías renovables, destacando su inversión en proyectos solares y eólicos.",
-      "url": "https://www.emol.com/noticias/Economia/2023/10/05/1109875/chile-lidera-energias-renovables-latam.html",
-      "source": "Emol",
-      "source_url": "https://www.emol.com",
-      "country": "Chile",
-      "topics": [
-        "Energía",
-        "Sostenibilidad"
-      ],
-      "language": "es",
-      "published_at": "2023-10-05T11:10:00Z",
-      "relevance": 9,
-      "sentiment": "positive",
-      "author": "Felipe Vargas",
-      "curator": "Luciano AI"
-    },
-    {
-      "id": "https://www.emol.com/noticias/Tecnologia/2023/10/05/chile-debate-politicas-ciberseguridad.html",
-      "title": "Chile debate nuevas políticas de ciberseguridad tras ataques recientes",
-      "summary": "Tras una serie de ciberataques a instituciones públicas, Chile acelera la discusión de un marco normativo para fortalecer la seguridad digital en el país.",
-      "url": "https://www.emol.com/noticias/Tecnologia/2023/10/05/chile-debate-politicas-ciberseguridad.html",
-      "source": "Emol",
-      "source_url": "https://www.emol.com",
-      "country": "Chile",
-      "topics": [
-        "Ciberseguridad",
-        "Regulación"
-      ],
-      "language": "es",
-      "published_at": "2023-10-05T11:10:00Z",
-      "relevance": 9,
-      "sentiment": "negative",
-      "author": "Andrea Vargas",
-      "curator": "Luciano AI"
-    },
-    {
       "id": "https://elcomercio.pe/tecnologia/actualidad/startup-peruana-edtech-premio-internacional-noticia/",
       "title": "Startup peruana de edtech gana premio internacional",
       "summary": "Una empresa peruana de tecnología educativa ha sido reconocida en un concurso global por su plataforma innovadora que mejora el acceso a la educación en zonas rurales.",
@@ -2834,6 +2854,44 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://www.emol.com/noticias/Economia/2023/10/05/1109875/chile-lidera-energias-renovables-latam.html",
+      "title": "Chile lidera en energías renovables en América Latina",
+      "summary": "Un informe reciente posiciona a Chile como líder regional en la adopción de energías renovables, destacando su inversión en proyectos solares y eólicos.",
+      "url": "https://www.emol.com/noticias/Economia/2023/10/05/1109875/chile-lidera-energias-renovables-latam.html",
+      "source": "Emol",
+      "source_url": "https://www.emol.com",
+      "country": "Chile",
+      "topics": [
+        "Energía",
+        "Sostenibilidad"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T11:10:00Z",
+      "relevance": 9,
+      "sentiment": "positive",
+      "author": "Felipe Vargas",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.emol.com/noticias/Tecnologia/2023/10/05/chile-debate-politicas-ciberseguridad.html",
+      "title": "Chile debate nuevas políticas de ciberseguridad tras ataques recientes",
+      "summary": "Tras una serie de ciberataques a instituciones públicas, Chile acelera la discusión de un marco normativo para fortalecer la seguridad digital en el país.",
+      "url": "https://www.emol.com/noticias/Tecnologia/2023/10/05/chile-debate-politicas-ciberseguridad.html",
+      "source": "Emol",
+      "source_url": "https://www.emol.com",
+      "country": "Chile",
+      "topics": [
+        "Ciberseguridad",
+        "Regulación"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T11:10:00Z",
+      "relevance": 9,
+      "sentiment": "negative",
+      "author": "Andrea Vargas",
+      "curator": "Luciano AI"
+    },
+    {
       "id": "https://www.emol.com/noticias/Economia/2023/10/05/1101234/chile-regulacion-criptomonedas.html",
       "title": "Chile debate nuevas regulaciones para criptomonedas",
       "summary": "El Congreso chileno analiza un proyecto de ley para establecer un marco regulatorio claro para el uso y comercio de criptomonedas en el país.",
@@ -2853,25 +2911,6 @@
       "curator": "Luciano AI"
     },
     {
-      "id": "https://www.folha.uol.com.br/poder/2023/10/brasil-debate-novas-leis-de-protecao-de-dados.shtml",
-      "title": "Brasil debate nuevas leyes de protección de datos en tecnología",
-      "summary": "El Congreso brasileño discute un proyecto de ley para reforzar la protección de datos personales en plataformas digitales, con impacto en empresas tecnológicas.",
-      "url": "https://www.folha.uol.com.br/poder/2023/10/brasil-debate-novas-leis-de-protecao-de-dados.shtml",
-      "source": "Folha de S.Paulo",
-      "source_url": "https://www.folha.uol.com.br",
-      "country": "Brasil",
-      "topics": [
-        "Regulación",
-        "Tecnología"
-      ],
-      "language": "pt",
-      "published_at": "2023-10-05T10:45:00Z",
-      "relevance": 9,
-      "sentiment": "neutral",
-      "author": "Carlos Silva",
-      "curator": "Luciano AI"
-    },
-    {
       "id": "https://g1.globo.com/economia/noticia/2023/10/05/brasil-ley-streaming-contenido-local.ghtml",
       "title": "Brasil impulsa ley para regular plataformas de streaming",
       "summary": "El Congreso brasileño debate una nueva ley que obligaría a las plataformas de streaming a incluir un porcentaje de contenido local en sus catálogos.",
@@ -2886,6 +2925,25 @@
       "language": "pt",
       "published_at": "2023-10-05T10:45:00Z",
       "relevance": 6,
+      "sentiment": "neutral",
+      "author": "Carlos Silva",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.folha.uol.com.br/poder/2023/10/brasil-debate-novas-leis-de-protecao-de-dados.shtml",
+      "title": "Brasil debate nuevas leyes de protección de datos en tecnología",
+      "summary": "El Congreso brasileño discute un proyecto de ley para reforzar la protección de datos personales en plataformas digitales, con impacto en empresas tecnológicas.",
+      "url": "https://www.folha.uol.com.br/poder/2023/10/brasil-debate-novas-leis-de-protecao-de-dados.shtml",
+      "source": "Folha de S.Paulo",
+      "source_url": "https://www.folha.uol.com.br",
+      "country": "Brasil",
+      "topics": [
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-05T10:45:00Z",
+      "relevance": 9,
       "sentiment": "neutral",
       "author": "Carlos Silva",
       "curator": "Luciano AI"
