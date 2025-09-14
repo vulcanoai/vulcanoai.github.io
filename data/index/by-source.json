@@ -1,14 +1,14 @@
 {
   "version": "v1.0",
-  "generated_at": "2025-09-14T14:10:42.954Z",
+  "generated_at": "2025-09-14T15:01:13.561Z",
   "bySource": {
+    "El Universal": 17,
     "La Nación": 16,
-    "El Universal": 16,
     "Emol": 15,
     "El Comercio": 14,
     "G1 Globo": 13,
     "El Tiempo": 11,
-    "La República": 7,
+    "La República": 8,
     "Folha de S.Paulo": 7,
     "El Colombiano": 4,
     "América Economía": 4,
@@ -27,6 +27,7 @@
     "El Salvador.com": 2,
     "La Tercera": 2,
     "El Nacional": 2,
+    "CEPAL": 2,
     "—": 1,
     "La Razón": 1,
     "La Nación Argentina": 1,
@@ -42,7 +43,6 @@
     "Forbes México": 1,
     "ECLAC": 1,
     "Milenio": 1,
-    "G1": 1,
-    "CEPAL": 1
+    "G1": 1
   }
 }
