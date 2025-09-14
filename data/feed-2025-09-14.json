@@ -1,6 +1,27 @@
 {
   "version": "v1.0",
+  "generated_at": "2025-09-14T13:01:11.049Z",
+  "date": "2025-09-14",
   "articles": [
+    {
+      "id": "https://www.lanacion.com.ar/economia/argentina-inflacion-record-octubre-2024-nid25102024/",
+      "title": "Argentina enfrenta nuevos retos económicos con inflación récord",
+      "summary": "El país reporta una inflación mensual que supera expectativas, generando preocupación en los mercados y entre los ciudadanos.",
+      "url": "https://www.lanacion.com.ar/economia/argentina-inflacion-record-octubre-2024-nid25102024/",
+      "source": "La Nación",
+      "source_url": "https://www.lanacion.com.ar",
+      "country": "Argentina",
+      "topics": [
+        "Economía",
+        "Inflación"
+      ],
+      "language": "es",
+      "published_at": "2024-10-25T16:45:00Z",
+      "relevance": 9,
+      "sentiment": "negative",
+      "author": "Sofía Martínez",
+      "curator": "Luciano AI"
+    },
     {
       "id": "https://www.eluniversal.com.mx/negocios/mexico-nuevas-regulaciones-fintech-2024/",
       "title": "México impulsa nuevas regulaciones para fintech en 2024",
@@ -21,6 +42,26 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://www.emol.com/noticias/Economia/2024/10/25/1141235/greentech-chile-agricultura-sostenible.html",
+      "title": "Chilena GreenTech lanza solución innovadora para agricultura sostenible",
+      "summary": "La startup chilena presenta una tecnología basada en IA para optimizar el uso de agua en cultivos, buscando impactar positivamente en la región.",
+      "url": "https://www.emol.com/noticias/Economia/2024/10/25/1141235/greentech-chile-agricultura-sostenible.html",
+      "source": "Emol",
+      "source_url": "https://www.emol.com",
+      "country": "Chile",
+      "topics": [
+        "Startups",
+        "Agricultura",
+        "Sostenibilidad"
+      ],
+      "language": "es",
+      "published_at": "2024-10-25T13:20:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Diego Vargas",
+      "curator": "Luciano AI"
+    },
+    {
       "id": "https://www.larepublica.co/empresas/startup-logitech-recauda-5-millones-2024",
       "title": "Startup colombiana de logística recauda $5 millones en ronda Serie A",
       "summary": "La empresa LogiTech, con sede en Bogotá, ha logrado una inversión significativa para expandir sus operaciones en América Latina.",
@@ -37,6 +78,25 @@
       "relevance": 7,
       "sentiment": "positive",
       "author": "María Gómez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://elcomercio.pe/politica/peru-reformas-digitalizacion-servicios-publicos-2024-noticia/",
+      "title": "Perú aprueba reformas para digitalización de servicios públicos",
+      "summary": "El gobierno peruano anuncia un plan para digitalizar trámites públicos, con el objetivo de mejorar la eficiencia y reducir la burocracia.",
+      "url": "https://elcomercio.pe/politica/peru-reformas-digitalizacion-servicios-publicos-2024-noticia/",
+      "source": "El Comercio",
+      "source_url": "https://elcomercio.pe",
+      "country": "Perú",
+      "topics": [
+        "Tecnología",
+        "Regulación"
+      ],
+      "language": "es",
+      "published_at": "2024-10-25T11:10:00Z",
+      "relevance": 8,
+      "sentiment": "positive",
+      "author": "Ana López",
       "curator": "Luciano AI"
     },
     {
