@@ -1,5 +1,7 @@
 {
   "version": "v1.0",
+  "generated_at": "2025-09-14T16:01:12.725Z",
+  "date": "2025-09-14",
   "articles": [
     {
       "id": "https://www.lanacion.com.ar/economia/argentina-inflacion-record-octubre-2024-nid25102024/",
@@ -406,6 +408,25 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://www.folha.uol.com.br/economia/2023/10/brasil-aprova-novas-normas-para-startups-tecnologicas.shtml",
+      "title": "Brasil aprueba nuevas normas para startups tecnológicas",
+      "summary": "El gobierno brasileño ha implementado un marco regulatorio para apoyar el crecimiento de startups tecnológicas, ofreciendo incentivos fiscales y simplificación de trámites.",
+      "url": "https://www.folha.uol.com.br/economia/2023/10/brasil-aprova-novas-normas-para-startups-tecnologicas.shtml",
+      "source": "Folha de S.Paulo",
+      "source_url": "https://www.folha.uol.com.br",
+      "country": "Brasil",
+      "topics": [
+        "Startups",
+        "Regulación"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-05T16:45:00Z",
+      "relevance": 8,
+      "sentiment": "positive",
+      "author": "Ana Ribeiro",
+      "curator": "Valentina AI"
+    },
+    {
       "id": "https://www.lanacion.com.ar/economia/argentina-impulsa-proyecto-para-regular-criptomonedas-nid05102023",
       "title": "Argentina impulsa proyecto para regular criptomonedas",
       "summary": "El gobierno argentino presenta una iniciativa legislativa para establecer un marco regulatorio claro sobre el uso y comercio de criptomonedas en el país.",
@@ -618,6 +639,25 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://www.lanacion.com.ar/economia/argentina-debate-regulacion-de-criptomonedas-nid05102023/",
+      "title": "Argentina enfrenta debate sobre regulación de criptomonedas",
+      "summary": "Legisladores argentinos discuten un proyecto de ley para regular el uso y comercio de criptomonedas, en medio de preocupaciones por la evasión fiscal y el lavado de dinero.",
+      "url": "https://www.lanacion.com.ar/economia/argentina-debate-regulacion-de-criptomonedas-nid05102023/",
+      "source": "La Nación",
+      "source_url": "https://www.lanacion.com.ar",
+      "country": "Argentina",
+      "topics": [
+        "Regulación",
+        "Criptomonedas"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T13:20:00Z",
+      "relevance": 7,
+      "sentiment": "neutral",
+      "author": "Carlos Méndez",
+      "curator": "Valentina AI"
+    },
+    {
       "id": "https://elcomercio.pe/economia/peru/startup-peruana-edtech-cierra-ronda-financiacion-2023-noticia/",
       "title": "Startup peruana de edtech cierra ronda de financiación",
       "summary": "Una empresa emergente de tecnología educativa en Lima ha logrado captar 2 millones de dólares para expandir su plataforma de aprendizaje en línea en la región.",
@@ -789,6 +829,25 @@
       "sentiment": "positive",
       "author": "Diego Morales",
       "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.emol.com/noticias/Economia/2023/10/05/1109876/chile-lidera-energias-renovables-latam.html",
+      "title": "Chile lidera inversión en energías renovables en la región",
+      "summary": "Un informe destaca a Chile como el principal destino de inversión en energías renovables en América Latina, con proyectos de energía solar y eólica en aumento.",
+      "url": "https://www.emol.com/noticias/Economia/2023/10/05/1109876/chile-lidera-energias-renovables-latam.html",
+      "source": "Emol",
+      "source_url": "https://www.emol.com",
+      "country": "Chile",
+      "topics": [
+        "Energía",
+        "Innovación"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T11:10:00Z",
+      "relevance": 9,
+      "sentiment": "positive",
+      "author": "Sofía Castillo",
+      "curator": "Valentina AI"
     },
     {
       "id": "https://www.emol.com/noticias/Tecnologia/2023/10/05/1109876/chile-politicas-inteligencia-artificial.html",
