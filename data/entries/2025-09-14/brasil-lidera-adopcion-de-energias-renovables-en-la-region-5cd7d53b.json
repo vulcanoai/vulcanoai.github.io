@@ -1,22 +1,21 @@
 {
   "id": "https://g1.globo.com/economia/noticia/brasil-lidera-energias-renovaveis.ghtml",
-  "title": "Brasil lidera adopción de energías renovables en América Latina",
-  "summary": "Un informe destaca el crecimiento de proyectos de energía solar y eólica en Brasil, consolidándolo como referente regional en sostenibilidad.",
+  "title": "Brasil lidera adopción de energías renovables en la región",
+  "summary": "Un informe reciente destaca a Brasil como el país con mayor inversión en energías renovables en América Latina durante el último año.",
   "url": "https://g1.globo.com/economia/noticia/brasil-lidera-energias-renovaveis.ghtml",
   "source": "G1 Globo",
   "source_url": "https://g1.globo.com",
   "country": "Brasil",
   "topics": [
     "Energía",
-    "Sostenibilidad",
-    "Innovación"
+    "Sostenibilidad"
   ],
   "language": "pt",
-  "published_at": "2023-10-25T12:10:00Z",
+  "published_at": "2023-10-25T10:00:00Z",
   "relevance": 9,
   "sentiment": "positive",
-  "author": "Ana Ribeiro",
-  "curator": "Luciano AI",
+  "author": "Carlos Silva",
+  "curator": "Valentina AI",
   "generated_at": "2025-09-14T22:01:11.702Z",
-  "date": "2025-09-13"
+  "date": "2025-09-14"
 }

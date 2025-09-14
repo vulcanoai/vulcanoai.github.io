@@ -1,5 +1,7 @@
 {
   "version": "v1.0",
+  "generated_at": "2025-09-14T22:01:11.702Z",
+  "date": "2025-09-14",
   "articles": [
     {
       "id": "https://www.lanacion.com.ar/economia/argentina-inflacion-record-octubre-2024-nid25102024/",
@@ -270,6 +272,25 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://www.eluniversal.com.mx/tech/mexico-aprueba-regulacion-plataformas-digitales",
+      "title": "México aprueba nueva regulación para plataformas digitales",
+      "summary": "El gobierno mexicano ha implementado una nueva normativa que exige a las plataformas digitales mayores controles de seguridad y transparencia en el manejo de datos de usuarios.",
+      "url": "https://www.eluniversal.com.mx/tech/mexico-aprueba-regulacion-plataformas-digitales",
+      "source": "El Universal",
+      "source_url": "https://www.eluniversal.com.mx",
+      "country": "México",
+      "topics": [
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T14:30:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Juan Pérez",
+      "curator": "Valentina AI"
+    },
+    {
       "id": "https://www.eluniversal.com.mx/nacion/aprueban-ley-de-ciberseguridad-en-mexico",
       "title": "Nueva ley de ciberseguridad aprobada en México",
       "summary": "El Congreso de México aprobó una ley para fortalecer la protección de datos y combatir ciberataques en el país, con énfasis en la regulación de empresas tecnológicas.",
@@ -401,6 +422,25 @@
       "relevance": 7,
       "sentiment": "positive",
       "author": "Lucas Silva",
+      "curator": "Valentina AI"
+    },
+    {
+      "id": "https://www.larepublica.co/empresas/startup-fintech-colombiana-inversion",
+      "title": "Startup colombiana de fintech recibe inversión millonaria",
+      "summary": "Una startup de tecnología financiera en Bogotá ha asegurado una ronda de financiación de 5 millones de dólares para expandir sus operaciones en América Latina.",
+      "url": "https://www.larepublica.co/empresas/startup-fintech-colombiana-inversion",
+      "source": "La República",
+      "source_url": "https://www.larepublica.co",
+      "country": "Colombia",
+      "topics": [
+        "Startups",
+        "Fintech"
+      ],
+      "language": "es",
+      "published_at": "2023-10-25T12:15:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "María Gómez",
       "curator": "Valentina AI"
     },
     {
@@ -557,6 +597,25 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://g1.globo.com/economia/noticia/brasil-lidera-energias-renovaveis.ghtml",
+      "title": "Brasil lidera adopción de energías renovables en la región",
+      "summary": "Un informe reciente destaca a Brasil como el país con mayor inversión en energías renovables en América Latina durante el último año.",
+      "url": "https://g1.globo.com/economia/noticia/brasil-lidera-energias-renovaveis.ghtml",
+      "source": "G1 Globo",
+      "source_url": "https://g1.globo.com",
+      "country": "Brasil",
+      "topics": [
+        "Energía",
+        "Sostenibilidad"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-25T10:00:00Z",
+      "relevance": 9,
+      "sentiment": "positive",
+      "author": "Carlos Silva",
+      "curator": "Valentina AI"
+    },
+    {
       "id": "https://www.lanacion.com.ar/politica/argentina-proyecto-ley-regular-plataformas-digitales-nid05102023/",
       "title": "Argentina impulsa proyecto de ley para regular plataformas digitales",
       "summary": "El gobierno argentino presentó un proyecto de ley que busca regular el funcionamiento de plataformas digitales y redes sociales, con énfasis en la protección de datos y la lucha contra la desinformación.",
@@ -596,6 +655,25 @@
       "curator": "Valentina AI"
     },
     {
+      "id": "https://www.eltiempo.com/economia/empresas/startup-colombiana-de-fintech-recibe-inversion-millonaria-123456",
+      "title": "Startup colombiana de fintech recibe inversión millonaria",
+      "summary": "Una startup de tecnología financiera en Colombia ha asegurado una ronda de financiación de 5 millones de dólares para expandir sus operaciones en América Latina.",
+      "url": "https://www.eltiempo.com/economia/empresas/startup-colombiana-de-fintech-recibe-inversion-millonaria-123456",
+      "source": "El Tiempo",
+      "source_url": "https://www.eltiempo.com",
+      "country": "Colombia",
+      "topics": [
+        "Startups",
+        "Fintech"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T16:45:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "María Gómez",
+      "curator": "Valentina AI"
+    },
+    {
       "id": "https://www.folha.uol.com.br/economia/2023/10/brasil-aprova-novas-normas-para-startups-tecnologicas.shtml",
       "title": "Brasil aprueba nuevas normas para startups tecnológicas",
       "summary": "El gobierno brasileño ha implementado un marco regulatorio para apoyar el crecimiento de startups tecnológicas, ofreciendo incentivos fiscales y simplificación de trámites.",
@@ -632,25 +710,6 @@
       "sentiment": "neutral",
       "author": "Sofía Martínez",
       "curator": "Luciano AI"
-    },
-    {
-      "id": "https://www.eltiempo.com/economia/empresas/startup-colombiana-de-fintech-recibe-inversion-millonaria-123456",
-      "title": "Startup colombiana de fintech recibe inversión millonaria",
-      "summary": "Una startup de tecnología financiera en Colombia ha asegurado una ronda de financiación de 5 millones de dólares para expandir sus operaciones en América Latina.",
-      "url": "https://www.eltiempo.com/economia/empresas/startup-colombiana-de-fintech-recibe-inversion-millonaria-123456",
-      "source": "El Tiempo",
-      "source_url": "https://www.eltiempo.com",
-      "country": "Colombia",
-      "topics": [
-        "Startups",
-        "Fintech"
-      ],
-      "language": "es",
-      "published_at": "2023-10-05T16:45:00Z",
-      "relevance": 7,
-      "sentiment": "positive",
-      "author": "María Gómez",
-      "curator": "Valentina AI"
     },
     {
       "id": "https://www.eltiempo.com/economia/empresas/startup-colombiana-recibe-inversion-millonaria-2023",
@@ -922,6 +981,25 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://www.folha.uol.com.br/educacao/2023/10/startup-brasileira-edtech-capta-fundos.shtml",
+      "title": "Startup brasileña de edtech capta fondos para expansión",
+      "summary": "Una empresa de tecnología educativa en Brasil recibe inversión de 3 millones de reales para llevar sus soluciones digitales a más escuelas públicas.",
+      "url": "https://www.folha.uol.com.br/educacao/2023/10/startup-brasileira-edtech-capta-fundos.shtml",
+      "source": "Folha de S.Paulo",
+      "source_url": "https://www.folha.uol.com.br",
+      "country": "Brasil",
+      "topics": [
+        "Startups",
+        "Edtech"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-05T13:10:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Mariana Silva",
+      "curator": "Valentina AI"
+    },
+    {
       "id": "https://www.emol.com/noticias/Economia/2023/10/05/1109875/chile-normativa-ciberseguridad-empresas.html",
       "title": "Chile avanza en normativa para ciberseguridad en empresas",
       "summary": "El Senado chileno aprobó un proyecto de ley que obliga a las empresas a implementar medidas de ciberseguridad para proteger datos sensibles, tras un aumento de ataques cibernéticos en el país.",
@@ -940,25 +1018,6 @@
       "sentiment": "neutral",
       "author": "Andrea Castillo",
       "curator": "Luciano AI"
-    },
-    {
-      "id": "https://www.folha.uol.com.br/educacao/2023/10/startup-brasileira-edtech-capta-fundos.shtml",
-      "title": "Startup brasileña de edtech capta fondos para expansión",
-      "summary": "Una empresa de tecnología educativa en Brasil recibe inversión de 3 millones de reales para llevar sus soluciones digitales a más escuelas públicas.",
-      "url": "https://www.folha.uol.com.br/educacao/2023/10/startup-brasileira-edtech-capta-fundos.shtml",
-      "source": "Folha de S.Paulo",
-      "source_url": "https://www.folha.uol.com.br",
-      "country": "Brasil",
-      "topics": [
-        "Startups",
-        "Edtech"
-      ],
-      "language": "pt",
-      "published_at": "2023-10-05T13:10:00Z",
-      "relevance": 7,
-      "sentiment": "positive",
-      "author": "Mariana Silva",
-      "curator": "Valentina AI"
     },
     {
       "id": "https://www.elcolombiano.com/colombia/colombia-regula-uso-de-drones-en-espacios-urbanos-MH20231005",
