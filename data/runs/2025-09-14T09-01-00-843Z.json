@@ -1,0 +1,65 @@
+{
+  "version": "v1.0",
+  "articles": [
+    {
+      "id": "https://www.elpais.com.uy/negocios/uruguay-avanza-en-la-adopcion-de-tecnologia-5g",
+      "title": "Uruguay avanza en la adopción de tecnología 5G",
+      "summary": "El gobierno uruguayo anuncia un plan para implementar redes 5G en las principales ciudades, con el objetivo de mejorar la conectividad y atraer inversión tecnológica.",
+      "url": "https://www.elpais.com.uy/negocios/uruguay-avanza-en-la-adopcion-de-tecnologia-5g",
+      "source": "El País Uruguay",
+      "source_url": "https://www.elpais.com.uy",
+      "country": "Uruguay",
+      "topics": [
+        "Tecnología",
+        "Regulación"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T14:00:00Z",
+      "relevance": 8,
+      "sentiment": "positive",
+      "author": "Lucía Fernández",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.milenio.com/negocios/startup-mexicana-movilidad-electrica-recibe-financiacion-2023",
+      "title": "Startup mexicana de movilidad eléctrica recibe financiación internacional",
+      "summary": "Una empresa emergente de movilidad eléctrica en Guadalajara cierra una ronda de inversión de 3 millones de dólares para expandir su flota de vehículos sostenibles.",
+      "url": "https://www.milenio.com/negocios/startup-mexicana-movilidad-electrica-recibe-financiacion-2023",
+      "source": "Milenio",
+      "source_url": "https://www.milenio.com",
+      "country": "México",
+      "topics": [
+        "Startups",
+        "Movilidad"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T11:45:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Diego Morales",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.abc.com.py/nacionales/2023/10/05/paraguay-debate-normativas-comercio-electronico/",
+      "title": "Paraguay debate nuevas normativas para comercio electrónico",
+      "summary": "El Congreso paraguayo analiza un proyecto de ley para regular el comercio electrónico, buscando proteger a los consumidores y fomentar el crecimiento del sector.",
+      "url": "https://www.abc.com.py/nacionales/2023/10/05/paraguay-debate-normativas-comercio-electronico/",
+      "source": "ABC Color",
+      "source_url": "https://www.abc.com.py",
+      "country": "Paraguay",
+      "topics": [
+        "Regulación",
+        "E-commerce"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T09:30:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Gabriela Sánchez",
+      "curator": "Luciano AI"
+    }
+  ],
+  "count": 3,
+  "timestamp": "2025-09-14T09:00:57.452Z",
+  "params": {}
+}
