@@ -1,7 +1,5 @@
 {
   "version": "v1.0",
-  "generated_at": "2025-09-14T20:12:46.234Z",
-  "date": "2025-09-14",
   "articles": [
     {
       "id": "https://www.lanacion.com.ar/economia/argentina-inflacion-record-octubre-2024-nid25102024/",
@@ -579,25 +577,6 @@
       "curator": "Luciano AI"
     },
     {
-      "id": "https://www.eltiempo.com/economia/empresas/startup-colombiana-de-fintech-recibe-inversion-millonaria-123456",
-      "title": "Startup colombiana de fintech recibe inversión millonaria",
-      "summary": "Una startup de tecnología financiera en Colombia ha asegurado una ronda de financiación de 5 millones de dólares para expandir sus operaciones en América Latina.",
-      "url": "https://www.eltiempo.com/economia/empresas/startup-colombiana-de-fintech-recibe-inversion-millonaria-123456",
-      "source": "El Tiempo",
-      "source_url": "https://www.eltiempo.com",
-      "country": "Colombia",
-      "topics": [
-        "Startups",
-        "Fintech"
-      ],
-      "language": "es",
-      "published_at": "2023-10-05T16:45:00Z",
-      "relevance": 7,
-      "sentiment": "positive",
-      "author": "María Gómez",
-      "curator": "Valentina AI"
-    },
-    {
       "id": "https://www.folha.uol.com.br/economia/2023/10/brasil-aprova-novas-normas-para-startups-tecnologicas.shtml",
       "title": "Brasil aprueba nuevas normas para startups tecnológicas",
       "summary": "El gobierno brasileño ha implementado un marco regulatorio para apoyar el crecimiento de startups tecnológicas, ofreciendo incentivos fiscales y simplificación de trámites.",
@@ -634,6 +613,25 @@
       "sentiment": "neutral",
       "author": "Sofía Martínez",
       "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.eltiempo.com/economia/empresas/startup-colombiana-de-fintech-recibe-inversion-millonaria-123456",
+      "title": "Startup colombiana de fintech recibe inversión millonaria",
+      "summary": "Una startup de tecnología financiera en Colombia ha asegurado una ronda de financiación de 5 millones de dólares para expandir sus operaciones en América Latina.",
+      "url": "https://www.eltiempo.com/economia/empresas/startup-colombiana-de-fintech-recibe-inversion-millonaria-123456",
+      "source": "El Tiempo",
+      "source_url": "https://www.eltiempo.com",
+      "country": "Colombia",
+      "topics": [
+        "Startups",
+        "Fintech"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T16:45:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "María Gómez",
+      "curator": "Valentina AI"
     },
     {
       "id": "https://www.eltiempo.com/economia/empresas/startup-colombiana-recibe-inversion-millonaria-2023",
