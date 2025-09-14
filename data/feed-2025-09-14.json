@@ -1,5 +1,7 @@
 {
   "version": "v1.0",
+  "generated_at": "2025-09-14T04:01:10.166Z",
+  "date": "2025-09-14",
   "articles": [
     {
       "id": "https://www.excelsior.com.mx/nacional/mexico-regulacion-criptomonedas-lavado-dinero/1612345",
@@ -173,6 +175,26 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://www.lanacion.com.ar/politica/argentina-proyecto-ley-regular-plataformas-digitales-nid05102023/",
+      "title": "Argentina impulsa proyecto de ley para regular plataformas digitales",
+      "summary": "El gobierno argentino presentó un proyecto de ley que busca regular el funcionamiento de plataformas digitales y redes sociales, con énfasis en la protección de datos y la lucha contra la desinformación.",
+      "url": "https://www.lanacion.com.ar/politica/argentina-proyecto-ley-regular-plataformas-digitales-nid05102023/",
+      "source": "La Nación",
+      "source_url": "https://www.lanacion.com.ar",
+      "country": "Argentina",
+      "topics": [
+        "Regulación",
+        "Tecnología",
+        "Datos"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T18:20:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Sofía Martínez",
+      "curator": "Luciano AI"
+    },
+    {
       "id": "https://www.larepublica.co/empresas/startup-colombiana-logistica-recauda-10-millones-dolares-2023",
       "title": "Startup colombiana de logística recauda 10 millones de dólares",
       "summary": "Una startup colombiana enfocada en soluciones de logística ha logrado una ronda de financiación Serie A por 10 millones de dólares, liderada por un fondo internacional.",
@@ -193,6 +215,26 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://elcomercio.pe/economia/peru/startup-edtech-peruana-recibe-inversion-5-millones-2023-noticia/",
+      "title": "Startup peruana de edtech recibe inversión de fondo regional",
+      "summary": "Una startup peruana enfocada en soluciones educativas digitales ha recibido una inversión de 5 millones de dólares de un fondo regional para expandir sus operaciones en América Latina.",
+      "url": "https://elcomercio.pe/economia/peru/startup-edtech-peruana-recibe-inversion-5-millones-2023-noticia/",
+      "source": "El Comercio",
+      "source_url": "https://elcomercio.pe",
+      "country": "Perú",
+      "topics": [
+        "Startups",
+        "Educación",
+        "Financiamiento"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T15:45:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Luis Vargas",
+      "curator": "Luciano AI"
+    },
+    {
       "id": "https://www.eluniversal.com.mx/economia/mexico-aprueba-ley-para-regular-fintechs-y-criptomonedas",
       "title": "México aprueba nueva ley para regular fintechs y criptomonedas",
       "summary": "El Congreso de México ha aprobado una legislación que busca regular las operaciones de empresas fintech y el uso de criptomonedas, con el objetivo de fomentar la innovación y proteger a los usuarios.",
@@ -210,6 +252,26 @@
       "relevance": 8,
       "sentiment": "neutral",
       "author": "Juan Pérez",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.emol.com/noticias/Economia/2023/10/05/1109875/chile-normativa-ciberseguridad-empresas.html",
+      "title": "Chile avanza en normativa para ciberseguridad en empresas",
+      "summary": "El Senado chileno aprobó un proyecto de ley que obliga a las empresas a implementar medidas de ciberseguridad para proteger datos sensibles, tras un aumento de ataques cibernéticos en el país.",
+      "url": "https://www.emol.com/noticias/Economia/2023/10/05/1109875/chile-normativa-ciberseguridad-empresas.html",
+      "source": "Emol",
+      "source_url": "https://www.emol.com",
+      "country": "Chile",
+      "topics": [
+        "Regulación",
+        "Ciberseguridad",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T13:10:00Z",
+      "relevance": 9,
+      "sentiment": "neutral",
+      "author": "Andrea Castillo",
       "curator": "Luciano AI"
     },
     {
