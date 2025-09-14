@@ -1,5 +1,7 @@
 {
   "version": "v1.0",
+  "generated_at": "2025-09-14T05:01:09.220Z",
+  "date": "2025-09-14",
   "articles": [
     {
       "id": "https://www.excelsior.com.mx/nacional/mexico-regulacion-criptomonedas-lavado-dinero/1612345",
@@ -193,6 +195,25 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://www.eltiempo.com/economia/empresas/startup-colombiana-recibe-inversion-millonaria-2023",
+      "title": "Startup colombiana recibe inversión millonaria para expansión",
+      "summary": "Una startup de tecnología en Bogotá ha asegurado una ronda de financiación de 5 millones de dólares para expandir sus operaciones en América Latina.",
+      "url": "https://www.eltiempo.com/economia/empresas/startup-colombiana-recibe-inversion-millonaria-2023",
+      "source": "El Tiempo",
+      "source_url": "https://www.eltiempo.com",
+      "country": "Colombia",
+      "topics": [
+        "Startups",
+        "Inversión"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T16:45:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "María Gómez",
+      "curator": "Luciano AI"
+    },
+    {
       "id": "https://www.larepublica.co/empresas/startup-colombiana-logistica-recauda-10-millones-dolares-2023",
       "title": "Startup colombiana de logística recauda 10 millones de dólares",
       "summary": "Una startup colombiana enfocada en soluciones de logística ha logrado una ronda de financiación Serie A por 10 millones de dólares, liderada por un fondo internacional.",
@@ -230,6 +251,25 @@
       "relevance": 7,
       "sentiment": "positive",
       "author": "Luis Vargas",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.eluniversal.com.mx/tech/mexico-aprueba-ley-regulacion-plataformas-digitales",
+      "title": "México aprueba nueva ley para regular plataformas digitales",
+      "summary": "El gobierno mexicano ha aprobado una legislación que busca regular las operaciones de plataformas digitales, con un enfoque en la protección de datos y la competencia justa.",
+      "url": "https://www.eluniversal.com.mx/tech/mexico-aprueba-ley-regulacion-plataformas-digitales",
+      "source": "El Universal",
+      "source_url": "https://www.eluniversal.com.mx",
+      "country": "México",
+      "topics": [
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T14:30:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Juan Pérez",
       "curator": "Luciano AI"
     },
     {
@@ -288,6 +328,25 @@
       "language": "pt",
       "published_at": "2023-10-05T12:15:00Z",
       "relevance": 6,
+      "sentiment": "positive",
+      "author": "Carlos Silva",
+      "curator": "Luciano AI"
+    },
+    {
+      "id": "https://g1.globo.com/economia/noticia/brasil-lidera-energias-renovaveis-na-america-latina.ghtml",
+      "title": "Brasil lidera adopción de energías renovables en la región",
+      "summary": "Un nuevo informe destaca a Brasil como el país con mayor crecimiento en la implementación de energías renovables en América Latina durante el último año.",
+      "url": "https://g1.globo.com/economia/noticia/brasil-lidera-energias-renovaveis-na-america-latina.ghtml",
+      "source": "G1 Globo",
+      "source_url": "https://g1.globo.com",
+      "country": "Brasil",
+      "topics": [
+        "Energía",
+        "Sostenibilidad"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-05T12:00:00Z",
+      "relevance": 9,
       "sentiment": "positive",
       "author": "Carlos Silva",
       "curator": "Luciano AI"
