@@ -1,5 +1,7 @@
 {
   "version": "v1.0",
+  "generated_at": "2025-09-14T21:01:11.260Z",
+  "date": "2025-09-14",
   "articles": [
     {
       "id": "https://www.lanacion.com.ar/economia/argentina-inflacion-record-octubre-2024-nid25102024/",
@@ -577,6 +579,44 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://www.emol.com/noticias/Economia/2023/10/05/1109876/chile-lidera-energias-renovables.html",
+      "title": "Chile lidera adopción de energías renovables en la región",
+      "summary": "Un nuevo informe destaca a Chile como el país latinoamericano con mayor crecimiento en proyectos de energía solar y eólica durante el último año.",
+      "url": "https://www.emol.com/noticias/Economia/2023/10/05/1109876/chile-lidera-energias-renovables.html",
+      "source": "Emol",
+      "source_url": "https://www.emol.com",
+      "country": "Chile",
+      "topics": [
+        "Energía",
+        "Sostenibilidad"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T17:00:00Z",
+      "relevance": 9,
+      "sentiment": "positive",
+      "author": "Sofía Vargas",
+      "curator": "Valentina AI"
+    },
+    {
+      "id": "https://www.eltiempo.com/economia/empresas/startup-colombiana-de-fintech-recibe-inversion-millonaria-123456",
+      "title": "Startup colombiana de fintech recibe inversión millonaria",
+      "summary": "Una startup de tecnología financiera en Colombia ha asegurado una ronda de financiación de 5 millones de dólares para expandir sus operaciones en América Latina.",
+      "url": "https://www.eltiempo.com/economia/empresas/startup-colombiana-de-fintech-recibe-inversion-millonaria-123456",
+      "source": "El Tiempo",
+      "source_url": "https://www.eltiempo.com",
+      "country": "Colombia",
+      "topics": [
+        "Startups",
+        "Fintech"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T16:45:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "María Gómez",
+      "curator": "Valentina AI"
+    },
+    {
       "id": "https://www.folha.uol.com.br/economia/2023/10/brasil-aprova-novas-normas-para-startups-tecnologicas.shtml",
       "title": "Brasil aprueba nuevas normas para startups tecnológicas",
       "summary": "El gobierno brasileño ha implementado un marco regulatorio para apoyar el crecimiento de startups tecnológicas, ofreciendo incentivos fiscales y simplificación de trámites.",
@@ -613,25 +653,6 @@
       "sentiment": "neutral",
       "author": "Sofía Martínez",
       "curator": "Luciano AI"
-    },
-    {
-      "id": "https://www.eltiempo.com/economia/empresas/startup-colombiana-de-fintech-recibe-inversion-millonaria-123456",
-      "title": "Startup colombiana de fintech recibe inversión millonaria",
-      "summary": "Una startup de tecnología financiera en Colombia ha asegurado una ronda de financiación de 5 millones de dólares para expandir sus operaciones en América Latina.",
-      "url": "https://www.eltiempo.com/economia/empresas/startup-colombiana-de-fintech-recibe-inversion-millonaria-123456",
-      "source": "El Tiempo",
-      "source_url": "https://www.eltiempo.com",
-      "country": "Colombia",
-      "topics": [
-        "Startups",
-        "Fintech"
-      ],
-      "language": "es",
-      "published_at": "2023-10-05T16:45:00Z",
-      "relevance": 7,
-      "sentiment": "positive",
-      "author": "María Gómez",
-      "curator": "Valentina AI"
     },
     {
       "id": "https://www.eltiempo.com/economia/empresas/startup-colombiana-recibe-inversion-millonaria-2023",
@@ -691,6 +712,25 @@
       "sentiment": "positive",
       "author": "Luis Vargas",
       "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.lanacion.com.ar/economia/argentina-impulsa-ley-para-regular-criptomonedas-nid05102023",
+      "title": "Argentina impulsa ley para regular criptomonedas",
+      "summary": "El gobierno argentino presenta un proyecto de ley para regular el uso y comercio de criptomonedas, buscando mayor control fiscal y protección al consumidor.",
+      "url": "https://www.lanacion.com.ar/economia/argentina-impulsa-ley-para-regular-criptomonedas-nid05102023",
+      "source": "La Nación",
+      "source_url": "https://www.lanacion.com.ar",
+      "country": "Argentina",
+      "topics": [
+        "Regulación",
+        "Criptomonedas"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T15:20:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Carlos Fernández",
+      "curator": "Valentina AI"
     },
     {
       "id": "https://www.reforma.com/mexico-lanza-iniciativa-para-impulsar-startups-tecnologicas-2023-10-05/",
@@ -882,6 +922,25 @@
       "sentiment": "positive",
       "author": "Luis Vargas",
       "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.folha.uol.com.br/educacao/2023/10/startup-brasileira-edtech-capta-fundos.shtml",
+      "title": "Startup brasileña de edtech capta fondos para expansión",
+      "summary": "Una empresa de tecnología educativa en Brasil recibe inversión de 3 millones de reales para llevar sus soluciones digitales a más escuelas públicas.",
+      "url": "https://www.folha.uol.com.br/educacao/2023/10/startup-brasileira-edtech-capta-fundos.shtml",
+      "source": "Folha de S.Paulo",
+      "source_url": "https://www.folha.uol.com.br",
+      "country": "Brasil",
+      "topics": [
+        "Startups",
+        "Edtech"
+      ],
+      "language": "pt",
+      "published_at": "2023-10-05T13:10:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "Mariana Silva",
+      "curator": "Valentina AI"
     },
     {
       "id": "https://www.emol.com/noticias/Economia/2023/10/05/1109875/chile-normativa-ciberseguridad-empresas.html",
