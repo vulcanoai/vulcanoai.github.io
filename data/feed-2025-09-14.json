@@ -1,5 +1,7 @@
 {
   "version": "v1.0",
+  "generated_at": "2025-09-14T20:01:10.266Z",
+  "date": "2025-09-14",
   "articles": [
     {
       "id": "https://www.lanacion.com.ar/economia/argentina-inflacion-record-octubre-2024-nid25102024/",
@@ -577,6 +579,25 @@
       "curator": "Luciano AI"
     },
     {
+      "id": "https://www.eltiempo.com/economia/empresas/startup-colombiana-de-fintech-recibe-inversion-millonaria-123456",
+      "title": "Startup colombiana de fintech recibe inversión millonaria",
+      "summary": "Una startup de tecnología financiera en Colombia ha asegurado una ronda de financiación de 5 millones de dólares para expandir sus operaciones en América Latina.",
+      "url": "https://www.eltiempo.com/economia/empresas/startup-colombiana-de-fintech-recibe-inversion-millonaria-123456",
+      "source": "El Tiempo",
+      "source_url": "https://www.eltiempo.com",
+      "country": "Colombia",
+      "topics": [
+        "Startups",
+        "Fintech"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T16:45:00Z",
+      "relevance": 7,
+      "sentiment": "positive",
+      "author": "María Gómez",
+      "curator": "Valentina AI"
+    },
+    {
       "id": "https://www.folha.uol.com.br/economia/2023/10/brasil-aprova-novas-normas-para-startups-tecnologicas.shtml",
       "title": "Brasil aprueba nuevas normas para startups tecnológicas",
       "summary": "El gobierno brasileño ha implementado un marco regulatorio para apoyar el crecimiento de startups tecnológicas, ofreciendo incentivos fiscales y simplificación de trámites.",
@@ -691,6 +712,25 @@
       "sentiment": "positive",
       "author": "Ana López",
       "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.eluniversal.com.mx/tecnologia/mexico-aprueba-regulacion-para-plataformas-digitales",
+      "title": "México aprueba nueva regulación para plataformas digitales",
+      "summary": "El gobierno mexicano ha implementado una nueva normativa que exige a las plataformas digitales cumplir con estándares de transparencia y protección de datos para operar en el país.",
+      "url": "https://www.eluniversal.com.mx/tecnologia/mexico-aprueba-regulacion-para-plataformas-digitales",
+      "source": "El Universal",
+      "source_url": "https://www.eluniversal.com.mx",
+      "country": "México",
+      "topics": [
+        "Regulación",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T14:30:00Z",
+      "relevance": 8,
+      "sentiment": "neutral",
+      "author": "Juan Pérez",
+      "curator": "Valentina AI"
     },
     {
       "id": "https://www.eluniversal.com.mx/nacion/mexico-propone-ley-para-regular-plataformas-digitales",
@@ -941,6 +981,25 @@
       "sentiment": "positive",
       "author": "Carlos Silva",
       "curator": "Luciano AI"
+    },
+    {
+      "id": "https://www.bbc.com/mundo/noticias-america-latina-ia-crecimiento-2023",
+      "title": "Crecimiento de la inteligencia artificial en América Latina",
+      "summary": "Un informe regional destaca cómo la inteligencia artificial está transformando industrias clave en América Latina, con un enfoque en Brasil y México.",
+      "url": "https://www.bbc.com/mundo/noticias-america-latina-ia-crecimiento-2023",
+      "source": "BBC Mundo",
+      "source_url": "https://www.bbc.com/mundo",
+      "country": "Regional",
+      "topics": [
+        "Inteligencia Artificial",
+        "Tecnología"
+      ],
+      "language": "es",
+      "published_at": "2023-10-05T12:00:00Z",
+      "relevance": 9,
+      "sentiment": "positive",
+      "author": "Ana Rodríguez",
+      "curator": "Valentina AI"
     },
     {
       "id": "https://www.cepal.org/es/noticias/america-latina-enfrenta-desafios-adopcion-ia",

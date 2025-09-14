@@ -1,13 +1,13 @@
 {
   "version": "v1.0",
-  "generated_at": "2025-09-14T19:09:16.595Z",
+  "generated_at": "2025-09-14T20:01:10.266Z",
   "bySource": {
-    "El Universal": 19,
+    "El Universal": 20,
     "La Nación": 17,
     "Emol": 16,
     "El Comercio": 14,
     "G1 Globo": 14,
-    "El Tiempo": 11,
+    "El Tiempo": 12,
     "La República": 10,
     "Folha de S.Paulo": 9,
     "El Colombiano": 4,
@@ -42,6 +42,7 @@
     "Opinión": 1,
     "Forbes México": 1,
     "ECLAC": 1,
+    "BBC Mundo": 1,
     "Milenio": 1,
     "G1": 1
   }
