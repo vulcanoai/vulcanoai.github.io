@@ -1,9 +1,7 @@
-# 🎯 Vulcano AI - Project Status Report
+# Vulcano AI — Project Status (Live Ops)
 
-**Date**: September 15, 2025  
-**Status**: ✅ Infrastructure live — ⏳ Content reset  
-**Stable Workflow**: PRODUCTION — AI Research Feed Autopilot (pending rename/import)  
-**Version**: 2.0 (Reset‑first)
+Date: 2025‑09‑15  
+Version: 2.1 (PR‑based curation)
 
 ## 🚀 **Deployment Status**
 
@@ -11,16 +9,16 @@
 |-----------|--------|---------|
 | **Frontend** | ✅ Ready | Pure HTML/CSS/JS, mobile responsive |
 | **Data Pipeline** | ✅ Live | n8n workflows sanitizados (`*_fixed.json`) |
-| **AI Agents** | 🟡 Standby | Seeding controlado (Luciano/Sofía) |
-| **RSS Sources** | 🟡 Curating | Startups baseline habilitado |
+| **AI Agents** | 🟡 Standby | Single agent: Codex 1 (AI News Researcher) |
+| **Sources** | 🟡 Curating | Strict allowlist enforced via `/data/sources.json` |
 | **API Endpoints** | ✅ Ready | Webhook infrastructure complete |
 | **GitHub Integration** | ✅ Ready | Automated commits to repository |
 
-## 📊 **Current Metrics (v2.0)**
+## 📊 Current Metrics
 
-- **Articles in Feed**: 0 (reset intencional)
-- **Live feed**: `/data/feed-latest.json` únicamente (sin fallbacks)
-- **Seeding workflows**: Startups (hourly), AI Research (pendiente)
+- CRITICAL: No news published (feed_count=0)
+- Live feed: `/data/feed-latest.json` only (no fallbacks)
+- Reviews telemetry: `/data/index/reviews.json` (PRs abiertos/pendientes)
 
 ## 🤖 **AI Agent Ecosystem**
 

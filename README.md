@@ -1,6 +1,6 @@
 # Vulcano AI — Plataforma de noticias IA para LATAM
 
-Estado: Producción activa (Versión 2.0). Este repositorio contiene el sitio estático (GitHub Pages), los artefactos de datos (`/data`) y los flujos n8n usados para automatizar el feed y sociales.
+Estado: Producción activa (Versión 2.1 — PR‑based curation). Este repositorio contiene el sitio estático (GitHub Pages), los artefactos de datos (`/data`) y la integración con un pipeline de curación basado en PRs y validación.
 
 • Frontend: HTML/CSS/JS puro (sin dependencias externas)
 • Datos: JSON versionados en `data/` (abiertos y reproducibles)
@@ -12,9 +12,8 @@ Estado: Producción activa (Versión 2.0). Este repositorio contiene el sitio es
 [Fuentes RSS/Agentes] → [n8n Autopilots] → [Commits a /data] → [CI build-feed] → [GitHub Pages] → [Frontend]
 ```
 
-- n8n obtiene, clasifica (Grok/LLMs), deduplica y publica JSON a este repo (vía API GitHub).
-- `scripts/build-feed.js` consolida y genera `feed-latest.json`, `feed-YYYY-MM-DD.json`, índices y trazabilidad por artículo en `entries/`.
-- Versión 2.0 (reset‑first): el sitio lee SOLO `data/feed-latest.json` (sin fallbacks). El feed puede estar vacío mientras se valida la nueva canalización.
+- Agentes proponen artículos → PRs → validadores aprueban → GitHub webhook publica en `/data` con guardas (sin exponer workflows de producción).
+- `scripts/build-feed.js` y el servidor consolidan `feed-latest.json` e índices. El frontend lee SOLO `data/feed-latest.json` (sin fallbacks). El feed puede estar a cero hasta aprobar/mergear.
 
 ## Estructura del repositorio
 
@@ -46,16 +45,10 @@ Entradas (insumos que se editan/añaden): `data/runs/*.json` (agentes), `data/in
 
 Esquemas: ver `docs/schemas/*.json` y contratos en `docs/DATA_LAYOUT.md`.
 
-## Workflows n8n en producción
+## Workflows n8n (privados)
 
-Carpeta: `n8n/workflows/`
-
-- `PRODUCTION_FEED_NEWS_AUTOPILOT.json` — Pipeline de noticias (ingestión RSS, clasificación, publicación a GitHub).
-- `PRODUCTION_SOCIAL_AUTOPILOT.json` — Publicaciones sociales con pulido/validación.
-- `PRODUCTION_SOCIAL_WEEKLY_REPORT.json` — Resumen semanal por temas/países.
-- Borradores/tests: `DRAFT_SOCIALMEDIA_LEGACY.json`, `SOCIALMEDIA_*_TEST_vYYYYMMDD-HHMM.json`.
-
-Normas y ciclo de vida: `docs/N8N_WORKFLOW_GUIDELINES.md` y `n8n/README.md`.
+- Los JSON de producción no se comprometen en el repo. Admin puede usar un alias (p.ej. `IvanFile.json`) como workflow de producción en n8n privado.
+- Normas y ciclo de vida: ver `docs/N8N_WORKFLOW_GUIDELINES.md` (naming, promoción y privacidad).
 
 ## Configuración del sitio (cliente)
 
@@ -98,12 +91,13 @@ Guías detalladas: `N8N_SETUP.md` y `N8N_INTEGRATION.md`.
 - Requiere credenciales en n8n (Grok/X.AI, GitHub, etc.). No hay secretos en este repo.
 - Naming y promoción de builds: ver `n8n/README.md`.
 
-## Seguridad y buenas prácticas
+## Seguridad y buenas prácticas (v2.1)
 
 - Sin claves en el cliente; secretos viven en credenciales de n8n / variables de entorno.
 - CSP estricta en HTML; si usas endpoints externos, añade su origen a `connect-src`.
 - `scripts/build-feed.js` escribe de forma idempotente y atómica; CI evita solapes con `concurrency`.
-- Preferir PRs generados por agentes sobre escrituras directas a `main` para trazabilidad.
+- Preferir PRs generados por agentes; server publica tras merge (ver `docs/AGENT_PROTOCOL.md`).
+- Validación estricta: enlaces deben resolver (HEAD+GET), fuentes en allowlist (`/data/sources.json`), alcance LATAM + IA.
 
 Más en `SECURITY.md` y `docs/DATA_PIPELINE.md` (seguridad de concurrencia y contratos de datos).
 
@@ -111,7 +105,8 @@ Más en `SECURITY.md` y `docs/DATA_PIPELINE.md` (seguridad de concurrencia y con
 
 - `docs/DATA_LAYOUT.md` — Contrato y distribución de archivos en `data/`.
 - `docs/DATA_PIPELINE.md` — Flujo de consolidación, entradas vs. generados y CI.
-- `docs/WORKFLOW_DEBUG007.md` — Notas del workflow estable.
+- `docs/AGENT_PROTOCOL.md` — Protocolo de agentes (prompts, endpoints, ejemplos).
+- `docs/N8N_WORKFLOW_GUIDELINES.md` — Naming/prod (incluye alias “IvanFile”).
 - `docs/LOCAL_DEV_DATA.md` — Guardas para no versionar data generada en dev.
 - `n8n/README.md` — Normas de workflows, nombres y promoción a producción.
 
