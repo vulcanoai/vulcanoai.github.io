@@ -1,6 +1,64 @@
 {
   "version": "v1.0",
   "category": "startups",
-  "generated_at": "2025-09-15T12:00:47.602Z",
-  "articles": []
+  "generated_at": "2025-09-15T12:00:50.870Z",
+  "articles": [
+    {
+      "id": "https://startupi.com.br/ingles-deixar-barreira-acesso-a-vagas/",
+      "title": "E se o inglês deixar de ser uma barreira de acesso para vagas globais?",
+      "summary": "Startupi E se o inglês deixar de ser uma barreira de acesso para vagas globais? *Por Gustavo Sèngès Ferramentas de tradução em tempo real podem democratizar o acesso a vagas remotas em empresas estrangeiras e transformar o mercado de trabalho para milhões de profissionais ao redor do mundo Durante muito tempo, falar inglês era condição necessária para a conquista de oportunidades globais. Em boa parte das empresas estrangeiras, dominar o [...] O post E se o inglês deixar de ser uma barreira de acesso para vagas globais? aparece primeiro em Startupi e foi escrito por Convidado Especial ]]>",
+      "url": "https://startupi.com.br/ingles-deixar-barreira-acesso-a-vagas/",
+      "source": "Startupi",
+      "source_url": "https://startupi.com.br",
+      "country": "Brasil",
+      "topics": [
+        "Startups",
+        "Empresas"
+      ],
+      "language": "pt",
+      "published_at": "2025-09-14T11:00:00.000Z",
+      "relevance": 5,
+      "sentiment": "neutral",
+      "author": "",
+      "curator": "Codex 1"
+    },
+    {
+      "id": "https://startupi.com.br/setembro-amarelo-reforca-imapcto-saude-mental/",
+      "title": "Setembro Amarelo reforça impacto da saúde mental na produtividade e gestão de empresas",
+      "summary": "Startupi Setembro Amarelo reforça impacto da saúde mental na produtividade e gestão de empresas O Setembro Amarelo, campanha nacional dedicada à prevenção do suicídio e à conscientização sobre saúde mental, recoloca o tema no centro das discussões corporativas. Em 2024, dados do Ministério da Previdência Social apontaram mais de 472 mil afastamentos de trabalhadores brasileiros relacionados a transtornos mentais e comportamentais. Entre os diagnósticos mais recorrentes estão depressão, ansiedade [...] O post Setembro Amarelo reforça impacto da saúde mental na produtividade e gestão de empresas aparece primeiro em Startupi e foi escrito por Tiago Souza ]]>",
+      "url": "https://startupi.com.br/setembro-amarelo-reforca-imapcto-saude-mental/",
+      "source": "Startupi",
+      "source_url": "https://startupi.com.br",
+      "country": "Brasil",
+      "topics": [
+        "Startups",
+        "Empresas"
+      ],
+      "language": "pt",
+      "published_at": "2025-09-14T10:00:00.000Z",
+      "relevance": 5,
+      "sentiment": "neutral",
+      "author": "",
+      "curator": "Codex 1"
+    },
+    {
+      "id": "https://startupi.com.br/ex-globo-e-novo-cto-do-vakinha/",
+      "title": "Ex-Globo é novo CTO do Vakinha",
+      "summary": "Startupi Ex-Globo é novo CTO do Vakinha Marcelo Soares é o novo CTO do Vakinha, site de doações online. Ele terá a missão de otimizar o produto, garantindo melhor experiência e segurança para o usuário e para a plataforma, além de aperfeiçoar o tratamento de dados, que é um ativo da empresa de impacto social e um grande elo com seus públicos, [...] O post Ex-Globo é novo CTO do Vakinha aparece primeiro em Startupi e foi escrito por Cecília Ferraz ]]>",
+      "url": "https://startupi.com.br/ex-globo-e-novo-cto-do-vakinha/",
+      "source": "Startupi",
+      "source_url": "https://startupi.com.br",
+      "country": "Brasil",
+      "topics": [
+        "Startups",
+        "Empresas"
+      ],
+      "language": "pt",
+      "published_at": "2025-09-14T10:00:00.000Z",
+      "relevance": 5,
+      "sentiment": "neutral",
+      "author": "",
+      "curator": "Codex 1"
+    }
+  ]
 }
