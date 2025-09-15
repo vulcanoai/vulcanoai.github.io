@@ -25,7 +25,7 @@
   <meta http-equiv="refresh" content="0;url=/pages/noticias.html" />
 </head>
 
-<body>
+<body class="grid-room">
   <div style="display:flex; align-items:center; justify-content:center; height:100vh; background:var(--bg); color:var(--text)">
     <div style="text-align:center">
       <svg width="48" height="48" style="color:var(--logo); margin-bottom:16px">
@@ -35,6 +35,32 @@
       <div style="margin-top:8px"><a href="/pages/noticias.html" style="color:var(--brand)">Si no se redirige automáticamente, haz clic aquí</a></div>
     </div>
   </div>
-</body>
-
-</html>
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="/pages/noticias.html" class="nav-item" data-page="home">
+        <svg class="nav-icon" aria-hidden="true">
+          <use href="/assets/icons.svg#home"></use>
+        </svg>
+        <span class="nav-label">Home</span>
+      </a>
+      <a href="/pages/agentes.html" class="nav-item" data-page="agents">
+        <svg class="nav-icon" aria-hidden="true">
+          <use href="/assets/icons.svg#users"></use>
+        </svg>
+        <span class="nav-label">Agents</span>
+      </a>
+      <a href="/pages/crypto.html" class="nav-item" data-page="markets">
+        <svg class="nav-icon" aria-hidden="true">
+          <use href="/assets/icons.svg#trending-up"></use>
+        </svg>
+        <span class="nav-label">Markets</span>
+      </a>
+      <a href="/pages/apoya.html" class="nav-item" data-page="support">
+        <svg class="nav-icon" aria-hidden="true">
+          <use href="/assets/icons.svg#heart"></use>
+        </svg>
+        <span class="nav-label">Support</span>
+      </a>
+    </nav>
+    <script src="/assets/js/panels.js"></script>
+  </body>

@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="/assets/css/styles.css?v=3" />
 </head>
 
-<body>
+<body class="grid-room">
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="/pages/noticias.html">
@@ -378,6 +378,32 @@
     <script src="/assets/js/config.js"></script>
     <script src="/assets/js/logo.js?v=2"></script>
   <script src="/assets/js/app.js?v=9"></script>
-</body>
-
-</html>
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="/pages/noticias.html" class="nav-item" data-page="home">
+        <svg class="nav-icon" aria-hidden="true">
+          <use href="/assets/icons.svg#home"></use>
+        </svg>
+        <span class="nav-label">Home</span>
+      </a>
+      <a href="/pages/agentes.html" class="nav-item" data-page="agents">
+        <svg class="nav-icon" aria-hidden="true">
+          <use href="/assets/icons.svg#users"></use>
+        </svg>
+        <span class="nav-label">Agents</span>
+      </a>
+      <a href="/pages/crypto.html" class="nav-item" data-page="markets">
+        <svg class="nav-icon" aria-hidden="true">
+          <use href="/assets/icons.svg#trending-up"></use>
+        </svg>
+        <span class="nav-label">Markets</span>
+      </a>
+      <a href="/pages/apoya.html" class="nav-item" data-page="support">
+        <svg class="nav-icon" aria-hidden="true">
+          <use href="/assets/icons.svg#heart"></use>
+        </svg>
+        <span class="nav-label">Support</span>
+      </a>
+    </nav>
+    <script src="/assets/js/panels.js"></script>
+  </body>

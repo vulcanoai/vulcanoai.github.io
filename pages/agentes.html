@@ -11,7 +11,7 @@
     <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="/assets/css/styles.css?v=3" />
   </head>
-  <body>
+  <body class="grid-room">
     <a href="#main" class="skip-link">Saltar al contenido</a>
     <header class="site-header">
       <div class="container header-inner">
@@ -181,5 +181,77 @@
     <script src="/assets/js/theme.js"></script>
     <script src="/assets/js/status-badge.js"></script>
     <script src="/assets/js/app.js?v=9"></script>
+  
+    <!-- Agents Panel Overlay -->
+    <div class="panel-overlay" data-panel="agents">
+      <div class="panel-sheet">
+        <div class="panel-header">
+          <h2 class="panel-title">AI Agents</h2>
+          <button class="panel-close" aria-label="Close">
+            <svg aria-hidden="true" width="20" height="20"><use href="/assets/icons.svg#x"></use></svg>
+          </button>
+        </div>
+        <div class="panel-content">
+          <p>AI Agents dashboard loading...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Analytics Panel Overlay -->
+    <div class="panel-overlay" data-panel="analytics">
+      <div class="panel-sheet large">
+        <div class="panel-header">
+          <h2 class="panel-title">Analytics</h2>
+          <button class="panel-close" aria-label="Close">
+            <svg aria-hidden="true" width="20" height="20"><use href="/assets/icons.svg#x"></use></svg>
+          </button>
+        </div>
+        <div class="panel-content">
+          <p>Analytics data loading...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sources Panel Overlay -->
+    <div class="panel-overlay" data-panel="sources">
+      <div class="panel-sheet">
+        <div class="panel-header">
+          <h2 class="panel-title">Data Sources</h2>
+          <button class="panel-close" aria-label="Close">
+            <svg aria-hidden="true" width="20" height="20"><use href="/assets/icons.svg#x"></use></svg>
+          </button>
+        </div>
+        <div class="panel-content">
+          <p>Data sources loading...</p>
+        </div>
+      </div>
+    </div>
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="/pages/noticias.html" class="nav-item" data-page="home">
+        <svg class="nav-icon" aria-hidden="true">
+          <use href="/assets/icons.svg#home"></use>
+        </svg>
+        <span class="nav-label">Home</span>
+      </a>
+      <a href="/pages/agentes.html" class="nav-item active" aria-current="page" data-page="agents">
+        <svg class="nav-icon" aria-hidden="true">
+          <use href="/assets/icons.svg#users"></use>
+        </svg>
+        <span class="nav-label">Agents</span>
+      </a>
+      <a href="/pages/crypto.html" class="nav-item" data-page="markets">
+        <svg class="nav-icon" aria-hidden="true">
+          <use href="/assets/icons.svg#trending-up"></use>
+        </svg>
+        <span class="nav-label">Markets</span>
+      </a>
+      <a href="/pages/apoya.html" class="nav-item" data-page="support">
+        <svg class="nav-icon" aria-hidden="true">
+          <use href="/assets/icons.svg#heart"></use>
+        </svg>
+        <span class="nav-label">Support</span>
+      </a>
+    </nav>
+    <script src="/assets/js/panels.js"></script>
   </body>
-  </html>
