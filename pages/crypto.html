@@ -68,190 +68,133 @@
         </nav>
       </div>
     </header>
-    <main class="section" id="main">
-      <div class="container">
-        <!-- Cultural Crypto Gateway -->
-        <div class="crypto-cultural-hero">
-          <div class="vector-field" id="vector-field">
-            <!-- Mathematical vector field based on logo geometry -->
+    <main class="app-main" id="main">
+      <div class="app-container">
+        <!-- App Profile Header -->
+        <div class="app-profile">
+          <div class="profile-avatar">
+            <svg class="avatar-icon" aria-hidden="true">
+              <use href="/assets/icons.svg#trending-up"></use>
+            </svg>
           </div>
-
-          <div class="hero-grid">
-            <div class="hero-content">
-              <div class="cultural-header">
-                <div class="geometric-logo" id="geometric-logo">
-                  <!-- Pure vector mathematics from logo -->
-                </div>
-                <div class="hero-text">
-                  <h1>Futurismo Digital</h1>
-                  <p class="hero-subtitle">Donde la cultura latina se encuentra con la economía del futuro</p>
-                  <div class="cultural-bridge">
-                    <span class="bridge-element">Arte</span>
-                    <span class="bridge-connector">×</span>
-                    <span class="bridge-element">Ciencia</span>
-                    <span class="bridge-connector">×</span>
-                    <span class="bridge-element">Economía</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Real-time Economic Indicators -->
-            <div class="economic-dashboard">
-              <div class="dashboard-header">
-                <h3>Estado Económico Regional</h3>
-                <div class="update-indicator">
-                  <div class="pulse-dot"></div>
-                  <span>Tiempo real</span>
-                </div>
-              </div>
-
-              <div class="indicators-grid">
-                <div class="indicator-card primary">
-                  <div class="indicator-icon">$</div>
-                  <div class="indicator-data">
-                    <div class="indicator-value" id="usd-rate">--</div>
-                    <div class="indicator-label">USD/Peso</div>
-                    <div class="indicator-trend" id="usd-trend">--</div>
-                  </div>
-                </div>
-
-                <div class="indicator-card">
-                  <div class="indicator-icon">◎</div>
-                  <div class="indicator-data">
-                    <div class="indicator-value" id="sol-rate">--</div>
-                    <div class="indicator-label">SOL</div>
-                    <div class="indicator-trend" id="sol-trend">--</div>
-                  </div>
-                </div>
-
-                <div class="indicator-card">
-                  <div class="indicator-icon">₿</div>
-                  <div class="indicator-data">
-                    <div class="indicator-value" id="btc-rate">--</div>
-                    <div class="indicator-label">BTC</div>
-                    <div class="indicator-trend" id="btc-trend">--</div>
-                  </div>
-                </div>
-
-                <div class="indicator-card computation">
-                  <div class="indicator-icon">⚡</div>
-                  <div class="indicator-data">
-                    <div class="indicator-value" id="compute-power">--</div>
-                    <div class="indicator-label">Computación LATAM</div>
-                    <div class="indicator-sublabel">para el bien común</div>
-                  </div>
-                </div>
-              </div>
+          <div class="profile-info">
+            <h1 class="profile-name">Crypto LATAM</h1>
+            <p class="profile-subtitle">Mercados Digitales</p>
+          </div>
+          <div class="profile-stats">
+            <div class="stat-pill">
+              <span class="stat-number" id="crypto-signals-counter">...</span>
+              <span class="stat-text">Señales</span>
             </div>
           </div>
+        </div>
 
-          <!-- Computation for Good Concept -->
-          <div class="computation-concept">
-            <div class="concept-header">
-              <h3>Computación = Nueva Moneda</h3>
-              <p>Cada token que adquieres pone poder computacional a trabajar por causas latinoamericanas</p>
+        <!-- Quick Actions Grid -->
+        <div class="quick-actions">
+          <h2 class="section-title">Acciones Rápidas</h2>
+          <div class="action-grid">
+            <button class="action-card" data-action="markets">
+              <svg class="action-icon" aria-hidden="true">
+                <use href="/assets/icons.svg#bar-chart"></use>
+              </svg>
+              <span class="action-label">Mercados</span>
+            </button>
+
+            <button class="action-card" data-action="defi">
+              <svg class="action-icon" aria-hidden="true">
+                <use href="/assets/icons.svg#layers"></use>
+              </svg>
+              <span class="action-label">DeFi</span>
+            </button>
+
+            <button class="action-card" data-action="regulation">
+              <svg class="action-icon" aria-hidden="true">
+                <use href="/assets/icons.svg#shield"></use>
+              </svg>
+              <span class="action-label">Regulación</span>
+            </button>
+
+            <button class="action-card" data-action="blockchain">
+              <svg class="action-icon" aria-hidden="true">
+                <use href="/assets/icons.svg#link"></use>
+              </svg>
+              <span class="action-label">Blockchain</span>
+            </button>
+
+            <button class="action-card" data-action="analytics" data-open-panel="analytics">
+              <svg class="action-icon" aria-hidden="true">
+                <use href="/assets/icons.svg#pie-chart"></use>
+              </svg>
+              <span class="action-label">Análisis</span>
+            </button>
+
+            <button class="action-card" data-action="settings">
+              <svg class="action-icon" aria-hidden="true">
+                <use href="/assets/icons.svg#settings"></use>
+              </svg>
+              <span class="action-label">Configurar</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Market Overview -->
+        <div class="market-overview">
+          <h2 class="section-title">Resumen de Mercado</h2>
+          <div class="market-grid">
+            <div class="market-card primary">
+              <div class="market-icon">₿</div>
+              <div class="market-data">
+                <div class="market-value" id="btc-price">--</div>
+                <div class="market-label">Bitcoin</div>
+                <div class="market-change" id="btc-change">--</div>
+              </div>
             </div>
 
-            <div class="concept-visualization" id="computation-viz">
-              <div class="compute-flow">
-                <div class="compute-node source">
-                  <span>Tu Token</span>
-                </div>
-                <div class="compute-arrow"></div>
-                <div class="compute-node process">
-                  <span>Poder de Cómputo</span>
-                </div>
-                <div class="compute-arrow"></div>
-                <div class="compute-node result">
-                  <span>Solución LATAM</span>
-                </div>
+            <div class="market-card">
+              <div class="market-icon">Ξ</div>
+              <div class="market-data">
+                <div class="market-value" id="eth-price">--</div>
+                <div class="market-label">Ethereum</div>
+                <div class="market-change" id="eth-change">--</div>
               </div>
+            </div>
 
-              <div class="cause-examples">
-                <div class="cause-card">
-                  <span>🏥</span>
-                  <p>Investigación médica</p>
-                </div>
-                <div class="cause-card">
-                  <span>🌱</span>
-                  <p>Cambio climático</p>
-                </div>
-                <div class="cause-card">
-                  <span>📚</span>
-                  <p>Educación accesible</p>
-                </div>
-                <div class="cause-card">
-                  <span>🏛️</span>
-                  <p>Políticas públicas</p>
-                </div>
+            <div class="market-card">
+              <div class="market-icon">◎</div>
+              <div class="market-data">
+                <div class="market-value" id="sol-price">--</div>
+                <div class="market-label">Solana</div>
+                <div class="market-change" id="sol-change">--</div>
+              </div>
+            </div>
+
+            <div class="market-card latam">
+              <div class="market-icon">🌎</div>
+              <div class="market-data">
+                <div class="market-value" id="latam-index">--</div>
+                <div class="market-label">Índice LATAM</div>
+                <div class="market-sublabel">Adopción cripto</div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Smart chips auto (feed.js) + filtro inicial a Crypto por data-attribute -->
-        <div class="filters" id="filters">
-          <input type="search" id="search" placeholder="Buscar en Crypto" aria-label="Buscar" />
-          <select id="filter-country" aria-label="Filtrar por país"></select>
-          <select id="filter-topic" aria-label="Filtrar por tema"></select>
-          <select id="filter-source" aria-label="Filtrar por fuente"></select>
-          <select id="sort-by" aria-label="Ordenar">
-            <option value="recent">Más recientes</option>
-            <option value="relevance">Más relevantes</option>
-          </select>
-        </div>
-
-        <!-- Crypto Feed Section -->
-        <div class="crypto-feed-section">
-          <div class="crypto-feed-header">
-            <h2>Últimas señales</h2>
-            <p class="section-subtitle">Noticias de blockchain, DeFi, stablecoins y regulación crypto en América Latina</p>
+        <!-- Activity Feed -->
+        <div class="activity-feed">
+          <div class="feed-header">
+            <h2 class="section-title">Actividad Reciente</h2>
+            <div class="feed-filters">
+              <select class="filter-pill" id="filter-topic" aria-label="Filtrar">
+                <option value="">Todos los Temas</option>
+                <option value="Crypto">Crypto</option>
+                <option value="DeFi">DeFi</option>
+                <option value="Blockchain">Blockchain</option>
+                <option value="Regulación">Regulación</option>
+              </select>
+            </div>
           </div>
-          
-          <div class="crypto-layout">
-            <section class="crypto-main">
-              <div id="news-list" class="crypto-grid" aria-live="polite" data-default-topic="Crypto">
-                <!-- Content loaded dynamically from feed.js -->
-              </div>
-            </section>
-            
-            <aside class="crypto-sidebar">
-              <!-- Regional Analysis -->
-              <div class="crypto-panel">
-                <h3>Análisis regional</h3>
-                <div class="panel-metrics">
-                  <div class="metric-row">
-                    <span class="metric-label">Cobertura</span>
-                    <span class="metric-value" id="regional-coverage">--</span>
-                  </div>
-                  <div class="metric-row">
-                    <span class="metric-label">Señales/semana</span>
-                    <span class="metric-value" id="weekly-signals">--</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Data Sources -->
-              <div class="crypto-panel">
-                <h3>Metodología</h3>
-                <div class="method-list">
-                  <div class="method-item">Filtrado automático por IA</div>
-                  <div class="method-item">Verificación de fuentes</div>
-                  <div class="method-item">Análisis de sentimiento</div>
-                  <div class="method-item">Clasificación temática</div>
-                </div>
-              </div>
-
-              <!-- Algorithmic Visualization -->
-              <div class="crypto-panel">
-                <h3>Geometría de red</h3>
-                <div id="crypto-network" class="network-visualization">
-                  <!-- Network nodes generated by logo.js -->
-                </div>
-                <p class="viz-note">Visualización algorítmica de conexiones entre fuentes</p>
-              </div>
-            </aside>
+          <div id="activity-list" class="activity-list" aria-live="polite" data-default-topic="Crypto">
+            <!-- Content loaded dynamically -->
           </div>
         </div>
       </div>
@@ -277,103 +220,68 @@
     <script src="/assets/js/feed.js?v=10"></script>
     <script src="/assets/js/app.js?v=9"></script>
     <script>
-      // Generate sophisticated crypto visualizations
+      // Crypto app-specific functionality
       document.addEventListener('DOMContentLoaded', function() {
-        const heroOrb = document.getElementById('hero-orb');
-        const blockchainGrid = document.getElementById('blockchain-grid');
-        const networkEl = document.getElementById('crypto-network');
+        // Initialize crypto counter
+        const cryptoCounter = document.getElementById('crypto-signals-counter');
+        if (cryptoCounter) {
+          // This will be updated by feed.js when it loads crypto content
+          cryptoCounter.textContent = '---';
+        }
 
-        // Main hero orb with dynamic wireframe
-        if (heroOrb && window.VulcanoLogo) {
-          window.VulcanoLogo.drawWireSphere(heroOrb, {
-            radius: 70,
-            lons: 16,
-            rotations: [0, 30, 60]
+        // Initialize market data placeholders
+        const marketElements = {
+          'btc-price': '$--,---',
+          'eth-price': '$--,---',
+          'sol-price': '$---',
+          'latam-index': '---%',
+          'btc-change': '+-%',
+          'eth-change': '+-%',
+          'sol-change': '+-%'
+        };
+
+        Object.entries(marketElements).forEach(([id, placeholder]) => {
+          const element = document.getElementById(id);
+          if (element) {
+            element.textContent = placeholder;
+          }
+        });
+
+        // Action card interactions
+        document.querySelectorAll('.action-card').forEach(card => {
+          card.addEventListener('click', function() {
+            const action = this.dataset.action;
+            console.log('Crypto action:', action);
+
+            // Add haptic feedback
+            if (navigator.vibrate) {
+              navigator.vibrate(50);
+            }
+
+            // Handle specific crypto actions
+            switch (action) {
+              case 'markets':
+                // Scroll to market overview
+                document.querySelector('.market-overview')?.scrollIntoView({ behavior: 'smooth' });
+                break;
+              case 'defi':
+              case 'regulation':
+              case 'blockchain':
+                // Filter activity feed by topic
+                const topicFilter = document.getElementById('filter-topic');
+                if (topicFilter) {
+                  const topicMap = {
+                    'defi': 'DeFi',
+                    'regulation': 'Regulación',
+                    'blockchain': 'Blockchain'
+                  };
+                  topicFilter.value = topicMap[action] || '';
+                  topicFilter.dispatchEvent(new Event('change'));
+                }
+                break;
+            }
           });
-
-          // Add subtle rotation animation
-          heroOrb.style.animation = 'crypto-rotate 20s linear infinite';
-        }
-
-        // Blockchain network background
-        if (blockchainGrid && window.VulcanoLogo) {
-          const grid = document.createElement('div');
-          grid.style.cssText = 'display:grid;grid-template-columns:repeat(6,1fr);gap:20px;opacity:0.15;position:absolute;inset:0;padding:40px;';
-
-          for (let i = 0; i < 24; i++) {
-            const node = document.createElement('div');
-            node.style.cssText = `
-              opacity:${0.3 + (i % 3) * 0.2};
-              transform:scale(${0.2 + (i % 4) * 0.1});
-              animation: crypto-pulse ${2 + (i % 3)}s ease-in-out infinite;
-              animation-delay: ${i * 0.2}s;
-            `;
-            window.VulcanoLogo.drawWireSphere(node, {
-              radius: 20,
-              lons: 4 + (i % 8),
-              rotations: [(i * 15) % 360, ((i + 1) * 20) % 360]
-            });
-            grid.appendChild(node);
-          }
-
-          blockchainGrid.appendChild(grid);
-        }
-
-        // Network sidebar visualization
-        if (networkEl && window.VulcanoLogo) {
-          const network = document.createElement('div');
-          network.style.cssText = 'display:flex;flex-wrap:wrap;gap:8px;justify-content:center;';
-
-          for (let i = 0; i < 9; i++) {
-            const node = document.createElement('div');
-            node.style.cssText = `
-              opacity:0.4;
-              transform:scale(0.25);
-              animation: crypto-network-pulse ${1.5 + (i % 3) * 0.5}s ease-in-out infinite;
-              animation-delay: ${i * 0.15}s;
-            `;
-            window.VulcanoLogo.drawWireSphere(node, {
-              radius: 25,
-              lons: 6 + (i % 6),
-              rotations: [i * 40, (i + 2) * 25]
-            });
-            network.appendChild(node);
-          }
-
-          networkEl.appendChild(network);
-        }
-
-        // Add CSS animations
-        const style = document.createElement('style');
-        style.textContent = `
-          @keyframes crypto-rotate {
-            from { transform: rotateY(0deg) rotateX(0deg); }
-            to { transform: rotateY(360deg) rotateX(360deg); }
-          }
-          @keyframes crypto-pulse {
-            0%, 100% { opacity: 0.3; transform: scale(0.2); }
-            50% { opacity: 0.6; transform: scale(0.3); }
-          }
-          @keyframes crypto-network-pulse {
-            0%, 100% { opacity: 0.2; }
-            50% { opacity: 0.6; }
-          }
-          .orbital-ring {
-            position: absolute;
-            border: 1px solid var(--logo);
-            border-radius: 50%;
-            opacity: 0.2;
-          }
-          .ring-1 { width: 150px; height: 150px; animation: crypto-rotate 30s linear infinite reverse; }
-          .ring-2 { width: 200px; height: 200px; animation: crypto-rotate 40s linear infinite; }
-          .ring-3 { width: 250px; height: 250px; animation: crypto-rotate 50s linear infinite reverse; }
-          .tagline-pulse {
-            width: 8px; height: 8px; background: var(--logo);
-            border-radius: 50%; margin-right: 12px;
-            animation: crypto-pulse 2s ease-in-out infinite;
-          }
-        `;
-        document.head.appendChild(style);
+        });
       });
     </script>
   
@@ -381,13 +289,13 @@
     <div class="panel-overlay" data-panel="agents">
       <div class="panel-sheet">
         <div class="panel-header">
-          <h2 class="panel-title">AI Agents</h2>
-          <button class="panel-close" aria-label="Close">
+          <h2 class="panel-title">Agentes IA</h2>
+          <button class="panel-close" aria-label="Cerrar">
             <svg aria-hidden="true" width="20" height="20"><use href="/assets/icons.svg#x"></use></svg>
           </button>
         </div>
         <div class="panel-content">
-          <p>AI Agents dashboard loading...</p>
+          <p>Cargando dashboard de agentes IA...</p>
         </div>
       </div>
     </div>
@@ -396,13 +304,13 @@
     <div class="panel-overlay" data-panel="analytics">
       <div class="panel-sheet large">
         <div class="panel-header">
-          <h2 class="panel-title">Analytics</h2>
-          <button class="panel-close" aria-label="Close">
+          <h2 class="panel-title">Análisis</h2>
+          <button class="panel-close" aria-label="Cerrar">
             <svg aria-hidden="true" width="20" height="20"><use href="/assets/icons.svg#x"></use></svg>
           </button>
         </div>
         <div class="panel-content">
-          <p>Analytics data loading...</p>
+          <p>Cargando datos de análisis...</p>
         </div>
       </div>
     </div>
@@ -411,13 +319,13 @@
     <div class="panel-overlay" data-panel="sources">
       <div class="panel-sheet">
         <div class="panel-header">
-          <h2 class="panel-title">Data Sources</h2>
-          <button class="panel-close" aria-label="Close">
+          <h2 class="panel-title">Fuentes de Datos</h2>
+          <button class="panel-close" aria-label="Cerrar">
             <svg aria-hidden="true" width="20" height="20"><use href="/assets/icons.svg#x"></use></svg>
           </button>
         </div>
         <div class="panel-content">
-          <p>Data sources loading...</p>
+          <p>Cargando fuentes de datos...</p>
         </div>
       </div>
     </div>
@@ -439,7 +347,7 @@
         <svg class="nav-icon" aria-hidden="true">
           <use href="/assets/icons.svg#trending-up"></use>
         </svg>
-        <span class="nav-label">Markets</span>
+        <span class="nav-label">Crypto</span>
       </a>
       <a href="/pages/apoya.html" class="nav-item" data-page="support">
         <svg class="nav-icon" aria-hidden="true">
