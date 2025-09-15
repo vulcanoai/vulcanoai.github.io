@@ -2694,6 +2694,12 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
 .site-footer{border-top:1px solid var(--line); padding:18px 0; background:var(--bg)}
 .footer-inner{display:flex; align-items:center; justify-content:space-between; gap:16px}
 .footer-brand{display:flex; align-items:center; gap:10px}
+.footer-brand strong{
+  font-weight: 800;
+  letter-spacing: .5px;
+  font-size: 1.1rem;
+  color: var(--text);
+}
 .footer-nav{display:flex; gap:12px}
 .footer-nav a{color:var(--muted); text-decoration:none}
 
