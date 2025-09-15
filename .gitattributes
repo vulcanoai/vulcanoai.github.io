@@ -1,3 +1,9 @@
-# Reduce noise in diffs for large generated JSON under data/
-data/** -diff
+# Prefer our branch on generated or frequently-updated JSON to avoid conflicts
+data/** merge=ours
+data/index/** merge=ours
+data/runs/** merge=ours
+data/entries/** merge=ours
+
+# Ensure JSON diffs are treated as text
+*.json text
 
