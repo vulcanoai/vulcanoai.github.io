@@ -1,13 +1,21 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-HOOKS_DIR="$(git rev-parse --show-toplevel)/scripts/git-hooks"
+HOOKS_DIR=".githooks"
+TARGET_DIR=".git/hooks"
+
 if [[ ! -d "$HOOKS_DIR" ]]; then
-  echo "Hooks directory not found: $HOOKS_DIR" >&2
-  exit 1
+  echo "No $HOOKS_DIR directory found. Nothing to install."
+  exit 0
 fi
 
-git config core.hooksPath "$HOOKS_DIR"
-chmod +x "$HOOKS_DIR"/* || true
-echo "Git hooks installed from $HOOKS_DIR"
+mkdir -p "$TARGET_DIR"
+for hook in pre-commit pre-merge-commit; do
+  if [[ -f "$HOOKS_DIR/$hook" ]]; then
+    install -m 0755 "$HOOKS_DIR/$hook" "$TARGET_DIR/$hook"
+    echo "Installed hook: $hook"
+  fi
+done
+
+echo "Git hooks installed."
 

@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Block accidental commits of /data/* from local dev machines.
+
+set -euo pipefail
+
+if git diff --cached --name-only | grep -qE '^data/'; then
+  if [[ "${VULCANO_ALLOW_LOCAL_DATA_COMMIT:-}" != "1" ]]; then
+    echo "\n[guard] Blocking commit: staged changes under /data detected." >&2
+    echo "To override intentionally, set VULCANO_ALLOW_LOCAL_DATA_COMMIT=1 and re-commit." >&2
+    exit 1
+  fi
+fi
+
+exit 0
+

@@ -6,11 +6,15 @@ Recommended setup (sparse checkout)
 
 1) Enable sparse‑checkout and partial clone on your local repo:
 
+   # One‑liner (recommended)
+   bash scripts/setup-sparse-no-data.sh
+
+   # Manual steps (advanced):
    git config core.sparseCheckout true
-   git sparse-checkout init --cone
-   git sparse-checkout set \
-     '/*' \
-     '!:data'
+   git sparse-checkout init || true
+   git config core.sparseCheckoutCone false   # allow negative patterns
+   printf "/*\n!/data/\n" > .git/info/sparse-checkout
+   git read-tree -mu HEAD
 
    # Optional: speed up with partial clone
    git config remote.origin.promisor true
@@ -20,10 +24,11 @@ Recommended setup (sparse checkout)
 
 3) When you need to inspect data temporarily:
 
-   git sparse-checkout add data/index data/feed-latest.json
+   # add a subset, e.g., status + latest only
+   git sparse-checkout set '/*' '!/data/' '/data/index/' '/data/feed-latest.json'
 
-   # After inspecting, you can remove again:
-   git sparse-checkout set '/*' '!:data'
+   # After inspecting, remove again:
+   printf "/*\n!/data/\n" > .git/info/sparse-checkout && git read-tree -mu HEAD
 
 Why this works
 
@@ -40,19 +45,17 @@ Guardrails
 - The script `scripts/build-feed.js` refuses to write locally unless you set `VULCANO_ALLOW_LOCAL_DATA_WRITE=1` (or run in CI). This prevents accidental local data churn.
 - Prefer running ingestion via n8n/CI only. Local builds are for debugging and should opt‑in explicitly.
 
-Helper script
+Helper scripts
 
-- You can add sparse settings with a helper script:
-
-  scripts/setup-sparse-no-data.sh
+- Configure sparse checkout: `scripts/setup-sparse-no-data.sh`
+- Install local guard hooks: `scripts/install-hooks.sh`
 
 Local commit guard
 
-- Install repo‑managed git hooks to block accidental commits under `/data`:
+-- Install repo‑managed git hooks to block accidental commits under `/data`:
 
   ./scripts/install-hooks.sh
 
 - Override (not recommended):
 
   VULCANO_ALLOW_LOCAL_DATA_COMMIT=1 git commit -m "..."
-

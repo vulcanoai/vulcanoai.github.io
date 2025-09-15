@@ -1,0 +1,3 @@
+# Reduce noise in diffs for large generated JSON under data/
+data/** -diff
+
