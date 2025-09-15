@@ -67,96 +67,140 @@
         </nav>
       </div>
     </header>
-    <main class="section" id="main">
-      <div class="container">
-        <!-- Hero Section -->
-        <div class="agents-hero">
-          <div class="hero-content">
-            <div class="hero-header">
-              <svg class="hero-icon" aria-hidden="true">
-                <use href="/assets/icons.svg#robot"></use>
+    <main class="app-main" id="main">
+      <div class="app-container">
+        <!-- App Profile Header -->
+        <div class="app-profile">
+          <div class="profile-avatar">
+            <svg class="avatar-icon" aria-hidden="true">
+              <use href="/assets/icons.svg#users"></use>
+            </svg>
+          </div>
+          <div class="profile-info">
+            <h1 class="profile-name">Agentes IA</h1>
+            <p class="profile-subtitle">Sistema Autónomo</p>
+          </div>
+          <div class="profile-stats">
+            <div class="stat-pill">
+              <span class="stat-number" id="active-agents-counter">1</span>
+              <span class="stat-text">Activos</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Actions Grid -->
+        <div class="quick-actions">
+          <h2 class="section-title">Acciones Rápidas</h2>
+          <div class="action-grid">
+            <button class="action-card" data-action="status">
+              <svg class="action-icon" aria-hidden="true">
+                <use href="/assets/icons.svg#activity"></use>
               </svg>
-              <div class="hero-text">
-                <h1>Agente: Codex 1</h1>
-                <p class="hero-subtitle">AI News Researcher — enfoque único en recolectar noticias</p>
-              </div>
-            </div>
-            
-            <!-- Status Overview -->
-            <div class="status-overview">
-              <div class="status-card">
-                <div class="status-indicator">
-                  <div class="status-dot ok"></div>
-                  <span class="status-text">Sistemas operacionales</span>
-                </div>
-                <div id="agents-summary" class="status-summary">Cargando estado del ecosistema...</div>
-              </div>
-            </div>
-            
-            <!-- Controls -->
-            <div class="agents-controls">
-              <button id="agents-refresh-now" class="btn secondary">
-                <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#refresh"></use></svg>
-                Actualizar
-              </button>
-              <button id="agents-refresh-toggle" class="btn secondary">
-                <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#refresh"></use></svg>
-                <span class="toggle-text">Auto‑actualizar: ON</span>
-              </button>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Metrics Cards -->
-        <div id="agents-metrics" class="metrics-grid"></div>
+              <span class="action-label">Estado</span>
+            </button>
 
-        <!-- Pipeline Monitoring -->
-        <div class="agents-section">
-          <div class="section-header">
-            <h2>Flujo de datos</h2>
-            <p class="section-subtitle">Estado de ingesta, consolidación y publicación (últimas horas)</p>
-          </div>
-          <div class="panel">
-            <div id="pipeline-summary" class="note">Cargando pipeline…</div>
-            <div id="pipeline-chart" class="pipeline-chart" style="margin-top:12px"></div>
-            <div id="pipeline-timeline" class="smart-tags" style="margin-top:12px"></div>
-            <div id="pipeline-links" class="meta" style="margin-top:8px"></div>
+            <button class="action-card" data-action="pipeline">
+              <svg class="action-icon" aria-hidden="true">
+                <use href="/assets/icons.svg#layers"></use>
+              </svg>
+              <span class="action-label">Pipeline</span>
+            </button>
+
+            <button class="action-card" data-action="metrics">
+              <svg class="action-icon" aria-hidden="true">
+                <use href="/assets/icons.svg#bar-chart"></use>
+              </svg>
+              <span class="action-label">Métricas</span>
+            </button>
+
+            <button class="action-card" data-action="logs">
+              <svg class="action-icon" aria-hidden="true">
+                <use href="/assets/icons.svg#file-text"></use>
+              </svg>
+              <span class="action-label">Logs</span>
+            </button>
+
+            <button class="action-card" data-action="refresh">
+              <svg class="action-icon" aria-hidden="true">
+                <use href="/assets/icons.svg#refresh"></use>
+              </svg>
+              <span class="action-label">Actualizar</span>
+            </button>
+
+            <button class="action-card" data-action="settings">
+              <svg class="action-icon" aria-hidden="true">
+                <use href="/assets/icons.svg#settings"></use>
+              </svg>
+              <span class="action-label">Configurar</span>
+            </button>
           </div>
         </div>
 
-        <!-- Agents Grid -->
-        <div class="agents-section">
-          <div class="section-header">
-            <h2>Agente principal</h2>
-            <p class="section-subtitle">Operando con un único agente: Codex 1</p>
-          </div>
-          
-          <div id="agents-grid" class="agents-grid">
-            <!-- Agents loaded dynamically -->
-          </div>
-          
-          <!-- Fallback table for detailed view -->
-          <div class="table-section" style="display: none;">
-            <div class="table-header">
-              <h3>Vista detallada</h3>
-              <button class="btn link" onclick="document.querySelector('.agents-grid').style.display='grid'; this.parentElement.parentElement.style.display='none';">Volver a tarjetas</button>
+        <!-- Agent Status Overview -->
+        <div class="agent-status-overview">
+          <h2 class="section-title">Estado del Sistema</h2>
+          <div class="status-grid">
+            <div class="status-card primary">
+              <div class="status-indicator">
+                <div class="status-dot ok" id="system-status"></div>
+                <span class="status-text">Sistema Principal</span>
+              </div>
+              <div class="status-details">
+                <div class="status-value" id="uptime">99.8%</div>
+                <div class="status-label">Tiempo Activo</div>
+              </div>
             </div>
-            <div class="table-container">
-              <table id="agents-table" class="agents-table">
-                <thead>
-                  <tr>
-                    <th>Agente</th>
-                    <th>Estado</th>
-                    <th>Última ejecución</th>
-                    <th>Rendimiento</th>
-                    <th>Especialización</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <!-- Content loaded dynamically -->
-                </tbody>
-              </table>
+
+            <div class="status-card">
+              <div class="status-indicator">
+                <div class="status-dot processing" id="pipeline-status"></div>
+                <span class="status-text">Pipeline</span>
+              </div>
+              <div class="status-details">
+                <div class="status-value" id="processing-rate">~24/h</div>
+                <div class="status-label">Artículos/hora</div>
+              </div>
             </div>
+
+            <div class="status-card">
+              <div class="status-indicator">
+                <div class="status-dot ok" id="data-status"></div>
+                <span class="status-text">Datos</span>
+              </div>
+              <div class="status-details">
+                <div class="status-value" id="last-update">2min</div>
+                <div class="status-label">Última actualización</div>
+              </div>
+            </div>
+
+            <div class="status-card codex">
+              <div class="status-indicator">
+                <div class="status-dot ok" id="codex-status"></div>
+                <span class="status-text">Codex 1</span>
+              </div>
+              <div class="status-details">
+                <div class="status-value" id="codex-performance">Óptimo</div>
+                <div class="status-label">Rendimiento</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Activity Feed -->
+        <div class="activity-feed">
+          <div class="feed-header">
+            <h2 class="section-title">Actividad del Sistema</h2>
+            <div class="feed-filters">
+              <select class="filter-pill" id="filter-agent" aria-label="Filtrar por agente">
+                <option value="">Todos los Agentes</option>
+                <option value="Codex1">Codex 1</option>
+                <option value="Pipeline">Pipeline</option>
+                <option value="Sistema">Sistema</option>
+              </select>
+            </div>
+          </div>
+          <div id="agent-activity-list" class="activity-list" aria-live="polite">
+            <!-- Agent activity loaded dynamically -->
           </div>
         </div>
       </div>
@@ -181,18 +225,121 @@
     <script src="/assets/js/theme.js"></script>
     <script src="/assets/js/status-badge.js"></script>
     <script src="/assets/js/app.js?v=9"></script>
+    <script>
+      // Agents app-specific functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        // Initialize agent activity simulator
+        function simulateAgentActivity() {
+          const activityList = document.getElementById('agent-activity-list');
+          if (!activityList) return;
+
+          const activities = [
+            {
+              agent: 'Codex 1',
+              action: 'Procesó 12 artículos de fuentes RSS',
+              time: 'hace 2 min',
+              status: 'ok'
+            },
+            {
+              agent: 'Pipeline',
+              action: 'Clasificación automática completada',
+              time: 'hace 5 min',
+              status: 'ok'
+            },
+            {
+              agent: 'Sistema',
+              action: 'Actualización de índice LATAM',
+              time: 'hace 8 min',
+              status: 'processing'
+            },
+            {
+              agent: 'Codex 1',
+              action: 'Análisis de sentimiento terminado',
+              time: 'hace 12 min',
+              status: 'ok'
+            }
+          ];
+
+          activityList.innerHTML = activities.map(activity => `
+            <div class="activity-item">
+              <div class="activity-indicator">
+                <div class="activity-dot ${activity.status}"></div>
+              </div>
+              <div class="activity-content">
+                <div class="activity-title">${activity.action}</div>
+                <div class="activity-meta">
+                  <span class="activity-agent">${activity.agent}</span>
+                  <span class="activity-time">${activity.time}</span>
+                </div>
+              </div>
+            </div>
+          `).join('');
+        }
+
+        // Action card interactions
+        document.querySelectorAll('.action-card').forEach(card => {
+          card.addEventListener('click', function() {
+            const action = this.dataset.action;
+            console.log('Agent action:', action);
+
+            // Add haptic feedback
+            if (navigator.vibrate) {
+              navigator.vibrate(50);
+            }
+
+            // Handle specific agent actions
+            switch (action) {
+              case 'status':
+                document.querySelector('.agent-status-overview')?.scrollIntoView({ behavior: 'smooth' });
+                break;
+              case 'pipeline':
+              case 'logs':
+                // Filter activity by type
+                const filterSelect = document.getElementById('filter-agent');
+                if (filterSelect) {
+                  filterSelect.value = action === 'pipeline' ? 'Pipeline' : 'Sistema';
+                  filterSelect.dispatchEvent(new Event('change'));
+                }
+                break;
+              case 'refresh':
+                // Simulate refresh
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                  this.style.transform = '';
+                  simulateAgentActivity();
+                }, 150);
+                break;
+            }
+          });
+        });
+
+        // Initialize simulated data
+        simulateAgentActivity();
+
+        // Update status indicators periodically
+        setInterval(() => {
+          const dots = document.querySelectorAll('.status-dot');
+          dots.forEach(dot => {
+            if (Math.random() > 0.9) {
+              dot.style.opacity = '0.5';
+              setTimeout(() => dot.style.opacity = '', 200);
+            }
+          });
+        }, 3000);
+      });
+    </script>
   
     <!-- Agents Panel Overlay -->
     <div class="panel-overlay" data-panel="agents">
       <div class="panel-sheet">
         <div class="panel-header">
-          <h2 class="panel-title">AI Agents</h2>
-          <button class="panel-close" aria-label="Close">
+          <h2 class="panel-title">Agentes IA</h2>
+          <button class="panel-close" aria-label="Cerrar">
             <svg aria-hidden="true" width="20" height="20"><use href="/assets/icons.svg#x"></use></svg>
           </button>
         </div>
         <div class="panel-content">
-          <p>AI Agents dashboard loading...</p>
+          <p>Cargando dashboard de agentes IA...</p>
         </div>
       </div>
     </div>
@@ -201,13 +348,13 @@
     <div class="panel-overlay" data-panel="analytics">
       <div class="panel-sheet large">
         <div class="panel-header">
-          <h2 class="panel-title">Analytics</h2>
-          <button class="panel-close" aria-label="Close">
+          <h2 class="panel-title">Análisis</h2>
+          <button class="panel-close" aria-label="Cerrar">
             <svg aria-hidden="true" width="20" height="20"><use href="/assets/icons.svg#x"></use></svg>
           </button>
         </div>
         <div class="panel-content">
-          <p>Analytics data loading...</p>
+          <p>Cargando datos de análisis...</p>
         </div>
       </div>
     </div>
@@ -216,13 +363,13 @@
     <div class="panel-overlay" data-panel="sources">
       <div class="panel-sheet">
         <div class="panel-header">
-          <h2 class="panel-title">Data Sources</h2>
-          <button class="panel-close" aria-label="Close">
+          <h2 class="panel-title">Fuentes de Datos</h2>
+          <button class="panel-close" aria-label="Cerrar">
             <svg aria-hidden="true" width="20" height="20"><use href="/assets/icons.svg#x"></use></svg>
           </button>
         </div>
         <div class="panel-content">
-          <p>Data sources loading...</p>
+          <p>Cargando fuentes de datos...</p>
         </div>
       </div>
     </div>
@@ -238,7 +385,7 @@
         <svg class="nav-icon" aria-hidden="true">
           <use href="/assets/icons.svg#users"></use>
         </svg>
-        <span class="nav-label">Agents</span>
+        <span class="nav-label">Agentes</span>
       </a>
       <a href="/pages/crypto.html" class="nav-item" data-page="markets">
         <svg class="nav-icon" aria-hidden="true">
