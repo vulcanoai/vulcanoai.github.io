@@ -2232,18 +2232,26 @@ async function initFooterUpdates() {
   if (!footerUpdate) return;
   
   try {
-    // Get the last modification time from the feed
-    const feedRaw = await fetch('/data/feed-latest.json', { cache: 'no-store' });
-    if (feedRaw.ok) {
+    // Get last modification time and telemetry status
+    const [feedRaw, statusRaw] = await Promise.all([
+      fetch('/data/feed-latest.json', { cache: 'no-store' }),
+      fetch('/data/index/status.json', { cache: 'no-store' }).catch(()=>null)
+    ]);
+    let lm = '';
+    if (feedRaw && feedRaw.ok) {
       const lastModified = feedRaw.headers.get('last-modified');
       if (lastModified) {
         const updateTime = new Date(lastModified);
-        const timeString = updateTime.toLocaleTimeString('es-ES', {
-          hour: '2-digit',
-          minute: '2-digit',
-          timeZone: 'America/Bogota'
-        });
-        footerUpdate.textContent = `Última actualización: ${timeString}`;
+        lm = updateTime.toLocaleTimeString('es-ES', { hour:'2-digit', minute:'2-digit', timeZone:'America/Bogota' });
+      }
+    }
+    if (statusRaw && statusRaw.ok) {
+      const status = await statusRaw.json().catch(()=>null);
+      if (status) {
+        const n = Number(status.feed_count||0);
+        const s = Number(status.sources_count||0);
+        const ts = status.generated_at ? new Date(status.generated_at).toLocaleTimeString('es-ES', { hour:'2-digit', minute:'2-digit', timeZone:'America/Bogota' }) : lm;
+        footerUpdate.textContent = `Última actualización: ${ts || '—'} · Artículos: ${n} · Fuentes: ${s}`;
         return;
       }
     }
