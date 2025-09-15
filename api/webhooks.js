@@ -77,24 +77,16 @@ async function handleAISubmit(req, res){
     if (!arr.length){
       return res.status(400).json({ error: 'No articles provided' });
     }
-    // Normalize and validate minimal fields, no source hardcoding
-    const norm = (a) => ({
-      id: String(a.id || a.url || a.title || ''),
-      title: String(a.title || '').trim(),
-      summary: String(a.summary || '').trim().slice(0, 500),
-      url: String(a.url || '').trim(),
-      source: String(a.source || ''),
-      source_url: String(a.source_url || (a.url ? new URL(a.url).origin : '')),
-      country: String(a.country || 'Regional'),
-      topics: Array.isArray(a.topics) ? a.topics : [],
-      language: String(a.language || 'es').slice(0,2).toLowerCase(),
-      published_at: a.published_at || new Date().toISOString(),
-      relevance: Math.min(Math.max(Number(a.relevance || 6), 0), 10),
-      sentiment: ['positive','neutral','negative'].includes(a.sentiment) ? a.sentiment : 'neutral',
-      author: String(a.author || ''),
-      curator: String(a.curator || 'Codex 1')
-    });
-    const items = arr.map(norm).filter(x => x.title && x.url);
+    // Normalize and validate
+    const candidates = arr.map(a => normalizeArticle(a)).filter(x => x.title && x.url);
+    const items = [];
+    for (const it of candidates){
+      const [ok, allowed] = await Promise.all([
+        verifyUrl(it.url), isAllowedHost(it.url)
+      ]);
+      if (!ok || !allowed) continue;
+      items.push(it);
+    }
     if (!items.length){
       return res.status(400).json({ error: 'No valid articles after normalization' });
     }
@@ -444,4 +436,91 @@ async function handleStatus(req, res) {
       error: error.message
     });
   }
+}
+
+// ---------- Helper: raw body (for GitHub signature) ----------
+function getRawBody(req){
+  return new Promise((resolve, reject) => {
+    try{
+      const chunks=[]; req.on('data', c=>chunks.push(Buffer.from(c)));
+      req.on('end', ()=>resolve(Buffer.concat(chunks)));
+      req.on('error', reject);
+    }catch(e){ reject(e); }
+  });
+}
+
+// ---------- Validation helpers ----------
+function hostnameOf(u){ try{ const h=new URL(u).hostname.toLowerCase(); return h.startsWith('www.')?h.slice(4):h; }catch{ return ''; } }
+async function loadAllowedHosts(){
+  try{
+    const r = await fetch('https://vulcanoai.github.io/data/sources.json', { cache:'no-store' });
+    const arr = await r.json(); const set = new Set();
+    for (const s of (Array.isArray(arr)?arr:[])){
+      try{ const h = hostnameOf(s.url||''); if (h) set.add(h); }catch(_){/* noop */}
+    }
+    return set;
+  }catch(_){ return new Set(); }
+}
+let __allowCache = { ts:0, set:new Set() };
+async function isAllowedHost(url){
+  const now = Date.now(); if (now-__allowCache.ts > 5*60*1000){ __allowCache.set = await loadAllowedHosts(); __allowCache.ts = now; }
+  const host = hostnameOf(url); const set = __allowCache.set; if(!set||!set.size) return false;
+  if (set.has(host)) return true; for (const h of set){ if (host===h || host.endsWith('.'+h)) return true; }
+  return false;
+}
+async function verifyUrl(url, timeoutMs=10000){
+  try{
+    const ctrl=new AbortController(); const t=setTimeout(()=>ctrl.abort(), timeoutMs);
+    let r = await fetch(url, { method:'HEAD', redirect:'follow', signal: ctrl.signal });
+    if(!r.ok || r.status>=400){ clearTimeout(t); const ctrl2=new AbortController(); const t2=setTimeout(()=>ctrl2.abort(), timeoutMs); r = await fetch(url,{method:'GET', redirect:'follow', signal: ctrl2.signal}); clearTimeout(t2); }
+    clearTimeout(t); return r.ok && r.status<400;
+  }catch(_){ return false; }
+}
+function normalizeArticle(a){
+  const val=(x,d='')=>(x==null?d:String(x)).trim();
+  let lang = val(a.language||'es').slice(0,2).toLowerCase(); if(!lang) lang='es';
+  let pub = val(a.published_at); if(!pub) pub=new Date().toISOString();
+  return { id: val(a.id)||val(a.url)||val(a.title)||`ai-${Date.now()}-${Math.random().toString(36).slice(2,8)}`,
+    title: val(a.title,'Sin título'), summary: val(a.summary).slice(0,500), url: val(a.url,'#'),
+    source: val(a.source), source_url: val(a.source_url) || (a.url? new URL(a.url).origin: ''),
+    country: val(a.country,'Regional'), topics: Array.isArray(a.topics)?a.topics:[],
+    language: lang, published_at: pub, relevance: Number(a.relevance||6), sentiment: val(a.sentiment,'neutral'),
+    author: val(a.author), curator: val(a.curator,'Codex 1') };
+}
+function dedupeByUrl(arr){ const seen=new Set(); const out=[]; for (const a of (arr||[])){ const k=(a&&a.url)?a.url.trim():''; if(!k||seen.has(k)) continue; seen.add(k); out.push(a);} return out; }
+
+// ---------- GitHub webhook: PR merged -> publish ----------
+async function handleGitHubWebhook(req, res){
+  if (req.method !== 'POST') return res.status(405).json({ error:'Method not allowed' });
+  try{
+    const raw = await getRawBody(req);
+    const secret = process.env.GITHUB_WEBHOOK_SECRET || WEBHOOK_SECRET || '';
+    const sig = req.headers['x-hub-signature-256'] || '';
+    if (secret){ if (!verifySignature(raw, sig, secret)) return res.status(401).json({ error:'Bad signature' }); }
+    const event = req.headers['x-github-event'] || '';
+    const body = JSON.parse(raw.toString('utf8'));
+    if (event==='pull_request' && body?.action==='closed' && body?.pull_request?.merged){
+      const pr = body.pull_request.number;
+      // list files
+      const files = await gh(`/pulls/${pr}/files`, 'GET');
+      const targets = (files||[]).filter(f=>/^data\/proposals\/.+\/articles\.json$/.test(f.filename)).map(f=>f.filename);
+      let merged = [];
+      for (const p of targets){ const c = await getContent(p); if (c.json && Array.isArray(c.json.articles)) merged.push(...c.json.articles); }
+      // validate & allowlist
+      const filtered = [];
+      for (const it of merged){ const a = normalizeArticle(it); if(!a.url||!a.title) continue; const [ok,allowed]=await Promise.all([verifyUrl(a.url),isAllowedHost(a.url)]); if(!ok||!allowed) continue; filtered.push(a); }
+      // ai-research feed
+      const catPath='data/ai-research/feed-latest.json'; const catCur=await getContent(catPath); const baseArr=Array.isArray(catCur.json?.articles)?catCur.json.articles:[]; const catAll=dedupeByUrl([...filtered, ...baseArr]);
+      await putContent(catPath, 'chore(ai-research): update feed-latest.json', { version:'v1.0', category:'ai-research', generated_at:new Date().toISOString(), articles: catAll });
+      // consolidated
+      const consPath='data/feed-latest.json'; const consCur=await getContent(consPath); const consArr=Array.isArray(consCur.json?.articles)?consCur.json.articles:(Array.isArray(consCur.json)?consCur.json:[]); const consAll=dedupeByUrl([...filtered, ...consArr]);
+      await putContent(consPath, 'chore(feed): consolidate after merge', { version:'v1.0', generated_at:new Date().toISOString(), articles: consAll });
+      // status
+      const stPath='data/index/status.json'; const stCur=await getContent(stPath); const st=stCur.json||{}; st.version='v1.0'; st.generated_at=new Date().toISOString(); st.last_feed_update=new Date().toISOString(); st.feed_count=consAll.length; await putContent(stPath, 'chore(status): update after merge', st);
+      // reviews manifest
+      await updateReviewsManifest(async (m)=>{ const it=(m.items||[]).find(x=>x.pr===pr); if (it){ it.status='merged'; it.updated_at=new Date().toISOString(); } m.open_prs=(m.items||[]).filter(x=>x.status==='open'||x.status==='changes_requested').length; m.pending_reviews=(m.items||[]).filter(x=>x.status==='open').length; return m; });
+      return res.status(200).json({ success:true, pr, added: filtered.length });
+    }
+    return res.status(200).json({ ok:true });
+  }catch(err){ console.error('github webhook error', err); return res.status(500).json({ error:'Internal error' }); }
 }
