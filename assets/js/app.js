@@ -2068,12 +2068,13 @@ async function initSourcesPage() {
     
     // Calculate real metrics
     const uniqueSources = new Set(articles.map(x => (x.source || '').trim()).filter(Boolean));
-    const totalSources = Math.max(uniqueSources.size, sourcesData.length || 11); // Fallback to visible sources
+    // v2.0 reset-first: derive counts ONLY from live feed
+    const totalSources = uniqueSources.size;
     const totalArticles = articles.length;
     
     // Calculate accuracy rate based on articles with valid data
     const validArticles = articles.filter(a => a.title && a.source && a.country);
-    const accuracyPercentage = totalArticles > 0 ? Math.round((validArticles.length / totalArticles) * 100) : 95;
+    const accuracyPercentage = totalArticles > 0 ? Math.round((validArticles.length / totalArticles) * 100) : 0;
     
     // Animate values
     const animateValue = (element, start, end, duration = 1000, suffix = '') => {
@@ -2099,9 +2100,9 @@ async function initSourcesPage() {
   } catch (error) {
     console.error('Error loading sources stats:', error);
     // Fallback values
-    if (statsElements.sourcesCount) statsElements.sourcesCount.textContent = '11';
-    if (statsElements.articlesProcessed) statsElements.articlesProcessed.textContent = '--';
-    if (statsElements.accuracyRate) statsElements.accuracyRate.textContent = '95%';
+    if (statsElements.sourcesCount) statsElements.sourcesCount.textContent = '0';
+    if (statsElements.articlesProcessed) statsElements.articlesProcessed.textContent = '0';
+    if (statsElements.accuracyRate) statsElements.accuracyRate.textContent = '0%';
   }
 }
 
