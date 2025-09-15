@@ -68,180 +68,153 @@
         </nav>
       </div>
     </header>
-    <main class="section" id="main">
-      <div class="container">
-        <!-- Legal Observatory Hero -->
-        <div class="legal-hero">
-          <div class="hero-content">
-            <div class="hero-header">
-              <div class="hero-text">
-                <h1>Observatorio Legal de IA</h1>
-                <p class="hero-subtitle">Seguimiento regulatorio de IA en América Latina</p>
+    <main class="app-main" id="main">
+      <div class="app-container">
+        <!-- App Profile Header -->
+        <div class="app-profile">
+          <div class="profile-avatar">
+            <svg class="avatar-icon" aria-hidden="true">
+              <use href="/assets/icons.svg#shield"></use>
+            </svg>
+          </div>
+          <div class="profile-info">
+            <h1 class="profile-name">Observatorio Legal</h1>
+            <p class="profile-subtitle">Regulación IA LATAM</p>
+          </div>
+          <div class="profile-stats">
+            <div class="stat-pill">
+              <span class="stat-number" id="legal-initiatives-counter">47</span>
+              <span class="stat-text">Iniciativas</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Actions Grid -->
+        <div class="quick-actions">
+          <h2 class="section-title">Acciones Rápidas</h2>
+          <div class="action-grid">
+            <button class="action-card" data-action="timeline">
+              <svg class="action-icon" aria-hidden="true">
+                <use href="/assets/icons.svg#clock"></use>
+              </svg>
+              <span class="action-label">Cronología</span>
+            </button>
+
+            <button class="action-card" data-action="countries">
+              <svg class="action-icon" aria-hidden="true">
+                <use href="/assets/icons.svg#globe"></use>
+              </svg>
+              <span class="action-label">Por País</span>
+            </button>
+
+            <button class="action-card" data-action="regulations">
+              <svg class="action-icon" aria-hidden="true">
+                <use href="/assets/icons.svg#file-text"></use>
+              </svg>
+              <span class="action-label">Normativas</span>
+            </button>
+
+            <button class="action-card" data-action="restrictions">
+              <svg class="action-icon" aria-hidden="true">
+                <use href="/assets/icons.svg#alert-triangle"></use>
+              </svg>
+              <span class="action-label">Restricciones</span>
+            </button>
+
+            <button class="action-card" data-action="analytics" data-open-panel="analytics">
+              <svg class="action-icon" aria-hidden="true">
+                <use href="/assets/icons.svg#trending-up"></use>
+              </svg>
+              <span class="action-label">Tendencias</span>
+            </button>
+
+            <button class="action-card" data-action="alerts">
+              <svg class="action-icon" aria-hidden="true">
+                <use href="/assets/icons.svg#bell"></use>
+              </svg>
+              <span class="action-label">Alertas</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Regional Legal Status -->
+        <div class="legal-status-overview">
+          <h2 class="section-title">Estado Regulatorio Regional</h2>
+          <div class="legal-grid">
+            <div class="legal-card mexico">
+              <div class="legal-flag">🇲🇽</div>
+              <div class="legal-data">
+                <div class="legal-country">México</div>
+                <div class="legal-status status-progressive">Progresivo</div>
+                <div class="legal-score">8.2/10</div>
               </div>
             </div>
-            
-            <div class="legal-stats">
-              <div class="stat-card legal-themed">
-                <div class="stat-value" id="legal-count">Cargando...</div>
-                <div class="stat-label">Iniciativas activas</div>
-              </div>
-              <div class="stat-card legal-themed">
-                <div class="stat-value" id="legal-countries">--</div>
-                <div class="stat-label">Países monitoreados</div>
-              </div>
-              <div class="stat-card legal-themed roadblock" id="roadblock-indicator">
-                <div class="stat-value">--</div>
-                <div class="stat-label">Nivel de restricción</div>
+
+            <div class="legal-card colombia">
+              <div class="legal-flag">🇨🇴</div>
+              <div class="legal-data">
+                <div class="legal-country">Colombia</div>
+                <div class="legal-status status-moderate">Moderado</div>
+                <div class="legal-score">7.1/10</div>
               </div>
             </div>
-            
-            <div class="legal-tagline">
-              <div class="tagline-content">
-                <svg class="tagline-icon" aria-hidden="true">
-                  <use href="/assets/icons.svg#sparkles"></use>
-                </svg>
-                <span>Para políticos, científicos y humanistas • Transparencia total • Fuentes oficiales</span>
+
+            <div class="legal-card brazil">
+              <div class="legal-flag">🇧🇷</div>
+              <div class="legal-data">
+                <div class="legal-country">Brasil</div>
+                <div class="legal-status status-progressive">Progresivo</div>
+                <div class="legal-score">8.7/10</div>
+              </div>
+            </div>
+
+            <div class="legal-card argentina">
+              <div class="legal-flag">🇦🇷</div>
+              <div class="legal-data">
+                <div class="legal-country">Argentina</div>
+                <div class="legal-status status-cautious">Cauteloso</div>
+                <div class="legal-score">6.4/10</div>
               </div>
             </div>
           </div>
         </div>
-        <!-- Singularity Timeline Section -->
-        <div class="singularity-section">
-          <div class="section-header">
-            <h2>Cronología hacia la Singularidad</h2>
-            <p class="section-subtitle">Visualización de barreras y aceleradores regulatorios por país</p>
-          </div>
-          
-          <div class="timeline-controls">
+
+        <!-- Regulatory Timeline -->
+        <div class="regulatory-timeline">
+          <h2 class="section-title">Cronología Regulatoria</h2>
+          <div class="timeline-container">
             <div class="timeline-filters">
-              <button class="filter-btn active" data-filter="all">Todos los países</button>
-              <button class="filter-btn" data-filter="mexico">México</button>
-              <button class="filter-btn" data-filter="colombia">Colombia</button>
-              <button class="filter-btn" data-filter="brasil">Brasil</button>
-              <button class="filter-btn" data-filter="argentina">Argentina</button>
+              <select class="filter-pill" id="filter-country" aria-label="Filtrar por país">
+                <option value="">Todos los Países</option>
+                <option value="mexico">México</option>
+                <option value="colombia">Colombia</option>
+                <option value="brasil">Brasil</option>
+                <option value="argentina">Argentina</option>
+              </select>
             </div>
-            <div class="singularity-indicator">
-              <div class="indicator-label">Proximidad AGI:</div>
-              <div class="progress-bar">
-                <div class="progress-fill" id="singularity-progress"></div>
-                <div class="progress-markers">
-                  <span class="marker restrictive">Restrictivo</span>
-                  <span class="marker balanced">Equilibrado</span>
-                  <span class="marker accelerating">Acelerador</span>
-                </div>
-              </div>
+            <div id="legal-timeline" class="timeline-feed">
+              <!-- Timeline events loaded dynamically -->
             </div>
-          </div>
-          
-          <div class="interactive-timeline" id="interactive-timeline">
-            <!-- Timeline items will be populated dynamically -->
           </div>
         </div>
-        
-        <!-- Legal Dashboard -->
-        <div class="legal-dashboard">
-          <div class="dashboard-main">
-            <div class="country-analysis">
-              <h3>Análisis por país</h3>
-              <div class="country-grid" id="country-grid">
-                <!-- Country cards populated dynamically -->
-              </div>
-            </div>
-            
-            <div class="regulatory-heatmap">
-              <h3>Mapa de calor regulatorio</h3>
-              <div class="heatmap-container" id="regulatory-heatmap">
-                <!-- Heatmap visualization -->
-              </div>
+
+        <!-- Activity Feed -->
+        <div class="activity-feed">
+          <div class="feed-header">
+            <h2 class="section-title">Actividad Regulatoria</h2>
+            <div class="feed-filters">
+              <select class="filter-pill" id="filter-legal-type" aria-label="Filtrar tipo">
+                <option value="">Todos los Tipos</option>
+                <option value="ley">Leyes</option>
+                <option value="decreto">Decretos</option>
+                <option value="consulta">Consultas Públicas</option>
+                <option value="normativa">Normativas</option>
+              </select>
             </div>
           </div>
-          
-          <aside class="legal-sidebar">
-            <!-- Threat Level Indicator -->
-            <div class="legal-panel threat-assessment">
-              <div class="panel-header">
-                <h3>Evaluación de amenazas</h3>
-                <div class="threat-level" id="threat-level">
-                  <div class="threat-dot"></div>
-                  <span>Calculando...</span>
-                </div>
-              </div>
-              <div class="threat-metrics">
-                <div class="threat-metric">
-                  <div class="metric-icon">🚫</div>
-                  <div class="metric-info">
-                    <div class="metric-value" id="restrictions-count">--</div>
-                    <div class="metric-label">Restricciones activas</div>
-                  </div>
-                </div>
-                <div class="threat-metric">
-                  <div class="metric-icon">⚠️</div>
-                  <div class="metric-info">
-                    <div class="metric-value" id="pending-votes">--</div>
-                    <div class="metric-label">Votaciones pendientes</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Key Areas Panel -->
-            <div class="legal-panel key-areas">
-              <h3>Áreas críticas</h3>
-              <div class="area-tags">
-                <div class="area-tag high-risk">
-                  <span class="area-icon">🔒</span>
-                  <span>Protección de datos</span>
-                </div>
-                <div class="area-tag medium-risk">
-                  <span class="area-icon">🔍</span>
-                  <span>Transparencia</span>
-                </div>
-                <div class="area-tag high-risk">
-                  <span class="area-icon">⚙️</span>
-                  <span>Sistemas autónomos</span>
-                </div>
-                <div class="area-tag critical-risk">
-                  <span class="area-icon">🤖</span>
-                  <span>AGI y Singularidad</span>
-                </div>
-                <div class="area-tag medium-risk">
-                  <span class="area-icon">🎨</span>
-                  <span>Contenido sintético</span>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Political Intelligence -->
-            <div class="legal-panel political-intel">
-              <h3>Inteligencia política</h3>
-              <div class="intel-points">
-                <div class="intel-point">
-                  <div class="point-icon">🏛️</div>
-                  <div class="point-text">Monitoreo de iniciativas legislativas en tiempo real</div>
-                </div>
-                <div class="intel-point">
-                  <div class="point-icon">📈</div>
-                  <div class="point-text">Análisis predictivo de aprobación de leyes</div>
-                </div>
-                <div class="intel-point">
-                  <div class="point-icon">🌍</div>
-                  <div class="point-text">Comparativa regional de marcos regulatorios</div>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Disclaimer -->
-            <div class="legal-panel disclaimer">
-              <h3>Aviso legal</h3>
-              <p class="disclaimer-text">
-                Esta información es de carácter informativo y no constituye asesoría legal. 
-                Siempre verifica en fuentes oficiales y consulta especialistas.
-              </p>
-              <div class="verification-badge">
-                ✓ Fuentes oficiales verificadas
-              </div>
-            </div>
-          </aside>
+          <div id="legal-activity-list" class="activity-list" aria-live="polite">
+            <!-- Legal activity loaded dynamically -->
+          </div>
         </div>
       </div>
     </main>
@@ -249,7 +222,10 @@
       <div class="container footer-inner">
         <div class="footer-brand">
           <svg class="logo small" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>
-          <div><strong>Vulcano AI</strong><div class="muted">Vulcano Ai Digital Solutions S.A.S - 2025 Todos los derechos reservados</div></div>
+          <div>
+            <strong>Vulcano AI</strong>
+            <div class="muted">Vulcano Ai Digital Solutions S.A.S - 2025 Todos los derechos reservados</div>
+          </div>
         </div>
         <nav class="footer-nav">
           <a href="/pages/legal/privacidad.html">Privacidad</a>
@@ -261,7 +237,188 @@
     <script src="/assets/js/config.js"></script>
     <script src="/assets/js/theme.js"></script>
     <script src="/assets/js/app.js?v=9"></script>
-      <!-- Bottom Navigation -->
+    <script>
+      // Legal observatory app-specific functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        // Initialize legal activity simulator
+        function simulateLegalActivity() {
+          const activityList = document.getElementById('legal-activity-list');
+          if (!activityList) return;
+
+          const activities = [
+            {
+              type: 'ley',
+              action: 'Nueva Ley de IA aprobada en México',
+              details: 'Marco regulatorio para sistemas de IA en sector público',
+              country: '🇲🇽',
+              time: 'hace 2 días',
+              status: 'ok'
+            },
+            {
+              type: 'consulta',
+              action: 'Consulta pública abierta en Colombia',
+              details: 'Regulación de algoritmos de recomendación',
+              country: '🇨🇴',
+              time: 'hace 1 semana',
+              status: 'processing'
+            },
+            {
+              type: 'decreto',
+              action: 'Decreto sobre IA en Brasil',
+              details: 'Lineamientos para IA en healthcare',
+              country: '🇧🇷',
+              time: 'hace 2 semanas',
+              status: 'ok'
+            },
+            {
+              type: 'normativa',
+              action: 'Normativa técnica en Argentina',
+              details: 'Estándares de transparencia algorítmica',
+              country: '🇦🇷',
+              time: 'hace 3 semanas',
+              status: 'warning'
+            }
+          ];
+
+          activityList.innerHTML = activities.map(activity => `
+            <div class="activity-item">
+              <div class="activity-indicator">
+                <div class="activity-dot ${activity.status}"></div>
+              </div>
+              <div class="activity-content">
+                <div class="activity-title">${activity.action}</div>
+                <div class="activity-details">${activity.details}</div>
+                <div class="activity-meta">
+                  <span class="activity-country">${activity.country}</span>
+                  <span class="activity-type">${activity.type}</span>
+                  <span class="activity-time">${activity.time}</span>
+                </div>
+              </div>
+            </div>
+          `).join('');
+        }
+
+        // Initialize timeline simulator
+        function simulateTimeline() {
+          const timeline = document.getElementById('legal-timeline');
+          if (!timeline) return;
+
+          const events = [
+            {
+              date: '2025-03',
+              title: 'Ley de IA - México',
+              description: 'Primera ley integral de IA en LATAM',
+              impact: 'high'
+            },
+            {
+              date: '2025-01',
+              title: 'Marco ético - Colombia',
+              description: 'Principios éticos para desarrollo de IA',
+              impact: 'medium'
+            },
+            {
+              date: '2024-11',
+              title: 'Consulta pública - Brasil',
+              description: 'Regulación de IA generativa',
+              impact: 'high'
+            }
+          ];
+
+          timeline.innerHTML = events.map(event => `
+            <div class="timeline-event impact-${event.impact}">
+              <div class="event-date">${event.date}</div>
+              <div class="event-content">
+                <div class="event-title">${event.title}</div>
+                <div class="event-description">${event.description}</div>
+              </div>
+            </div>
+          `).join('');
+        }
+
+        // Action card interactions
+        document.querySelectorAll('.action-card').forEach(card => {
+          card.addEventListener('click', function() {
+            const action = this.dataset.action;
+            console.log('Legal action:', action);
+
+            // Add haptic feedback
+            if (navigator.vibrate) {
+              navigator.vibrate(50);
+            }
+
+            // Handle specific legal actions
+            switch (action) {
+              case 'timeline':
+                document.querySelector('.regulatory-timeline')?.scrollIntoView({ behavior: 'smooth' });
+                break;
+              case 'countries':
+                document.querySelector('.legal-status-overview')?.scrollIntoView({ behavior: 'smooth' });
+                break;
+              case 'regulations':
+              case 'restrictions':
+                // Filter activity by type
+                const filterSelect = document.getElementById('filter-legal-type');
+                if (filterSelect) {
+                  const typeMap = {
+                    'regulations': 'normativa',
+                    'restrictions': 'decreto'
+                  };
+                  filterSelect.value = typeMap[action] || '';
+                  filterSelect.dispatchEvent(new Event('change'));
+                }
+                break;
+              case 'alerts':
+                // Scroll to activity feed
+                document.querySelector('.activity-feed')?.scrollIntoView({ behavior: 'smooth' });
+                break;
+            }
+          });
+        });
+
+        // Initialize simulated data
+        simulateLegalActivity();
+        simulateTimeline();
+
+        // Animate legal scores
+        function animateLegalScores() {
+          const scores = document.querySelectorAll('.legal-score');
+          scores.forEach(scoreElement => {
+            const targetScore = parseFloat(scoreElement.textContent);
+            let currentScore = 0;
+            const increment = targetScore / 50;
+
+            const animate = () => {
+              currentScore += increment;
+              if (currentScore <= targetScore) {
+                scoreElement.textContent = currentScore.toFixed(1) + '/10';
+                requestAnimationFrame(animate);
+              } else {
+                scoreElement.textContent = targetScore.toFixed(1) + '/10';
+              }
+            };
+
+            animate();
+          });
+        }
+
+        // Trigger score animation on scroll
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.hasAttribute('data-animated')) {
+              entry.target.setAttribute('data-animated', 'true');
+              setTimeout(animateLegalScores, 300);
+            }
+          });
+        });
+
+        const legalOverview = document.querySelector('.legal-status-overview');
+        if (legalOverview) {
+          observer.observe(legalOverview);
+        }
+      });
+    </script>
+
+    <!-- Bottom Navigation -->
     <nav class="bottom-nav">
       <a href="/pages/noticias.html" class="nav-item" data-page="home">
         <svg class="nav-icon" aria-hidden="true">
@@ -273,20 +430,21 @@
         <svg class="nav-icon" aria-hidden="true">
           <use href="/assets/icons.svg#users"></use>
         </svg>
-        <span class="nav-label">Agents</span>
+        <span class="nav-label">Agentes</span>
       </a>
       <a href="/pages/crypto.html" class="nav-item" data-page="markets">
         <svg class="nav-icon" aria-hidden="true">
           <use href="/assets/icons.svg#trending-up"></use>
         </svg>
-        <span class="nav-label">Markets</span>
+        <span class="nav-label">Crypto</span>
       </a>
-      <a href="/pages/apoya.html" class="nav-item" data-page="support">
+      <a href="/pages/observatorio-legal.html" class="nav-item active" aria-current="page" data-page="legal">
         <svg class="nav-icon" aria-hidden="true">
-          <use href="/assets/icons.svg#heart"></use>
+          <use href="/assets/icons.svg#shield"></use>
         </svg>
-        <span class="nav-label">Support</span>
+        <span class="nav-label">Legal</span>
       </a>
     </nav>
     <script src="/assets/js/panels.js"></script>
   </body>
+</html>
