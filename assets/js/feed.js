@@ -75,59 +75,10 @@
 
   async function loadFeed(){
     const config = cfg();
-    
-    // Generate list of potential data sources: latest + last 7 days of snapshots + sample
-    const today = new Date();
-    const sources = [];
+    // Reset-first strategy: read ONLY the latest consolidated feed.
+    // No fallback to snapshots or runs to avoid re‑introducing stale data.
+    const sources = [ { url: config.feedUrl || '/data/feed-latest.json', type: 'latest' } ];
 
-    // Try to include last run file based on status.json (most up-to-date hourly batch)
-    try {
-      const status = await fetchJSON('/data/index/status.json');
-      if (status && typeof status.feed_count === 'number') {
-        state.totalCountFromIndex = status.feed_count;
-      }
-      if (status && status.last_run_iso) {
-        const file = status.last_run_iso
-          .replace(/:/g, '-')
-          .replace(/\./g, '-') + '.json';
-        sources.push({ url: `/data/runs/${file}`, type: 'run', date: status.last_run_iso.slice(0,10) });
-      }
-      // Try runs manifest to include several latest runs
-      try{
-        const runs = await fetchJSON('/data/index/runs.json');
-        if (runs && Array.isArray(runs.runs)){
-          for (const r of runs.runs.slice(0, 12)){
-            if (r && r.file){ sources.push({ url: `/data/runs/${r.file}`, type: 'run', date: (r.timestamp||'').slice(0,10) }); }
-          }
-        }
-      }catch(_){ /* ignore */ }
-    } catch (_) { /* optional */ }
-
-    // If a specific day was requested, prioritize that snapshot
-    try {
-      const day = (state.filters && state.filters.day) ? String(state.filters.day) : '';
-      if (day && /^\d{4}-\d{2}-\d{2}$/.test(day)){
-        sources.push({ url: `/data/feed-${day}.json`, type: 'snapshot', date: day });
-      }
-    } catch(_) { /* noop */ }
-
-    // Always include latest consolidated feed
-    sources.push({ url: config.feedUrl || '/data/feed-latest.json', type: 'latest' });
-    
-    // Add last 7 days of snapshots
-    for (let i = 0; i < 7; i++) {
-      const date = new Date(today);
-      date.setDate(date.getDate() - i);
-      const dateStr = date.toISOString().slice(0, 10);
-      sources.push({ 
-        url: `/data/feed-${dateStr}.json`, 
-        type: 'snapshot', 
-        date: dateStr 
-      });
-    }
-    
-    // No sample fallback: rely only on live + snapshots + last run
-    
     // Show loading state
     showLoadingState('Cargando noticias...');
     
@@ -183,8 +134,8 @@
     hideLoadingState();
     
     if (allArticles.length === 0) {
-      // Final fallback: show error (no demo data)
-      showErrorState('No se pudieron cargar noticias. Verifica tu conexión e intenta nuevamente.');
+      // Graceful empty state when feed is intentionally reset to zero
+      showErrorState('Aún no hay noticias publicadas. Vuelve pronto — estamos preparando una nueva ronda de contenido verificado.');
       return [];
     }
     

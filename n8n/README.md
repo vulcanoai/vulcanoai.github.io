@@ -39,6 +39,7 @@ Current files (examples)
   - `n8n/workflows/STARTUPS_FEED_AUTOPILOT_fixed.json` — Startups category via curated RSS (hourly, writes to `data/startups/*`)
   - `n8n/workflows/AI_RESEARCH_FEED_AUTOPILOT_fixed.json` — AI research via arXiv RSS (hourly, writes to `data/ai-research/*`)
   - `n8n/workflows/GLOBAL_AI_DISCOVERY_AUTOPILOT_fixed.json` — Source‑agnostic, multilingual discovery via Serper (hourly, writes to `data/discovery/*`)
+  - `n8n/workflows/RESET_FEED_TO_EMPTY_fixed.json` — One‑shot reset: overwrites `data/feed-latest.json` with an empty articles array
 - Tests:
   - `n8n/workflows/SOCIALMEDIA_POLISHER_TEST_v20250914-1200.json`
   - `n8n/workflows/SOCIALMEDIA_WEEKLY_REPORT_TEST_v20250914-1200.json`
@@ -54,3 +55,10 @@ Agent guidelines
 References
 
 - Detailed guidelines: `docs/N8N_WORKFLOW_GUIDELINES.md` (naming, lifecycle, tooling, promotion).
+
+Resetting the site feed (clean slate)
+
+- Import `n8n/workflows/RESET_FEED_TO_EMPTY_fixed.json` and select your GitHub credential.
+- Run the webhook `POST /webhook/reset-feed` (optionally pass `{ "repo_owner":"...","repo_name":"...","branch":"main" }`).
+- The file `data/feed-latest.json` is overwritten with `{ version, generated_at, articles: [] }`.
+- Frontend has been set to read ONLY `feed-latest.json` (no snapshots/runs fallback) so the site shows a clean empty state until new data arrives.

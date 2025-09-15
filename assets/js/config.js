@@ -7,7 +7,7 @@
 window.AILatamConfig = window.AILatamConfig || {
   api: {
     // Configuración para trabajar con el workflow n8n existente
-    // Prioridad: feed-latest.json -> snapshots diarios -> sample como fallback
+    // Reset‑first: usar SOLO feed-latest.json (sin fallbacks)
     feedUrl: '/data/feed-latest.json',
     agentsUrl: '/data/agents.json',
     sourcesUrl: '/data/sources.json',
