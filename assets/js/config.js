@@ -26,6 +26,7 @@ window.AILatamConfig = window.AILatamConfig || {
   site: {
     name: 'Vulcano Ai',
     baseUrl: '/',
+    resetMode: true,
     nav: [
       { label:'Inicio', href:'/pages/noticias.html', icon:'calendar' },
       { label:'Archivo', href:'/pages/archivo.html', icon:'calendar' },

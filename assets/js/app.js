@@ -290,7 +290,8 @@ async function initSources(container){
     const res = await fetch(url, { cache:'no-store' });
     sources = await res.json();
   } catch(e){
-    sources = window.VULCANO_DEMO?.sources || [];
+    // v2.0 reset-first: no demo fallback
+    sources = [];
   }
   // Load current feed to compute coverage metrics per source
   let feed = [];
@@ -447,7 +448,7 @@ async function initAgents(container){
       const url = (window.AILatamConfig?.api?.agentsUrl) || '/data/agents.json';
       const res = await fetch(url, { cache:'no-store' });
       return await res.json();
-    }catch(e){ return window.VULCANO_DEMO?.agents || []; }
+    }catch(e){ return []; }
   }
   
   async function loadStatus(){
@@ -500,6 +501,10 @@ async function initAgents(container){
 // Archive (historical) page
 async function initArchivePage(container){
   try{
+    if (window.AILatamConfig?.site?.resetMode) {
+      container.innerHTML = '<div class="panel">Archivo en modo reinicio — aún no hay días publicados.</div>';
+      return;
+    }
     // Loading state
     container.innerHTML = '<div class="panel" style="text-align:center; padding:24px">Cargando archivo…</div>';
 
@@ -883,7 +888,7 @@ async function initPanorama(container){
     const url = (window.AILatamConfig?.api?.panoramaUrl) || '/data/panorama.json';
     const res = await fetch(url, { cache:'no-store' });
     cats = await res.json();
-  } catch(e){ cats = window.VULCANO_DEMO?.panorama || []; }
+  } catch(e){ cats = []; }
   container.innerHTML='';
   for (const c of cats){
     const card = document.createElement('article');
@@ -921,12 +926,16 @@ async function initPanorama(container){
 
 // Observatorio Legal: línea temporal básica de items normativos
 async function initLegal(container){
+  if (window.AILatamConfig?.site?.resetMode) {
+    container.innerHTML = '<div class="panel">Observatorio en modo reinicio — aún no hay iniciativas.</div>';
+    return;
+  }
   let items;
   try{
     const url = (window.AILatamConfig?.api?.legalUrl) || '/data/legal-sample.json';
     const res = await fetch(url, { cache:'no-store' });
     items = await res.json();
-  } catch(e){ items = window.VULCANO_DEMO?.legal || []; }
+  } catch(e){ items = []; }
   container.innerHTML='';
   for (const it of items){
     const box = document.createElement('div');
