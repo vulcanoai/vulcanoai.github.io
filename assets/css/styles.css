@@ -21,6 +21,15 @@
   --logo:#ff5a2a;      /* Vulcano orange for logo */
   --bg-alpha-95: rgba(13,17,23,.95);
   --bg-alpha-98: rgba(13,17,23,.98);
+
+  /* Ethereal AI Heaven Interior Palette */
+  --ethereal-primary: #a78bfa;    /* Soft violet */
+  --ethereal-secondary: #c7d2fe;  /* Light lavender */
+  --ethereal-accent: #e0e7ff;     /* Pale indigo */
+  --ethereal-glow: #f3f4f6;       /* Pure light */
+  --ethereal-mist: rgba(167,139,250,.15);   /* Violet mist */
+  --ethereal-shimmer: rgba(199,210,254,.20); /* Lavender shimmer */
+  --ethereal-light: rgba(224,231,255,.25);   /* Indigo light */
 }
 
 /* Theme: Arctic White */
@@ -39,6 +48,15 @@
   --logo:#ea580c;      /* Stronger orange logo */
   --bg-alpha-95: rgba(255,255,255,.95);
   --bg-alpha-98: rgba(255,255,255,.98);
+
+  /* Ethereal AI Heaven Interior Palette - Light Theme */
+  --ethereal-primary: #8b5cf6;    /* Violet */
+  --ethereal-secondary: #a78bfa;  /* Light purple */
+  --ethereal-accent: #c7d2fe;     /* Pale lavender */
+  --ethereal-glow: #f8fafc;       /* Pure white light */
+  --ethereal-mist: rgba(139,92,246,.12);   /* Violet mist */
+  --ethereal-shimmer: rgba(167,139,250,.15); /* Purple shimmer */
+  --ethereal-light: rgba(199,210,254,.18);   /* Lavender light */
 }
 *{box-sizing:border-box}
 html,body{height:100%}
@@ -273,7 +291,7 @@ body.nav-open{overflow:hidden}
 
 [class*="-hero"]:not(.news-hero):not(.agents-hero):not(.legal-hero) {
   background:
-    linear-gradient(135deg, rgba(31,111,235,.12) 0%, rgba(255,90,42,.08) 50%, rgba(255,255,255,.05) 100%),
+    linear-gradient(135deg, var(--ethereal-mist) 0%, var(--ethereal-shimmer) 50%, var(--ethereal-light) 100%),
     linear-gradient(rgba(255,255,255,.02), rgba(255,255,255,.08)) !important;
   border: 1px solid rgba(255,255,255,.15) !important;
   backdrop-filter: blur(20px) !important;
@@ -298,11 +316,11 @@ body.nav-open{overflow:hidden}
 /* Cybernetic pulse animation for hero icons */
 @keyframes cybernetic-pulse {
   0%, 100% {
-    filter: drop-shadow(0 0 15px rgba(255,90,42,.4));
+    filter: drop-shadow(0 0 15px var(--ethereal-mist));
     transform: scale(1);
   }
   50% {
-    filter: drop-shadow(0 0 25px rgba(255,90,42,.6));
+    filter: drop-shadow(0 0 25px var(--ethereal-primary));
     transform: scale(1.02);
   }
 }
@@ -334,7 +352,7 @@ body.nav-open{overflow:hidden}
 /* Enhanced Glass Morphism Hero Section */
 .news-hero{
   background:
-    linear-gradient(135deg, rgba(31,111,235,.15) 0%, rgba(255,90,42,.10) 50%, rgba(255,255,255,.05) 100%),
+    linear-gradient(135deg, var(--ethereal-mist) 0%, var(--ethereal-shimmer) 50%, var(--ethereal-light) 100%),
     linear-gradient(rgba(255,255,255,.02), rgba(255,255,255,.08));
   border: 1px solid rgba(255,255,255,.15);
   border-radius: 20px;
@@ -360,12 +378,12 @@ body.nav-open{overflow:hidden}
   height: 3px;
   background: linear-gradient(90deg,
     transparent 0%,
-    rgba(31,111,235,.6) 25%,
-    rgba(255,90,42,.5) 50%,
-    rgba(255,255,255,.4) 75%,
+    var(--ethereal-primary) 25%,
+    var(--ethereal-secondary) 50%,
+    var(--ethereal-accent) 75%,
     transparent 100%);
   border-radius: 20px 20px 0 0;
-  opacity: 0.8;
+  opacity: 0.6;
 }
 
 .news-hero::after{
@@ -397,7 +415,7 @@ body.nav-open{overflow:hidden}
 }
 
 .news-hero:hover .hero-icon{
-  filter: drop-shadow(0 0 25px rgba(255,90,42,.6));
+  filter: drop-shadow(0 0 25px var(--ethereal-primary));
   transform: scale(1.05);
 }
 
@@ -476,7 +494,7 @@ body.nav-open{overflow:hidden}
   font-size: 2.2rem;
   font-weight: 700;
   margin-bottom: 8px;
-  background: linear-gradient(135deg, var(--brand) 0%, var(--logo) 100%);
+  background: linear-gradient(135deg, var(--ethereal-primary) 0%, var(--ethereal-secondary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -634,6 +652,21 @@ body.nav-open{overflow:hidden}
 .btn{display:inline-block; padding:8px 12px; border-radius:6px; border:1px solid var(--line); color:var(--text); text-decoration:none; background:var(--panel)}
 .btn:hover{background:var(--panel-alt)}
 .btn.primary{background:var(--brand); border-color:var(--brand); color:white}
+
+/* WhatsApp Button - Green styling */
+#wa-link.btn.primary {
+  background: #25d366;
+  border-color: #25d366;
+  color: white;
+  box-shadow: 0 4px 12px rgba(37,211,102,.25);
+}
+#wa-link.btn.primary:hover {
+  background: #20bf5a;
+  border-color: #20bf5a;
+  box-shadow: 0 6px 20px rgba(37,211,102,.35);
+  transform: translateY(-1px);
+}
+
 .btn.ghost{background:transparent}
 .btn.subtle{background:transparent; border-color:transparent; color:var(--muted)}
 .btn.subtle:hover{background:var(--panel); color:var(--text)}
@@ -854,7 +887,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
 /* Agents — GitHub-inspired dashboard */
 .agents-hero{
   background:
-    linear-gradient(135deg, rgba(31,111,235,.15) 0%, rgba(255,90,42,.10) 50%, rgba(255,255,255,.05) 100%),
+    linear-gradient(135deg, var(--ethereal-mist) 0%, var(--ethereal-shimmer) 50%, var(--ethereal-light) 100%),
     linear-gradient(rgba(255,255,255,.02), rgba(255,255,255,.08));
   border: 1px solid rgba(255,255,255,.15);
   border-radius: 20px;
@@ -880,12 +913,12 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
   height: 3px;
   background: linear-gradient(90deg,
     transparent 0%,
-    rgba(31,111,235,.6) 25%,
-    rgba(255,90,42,.5) 50%,
-    rgba(255,255,255,.4) 75%,
+    var(--ethereal-primary) 25%,
+    var(--ethereal-secondary) 50%,
+    var(--ethereal-accent) 75%,
     transparent 100%);
   border-radius: 20px 20px 0 0;
-  opacity: 0.8;
+  opacity: 0.6;
 }
 
 .agents-hero::after{
@@ -916,7 +949,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
 }
 
 .agents-hero:hover .hero-icon{
-  filter: drop-shadow(0 0 25px rgba(255,90,42,.6));
+  filter: drop-shadow(0 0 25px var(--ethereal-primary));
   transform: scale(1.05);
 }
 
@@ -1057,7 +1090,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 8px;
-  background: linear-gradient(135deg, var(--brand) 0%, var(--logo) 100%);
+  background: linear-gradient(135deg, var(--ethereal-primary) 0%, var(--ethereal-secondary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -1198,7 +1231,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
 .agent-metric .value{
   font-size: 1.4rem;
   font-weight: 600;
-  color: var(--brand);
+  color: var(--ethereal-primary);
   margin-bottom: 4px;
 }
 
