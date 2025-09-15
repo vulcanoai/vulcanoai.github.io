@@ -48,6 +48,12 @@ export default async function handler(req, res) {
         return await handleTriggerUpdate(req, res);
       case '/api/indie-submit':
         return await handleIndieSubmit(req, res);
+      case '/api/ai-propose':
+        return await handleAIPropose(req, res);
+      case '/api/ai-review':
+        return await handleAIReview(req, res);
+      case '/api/ai-submit':
+        return await handleAISubmit(req, res);
       case '/api/status':
         return await handleStatus(req, res);
       default:
@@ -56,6 +62,195 @@ export default async function handler(req, res) {
   } catch (error) {
     console.error('Webhook error:', error);
     return res.status(500).json({ error: 'Internal server error', details: error.message });
+  }
+}
+
+// Handle AI agent submissions (autonomous researcher)
+async function handleAISubmit(req, res){
+  if (req.method !== 'POST'){
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+  try{
+    const body = req.body || {};
+    const payload = Array.isArray(body) ? { articles: body } : body;
+    const arr = Array.isArray(payload.articles) ? payload.articles : [];
+    if (!arr.length){
+      return res.status(400).json({ error: 'No articles provided' });
+    }
+    // Normalize and validate minimal fields, no source hardcoding
+    const norm = (a) => ({
+      id: String(a.id || a.url || a.title || ''),
+      title: String(a.title || '').trim(),
+      summary: String(a.summary || '').trim().slice(0, 500),
+      url: String(a.url || '').trim(),
+      source: String(a.source || ''),
+      source_url: String(a.source_url || (a.url ? new URL(a.url).origin : '')),
+      country: String(a.country || 'Regional'),
+      topics: Array.isArray(a.topics) ? a.topics : [],
+      language: String(a.language || 'es').slice(0,2).toLowerCase(),
+      published_at: a.published_at || new Date().toISOString(),
+      relevance: Math.min(Math.max(Number(a.relevance || 6), 0), 10),
+      sentiment: ['positive','neutral','negative'].includes(a.sentiment) ? a.sentiment : 'neutral',
+      author: String(a.author || ''),
+      curator: String(a.curator || 'Codex 1')
+    });
+    const items = arr.map(norm).filter(x => x.title && x.url);
+    if (!items.length){
+      return res.status(400).json({ error: 'No valid articles after normalization' });
+    }
+
+    // Prepare GitHub write (category ai-research)
+    const contentObj = { version:'v1.0', category:'ai-research', generated_at: new Date().toISOString(), articles: items };
+    const content = Buffer.from(JSON.stringify(contentObj, null, 2)).toString('base64');
+    const pathLatest = 'data/ai-research/feed-latest.json';
+    const snapshotPath = `data/ai-research/feed-${new Date().toISOString().slice(0,10)}.json`;
+    const base = 'https://api.github.com/repos/vulcanoai/vulcanoai.github.io/contents';
+
+    async function putFile(path, message){
+      // Get existing sha (if any)
+      let sha;
+      try{
+        const h = await fetch(`${base}/${path}?ref=main`, { headers: { 'Authorization': `token ${GITHUB_TOKEN}`, 'Accept':'application/vnd.github+json' } });
+        if (h.ok){ const j = await h.json(); sha = j.sha; }
+      }catch(_){ /* ignore */ }
+      const body = { message, content, branch:'main' };
+      if (sha) body.sha = sha;
+      const r = await fetch(`${base}/${path}`, {
+        method:'PUT',
+        headers: { 'Authorization': `token ${GITHUB_TOKEN}`, 'Content-Type':'application/json', 'Accept':'application/vnd.github+json' },
+        body: JSON.stringify(body)
+      });
+      if (!r.ok){ throw new Error(`GitHub PUT ${path} failed: ${r.status}`); }
+    }
+
+    await putFile(pathLatest, 'chore(ai-research): update feed-latest.json');
+    await putFile(snapshotPath, 'chore(ai-research): snapshot');
+
+    return res.status(200).json({ success:true, wrote: [pathLatest, snapshotPath], count: items.length });
+  }catch(err){
+    console.error('AI submit failed:', err);
+    return res.status(500).json({ success:false, error: err.message });
+  }
+}
+
+// Utility: GitHub API request
+async function gh(path, method='GET', body){
+  const url = `https://api.github.com/repos/vulcanoai/vulcanoai.github.io${path}`;
+  const headers = { 'Accept':'application/vnd.github+json' };
+  if (GITHUB_TOKEN) headers['Authorization'] = `token ${GITHUB_TOKEN}`;
+  if (body) headers['Content-Type'] = 'application/json';
+  const r = await fetch(url, { method, headers, body: body? JSON.stringify(body): undefined });
+  if (!r.ok){ const t = await r.text(); throw new Error(`GitHub ${method} ${path} -> ${r.status} ${t}`); }
+  return r.json();
+}
+
+async function getContent(path){
+  try{
+    const j = await gh(`/contents/${encodeURIComponent(path)}?ref=main`, 'GET');
+    if (j && j.content){
+      const txt = Buffer.from(j.content, 'base64').toString('utf8');
+      return { sha: j.sha, json: JSON.parse(txt) };
+    }
+  }catch(_){ /* no file */ }
+  return { sha: null, json: null };
+}
+
+async function putContent(path, message, obj){
+  const cur = await getContent(path);
+  const content = Buffer.from(JSON.stringify(obj, null, 2)).toString('base64');
+  const body = { message, content, branch:'main' };
+  if (cur.sha) body.sha = cur.sha;
+  await gh(`/contents/${encodeURIComponent(path)}`, 'PUT', body);
+}
+
+async function updateReviewsManifest(mutator){
+  const p = 'data/index/reviews.json';
+  const cur = await getContent(p);
+  const base = cur.json || { version:'v1.0', generated_at: new Date().toISOString(), open_prs:0, pending_reviews:0, last_review:null, items:[] };
+  const next = await mutator(base);
+  next.version = 'v1.0';
+  next.generated_at = new Date().toISOString();
+  await putContent(p, 'chore(reviews): update manifest', next);
+}
+
+// Handle AI Proposals: create PR with proposed articles
+async function handleAIPropose(req, res){
+  if (req.method !== 'POST') return res.status(405).json({ error:'Method not allowed' });
+  try{
+    const body = req.body || {};
+    const articles = Array.isArray(body.articles) ? body.articles : [];
+    const proposer = String(body.proposer || 'Codex 1');
+    if (!articles.length) return res.status(400).json({ error:'No articles' });
+
+    // Get main head sha
+    const ref = await gh('/git/ref/heads/main');
+    const baseSha = ref.object.sha;
+    const ts = new Date().toISOString().replace(/[:.]/g,'-');
+    const proposalId = `p-${ts}-${Math.random().toString(36).slice(2,8)}`;
+    const branch = `proposals/${proposalId}`;
+    // Create branch
+    await gh('/git/refs', 'POST', { ref:`refs/heads/${branch}`, sha: baseSha });
+    // Put proposal content in branch
+    const folder = `data/proposals/${proposalId}`;
+    const payload = { version:'v1.0', proposer, created_at: new Date().toISOString(), articles };
+    const content = Buffer.from(JSON.stringify(payload, null, 2)).toString('base64');
+    await gh(`/contents/${encodeURIComponent(folder+'/articles.json')}`, 'PUT', { message:`feat(proposal): ${proposalId}`, content, branch });
+    // Open PR
+    const pr = await gh('/pulls', 'POST', { title:`AI Proposal ${proposalId}`, head: branch, base:'main', body:`Proposed by ${proposer} — ${articles.length} articles.` });
+
+    // Update reviews manifest
+    await updateReviewsManifest(async (m) => {
+      m.items = m.items || [];
+      m.items.unshift({ id: proposalId, pr: pr.number, title: pr.title, status:'open', proposer, created_at: pr.created_at, updated_at: pr.created_at, reviews: [] });
+      m.open_prs = (m.items.filter(x=>x.status==='open').length)||0;
+      m.pending_reviews = m.open_prs; // simplistic initial metric
+      return m;
+    });
+
+    return res.status(200).json({ success:true, proposal: proposalId, pr: pr.number, url: pr.html_url });
+  }catch(err){
+    console.error('AI propose failed:', err);
+    return res.status(500).json({ success:false, error: err.message });
+  }
+}
+
+// Handle AI Reviews: record review and optionally merge
+async function handleAIReview(req, res){
+  if (req.method !== 'POST') return res.status(405).json({ error:'Method not allowed' });
+  try{
+    const { pr_number, reviewer, decision='comment', comment='' } = req.body || {};
+    if (!pr_number || !reviewer) return res.status(400).json({ error:'Missing pr_number or reviewer' });
+    let event = 'COMMENT';
+    if (decision === 'approve') event = 'APPROVE';
+    else if (decision === 'reject') event = 'REQUEST_CHANGES';
+    await gh(`/pulls/${pr_number}/reviews`, 'POST', { body: comment || `${reviewer}: ${decision}`, event });
+
+    // Optionally auto-merge if approved
+    if (decision === 'approve'){
+      try{ await gh(`/pulls/${pr_number}/merge`, 'PUT', { merge_method:'squash', commit_title:`merge: AI proposal #${pr_number}` }); }catch(_){ /* ignore */ }
+    }
+
+    await updateReviewsManifest(async (m) => {
+      m.items = m.items || [];
+      const it = m.items.find(x => x.pr === pr_number);
+      const now = new Date().toISOString();
+      if (it){
+        it.reviews = it.reviews || [];
+        it.reviews.push({ reviewer, decision, timestamp: now, comment });
+        it.updated_at = now;
+        if (decision === 'approve') it.status = 'approved';
+        if (decision === 'reject') it.status = 'changes_requested';
+      }
+      m.last_review = { pr: pr_number, reviewer, decision, timestamp: now };
+      m.open_prs = (m.items.filter(x=>x.status==='open' || x.status==='changes_requested').length)||0;
+      m.pending_reviews = (m.items.filter(x=>x.status==='open').length)||0;
+      return m;
+    });
+
+    return res.status(200).json({ success:true });
+  }catch(err){
+    console.error('AI review failed:', err);
+    return res.status(500).json({ success:false, error: err.message });
   }
 }
 

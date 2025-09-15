@@ -28,5 +28,22 @@ MSG
   exit 1
 fi
 
-exit 0
+# Block committing n8n workflow JSONs (keep production/admin wiring private)
+if git diff --cached --name-only | grep -E '^(n8n/workflows/).+\.json$'; then
+  if [[ "${VULCANO_ALLOW_WORKFLOW_COMMIT:-}" == "1" ]]; then
+    :
+  else
+    cat << 'MSG'
+❌ Commit blocked: staged changes include n8n workflow JSON files.
 
+Production and admin workflow JSONs must not be committed to the public repo.
+Keep real workflows private in n8n. Store only sanitized docs (no JSON) in docs/.
+
+To override temporarily (not recommended):
+  VULCANO_ALLOW_WORKFLOW_COMMIT=1 git commit -m "..."
+MSG
+    exit 1
+  fi
+fi
+
+exit 0

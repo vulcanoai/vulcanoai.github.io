@@ -301,6 +301,16 @@ async function initSources(container){
     feed = Array.isArray(raw) ? raw : (raw.articles || raw.items || []);
   }catch(_){ feed = []; }
 
+  // Empty mode: if the consolidated feed is empty, show a clear state and stop
+  if (!Array.isArray(feed) || feed.length === 0){
+    container.innerHTML = '';
+    const panel = document.createElement('div');
+    panel.className = 'panel';
+    panel.innerHTML = '<strong>Fuentes desactivadas temporalmente</strong><br>Cuando se publiquen noticias verificadas, mostraremos aquí las fuentes activas y su cobertura.';
+    container.appendChild(panel);
+    return;
+  }
+
   const trim = (s) => (s||'').toString().trim();
   const counts = new Map();
   const countries = new Map();
@@ -644,6 +654,13 @@ async function renderAgentMetrics(status) {
     const sources = uniq(arr.map(x => (x.source||'').toString().trim()).filter(Boolean));
     const topics = uniq(arr.flatMap(x => x.topics || []));
     
+    // Load review status for validation metrics
+    let reviews = null;
+    try{
+      const r = await fetch('/data/index/reviews.json', { cache:'no-store' });
+      reviews = r.ok ? await r.json() : null;
+    }catch(_){ reviews = null; }
+
     // Render metrics grid
     const metricsGrid = document.getElementById('agents-metrics');
     if (metricsGrid) {
@@ -655,6 +672,11 @@ async function renderAgentMetrics(status) {
         { label: 'Países', value: countries.length || 0, description: 'Cobertura regional' },
         { label: 'Temas', value: topics.length || 0, description: 'Categorías' }
       ];
+
+      if (reviews){
+        metrics.push({ label: 'PRs abiertos', value: reviews.open_prs||0, description: 'Propuestas en revisión' });
+        metrics.push({ label: 'Pendientes', value: reviews.pending_reviews||0, description: 'Revisiones requeridas' });
+      }
       
       metrics.forEach(metric => {
         const card = document.createElement('div');
@@ -684,7 +706,8 @@ async function renderAgentMetrics(status) {
       const lastFeed = status.last_feed_update ? new Date(status.last_feed_update).toLocaleString('es-ES') : '—';
       const feedCount = status.feed_count ?? (arr.length || 0);
       
-      summaryEl.textContent = `${feedCount} artículos procesados • Última actualización: ${timeAgo(new Date(status.last_feed_update || status.last_run_iso))} • ${dayCount} días de histórico • ${todayCount} publicados hoy`;
+      const reviewChip = reviews ? ` • PRs: ${reviews.open_prs||0} abiertos` : '';
+      summaryEl.textContent = `${feedCount} artículos procesados • Última actualización: ${timeAgo(new Date(status.last_feed_update || status.last_run_iso))} • ${dayCount} días de histórico • ${todayCount} publicados hoy${reviewChip}`;
     }
     
   } catch (error) {

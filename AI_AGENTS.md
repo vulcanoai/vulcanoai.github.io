@@ -1,6 +1,6 @@
 # AI_AGENTS.md
 
-**Multi-AI Autonomous Collaboration Protocol for Vulcano AI**
+**Codex 1 — Autonomous News Researcher (Vulcano AI)**
 
 ## 🤖 Experiment Overview
 
@@ -10,40 +10,15 @@ Vulcano AI is a pioneering experiment in **multi-AI autonomous collaboration**. 
 
 > **"Demonstrate autonomous AI collaboration in building an open, transparent news ecosystem for the Latin American AI community."**
 
-## 👥 AI Agent Roles & Responsibilities
+## 👥 Agent Role & Responsibilities
 
-### **Claude Code (Anthropic)**
-- **Primary Role**: Interface Architecture & User Experience
-- **Responsibilities**:
-  - Frontend development and responsive design
-  - Code structure and security implementation
-  - User interface optimization
-  - Documentation maintenance
-  - Cross-agent communication protocols
-
-### **OpenAI Codex**
-- **Primary Role**: Backend Logic & Automation
-- **Responsibilities**:
-  - N8N workflow development
-  - API integrations and data processing
-  - Automation logic and scheduling
-  - Code generation for data pipelines
-
-### **Grok (X)**
-- **Primary Role**: Content Analysis & Intelligence
-- **Responsibilities**:
-  - News content classification and sentiment analysis
-  - Topic extraction and relevance scoring  
-  - Regional context analysis for LATAM content
-  - Content quality assessment
-
-### **N8N Workflow Agents**
-- **Primary Role**: Data Orchestration & Pipeline Management
-- **Responsibilities**:
-  - RSS feed aggregation from multiple sources
-  - Content deduplication and normalization
-  - Data transformation and API publishing
-  - Scheduling and monitoring automated tasks
+### Codex 1 (AI News Researcher)
+- Primary Role: Autonomous discovery, validation and curation of LATAM AI news
+- Responsibilities:
+  - Formulate queries and discover sources dynamically (no hardcoded sites in code)
+  - Validate URLs (HTTP 2xx), extract title/summary, detect language, country, topics
+  - Produce standardized JSON and publish via GitHub to category feeds
+  - Trigger consolidation after publish (or schedule-based)
 
 ## 🔄 Collaboration Protocols
 
@@ -97,10 +72,10 @@ All agents must adhere to the standardized article schema defined in `/data/samp
 - **Error Handling**: Graceful degradation with fallbacks
 
 ### **Content Processing Pipeline**
-1. **Ingestion** (N8N): RSS/API sources → Raw data
-2. **Analysis** (Grok): Content classification → Enriched data  
-3. **Curation** (Codex): Quality filtering → Curated feed
-4. **Display** (Claude): User interface → Published content
+1. Ingestion (Agent): Web search + site crawl (dynamic, prompt-driven)
+2. Validation (n8n): URL check, dedupe, recency window, allowlist optional
+3. Publication (n8n): Commit category feed `data/ai-research/feed-latest.json`
+4. Consolidation (n8n): Merge to `data/feed-latest.json` and update status
 
 ### **Quality Metrics**
 - **Coverage**: Countries and topics represented
@@ -108,21 +83,9 @@ All agents must adhere to the standardized article schema defined in `/data/samp
 - **Accuracy**: Correct classification and metadata
 - **Relevance**: User engagement and feedback
 
-## 🎨 Curator AI Personalities
+## 🎨 Curator Identity
 
-Each agent embodies Latin American cultural values and regional expertise:
-
-- **Luciano AI** (🔥): Startup y inversión - "El Emprendedor"
-- **Esperanza AI** (🏛️): Gobierno y regulación - "La Legisladora"  
-- **Sofía AI** (🔬): Investigación académica - "La Científica"
-- **Mateo AI** (🏦): Finanzas y empresas - "El Analista"
-- **Amalia AI** (📚): Educación y talento - "La Educadora"
-- **Sebastián AI** (🏭): Industria y aplicaciones - "El Ingeniero"
-- **Valentina AI** (🤝): Cooperación regional - "La Conectora"
-- **Alejandro AI** (💰): Capital de riesgo - "El Inversionista"
-- **Camila AI** (🌱): Sostenibilidad - "La Ambientalista"
-- **Rodrigo AI** (🔒): Ciberseguridad - "El Guardian"
-- **Isabella AI** (⚕️): IA en salud - "La Doctora"
+- Curator string used in feed: `Codex 1`
 
 ## 📈 Success Metrics
 
@@ -166,7 +129,7 @@ This experiment evolves through:
 
 ---
 
-**Last Updated**: 2025-09-11 by Claude Code  
+**Last Updated**: 2025-09-15 by Codex 1  
 **Next Review**: When new agents join or major architecture changes occur
 
 ---

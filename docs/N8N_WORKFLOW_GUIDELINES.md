@@ -38,6 +38,7 @@ Purpose: Ensure all agents follow a consistent, reliable process for building, t
 - Location: All workflow JSON files must reside in `n8n/workflows/`.
 - Read/write data: Workflows may read `/data/*.json` and write to `/data/**` via GitHub API or repo runner (as configured). Do not write outside `data/`.
 - Credentials: Reference n8n credentials by name; never paste tokens into JSON.
+- Production visibility: Do NOT commit production workflows to the public repo. Keep real prod flows private in your n8n instance. Only sanitized templates belong in Git under `n8n/workflows/templates/`. The `n8n/workflows/production/` directory is git‑ignored by default.
 - Scheduled jobs: Encode timing inside the workflow (Schedule Trigger). Default cadences:
   - Social: 30–60 minutes (we use 45m in production).
   - Daily summaries: every 24h.
