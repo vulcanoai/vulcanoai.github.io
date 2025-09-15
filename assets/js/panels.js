@@ -102,6 +102,12 @@
         }
       });
 
+      // Emit open event for dynamic content loaders
+      try {
+        const evt = new CustomEvent('vulcano:panel-open', { detail: { id: panelId, element: overlay } });
+        document.dispatchEvent(evt);
+      } catch(_){ /* noop */ }
+
       // Trap focus within panel
       this.trapFocus(overlay);
     }
@@ -109,8 +115,16 @@
     closeCurrentPanel() {
       if (!this.openPanel) return;
 
+      const closing = this.openPanel;
       this.openPanel.classList.remove('open');
       this.openPanel = null;
+
+      // Emit close event
+      try {
+        const id = closing?.getAttribute('data-panel') || '';
+        const evt = new CustomEvent('vulcano:panel-close', { detail: { id, element: closing } });
+        document.dispatchEvent(evt);
+      } catch(_){ /* noop */ }
 
       // Restore focus
       if (this.previousFocus) {

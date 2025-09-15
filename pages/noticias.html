@@ -227,25 +227,25 @@
     </div>
     <!-- Bottom Navigation -->
     <nav class="bottom-nav">
-      <a href="/pages/noticias.html" class="nav-item active" aria-current="page">
+      <a href="#" class="nav-item active" aria-current="page">
         <svg class="nav-icon" aria-hidden="true">
           <use href="/assets/icons.svg#home"></use>
         </svg>
         <span class="nav-label">Home</span>
       </a>
-      <a href="/pages/agentes.html" class="nav-item">
+      <a href="#" class="nav-item" data-open-panel="agents">
         <svg class="nav-icon" aria-hidden="true">
           <use href="/assets/icons.svg#users"></use>
         </svg>
         <span class="nav-label">Agents</span>
       </a>
-      <a href="/pages/crypto.html" class="nav-item">
+      <a href="#" class="nav-item" data-open-panel="markets">
         <svg class="nav-icon" aria-hidden="true">
           <use href="/assets/icons.svg#trending-up"></use>
         </svg>
         <span class="nav-label">Markets</span>
       </a>
-      <a href="/pages/apoya.html" class="nav-item">
+      <a href="#" class="nav-item" data-open-panel="support">
         <svg class="nav-icon" aria-hidden="true">
           <use href="/assets/icons.svg#heart"></use>
         </svg>
@@ -268,9 +268,40 @@
         </nav>
       </div>
     </footer>
+    <!-- Markets Panel Overlay -->
+    <div class="panel-overlay" data-panel="markets">
+      <div class="panel-sheet">
+        <div class="panel-header">
+          <h2 class="panel-title">Mercados y Crypto</h2>
+          <button class="panel-close" aria-label="Cerrar">
+            <svg aria-hidden="true" width="20" height="20"><use href="/assets/icons.svg#x"></use></svg>
+          </button>
+        </div>
+        <div class="panel-content">
+          <p>Cargando señales de mercado…</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Support Panel Overlay -->
+    <div class="panel-overlay" data-panel="support">
+      <div class="panel-sheet">
+        <div class="panel-header">
+          <h2 class="panel-title">Apoyar Vulcano</h2>
+          <button class="panel-close" aria-label="Cerrar">
+            <svg aria-hidden="true" width="20" height="20"><use href="/assets/icons.svg#x"></use></svg>
+          </button>
+        </div>
+        <div class="panel-content">
+          <p>Inicializando…</p>
+        </div>
+      </div>
+    </div>
+
     <script src="/assets/js/config.js"></script>
     <script src="/assets/js/theme.js"></script>
     <script src="/assets/js/feed.js?v=10"></script>
     <script src="/assets/js/app.js?v=9"></script>
     <script src="/assets/js/panels.js"></script>
+    <script src="/assets/js/panels-content.js"></script>
   </body>
