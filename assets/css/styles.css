@@ -1184,6 +1184,8 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
 .agent-avatar.camila { background: linear-gradient(135deg, #22c55e, #4ade80); }
 .agent-avatar.rodrigo { background: linear-gradient(135deg, #8b5cf6, #a78bfa); }
 .agent-avatar.isabella { background: linear-gradient(135deg, #f472b6, #fb7185); }
+/* Single-agent: Codex */
+.agent-avatar.codex { background: linear-gradient(135deg, #ffd700, #f4d03f); }
 
 /* Button active state */
 .btn.secondary.active {
@@ -2800,6 +2802,7 @@ a:hover{color:#fff}
 .chip.camila{border-color:#22c55e; color:#e7fdf2; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)), rgba(34,197,94,.15)}
 .chip.rodrigo{border-color:#ef4444; color:#fdeaef; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)), rgba(239,68,68,.15)}
 .chip.isabella{border-color:#10b981; color:#e6fffa; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)), rgba(16,185,129,.15)}
+.chip.codex{border-color:var(--brand,#ffd700); color:#fff8dc; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)), rgba(255,215,0,.15)}
 .chip.default{border-color:#6b7280; color:#e5e7eb; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)), rgba(107,114,128,.15)}
 /* Crypto (agents warn amber) */
 .chip.crypto{border-color:#fbbf24; color:#fff1c2; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)), rgba(251,191,36,.18)}

@@ -115,7 +115,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const status = Number($json.statusCode||$json.status||0); if(!(status>=200 && status<400)) return []; const a = ($json.orig||{}); if(!a.url) return []; const out = { id: a.url||a.id, title: a.title||'', summary: a.summary||'', url: a.url||'', source: a.source||'', source_url: a.source_url || (a.url? new URL(a.url).origin: ''), country: a.country||'Regional', topics: Array.isArray(a.topics)? a.topics : ['AI'], language: (a.language||'en').slice(0,2), published_at: a.published_at || new Date().toISOString(), relevance: a.relevance||5, sentiment: a.sentiment||'neutral', author: a.author||'', curator: a.curator||'Luciano AI' }; return [{ json: out }];"
+        "jsCode": "const status = Number($json.statusCode||$json.status||0); if(!(status>=200 && status<400)) return []; const a = ($json.orig||{}); if(!a.url) return []; const out = { id: a.url||a.id, title: a.title||'', summary: a.summary||'', url: a.url||'', source: a.source||'', source_url: a.source_url || (a.url? new URL(a.url).origin: ''), country: a.country||'Regional', topics: Array.isArray(a.topics)? a.topics : ['AI'], language: (a.language||'en').slice(0,2), published_at: a.published_at || new Date().toISOString(), relevance: a.relevance||5, sentiment: a.sentiment||'neutral', author: a.author||'', curator: a.curator||'Codex 1' }; return [{ json: out }];"
       },
       "id": "filter-valid",
       "name": "FILTER_VALID",

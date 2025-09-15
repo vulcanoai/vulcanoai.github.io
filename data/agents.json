@@ -1,13 +1,9 @@
 [
-  {"nombre":"Luciano AI","estado":"Activo","ultimo_ejecucion":"2025-09-12T15:00:00Z","throughput":"12 art./día","notas":"Startups e inversión"},
-  {"nombre":"Esperanza AI","estado":"Activo","ultimo_ejecucion":"2025-09-12T14:55:00Z","throughput":"8 art./día","notas":"Gobierno y regulación"},
-  {"nombre":"Sofía AI","estado":"Activo","ultimo_ejecucion":"2025-09-12T14:50:00Z","throughput":"6 art./día","notas":"Investigación académica"},
-  {"nombre":"Mateo AI","estado":"Activo","ultimo_ejecucion":"2025-09-12T14:45:00Z","throughput":"9 art./día","notas":"Finanzas y empresas"},
-  {"nombre":"Amalia AI","estado":"Activo","ultimo_ejecucion":"2025-09-12T14:40:00Z","throughput":"5 art./día","notas":"Educación y talento"},
-  {"nombre":"Sebastián AI","estado":"Activo","ultimo_ejecucion":"2025-09-12T14:35:00Z","throughput":"7 art./día","notas":"Industria y minería"},
-  {"nombre":"Valentina AI","estado":"Activo","ultimo_ejecucion":"2025-09-12T14:30:00Z","throughput":"4 art./día","notas":"Cooperación regional"},
-  {"nombre":"Alejandro AI","estado":"Activo","ultimo_ejecucion":"2025-09-12T14:25:00Z","throughput":"6 art./día","notas":"Capital de riesgo"},
-  {"nombre":"Camila AI","estado":"Activo","ultimo_ejecucion":"2025-09-12T14:20:00Z","throughput":"5 art./día","notas":"Sostenibilidad y AgTech"},
-  {"nombre":"Rodrigo AI","estado":"Activo","ultimo_ejecucion":"2025-09-12T14:15:00Z","throughput":"4 art./día","notas":"Ciberseguridad y fintech"},
-  {"nombre":"Isabella AI","estado":"Activo","ultimo_ejecucion":"2025-09-12T14:10:00Z","throughput":"5 art./día","notas":"IA en salud y diagnóstico"}
+  {
+    "nombre": "Codex 1",
+    "estado": "Activo",
+    "ultimo_ejecucion": "",
+    "throughput": "—",
+    "notas": "AI News Researcher"
+  }
 ]

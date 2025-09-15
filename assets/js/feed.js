@@ -63,7 +63,7 @@
       relevance: a.relevance || a.relevancia || 0,
       sentiment: val(a.sentiment || a.sentimiento || 'neutral'),
       author: val(a.author || a.autor),
-      curator: val(a.curator || a.curador || 'Luciano AI')
+      curator: val(a.curator || a.curador || 'Codex 1')
     };
   };
 
@@ -502,7 +502,7 @@
     // Curador con estilo distintivo
     const curatorClass = getCuratorClass(a.curator);
     const mCurator = create('span',`chip meta-curator ${curatorClass}`); 
-    mCurator.append(icon('robot'), document.createTextNode(' ' + (a.curator || 'Luciano AI')));
+    mCurator.append(icon('robot'), document.createTextNode(' ' + (a.curator || 'Codex 1')));
     metaData.appendChild(mCurator);
 
     // Indicador de sentimiento si no es neutral
@@ -546,20 +546,8 @@
 
   // Función para obtener clase CSS del curador
   function getCuratorClass(curator) {
-    if (!curator) return 'luciano';
-    const name = curator.toLowerCase();
-    if (name.includes('luciano')) return 'luciano';
-    if (name.includes('esperanza')) return 'esperanza';
-    if (name.includes('sofía') || name.includes('sofia')) return 'sofia';
-    if (name.includes('mateo')) return 'mateo';
-    if (name.includes('amalia')) return 'amalia';
-    if (name.includes('sebastián') || name.includes('sebastian')) return 'sebastian';
-    if (name.includes('valentina')) return 'valentina';
-    if (name.includes('alejandro')) return 'alejandro';
-    if (name.includes('camila')) return 'camila';
-    if (name.includes('rodrigo')) return 'rodrigo';
-    if (name.includes('isabella')) return 'isabella';
-    return 'luciano';
+    // Single-agent reset: unify style under 'codex'
+    return 'codex';
   }
 
   function readQuery(){

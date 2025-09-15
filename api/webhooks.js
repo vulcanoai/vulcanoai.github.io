@@ -155,7 +155,7 @@ async function handleIndieSubmit(req, res) {
     relevance: Math.min(Math.max(article.relevance || 7, 1), 10),
     sentiment: ['positive', 'neutral', 'negative'].includes(article.sentiment) ? article.sentiment : 'neutral',
     author: article.author || 'Comunidad',
-    curator: 'Luciano AI',
+    curator: 'Codex 1',
     submission_type: 'independent',
     submitted_at: new Date().toISOString()
   };

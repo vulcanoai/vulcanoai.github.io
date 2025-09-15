@@ -355,20 +355,8 @@ async function initSources(container){
 
 // Helper function for curator CSS classes
 function getCuratorClassName(curator) {
-  if (!curator) return 'luciano';
-  const name = curator.toLowerCase();
-  if (name.includes('luciano')) return 'luciano';
-  if (name.includes('esperanza')) return 'esperanza';
-  if (name.includes('sofía') || name.includes('sofia')) return 'sofia';
-  if (name.includes('mateo')) return 'mateo';
-  if (name.includes('amalia')) return 'amalia';
-  if (name.includes('sebastián') || name.includes('sebastian')) return 'sebastian';
-  if (name.includes('valentina')) return 'valentina';
-  if (name.includes('alejandro')) return 'alejandro';
-  if (name.includes('camila')) return 'camila';
-  if (name.includes('rodrigo')) return 'rodrigo';
-  if (name.includes('isabella')) return 'isabella';
-  return 'luciano';
+  // Single-agent reset: unify style under 'codex'
+  return 'codex';
 }
 
 // World clock + last update ribbon (site-wide)
@@ -1049,7 +1037,7 @@ async function initLiveSearch(form){
       const items = Array.isArray(json) ? json : (json.items || json.articles || []);
       // Autoría anónima con hash
       const anon = 'anon-' + crypto.getRandomValues(new Uint32Array(1))[0].toString(16).slice(0,8);
-      const mapped = items.map(x => ({...x, author: anon, curator: 'Luciano AI'}));
+      const mapped = items.map(x => ({...x, author: anon, curator: 'Codex 1'}));
       if (window.AILatamFeed?.addItems){ window.AILatamFeed.addItems(mapped); }
       status.textContent = `Añadido al feed (${mapped.length} resultados). Hash autor: ${anon}`;
       status.className = 'chip ok';

@@ -134,7 +134,7 @@ if(tlds.some(t=>url.includes(t))) score+=2; if(/lat(am|\s*america)/i.test(title)
     },
     {
       "parameters": {
-        "jsCode": "// CURATE — map to standard schema and aggregate\nfunction norm(j){ return { id: j.url, title: j.title||'', summary: j.description||j.html_excerpt||'', url: j.url, source: j.site||'', source_url: j.url? new URL(j.url).origin : '', country: 'Regional', topics: ['AI'], language: (j.langHint||'').slice(0,2)||'en', published_at: j.published_at || new Date().toISOString(), relevance: 6, sentiment: 'neutral', author: '', curator: 'Luciano AI' }; }\nreturn [{ json: { articles: [ norm($json) ] } }];"
+        "jsCode": "// CURATE — map to standard schema and aggregate\nfunction norm(j){ return { id: j.url, title: j.title||'', summary: j.description||j.html_excerpt||'', url: j.url, source: j.site||'', source_url: j.url? new URL(j.url).origin : '', country: 'Regional', topics: ['AI'], language: (j.langHint||'').slice(0,2)||'en', published_at: j.published_at || new Date().toISOString(), relevance: 6, sentiment: 'neutral', author: '', curator: 'Codex 1' }; }\nreturn [{ json: { articles: [ norm($json) ] } }];"
       },
       "id": "curate",
       "name": "CURATE",

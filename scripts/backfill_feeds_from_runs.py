@@ -51,7 +51,7 @@ def normalize(a):
         'relevance': a.get('relevance') or a.get('relevancia') or 0,
         'sentiment': a.get('sentiment') or a.get('sentimiento') or 'neutral',
         'author': a.get('author') or a.get('autor') or '',
-        'curator': a.get('curator') or a.get('curador') or 'Luciano AI',
+        'curator': a.get('curator') or a.get('curador') or 'Codex 1',
     }
 
 def dedupe_sort(items, cap=None):
@@ -94,4 +94,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

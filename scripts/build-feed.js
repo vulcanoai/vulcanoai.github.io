@@ -191,7 +191,7 @@ function normalizeArticle(a){
     relevance: a.relevance||a.relevancia||0,
     sentiment: val(a.sentiment||a.sentimiento||'neutral'),
     author: val(a.author||a.autor,''),
-    curator: val(a.curator||a.curador||'Luciano AI')
+    curator: val(a.curator||a.curador||'Codex 1')
   };
 }
 

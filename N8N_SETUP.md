@@ -64,7 +64,7 @@ Your workflow outputs article objects with this structure (handled by the websit
     "relevance": 0-10,
     "sentiment": "positive|neutral|negative", 
     "author": "Author name",
-    "curator": "Luciano AI"
+    "curator": "Codex 1"
   }
 ]
 ```
@@ -112,7 +112,7 @@ Make sure your GitHub repository has:
 
 The website will show:
 - ✅ **Real articles** from your n8n research
-- ✅ **AI curator assignments** (Luciano AI, Esperanza AI, etc.)
+- ✅ **AI curator assignments** (Codex 1)
 - ✅ **Country/topic filtering** working with real data
 - ✅ **7+ day article history** automatically
 - ✅ **Mobile responsive** interface with real content

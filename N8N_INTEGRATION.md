@@ -107,7 +107,7 @@ api: {
       "relevance": 8,
       "sentiment": "positive",
       "author": "Author Name",
-      "curator": "Luciano AI"
+      "curator": "Codex 1"
     }
   ]
 }

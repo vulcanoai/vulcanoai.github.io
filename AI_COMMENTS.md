@@ -45,7 +45,7 @@ const normalize = (a) => {
     country, topics, language, published_at,
     relevance: a.relevance || a.relevancia || 0,
     sentiment: val(a.sentiment || a.sentimiento || 'neutral'),
-    author: val(a.author || a.autor), curator: val(a.curator || a.curador || 'Luciano AI')
+    author: val(a.author || a.autor), curator: val(a.curator || a.curador || 'Codex 1')
   };
 };
 ```
@@ -53,7 +53,7 @@ const normalize = (a) => {
 **Agent Notes:**
 - Supports both Spanish and English field names for flexibility
 - Auto-generates UUIDs for missing article IDs
-- Defaults to 'Luciano AI' as curator for consistency
+- Defaults to 'Codex 1' as curator for consistency
 - Regional classification falls back to 'Regional' for broad content
 
 ### **Configuration Management**
@@ -145,7 +145,7 @@ const getCuratorClass = (curator) => {
   "relevance": 0-10,
   "sentiment": "positive|neutral|negative",
   "author": "string",
-  "curator": "Luciano AI|Esperanza AI|Sofía AI|Mateo AI|etc"
+  "curator": "Codex 1"
 }
 ```
 
