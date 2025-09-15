@@ -36,6 +36,9 @@ Current files (examples)
   - `n8n/workflows/PRODUCTION_SOCIAL_WEEKLY_REPORT.json` — Weekly topics/countries summary tweets
 - Drafts:
   - `n8n/workflows/DRAFT_SOCIALMEDIA_LEGACY.json` — Legacy/working draft (kept for reference)
+  - `n8n/workflows/STARTUPS_FEED_AUTOPILOT_fixed.json` — Startups category via curated RSS (hourly, writes to `data/startups/*`)
+  - `n8n/workflows/AI_RESEARCH_FEED_AUTOPILOT_fixed.json` — AI research via arXiv RSS (hourly, writes to `data/ai-research/*`)
+  - `n8n/workflows/GLOBAL_AI_DISCOVERY_AUTOPILOT_fixed.json` — Source‑agnostic, multilingual discovery via Serper (hourly, writes to `data/discovery/*`)
 - Tests:
   - `n8n/workflows/SOCIALMEDIA_POLISHER_TEST_v20250914-1200.json`
   - `n8n/workflows/SOCIALMEDIA_WEEKLY_REPORT_TEST_v20250914-1200.json`
