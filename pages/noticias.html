@@ -73,81 +73,140 @@
         </nav>
       </div>
     </header>
-    <main class="section" id="main">
-      <div class="container">
-        <!-- Hero Section -->
-        <div class="news-hero">
-          <div class="hero-content">
-            <div class="hero-header">
-              <svg class="hero-icon" aria-hidden="true">
-                <use href="/assets/icons.svg#logo"></use>
-              </svg>
-              <div class="hero-text">
-                <h1>Vulcano AI</h1>
-                <p class="hero-subtitle">Ecosistema abierto de IA en América Latina</p>
-              </div>
-            </div>
-            
-            <div class="hero-stats">
-              <div class="stat-card">
-                <div class="stat-value" id="results-counter">Cargando...</div>
-                <div class="stat-label">Artículos procesados</div>
-              </div>
-              <div class="stat-card">
-                <div class="stat-value" id="live-sources">--</div>
-                <div class="stat-label">Fuentes activas</div>
-              </div>
-              <div class="stat-card">
-                <div class="stat-value" id="live-countries">--</div>
-                <div class="stat-label">Países cubiertos</div>
-              </div>
-            </div>
-            
-            <div class="hero-tagline">
-              <span>Procesado por sistemas autónomos de inteligencia artificial</span>
+    <main class="app-main" id="main">
+      <div class="app-container">
+        <!-- App Profile Header -->
+        <div class="app-profile">
+          <div class="profile-avatar">
+            <svg class="avatar-icon" aria-hidden="true">
+              <use href="/assets/icons.svg#logo"></use>
+            </svg>
+          </div>
+          <div class="profile-info">
+            <h1 class="profile-name">Vulcano AI</h1>
+            <p class="profile-subtitle">IA Intelligence Hub</p>
+          </div>
+          <div class="profile-stats">
+            <div class="stat-pill">
+              <span class="stat-number" id="results-counter">...</span>
+              <span class="stat-text">Artículos</span>
             </div>
           </div>
-        </div>
-        <div class="filters" id="filters">
-          <input type="search" id="search" placeholder="Buscar noticias, empresas, temas..." aria-label="Buscar" />
-          <select id="filter-country" aria-label="Filtrar por país"></select>
-          <select id="filter-topic" aria-label="Filtrar por tema"></select>
-          <select id="filter-source" aria-label="Filtrar por fuente"></select>
-          <select id="sort-by" aria-label="Ordenar">
-            <option value="recent">Más recientes</option>
-            <option value="relevance">Más relevantes</option>
-          </select>
-        </div>
-        <div id="news-list" class="grid news-grid" aria-live="polite">
-          <!-- Content loaded dynamically by feed.js (from /data/feed-latest.json) -->
         </div>
 
-        <!-- Call to Action Section -->
-        <section class="cta-section">
-          <div class="cta-card">
-            <div class="cta-content">
-              <div class="cta-icon">
-                <svg aria-hidden="true"><use href="/assets/icons.svg#whatsapp"></use></svg>
-              </div>
-              <div class="cta-text">
-                <h3>Mantente al día</h3>
-                <p>Recibe noticias curadas de IA en LATAM directo en tu WhatsApp. Resúmenes diarios y alertas importantes.</p>
-              </div>
-              <div class="cta-actions">
-                <a id="wa-link" class="btn primary large" target="_blank" rel="noopener">
-                  <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#whatsapp"></use></svg>
-                  Unirse a WhatsApp
-                </a>
-                <a href="/pages/apoya.html" class="btn secondary large">
-                  <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#heart"></use></svg>
-                  Apoyar proyecto
-                </a>
-              </div>
+        <!-- Quick Actions Grid -->
+        <div class="quick-actions">
+          <h2 class="section-title">Quick Actions</h2>
+          <div class="action-grid">
+            <button class="action-card" data-action="activity">
+              <svg class="action-icon" aria-hidden="true">
+                <use href="/assets/icons.svg#activity"></use>
+              </svg>
+              <span class="action-label">Activity</span>
+            </button>
+
+            <button class="action-card" data-action="news">
+              <svg class="action-icon" aria-hidden="true">
+                <use href="/assets/icons.svg#newspaper"></use>
+              </svg>
+              <span class="action-label">News</span>
+            </button>
+
+            <button class="action-card" data-action="analytics">
+              <svg class="action-icon" aria-hidden="true">
+                <use href="/assets/icons.svg#bar-chart"></use>
+              </svg>
+              <span class="action-label">Analytics</span>
+            </button>
+
+            <button class="action-card" data-action="agents">
+              <svg class="action-icon" aria-hidden="true">
+                <use href="/assets/icons.svg#users"></use>
+              </svg>
+              <span class="action-label">Agents</span>
+            </button>
+
+            <button class="action-card" data-action="sources">
+              <svg class="action-icon" aria-hidden="true">
+                <use href="/assets/icons.svg#rss"></use>
+              </svg>
+              <span class="action-label">Sources</span>
+            </button>
+
+            <button class="action-card" data-action="settings">
+              <svg class="action-icon" aria-hidden="true">
+                <use href="/assets/icons.svg#settings"></use>
+              </svg>
+              <span class="action-label">Settings</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Activity Feed -->
+        <div class="activity-feed">
+          <div class="feed-header">
+            <h2 class="section-title">Recent Activity</h2>
+            <div class="feed-filters">
+              <select class="filter-pill" id="filter-topic" aria-label="Filter">
+                <option value="">All Topics</option>
+              </select>
             </div>
           </div>
-        </section>
+          <div id="activity-list" class="activity-list" aria-live="polite">
+            <!-- Content loaded dynamically -->
+          </div>
+        </div>
+
+        <!-- Connect Section -->
+        <div class="connect-section">
+          <div class="connect-card">
+            <div class="connect-header">
+              <svg class="connect-icon" aria-hidden="true">
+                <use href="/assets/icons.svg#whatsapp"></use>
+              </svg>
+              <div class="connect-info">
+                <h3 class="connect-title">Stay Connected</h3>
+                <p class="connect-subtitle">Get AI updates on WhatsApp</p>
+              </div>
+            </div>
+            <a id="wa-link" class="connect-btn" target="_blank" rel="noopener">
+              <span>Join</span>
+              <svg class="btn-arrow" aria-hidden="true">
+                <use href="/assets/icons.svg#arrow-right"></use>
+              </svg>
+            </a>
+          </div>
+        </div>
       </div>
     </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="/pages/noticias.html" class="nav-item active" aria-current="page">
+        <svg class="nav-icon" aria-hidden="true">
+          <use href="/assets/icons.svg#home"></use>
+        </svg>
+        <span class="nav-label">Home</span>
+      </a>
+      <a href="/pages/agentes.html" class="nav-item">
+        <svg class="nav-icon" aria-hidden="true">
+          <use href="/assets/icons.svg#users"></use>
+        </svg>
+        <span class="nav-label">Agents</span>
+      </a>
+      <a href="/pages/crypto.html" class="nav-item">
+        <svg class="nav-icon" aria-hidden="true">
+          <use href="/assets/icons.svg#trending-up"></use>
+        </svg>
+        <span class="nav-label">Markets</span>
+      </a>
+      <a href="/pages/apoya.html" class="nav-item">
+        <svg class="nav-icon" aria-hidden="true">
+          <use href="/assets/icons.svg#heart"></use>
+        </svg>
+        <span class="nav-label">Support</span>
+      </a>
+    </nav>
     <footer class="site-footer">
       <div class="container footer-inner">
         <div class="footer-brand">

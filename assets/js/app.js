@@ -24,9 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Initialize homepage hero stats
   initHeroStats();
-  
+
   // Initialize crypto page if present
   initCryptoPage();
+
+  // Initialize app-like interface
+  initAppInterface();
   
   // Initialize legal observatory if present
   initLegalObservatory();
@@ -2292,6 +2295,82 @@ async function initFooterUpdates() {
     });
     footerUpdate.textContent = `Última actualización: ${timeString}`;
   }
+}
+
+// App-like interface functionality
+function initAppInterface() {
+  // Handle action button clicks
+  const actionCards = document.querySelectorAll('.action-card');
+
+  actionCards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      e.preventDefault();
+      const action = card.dataset.action;
+
+      // Add active feedback
+      card.style.transform = 'translateY(0) scale(0.95)';
+      setTimeout(() => {
+        card.style.transform = '';
+      }, 150);
+
+      // Handle routing
+      switch(action) {
+        case 'activity':
+          // Already on activity feed, scroll to top
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          break;
+        case 'news':
+          window.location.href = '/pages/noticias.html';
+          break;
+        case 'analytics':
+          window.location.href = '/pages/agentes.html';
+          break;
+        case 'agents':
+          window.location.href = '/pages/agentes.html';
+          break;
+        case 'sources':
+          window.location.href = '/pages/fuentes.html';
+          break;
+        case 'settings':
+          window.location.href = '/pages/vulcano.html';
+          break;
+      }
+    });
+  });
+
+  // Add haptic feedback on mobile
+  if ('vibrate' in navigator) {
+    actionCards.forEach(card => {
+      card.addEventListener('touchstart', () => {
+        navigator.vibrate(10); // Very short haptic feedback
+      });
+    });
+  }
+
+  // Add smooth page transitions
+  const navItems = document.querySelectorAll('.nav-item');
+  navItems.forEach(item => {
+    item.addEventListener('click', (e) => {
+      // Don't prevent if it's the current page
+      if (item.classList.contains('active')) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+
+      // Add loading state
+      const icon = item.querySelector('.nav-icon');
+      if (icon) {
+        const originalIcon = icon.innerHTML;
+        icon.innerHTML = '<circle cx="12" cy="12" r="3"><animate attributeName="r" values="3;5;3" dur="1s" repeatCount="indefinite"/></circle>';
+
+        // Let the navigation proceed naturally, but with visual feedback
+        setTimeout(() => {
+          icon.innerHTML = originalIcon;
+        }, 1000);
+      }
+    });
+  });
 }
 
 // (drag helpers removed)

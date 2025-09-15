@@ -268,7 +268,8 @@
     const start = (page - 1) * pageSize;
     const end = Math.min(start + pageSize, state.filtered.length);
     for(let i=start;i<end;i++){
-      list.appendChild(card(state.filtered[i]));
+      const cardElement = state.els.isAppMode ? activityCard(state.filtered[i]) : card(state.filtered[i]);
+      list.appendChild(cardElement);
     }
     renderPagination();
   }
@@ -427,17 +428,85 @@
     return s;
   }
 
-  function card(a){
+  function activityCard(a){
+    const el = create('article','activity-card');
+
+    const header = create('div','activity-header');
+
+    // Activity avatar based on source
+    const avatar = create('div','activity-avatar');
+    const avatarIcon = create('svg','activity-avatar-icon');
+    avatarIcon.setAttribute('aria-hidden', 'true');
+    avatarIcon.innerHTML = '<use href="/assets/icons.svg#newspaper"></use>';
+    avatar.appendChild(avatarIcon);
+
+    // Activity meta info
+    const meta = create('div','activity-meta');
+
+    const title = create('h3','activity-title');
+    title.textContent = a.title;
+
+    const subtitle = create('p','activity-subtitle');
+    subtitle.textContent = a.summary || '';
+
+    meta.appendChild(title);
+    meta.appendChild(subtitle);
+
+    // Time
+    const time = create('span','activity-time');
+    time.textContent = fmtDate(a.published_at);
+
+    header.appendChild(avatar);
+    header.appendChild(meta);
+    header.appendChild(time);
+
+    // Tags
+    const tags = create('div','activity-tags');
+
+    // Add country tag
+    if (a.country && a.country !== 'Regional') {
+      const countryTag = create('span','activity-tag');
+      countryTag.textContent = a.country;
+      tags.appendChild(countryTag);
+    }
+
+    // Add topic tags (limit to 2)
+    const topicList = (a.topics || []).slice(0, 2);
+    for (const topic of topicList) {
+      const tag = create('span','activity-tag');
+      tag.textContent = topic;
+      tags.appendChild(tag);
+    }
+
+    el.appendChild(header);
+    if (tags.children.length > 0) {
+      el.appendChild(tags);
+    }
+
+    // Add click handler to open article
+    el.style.cursor = 'pointer';
+    el.addEventListener('click', () => {
+      if (a.url.startsWith('/')) {
+        window.location.href = a.url;
+      } else {
+        window.open(a.url, '_blank', 'noopener');
+      }
+    });
+
+    return el;
+  }
+
+function card(a){
     const el = create('article','card');
     const body = create('div','body');
     const title = create('h3','title');
-    const link = create('a'); 
-    link.href = a.url.startsWith('/') ? a.url : a.url; 
+    const link = create('a');
+    link.href = a.url.startsWith('/') ? a.url : a.url;
     if (!a.url.startsWith('/')) {
-      link.target = '_blank'; 
+      link.target = '_blank';
       link.rel = 'noopener';
     }
-    link.textContent = a.title; 
+    link.textContent = a.title;
     title.appendChild(link);
     // NEW badge if newer than last visit
     try{
@@ -616,16 +685,20 @@
   }
 
   async function initFeed(){
-    const list = document.getElementById('news-list');
+    const list = document.getElementById('activity-list') || document.getElementById('news-list');
     if(!list) return; // Not on this page
+
+    // Determine if we're in app mode or traditional mode
+    const isAppMode = list.id === 'activity-list';
 
     state.els = {
       list,
       search: document.getElementById('search'),
-      country: document.getElementById('filter-country'),
+      country: document.getElementById('filter-country') || document.getElementById('filter-topic'),
       topic: document.getElementById('filter-topic'),
       source: document.getElementById('filter-source'),
-      sort: document.getElementById('sort-by')
+      sort: document.getElementById('sort-by'),
+      isAppMode
     };
 
     readQuery();
