@@ -18,6 +18,10 @@ class CryptoCulturalGateway {
   }
 
   init() {
+    // Respect reset-first mode: do not render crypto visuals or simulated data
+    if (window.AILatamConfig && window.AILatamConfig.site && window.AILatamConfig.site.resetMode) {
+      return;
+    }
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', () => this.setup());
     } else {

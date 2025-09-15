@@ -1334,6 +1334,13 @@ async function initHeroStats() {
 async function initCryptoPage() {
   // Only run on crypto page
   if (!document.querySelector('.crypto-hero')) return;
+  // v2.0 reset-first: show neutral empty state if resetMode is on
+  if (window.AILatamConfig?.site?.resetMode) {
+    const ids = ['crypto-count','crypto-countries','crypto-sources','regional-coverage','weekly-signals'];
+    ids.forEach(id => { const el = document.getElementById(id); if (el) el.textContent = '0'; });
+    // Skip animations and previews in reset mode
+    return;
+  }
   
   try {
     // Initialize blockchain animation
@@ -1461,10 +1468,9 @@ async function loadCryptoStats() {
     
   } catch (error) {
     console.error('Error loading crypto stats:', error);
-    // Set fallback values
-    Object.values(statsElements).forEach(el => {
-      if (el) el.textContent = '--';
-    });
+    // Empty mode fallback: show zeros (no dummy data)
+    const zero = ['cryptoCount','cryptoCountries','cryptoSources','regionalCoverage','weeklySignals'];
+    zero.forEach(k => { const el = statsElements[k]; if (el) el.textContent = '0'; });
   }
 }
 
