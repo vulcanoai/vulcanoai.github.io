@@ -136,73 +136,31 @@
           </div>
         </div>
 
-        <!-- Agent Status Overview -->
-        <div class="agent-status-overview">
-          <h2 class="section-title">Estado del Sistema</h2>
-          <div class="status-grid">
-            <div class="status-card primary">
-              <div class="status-indicator">
-                <div class="status-dot ok" id="system-status"></div>
-                <span class="status-text">Sistema Principal</span>
-              </div>
-              <div class="status-details">
-                <div class="status-value" id="uptime">99.8%</div>
-                <div class="status-label">Tiempo Activo</div>
-              </div>
-            </div>
-
-            <div class="status-card">
-              <div class="status-indicator">
-                <div class="status-dot processing" id="pipeline-status"></div>
-                <span class="status-text">Pipeline</span>
-              </div>
-              <div class="status-details">
-                <div class="status-value" id="processing-rate">~24/h</div>
-                <div class="status-label">Artículos/hora</div>
-              </div>
-            </div>
-
-            <div class="status-card">
-              <div class="status-indicator">
-                <div class="status-dot ok" id="data-status"></div>
-                <span class="status-text">Datos</span>
-              </div>
-              <div class="status-details">
-                <div class="status-value" id="last-update">2min</div>
-                <div class="status-label">Última actualización</div>
-              </div>
-            </div>
-
-            <div class="status-card codex">
-              <div class="status-indicator">
-                <div class="status-dot ok" id="codex-status"></div>
-                <span class="status-text">Codex 1</span>
-              </div>
-              <div class="status-details">
-                <div class="status-value" id="codex-performance">Óptimo</div>
-                <div class="status-label">Rendimiento</div>
-              </div>
-            </div>
+        <!-- Resumen y métricas reales -->
+        <section class="section">
+          <div class="panel">
+            <h2 class="section-title">Estado del Sistema</h2>
+            <p id="agents-summary" class="muted">Cargando métricas…</p>
+            <div id="agents-metrics" class="grid" style="margin-top:12px"></div>
           </div>
-        </div>
+        </section>
 
-        <!-- Activity Feed -->
-        <div class="activity-feed">
-          <div class="feed-header">
-            <h2 class="section-title">Actividad del Sistema</h2>
-            <div class="feed-filters">
-              <select class="filter-pill" id="filter-agent" aria-label="Filtrar por agente">
-                <option value="">Todos los Agentes</option>
-                <option value="Codex1">Codex 1</option>
-                <option value="Pipeline">Pipeline</option>
-                <option value="Sistema">Sistema</option>
-              </select>
-            </div>
+        <!-- Agentes (desde /data/agents.json) -->
+        <section class="section">
+          <h2 class="section-title">Agentes</h2>
+          <div id="agents-grid" class="grid"></div>
+        </section>
+
+        <!-- Pipeline (desde /data/index/status.json) -->
+        <section class="section">
+          <h2 class="section-title">Pipeline</h2>
+          <p id="pipeline-summary" class="muted">Cargando…</p>
+          <div id="pipeline-timeline" class="timeline-feed"></div>
+          <div class="controls" style="margin-top:12px; display:flex; gap:8px">
+            <button id="agents-refresh-now" class="btn">Actualizar ahora</button>
+            <button id="agents-refresh-toggle" class="btn secondary"><span class="toggle-text">Auto-actualizar: ON</span></button>
           </div>
-          <div id="agent-activity-list" class="activity-list" aria-live="polite">
-            <!-- Agent activity loaded dynamically -->
-          </div>
-        </div>
+        </section>
       </div>
     </main>
     <footer class="site-footer">
@@ -225,109 +183,6 @@
     <script src="/assets/js/theme.js"></script>
     <script src="/assets/js/status-badge.js"></script>
     <script src="/assets/js/app.js?v=9"></script>
-    <script>
-      // Agents app-specific functionality
-      document.addEventListener('DOMContentLoaded', function() {
-        // Initialize agent activity simulator
-        function simulateAgentActivity() {
-          const activityList = document.getElementById('agent-activity-list');
-          if (!activityList) return;
-
-          const activities = [
-            {
-              agent: 'Codex 1',
-              action: 'Procesó 12 artículos de fuentes RSS',
-              time: 'hace 2 min',
-              status: 'ok'
-            },
-            {
-              agent: 'Pipeline',
-              action: 'Clasificación automática completada',
-              time: 'hace 5 min',
-              status: 'ok'
-            },
-            {
-              agent: 'Sistema',
-              action: 'Actualización de índice LATAM',
-              time: 'hace 8 min',
-              status: 'processing'
-            },
-            {
-              agent: 'Codex 1',
-              action: 'Análisis de sentimiento terminado',
-              time: 'hace 12 min',
-              status: 'ok'
-            }
-          ];
-
-          activityList.innerHTML = activities.map(activity => `
-            <div class="activity-item">
-              <div class="activity-indicator">
-                <div class="activity-dot ${activity.status}"></div>
-              </div>
-              <div class="activity-content">
-                <div class="activity-title">${activity.action}</div>
-                <div class="activity-meta">
-                  <span class="activity-agent">${activity.agent}</span>
-                  <span class="activity-time">${activity.time}</span>
-                </div>
-              </div>
-            </div>
-          `).join('');
-        }
-
-        // Action card interactions
-        document.querySelectorAll('.action-card').forEach(card => {
-          card.addEventListener('click', function() {
-            const action = this.dataset.action;
-            console.log('Agent action:', action);
-
-            // Add haptic feedback
-            if (navigator.vibrate) {
-              navigator.vibrate(50);
-            }
-
-            // Handle specific agent actions
-            switch (action) {
-              case 'status':
-                document.querySelector('.agent-status-overview')?.scrollIntoView({ behavior: 'smooth' });
-                break;
-              case 'pipeline':
-              case 'logs':
-                // Filter activity by type
-                const filterSelect = document.getElementById('filter-agent');
-                if (filterSelect) {
-                  filterSelect.value = action === 'pipeline' ? 'Pipeline' : 'Sistema';
-                  filterSelect.dispatchEvent(new Event('change'));
-                }
-                break;
-              case 'refresh':
-                // Simulate refresh
-                this.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                  this.style.transform = '';
-                  simulateAgentActivity();
-                }, 150);
-                break;
-            }
-          });
-        });
-
-        // Initialize simulated data
-        simulateAgentActivity();
-
-        // Update status indicators periodically
-        setInterval(() => {
-          const dots = document.querySelectorAll('.status-dot');
-          dots.forEach(dot => {
-            if (Math.random() > 0.9) {
-              dot.style.opacity = '0.5';
-              setTimeout(() => dot.style.opacity = '', 200);
-            }
-          });
-        }, 3000);
-      });
-    </script>
   
     <!-- Agents Panel Overlay -->
     <div class="panel-overlay" data-panel="agents">
