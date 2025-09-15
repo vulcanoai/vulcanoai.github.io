@@ -1,6 +1,6 @@
 # 🚀 N8N Integration Setup for Vulcano AI
 
-**Status**: Stable on `DEBUG007` (Sep 13, 2025)
+**Status**: Version 2.0 (reset‑first)
 
 ## 🎯 How It Works
 
@@ -17,27 +17,20 @@ The current stable n8n workflow (`DEBUG007`) is designed to:
 
 The website is now configured to work perfectly with this workflow!
 
-## 📊 Website Data Flow
+## 📊 Website Data Flow (v2.0)
 
-The website will now:
+The website now reads ONLY `/data/feed-latest.json` (no fallbacks). Expect an empty state until you publish fresh items.
 
-1. **Try `feed-latest.json`** first (your n8n live output)
-2. **Fallback to snapshots** from the last 7 days if latest fails
-3. **Aggregate & deduplicate** articles across all sources
-4. **Display real data** as soon as you trigger the workflow!
-
-## 🔄 Manual Trigger Process
+## 🔄 Seed → Publish (v2.0)
 
 ### In your n8n instance:
 
-1. **Import your workflow** (`DEBUG007-fixed.json`) 
-2. **Configure credentials**:
-   - Grok API key 
-   - GitHub token with repo access
-3. **Set repository params** (defaults are preconfigured):
-   - `repoOwner`: `vulcanoai` 
-   - `repoName`: `vulcanoai.github.io`
-4. **Hit the manual trigger button** 🚀
+1. Import and configure credentials:
+   - GitHub token (repo access)
+   - LLM keys if applicable (optional for baseline)
+2. Execute `STARTUPS_FEED_AUTOPILOT_fixed.json` once → writes `data/startups/feed-latest.json`
+3. Execute `MERGE_AND_CLEAN_GLOBAL_FEED_fixed.json` (include_existing=false) → writes `data/feed-latest.json`
+4. Hard refresh the site (disable cache) → verify empty or fresh items appear
 
 ### What happens:
 
@@ -83,13 +76,10 @@ Your workflow outputs article objects with this structure (handled by the websit
 3. **Refresh website**: You'll see real articles from `feed-latest.json` (which now merges data across runs)
 4. **Check console logs**: Will show "Cargados X artículos desde: /data/feed-latest.json (latest)"
 
-## 📈 7-Day Persistence 
+## 📈 Persistence (v2.0)
 
-The website now intelligently:
-- **Aggregates articles** from the last 7 days of snapshots
-- **Deduplicates** by URL to avoid repeats
-- **Sorts by date** (newest first) and relevance
-- **Maintains history** even if latest feed fails
+- Daily snapshots can still be written by workflows, but the site will not read them by default.
+- Re‑enable fallbacks only when content quality is guaranteed.
 
 ## 🔧 Repository Setup
 

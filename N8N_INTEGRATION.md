@@ -21,25 +21,25 @@ This document specifies how N8N workflows integrate with the Vulcano AI frontend
 
 ## 🔄 N8N Workflow Specifications
 
-### **Core Workflows Required**
+### **Core Workflows Required (v2.0)**
 
-#### **1. News Aggregation Workflow**
-- **Trigger**: Scheduled (every 30 minutes)
-- **Sources**: RSS feeds from major LATAM tech/AI publications
-- **Output**: Raw articles in standardized format
-- **File**: `workflows/news-aggregation.json`
+#### **1. Startups Feed (baseline)**
+- **Trigger**: Scheduled (hourly)
+- **Sources**: Contxto, Startupi, Startups.com.br (HTTP + parse)
+- **Output**: `data/startups/feed-latest.json`
+- **File**: `workflows/STARTUPS_FEED_AUTOPILOT_fixed.json`
 
-#### **2. Content Classification Workflow**  
-- **Trigger**: New articles from aggregation
-- **Process**: AI-powered classification and sentiment analysis
-- **Output**: Enriched articles with metadata
-- **File**: `workflows/content-classification.json`
+#### **2. AI Research Feed**  
+- **Trigger**: Scheduled (hourly)
+- **Sources**: arXiv Atom (cs.AI, cs.LG, stat.ML)
+- **Output**: `data/ai-research/feed-latest.json`
+- **File**: `workflows/AI_RESEARCH_FEED_AUTOPILOT_fixed.json`
 
-#### **3. Publication Workflow**
-- **Trigger**: Classified articles ready for publication
-- **Process**: Final validation, deduplication, API publishing  
-- **Output**: Live feed updates
-- **File**: `workflows/publication.json`
+#### **3. Merge & Clean (publication)**
+- **Trigger**: On demand (webhook) or scheduled
+- **Process**: Merge category feeds, validate URLs (2xx/3xx), dedupe, recency filter
+- **Output**: `data/feed-latest.json` (only)
+- **File**: `workflows/MERGE_AND_CLEAN_GLOBAL_FEED_fixed.json`
 
 #### **4. Agent Status Monitoring**
 - **Trigger**: Scheduled (every 5 minutes)
@@ -69,14 +69,14 @@ This document specifies how N8N workflows integrate with the Vulcano AI frontend
 
 ## 🔌 API Integration Points
 
-### **Frontend Configuration**
+### **Frontend Configuration (v2.0)**
 Located in: `assets/js/config.js`
 
 ```javascript
 api: {
   baseUrl: 'https://your-n8n-webhook-domain.com',
   endpoints: {
-    feedUrl: '/webhook/feed-latest',      // Latest articles
+    feedUrl: '/data/feed-latest.json',    // Latest articles (no fallbacks)
     agentsUrl: '/webhook/agent-status',   // Agent status  
     searchUrl: '/webhook/search',         // Live search
     updateUrl: '/webhook/trigger-update'  // Manual updates
@@ -86,7 +86,7 @@ api: {
 
 ### **Expected API Responses**
 
-#### **Feed Endpoint** (`/webhook/feed-latest`)
+#### **Feed Endpoint** (`/data/feed-latest.json`)
 ```json
 {
   "status": "success",
@@ -107,7 +107,7 @@ api: {
       "relevance": 8,
       "sentiment": "positive",
       "author": "Author Name",
-      "curator": "Lucas AI"
+      "curator": "Luciano AI"
     }
   ]
 }

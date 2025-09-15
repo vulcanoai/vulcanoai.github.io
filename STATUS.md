@@ -1,29 +1,26 @@
 # 🎯 Vulcano AI - Project Status Report
 
-**Date**: September 12, 2025  
-**Status**: ✅ **PRODUCTION READY**  
-**Stable Workflow**: DEBUG006 (n8n) — Sep 13, 2025  
-**Version**: 2.0 Enhanced
+**Date**: September 15, 2025  
+**Status**: ✅ Infrastructure live — ⏳ Content reset  
+**Stable Workflow**: PRODUCTION — AI Research Feed Autopilot (pending rename/import)  
+**Version**: 2.0 (Reset‑first)
 
 ## 🚀 **Deployment Status**
 
 | Component | Status | Details |
 |-----------|--------|---------|
 | **Frontend** | ✅ Ready | Pure HTML/CSS/JS, mobile responsive |
-| **Data Pipeline** | ✅ Ready | Enhanced n8n workflow with Grok AI |
-| **AI Agents** | ✅ Active | All 11 agents operational |
-| **RSS Sources** | ✅ Ready | 23 curated LATAM sources |
+| **Data Pipeline** | ✅ Live | n8n workflows sanitizados (`*_fixed.json`) |
+| **AI Agents** | 🟡 Standby | Seeding controlado (Luciano/Sofía) |
+| **RSS Sources** | 🟡 Curating | Startups baseline habilitado |
 | **API Endpoints** | ✅ Ready | Webhook infrastructure complete |
 | **GitHub Integration** | ✅ Ready | Automated commits to repository |
 
-## 📊 **Current Metrics**
+## 📊 **Current Metrics (v2.0)**
 
-- **Articles in Feed**: 12 current articles (live data)
-- **AI Agents Active**: 11/11 agents operational
-- **RSS Sources**: 23 premium LATAM sources configured
-- **Processing Capacity**: 60-100 articles/hour
-- **Geographic Coverage**: 12 LATAM countries + Regional
-- **Languages**: Spanish, Portuguese, English
+- **Articles in Feed**: 0 (reset intencional)
+- **Live feed**: `/data/feed-latest.json` únicamente (sin fallbacks)
+- **Seeding workflows**: Startups (hourly), AI Research (pendiente)
 
 ## 🤖 **AI Agent Ecosystem**
 
@@ -48,9 +45,9 @@ All agents are now **ACTIVE** and operational:
 
 ## 🔄 **Data Processing Pipeline**
 
-### **Stage 1: RSS Ingestion** 
-- **23 sources** across 12 LATAM countries
-- **Premium outlets**: Bloomberg Línea, Contxto, El Economista, La República
+### **Stage 1: Ingesta** 
+- **Startups RSS**: Contxto, Startupi, Startups.com.br (baseline)
+- **AI Research**: arXiv Atom (cs.AI, cs.LG, stat.ML)
 - **Government sources**: MinTIC Colombia, CORFO Chile, SENACYT Panamá
 - **Academic sources**: USP, Tec de Monterrey, Universidad de los Andes
 
@@ -70,12 +67,12 @@ All agents are now **ACTIVE** and operational:
 
 ## 🌐 **Frontend Features**
 
-### **Core Functionality**
+### **Core Functionality (v2.0)**
 - ✅ **Smart filtering** by country, topic, source, language
 - ✅ **Real-time search** across all articles
 - ✅ **Mobile responsive** design
 - ✅ **Dark/light theme** support
-- ✅ **Progressive fallback** (live → daily → sample data)
+- ❌ Progressive fallbacks deshabilitados (solo `feed-latest.json`)
 
 ### **Advanced Features**
 - ✅ **Smart tags** for quick topic exploration
@@ -103,13 +100,13 @@ All agents are now **ACTIVE** and operational:
 - **Sources list**: `/data/sources.json`
 - **Independent submissions**: `/data/indie/`
 
-## 🎯 **Next Phase Recommendations**
+## 🎯 **Next Steps (v2.0)**
 
 ### **Immediate (Week 1)**
-1. **Deploy n8n workflow** to production instance
-2. **Configure webhook endpoints** on Vercel/Netlify  
-3. **Set up monitoring** and alerts
-4. **Test manual triggers** and submissions
+1. Ejecutar Startups feed (una vez) para poblar `data/startups/feed-latest.json`
+2. Ejecutar `MERGE_AND_CLEAN_GLOBAL_FEED_fixed.json` (include_existing=false) → publica `data/feed-latest.json`
+3. Renombrar/importar producción: `PRODUCTION_AI_RESEARCH_FEED_AUTOPILOT.json` (o usar el combinado)
+4. Monitoreo de enlaces y latencia; activar cadencias
 
 ### **Short Term (Month 1)**
 1. **Add more RSS sources** (target: 50+ sources)
@@ -167,11 +164,7 @@ All agents are now **ACTIVE** and operational:
 
 ## 💬 **Summary**
 
-**Vulcano AI is now a fully operational, production-ready AI news platform for Latin America.** 
-
-The system successfully demonstrates autonomous multi-AI collaboration with 11 specialized agents processing 60+ articles daily from 23 premium sources across 12 LATAM countries. The infrastructure is resilient, secure, and scalable.
-
-**Ready for launch! 🚀**
+La infraestructura está lista y saneada. El contenido ha sido reiniciado a cero para asegurar calidad y frescura. El siguiente paso es sembrar Startups y AI Research y publicar de forma controlada el feed unificado.
 
 ---
 

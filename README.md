@@ -1,6 +1,6 @@
 # Vulcano AI — Plataforma de noticias IA para LATAM
 
-Estado: Producción activa. Este repositorio contiene el sitio estático (GitHub Pages), los artefactos de datos (`/data`) y los flujos n8n usados para automatizar el feed y sociales.
+Estado: Producción activa (Versión 2.0). Este repositorio contiene el sitio estático (GitHub Pages), los artefactos de datos (`/data`) y los flujos n8n usados para automatizar el feed y sociales.
 
 • Frontend: HTML/CSS/JS puro (sin dependencias externas)
 • Datos: JSON versionados en `data/` (abiertos y reproducibles)
@@ -14,7 +14,7 @@ Estado: Producción activa. Este repositorio contiene el sitio estático (GitHub
 
 - n8n obtiene, clasifica (Grok/LLMs), deduplica y publica JSON a este repo (vía API GitHub).
 - `scripts/build-feed.js` consolida y genera `feed-latest.json`, `feed-YYYY-MM-DD.json`, índices y trazabilidad por artículo en `entries/`.
-- El sitio lee `data/feed-latest.json` con fallback inteligente a snapshots recientes.
+- Versión 2.0 (reset‑first): el sitio lee SOLO `data/feed-latest.json` (sin fallbacks). El feed puede estar vacío mientras se valida la nueva canalización.
 
 ## Estructura del repositorio
 
@@ -33,7 +33,7 @@ docs/ (pipeline, layouts, guías de workflows)
 
 Generados por CI/script (`scripts/build-feed.js`):
 
-- `data/feed-latest.json` — Feed consolidado (ordenado por `published_at`).
+- `data/feed-latest.json` — Feed consolidado (ordenado por `published_at`). En v2.0, este es el ÚNICO origen consumido por el frontend.
 - `data/feed-YYYY-MM-DD.json` — Snapshot diario por fecha de descubrimiento.
 - `data/index/by-country.json`, `by-topic.json`, `by-source.json` — Agregaciones.
 - `data/index/catalog.json` — Días disponibles.
@@ -65,7 +65,7 @@ Archivo: `assets/js/config.js` (`window.AILatamConfig`).
 - Opcional: `indieSubmitUrl`, `searchAgentUrl`, `updateTriggerUrl` para integrar webhooks n8n o serverless.
 - Otras fuentes: `agentsUrl`, `sourcesUrl`, `panoramaUrl`, `legalUrl`.
 
-La UI intenta: latest → snapshots diarios (últimos 7+ días) → muestra data de ejemplo si todo falla.
+Frontend v2.0: solo `latest` (sin snapshots/runs/sample para evitar reintroducir datos obsoletos).
 
 ## Ejecutar localmente
 
