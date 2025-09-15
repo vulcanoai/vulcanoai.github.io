@@ -1,0 +1,1280 @@
+{
+  "name": "NEWSAIRESEARCH",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours"
+            }
+          ]
+        }
+      },
+      "id": "58b96e41-2af8-495a-ac48-440884c5ca9e",
+      "name": "AUTOPILOT_hourly",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        -608,
+        -16
+      ],
+      "notes": "Runs hourly to aggregate Startups news via HTTP (RSS)."
+    },
+    {
+      "parameters": {
+        "jsCode": "const date = new Date().toISOString().slice(0,10);\nreturn [{ json: { params: { category:'startups', timeWindowHours:48, languages:['es','pt','en'], minItems:3, feedMaxLatest:150, repoOwner:'vulcanoai', repoName:'vulcanoai.github.io', branch:'main', pathLatest:'data/startups/feed-latest.json', pathSnapshot:`data/startups/feed-${date}.json` } } }];"
+      },
+      "id": "eb8c7270-e19e-463c-a2a9-0bfa7833acd9",
+      "name": "BUILD_PARAMS",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -368,
+        -16
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://contxto.com/feed/",
+        "options": {}
+      },
+      "id": "d8e90aca-8160-431f-8b7d-e942e7202372",
+      "name": "HTTP_Contxto_RSS",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        -368,
+        -272
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const xml=($json.body||$json.data||$json)||'';function t(v){return String(v||'').replace(/<[^>]+>/g,' ').replace(/\\s+/g,' ').trim();}const out=[];const re=/<item[\\s\\S]*?<\\/item>/gi;let m;while((m=re.exec(xml))){const it=m[0];const title=t((it.match(/<title>([\\s\\S]*?)<\\/title>/i)||[])[1]);const link=t((it.match(/<link>([\\s\\S]*?)<\\/link>/i)||[])[1]);const desc=t((it.match(/<description>([\\s\\S]*?)<\\/description>/i)||[])[1]);const date=t((it.match(/<pubDate>([\\s\\S]*?)<\\/pubDate>/i)||[])[1]||(it.match(/<updated>([\\s\\S]*?)<\\/updated>/i)||[])[1]);if(!title||!link) continue;out.push({id:link||title,title,summary:desc,url:link,source:'Contxto',source_url:'https://contxto.com',country:'Regional',topics:['Startups','Inversion'],language:'es',published_at:new Date(date||Date.now()).toISOString(),relevance:5,sentiment:'neutral',author:'',curator:'Luciano AI'});}return [{ json:{ articles: out } }];"
+      },
+      "id": "566d606f-0a73-4b39-89c9-d1157359bd31",
+      "name": "PARSE_Contxto",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -144,
+        -272
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://startupi.com.br/feed/",
+        "options": {}
+      },
+      "id": "f44613b1-15f9-4654-b7f9-fcd84b2ebb8d",
+      "name": "HTTP_Startupi_RSS",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        -368,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const xml=($json.body||$json.data||$json)||'';function t(v){return String(v||'').replace(/<[^>]+>/g,' ').replace(/\\s+/g,' ').trim();}const out=[];const re=/<item[\\s\\S]*?<\\/item>/gi;let m;while((m=re.exec(xml))){const it=m[0];const title=t((it.match(/<title>([\\s\\S]*?)<\\/title>/i)||[])[1]);const link=t((it.match(/<link>([\\s\\S]*?)<\\/link>/i)||[])[1]);const desc=t((it.match(/<description>([\\s\\S]*?)<\\/description>/i)||[])[1]);const date=t((it.match(/<pubDate>([\\s\\S]*?)<\\/pubDate>/i)||[])[1]||(it.match(/<updated>([\\s\\S]*?)<\\/updated>/i)||[])[1]);if(!title||!link) continue;out.push({id:link||title,title,summary:desc,url:link,source:'Startupi',source_url:'https://startupi.com.br',country:'Brasil',topics:['Startups','Empresas'],language:'pt',published_at:new Date(date||Date.now()).toISOString(),relevance:5,sentiment:'neutral',author:'',curator:'Luciano AI'});}return [{ json:{ articles: out } }];"
+      },
+      "id": "b391708c-c71d-40ca-89f8-f9c2dcb7e5f8",
+      "name": "PARSE_Startupi",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -144,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://startups.com.br/feed/",
+        "options": {}
+      },
+      "id": "3759100c-b8fd-4960-b1da-8f2a3a3f9b73",
+      "name": "HTTP_StartupsBR_RSS",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        -368,
+        -48
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const xml=($json.body||$json.data||$json)||'';function t(v){return String(v||'').replace(/<[^>]+>/g,' ').replace(/\\s+/g,' ').trim();}const out=[];const re=/<item[\\s\\S]*?<\\/item>/gi;let m;while((m=re.exec(xml))){const it=m[0];const title=t((it.match(/<title>([\\s\\S]*?)<\\/title>/i)||[])[1]);const link=t((it.match(/<link>([\\s\\S]*?)<\\/link>/i)||[])[1]);const desc=t((it.match(/<description>([\\s\\S]*?)<\\/description>/i)||[])[1]);const date=t((it.match(/<pubDate>([\\s\\S]*?)<\\/pubDate>/i)||[])[1]||(it.match(/<updated>([\\s\\S]*?)<\\/updated>/i)||[])[1]);if(!title||!link) continue;out.push({id:link||title,title,summary:desc,url:link,source:'Startups.com.br',source_url:'https://startups.com.br',country:'Brasil',topics:['Startups','VC'],language:'pt',published_at:new Date(date||Date.now()).toISOString(),relevance:5,sentiment:'neutral',author:'',curator:'Luciano AI'});}return [{ json:{ articles: out } }];"
+      },
+      "id": "bfbf4b67-713a-466f-ba83-257bc1946eaa",
+      "name": "PARSE_StartupsBR",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -144,
+        -48
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "function p(){ try{ return $items('BUILD_PARAMS',0,0).json.params; }catch{ return {}; } }\nconst params=p(); const hours=Number(params.timeWindowHours||48); const now=Date.now();\nconst all=$input.all(); const arr=[]; for(const it of all){ const a=Array.isArray(it.json.articles)? it.json.articles: []; for(const x of a){ if(x && x.url) arr.push(x); } }\nconst seen=new Set(); const out=[]; for(const a of arr){ const k=a.url; if(!k||seen.has(k)) continue; seen.add(k); out.push(a); }\nconst filtered=out.filter(a=>{ const t=new Date(a.published_at).getTime(); return isFinite(t) && (now-t)<=hours*3600*1000; });\nfiltered.sort((a,b)=> new Date(b.published_at)-new Date(a.published_at));\nreturn [{ json:{ category:'startups', articles: filtered } }];"
+      },
+      "id": "ac53a391-1a4a-42ab-a521-a5e76fe723fe",
+      "name": "AGGREGATE",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        128,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "function item(n){ try{ const it=$items(n,0,0); return it && it.json ? it.json : null; }catch(_){ return null; } }\nconst params = (item('BUILD_PARAMS')?.params) || {};\nconst owner = params.repoOwner || 'vulcanoai';\nconst repo  = params.repoName  || 'vulcanoai.github.io';\nconst branch= params.branch     || 'main';\nconst base  = `https://api.github.com/repos/${owner}/${repo}/contents`;\nconst latestPath = params.pathLatest || 'data/startups/feed-latest.json';\nconst snapshotPath = params.pathSnapshot || ('data/startups/feed-'+new Date().toISOString().slice(0,10)+'.json');\nconst input = item('AGGREGATE') || $json || {};\nconst articles = Array.isArray(input.articles) ? input.articles : [];\nconst latestPayload = JSON.stringify({ version:'v1.0', category:'startups', generated_at: new Date().toISOString(), articles }, null, 2);\nconst latestContent = Buffer.from(latestPayload).toString('base64');\nreturn [ { json: { target:'latest', base, branch, path: latestPath, content: latestContent, message: 'chore(startups): update feed-latest.json' } }, { json: { target:'snapshot', base, branch, path: snapshotPath, content: latestContent, message: 'chore(startups): snapshot for day' } } ];"
+      },
+      "id": "4b72d4f7-a106-467e-8c24-753b5c5f4759",
+      "name": "BUILD_GH_BODY",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        368,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{$json.base}}/{{ $json.path }}?ref={{$json.branch}}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "774a88bb-5a8c-4e22-92b2-2acd1d4d3250",
+      "name": "GITHUB_GET_SHA",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        544,
+        -256
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "githubApi": {
+          "id": "fiWvt8LJXl85zjSx",
+          "name": "GitHub account"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "mode": "mergeByPosition",
+        "options": {}
+      },
+      "id": "834b6bf9-5bd7-4ddd-8ded-c7ef36b42844",
+      "name": "MERGE_SHA",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2,
+      "position": [
+        752,
+        -208
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const j=$json||{}; const base=j.base||''; const path=j.path||''; const branch=j.branch||'main'; const message=j.message||'chore(startups): update'; const content=j.content; let sha; if(j && j.body && typeof j.body.sha==='string') sha=j.body.sha; if(!sha && j && j.data && typeof j.data.sha==='string') sha=j.data.sha; const body={ message, content, branch }; if(sha) body.sha=sha; return [{ json: { url: `${base}/${path}`, body } }];"
+      },
+      "id": "7840e29a-7f69-4dd7-b1a7-879d631ee2a7",
+      "name": "BUILD_PUT",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        944,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "={{$json.url}}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.body }}",
+        "options": {}
+      },
+      "id": "0a1f2cf4-f9a9-4063-a3ed-05e15abdacd7",
+      "name": "GITHUB_PUT",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1136,
+        -160
+      ],
+      "credentials": {
+        "githubApi": {
+          "id": "fiWvt8LJXl85zjSx",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "reset-feed",
+        "responseMode": "responseNode",
+        "options": {
+          "rawBody": true
+        }
+      },
+      "id": "58ceb517-d81e-4ac2-be1a-935cfd76f6eb",
+      "name": "RESET_IN",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -1968,
+        480
+      ],
+      "webhookId": "27464ef5-384d-4d60-a0f3-012db8287e9a"
+    },
+    {
+      "parameters": {
+        "jsCode": "let body=$json.body; if(typeof body==='string'){ try{ body=JSON.parse(body);}catch{ body={}; } } const owner=body?.repo_owner||'vulcanoai'; const repo=body?.repo_name||'vulcanoai.github.io'; const branch=body?.branch||'main'; const base=`https://api.github.com/repos/${owner}/${repo}/contents`; const path='data/feed-latest.json'; const payload={ version:'v1.0', generated_at: new Date().toISOString(), articles: [] }; const content=Buffer.from(JSON.stringify(payload,null,2)).toString('base64'); return [{ json: { base, branch, path, content, message: 'chore(feed): reset to empty' } }];"
+      },
+      "id": "68b8741f-2b1f-4d17-84a7-9d98d7561216",
+      "name": "BUILD_GH_BODY2",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1776,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{$json.base}}/{{ $json.path }}?ref={{$json.branch}}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "bd544292-5730-49e1-a0f9-1bfb503740bb",
+      "name": "GITHUB_GET_SHA2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        -1568,
+        480
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "githubApi": {
+          "id": "fiWvt8LJXl85zjSx",
+          "name": "GitHub account"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const meta=$json||{}; const respRaw=$items('GITHUB_GET_SHA2',0,0)?.json||{}; const resp=(respRaw.body&&typeof respRaw.body==='object')?respRaw.body:((respRaw.data&&typeof respRaw.data==='object')?respRaw.data:respRaw); const body={ message: meta.message||'update', content: meta.content, branch: meta.branch||'main' }; if(resp&&resp.sha) body.sha=resp.sha; return [{ json: { url: `${meta.base}/${meta.path}`, body } }];"
+      },
+      "id": "02e628c5-550d-4e14-a452-390f579a70bc",
+      "name": "BUILD_PUT2",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1376,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "={{$json.url}}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.body }}",
+        "options": {}
+      },
+      "id": "c79e5925-5d99-4a79-8b2b-067eba1d05b0",
+      "name": "GITHUB_PUT2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        -1168,
+        480
+      ],
+      "credentials": {
+        "githubApi": {
+          "id": "fiWvt8LJXl85zjSx",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "45912b16-288e-4e8e-90e0-a795a8da8c6c",
+      "name": "RESPOND1",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        -976,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// BUILD_STATUS — telemetry summary based on collapsed articles\nfunction p(){ try{ return $items('BUILD_PARAMS2',0,0).json.params; }catch{ return {}; } } const params=p(); const arts=Array.isArray($json.articles)? $json.articles: []; const sources=new Set(); for(const a of arts){ if(a&&a.source) sources.add(String(a.source).trim()); } const payload={ version:'v1.0', generated_at:new Date().toISOString(), feed_count: arts.length, sources_count: sources.size, time_window_hours: params.timeWindowHours||null, include_existing: params.includeExisting===true, last_run_iso: new Date().toISOString() }; const content=Buffer.from(JSON.stringify(payload,null,2)).toString('base64'); const owner=params.owner||'vulcanoai'; const repo=params.repo||'vulcanoai.github.io'; const branch=params.branch||'main'; const base=`https://api.github.com/repos/${owner}/${repo}/contents`; return [{ json:{ base, branch, path:'data/index/status.json', content, message:'chore(status): update feed status' } }];"
+      },
+      "id": "d11d4e43-382d-4ae1-8a42-3b1a08b5cf46",
+      "name": "BUILD_STATUS",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1264,
+        768
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{$json.base}}/{{ $json.path }}?ref={{$json.branch}}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "15f6d003-8703-4612-b919-e785c0c8cd97",
+      "name": "GITHUB_GET_STATUS_SHA",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1440,
+        720
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "githubApi": {
+          "id": "fiWvt8LJXl85zjSx",
+          "name": "GitHub account"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const meta=$json||{}; const respRaw=$items('GITHUB_GET_STATUS_SHA',0,0)?.json||{}; const resp=(respRaw.body&&typeof respRaw.body==='object')?respRaw.body:((respRaw.data&&typeof respRaw.data==='object')?respRaw.data:respRaw); const body={ message: meta.message||'update', content: meta.content, branch: meta.branch||'main' }; if(resp&&resp.sha) body.sha=resp.sha; return [{ json: { url: `${meta.base}/${meta.path}`, body } }];"
+      },
+      "id": "e16248d3-b9f1-4824-b645-0d2aa2eea55e",
+      "name": "BUILD_PUT_STATUS",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1632,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "={{$json.url}}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.body }}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "id": "11dd63f7-a7da-414b-acb9-9c9760612a52",
+      "name": "GITHUB_PUT_STATUS",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1808,
+        720
+      ],
+      "credentials": {
+        "githubApi": {
+          "id": "fiWvt8LJXl85zjSx",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours"
+            }
+          ]
+        }
+      },
+      "id": "c1c8a4fc-a0ef-4ef3-aae5-e25f4df4efdf",
+      "name": "AUTOPILOT_hourly2",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        -544,
+        768
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "merge-clean-feed",
+        "responseMode": "responseNode",
+        "options": {
+          "rawBody": true
+        }
+      },
+      "id": "ffa9b3c6-47eb-4744-9503-263d340a7994",
+      "name": "MERGE_IN1",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -544,
+        960
+      ],
+      "webhookId": "1431fa38-1ce1-4312-89a7-099dc039513c"
+    },
+    {
+      "parameters": {},
+      "id": "e186ac6d-bf3c-4b4b-8634-1d76972e567f",
+      "name": "START1",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2,
+      "position": [
+        -368,
+        864
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "let body=$json.body; if(typeof body==='string'){ try{ body=JSON.parse(body);}catch{ body={}; } } const date=new Date().toISOString().slice(0,10); const params={ owner: body?.repo_owner||'vulcanoai', repo: body?.repo_name||'vulcanoai.github.io', branch: body?.branch||'main', paths: ['data/startups/feed-latest.json','data/ai-research/feed-latest.json','data/discovery/feed-latest.json'], includeExisting: (body?.include_existing===true), outLatest: 'data/feed-latest.json', outSnapshot: `data/feed-${date}.json`, timeWindowHours: Number(body?.time_window_hours ?? 96) }; return [{ json: { params } }];"
+      },
+      "id": "fc251091-37ea-4594-8ae3-6bfe157bcd57",
+      "name": "BUILD_PARAMS2",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -176,
+        864
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const params = ($json.params && typeof $json.params==='object')? $json.params : {}; const owner=params.owner||'vulcanoai'; const repo=params.repo||'vulcanoai.github.io'; const branch=params.branch||'main'; let paths = Array.isArray(params.paths)? params.paths.slice() : []; if(!paths.length){ paths = ['data/startups/feed-latest.json']; } const base=`https://api.github.com/repos/${owner}/${repo}/contents`; const out = paths.map(p=>({ json:{ base, branch, path:p } })); if(params.includeExisting){ out.push({ json:{ base, branch, path: (params.outLatest||'data/feed-latest.json') } }); } return out;"
+      },
+      "id": "75e17400-d12e-4832-930d-25b892726df4",
+      "name": "EXPAND_GITHUB_GETS1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        0,
+        864
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{$json.base}}/{{ $json.path }}?ref={{$json.branch}}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "8f8a1662-69e1-4671-8d65-9679114c4b1d",
+      "name": "GITHUB_GET_CONTENT1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        176,
+        864
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "githubApi": {
+          "id": "fiWvt8LJXl85zjSx",
+          "name": "GitHub account"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const j=$json||{}; const payload = (j.body && typeof j.body==='object')? j.body : (j.data && typeof j.data==='object'? j.data : j); const b64 = payload.content; let articles=[]; if(typeof b64==='string'){ try{ const text=Buffer.from(b64,'base64').toString('utf8'); const obj=JSON.parse(text); const arr = Array.isArray(obj)? obj : (Array.isArray(obj.articles)? obj.articles : []); articles = arr; }catch{} } return [{ json: { articles } }];"
+      },
+      "id": "819b9053-abeb-4a06-9ab5-e6eeae881433",
+      "name": "PARSE_CATEGORY1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        352,
+        864
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "function p(){ try{ return $items('BUILD_PARAMS2',0,0).json.params; }catch{ return {}; } } const params=p(); const now=Date.now(); const hours=params.timeWindowHours||96; const arr=[]; for(const it of $input.all()){ const a=Array.isArray(it.json.articles)? it.json.articles: []; for(const x of a){ if(x && x.url) arr.push(x); } } const seen=new Set(); const dedup=[]; for(const a of arr){ const k=(a.url||'').trim(); if(!k||seen.has(k)) continue; seen.add(k); dedup.push(a); } const filtered = dedup.filter(a=>{ const t=new Date(a.published_at||a.date||a.pubDate||'').getTime(); return !isFinite(t) || (now - t) <= hours*3600*1000; }); filtered.sort((a,b)=> new Date(b.published_at||b.date||0) - new Date(a.published_at||a.date||0)); const items = filtered.map(a=>({ json: a })); if(!items.length) return [{ json: { __empty: true } }]; return items;"
+      },
+      "id": "27b182a1-a463-4e94-b52f-6bd5a1eefd12",
+      "name": "EXPAND_ARTICLES1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        544,
+        864
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{$json.url}}",
+        "options": {
+          "timeout": 12000
+        }
+      },
+      "id": "734f4b82-db1c-48bf-9629-711b0ec15eac",
+      "name": "HTTP_VALIDATE1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        720,
+        864
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const u = (($json.url||'')+ '').trim(); if(!u || !/^https?:\\/\\//i.test(u)) return []; return [{ json: $json }];"
+      },
+      "id": "3a70852a-30ca-4b30-b7db-2223b250fb70",
+      "name": "FILTER_HAS_URL1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        640,
+        768
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{ json: { orig: $json } }];"
+      },
+      "id": "30f50fa4-8ba0-45e0-8fd7-1b4016e9c607",
+      "name": "KEEP_ORIG1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        656
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "mergeByFields": {
+          "values": [
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "id": "c2361f90-6022-4347-afb7-9e314fabd7c5",
+      "name": "MERGE_VALIDATE1",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2,
+      "position": [
+        912,
+        768
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const status = Number($json.statusCode||$json.status||0); if(!(status>=200 && status<400)) return []; const a = ($json.orig||{}); if(!a.url) return []; const out = { id: a.url||a.id, title: a.title||'', summary: a.summary||'', url: a.url||'', source: a.source||'', source_url: a.source_url || (a.url? new URL(a.url).origin: ''), country: a.country||'Regional', topics: Array.isArray(a.topics)? a.topics : ['AI'], language: (a.language||'en').slice(0,2), published_at: a.published_at || new Date().toISOString(), relevance: a.relevance||5, sentiment: a.sentiment||'neutral', author: a.author||'', curator: a.curator||'Luciano AI' }; return [{ json: out }];"
+      },
+      "id": "747534cf-a0d4-487e-980f-5e011f1c8b11",
+      "name": "FILTER_VALID1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        912,
+        864
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "if($json.__empty) return [{ json: { articles: [] } }]; return [];"
+      },
+      "id": "a25fef3e-475a-4c19-8c54-30808f3f54ff",
+      "name": "IF_EMPTY_TO_COLLAPSE1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        960
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const all=$input.all(); const seen=new Set(); const out=[]; for(const it of all){ const a=it.json; if(!a||!a.url) continue; const u=a.url.trim(); if(seen.has(u)) continue; seen.add(u); out.push(a); } out.sort((a,b)=> new Date(b.published_at)-new Date(a.published_at)); return [{ json: { articles: out } }];"
+      },
+      "id": "c7bdfdcf-7bd1-4f0e-a146-e8af96b2f553",
+      "name": "COLLAPSE1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1088,
+        864
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "function p(){ try{ return $items('BUILD_PARAMS2',0,0).json.params; }catch{ return {}; } } const params=p(); const owner=params.owner||'vulcanoai'; const repo=params.repo||'vulcanoai.github.io'; const branch=params.branch||'main'; const base=`https://api.github.com/repos/${owner}/${repo}/contents`; const latestPath=params.outLatest||'data/feed-latest.json'; const payload = { version:'v1.0', generated_at: new Date().toISOString(), articles: ($json.articles||[]) }; const content=Buffer.from(JSON.stringify(payload,null,2)).toString('base64'); return [ { json: { base, branch, path: latestPath, content, message: 'chore(feed): clean+merge latest' } } ];"
+      },
+      "id": "8d0670cb-d56e-40cd-80b9-0f5152d7d562",
+      "name": "BUILD_GH_BODY3",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1264,
+        864
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{$json.base}}/{{ $json.path }}?ref={{$json.branch}}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "efbe6f46-eff6-42bc-b5bd-3b81a39b9108",
+      "name": "GITHUB_GET_SHA3",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1440,
+        784
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "githubApi": {
+          "id": "fiWvt8LJXl85zjSx",
+          "name": "GitHub account"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {},
+      "id": "7cb6c83e-2988-4f39-a64b-66fc1ed155bc",
+      "name": "MERGE_META_SHA1",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2,
+      "position": [
+        1632,
+        864
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const all=$input.all(); function respOf(it){ const j=(it&&it.json)||{}; if(j.body&&typeof j.body==='object') return j.body; if(j.data&&typeof j.data==='object') return j.data; return j; } const metaItem=all.find(it=>it.json&&it.json.base&&it.json.path); const meta=(metaItem&&metaItem.json)||{}; const shaItem=all.find(it=>{ const r=respOf(it); return r && typeof r.sha==='string'; }); const resp=respOf(shaItem); const base=meta.base||''; const path=meta.path||''; const branch=meta.branch||'main'; const message=meta.message||'update'; const content=meta.content; const body={ message, content, branch }; if(resp && typeof resp.sha==='string') body.sha=resp.sha; return [{ json:{ url: `${base}/${path}`, body } }];"
+      },
+      "id": "76e6e9c5-1075-44dd-870b-f730d61ac2d4",
+      "name": "BUILD_PUT3",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1808,
+        864
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "={{$json.url}}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.body }}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "id": "32bd288a-586c-49e9-bc1f-80458a778674",
+      "name": "GITHUB_PUT3",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1968,
+        864
+      ],
+      "credentials": {
+        "githubApi": {
+          "id": "fiWvt8LJXl85zjSx",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "c3048249-1bdd-44b0-b9ae-bd74fca25528",
+      "name": "RESPOND2",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        2144,
+        864
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "AUTOPILOT_hourly": {
+      "main": [
+        [
+          {
+            "node": "BUILD_PARAMS",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP_Contxto_RSS",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP_Startupi_RSS",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP_StartupsBR_RSS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP_Contxto_RSS": {
+      "main": [
+        [
+          {
+            "node": "PARSE_Contxto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP_Startupi_RSS": {
+      "main": [
+        [
+          {
+            "node": "PARSE_Startupi",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP_StartupsBR_RSS": {
+      "main": [
+        [
+          {
+            "node": "PARSE_StartupsBR",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PARSE_Contxto": {
+      "main": [
+        [
+          {
+            "node": "AGGREGATE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PARSE_Startupi": {
+      "main": [
+        [
+          {
+            "node": "AGGREGATE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PARSE_StartupsBR": {
+      "main": [
+        [
+          {
+            "node": "AGGREGATE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AGGREGATE": {
+      "main": [
+        [
+          {
+            "node": "BUILD_GH_BODY",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "BUILD_GH_BODY": {
+      "main": [
+        [
+          {
+            "node": "GITHUB_GET_SHA",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "MERGE_SHA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GITHUB_GET_SHA": {
+      "main": [
+        [
+          {
+            "node": "MERGE_SHA",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "MERGE_SHA": {
+      "main": [
+        [
+          {
+            "node": "BUILD_PUT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RESET_IN": {
+      "main": [
+        [
+          {
+            "node": "BUILD_GH_BODY2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "BUILD_GH_BODY2": {
+      "main": [
+        [
+          {
+            "node": "GITHUB_GET_SHA2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GITHUB_GET_SHA2": {
+      "main": [
+        [
+          {
+            "node": "BUILD_PUT2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "BUILD_PUT2": {
+      "main": [
+        [
+          {
+            "node": "GITHUB_PUT2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GITHUB_PUT2": {
+      "main": [
+        [
+          {
+            "node": "RESPOND1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AUTOPILOT_hourly2": {
+      "main": [
+        [
+          {
+            "node": "START1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MERGE_IN1": {
+      "main": [
+        [
+          {
+            "node": "START1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "START1": {
+      "main": [
+        [
+          {
+            "node": "BUILD_PARAMS2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "BUILD_PARAMS2": {
+      "main": [
+        [
+          {
+            "node": "EXPAND_GITHUB_GETS1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "EXPAND_GITHUB_GETS1": {
+      "main": [
+        [
+          {
+            "node": "GITHUB_GET_CONTENT1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GITHUB_GET_CONTENT1": {
+      "main": [
+        [
+          {
+            "node": "PARSE_CATEGORY1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PARSE_CATEGORY1": {
+      "main": [
+        [
+          {
+            "node": "EXPAND_ARTICLES1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "EXPAND_ARTICLES1": {
+      "main": [
+        [
+          {
+            "node": "FILTER_HAS_URL1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "IF_EMPTY_TO_COLLAPSE1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP_VALIDATE1": {
+      "main": [
+        [
+          {
+            "node": "MERGE_VALIDATE1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "FILTER_HAS_URL1": {
+      "main": [
+        [
+          {
+            "node": "HTTP_VALIDATE1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "KEEP_ORIG1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "KEEP_ORIG1": {
+      "main": [
+        [
+          {
+            "node": "MERGE_VALIDATE1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "MERGE_VALIDATE1": {
+      "main": [
+        [
+          {
+            "node": "FILTER_VALID1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF_EMPTY_TO_COLLAPSE1": {
+      "main": [
+        [
+          {
+            "node": "COLLAPSE1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "COLLAPSE1": {
+      "main": [
+        [
+          {
+            "node": "BUILD_GH_BODY3",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "BUILD_STATUS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "BUILD_GH_BODY3": {
+      "main": [
+        [
+          {
+            "node": "GITHUB_GET_SHA3",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "MERGE_META_SHA1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GITHUB_GET_SHA3": {
+      "main": [
+        [
+          {
+            "node": "MERGE_META_SHA1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "MERGE_META_SHA1": {
+      "main": [
+        [
+          {
+            "node": "BUILD_PUT3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "BUILD_PUT3": {
+      "main": [
+        [
+          {
+            "node": "GITHUB_PUT3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GITHUB_PUT3": {
+      "main": [
+        [
+          {
+            "node": "RESPOND2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "daf24ee7-c84e-4028-93c2-fa5a92bf030a",
+  "meta": {
+    "instanceId": "99f6164f62c22d699c9ce9932f4b521d20a24970022054dc68b9a0dd16ce6d86"
+  },
+  "id": "PWGhwpPmsKCKrWiI",
+  "tags": []
+}

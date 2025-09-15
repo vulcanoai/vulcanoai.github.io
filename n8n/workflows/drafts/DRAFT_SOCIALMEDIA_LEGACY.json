@@ -1,0 +1,490 @@
+{
+  "name": "DRAFT_SOCIALMEDIA_LEGACY",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        704,
+        672
+      ],
+      "id": "28f9a23b-4fed-4403-805c-ff1fd8bf9d9b",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "You are a content curator AI. Your role is to read the final AI-generated debate response and extract:\n\n1. A short summary (2–3 sentences)\n2. 3 relevant hashtags\n3. One word to describe the overall tone or mood (e.g., hopeful, dystopian, enlightening)\n\nRespond only in this strict JSON format:\n{\n  \"summary\": \"...\",\n  \"hashtags\": [\"...\", \"...\", \"...\"],\n  \"mood\": \"...\"\n}\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        2064,
+        208
+      ],
+      "id": "22aae497-7fe4-4e30-b233-a7d06f45e5bf",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        2080,
+        368
+      ],
+      "id": "3d873cab-91f8-4e05-a0b8-9ba53ab2b900",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "LHo2RkL2RsO6qUqu",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "phantom-curator-001"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        2176,
+        448
+      ],
+      "id": "cca340ea-9d35-4526-81f0-02600baad1ba",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"summary\": \"{{ $json[\\\"summary\\\"] }}\",\n    \"hashtags\": \"{{ $json[\\\"hashtags\\\"] }}\",\n    \"mood\": \"{{ $json[\\\"mood\\\"] }}\",\n    \"agent_origin\": \"Aether\",\n    \"source_topic\": \"{{ $('Code').item.json['topic'] }}\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2656,
+        496
+      ],
+      "id": "48b6053b-4cba-4d9d-9211-d642beea432d",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "You are a creative and professional social media manager working for a futuristic brand. \n\nYour job is to take structured data from an AI-generated debate and write a short social media post that:\n\n- Summarizes the idea in a catchy way\n- Feels mysterious or thought-provoking\n- Includes the hashtags naturally\n- Fits within 300 characters\n\nMake it feel like a cryptic preview of a greater experiment happening behind the scenes.\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        2832,
+        464
+      ],
+      "id": "b931b649-4436-440b-bbd6-c9b313735a37",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "socialphantom"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        2960,
+        736
+      ],
+      "id": "f59741eb-e309-41bc-b6d7-ba366000e672",
+      "name": "Simple Memory1"
+    },
+    {
+      "parameters": {
+        "text": "={{ $('AI Agent1').item.json.output }} #PhantomTheoryAI\n\n",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.twitter",
+      "typeVersion": 2,
+      "position": [
+        3152,
+        480
+      ],
+      "id": "bc574d1b-b2dd-4c28-82b0-08a016c91add",
+      "name": "Create Tweet",
+      "credentials": {
+        "twitterOAuth2Api": {
+          "id": "YrtK0hPXlAIdV57G",
+          "name": "X account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1056,
+        672
+      ],
+      "id": "50d451c3-ff25-45fe-af44-ca1f535acac5",
+      "name": "AI Agent2"
+    },
+    {
+      "parameters": {
+        "model": "grok-4-0709",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatXAiGrok",
+      "typeVersion": 1,
+      "position": [
+        1024,
+        928
+      ],
+      "id": "92faded9-9ca6-49d1-b0a1-4457899bb452",
+      "name": "xAI Grok Chat Model1",
+      "credentials": {
+        "xAiApi": {
+          "id": "H0GQCuRkHVUlEFKY",
+          "name": "xAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "phantomartai"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        1184,
+        960
+      ],
+      "id": "5cc72f39-1a7b-49d0-9595-ac10caf76786",
+      "name": "Simple Memory2"
+    },
+    {
+      "parameters": {
+        "model": "grok-3-fast",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatXAiGrok",
+      "typeVersion": 1,
+      "position": [
+        2816,
+        704
+      ],
+      "id": "d2ad5237-0ef5-48d6-9a18-786b82ee8927",
+      "name": "xAI Grok Chat Model2",
+      "credentials": {
+        "xAiApi": {
+          "id": "H0GQCuRkHVUlEFKY",
+          "name": "xAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://vulcano.ai/data/feed-latest.json",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1568,
+        784
+      ],
+      "id": "af97b88b-e76f-4610-8dff-7bc91ede7a57",
+      "name": "FETCH_FEED_LATEST",
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $json;\nconst arr = Array.isArray(data.articles) ? data.articles : (Array.isArray(data.items) ? data.items : []);\nif (!arr.length) return [];\nconst allowLangs = new Set(['es','pt']);\nfunction normalize(a){\n  const val = (x,d='') => (x==null?d:String(x)).trim();\n  const topics = Array.isArray(a.topics) ? a.topics : [];\n  return {\n    title: val(a.title),\n    summary: val(a.summary),\n    url: val(a.url||a.link),\n    source: val(a.source),\n    source_url: val(a.source_url),\n    country: val(a.country,'Regional'),\n    topics,\n    language: val(a.language||'es').slice(0,2).toLowerCase(),\n    published_at: val(a.published_at||new Date().toISOString())\n  };\n}\nconst items = arr.map(normalize)\n  .filter(a => a.title && a.url && allowLangs.has(a.language))\n  .sort((x,y)=> new Date(y.published_at) - new Date(x.published_at));\nconst pick = items[ Math.floor(Math.random() * Math.min(items.length, 20)) ] || items[0];\nif (!pick) return [];\nconst d = (pick.published_at||'').slice(0,10);\nfunction slugify(s){return (s||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'').slice(0,80)}\nfunction shortHash(s){ let h=0; s=(s||'').toString(); for (let i=0;i<s.length;i++){ h=((h<<5)-h)+s.charCodeAt(i); h|=0;} return ('00000000'+(h>>>0).toString(16)).slice(-8)}\nconst slug = slugify(pick.title);\nconst uniq = shortHash(pick.url || pick.title);\nconst internalJson = `https://vulcano.ai/data/entries/${d}/${slug}-${uniq}.json`;\nconst internalPage = `https://vulcano.ai/pages/noticias.html?dia=${encodeURIComponent(d)}&q=${encodeURIComponent(pick.title)}`;\nreturn [{ json: { article: pick, link: internalPage, link_json: internalJson } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1760,
+        800
+      ],
+      "id": "314d7eef-11a1-49c6-901e-7d0d50431e8f",
+      "name": "SELECT_FOR_TWEET"
+    },
+    {
+      "parameters": {
+        "jsCode": "const a = $json.article || {}; const link = $json.link || ''; const norm = s => (s||'').toString().trim();\nconst title = norm(a.title); const summary = norm(a.summary); const country = norm(a.country); const topics = Array.isArray(a.topics)?a.topics:[];\nfunction capWords(s){ return s.split(/[ 	
+]+/).map(w=> w? (w[0].toUpperCase()+w.slice(1).toLowerCase()) : '').join(''); }\nfunction tagify(s){ return capWords((s||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').replace(/[^A-Za-z0-9 \t\n\r]/g,' ').trim()); }\nconst tags = new Set(['IA','LatAm']); if (country) tags.add(tagify(country)); for (const t of topics.slice(0,2)){ if (t) tags.add(tagify(t)); }\nconst hashtags = Array.from(tags).map(x=> '#'+x).join(' ');\nlet base = `${title}`; let extra = summary ? ` — ${summary}` : '';\nconst budget = 280; const fixed = (hashtags + ' ' + link).trim(); const maxLen = Math.max(0, budget - (fixed.length ? (fixed.length + 1) : 0));\nlet txt = `${base}${extra}`;\nif (txt.length > maxLen){ const cut = txt.slice(0, Math.max(0, maxLen-1)); const i = cut.lastIndexOf(' '); txt = (i>40? cut.slice(0,i) : cut).trimEnd() + '…'; }\nconst out = fixed ? `${txt} ${fixed}` : txt; return [{ json: { draft: out, article: a, link, hashtags } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1936,
+        784
+      ],
+      "id": "a4cd49bf-a421-48c5-9535-f9a281738263",
+      "name": "BUILD_TWEET_NEWS"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Eres el agente social de Vulcano AI. Mejora el siguiente tweet en español para que sea claro, natural y sin errores. Reglas:\n- Mantén el enlace EXACTAMENTE igual, no lo elimines ni modifiques.\n- Mantén como máximo 3 hashtags relevantes (IA/LatAm/país/tema).\n- No uses emojis.\n- Tono: informativo y profesional (no críptico).\n- 280 caracteres como máximo (incluyendo hashtags y enlace).\nDevuelve SOLO JSON: {\n  \"text\": \"...tweet final...\"\n}\nContenido:\nTítulo: {{$json.article.title}}\nResumen: {{$json.article.summary}}\nPaís: {{$json.article.country}}\nTemas: {{$json.article.topics}}\nBorrador: {{$json.draft}}\nEnlace: {{$json.link}}\n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        2128,
+        784
+      ],
+      "id": "f1e6a1a4-9bd4-46b6-8a98-1b92e1a9d6d1",
+      "name": "AI Polisher (News)"
+    },
+    {
+      "parameters": {
+        "jsCode": "const inp = $json || {}; const link = String(inp.link||''); const raw = String(inp.text||inp.draft||'');\nfunction keepLink(t){ if(!link) return t; const has = t.includes(link); if(!has){ if (t.length + 1 + link.length <= 280) return (t + ' ' + link).trim(); let room = 280 - link.length - 1; let cut = t.slice(0, Math.max(0, room-1)); const i = cut.lastIndexOf(' '); t = (i>40? cut.slice(0,i) : cut).trimEnd() + '…'; return (t + ' ' + link).trim(); } return t; }\nlet text = raw.replace(/[\\n\\r]+/g,' ').replace(/[ \t\n\r]{2,}/g,' ').trim();\nif (text.length > 280){ let cut = text.slice(0,279); const i = cut.lastIndexOf(' '); text = (i>40? cut.slice(0,i) : cut).trimEnd() + '…'; }\ntext = keepLink(text);\ntext = text.replace(/#Per(\\b)/g,'#Peru$1').replace(/#Mex(\\b)/g,'#Mexico$1');\nreturn [{ json: { text, link } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2320,
+        784
+      ],
+      "id": "a5a6db13-0a43-4b6b-9f01-6f7f9d2ee7a5",
+      "name": "VALIDATE_TWEET"
+    },
+    {
+      "parameters": {
+        "text": "={{ $json.text }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.twitter",
+      "typeVersion": 2,
+      "position": [
+        2128,
+        800
+      ],
+      "id": "7177d513-5e0a-4349-8625-76d9914099e2",
+      "name": "Create Tweet (News)",
+      "credentials": {
+        "twitterOAuth2Api": {
+          "id": "YrtK0hPXlAIdV57G",
+          "name": "X account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "FETCH_FEED_LATEST": {
+      "main": [
+        [
+          {
+            "node": "SELECT_FOR_TWEET",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SELECT_FOR_TWEET": {
+      "main": [
+        [
+          {
+            "node": "BUILD_TWEET_NEWS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "BUILD_TWEET_NEWS": {
+      "main": [
+        [
+          {
+            "node": "AI Polisher (News)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Polisher (News)": {
+      "main": [
+        [
+          {
+            "node": "VALIDATE_TWEET",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "VALIDATE_TWEET": {
+      "main": [
+        [
+          {
+            "node": "Create Tweet (News)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "AI Polisher (News)",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        []
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory1": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "Create Tweet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "xAI Grok Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent2",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory2": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent2",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "xAI Grok Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent2": {
+      "main": [
+        [
+          {
+            "node": "FETCH_FEED_LATEST",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "versionId": "f9ac3819-f405-4fca-8166-87058132f7c2",
+  "meta": {
+    "instanceId": "99f6164f62c22d699c9ce9932f4b521d20a24970022054dc68b9a0dd16ce6d86"
+  },
+  "id": "DIuJYqYSsCOI7zyd",
+  "tags": []
+}

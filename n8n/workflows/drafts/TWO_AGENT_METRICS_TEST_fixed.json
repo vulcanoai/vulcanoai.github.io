@@ -1,0 +1,174 @@
+{
+  "name": "TWO_AGENT_METRICS_TEST",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "Manual Trigger",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        120,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "triggerTimes": {
+          "item": [
+            {
+              "hour": 0
+            }
+          ]
+        }
+      },
+      "id": "Cron",
+      "name": "Cron (disabled)",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [
+        120,
+        120
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "repoOwner",
+              "value": "vulcanoai"
+            },
+            {
+              "name": "repoName",
+              "value": "vulcanoai.github.io"
+            },
+            {
+              "name": "repoBranch",
+              "value": "main"
+            }
+          ]
+        }
+      },
+      "id": "Set Repo",
+      "name": "Set Repo Params",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        360,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Build test articles for two agents: Luciano AI (generalist) and Isabella AI (health)\nconst now = new Date();\nfunction isoMinus(h){ const d = new Date(now.getTime() - h*3600*1000); return d.toISOString(); }\n\nconst articles = [\n  {\n    id: 'test-luciano-1',\n    title: 'Startup colombiana lanza modelo de IA para logística urbana',\n    summary: 'Optimiza rutas y reduce emisiones en entregas de última milla.',\n    url: 'https://ejemplo.com/colombia-startup-ia-logistica',\n    source: 'Ejemplo Noticias',\n    source_url: 'https://ejemplo.com',\n    country: 'Colombia',\n    topics: ['Startups','Logística','IA'],\n    language: 'es',\n    published_at: isoMinus(2),\n    relevance: 7,\n    sentiment: 'positive',\n    author: 'Agente de prueba',\n    curator: 'Luciano AI',\n    stage: 'validated'\n  },\n  {\n    id: 'test-luciano-2',\n    title: 'Fondo regional invierte en plataforma de IA educativa',\n    summary: 'Ronda semilla para expandir a México y Chile.',\n    url: 'https://ejemplo.com/fondo-invierte-ia-educacion',\n    source: 'Ejemplo Financiero',\n    source_url: 'https://ejemplo-financiero.com',\n    country: 'Regional',\n    topics: ['Inversión','Educación','IA'],\n    language: 'es',\n    published_at: isoMinus(3),\n    relevance: 6,\n    sentiment: 'neutral',\n    author: 'Agente de prueba',\n    curator: 'Luciano AI',\n    stage: 'validated'\n  },\n  {\n    id: 'test-isabella-1',\n    title: 'Ministerio de Salud de Brasil publica guía sobre IA clínica',\n    summary: 'Recomendaciones para uso responsable de IA en diagnóstico.',\n    url: 'https://ejemplo.com/brasil-guia-ia-salud',\n    source: 'Salud Hoy',\n    source_url: 'https://saludhoy.example',\n    country: 'Brasil',\n    topics: ['Salud','Regulación','IA'],\n    language: 'pt',\n    published_at: isoMinus(1),\n    relevance: 8,\n    sentiment: 'positive',\n    author: 'Agente de prueba',\n    curator: 'Isabella AI',\n    stage: 'validated'\n  }\n];\n\nreturn articles.map(a => ({ json: a }));"
+      },
+      "id": "Build Articles",
+      "name": "Build Test Articles",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 2,
+      "position": [
+        560,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Wrap items into a run snapshot and prepare GitHub file params\nconst items = $input.all();\nconst articles = items.map(i => i.json);\nconst ts = new Date().toISOString();\nconst run = { timestamp: ts, count: articles.length, articles, params: { test: 'two-agent-metrics' } };\nconst content = JSON.stringify(run, null, 2);\n// GitHub file path: replace colon/dot for compatibility\nconst name = ts.replace(/[:.]/g, '-');\nconst filePath = `data/runs/${name}.json`;\nconst commitMessage = `chore(run): two-agent test snapshot ${name}`;\nreturn [{ json: { ...$json, filePath, fileContent: content, commitMessage } }];"
+      },
+      "id": "Build Run",
+      "name": "Build Run Snapshot",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 2,
+      "position": [
+        780,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "createUpdateFile",
+        "owner": "={{$json.repoOwner}}",
+        "repository": "={{$json.repoName}}",
+        "filePath": "={{$json.filePath}}",
+        "fileContent": "={{$json.fileContent}}",
+        "additionalFields": {
+          "branch": "={{$json.repoBranch}}",
+          "commitMessage": "={{$json.commitMessage}}"
+        }
+      },
+      "id": "GitHub Commit",
+      "name": "GitHub Commit Run",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Repo Params",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cron (disabled)": {
+      "main": [
+        [
+          {
+            "node": "Set Repo Params",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Repo Params": {
+      "main": [
+        [
+          {
+            "node": "Build Test Articles",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Test Articles": {
+      "main": [
+        [
+          {
+            "node": "Build Run Snapshot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Run Snapshot": {
+      "main": [
+        [
+          {
+            "node": "GitHub Commit Run",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "staticData": {},
+  "pinData": {}
+}
+

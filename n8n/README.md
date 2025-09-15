@@ -40,23 +40,23 @@ Conventions
 - Date‑stamped variants include `vYYYYMMDD-HHMM` for reproducible test builds.
 - Legacy `DEBUG###.json` files may still exist; treat them as read‑only snapshots.
 
-Current files (examples)
+Folder layout (clean)
 
-- Production (read‑only):
-  - `n8n/workflows/PRODUCTION_FEED_NEWS_AUTOPILOT.json` — Consolidated feed/news pipeline (stable autopilot)
-  - `n8n/workflows/PRODUCTION_SOCIAL_AUTOPILOT.json` — Social posts with AI polisher + validator (every 45 min)
-  - `n8n/workflows/PRODUCTION_SOCIAL_WEEKLY_REPORT.json` — Weekly topics/countries summary tweets
-  - Recommended rename for AI research (if active in n8n): `PRODUCTION_AI_RESEARCH_FEED_AUTOPILOT.json`
-- Drafts:
-  - `n8n/workflows/DRAFT_SOCIALMEDIA_LEGACY.json` — Legacy/working draft (kept for reference)
-  - `n8n/workflows/STARTUPS_FEED_AUTOPILOT_fixed.json` — Startups category via curated RSS (hourly, writes to `data/startups/*`)
-  - `n8n/workflows/AI_RESEARCH_FEED_AUTOPILOT_fixed.json` — AI research via arXiv RSS (hourly, writes to `data/ai-research/*`)
-  - `n8n/workflows/GLOBAL_AI_DISCOVERY_AUTOPILOT_fixed.json` — Source‑agnostic, multilingual discovery via Serper (hourly, writes to `data/discovery/*`)
-  - `n8n/workflows/RESET_FEED_TO_EMPTY_fixed.json` — One‑shot reset: overwrites `data/feed-latest.json` with an empty articles array
-  - `n8n/workflows/MERGE_AND_CLEAN_GLOBAL_FEED_fixed.json` — Merge, validate links, and publish a clean site feed
-- Tests:
-  - `n8n/workflows/SOCIALMEDIA_POLISHER_TEST_v20250914-1200.json`
-  - `n8n/workflows/SOCIALMEDIA_WEEKLY_REPORT_TEST_v20250914-1200.json`
+- Production (import these):
+  - `n8n/workflows/production/PRODUCTION_AI_RESEARCH_FEED_AUTOPILOT.json`
+- Ops (active utilities):
+  - `n8n/workflows/ops/MERGE_AND_CLEAN_GLOBAL_FEED_fixed.json` — Merge, validate, publish
+  - `n8n/workflows/ops/RESET_FEED_TO_EMPTY_fixed.json` — Reset feed to empty
+  - `n8n/workflows/ops/STARTUPS_FEED_AUTOPILOT_fixed.json` — Baseline seeding (optional)
+- Drafts (sleeping/experiments):
+  - `n8n/workflows/drafts/AI_RESEARCH_FEED_AUTOPILOT_fixed.json`
+  - `n8n/workflows/drafts/GLOBAL_AI_DISCOVERY_AUTOPILOT_fixed.json`
+  - `n8n/workflows/drafts/AI_LATAM_AUTOPILOT_combined_fixed.json`
+  - `n8n/workflows/drafts/SOCIALMEDIA_*` and `n8n/workflows/drafts/DRAFT_SOCIALMEDIA_LEGACY.json`
+- Archive (legacy not in use):
+  - `n8n/workflows/archive/PRODUCTION_FEED_NEWS_AUTOPILOT.json`
+  - `n8n/workflows/archive/PRODUCTION_SOCIAL_AUTOPILOT.json`
+  - `n8n/workflows/archive/PRODUCTION_SOCIAL_WEEKLY_REPORT.json`
 
 Agent guidelines
 

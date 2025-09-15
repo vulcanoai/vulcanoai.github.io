@@ -1,0 +1,254 @@
+{
+  "name": "GLOBAL AI — Discovery Autopilot (fixed)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [ { "field": "hours" } ]
+        }
+      },
+      "id": "trg-global-hourly",
+      "name": "AUTOPILOT (hourly)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [ -2200, 0 ],
+      "notes": "Runs hourly to discover global AI news relevant to LATAM."
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "global-ai-discovery",
+        "responseMode": "responseNode",
+        "options": { "rawBody": true }
+      },
+      "id": "wh-global-in",
+      "name": "DISCOVERY_IN",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [ -2200, 200 ],
+      "notes": "Manual trigger with custom prompt/params."
+    },
+    {
+      "parameters": {},
+      "id": "merge-start",
+      "name": "START",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2,
+      "position": [ -2000, 100 ],
+      "notes": "Merge schedule + webhook into a single flow"
+    },
+    {
+      "parameters": {
+        "jsCode": "// BUILD_PARAMS — no static sources; AI+search driven\nlet body=$json.body; if(typeof body==='string'){ try{ body=JSON.parse(body);}catch{ body={}; } }\nconst now=new Date(); const date=now.toISOString().slice(0,10);\nconst params={\n  category: 'global-ai',\n  timeWindowHours: Number(body?.time_window_hours ?? 48),\n  minItems: Number(body?.min_items ?? 6),\n  languages: Array.isArray(body?.languages)? body.languages : ['es','pt','en','zh','ru'],\n  branch: body?.branch || 'main',\n  repoOwner: body?.repo_owner || 'vulcanoai',\n  repoName: body?.repo_name || 'vulcanoai.github.io',\n  pathLatest: body?.path_latest || 'data/discovery/feed-latest.json',\n  pathSnapshot: body?.path_snapshot || `data/discovery/feed-${date}.json`,\n  topic: (body?.topic || '').toString().trim() || 'AI developments, companies, policy, research with links to Latin America',\n  latamTerms: [\n    'Latin America','LATAM','América Latina','América do Sul','South America','Centroamérica','Central America',\n    'México','Mexico','Brasil','Brazil','Argentina','Chile','Perú','Peru','Colombia','Uruguay','Paraguay','Bolivia','Ecuador','Panamá','Panama','Venezuela','Dominicana','Costa Rica','Guatemala','Honduras','El Salvador','Nicaragua'\n  ]\n};\nreturn [{ json: { params } }];"
+      },
+      "id": "build-params",
+      "name": "BUILD_PARAMS",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [ -1800, 100 ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// BUILD_QUERIES — multilingual queries; no fixed sources\nfunction p(){ try{ return $items('BUILD_PARAMS',0,0).json.params; }catch{ return $json.params||{} } }\nconst params=p(); const hours=params.timeWindowHours||48;\nconst langs=Array.isArray(params.languages)? params.languages : ['es','pt','en','zh','ru'];\nconst latam=['\u201cLatin America\u201d','LATAM','\u201cAm\u00E9rica Latina\u201d','\u201cAm\u00E9rica do Sul\u201d','\u201cSouth America\u201d','Centroam\u00E9rica'];\nconst aiTerms={ es:['inteligencia artificial','IA','modelo','red neuronal'], pt:['intelig\u00EAncia artificial','IA','modelo','rede neural'], en:['artificial intelligence','AI','model','neural network'], zh:['\u4EBA\u5DE5\u667A\u80FD','AI','\u6A21\u578B'], ru:['\u0438\u0441\u043A\u0443\u0441\u0441\u0442\u0432\u0435\u043D\u043D\u044B\u0439 \u0438\u043D\u0442\u0435\u043B\u043B\u0435\u043A\u0442','AI','\u043C\u043E\u0434\u0435\u043B\u044C'] };\nconst localeHL={ es:'es', pt:'pt-BR', en:'en', zh:'zh-CN', ru:'ru' };\nconst qdr = hours>=24? `qdr:d${Math.ceil(hours/24)}` : `qdr:h${hours}`;\nconst out=[];\nfor(const lg of langs){ const terms=aiTerms[lg]||aiTerms.en; const baseTerms = (terms.join(' OR ')); const lat = latam.join(' OR ');\n  out.push({ json: { lang: lg, hl: localeHL[lg]||'en', body: { q: `${baseTerms} (${lat})`, num: 10, tbs: qdr } } });\n}\nreturn out;"
+      },
+      "id": "build-queries",
+      "name": "BUILD_QUERIES",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [ -1600, 100 ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://google.serper.dev/news",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "X-API-KEY", "value": "={{$env.SERPER_API_KEY}}" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json.body}}",
+        "options": { "timeout": 30000 }
+      },
+      "id": "serper-news",
+      "name": "SERPER — News",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [ -1400, 100 ],
+      "alwaysOutputData": true,
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// PARSE_SERPER — flatten results into candidate links\nconst lang=$json.lang || 'en';\nlet data = $json; if($json.body && typeof $json.body==='object') data=$json.body; if($json.data && typeof $json.data==='object') data=$json.data;\nconst news = Array.isArray(data.news)? data.news : [];\nconst out=[];\nfor(const n of news){ if(!n || !n.link || !n.title) continue; out.push({ json: { lang, url: n.link, title: n.title, snippet: n.snippet||'', source: n.source||'', date: n.date||n.datePublished||'' } }); }\nreturn out;"
+      },
+      "id": "parse-serper",
+      "name": "PARSE_SERPER",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [ -1200, 100 ]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{$json.url}}",
+        "responseFormat": "string",
+        "options": { "timeout": 15000, "maxRedirects": 5 }
+      },
+      "id": "http-validate",
+      "name": "HTTP_VALIDATE",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [ -1000, 100 ],
+      "alwaysOutputData": true,
+      "continueOnFail": true,
+      "notes": "Fetch page to verify reachability and capture HTML."
+    },
+    {
+      "parameters": {
+        "jsCode": "// EXTRACT_META — OG tags and basic fields\nconst html = ($json.body && typeof $json.body==='string')? $json.body : ($json.data || '');\nconst url = $json.url || '';
+function m(re){ const r=re.exec(html); return r? (r[1]||'').trim() : ''; }\nfunction tag(name){ const re=new RegExp(`<meta[^>]+property=[\"']${name}[\"'][^>]+content=[\"']([^\"']+)[\"'][^>]*>`,`i`); return m(re); }\nconst title = tag('og:title') || (html.match(/<title>([^<]+)<\/title>/i)?.[1]||'');\nconst description = tag('og:description') || '';
+const site = tag('og:site_name') || '';
+const pub = tag('article:published_time') || '';
+return [{ json: { url, title, description, site, published_at: pub, html_excerpt: (html.slice(0,2000)||''), langHint: $json.lang||'' } }];"
+      },
+      "id": "extract-meta",
+      "name": "EXTRACT_META",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [ -800, 100 ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// FILTER_LATAM — heuristic relevance to LATAM\nfunction p(){ try{ return $items('BUILD_PARAMS',0,0).json.params; }catch{ return {}; } }\nconst params=p(); const terms=(params.latamTerms||[]).map(s=>s.toLowerCase());\nconst url=$json.url||''; const title=($json.title||'').toLowerCase(); const desc=($json.description||'').toLowerCase(); const site=($json.site||'').toLowerCase();\nconst tlds=['.mx','.br','.ar','.cl','.co','.pe','.uy','.ec','.pa','.ve','.bo','.py','.do','.cr','.gt','.hn','.sv','.ni'];\nlet score=0; for(const t of terms){ if(title.includes(t.toLowerCase())) score+=2; if(desc.includes(t.toLowerCase())) score+=1; if(site.includes(t.toLowerCase())) score+=1; }
+if(tlds.some(t=>url.includes(t))) score+=2; if(/lat(am|\s*america)/i.test(title)) score+=2; if(/\b(ibero|hispano)\b/i.test(title)) score+=1;\nif(score>=2){ return [{ json: { ...$json, _latamScore: score } }]; } else { return []; }"
+      },
+      "id": "filter-latam",
+      "name": "FILTER_LATAM",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [ -600, 100 ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// CURATE — map to standard schema and aggregate\nfunction norm(j){ return { id: j.url, title: j.title||'', summary: j.description||j.html_excerpt||'', url: j.url, source: j.site||'', source_url: j.url? new URL(j.url).origin : '', country: 'Regional', topics: ['AI'], language: (j.langHint||'').slice(0,2)||'en', published_at: j.published_at || new Date().toISOString(), relevance: 6, sentiment: 'neutral', author: '', curator: 'Luciano AI' }; }\nreturn [{ json: { articles: [ norm($json) ] } }];"
+      },
+      "id": "curate",
+      "name": "CURATE",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [ -420, 100 ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// MERGE_ITEMS — collapse into one item with array\nconst all=$input.all(); const arr=[]; for(const it of all){ const a=Array.isArray(it.json.articles)? it.json.articles: []; for(const x of a){ if(x && x.url) arr.push(x); } }\n// Deduplicate by URL\nconst seen=new Set(); const out=[]; for(const a of arr){ if(!seen.has(a.url)){ seen.add(a.url); out.push(a); } }\n// Time filter\nfunction p(){ try{ return $items('BUILD_PARAMS',0,0).json.params; }catch{ return {}; } }\nconst params=p(); const now=Date.now(); const hours=params.timeWindowHours||48;\nconst filtered = out.filter(a=>{ const t=new Date(a.published_at).getTime(); return isFinite(t) && (now-t) <= hours*3600*1000; });\nfiltered.sort((a,b)=> new Date(b.published_at)-new Date(a.published_at));\nreturn [{ json: { category: 'global-ai', articles: filtered } }];"
+      },
+      "id": "merge-items",
+      "name": "MERGE_ITEMS",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [ -240, 100 ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// BUILD_GH_BODY — upsert latest and snapshot\nfunction p(){ try{ return $items('BUILD_PARAMS',0,0).json.params; }catch{ return {}; } }\nconst params=p(); const owner=params.repoOwner; const repo=params.repoName; const branch=params.branch; const base=`https://api.github.com/repos/${owner}/${repo}/contents`;\nconst latestPath=params.pathLatest; const snapshotPath=params.pathSnapshot;\nconst payload = { version:'v1.0', category:'global-ai', generated_at: new Date().toISOString(), articles: ($json.articles||[]) };\nconst content = Buffer.from(JSON.stringify(payload, null, 2)).toString('base64');\nreturn [ { json: { base, branch, path: latestPath, content, message: 'chore(global-ai): update feed-latest.json' } }, { json: { base, branch, path: snapshotPath, content, message: 'chore(global-ai): snapshot for day' } } ];"
+      },
+      "id": "build-gh-body",
+      "name": "BUILD_GH_BODY",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [ -80, 100 ]
+    },
+    {
+      "parameters": {
+        "url": "={{$json.base}}/{{ $json.path }}?ref={{$json.branch}}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
+        "sendHeaders": true,
+        "headerParameters": { "parameters": [ { "name": "Accept", "value": "application/vnd.github+json" } ] },
+        "options": { "timeout": 60000 }
+      },
+      "id": "gh-get-sha",
+      "name": "GITHUB_GET_SHA",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [ 120, 20 ],
+      "alwaysOutputData": true,
+      "continueOnFail": true,
+      "credentials": { "githubApi": { "id": "fiWvt8LJXl85zjSx", "name": "GitHub account" } }
+    },
+    {
+      "parameters": { "mode": "mergeByPosition", "options": {} },
+      "id": "merge-sha",
+      "name": "MERGE_SHA",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2,
+      "position": [ 320, 60 ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// BUILD_PUT — combine meta+sha from MERGE_SHA\nconst j=$json||{}; const base=j.base||''; const path=j.path||''; const branch=j.branch||'main'; const message=j.message||'update'; const content=j.content;\nlet sha; if(j && j.body && typeof j.body.sha==='string') sha=j.body.sha; if(!sha && j && j.data && typeof j.data.sha==='string') sha=j.data.sha;\nconst body={ message, content, branch }; if(sha) body.sha=sha; return [{ json: { url: `${base}/${path}`, body } }];"
+      },
+      "id": "build-put",
+      "name": "BUILD_PUT",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [ 520, 100 ]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "={{$json.url}}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
+        "sendHeaders": true,
+        "headerParameters": { "parameters": [ { "name": "Accept", "value": "application/vnd.github+json" }, { "name": "Content-Type", "value": "application/json" } ] },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.body }}",
+        "options": { "timeout": 60000 }
+      },
+      "id": "gh-put",
+      "name": "GITHUB_PUT",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [ 720, 100 ],
+      "credentials": { "githubApi": { "id": "fiWvt8LJXl85zjSx", "name": "GitHub account" } }
+    },
+    {
+      "parameters": { "options": { "responseCode": 200 } },
+      "id": "respond",
+      "name": "RESPOND",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [ 920, 100 ]
+    }
+  ],
+  "connections": {
+    "DISCOVERY_IN": { "main": [ [ { "node": "START", "type": "main", "index": 0 } ] ] },
+    "AUTOPILOT (hourly)": { "main": [ [ { "node": "START", "type": "main", "index": 0 } ] ] },
+    "START": { "main": [ [ { "node": "BUILD_PARAMS", "type": "main", "index": 0 } ] ] },
+    "BUILD_PARAMS": { "main": [ [ { "node": "BUILD_QUERIES", "type": "main", "index": 0 } ] ] },
+    "BUILD_QUERIES": { "main": [ [ { "node": "SERPER — News", "type": "main", "index": 0 } ] ] },
+    "SERPER — News": { "main": [ [ { "node": "PARSE_SERPER", "type": "main", "index": 0 } ] ] },
+    "PARSE_SERPER": { "main": [ [ { "node": "HTTP_VALIDATE", "type": "main", "index": 0 } ] ] },
+    "HTTP_VALIDATE": { "main": [ [ { "node": "EXTRACT_META", "type": "main", "index": 0 } ] ] },
+    "EXTRACT_META": { "main": [ [ { "node": "FILTER_LATAM", "type": "main", "index": 0 } ] ] },
+    "FILTER_LATAM": { "main": [ [ { "node": "CURATE", "type": "main", "index": 0 } ] ] },
+    "CURATE": { "main": [ [ { "node": "MERGE_ITEMS", "type": "main", "index": 0 } ] ] },
+    "MERGE_ITEMS": { "main": [ [ { "node": "BUILD_GH_BODY", "type": "main", "index": 0 } ] ] },
+    "BUILD_GH_BODY": { "main": [ [ { "node": "GITHUB_GET_SHA", "type": "main", "index": 0 }, { "node": "MERGE_SHA", "type": "main", "index": 0 } ] ] },
+    "GITHUB_GET_SHA": { "main": [ [ { "node": "MERGE_SHA", "type": "main", "index": 1 } ] ] },
+    "MERGE_SHA": { "main": [ [ { "node": "BUILD_PUT", "type": "main", "index": 0 } ] ] },
+    "BUILD_PUT": { "main": [ [ { "node": "GITHUB_PUT", "type": "main", "index": 0 } ] ] },
+    "GITHUB_PUT": { "main": [ [ { "node": "RESPOND", "type": "main", "index": 0 } ] ] }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1", "callerPolicy": "workflowsFromSameOwner" },
+  "versionId": "v1-global-ai-fixed",
+  "id": "wk-global-ai-discovery-fixed",
+  "tags": ["ai","global","discovery","serper","autopilot"]
+}
