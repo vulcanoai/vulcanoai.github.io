@@ -1,61 +1,6 @@
 {
   "version": "v1.0",
   "category": "startups",
-  "generated_at": "2025-09-16T10:00:45.610Z",
-  "articles": [
-    {
-      "id": "https://startupslatam.com/gokei-cierra-ronda-de-inversion-con-participacion-de-fundadores-del-primer-unicornio-chileno/",
-      "title": "Gokei cierra ronda de inversión con participación de fundadores del primer unicornio chileno",
-      "summary": "",
-      "url": "https://startupslatam.com/gokei-cierra-ronda-de-inversion-con-participacion-de-fundadores-del-primer-unicornio-chileno/",
-      "source": "Startupslatam",
-      "source_url": "https://www.startupslatam.com",
-      "country": "Regional",
-      "topics": [
-        "Startups"
-      ],
-      "language": "es",
-      "published_at": "2025-09-15T22:48:11.000Z",
-      "relevance": 5,
-      "sentiment": "neutral",
-      "author": "",
-      "curator": "Codex 1"
-    },
-    {
-      "id": "https://startupslatam.com/rosario-busca-posicionarse-en-el-mapa-internacional-de-la-innovacion-con-su-primera-techweek/",
-      "title": "Rosario busca posicionarse en el mapa internacional de la innovación con su primera TechWeek",
-      "summary": "",
-      "url": "https://startupslatam.com/rosario-busca-posicionarse-en-el-mapa-internacional-de-la-innovacion-con-su-primera-techweek/",
-      "source": "Startupslatam",
-      "source_url": "https://www.startupslatam.com",
-      "country": "Regional",
-      "topics": [
-        "Startups"
-      ],
-      "language": "es",
-      "published_at": "2025-09-15T14:49:52.000Z",
-      "relevance": 5,
-      "sentiment": "neutral",
-      "author": "",
-      "curator": "Codex 1"
-    },
-    {
-      "id": "https://startupslatam.com/etmday-2025-busca-convertirse-en-el-evento-de-emprendimiento-mas-grande-del-mundo-con-este-pais-invitado/",
-      "title": "EtMday 2025 busca convertirse en el evento de emprendimiento más grande del mundo con este país invitado",
-      "summary": "",
-      "url": "https://startupslatam.com/etmday-2025-busca-convertirse-en-el-evento-de-emprendimiento-mas-grande-del-mundo-con-este-pais-invitado/",
-      "source": "Startupslatam",
-      "source_url": "https://www.startupslatam.com",
-      "country": "Regional",
-      "topics": [
-        "Startups"
-      ],
-      "language": "es",
-      "published_at": "2025-09-15T14:22:08.000Z",
-      "relevance": 5,
-      "sentiment": "neutral",
-      "author": "",
-      "curator": "Codex 1"
-    }
-  ]
+  "generated_at": "2025-09-16T10:00:47.640Z",
+  "articles": []
 }
