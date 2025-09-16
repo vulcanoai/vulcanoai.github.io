@@ -1,6 +1,45 @@
 {
   "version": "v1.0",
   "category": "startups",
-  "generated_at": "2025-09-16T12:00:47.935Z",
-  "articles": []
+  "generated_at": "2025-09-16T12:00:50.860Z",
+  "articles": [
+    {
+      "id": "https://startupi.com.br/7-ferramentas-inteligencia-artificial-trabalho/",
+      "title": "7 ferramentas de Inteligência Artificial para otimizar o dia a dia no trabalho",
+      "summary": "Startupi 7 ferramentas de Inteligência Artificial para otimizar o dia a dia no trabalho Segundo o levantamento State of AI in 2025, da McKinsey, empresas que aplicam Inteligência Artificial de forma estruturada registram ganhos de até 20% na produtividade e reduzem significativamente o tempo gasto em atividades operacionais. Já a Gartner prevê que, até 2026, mais de 80% das organizações terão utilizado APIs ou integrações para conectar múltiplos modelos de [...] O post 7 ferramentas de Inteligência Artificial para otimizar o dia a dia no trabalho aparece primeiro em Startupi e foi escrito por Startupi ]]>",
+      "url": "https://startupi.com.br/7-ferramentas-inteligencia-artificial-trabalho/",
+      "source": "Startupi",
+      "source_url": "https://startupi.com.br",
+      "country": "Brasil",
+      "topics": [
+        "Startups",
+        "Empresas"
+      ],
+      "language": "pt",
+      "published_at": "2025-09-15T15:44:36.000Z",
+      "relevance": 5,
+      "sentiment": "neutral",
+      "author": "",
+      "curator": "Codex 1"
+    },
+    {
+      "id": "https://startupi.com.br/procurando-estagio-vagas-tecnologia-estudantes/",
+      "title": "Procurando estágio? Selecionamos várias vagas em tecnologia para estudantes",
+      "summary": "Startupi Procurando estágio? Selecionamos várias vagas em tecnologia para estudantes Embraer A Embraer abriu inscrições para uma edição exclusiva do programa Formação de Talentos voltada a pessoas com deficiência (PCDs), com mais de 50 vagas em cursos gratuitos. São 37 oportunidades para operadores logísticos em São José dos Campos e 16 para auxiliares de manutenção em Sorocaba. As aulas presenciais começam em outubro, no Senai, [...] O post Procurando estágio? Selecionamos várias vagas em tecnologia para estudantes aparece primeiro em Startupi e foi escrito por Cecília Ferraz ]]>",
+      "url": "https://startupi.com.br/procurando-estagio-vagas-tecnologia-estudantes/",
+      "source": "Startupi",
+      "source_url": "https://startupi.com.br",
+      "country": "Brasil",
+      "topics": [
+        "Startups",
+        "Empresas"
+      ],
+      "language": "pt",
+      "published_at": "2025-09-15T15:33:59.000Z",
+      "relevance": 5,
+      "sentiment": "neutral",
+      "author": "",
+      "curator": "Codex 1"
+    }
+  ]
 }
