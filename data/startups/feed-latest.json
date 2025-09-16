@@ -1,117 +1,57 @@
 {
   "version": "v1.0",
   "category": "startups",
-  "generated_at": "2025-09-16T05:00:51.118Z",
+  "generated_at": "2025-09-16T06:00:45.650Z",
   "articles": [
     {
-      "id": "https://startups.com.br/negocios/felipe-neto-deixa-play9-apos-reestruturacao-do-grupo/",
-      "title": "Felipe Neto deixa Play9 após reestruturação do grupo",
-      "summary": "Felipe Neto, um dos influenciadores digitais mais influentes do Brasil (Imagem: Divulgação/Redes Sociais) Com a saída do youtuber, Pedro Paes Leme, cofundador e atual CEO, passa a ser o sócio majoritário da Play9 O post Felipe Neto deixa Play9 após reestruturação do grupo apareceu primeiro em Startups . ]]>",
-      "url": "https://startups.com.br/negocios/felipe-neto-deixa-play9-apos-reestruturacao-do-grupo/",
-      "source": "Startups.com.br",
-      "source_url": "https://startups.com.br",
-      "country": "Brasil",
+      "id": "https://startupslatam.com/gokei-cierra-ronda-de-inversion-con-participacion-de-fundadores-del-primer-unicornio-chileno/",
+      "title": "Gokei cierra ronda de inversión con participación de fundadores del primer unicornio chileno",
+      "summary": "",
+      "url": "https://startupslatam.com/gokei-cierra-ronda-de-inversion-con-participacion-de-fundadores-del-primer-unicornio-chileno/",
+      "source": "Startupslatam",
+      "source_url": "https://www.startupslatam.com",
+      "country": "Regional",
       "topics": [
-        "Startups",
-        "VC"
+        "Startups"
       ],
-      "language": "pt",
-      "published_at": "2025-09-15T22:05:32.000Z",
+      "language": "es",
+      "published_at": "2025-09-15T22:48:11.000Z",
       "relevance": 5,
       "sentiment": "neutral",
       "author": "",
       "curator": "Codex 1"
     },
     {
-      "id": "https://startups.com.br/negocios/inteligencia-artificial/53-das-startups-brasileiras-ja-utilizam-ia-em-seus-negocios-diz-aws/",
-      "title": "53% das startups brasileiras já utilizam IA em seus negócios, diz AWS",
-      "summary": "IA nas empresas | Foto: Canva Além disso, estudo divulgado pela big tech mostra que 31% das startups já desenvolvem novos produtos baseados em IA O post 53% das startups brasileiras já utilizam IA em seus negócios, diz AWS apareceu primeiro em Startups . ]]>",
-      "url": "https://startups.com.br/negocios/inteligencia-artificial/53-das-startups-brasileiras-ja-utilizam-ia-em-seus-negocios-diz-aws/",
-      "source": "Startups.com.br",
-      "source_url": "https://startups.com.br",
-      "country": "Brasil",
+      "id": "https://startupslatam.com/rosario-busca-posicionarse-en-el-mapa-internacional-de-la-innovacion-con-su-primera-techweek/",
+      "title": "Rosario busca posicionarse en el mapa internacional de la innovación con su primera TechWeek",
+      "summary": "",
+      "url": "https://startupslatam.com/rosario-busca-posicionarse-en-el-mapa-internacional-de-la-innovacion-con-su-primera-techweek/",
+      "source": "Startupslatam",
+      "source_url": "https://www.startupslatam.com",
+      "country": "Regional",
       "topics": [
-        "Startups",
-        "VC"
+        "Startups"
       ],
-      "language": "pt",
-      "published_at": "2025-09-15T19:30:59.000Z",
+      "language": "es",
+      "published_at": "2025-09-15T14:49:52.000Z",
       "relevance": 5,
       "sentiment": "neutral",
       "author": "",
       "curator": "Codex 1"
     },
     {
-      "id": "https://startups.com.br/negocios/alphabet-dona-do-google-alcanca-us-3-trilhoes-com-alta-das-acoes-e-avanco-em-ia/",
-      "title": "Alphabet, dona do Google, alcança US$ 3 trilhões com alta das ações e avanço em IA",
-      "summary": "Google (Foto: Canva) Ações da controladora do Google sobem mais de 32% em 2025, com crescimento forte na divisão de nuvem e diversificação além da busca O post Alphabet, dona do Google, alcança US$ 3 trilhões com alta das ações e avanço em IA apareceu primeiro em Startups . ]]>",
-      "url": "https://startups.com.br/negocios/alphabet-dona-do-google-alcanca-us-3-trilhoes-com-alta-das-acoes-e-avanco-em-ia/",
-      "source": "Startups.com.br",
-      "source_url": "https://startups.com.br",
-      "country": "Brasil",
+      "id": "https://startupslatam.com/etmday-2025-busca-convertirse-en-el-evento-de-emprendimiento-mas-grande-del-mundo-con-este-pais-invitado/",
+      "title": "EtMday 2025 busca convertirse en el evento de emprendimiento más grande del mundo con este país invitado",
+      "summary": "",
+      "url": "https://startupslatam.com/etmday-2025-busca-convertirse-en-el-evento-de-emprendimiento-mas-grande-del-mundo-con-este-pais-invitado/",
+      "source": "Startupslatam",
+      "source_url": "https://www.startupslatam.com",
+      "country": "Regional",
       "topics": [
-        "Startups",
-        "VC"
+        "Startups"
       ],
-      "language": "pt",
-      "published_at": "2025-09-15T18:07:38.000Z",
-      "relevance": 5,
-      "sentiment": "neutral",
-      "author": "",
-      "curator": "Codex 1"
-    },
-    {
-      "id": "https://startups.com.br/semana-caldeira/com-ia-no-centro-das-discussoes-semana-caldeira-chega-a-4a-edicao/",
-      "title": "Com IA no centro das discussões, Semana Caldeira chega à 4ª edição",
-      "summary": "Semana Caldeira 2025 será no fim de setembro | Foto: divulgação A ser realizado no fim de setembro, evento quer se consolidar como um dos maiores encontros de inovação na América Latina O post Com IA no centro das discussões, Semana Caldeira chega à 4ª edição apareceu primeiro em Startups . ]]>",
-      "url": "https://startups.com.br/semana-caldeira/com-ia-no-centro-das-discussoes-semana-caldeira-chega-a-4a-edicao/",
-      "source": "Startups.com.br",
-      "source_url": "https://startups.com.br",
-      "country": "Brasil",
-      "topics": [
-        "Startups",
-        "VC"
-      ],
-      "language": "pt",
-      "published_at": "2025-09-15T17:45:21.000Z",
-      "relevance": 5,
-      "sentiment": "neutral",
-      "author": "",
-      "curator": "Codex 1"
-    },
-    {
-      "id": "https://startups.com.br/danca-das-cadeiras/vakinha-contrata-ex-olx-como-cto/",
-      "title": "Vakinha contrata ex-OLX como CTO",
-      "summary": "Marcelo Soares, novo CTO do Vakinha, ao lado de Luiz Felipe Gheller, CEO da empresa (Imagem: Divulgação) Marcelo Soares terá a missão de otimizar o Vakinha, garantindo melhor experiência e segurança para o usuário e para a plataforma O post Vakinha contrata ex-OLX como CTO apareceu primeiro em Startups . ]]>",
-      "url": "https://startups.com.br/danca-das-cadeiras/vakinha-contrata-ex-olx-como-cto/",
-      "source": "Startups.com.br",
-      "source_url": "https://startups.com.br",
-      "country": "Brasil",
-      "topics": [
-        "Startups",
-        "VC"
-      ],
-      "language": "pt",
-      "published_at": "2025-09-15T13:00:00.000Z",
-      "relevance": 5,
-      "sentiment": "neutral",
-      "author": "",
-      "curator": "Codex 1"
-    },
-    {
-      "id": "https://startups.com.br/la-fora/eua-estariam-prontos-para-banir-o-tiktok-se-nao-houver-acordo-ou-nao/",
-      "title": "EUA estariam prontos para banir o TikTok se não houver acordo – ou não",
-      "summary": "TikTok (Foto: Canva) Negociações sobre a venda do TikTok avançaram neste fim de semana, mas ainda dependem de exigências feitas pela China O post EUA estariam prontos para banir o TikTok se não houver acordo – ou não apareceu primeiro em Startups . ]]>",
-      "url": "https://startups.com.br/la-fora/eua-estariam-prontos-para-banir-o-tiktok-se-nao-houver-acordo-ou-nao/",
-      "source": "Startups.com.br",
-      "source_url": "https://startups.com.br",
-      "country": "Brasil",
-      "topics": [
-        "Startups",
-        "VC"
-      ],
-      "language": "pt",
-      "published_at": "2025-09-15T11:12:32.000Z",
+      "language": "es",
+      "published_at": "2025-09-15T14:22:08.000Z",
       "relevance": 5,
       "sentiment": "neutral",
       "author": "",
