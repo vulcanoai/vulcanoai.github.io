@@ -23,7 +23,7 @@ Vulcano AI ahora es una cápsula conversacional minimalista que entrega contexto
 ```
 
 - **Datos:** repositorio `data/` con `feed-latest.json`, snapshots y agregaciones generadas por `scripts/build-feed.js`.
-- **Frontend:** HTML + CSS puros (`index.html` / `pages/noticias.html`) más un único controlador (`assets/js/capsule.js`).
+- **Frontend:** HTML + CSS puros (`index.html` / `pages/noticias.html`) más un único controlador (`assets/js/capsule.js`). La historia de marca se expande en `pages/vision.html`, una cápsula gemela orientada a la visión.
 - **Voz:** captura y lectura con APIs nativas (`SpeechRecognition` / `SpeechSynthesis`). Las funciones se degradan si el navegador no las expone.
 - **Legado:** el resto de HTML/CSS/JS del repositorio se conserva como referencia histórica. Ningún flujo productivo depende de esos archivos; se revisan en `docs/legacy-audit.md`.
 

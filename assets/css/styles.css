@@ -4083,6 +4083,15 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 
 .capsule-chip:hover{background:rgba(255,75,0,.12); transform:translateY(-1px);}
 
+.capsule-links{
+  text-align:center;
+  margin-top:-4px;
+}
+
+.capsule-links .capsule-link{
+  font-size:.85rem;
+}
+
 .capsule-footer{color:var(--muted); font-size:.75rem; text-align:center;}
 
 .capsule-footer small{display:block; line-height:1.4;}
