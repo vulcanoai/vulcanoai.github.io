@@ -3,106 +3,22 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
+    <meta http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <meta name="color-scheme" content="dark light" />
-    <title>Actualizaciones — Vulcano Ai</title>
+    <title>Vulcano AI — Cápsula Conversacional</title>
+    <meta name="description" content="Toda la experiencia de Vulcano AI vive ahora en una cápsula conversacional con voz integrada." />
     <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="stylesheet" href="/assets/css/styles.css?v=4" />
+    <script>window.location.replace('/');</script>
   </head>
-  <body class="grid-room">
-    <a href="#main" class="skip-link">Saltar al contenido</a>
-    <header class="site-header">
-      <div class="container header-inner">
-        <a class="brand" href="/"><svg class="logo" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg><span class="brand-text">Vulcano Ai</span></a>
-        <button class="nav-toggle" aria-label="Abrir menú">☰</button>
-        <nav class="site-nav" aria-label="Principal">
-          <a href="/pages/noticias.html">Inicio</a>
-          <a href="/pages/crypto.html">Crypto</a>
-          
-          <a href="/pages/observatorio-legal.html">Observatorio</a>
-          <a href="/pages/agentes.html">Agentes</a>
-          <a href="/pages/fuentes.html">Fuentes</a>
-          <a href="/pages/vulcano.html">Qué es Vulcano AI</a>
-        </nav>
-      </div>
-    </header>
-    <main class="section" id="main">
-      <div class="container">
-        <h1>Actualizaciones</h1>
-        <div class="panel">
-          <h3>WhatsApp</h3>
-          <p>Recibe noticias de IA en LATAM directamente en tu WhatsApp, a la hora y frecuencia que prefieras.</p>
-          <form id="wa-form" class="form-grid">
-            <label>Frecuencia</label>
-            <div>
-              <label><input type="radio" name="freq" value="diarias" checked> Diarias</label>
-              <label style="margin-left:10px"><input type="radio" name="freq" value="semanales"> Semanales</label>
-            </div>
-            <div></div>
-            <div class="form-actions">
-              <a id="wa-link" class="btn primary" target="_blank" rel="noopener"><svg class="icon"><use href="/assets/icons.svg#whatsapp"></use></svg> Abrir WhatsApp</a>
-              <span class="note">Número: +57 319 362 0926. Mensaje de alta sugerido: “ALTA {DIARIO|SEMANAL}”.</span>
-            </div>
-          </form>
-        </div>
-        <div class="panel" style="margin-top:12px">
-          <h3>Redes</h3>
-          <div class="social-row">
-            <a href="https://instagram.com/vulcanoai.solutions" target="_blank" rel="noopener"><svg class="icon"><use href="/assets/icons.svg#instagram"></use></svg> Instagram</a>
-            <a href="https://x.com/VulcanoAi" target="_blank" rel="noopener"><svg class="icon"><use href="/assets/icons.svg#x"></use></svg> X</a>
-            <a href="https://www.linkedin.com/company/vulcano-ai/" target="_blank" rel="noopener"><svg class="icon"><use href="/assets/icons.svg#linkedin"></use></svg> LinkedIn</a>
-          </div>
-        </div>
-        <div class="panel" style="margin-top:12px">
-          <h3>Privacidad</h3>
-          <p class="note">Los mensajes por WhatsApp pueden contener datos personales. Consulta nuestra <a href="/pages/legal/privacidad.html">Política de Privacidad</a>. Puedes darte de baja en cualquier momento escribiendo “BAJA”.</p>
-        </div>
-      </div>
-    </main>
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <div class="footer-brand">
-          <svg class="logo small" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>
-          <div>
-            <strong>Vulcano AI</strong>
-            <div class="muted">Vulcano Ai Digital Solutions S.A.S - 2025 Todos los derechos reservados</div>
-          </div>
-        </div>
-        <nav class="footer-nav">
-          <a href="/pages/legal/privacidad.html">Privacidad</a>
-          <a href="/pages/legal/terminos.html">Términos</a>
-        </nav>
-      </div>
-    </footer>
-    <script src="/assets/js/config.js"></script>
-    <script src="/assets/js/app.js"></script>
-      <!-- Bottom Navigation -->
-    <nav class="bottom-nav">
-      <a href="/pages/noticias.html" class="nav-item" data-page="home">
-        <svg class="nav-icon" aria-hidden="true">
-          <use href="/assets/icons.svg#home"></use>
-        </svg>
-        <span class="nav-label">Home</span>
-      </a>
-      <a href="/pages/agentes.html" class="nav-item" data-page="agents">
-        <svg class="nav-icon" aria-hidden="true">
-          <use href="/assets/icons.svg#users"></use>
-        </svg>
-        <span class="nav-label">Agents</span>
-      </a>
-      <a href="/pages/crypto.html" class="nav-item" data-page="markets">
-        <svg class="nav-icon" aria-hidden="true">
-          <use href="/assets/icons.svg#trending-up"></use>
-        </svg>
-        <span class="nav-label">Markets</span>
-      </a>
-      <a href="/pages/apoya.html" class="nav-item" data-page="support">
-        <svg class="nav-icon" aria-hidden="true">
-          <use href="/assets/icons.svg#heart"></use>
-        </svg>
-        <span class="nav-label">Support</span>
-      </a>
-    </nav>
-    <script src="/assets/js/panels.js"></script>
+  <body class="capsule-body" data-theme="arctic">
+    <div class="capsule-redirect">
+      <svg width="40" height="40" aria-hidden="true">
+        <use href="/assets/icons.svg#logo"></use>
+      </svg>
+      <p>Esta vista ahora vive dentro de la cápsula conversacional de Vulcano AI.</p>
+      <a class="capsule-link" href="/">Volver a la conversación</a>
+    </div>
   </body>
+</html>

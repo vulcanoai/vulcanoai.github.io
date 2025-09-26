@@ -1,139 +1,97 @@
-# Vulcano AI — Plataforma de noticias IA para LATAM
+# Vulcano AI — Conversational Capsule
 
-Estado: Producción activa (Versión 2.1 — PR‑based curation). Este repositorio contiene el sitio estático (GitHub Pages), los artefactos de datos (`/data`) y la integración con un pipeline de curación basado en PRs y validación.
+Vulcano AI ahora es una cápsula conversacional minimalista que entrega contexto y señales sobre inteligencia artificial en América Latina. Todo sucede dentro de un solo espacio: sin paneles, sin navegación secundaria y con audio disponible desde el primer momento.
 
-• Frontend: HTML/CSS/JS puro (sin dependencias externas)
-• Datos: JSON versionados en `data/` (abiertos y reproducibles)
-• Automatización: n8n publica y consolida contenido; scripts locales y CI generan índices y snapshots
+## Visión
 
-## Arquitectura
+- **Propósito:** compartir noticias y análisis de IA para LATAM con tono humano, sereno y accionable.
+- **North Star:** si se siente como hablar con una guía sabia, estamos en el lugar correcto; si se siente como usar software, retrocedemos.
+- **Principios:** radical minimalism, conversación primero, cero fricción, seriedad cálida, relevancia local, calma y confianza.
+
+## Experiencia clave
+
+- **Una interacción, un resultado.** Campo centrado, chips opcionales y respuesta inmediata.
+- **Audio integrado.** Grabación de voz (Web Speech API) y lectura automática de la respuesta (Speech Synthesis) cuando el navegador lo permite.
+- **Resumen → Localización → Claridad.** El agente comprime el feed, resalta el ángulo LATAM y explica por qué importa.
+- **Fuentes transparentes.** Cada respuesta ofrece un acceso discreto a las referencias utilizadas.
+- **Confianza explícita.** Si la data está desactualizada o vacía, el agente lo menciona y sugiere el siguiente paso.
+
+## Arquitectura actual
 
 ```
-[Fuentes RSS/Agentes] → [n8n Autopilots] → [Commits a /data] → [CI build-feed] → [GitHub Pages] → [Frontend]
+[data/feed-latest.json]  →  [capsule.js]  →  [UI conversacional]
 ```
 
-- Agentes proponen artículos → PRs → validadores aprueban → GitHub webhook publica en `/data` con guardas (sin exponer workflows de producción).
-- `scripts/build-feed.js` y el servidor consolidan `feed-latest.json` e índices. El frontend lee SOLO `data/feed-latest.json` (sin fallbacks). El feed puede estar a cero hasta aprobar/mergear.
+- **Datos:** repositorio `data/` con `feed-latest.json`, snapshots y agregaciones generadas por `scripts/build-feed.js`.
+- **Frontend:** HTML + CSS puros (`index.html` / `pages/noticias.html`) más un único controlador (`assets/js/capsule.js`).
+- **Voz:** captura y lectura con APIs nativas (`SpeechRecognition` / `SpeechSynthesis`). Las funciones se degradan si el navegador no las expone.
+- **Legado:** el resto de HTML/CSS/JS del repositorio se conserva como referencia histórica. Ningún flujo productivo depende de esos archivos; se revisan en `docs/legacy-audit.md`.
 
-## Estructura del repositorio
+## Estructura relevante del repositorio
 
 ```
-index.html
-assets/js/{config.js, app.js, feed.js, logo.js}
-assets/css/styles.css
-pages/*.html (noticias, archivo, agentes, fuentes, observatorio, etc.)
-data/ (feed-latest.json, feed-YYYY-MM-DD.json, runs/, entries/, index/, sources.json, agents.json)
-n8n/workflows/*.json (producción, tests y borradores)
-scripts/ (build-feed.js, validadores, backfill, hooks)
-docs/ (pipeline, layouts, guías de workflows)
+assets/
+  css/styles.css        # Tokens y estilo de la cápsula
+  js/capsule.js         # Lógica de conversación, voz y resumen
+  icons.svg             # Sprite de íconos (incluye micrófono y audio)
+data/                   # Feed consolidado y snapshots históricos
+pages/noticias.html     # Clon de index.html (cápsula activa)
+docs/
+  experience-manifest.md
+  legacy-audit.md
+scripts/                # Build y validaciones de datos (CI/n8n)
 ```
 
-## Datos y archivos generados
-
-Generados por CI/script (`scripts/build-feed.js`):
-
-- `data/feed-latest.json` — Feed consolidado (ordenado por `published_at`). En v2.0, este es el ÚNICO origen consumido por el frontend.
-- `data/feed-YYYY-MM-DD.json` — Snapshot diario por fecha de descubrimiento.
-- `data/index/by-country.json`, `by-topic.json`, `by-source.json` — Agregaciones.
-- `data/index/catalog.json` — Días disponibles.
-- `data/index/runs.json` — Manifest de ejecuciones.
-- `data/index/status.json` — Estado/frescura del feed.
-- `data/stories/YYYY-MM-DD.json` y `data/index/stories.json` — Agrupación por historias.
-- `data/entries/YYYY-MM-DD/index.json` y `data/entries/YYYY-MM-DD/*.json` — Trazabilidad por artículo y día.
-
-Entradas (insumos que se editan/añaden): `data/runs/*.json` (agentes), `data/indie/*.json` (envíos independientes).
-
-Esquemas: ver `docs/schemas/*.json` y contratos en `docs/DATA_LAYOUT.md`.
-
-## Workflows n8n (privados)
-
-- Los JSON de producción no se comprometen en el repo. Admin puede usar un alias (p.ej. `IvanFile.json`) como workflow de producción en n8n privado.
-- Normas y ciclo de vida: ver `docs/N8N_WORKFLOW_GUIDELINES.md` (naming, promoción y privacidad).
-
-## Configuración del sitio (cliente)
-
-Archivo: `assets/js/config.js` (`window.AILatamConfig`).
-
-- `api.feedUrl`: por defecto `/data/feed-latest.json` (CORS no requerido en Pages).
-- Opcional: `indieSubmitUrl`, `searchAgentUrl`, `updateTriggerUrl` para integrar webhooks n8n o serverless.
-- Otras fuentes: `agentsUrl`, `sourcesUrl`, `panoramaUrl`, `legalUrl`.
-
-Frontend v2.0: solo `latest` (sin snapshots/runs/sample para evitar reintroducir datos obsoletos).
+> Nota: los archivos en `pages/`, `assets/js/app.js`, `assets/css/styles.css` (secciones legacy) y documentación previa siguen en el repositorio para consulta, pero no forman parte de la experiencia actual. Se irán archivando o refactorizando conforme avancen las iteraciones.
 
 ## Ejecutar localmente
 
-Servidor estático (cualquiera):
+1. Instala dependencias del pipeline de datos solo si vas a regenerar el feed (Node 18+). Para ver la cápsula basta con un servidor estático.
+2. Servidor rápido:
+   ```bash
+   python3 -m http.server 8080
+   # o npx serve .
+   ```
+3. Abre `http://localhost:8080/` y prueba la conversación (usa Chrome o Edge si quieres dictado y audio).
+4. Para refrescar datos manualmente:
+   ```bash
+   VULCANO_ALLOW_LOCAL_DATA_WRITE=1 node scripts/build-feed.js
+   ```
+   Ajustes disponibles en `scripts/build-feed.js` (`FEED_MAX_AGE_DAYS`, `VERIFY_LINKS`, etc.).
 
-```
-python3 -m http.server 8080
-# o
-npx serve .
-```
+## Lineamientos de diseño/contenido
 
-Abrir `http://localhost:8080`.
+- Respuestas ≤ 6 líneas salvo que el usuario pida más detalle.
+- Verbos sobre sustantivos; sin relleno ni jerga innecesaria.
+- Contexto LATAM por defecto: país, impacto y por qué importa.
+- Chips: máximo dos sugerencias, siempre pertinentes a la consulta anterior.
+- Fuentes solo cuando el usuario las solicita (botón “Ver fuentes”).
 
-Reconstruir datos localmente (opcionales):
+## Voz y accesibilidad
 
-```
-VULCANO_ALLOW_LOCAL_DATA_WRITE=1 node scripts/build-feed.js
-# Variables útiles:
-#   FEED_MAX_AGE_DAYS=180  (filtrado por antigüedad)
-#   VERIFY_LINKS=0         (desactivar verificación HTTP de enlaces)
-```
+- `capsule.js` activa dictado si existe `SpeechRecognition` (Chrome, Edge). Cuando no está disponible se deshabilita el botón de micrófono.
+- La lectura en voz alta se gobierna con el botón de audio. Queda en modo manual para evitar reproducción no deseada.
+- Todas las acciones relevantes tienen descripciones `aria-` y estados `aria-pressed`/`aria-disabled` consistentes.
+- Para integraciones futuras (Alexa, n8n, etc.) se documentan los endpoints en `docs/experience-manifest.md`.
 
-Guía completa de deployment y webhooks: `DEPLOYMENT.md`.
+## Datos y pipeline
 
-## Integración n8n
+- **Entrada:** agentes n8n y fuentes validadas generan PRs sobre `data/runs/` y `data/entries/`.
+- **Consolidación:** `scripts/build-feed.js` produce `data/feed-latest.json` e índices (`data/index/*.json`).
+- **Consumo:** la cápsula solo lee `feed-latest.json`. El resto de agregaciones permanece disponible para agentes y automatizaciones.
+- **Contratos:** revisa `docs/DATA_LAYOUT.md` y `docs/DATA_PIPELINE.md` para estructuras y garantías de frescura.
 
-Guías detalladas: `N8N_SETUP.md` y `N8N_INTEGRATION.md`.
+## Colaborar
 
-- El workflow estable publica: `data/runs/`, `data/entries/YYYY-MM-DD/`, `data/feed-latest.json`, `data/feed-YYYY-MM-DD.json` e índices.
-- Requiere credenciales en n8n (Grok/X.AI, GitHub, etc.). No hay secretos en este repo.
-- Naming y promoción de builds: ver `n8n/README.md`.
+1. Respeta el manifiesto (`docs/experience-manifest.md`). Cualquier cambio de UI/UX debe preservar minimalismo, calma y conversación centrada.
+2. Añade pruebas manuales para voz/audio si tocas `capsule.js`.
+3. Documenta todo ajuste relevante en `docs/legacy-audit.md` hasta que los componentes heredados se archiven por completo.
+4. Mantén la CSP estricta definida en `index.html`.
 
-## Seguridad y buenas prácticas (v2.1)
+## Soporte
 
-- Sin claves en el cliente; secretos viven en credenciales de n8n / variables de entorno.
-- CSP estricta en HTML; si usas endpoints externos, añade su origen a `connect-src`.
-- `scripts/build-feed.js` escribe de forma idempotente y atómica; CI evita solapes con `concurrency`.
-- Preferir PRs generados por agentes; server publica tras merge (ver `docs/AGENT_PROTOCOL.md`).
-- Validación estricta: enlaces deben resolver (HEAD+GET), fuentes en allowlist (`/data/sources.json`), alcance LATAM + IA.
+- WhatsApp: <https://wa.me/573193620926>
+- X/Twitter: <https://x.com/VulcanoAi>
+- LinkedIn: <https://www.linkedin.com/company/vulcano-ai/>
 
-Más en `SECURITY.md` y `docs/DATA_PIPELINE.md` (seguridad de concurrencia y contratos de datos).
-
-## Documentación relacionada
-
-- `docs/DATA_LAYOUT.md` — Contrato y distribución de archivos en `data/`.
-- `docs/DATA_PIPELINE.md` — Flujo de consolidación, entradas vs. generados y CI.
-- `docs/AGENT_PROTOCOL.md` — Protocolo de agentes (prompts, endpoints, ejemplos).
-- `docs/N8N_WORKFLOW_GUIDELINES.md` — Naming/prod (incluye alias “IvanFile”).
-- `docs/LOCAL_DEV_DATA.md` — Guardas para no versionar data generada en dev.
-- `n8n/README.md` — Normas de workflows, nombres y promoción a producción.
-
-## Canales y soporte
-
-- WhatsApp: `https://wa.me/573193620926`
-- X/Twitter: `https://x.com/VulcanoAi`
-- LinkedIn: `https://www.linkedin.com/company/vulcano-ai/`
-
-—
-
-Mantenido por Vulcano Ai Digital Solutions S.A.S. 2025.
-- Instagram: https://instagram.com/vulcanoai.solutions
-- X (Twitter): https://x.com/VulcanoAi
-- LinkedIn: https://www.linkedin.com/company/vulcano-ai/
-
-Página dedicada: `pages/actualizaciones.html`. El formulario compone el mensaje y abre WhatsApp con el texto sugerido. La frecuencia no se guarda en el cliente; el manejo se realiza en n8n/WA Business.
-
-### n8n (sugerido)
-
-- Webhook WA Business/Cloud API ↔ n8n: parsear mensajes “ALTA DIARIO/SEMANAL” y “BAJA”.
-- Lista de envíos (diaria/semanal) + publicación de resúmenes en WhatsApp.
-- Opcional: confirmación y ayuda automatizada.
-
-### Snapshots diarios del feed
-
-- Convención de archivos: `data/feed-YYYY-MM-DD.json` (ej. `data/feed-2025-09-08.json`).
-- `assets/js/config.js` puede apuntar al snapshot del día. Si el archivo no existe, el cliente hace fallback a `data/sample-feed.json`.
-- Esquema de artículo: ver más arriba. Mantener `published_at` en ISO‑8601.
-- Recomendado: que n8n genere el archivo del día (CDN o PR) y, opcionalmente, actualice un alias estable `data/feed.json`.
+Manteniendo la cápsula ligera, humana y regional.
