@@ -1,66 +1,29 @@
 <!doctype html>
 <html lang="es">
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="Content-Security-Policy"
     content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <meta name="color-scheme" content="dark light" />
-  <title>Vulcano AI — Noticias de IA en América Latina</title>
+  <title>Vulcano AI — Conversación</title>
   <meta name="description"
-    content="Ecosistema abierto de información sobre IA en América Latina procesada por sistemas autónomos de inteligencia artificial. Investigación, inversión, regulación y startups." />
-  <meta property="og:title" content="Vulcano AI — Noticias de IA en América Latina" />
-  <meta property="og:description"
-    content="Ecosistema abierto de información sobre IA en LATAM procesada por sistemas autónomos de inteligencia artificial." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="/" />
-  <meta property="og:image" content="/assets/img/og-banner.svg" />
+    content="Accede a la cápsula conversacional de Vulcano AI para seguir las noticias de inteligencia artificial en América Latina." />
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/css/styles.css?v=4" />
   <script>
-    // Redirect to noticias page immediately
-    window.location.replace('/pages/noticias.html');
+    window.addEventListener('DOMContentLoaded', () => {
+      window.location.replace('/pages/noticias.html');
+    });
   </script>
-  <meta http-equiv="refresh" content="0;url=/pages/noticias.html" />
 </head>
-
-<body class="grid-room">
-  <div style="display:flex; align-items:center; justify-content:center; height:100vh; background:var(--bg); color:var(--text)">
-    <div style="text-align:center">
-      <svg width="48" height="48" style="color:var(--logo); margin-bottom:16px">
-        <use href="/assets/icons.svg#logo"></use>
-      </svg>
-      <div>Redirigiendo a Vulcano AI...</div>
-      <div style="margin-top:8px"><a href="/pages/noticias.html" style="color:var(--brand)">Si no se redirige automáticamente, haz clic aquí</a></div>
-    </div>
+<body class="capsule-body" data-theme="arctic">
+  <div class="capsule-redirect">
+    <svg width="40" height="40" aria-hidden="true">
+      <use href="/assets/icons.svg#logo"></use>
+    </svg>
+    <p>Abriendo la conversación de Vulcano AI…</p>
+    <a class="capsule-link" href="/pages/noticias.html">Ir ahora</a>
   </div>
-    <!-- Bottom Navigation -->
-    <nav class="bottom-nav">
-      <a href="/pages/noticias.html" class="nav-item" data-page="home">
-        <svg class="nav-icon" aria-hidden="true">
-          <use href="/assets/icons.svg#home"></use>
-        </svg>
-        <span class="nav-label">Home</span>
-      </a>
-      <a href="/pages/agentes.html" class="nav-item" data-page="agents">
-        <svg class="nav-icon" aria-hidden="true">
-          <use href="/assets/icons.svg#users"></use>
-        </svg>
-        <span class="nav-label">Agents</span>
-      </a>
-      <a href="/pages/crypto.html" class="nav-item" data-page="markets">
-        <svg class="nav-icon" aria-hidden="true">
-          <use href="/assets/icons.svg#trending-up"></use>
-        </svg>
-        <span class="nav-label">Markets</span>
-      </a>
-      <a href="/pages/apoya.html" class="nav-item" data-page="support">
-        <svg class="nav-icon" aria-hidden="true">
-          <use href="/assets/icons.svg#heart"></use>
-        </svg>
-        <span class="nav-label">Support</span>
-      </a>
-    </nav>
-    <script src="/assets/js/panels.js"></script>
-  </body>
+</body>
+</html>

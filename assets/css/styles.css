@@ -3888,6 +3888,207 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 /* Utility */
 .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0}
 
+/* Conversational capsule experience */
+.capsule-body{
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  margin:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:32px 16px;
+  font-feature-settings:'liga' 1;
+}
+
+.capsule{
+  width:100%;
+  max-width:680px;
+  background:var(--panel);
+  border:1px solid rgba(17,24,39,.08);
+  border-radius:28px;
+  padding:32px;
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+  box-shadow:0 12px 32px rgba(15,23,42,.08);
+  backdrop-filter:blur(12px);
+}
+
+.capsule-header{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+
+.capsule-logo{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:48px;
+  height:48px;
+  border-radius:16px;
+  background:rgba(255,75,0,.12);
+  color:var(--brand);
+}
+
+.capsule-heading{display:flex; flex-direction:column; gap:4px;}
+.capsule-title{margin:0; font-size:1.25rem; font-weight:700; letter-spacing:.01em;}
+.capsule-subtitle{margin:0; color:var(--muted); font-size:.9rem;}
+
+.capsule-stream{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  min-height:160px;
+}
+
+.capsule-message{
+  padding:18px 20px;
+  border-radius:20px;
+  background:rgba(255,255,255,.85);
+  color:#1f2937;
+  box-shadow:0 4px 18px rgba(148,163,184,.15);
+  max-width:100%;
+  line-height:1.5;
+}
+
+[data-theme="arctic"] .capsule-message{
+  background:rgba(255,255,255,.95);
+  color:#111827;
+}
+
+.capsule-message.from-agent{
+  border-left:4px solid var(--brand);
+}
+
+.capsule-message.from-user{
+  align-self:flex-end;
+  background:rgba(255,75,0,.08);
+  color:#1f2937;
+  border-left:4px solid rgba(255,75,0,.35);
+}
+
+.capsule-sender{
+  display:inline-block;
+  font-size:.75rem;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--muted);
+  margin-bottom:8px;
+}
+
+.capsule-message p{margin:0; font-size:.98rem;}
+.capsule-message p + p{margin-top:8px;}
+
+.capsule-form{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  background:rgba(255,255,255,.9);
+  border:1px solid rgba(15,23,42,.1);
+  border-radius:999px;
+  padding:10px 14px 10px 18px;
+  box-shadow:0 6px 18px rgba(148,163,184,.12);
+}
+
+.capsule-form input{
+  flex:1;
+  border:none;
+  background:transparent;
+  font-size:1rem;
+  color:#0f172a;
+  outline:none;
+}
+
+.capsule-form input::placeholder{color:rgba(15,23,42,.45);}
+
+.capsule-send{
+  border:none;
+  background:var(--brand);
+  color:#fff;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+
+.capsule-send:hover{transform:translateY(-1px); box-shadow:0 8px 16px rgba(255,75,0,.25);}
+.capsule-send:active{transform:translateY(0);}
+
+.capsule-chips{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.capsule-chip{
+  background:rgba(15,23,42,.06);
+  color:#1f2937;
+  border:none;
+  border-radius:999px;
+  padding:8px 14px;
+  font-size:.85rem;
+  cursor:pointer;
+  transition:background .2s ease, transform .2s ease;
+}
+
+.capsule-chip:hover{background:rgba(255,75,0,.12); transform:translateY(-1px);}
+
+.capsule-footer{color:var(--muted); font-size:.75rem; text-align:center;}
+
+.capsule-footer small{display:block; line-height:1.4;}
+
+.capsule-source-toggle{
+  margin-top:12px;
+  font-size:.8rem;
+  color:var(--brand);
+  border:none;
+  background:none;
+  padding:0;
+  cursor:pointer;
+}
+
+.capsule-sources{
+  margin-top:12px;
+  padding:12px 14px;
+  border-radius:12px;
+  background:rgba(15,23,42,.04);
+  color:var(--muted);
+  font-size:.85rem;
+}
+
+.capsule-redirect{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  text-align:center;
+  padding:48px 32px;
+  min-height:60vh;
+  color:var(--text);
+}
+
+.capsule-link{
+  color:var(--brand);
+  text-decoration:none;
+  font-weight:600;
+}
+
+@media (max-width:640px){
+  .capsule{padding:24px; border-radius:20px; gap:20px;}
+  .capsule-message{font-size:.95rem;}
+  .capsule-form{padding:8px 12px;}
+  .capsule-form input{font-size:.95rem;}
+  .capsule-send{width:34px; height:34px;}
+}
+
 /* Hero orb (wireframe sphere) */
 .hero-grid{display:grid; grid-template-columns:1.2fr .8fr; gap:24px; align-items:center}
 @media (max-width: 900px){ .hero-grid{grid-template-columns:1fr} }

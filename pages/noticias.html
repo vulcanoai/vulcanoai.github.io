@@ -5,303 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <meta name="color-scheme" content="dark light" />
-    <title>Vulcano AI — Noticias de IA en América Latina</title>
-    <meta name="description" content="Ecosistema abierto de información sobre IA en América Latina procesada por sistemas autónomos de inteligencia artificial. Investigación, inversión, regulación y startups." />
-    <meta property="og:title" content="Vulcano AI — Noticias de IA en América Latina" />
-    <meta property="og:description" content="Ecosistema abierto de información sobre IA en LATAM procesada por sistemas autónomos de inteligencia artificial." />
+    <title>Vulcano AI — Conversación sobre noticias de IA en LATAM</title>
+    <meta name="description" content="Capsula conversacional que resume noticias de inteligencia artificial en América Latina." />
+    <meta property="og:title" content="Vulcano AI — Conversación sobre noticias de IA en LATAM" />
+    <meta property="og:description" content="Resumen minimalista y humano de la actualidad de IA en América Latina." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="/" />
     <meta property="og:image" content="/assets/img/og-banner.svg" />
     <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="/assets/css/styles.css?v=3" />
+    <link rel="stylesheet" href="/assets/css/styles.css?v=4" />
   </head>
-  <body class="grid-room">
-    <a href="#main" class="skip-link">Saltar al contenido</a>
-    <header class="site-header">
-      <div class="container header-inner">
-        <a class="brand" href="/pages/noticias.html">
-          <svg class="logo" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>
-          <span class="brand-text">Vulcano AI</span>
-        </a>
-        
-        <!-- Global Time Zone Indicators -->
-        <div class="global-time" id="global-time">
-          <div class="time-zone" data-tz="America/Mexico_City">
-            <span class="tz-label">MX</span>
-            <span class="tz-time">--:--</span>
-          </div>
-          <div class="time-zone" data-tz="America/Bogota">
-            <span class="tz-label">COL</span>
-            <span class="tz-time">--:--</span>
-          </div>
-          <div class="time-zone" data-tz="America/Argentina/Buenos_Aires">
-            <span class="tz-label">AR</span>
-            <span class="tz-time">--:--</span>
-          </div>
-          <div class="time-zone" data-tz="America/Sao_Paulo">
-            <span class="tz-label">BR</span>
-            <span class="tz-time">--:--</span>
-          </div>
+  <body class="capsule-body" data-theme="arctic">
+    <main class="capsule" aria-label="Vulcano AI">
+      <header class="capsule-header">
+        <div class="capsule-logo" aria-hidden="true">
+          <svg width="32" height="32" role="img">
+            <use href="/assets/icons.svg#logo"></use>
+          </svg>
         </div>
-
-        <!-- Theme Toggle -->
-        <div class="theme-selector">
-          <button class="theme-toggle" aria-label="Cambiar tema" id="theme-toggle">
-            <svg class="theme-icon" aria-hidden="true">
-              <use href="/assets/icons.svg#palette"></use>
-            </svg>
-          </button>
+        <div class="capsule-heading">
+          <p class="capsule-title">Vulcano AI</p>
+          <p class="capsule-subtitle">Guía serena de IA para América Latina</p>
         </div>
+      </header>
 
-        <button class="nav-toggle" aria-label="Abrir menú">
-          <span class="nav-toggle-line"></span>
-          <span class="nav-toggle-line"></span>
-          <span class="nav-toggle-line"></span>
+      <section class="capsule-stream" id="capsule-stream" aria-live="polite" aria-label="Actualizaciones de conversación">
+        <article class="capsule-message from-agent">
+          <span class="capsule-sender">Vulcano</span>
+          <p>Hola. Estoy listo para contarte qué ocurre con la IA en la región. ¿En qué quieres enfocarnos?</p>
+        </article>
+      </section>
+
+      <form class="capsule-form" id="capsule-form" autocomplete="off">
+        <label class="sr-only" for="capsule-input">Escribe tu pregunta</label>
+        <input id="capsule-input" name="q" type="text" placeholder="Pregúntame sobre IA en LATAM" maxlength="180" required />
+        <button type="submit" class="capsule-send" aria-label="Enviar pregunta">
+          <svg width="18" height="18" aria-hidden="true"><use href="/assets/icons.svg#arrow-right"></use></svg>
         </button>
-        
-        <nav class="site-nav" aria-label="Principal">
-          <a href="/pages/noticias.html" aria-current="page">Inicio</a>
-          <a href="/pages/crypto.html">Crypto</a>
-          <a href="/pages/experimental.html">Experimental</a>
-          <a href="/pages/observatorio-legal.html">Observatorio</a>
-          <a href="/pages/actualizaciones.html">Actualizaciones</a>
-          <a href="/pages/apoya.html">Apoyar</a>
-          <a href="/pages/agentes.html">Agentes</a>
-          <a href="/pages/fuentes.html">Fuentes</a>
-          <a href="/pages/vulcano.html">Qué es Vulcano AI</a>
-        </nav>
+      </form>
+
+      <div class="capsule-chips" id="capsule-chips" aria-label="Sugerencias">
+        <button type="button" class="capsule-chip" data-prompt="¿Qué pasó hoy con la IA en América Latina?">Hoy</button>
+        <button type="button" class="capsule-chip" data-prompt="Actualízame sobre regulación de IA en México">Regulación MX</button>
       </div>
-    </header>
-    <main class="app-main" id="main">
-      <div class="app-container">
-        <!-- App Profile Header -->
-        <div class="app-profile">
-          <div class="profile-avatar">
-            <svg class="avatar-icon" aria-hidden="true">
-              <use href="/assets/icons.svg#logo"></use>
-            </svg>
-          </div>
-          <div class="profile-info">
-            <h1 class="profile-name">Vulcano AI</h1>
-            <p class="profile-subtitle">IA Intelligence Hub</p>
-          </div>
-          <div class="profile-stats">
-            <div class="stat-pill">
-              <span class="stat-number" id="results-counter">...</span>
-              <span class="stat-text">Artículos</span>
-            </div>
-          </div>
-        </div>
 
-        <!-- Quick Actions Grid -->
-        <div class="quick-actions">
-          <h2 class="section-title">Quick Actions</h2>
-          <div class="action-grid">
-            <button class="action-card" data-action="activity">
-              <svg class="action-icon" aria-hidden="true">
-                <use href="/assets/icons.svg#activity"></use>
-              </svg>
-              <span class="action-label">Actividad</span>
-            </button>
-
-            <button class="action-card" data-action="news">
-              <svg class="action-icon" aria-hidden="true">
-                <use href="/assets/icons.svg#newspaper"></use>
-              </svg>
-              <span class="action-label">Noticias</span>
-            </button>
-
-            <button class="action-card" data-action="analytics" data-open-panel="analytics">
-              <svg class="action-icon" aria-hidden="true">
-                <use href="/assets/icons.svg#bar-chart"></use>
-              </svg>
-              <span class="action-label">Análisis</span>
-            </button>
-
-            <button class="action-card" data-action="agents" data-open-panel="agents">
-              <svg class="action-icon" aria-hidden="true">
-                <use href="/assets/icons.svg#users"></use>
-              </svg>
-              <span class="action-label">Agentes</span>
-            </button>
-
-            <button class="action-card" data-action="sources" data-open-panel="sources">
-              <svg class="action-icon" aria-hidden="true">
-                <use href="/assets/icons.svg#rss"></use>
-              </svg>
-              <span class="action-label">Fuentes</span>
-            </button>
-
-            <button class="action-card" data-action="settings">
-              <svg class="action-icon" aria-hidden="true">
-                <use href="/assets/icons.svg#settings"></use>
-              </svg>
-              <span class="action-label">Configurar</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Activity Feed -->
-        <div class="activity-feed">
-          <div class="feed-header">
-            <h2 class="section-title">Recent Activity</h2>
-            <div class="feed-filters">
-              <select class="filter-pill" id="filter-topic" aria-label="Filter">
-                <option value="">All Topics</option>
-              </select>
-            </div>
-          </div>
-          <div id="activity-list" class="activity-list" aria-live="polite">
-            <!-- Content loaded dynamically -->
-          </div>
-        </div>
-
-        <!-- Connect Section -->
-        <div class="connect-section">
-          <div class="connect-card">
-            <div class="connect-header">
-              <svg class="connect-icon" aria-hidden="true">
-                <use href="/assets/icons.svg#whatsapp"></use>
-              </svg>
-              <div class="connect-info">
-                <h3 class="connect-title">Stay Connected</h3>
-                <p class="connect-subtitle">Get AI updates on WhatsApp</p>
-              </div>
-            </div>
-            <a id="wa-link" class="connect-btn" target="_blank" rel="noopener">
-              <span>Join</span>
-              <svg class="btn-arrow" aria-hidden="true">
-                <use href="/assets/icons.svg#arrow-right"></use>
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
+      <footer class="capsule-footer">
+        <small>Datos curados por Vulcano AI. Última actualización: <span id="capsule-updated">—</span>.</small>
+      </footer>
     </main>
 
-
-    <!-- Agents Panel Overlay -->
-    <div class="panel-overlay" data-panel="agents">
-      <div class="panel-sheet">
-        <div class="panel-header">
-          <h2 class="panel-title">Agentes IA</h2>
-          <button class="panel-close" aria-label="Cerrar">
-            <svg aria-hidden="true" width="20" height="20"><use href="/assets/icons.svg#x"></use></svg>
-          </button>
-        </div>
-        <div class="panel-content">
-          <p>Cargando dashboard de agentes IA...</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Analytics Panel Overlay -->
-    <div class="panel-overlay" data-panel="analytics">
-      <div class="panel-sheet large">
-        <div class="panel-header">
-          <h2 class="panel-title">Análisis</h2>
-          <button class="panel-close" aria-label="Cerrar">
-            <svg aria-hidden="true" width="20" height="20"><use href="/assets/icons.svg#x"></use></svg>
-          </button>
-        </div>
-        <div class="panel-content">
-          <p>Cargando datos de análisis...</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Sources Panel Overlay -->
-    <div class="panel-overlay" data-panel="sources">
-      <div class="panel-sheet">
-        <div class="panel-header">
-          <h2 class="panel-title">Fuentes de Datos</h2>
-          <button class="panel-close" aria-label="Cerrar">
-            <svg aria-hidden="true" width="20" height="20"><use href="/assets/icons.svg#x"></use></svg>
-          </button>
-        </div>
-        <div class="panel-content">
-          <p>Cargando fuentes de datos...</p>
-        </div>
-      </div>
-    </div>
-    <!-- Bottom Navigation -->
-    <nav class="bottom-nav">
-      <a href="#" class="nav-item active" aria-current="page">
-        <svg class="nav-icon" aria-hidden="true">
-          <use href="/assets/icons.svg#home"></use>
-        </svg>
-        <span class="nav-label">Home</span>
-      </a>
-      <a href="#" class="nav-item" data-open-panel="agents">
-        <svg class="nav-icon" aria-hidden="true">
-          <use href="/assets/icons.svg#users"></use>
-        </svg>
-        <span class="nav-label">Agents</span>
-      </a>
-      <a href="#" class="nav-item" data-open-panel="markets">
-        <svg class="nav-icon" aria-hidden="true">
-          <use href="/assets/icons.svg#trending-up"></use>
-        </svg>
-        <span class="nav-label">Markets</span>
-      </a>
-      <a href="#" class="nav-item" data-open-panel="support">
-        <svg class="nav-icon" aria-hidden="true">
-          <use href="/assets/icons.svg#heart"></use>
-        </svg>
-        <span class="nav-label">Support</span>
-      </a>
-    </nav>
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <div class="footer-brand">
-          <svg class="logo small" aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>
-          <div>
-            <strong>Vulcano AI</strong>
-            <div class="muted">Vulcano Ai Digital Solutions S.A.S - 2025 Todos los derechos reservados</div>
-          </div>
-        </div>
-        <nav class="footer-nav">
-          <a href="/pages/legal/privacidad.html">Privacidad</a>
-          <a href="/pages/legal/terminos.html">Términos</a>
-          <a href="/pages/vulcano.html">Qué es Vulcano AI</a>
-        </nav>
-      </div>
-    </footer>
-    <!-- Markets Panel Overlay -->
-    <div class="panel-overlay" data-panel="markets">
-      <div class="panel-sheet">
-        <div class="panel-header">
-          <h2 class="panel-title">Mercados y Crypto</h2>
-          <button class="panel-close" aria-label="Cerrar">
-            <svg aria-hidden="true" width="20" height="20"><use href="/assets/icons.svg#x"></use></svg>
-          </button>
-        </div>
-        <div class="panel-content">
-          <p>Cargando señales de mercado…</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Support Panel Overlay -->
-    <div class="panel-overlay" data-panel="support">
-      <div class="panel-sheet">
-        <div class="panel-header">
-          <h2 class="panel-title">Apoyar Vulcano</h2>
-          <button class="panel-close" aria-label="Cerrar">
-            <svg aria-hidden="true" width="20" height="20"><use href="/assets/icons.svg#x"></use></svg>
-          </button>
-        </div>
-        <div class="panel-content">
-          <p>Inicializando…</p>
-        </div>
-      </div>
-    </div>
-
     <script src="/assets/js/config.js"></script>
-    <script src="/assets/js/theme.js"></script>
-    <script src="/assets/js/feed.js?v=10"></script>
-    <script src="/assets/js/app.js?v=9"></script>
-    <script src="/assets/js/panels.js"></script>
-    <script src="/assets/js/panels-content.js"></script>
+    <script src="/assets/js/capsule.js"></script>
   </body>
+</html>
