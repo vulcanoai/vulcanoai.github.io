@@ -11,6 +11,8 @@
   const input = document.getElementById('capsule-input');
   const chipsWrap = document.getElementById('capsule-chips');
   const chipNodes = chipsWrap ? Array.from(chipsWrap.querySelectorAll('.capsule-chip')) : [];
+  const voiceBtn = document.getElementById('capsule-voice');
+  const audioBtn = document.getElementById('capsule-audio');
   const updatedLabel = document.getElementById('capsule-updated');
 
   if (!stream || !form || !input) return;
@@ -26,6 +28,18 @@
     statusNote: '',
     defaultChips: defaults
   };
+
+  const voiceState = {
+    recognition: null,
+    recognitionSupported: false,
+    recognitionActive: false,
+    speakingSupported: 'speechSynthesis' in window,
+    speakingEnabled: false,
+    lastResponse: collectAgentParagraphs(),
+    voices: []
+  };
+
+  setupVoiceInterfaces();
 
   loadFeed();
 
@@ -87,6 +101,9 @@
   }
 
   function appendUser(text){
+    if (voiceState.speakingSupported){
+      try { window.speechSynthesis.cancel(); } catch (_){ /* noop */ }
+    }
     const article = document.createElement('article');
     article.className = 'capsule-message from-user';
     const sender = document.createElement('span');
@@ -217,6 +234,7 @@
       const response = buildResponse(query);
       updateAgent(placeholder, response.paragraphs, { sources: response.sources });
       updateChips(response.suggestions);
+      announceResponse(response.paragraphs);
     }, 260);
   }
 
@@ -275,6 +293,12 @@
       sources,
       suggestions: buildSuggestions(matches)
     };
+  }
+
+  function announceResponse(paragraphs){
+    if (!Array.isArray(paragraphs) || !paragraphs.length) return;
+    voiceState.lastResponse = paragraphs;
+    speakParagraphs(paragraphs);
   }
 
   function rankArticles(query, articles){
@@ -477,5 +501,154 @@
 
   function scrollStream(){
     stream.scrollTo({ top: stream.scrollHeight, behavior: 'smooth' });
+  }
+
+  function setupVoiceInterfaces(){
+    setupRecognition();
+    setupSpeech();
+
+    if (voiceBtn){
+      if (!voiceState.recognitionSupported){
+        voiceBtn.setAttribute('aria-disabled', 'true');
+        voiceBtn.disabled = true;
+        voiceBtn.title = 'Tu navegador no permite dictado por voz.';
+      } else {
+        voiceBtn.addEventListener('click', () => {
+          if (voiceState.recognitionActive){
+            stopRecognition();
+          } else {
+            startRecognition();
+          }
+        });
+      }
+    }
+
+    if (audioBtn){
+      if (!voiceState.speakingSupported){
+        audioBtn.setAttribute('aria-disabled', 'true');
+        audioBtn.disabled = true;
+        audioBtn.title = 'Tu navegador no soporta síntesis de voz.';
+      } else {
+        audioBtn.title = 'Escuchar respuestas';
+        audioBtn.addEventListener('click', () => {
+          voiceState.speakingEnabled = !voiceState.speakingEnabled;
+          audioBtn.setAttribute('aria-pressed', String(voiceState.speakingEnabled));
+          audioBtn.title = voiceState.speakingEnabled ? 'Desactivar lectura en voz' : 'Escuchar respuestas';
+          if (!voiceState.speakingEnabled){
+            window.speechSynthesis.cancel();
+          } else {
+            speakParagraphs(voiceState.lastResponse);
+          }
+        });
+      }
+    }
+  }
+
+  function setupRecognition(){
+    const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!Recognition) return;
+    const rec = new Recognition();
+    rec.lang = 'es-ES';
+    rec.interimResults = false;
+    rec.maxAlternatives = 1;
+    rec.addEventListener('result', (evt) => {
+      const transcript = Array.from(evt.results)
+        .map(result => result[0]?.transcript || '')
+        .join(' ')
+        .trim();
+      if (!transcript) return;
+      voiceState.recognitionActive = false;
+      updateVoiceUI();
+      input.value = '';
+      input.blur();
+      appendUser(transcript);
+      respondTo(transcript);
+    });
+    rec.addEventListener('error', (evt) => {
+      voiceState.recognitionActive = false;
+      updateVoiceUI();
+      console.warn('capsule: error en reconocimiento de voz', evt.error);
+      if (evt.error === 'not-allowed'){
+        const msg = ['No puedo activar el micrófono. Revisa los permisos del navegador.'];
+        appendAgent(msg, {});
+        announceResponse(msg);
+      }
+    });
+    rec.addEventListener('end', () => {
+      voiceState.recognitionActive = false;
+      updateVoiceUI();
+    });
+    voiceState.recognition = rec;
+    voiceState.recognitionSupported = true;
+  }
+
+  function startRecognition(){
+    if (!voiceState.recognition || voiceState.recognitionActive) return;
+    try {
+      voiceState.recognition.start();
+      voiceState.recognitionActive = true;
+      updateVoiceUI();
+    } catch (err){
+      console.error('capsule: no se pudo iniciar reconocimiento', err);
+      voiceState.recognitionActive = false;
+      updateVoiceUI();
+    }
+  }
+
+  function stopRecognition(){
+    if (!voiceState.recognition || !voiceState.recognitionActive) return;
+    voiceState.recognition.stop();
+    voiceState.recognitionActive = false;
+    updateVoiceUI();
+  }
+
+  function setupSpeech(){
+    if (!voiceState.speakingSupported) return;
+    try {
+      voiceState.voices = window.speechSynthesis.getVoices();
+      window.speechSynthesis.addEventListener?.('voiceschanged', () => {
+        voiceState.voices = window.speechSynthesis.getVoices();
+      });
+      window.speechSynthesis.onvoiceschanged = () => {
+        voiceState.voices = window.speechSynthesis.getVoices();
+      };
+    } catch (_){ /* noop */ }
+  }
+
+  function speakParagraphs(paragraphs){
+    if (!voiceState.speakingSupported || !voiceState.speakingEnabled) return;
+    if (!Array.isArray(paragraphs) || !paragraphs.length) return;
+    const text = paragraphs.join(' ').trim();
+    if (!text) return;
+    try {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      const preferred = voiceState.voices.find(v => /es(-|_)(CO|MX|419|ES)/i.test(v.lang));
+      if (preferred) utterance.voice = preferred;
+      utterance.lang = preferred ? preferred.lang : 'es-ES';
+      utterance.rate = 1;
+      window.speechSynthesis.speak(utterance);
+    } catch (err){
+      console.warn('capsule: síntesis de voz no disponible', err);
+    }
+  }
+
+  function updateVoiceUI(){
+    if (voiceBtn){
+      voiceBtn.classList.toggle('listening', voiceState.recognitionActive);
+      voiceBtn.setAttribute('aria-pressed', String(voiceState.recognitionActive));
+      voiceBtn.setAttribute('aria-label', voiceState.recognitionActive ? 'Detener dictado' : 'Hablar con Vulcano');
+      voiceBtn.title = voiceState.recognitionActive ? 'Detener dictado' : 'Hablar con Vulcano';
+    }
+    if (form){
+      form.classList.toggle('listening', voiceState.recognitionActive);
+    }
+  }
+
+  function collectAgentParagraphs(){
+    if (!stream) return [];
+    const last = stream.querySelector('.capsule-message.from-agent');
+    if (!last) return [];
+    return Array.from(last.querySelectorAll('p')).map(p => p.textContent.trim()).filter(Boolean);
   }
 })();

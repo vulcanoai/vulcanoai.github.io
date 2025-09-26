@@ -3993,6 +3993,11 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   box-shadow:0 6px 18px rgba(148,163,184,.12);
 }
 
+.capsule-form.listening{
+  border-color:rgba(255,75,0,.4);
+  box-shadow:0 0 0 3px rgba(255,75,0,.12);
+}
+
 .capsule-form input{
   flex:1;
   border:none;
@@ -4004,22 +4009,60 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 
 .capsule-form input::placeholder{color:rgba(15,23,42,.45);}
 
-.capsule-send{
-  border:none;
-  background:var(--brand);
-  color:#fff;
-  width:38px;
-  height:38px;
-  border-radius:50%;
+.capsule-form button{
   display:flex;
   align-items:center;
   justify-content:center;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  border:none;
   cursor:pointer;
-  transition:transform .2s ease, box-shadow .2s ease;
+  transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
 }
 
+.capsule-send{background:var(--brand); color:#fff;}
 .capsule-send:hover{transform:translateY(-1px); box-shadow:0 8px 16px rgba(255,75,0,.25);}
 .capsule-send:active{transform:translateY(0);}
+
+.capsule-voice,
+.capsule-audio{
+  background:rgba(15,23,42,.05);
+  color:#1f2937;
+  border:1px solid rgba(15,23,42,.1);
+}
+
+.capsule-voice:hover,
+.capsule-audio:hover{transform:translateY(-1px);}
+
+.capsule-voice:active,
+.capsule-audio:active{transform:translateY(0);}
+
+.capsule-voice.listening{
+  background:var(--brand);
+  color:#fff;
+  box-shadow:0 0 0 0 rgba(255,75,0,.35);
+  animation:capsulePulse 1.6s infinite;
+}
+
+.capsule-voice[aria-disabled="true"],
+.capsule-audio[aria-disabled="true"]{
+  opacity:.4;
+  cursor:default;
+  pointer-events:none;
+}
+
+.capsule-audio[aria-pressed="true"]{
+  background:rgba(255,75,0,.15);
+  color:var(--brand);
+  border-color:rgba(255,75,0,.35);
+}
+
+@keyframes capsulePulse{
+  0%{box-shadow:0 0 0 0 rgba(255,75,0,.35);}
+  70%{box-shadow:0 0 0 12px rgba(255,75,0,0);}
+  100%{box-shadow:0 0 0 0 rgba(255,75,0,0);}
+}
 
 .capsule-chips{
   display:flex;
@@ -4084,9 +4127,9 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 @media (max-width:640px){
   .capsule{padding:24px; border-radius:20px; gap:20px;}
   .capsule-message{font-size:.95rem;}
-  .capsule-form{padding:8px 12px;}
+  .capsule-form{padding:8px 12px; gap:8px;}
   .capsule-form input{font-size:.95rem;}
-  .capsule-send{width:34px; height:34px;}
+  .capsule-form button{width:34px; height:34px;}
 }
 
 /* Hero orb (wireframe sphere) */
