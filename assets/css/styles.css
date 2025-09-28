@@ -4092,6 +4092,35 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   font-size:.85rem;
 }
 
+.capsule-links .capsule-cta{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 22px;
+  border-radius:999px;
+  background:linear-gradient(135deg, rgba(255,75,0,.92) 0%, rgba(255,75,0,.75) 100%);
+  color:#fff;
+  text-decoration:none;
+  font-weight:600;
+  letter-spacing:.02em;
+  box-shadow:0 14px 28px rgba(255,75,0,.18);
+  transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+}
+
+.capsule-links .capsule-cta svg{flex:0 0 auto; opacity:.9;}
+
+.capsule-links .capsule-cta:hover,
+.capsule-links .capsule-cta:focus-visible{
+  transform:translateY(-2px);
+  box-shadow:0 18px 32px rgba(255,75,0,.24);
+  background:linear-gradient(135deg, rgba(255,75,0,1) 0%, rgba(255,120,40,.82) 100%);
+}
+
+.capsule-links .capsule-cta:focus-visible{
+  outline:2px solid rgba(255,120,40,.6);
+  outline-offset:4px;
+}
+
 .capsule-footer{color:var(--muted); font-size:.75rem; text-align:center;}
 
 .capsule-footer small{display:block; line-height:1.4;}
