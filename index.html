@@ -1,85 +1,98 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="Content-Security-Policy"
-      content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
-    <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <title>Vulcano AI — Conversación sobre noticias de IA en LATAM</title>
-    <meta name="description" content="Capsula conversacional que resume noticias de inteligencia artificial en América Latina." />
-    <meta property="og:title" content="Vulcano AI — Conversación sobre noticias de IA en LATAM" />
-    <meta property="og:description" content="Resumen minimalista y humano de la actualidad de IA en América Latina." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="/" />
-    <meta property="og:image" content="/assets/img/og-banner.svg" />
-    <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="/assets/css/styles.css?v=4" />
-  </head>
-  <body class="capsule-body" data-theme="ethereal">
-    <main class="capsule" aria-label="Vulcano AI">
-      <header class="capsule-header">
-        <div class="capsule-identity">
-          <div class="capsule-logo" aria-hidden="true">
-            <svg width="48" height="48" role="img">
-              <use href="/assets/icons.svg#logo"></use>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>Vulcano AI — Conversación sobre noticias de IAA en LATAM</title>
+  <meta name="description"
+    content="Capsula conversacional que resume noticias de inteligencia artificial en América Latina." />
+  <meta property="og:title" content="Vulcano AI — Conversación sobre noticias de IA en LATAM" />
+  <meta property="og:description" content="Resumen minimalista y humano de la actualidad de IA en América Latina." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="/" />
+  <meta property="og:image" content="/assets/img/og-banner.svg" />
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/css/styles.css?v=4" />
+</head>
+
+<body class="capsule-body" data-theme="ethereal">
+  <main class="capsule" aria-label="Vulcano AI">
+    <header class="capsule-header">
+      <div class="capsule-identity">
+        <div class="capsule-logo" aria-hidden="true">
+          <svg width="48" height="48" role="img">
+            <use href="/assets/icons.svg#logo"></use>
+          </svg>
+        </div>
+        <div class="capsule-heading">
+          <p class="capsule-title">Vulcano AI</p>
+          <p class="capsule-subtitle">Conversación inteligente sobre IA en LATAM</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="capsule-stream" id="capsule-stream" aria-live="polite" aria-label="Actualizaciones de conversación">
+      <article class="capsule-message from-agent">
+        <span class="capsule-sender">Vulcano</span>
+        <p>Hola. Estoy listo para contarte qué ocurre con la IA en la región. ¿En qué quieres enfocarnos?</p>
+      </article>
+    </section>
+
+    <div class="capsule-interaction">
+      <div class="voice-primary">
+        <button type="button" class="voice-orb" id="capsule-voice" aria-pressed="false" aria-label="Hablar con Vulcano">
+          <div class="orb-glow"></div>
+          <div class="orb-core">
+            <svg width="32" height="32" aria-hidden="true">
+              <use href="/assets/icons.svg#mic"></use>
             </svg>
           </div>
-          <div class="capsule-heading">
-            <p class="capsule-title">Vulcano AI</p>
-            <p class="capsule-subtitle">Conversación inteligente sobre IA en LATAM</p>
-          </div>
-        </div>
-      </header>
-
-      <section class="capsule-stream" id="capsule-stream" aria-live="polite" aria-label="Actualizaciones de conversación">
-        <article class="capsule-message from-agent">
-          <span class="capsule-sender">Vulcano</span>
-          <p>Hola. Estoy listo para contarte qué ocurre con la IA en la región. ¿En qué quieres enfocarnos?</p>
-        </article>
-      </section>
-
-      <div class="capsule-interaction">
-        <div class="voice-primary">
-          <button type="button" class="voice-orb" id="capsule-voice" aria-pressed="false" aria-label="Hablar con Vulcano">
-            <div class="orb-glow"></div>
-            <div class="orb-core">
-              <svg width="32" height="32" aria-hidden="true"><use href="/assets/icons.svg#mic"></use></svg>
-            </div>
-            <div class="orb-pulse"></div>
-          </button>
-          <p class="voice-hint">Toca para hablar</p>
-        </div>
-
-        <form class="capsule-form" id="capsule-form" autocomplete="off">
-          <label class="sr-only" for="capsule-input">Escribe tu pregunta</label>
-          <input id="capsule-input" name="q" type="text" placeholder="O escribe tu pregunta aquí..." maxlength="180" />
-          <button type="button" class="capsule-audio" id="capsule-audio" aria-pressed="false" aria-label="Escuchar respuestas">
-            <svg width="20" height="20" aria-hidden="true"><use href="/assets/icons.svg#volume"></use></svg>
-          </button>
-          <button type="submit" class="capsule-send" aria-label="Enviar">
-            <svg width="20" height="20" aria-hidden="true"><use href="/assets/icons.svg#arrow-right"></use></svg>
-          </button>
-        </form>
+          <div class="orb-pulse"></div>
+        </button>
+        <p class="voice-hint">Toca para hablar</p>
       </div>
 
-      <div class="capsule-suggestions" id="capsule-chips" aria-label="Sugerencias">
-        <button type="button" class="capsule-chip" data-prompt="Léeme un resumen de las noticias de IA en América Latina hoy">Escuchar briefing</button>
-        <button type="button" class="capsule-chip" data-prompt="Actualízame sobre regulación de IA en México">Regulación MX</button>
+      <form class="capsule-form" id="capsule-form" autocomplete="off">
+        <label class="sr-only" for="capsule-input">Escribe tu pregunta</label>
+        <input id="capsule-input" name="q" type="text" placeholder="O escribe tu pregunta aquí..." maxlength="180" />
+        <button type="button" class="capsule-audio" id="capsule-audio" aria-pressed="false"
+          aria-label="Escuchar respuestas">
+          <svg width="20" height="20" aria-hidden="true">
+            <use href="/assets/icons.svg#volume"></use>
+          </svg>
+        </button>
+        <button type="submit" class="capsule-send" aria-label="Enviar">
+          <svg width="20" height="20" aria-hidden="true">
+            <use href="/assets/icons.svg#arrow-right"></use>
+          </svg>
+        </button>
+      </form>
+    </div>
+
+    <div class="capsule-suggestions" id="capsule-chips" aria-label="Sugerencias">
+      <button type="button" class="capsule-chip"
+        data-prompt="Léeme un resumen de las noticias de IA en América Latina hoy">Escuchar briefing</button>
+      <button type="button" class="capsule-chip" data-prompt="Actualízame sobre regulación de IA en México">Regulación
+        MX</button>
+    </div>
+
+    <footer class="capsule-footer">
+      <div class="footer-content">
+        <span class="status-indicator">
+          <span class="status-dot"></span>
+          Actualización: <span id="capsule-updated">—</span>
+        </span>
+        <a class="footer-link" href="/pages/vision.html">Visión Premium</a>
       </div>
+    </footer>
+  </main>
 
-      <footer class="capsule-footer">
-        <div class="footer-content">
-          <span class="status-indicator">
-            <span class="status-dot"></span>
-            Actualización: <span id="capsule-updated">—</span>
-          </span>
-          <a class="footer-link" href="/pages/vision.html">Visión Premium</a>
-        </div>
-      </footer>
-    </main>
+  <script src="/assets/js/config.js"></script>
+  <script src="/assets/js/capsule.js"></script>
+</body>
 
-    <script src="/assets/js/config.js"></script>
-    <script src="/assets/js/capsule.js"></script>
-  </body>
 </html>
