@@ -639,6 +639,12 @@
       voiceBtn.setAttribute('aria-pressed', String(voiceState.recognitionActive));
       voiceBtn.setAttribute('aria-label', voiceState.recognitionActive ? 'Detener dictado' : 'Hablar con Vulcano');
       voiceBtn.title = voiceState.recognitionActive ? 'Detener dictado' : 'Hablar con Vulcano';
+
+      // Update voice hint text
+      const hintElement = document.querySelector('.voice-hint');
+      if (hintElement) {
+        hintElement.textContent = voiceState.recognitionActive ? 'Escuchando...' : 'Toca para hablar';
+      }
     }
     if (form){
       form.classList.toggle('listening', voiceState.recognitionActive);

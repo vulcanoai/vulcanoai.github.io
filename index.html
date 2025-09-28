@@ -16,17 +16,19 @@
     <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="/assets/css/styles.css?v=4" />
   </head>
-  <body class="capsule-body" data-theme="arctic">
+  <body class="capsule-body" data-theme="ethereal">
     <main class="capsule" aria-label="Vulcano AI">
       <header class="capsule-header">
-        <div class="capsule-logo" aria-hidden="true">
-          <svg width="32" height="32" role="img">
-            <use href="/assets/icons.svg#logo"></use>
-          </svg>
-        </div>
-        <div class="capsule-heading">
-          <p class="capsule-title">Vulcano AI</p>
-          <p class="capsule-subtitle">La cápsula de IA premium que conecta a Hispanoamérica con el futuro</p>
+        <div class="capsule-identity">
+          <div class="capsule-logo" aria-hidden="true">
+            <svg width="48" height="48" role="img">
+              <use href="/assets/icons.svg#logo"></use>
+            </svg>
+          </div>
+          <div class="capsule-heading">
+            <p class="capsule-title">Vulcano AI</p>
+            <p class="capsule-subtitle">Conversación inteligente sobre IA en LATAM</p>
+          </div>
         </div>
       </header>
 
@@ -37,37 +39,43 @@
         </article>
       </section>
 
-      <form class="capsule-form" id="capsule-form" autocomplete="off">
-        <button type="button" class="capsule-voice" id="capsule-voice" aria-pressed="false" aria-label="Hablar con Vulcano">
-          <svg width="18" height="18" aria-hidden="true"><use href="/assets/icons.svg#mic"></use></svg>
-        </button>
-        <label class="sr-only" for="capsule-input">Escribe tu pregunta</label>
-        <input id="capsule-input" name="q" type="text" placeholder="Pregúntame sobre IA en LATAM" maxlength="180" required />
-        <button type="button" class="capsule-audio" id="capsule-audio" aria-pressed="false" aria-label="Escuchar respuestas">
-          <svg width="18" height="18" aria-hidden="true"><use href="/assets/icons.svg#volume"></use></svg>
-        </button>
-        <button type="submit" class="capsule-send" aria-label="Enviar pregunta">
-          <svg width="18" height="18" aria-hidden="true"><use href="/assets/icons.svg#arrow-right"></use></svg>
-        </button>
-      </form>
+      <div class="capsule-interaction">
+        <div class="voice-primary">
+          <button type="button" class="voice-orb" id="capsule-voice" aria-pressed="false" aria-label="Hablar con Vulcano">
+            <div class="orb-glow"></div>
+            <div class="orb-core">
+              <svg width="32" height="32" aria-hidden="true"><use href="/assets/icons.svg#mic"></use></svg>
+            </div>
+            <div class="orb-pulse"></div>
+          </button>
+          <p class="voice-hint">Toca para hablar</p>
+        </div>
 
-      <div class="capsule-chips" id="capsule-chips" aria-label="Sugerencias">
+        <form class="capsule-form" id="capsule-form" autocomplete="off">
+          <label class="sr-only" for="capsule-input">Escribe tu pregunta</label>
+          <input id="capsule-input" name="q" type="text" placeholder="O escribe tu pregunta aquí..." maxlength="180" />
+          <button type="button" class="capsule-audio" id="capsule-audio" aria-pressed="false" aria-label="Escuchar respuestas">
+            <svg width="20" height="20" aria-hidden="true"><use href="/assets/icons.svg#volume"></use></svg>
+          </button>
+          <button type="submit" class="capsule-send" aria-label="Enviar">
+            <svg width="20" height="20" aria-hidden="true"><use href="/assets/icons.svg#arrow-right"></use></svg>
+          </button>
+        </form>
+      </div>
+
+      <div class="capsule-suggestions" id="capsule-chips" aria-label="Sugerencias">
         <button type="button" class="capsule-chip" data-prompt="Léeme un resumen de las noticias de IA en América Latina hoy">Escuchar briefing</button>
         <button type="button" class="capsule-chip" data-prompt="Actualízame sobre regulación de IA en México">Regulación MX</button>
       </div>
 
-      <div class="capsule-links">
-        <a class="capsule-link capsule-cta" href="/pages/vision.html">
-          <span>Activa Vulcano Premium</span>
-          <svg width="16" height="16" aria-hidden="true"><use href="/assets/icons.svg#arrow-right"></use></svg>
-        </a>
-      </div>
-
       <footer class="capsule-footer">
-        <small>
-          Datos curados por Vulcano AI. Última actualización: <span id="capsule-updated">—</span>.<br>
-          Vulcano Ai Digital Solutions S.A.S. Colombia · Soporte: <a class="capsule-link" href="mailto:ivan@vulcano.ai">ivan@vulcano.ai</a> · WhatsApp 3193620926 · <a class="capsule-link" href="/pages/vision.html">Visión</a>
-        </small>
+        <div class="footer-content">
+          <span class="status-indicator">
+            <span class="status-dot"></span>
+            Actualización: <span id="capsule-updated">—</span>
+          </span>
+          <a class="footer-link" href="/pages/vision.html">Visión Premium</a>
+        </div>
       </footer>
     </main>
 
