@@ -94,7 +94,7 @@ window.VulcanoChatComponent = (() => {
     const form = container.querySelector('#capsule-form');
     const input = container.querySelector('#capsule-input');
     const chipsWrap = container.querySelector('#capsule-chips');
-    const chipNodes = chipsWrap ? Array.from(chipsWrap.querySelectorAll('.capsule-chip')) : [];
+    let chipNodes = [];
     const voiceBtn = container.querySelector('#capsule-voice');
     const sendBtn = container.querySelector('#capsule-send');
 
@@ -133,16 +133,7 @@ window.VulcanoChatComponent = (() => {
       }
     });
 
-    chipNodes.forEach(chip => {
-      chip.addEventListener('click', () => {
-        const prompt = (chip.dataset.prompt || '').trim();
-        if (!prompt) return;
-        appendUser(prompt);
-        if (config.onSubmit) {
-          config.onSubmit(prompt, { appendAgent, updateChips, state });
-        }
-      });
-    });
+    hydrateChipNodes();
 
     // Voice setup
     setupVoiceInterfaces();
@@ -221,18 +212,49 @@ window.VulcanoChatComponent = (() => {
       return article;
     }
 
-    function updateChips(suggestions) {
-      chipNodes.forEach((chip, index) => {
-        const fallback = state.defaultChips[index];
-        const hint = suggestions && suggestions[index] ? suggestions[index] : fallback;
-        if (!hint) {
-          chip.hidden = true;
-          return;
-        }
-        chip.hidden = false;
-        chip.dataset.prompt = hint.prompt;
-        chip.textContent = hint.label;
+    function updateChips(suggestions = []) {
+      if (!chipsWrap) return;
+      const list = Array.isArray(suggestions) && suggestions.length ? suggestions : state.defaultChips;
+      state.defaultChips = list;
+      const track = chipsWrap.querySelector('.chip-track') || chipsWrap;
+      if (!track) return;
+
+      track.innerHTML = list.map(renderChip).join('');
+      hydrateChipNodes();
+    }
+
+    function renderChip(chip) {
+      if (!chip) return '';
+      const prompt = escapeHTML(chip.prompt || '');
+      const label = escapeHTML(chip.label || chip.prompt || '');
+      return `<button type="button" class="capsule-chip" role="listitem" data-prompt="${prompt}">${label}</button>`;
+    }
+
+    function hydrateChipNodes() {
+      if (!chipsWrap) return;
+      const track = chipsWrap.querySelector('.chip-track') || chipsWrap;
+      if (!track) return;
+      chipNodes = Array.from(track.querySelectorAll('.capsule-chip'));
+      chipNodes.forEach(chip => {
+        chip.addEventListener('click', () => {
+          const prompt = (chip.dataset.prompt || '').trim();
+          if (!prompt) return;
+          appendUser(prompt);
+          if (config.onSubmit) {
+            config.onSubmit(prompt, { appendAgent, updateChips, state });
+          }
+        }, { once: false });
       });
+      chipsWrap.hidden = chipNodes.length === 0;
+    }
+
+    function escapeHTML(value) {
+      return String(value || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
     }
 
     function scrollStream() {

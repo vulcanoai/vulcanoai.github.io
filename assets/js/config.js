@@ -9,6 +9,7 @@ window.AILatamConfig = window.AILatamConfig || {
     // Configuración para trabajar con el workflow n8n existente
     // Reset‑first: usar SOLO feed-latest.json (sin fallbacks)
     feedUrl: '/data/feed-latest.json',
+    capsulesUrl: '/data/capsules.json',
     agentsUrl: '/data/agents.json',
     sourcesUrl: '/data/sources.json',
     panoramaUrl: '/data/panorama.json',

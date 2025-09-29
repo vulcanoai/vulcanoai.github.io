@@ -3,77 +3,222 @@
 */
 (() => {
   const config = window.AILatamConfig || {};
-  const feedUrl = (config.api && config.api.feedUrl) || '/data/feed-latest.json';
+  const api = config.api || {};
+  const capsulesUrl = api.capsulesUrl || '/data/capsules.json';
 
-  // Initialize the unified chat component with main page configuration
   const chatInterface = window.VulcanoChatComponent.create('chat-interface', {
     hasHorizontalChips: true,
-    placeholder: "O escribe tu pregunta aquí...",
+    placeholder: "Escribe el título de una cápsula o elige una de la lista…",
     initialMessage: `
       <article class="capsule-message from-agent">
         <span class="capsule-sender">Vulcano</span>
-        <p>Hola. Estoy listo para contarte qué ocurre con la IA en la región. ¿En qué quieres enfocarnos?</p>
+        <p>Hola. Tengo cápsulas listas para que pases menos tiempo frente a la pantalla.</p>
+        <p>Toca un título en la parte inferior o escribe el nombre para repasar el contenido.</p>
       </article>
     `,
+    defaultChips: [],
     onSubmit: handleUserInput
   });
 
   if (!chatInterface) {
-    console.error('Failed to initialize chat interface');
+    console.error('capsule-main: no se pudo inicializar la interfaz de chat');
     return;
   }
 
   const updatedLabel = document.getElementById('capsule-updated');
+  const state = chatInterface.state;
+  state.loading = true;
+  state.error = null;
+  state.capsules = [];
+  state.capsuleIndex = new Map();
+  state.generatedAt = null;
 
-  // Load feed data on startup
-  loadFeed();
+  loadCapsules();
 
-  // Main response handler
-  function handleUserInput(query, { appendAgent, updateChips, state }) {
-    const placeholder = appendAgent(['Dame un instante…'], {});
-    setTimeout(() => {
-      const response = buildResponse(query);
-      updateAgent(placeholder, response.paragraphs, { sources: response.sources });
-      updateChips(response.suggestions);
-    }, 260);
-  }
-
-  async function loadFeed() {
+  async function loadCapsules() {
     if (updatedLabel) updatedLabel.textContent = 'cargando…';
     try {
-      const res = await fetch(feedUrl, { cache: 'no-store' });
+      const res = await fetch(capsulesUrl, { cache: 'no-store' });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      const rawItems = Array.isArray(data) ? data : (data.articles || data.items || []);
-      chatInterface.state.generatedAt = data.generated_at || null;
-      chatInterface.state.articles = normalizeArticles(rawItems);
-      chatInterface.state.loading = false;
-      const latest = chatInterface.state.articles[0];
+      const raw = Array.isArray(data) ? data : (data.capsules || []);
+      const normalized = normalizeCapsules(raw);
+      normalized.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+      state.capsules = normalized;
+      state.capsuleIndex = buildIndex(normalized);
+      state.loading = false;
+      state.generatedAt = data.generated_at || (normalized[0]?.createdISO ?? null);
+
       if (updatedLabel) {
-        if (chatInterface.state.generatedAt) {
-          updatedLabel.textContent = formatTimestamp(chatInterface.state.generatedAt);
-        } else if (latest) {
-          updatedLabel.textContent = formatTimestamp(latest.publishedAt);
+        if (state.generatedAt) {
+          updatedLabel.textContent = formatTimestamp(state.generatedAt);
+        } else if (normalized[0]) {
+          updatedLabel.textContent = formatTimestamp(normalized[0].createdISO);
         } else {
-          updatedLabel.textContent = 'sin datos recientes';
+          updatedLabel.textContent = 'sin cápsulas registradas';
         }
       }
-      if (chatInterface.state.generatedAt) {
-        const ageHours = (Date.now() - new Date(chatInterface.state.generatedAt).getTime()) / 36e5;
-        if (ageHours >= 24) {
-          chatInterface.state.stale = true;
-          chatInterface.state.statusNote = `Nota: el último corte confirmado es del ${formatTimestamp(chatInterface.state.generatedAt)}.`;
-        }
-      }
-      if (chatInterface.state.articles.length === 0) {
-        chatInterface.state.statusNote = 'Aún no hay historias publicadas en el corte más reciente.';
+
+      const chipList = normalized.map(cap => ({ prompt: cap.title, label: cap.title }));
+      state.defaultChips = chipList;
+      chatInterface.updateChips(chipList);
+
+      if (!normalized.length) {
+        appendSystemNote([
+          'Todavía no hay cápsulas almacenadas.',
+          'Añade nuevas cápsulas en tu base local y actualiza la página para verlas aquí.'
+        ]);
       }
     } catch (err) {
-      chatInterface.state.loading = false;
-      chatInterface.state.error = 'No pude cargar el feed en este momento.';
+      state.loading = false;
+      state.error = 'No pude cargar las cápsulas locales.';
       if (updatedLabel) updatedLabel.textContent = 'sin conexión';
-      console.error('capsule: no se pudo cargar el feed', err);
+      console.error('capsule-main: error al cargar cápsulas', err);
+      appendSystemNote([
+        'No pude conectar con tu base de cápsulas.',
+        'Verifica el archivo /data/capsules.json o vuelve a intentar más tarde.'
+      ]);
     }
+  }
+
+  function handleUserInput(rawQuery, helpers) {
+    const query = (rawQuery || '').trim();
+    const placeholder = helpers.appendAgent(['Buscando cápsula…'], {});
+
+    const response = buildCapsuleResponse(query);
+    updateAgent(placeholder, response.paragraphs, { sources: response.sources });
+  }
+
+  function buildCapsuleResponse(query) {
+    const clean = query.trim();
+    const mention = clean ? `"${shorten(clean)}"` : 'esa cápsula';
+
+    if (state.loading) {
+      return {
+        paragraphs: [`Sigo cargando la biblioteca local. Intenta de nuevo en unos segundos.`],
+        sources: []
+      };
+    }
+
+    if (state.error) {
+      return {
+        paragraphs: [state.error, 'Puedes revisar el archivo de cápsulas y recargar la página.'],
+        sources: []
+      };
+    }
+
+    if (!state.capsules.length) {
+      return {
+        paragraphs: ['Aún no hay cápsulas guardadas. Agrega una y vuelve a intentarlo.'],
+        sources: []
+      };
+    }
+
+    const match = findCapsule(clean);
+    if (!match) {
+      const suggestions = state.capsules.slice(0, 4).map(cap => `• ${cap.title}`);
+      const followUp = suggestions.length ? ['Puedes elegir una de estas cápsulas:', ...suggestions] : ['Puedes crear una cápsula nueva y actualizar la página.'];
+      return {
+        paragraphs: [`No encontré ${mention}.`, ...followUp],
+        sources: []
+      };
+    }
+
+    const paragraphs = [];
+    if (match.summary) {
+      paragraphs.push(match.summary);
+    }
+    match.body.forEach(line => {
+      if (line) paragraphs.push(line);
+    });
+    if (match.tags.length) {
+      paragraphs.push(`Etiquetas: ${match.tags.join(', ')}.`);
+    }
+    if (state.generatedAt) {
+      paragraphs.push(`Última actualización de la biblioteca: ${formatTimestamp(state.generatedAt)}.`);
+    }
+
+    return {
+      paragraphs,
+      sources: match.sources
+    };
+  }
+
+  function findCapsule(query) {
+    if (!query) return null;
+    const normalized = normalizeText(query);
+    if (!normalized) return null;
+
+    const exact = state.capsuleIndex.get(normalized);
+    if (exact) return exact;
+
+    const partial = state.capsules.find(cap => cap.searchTokens.some(token => token.includes(normalized) || normalized.includes(token)));
+    return partial || null;
+  }
+
+  function normalizeCapsules(list) {
+    if (!Array.isArray(list)) return [];
+    return list.map(item => {
+      const title = String(item.title || '').trim();
+      const summary = String(item.summary || '').trim();
+      const bodyRaw = Array.isArray(item.body) ? item.body : String(item.body || '').split(/\r?\n\r?\n|\r?\n/);
+      const body = bodyRaw.map(line => String(line || '').trim()).filter(Boolean);
+      const tags = Array.isArray(item.tags) ? item.tags.map(tag => String(tag || '').trim()).filter(Boolean) : [];
+      const sources = Array.isArray(item.sources) ? item.sources.filter(Boolean).map(src => ({
+        title: String(src.title || src.name || src.url || '').trim(),
+        url: src.url ? String(src.url).trim() : '',
+        source: String(src.source || '').trim()
+      })) : [];
+      const createdISO = item.created_at || item.createdAt || null;
+      const createdAt = createdISO ? Date.parse(createdISO) : null;
+      const normalizedTitle = normalizeText(title);
+      const extraTokens = [normalizeText(item.id || ''), ...tags.map(normalizeText)];
+      const searchTokens = [normalizedTitle, ...extraTokens].filter(Boolean);
+
+      return {
+        id: item.id || normalizedTitle || `capsule-${Math.random().toString(36).slice(2, 8)}`,
+        title: title || 'Cápsula sin título',
+        summary,
+        body,
+        tags,
+        sources,
+        createdISO,
+        createdAt,
+        normalizedTitle,
+        searchTokens
+      };
+    }).filter(cap => cap.title && cap.body.length);
+  }
+
+  function buildIndex(capsules) {
+    const index = new Map();
+    capsules.forEach(cap => {
+      if (cap.normalizedTitle) index.set(cap.normalizedTitle, cap);
+      cap.searchTokens.forEach(token => {
+        if (token && !index.has(token)) {
+          index.set(token, cap);
+        }
+      });
+    });
+    return index;
+  }
+
+  function appendSystemNote(lines) {
+    const stream = chatInterface?.elements?.stream;
+    if (!stream) return;
+    const article = document.createElement('article');
+    article.className = 'capsule-message from-agent';
+    const sender = document.createElement('span');
+    sender.className = 'capsule-sender';
+    sender.textContent = 'Vulcano';
+    article.appendChild(sender);
+    lines.forEach(text => {
+      const p = document.createElement('p');
+      p.textContent = text;
+      article.appendChild(p);
+    });
+    stream.appendChild(article);
   }
 
   function updateAgent(node, paragraphs, meta) {
@@ -128,244 +273,31 @@
     }
   }
 
-  function buildResponse(query) {
-    const clean = query.trim();
-    const intro = `Gracias por preguntar sobre "${shorten(clean)}". Aquí lo esencial:`;
-
-    if (chatInterface.state.loading) {
-      return {
-        paragraphs: [intro, 'Sigo cargando el feed de hoy. Dame unos segundos y vuelve a intentarlo.'],
-        sources: [],
-        suggestions: chatInterface.state.defaultChips
-      };
-    }
-    if (chatInterface.state.error) {
-      return {
-        paragraphs: [intro, chatInterface.state.error, 'Puedes recargar la página o intentar más tarde.'],
-        sources: [],
-        suggestions: chatInterface.state.defaultChips
-      };
-    }
-    if (chatInterface.state.articles.length === 0) {
-      return {
-        paragraphs: [intro, 'No tengo historias nuevas confirmadas en este corte.', 'Te avisaré apenas lleguen señales confiables.'],
-        sources: [],
-        suggestions: chatInterface.state.defaultChips
-      };
-    }
-
-    const matches = rankArticles(clean, chatInterface.state.articles);
-    const sources = matches.map(item => ({
-      title: item.title,
-      url: item.url,
-      source: item.source
-    }));
-
-    const lines = matches.map(article => formatLine(article));
-    while (lines.length < 2 && chatInterface.state.articles.length) {
-      const fallback = chatInterface.state.articles[lines.length];
-      if (!fallback) break;
-      if (!matches.includes(fallback)) {
-        lines.push(formatLine(fallback));
-        sources.push({ title: fallback.title, url: fallback.url, source: fallback.source });
-      }
-    }
-
-    const paragraphs = [intro, ...lines.slice(0, 3)];
-    if (chatInterface.state.stale || chatInterface.state.statusNote) {
-      paragraphs.push(chatInterface.state.statusNote);
-    } else {
-      paragraphs.push('Si quieres bajar a más detalle, dime qué país o tema seguimos.');
-    }
-
-    return {
-      paragraphs: paragraphs.slice(0, 6),
-      sources,
-      suggestions: buildSuggestions(matches)
-    };
-  }
-
-  function rankArticles(query, articles) {
-    const normalizedQuery = normalizeText(query);
-    const tokens = normalizedQuery.split(/\s+/).filter(t => t.length > 2);
-    const focusCountry = detectCountry(normalizedQuery);
-    const focusTopic = detectTopic(normalizedQuery);
-
-    const scored = articles.map(article => {
-      let score = 0;
-      tokens.forEach(token => {
-        if (article.normalized.title.includes(token)) score += 4;
-        if (article.normalized.summary.includes(token)) score += 2;
-        if (article.normalized.source.includes(token)) score += 1;
-        if (article.normalized.topics.some(t => t.includes(token))) score += 3;
-      });
-      if (focusCountry && article.normalized.country === focusCountry.key) score += 6;
-      if (focusTopic && article.normalized.topics.includes(focusTopic)) score += 4;
-      if (article.normalized.country === 'regional' && !focusCountry) score += 1;
-      const ageBoost = (Date.now() - new Date(article.publishedAt).getTime()) / 36e5;
-      score += Math.max(0, 12 - ageBoost); // favorecer lo reciente
-      return { article, score };
-    });
-
-    scored.sort((a, b) => {
-      if (b.score !== a.score) return b.score - a.score;
-      return new Date(b.article.publishedAt).getTime() - new Date(a.article.publishedAt).getTime();
-    });
-    const top = scored.filter(item => item.score > 0).slice(0, 3).map(item => item.article);
-    if (top.length) return top;
-    return articles.slice(0, 3);
-  }
-
-  function buildSuggestions(matches) {
-    if (!matches || !matches.length) return chatInterface.state.defaultChips;
-    const suggestions = [];
-    const first = matches[0];
-    if (first.country && first.country !== 'Regional') {
-      suggestions.push({
-        prompt: `Dame más contexto de IA en ${first.country}`,
-        label: `Más en ${first.country}`
-      });
-    }
-    if (first.topics && first.topics.length) {
-      const topic = first.topics[0];
-      suggestions.push({
-        prompt: `Actualízame sobre ${topic} en América Latina`,
-        label: topic
-      });
-    }
-    return suggestions.slice(0, 2);
-  }
-
-  function formatLine(article) {
-    const country = article.country || 'Regional';
-    const summary = article.summary ? shorten(article.summary, 140) : article.title;
-    const hook = explainWhy(article);
-    return `${country}: ${summary}${hook ? ` ${hook}` : ''}`;
-  }
-
-  function explainWhy(article) {
-    const topicHints = {
-      regulacion: 'Impacta la agenda regulatoria.',
-      gobierno: 'Marca postura gubernamental.',
-      inversion: 'Mueve capital en el ecosistema.',
-      startups: 'Abre oportunidades para startups.',
-      educacion: 'Afecta talento y formación.',
-      salud: 'Tiene implicaciones en salud pública.',
-      justicia: 'Toca el sistema de justicia.',
-      industria: 'Reconfigura la productividad industrial.'
-    };
-    for (const topic of article.normalized.topics) {
-      const hint = topicHints[topic];
-      if (hint) return hint;
-    }
-    return '';
-  }
-
-  function normalizeArticles(items) {
-    return items
-      .map(item => {
-        const title = safeText(item.title || item.titulo || 'Sin título');
-        const summary = safeText(item.summary || item.descripcion || item.resumen || '');
-        const url = safeUrl(item.url || item.link || '');
-        const source = safeText(item.source || item.fuente || 'Fuente no identificada');
-        const country = safeText(item.country || item.pais || 'Regional');
-        const topics = Array.isArray(item.topics || item.temas) ? (item.topics || item.temas).map(safeText).filter(Boolean) : [];
-        const publishedAt = item.published_at || item.fecha || new Date().toISOString();
-        return {
-          id: item.id || url || title,
-          title,
-          summary,
-          url,
-          source,
-          country,
-          topics,
-          publishedAt,
-          normalized: {
-            title: normalizeText(title),
-            summary: normalizeText(summary),
-            source: normalizeText(source),
-            country: normalizeText(country),
-            topics: topics.map(t => normalizeText(t))
-          }
-        };
-      })
-      .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
-  }
-
-  function detectCountry(text) {
-    const dictionary = [
-      { key: 'mexico', tokens: ['mexico', 'méxico', 'mx'] },
-      { key: 'colombia', tokens: ['colombia', 'col', 'co'] },
-      { key: 'argentina', tokens: ['argentina', 'ar'] },
-      { key: 'brasil', tokens: ['brasil', 'brazil', 'br'] },
-      { key: 'chile', tokens: ['chile', 'cl'] },
-      { key: 'peru', tokens: ['peru', 'perú', 'pe'] },
-      { key: 'uruguay', tokens: ['uruguay', 'uy'] },
-      { key: 'ecuador', tokens: ['ecuador', 'ec'] },
-      { key: 'bolivia', tokens: ['bolivia', 'bo'] },
-      { key: 'paraguay', tokens: ['paraguay', 'py'] },
-      { key: 'panama', tokens: ['panama', 'panamá', 'pa'] },
-      { key: 'dominicana', tokens: ['república dominicana', 'dominicana', 'rd'] },
-      { key: 'regional', tokens: ['latam', 'latinoamerica', 'latinoamérica', 'regional'] }
-    ];
-    for (const entry of dictionary) {
-      if (entry.tokens.some(token => text.includes(token))) return entry;
-    }
-    return null;
-  }
-
-  function detectTopic(text) {
-    const dictionary = {
-      regulacion: ['regulacion', 'regulación', 'ley', 'norma', 'politica', 'política', 'marco'],
-      inversion: ['inversion', 'inversión', 'capital', 'financiacion', 'financiación'],
-      startups: ['startup', 'emprend'],
-      gobierno: ['gobierno', 'ministerio', 'publico', 'público', 'senado'],
-      educacion: ['educacion', 'educación', 'universidad', 'colegio'],
-      salud: ['salud', 'hospital', 'clínica', 'clinica'],
-      justicia: ['justicia', 'corte', 'tribunal'],
-      industria: ['industria', 'manufactura', 'produccion', 'producción'],
-      trabajo: ['trabajo', 'empleo', 'laboral']
-    };
-    for (const key in dictionary) {
-      if (dictionary[key].some(token => text.includes(token))) return key;
-    }
-    return null;
-  }
-
-  function shorten(str, max = 100) {
-    const clean = safeText(str);
-    if (clean.length <= max) return clean;
-    return `${clean.slice(0, max - 1)}…`;
-  }
-
-  function safeText(value) {
-    return (value || '').toString().trim();
-  }
-
-  function safeUrl(value) {
-    const text = safeText(value);
-    if (!text) return '';
-    if (text.startsWith('http') || text.startsWith('/')) return text;
-    return `https://${text}`;
-  }
-
   function normalizeText(value) {
-    return safeText(value)
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
+    return String(value || '')
       .toLowerCase()
+      .normalize('NFD')
       .replace(/[^a-z0-9\s]/g, ' ')
       .replace(/\s+/g, ' ')
       .trim();
   }
 
-  function formatTimestamp(iso) {
-    try {
-      const date = new Date(iso);
-      if (Number.isNaN(date.getTime())) return 'fecha no disponible';
-      return new Intl.DateTimeFormat('es-CO', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }).format(date);
-    } catch (_) {
-      return 'fecha no disponible';
-    }
+  function shorten(value, max = 48) {
+    const text = String(value || '').trim();
+    if (text.length <= max) return text;
+    return `${text.slice(0, max - 1)}…`;
+  }
+
+  function formatTimestamp(dateLike) {
+    if (!dateLike) return 'fecha desconocida';
+    const date = new Date(dateLike);
+    if (!Number.isFinite(date.getTime())) return 'fecha desconocida';
+    return date.toLocaleString('es-CO', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
   }
 })();
