@@ -4,7 +4,7 @@
 (() => {
   const config = window.AILatamConfig || {};
   const api = config.api || {};
-  const capsulesUrl = api.capsulesUrl || '/data/capsules.json';
+  const docUrl = api.capsulesDocUrl || '/data/capsules/doc-latest.txt';
 
   const chatInterface = window.VulcanoChatComponent.create('chat-interface', {
     hasHorizontalChips: true,
@@ -32,52 +32,48 @@
   state.capsules = [];
   state.capsuleIndex = new Map();
   state.generatedAt = null;
+  state.rawDocument = '';
 
   loadCapsules();
 
   async function loadCapsules() {
     if (updatedLabel) updatedLabel.textContent = 'cargando…';
     try {
-      const res = await fetch(capsulesUrl, { cache: 'no-store' });
+      const res = await fetch(docUrl, { cache: 'no-store' });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-      const raw = Array.isArray(data) ? data : (data.capsules || []);
-      const normalized = normalizeCapsules(raw);
-      normalized.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+      const text = await res.text();
+      state.rawDocument = text;
 
-      state.capsules = normalized;
-      state.capsuleIndex = buildIndex(normalized);
+      const capsules = parseDocumentToCapsules(text);
+      state.capsules = capsules;
+      state.capsuleIndex = buildIndex(capsules);
       state.loading = false;
-      state.generatedAt = data.generated_at || (normalized[0]?.createdISO ?? null);
+
+      const lastModified = res.headers.get('last-modified');
+      state.generatedAt = lastModified ? new Date(lastModified).toISOString() : new Date().toISOString();
 
       if (updatedLabel) {
-        if (state.generatedAt) {
-          updatedLabel.textContent = formatTimestamp(state.generatedAt);
-        } else if (normalized[0]) {
-          updatedLabel.textContent = formatTimestamp(normalized[0].createdISO);
-        } else {
-          updatedLabel.textContent = 'sin cápsulas registradas';
-        }
+        updatedLabel.textContent = formatTimestamp(state.generatedAt);
       }
 
-      const chipList = normalized.map(cap => ({ prompt: cap.title, label: cap.title }));
+      const chipList = capsules.map(cap => ({ prompt: cap.title, label: cap.title }));
       state.defaultChips = chipList;
       chatInterface.updateChips(chipList);
 
-      if (!normalized.length) {
+      if (!capsules.length) {
         appendSystemNote([
-          'Todavía no hay cápsulas almacenadas.',
-          'Añade nuevas cápsulas en tu base local y actualiza la página para verlas aquí.'
+          'Todavía no hay cápsulas registradas.',
+          `Asegúrate de que existe el archivo ${docUrl} con contenido separado por ---.`
         ]);
       }
     } catch (err) {
       state.loading = false;
-      state.error = 'No pude cargar las cápsulas locales.';
+      state.error = 'No pude cargar las cápsulas en este momento.';
       if (updatedLabel) updatedLabel.textContent = 'sin conexión';
-      console.error('capsule-main: error al cargar cápsulas', err);
+      console.error('capsule-main: error al cargar documento', err);
       appendSystemNote([
-        'No pude conectar con tu base de cápsulas.',
-        'Verifica el archivo /data/capsules.json o vuelve a intentar más tarde.'
+        'No pude obtener el documento con las cápsulas.',
+        `Verifica el archivo ${docUrl} o vuelve a intentar más tarde.`
       ]);
     }
   }
@@ -85,7 +81,6 @@
   function handleUserInput(rawQuery, helpers) {
     const query = (rawQuery || '').trim();
     const placeholder = helpers.appendAgent(['Buscando cápsula…'], {});
-
     const response = buildCapsuleResponse(query);
     updateAgent(placeholder, response.paragraphs, { sources: response.sources });
   }
@@ -96,21 +91,21 @@
 
     if (state.loading) {
       return {
-        paragraphs: [`Sigo cargando la biblioteca local. Intenta de nuevo en unos segundos.`],
+        paragraphs: ['Sigo cargando el documento. Intenta de nuevo en unos segundos.'],
         sources: []
       };
     }
 
     if (state.error) {
       return {
-        paragraphs: [state.error, 'Puedes revisar el archivo de cápsulas y recargar la página.'],
+        paragraphs: [state.error, 'Puedes revisar el documento y recargar la página.'],
         sources: []
       };
     }
 
     if (!state.capsules.length) {
       return {
-        paragraphs: ['Aún no hay cápsulas guardadas. Agrega una y vuelve a intentarlo.'],
+        paragraphs: ['Aún no hay cápsulas guardadas en el documento.'],
         sources: []
       };
     }
@@ -118,7 +113,9 @@
     const match = findCapsule(clean);
     if (!match) {
       const suggestions = state.capsules.slice(0, 4).map(cap => `• ${cap.title}`);
-      const followUp = suggestions.length ? ['Puedes elegir una de estas cápsulas:', ...suggestions] : ['Puedes crear una cápsula nueva y actualizar la página.'];
+      const followUp = suggestions.length
+        ? ['Puedes elegir una de estas cápsulas:', ...suggestions]
+        : ['Puedes escribir una cápsula nueva y actualizar el documento.'];
       return {
         paragraphs: [`No encontré ${mention}.`, ...followUp],
         sources: []
@@ -126,7 +123,7 @@
     }
 
     const paragraphs = [];
-    if (match.summary) {
+    if (match.summary && match.summary !== match.body[0]) {
       paragraphs.push(match.summary);
     }
     match.body.forEach(line => {
@@ -136,7 +133,7 @@
       paragraphs.push(`Etiquetas: ${match.tags.join(', ')}.`);
     }
     if (state.generatedAt) {
-      paragraphs.push(`Última actualización de la biblioteca: ${formatTimestamp(state.generatedAt)}.`);
+      paragraphs.push(`Última sincronización: ${formatTimestamp(state.generatedAt)}.`);
     }
 
     return {
@@ -157,38 +154,90 @@
     return partial || null;
   }
 
-  function normalizeCapsules(list) {
-    if (!Array.isArray(list)) return [];
-    return list.map(item => {
-      const title = String(item.title || '').trim();
-      const summary = String(item.summary || '').trim();
-      const bodyRaw = Array.isArray(item.body) ? item.body : String(item.body || '').split(/\r?\n\r?\n|\r?\n/);
-      const body = bodyRaw.map(line => String(line || '').trim()).filter(Boolean);
-      const tags = Array.isArray(item.tags) ? item.tags.map(tag => String(tag || '').trim()).filter(Boolean) : [];
-      const sources = Array.isArray(item.sources) ? item.sources.filter(Boolean).map(src => ({
-        title: String(src.title || src.name || src.url || '').trim(),
-        url: src.url ? String(src.url).trim() : '',
-        source: String(src.source || '').trim()
-      })) : [];
-      const createdISO = item.created_at || item.createdAt || null;
-      const createdAt = createdISO ? Date.parse(createdISO) : null;
-      const normalizedTitle = normalizeText(title);
-      const extraTokens = [normalizeText(item.id || ''), ...tags.map(normalizeText)];
-      const searchTokens = [normalizedTitle, ...extraTokens].filter(Boolean);
+  function parseDocumentToCapsules(text) {
+    const normalized = String(text || '').replace(/\r\n/g, '\n');
+    const segments = normalized.split(/\n-{3,}\n/g).map(seg => seg.trim()).filter(Boolean);
+    const blocks = segments.length ? segments : (normalized.trim() ? [normalized.trim()] : []);
 
-      return {
-        id: item.id || normalizedTitle || `capsule-${Math.random().toString(36).slice(2, 8)}`,
-        title: title || 'Cápsula sin título',
-        summary,
-        body,
-        tags,
-        sources,
-        createdISO,
-        createdAt,
-        normalizedTitle,
-        searchTokens
-      };
-    }).filter(cap => cap.title && cap.body.length);
+    return blocks.map((segment, index) => buildCapsuleFromSegment(segment, index)).filter(Boolean);
+  }
+
+  function buildCapsuleFromSegment(segment, index) {
+    const lines = segment.split(/\n+/).map(line => line.trim()).filter(Boolean);
+    if (!lines.length) return null;
+
+    let title = '';
+    let summary = '';
+    const bodyLines = [];
+    const tags = [];
+    const sources = [];
+    const rest = [];
+
+    lines.forEach(line => {
+      if (!title && /^#\s*capsule[:\-]?/i.test(line)) {
+        title = line.replace(/^#\s*capsule[:\-]?/i, '').trim();
+        return;
+      }
+      if (!title && /^title[:\-]?/i.test(line)) {
+        title = line.replace(/^title[:\-]?/i, '').trim();
+        return;
+      }
+      if (!summary && /^summary[:\-]?/i.test(line)) {
+        summary = line.replace(/^summary[:\-]?/i, '').trim();
+        return;
+      }
+      if (/^tags?[:\-]?/i.test(line)) {
+        const values = line.replace(/^tags?[:\-]?/i, '').split(/[,;]+/).map(tag => tag.trim()).filter(Boolean);
+        tags.push(...values);
+        return;
+      }
+      if (/^sources?[:\-]?/i.test(line)) {
+        const entries = line.replace(/^sources?[:\-]?/i, '').split(/[,;]+/).map(entry => entry.trim()).filter(Boolean);
+        entries.forEach(entry => {
+          sources.push({ title: entry, url: entry.startsWith('http') ? entry : '' });
+        });
+        return;
+      }
+      rest.push(line);
+    });
+
+    if (!title && rest.length) {
+      title = rest.shift();
+    }
+    if (!title) {
+      title = `Cápsula ${index + 1}`;
+    }
+
+    if (!summary && rest.length) {
+      summary = rest[0];
+    }
+    if (!summary) {
+      summary = title;
+    }
+
+    const body = rest.length ? rest : [summary];
+
+    const normalizedTitle = normalizeText(title);
+    const id = `capsule-${index + 1}-${normalizedTitle || Math.random().toString(36).slice(2, 8)}`;
+    const searchTokens = Array.from(new Set([
+      normalizedTitle,
+      normalizeText(summary),
+      ...body.map(normalizeText),
+      ...tags.map(normalizeText)
+    ])).filter(Boolean);
+
+    return {
+      id,
+      title,
+      summary,
+      body,
+      tags,
+      sources,
+      createdISO: null,
+      createdAt: null,
+      normalizedTitle,
+      searchTokens
+    };
   }
 
   function buildIndex(capsules) {
@@ -219,58 +268,6 @@
       article.appendChild(p);
     });
     stream.appendChild(article);
-  }
-
-  function updateAgent(node, paragraphs, meta) {
-    if (!node) return;
-    Array.from(node.querySelectorAll('p')).forEach(p => p.remove());
-    paragraphs.forEach(text => {
-      const p = document.createElement('p');
-      p.textContent = text;
-      node.appendChild(p);
-    });
-    const toggle = node.querySelector('.capsule-source-toggle');
-    const sourcesPanel = node.querySelector('.capsule-sources');
-    if (toggle) toggle.remove();
-    if (sourcesPanel) sourcesPanel.remove();
-    if (meta && Array.isArray(meta.sources) && meta.sources.length) {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'capsule-source-toggle';
-      btn.textContent = 'Ver fuentes';
-      let expanded = false;
-      let panel = null;
-      btn.addEventListener('click', () => {
-        expanded = !expanded;
-        btn.textContent = expanded ? 'Ocultar fuentes' : 'Ver fuentes';
-        if (!panel) {
-          panel = document.createElement('div');
-          panel.className = 'capsule-sources';
-          meta.sources.forEach(src => {
-            const item = document.createElement('div');
-            if (src.url) {
-              const link = document.createElement('a');
-              link.href = src.url;
-              link.target = src.url.startsWith('/') ? '_self' : '_blank';
-              link.rel = 'noopener';
-              link.textContent = src.title || src.source || src.url;
-              item.appendChild(link);
-            } else {
-              item.textContent = src.title || src.source || '';
-            }
-            if (src.source) {
-              const metaSpan = document.createElement('span');
-              metaSpan.textContent = ` · ${src.source}`;
-              item.appendChild(metaSpan);
-            }
-            panel.appendChild(item);
-          });
-          node.appendChild(panel);
-        }
-        if (panel) { panel.style.display = expanded ? 'block' : 'none'; }
-      });
-      node.appendChild(btn);
-    }
   }
 
   function normalizeText(value) {
