@@ -6,3 +6,6 @@
 n8n/workflows/*.json
 n8n/workflows/**/*.json
 n8n/workflows/production/
+
+# Local capsules library lives outside git history
+data/capsules.json
