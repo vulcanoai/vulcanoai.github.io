@@ -4137,6 +4137,87 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   text-align: center;
 }
 
+/* Ethereal Voice Transcript Controls */
+[data-theme="ethereal"] .voice-transcript{
+  margin-top: 24px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+[data-theme="ethereal"] .voice-transcript:not([hidden]){
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+[data-theme="ethereal"] .transcript-content{
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.9) 0%, rgba(248,250,252,.8) 100%);
+  border: 1px solid var(--ethereal-light);
+  border-radius: 20px;
+  padding: 20px 24px;
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 8px 32px rgba(139,92,246,.08),
+    inset 0 1px 0 rgba(255,255,255,.5);
+}
+
+[data-theme="ethereal"] .transcript-text{
+  margin: 0 0 16px;
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.5;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+[data-theme="ethereal"] .transcript-actions{
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+[data-theme="ethereal"] .transcript-send,
+[data-theme="ethereal"] .transcript-cancel{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+[data-theme="ethereal"] .transcript-send{
+  background:
+    linear-gradient(135deg, var(--ethereal-primary) 0%, var(--ethereal-secondary) 100%);
+  color: white;
+  box-shadow: 0 4px 16px rgba(139,92,246,.25);
+}
+
+[data-theme="ethereal"] .transcript-send:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139,92,246,.35);
+}
+
+[data-theme="ethereal"] .transcript-cancel{
+  background: rgba(255,255,255,.8);
+  color: var(--text);
+  border: 1px solid var(--ethereal-light);
+  box-shadow: 0 2px 8px rgba(139,92,246,.08);
+}
+
+[data-theme="ethereal"] .transcript-cancel:hover{
+  background: rgba(255,255,255,.9);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(139,92,246,.12);
+}
+
 [data-theme="ethereal"] .capsule-stream{
   display: flex;
   flex-direction: column;
@@ -4284,6 +4365,32 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 [data-theme="ethereal"] .capsule-audio[aria-pressed="true"]{
   background: var(--ethereal-primary);
   color: white;
+}
+
+/* Ethereal Audio Stop Button */
+[data-theme="ethereal"] .capsule-audio-stop{
+  background: rgba(239,68,68,.1);
+  color: #dc2626;
+  border: 1px solid rgba(239,68,68,.2);
+  box-shadow: 0 2px 8px rgba(239,68,68,.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+[data-theme="ethereal"] .capsule-audio-stop:hover{
+  background: rgba(239,68,68,.15);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(239,68,68,.12);
+}
+
+[data-theme="ethereal"] .capsule-audio-stop:active{
+  transform: translateY(0);
 }
 
 .capsule-voice.listening{
@@ -4499,6 +4606,60 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   box-shadow: 0 8px 32px rgba(0,0,0,.1);
 }
 
+/* Default Voice Interface for Arctic/Default themes */
+.capsule-body:not([data-theme="ethereal"]) .capsule-interaction{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.capsule-body:not([data-theme="ethereal"]) .voice-primary{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.capsule-body:not([data-theme="ethereal"]) .voice-orb{
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.capsule-body:not([data-theme="ethereal"]) .orb-core{
+  width: 100%;
+  height: 100%;
+  background: var(--brand);
+  border: 2px solid var(--brand-2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.capsule-body:not([data-theme="ethereal"]) .voice-orb:hover{
+  transform: scale(1.05);
+}
+
+.capsule-body:not([data-theme="ethereal"]) .voice-orb.listening .orb-core{
+  background: var(--brand-2);
+  transform: scale(1.05);
+}
+
+.capsule-body:not([data-theme="ethereal"]) .voice-hint{
+  margin: 0;
+  font-size: 1rem;
+  color: var(--muted);
+  text-align: center;
+}
+
 @media (max-width:640px){
   .capsule{padding:24px; border-radius:20px; gap:20px;}
   .capsule-message{font-size:.95rem;}
@@ -4514,6 +4675,96 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
     padding: 40px 24px;
     gap: 36px;
   }
+}
+
+/* Default Voice Transcript Controls for Arctic/Default themes */
+.capsule-body:not([data-theme="ethereal"]) .voice-transcript{
+  margin-top: 20px;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.capsule-body:not([data-theme="ethereal"]) .voice-transcript:not([hidden]){
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.capsule-body:not([data-theme="ethereal"]) .transcript-content{
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.1);
+}
+
+.capsule-body:not([data-theme="ethereal"]) .transcript-text{
+  margin: 0 0 12px;
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+.capsule-body:not([data-theme="ethereal"]) .transcript-actions{
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.capsule-body:not([data-theme="ethereal"]) .transcript-send,
+.capsule-body:not([data-theme="ethereal"]) .transcript-cancel{
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: var(--panel);
+  color: var(--text);
+}
+
+.capsule-body:not([data-theme="ethereal"]) .transcript-send{
+  background: var(--brand);
+  color: white;
+  border-color: var(--brand);
+}
+
+.capsule-body:not([data-theme="ethereal"]) .transcript-send:hover{
+  background: var(--brand-2);
+  transform: translateY(-1px);
+}
+
+.capsule-body:not([data-theme="ethereal"]) .transcript-cancel:hover{
+  background: var(--panel-alt);
+  transform: translateY(-1px);
+}
+
+/* Default Audio Stop Button for Arctic/Default themes */
+.capsule-body:not([data-theme="ethereal"]) .capsule-audio-stop{
+  background: rgba(220,38,38,.1);
+  color: #dc2626;
+  border: 1px solid rgba(220,38,38,.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.capsule-body:not([data-theme="ethereal"]) .capsule-audio-stop:hover{
+  background: rgba(220,38,38,.15);
+  transform: translateY(-1px);
 }
 
 /* Hero orb (wireframe sphere) */

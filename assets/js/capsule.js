@@ -13,6 +13,11 @@
   const chipNodes = chipsWrap ? Array.from(chipsWrap.querySelectorAll('.capsule-chip')) : [];
   const voiceBtn = document.getElementById('capsule-voice');
   const audioBtn = document.getElementById('capsule-audio');
+  const audioStopBtn = document.getElementById('capsule-audio-stop');
+  const transcriptPanel = document.getElementById('voice-transcript');
+  const transcriptText = document.getElementById('transcript-text');
+  const transcriptSendBtn = document.getElementById('transcript-send');
+  const transcriptCancelBtn = document.getElementById('transcript-cancel');
   const updatedLabel = document.getElementById('capsule-updated');
 
   if (!stream || !form || !input) return;
@@ -35,11 +40,16 @@
     recognitionActive: false,
     speakingSupported: 'speechSynthesis' in window,
     speakingEnabled: false,
+    speakingActive: false,
     lastResponse: collectAgentParagraphs(),
-    voices: []
+    voices: [],
+    currentTranscript: '',
+    transcriptPending: false
   };
 
   setupVoiceInterfaces();
+  setupTranscriptControls();
+  setupAudioControls();
 
   loadFeed();
 
@@ -535,7 +545,7 @@
           audioBtn.setAttribute('aria-pressed', String(voiceState.speakingEnabled));
           audioBtn.title = voiceState.speakingEnabled ? 'Desactivar lectura en voz' : 'Escuchar respuestas';
           if (!voiceState.speakingEnabled){
-            window.speechSynthesis.cancel();
+            stopSpeaking();
           } else {
             speakParagraphs(voiceState.lastResponse);
           }
@@ -558,11 +568,10 @@
         .trim();
       if (!transcript) return;
       voiceState.recognitionActive = false;
+      voiceState.currentTranscript = transcript;
+      voiceState.transcriptPending = true;
       updateVoiceUI();
-      input.value = '';
-      input.blur();
-      appendUser(transcript);
-      respondTo(transcript);
+      showTranscriptPreview(transcript);
     });
     rec.addEventListener('error', (evt) => {
       voiceState.recognitionActive = false;
@@ -627,9 +636,68 @@
       if (preferred) utterance.voice = preferred;
       utterance.lang = preferred ? preferred.lang : 'es-ES';
       utterance.rate = 1;
+
+      utterance.onstart = () => {
+        voiceState.speakingActive = true;
+        updateAudioUI();
+      };
+
+      utterance.onend = () => {
+        voiceState.speakingActive = false;
+        updateAudioUI();
+      };
+
+      utterance.onerror = () => {
+        voiceState.speakingActive = false;
+        updateAudioUI();
+      };
+
       window.speechSynthesis.speak(utterance);
     } catch (err){
       console.warn('capsule: síntesis de voz no disponible', err);
+    }
+  }
+
+  function stopSpeaking(){
+    try {
+      window.speechSynthesis.cancel();
+      voiceState.speakingActive = false;
+      updateAudioUI();
+    } catch (err){
+      console.warn('capsule: no se pudo detener la síntesis', err);
+    }
+  }
+
+  function showTranscriptPreview(transcript){
+    if (!transcriptPanel || !transcriptText) return;
+    transcriptText.textContent = `"${transcript}"`;
+    transcriptPanel.hidden = false;
+  }
+
+  function hideTranscriptPreview(){
+    if (!transcriptPanel) return;
+    transcriptPanel.hidden = true;
+    voiceState.currentTranscript = '';
+    voiceState.transcriptPending = false;
+  }
+
+  function sendTranscript(){
+    if (!voiceState.currentTranscript || !voiceState.transcriptPending) return;
+    const transcript = voiceState.currentTranscript;
+    hideTranscriptPreview();
+    input.value = '';
+    input.blur();
+    appendUser(transcript);
+    respondTo(transcript);
+  }
+
+  function updateAudioUI(){
+    if (audioBtn && audioStopBtn){
+      if (voiceState.speakingActive){
+        audioStopBtn.hidden = false;
+      } else {
+        audioStopBtn.hidden = true;
+      }
     }
   }
 
@@ -648,6 +716,28 @@
     }
     if (form){
       form.classList.toggle('listening', voiceState.recognitionActive);
+    }
+  }
+
+  function setupTranscriptControls(){
+    if (transcriptSendBtn){
+      transcriptSendBtn.addEventListener('click', sendTranscript);
+    }
+    if (transcriptCancelBtn){
+      transcriptCancelBtn.addEventListener('click', hideTranscriptPreview);
+    }
+  }
+
+  function setupAudioControls(){
+    if (audioStopBtn){
+      audioStopBtn.addEventListener('click', () => {
+        voiceState.speakingEnabled = false;
+        if (audioBtn){
+          audioBtn.setAttribute('aria-pressed', 'false');
+          audioBtn.title = 'Escuchar respuestas';
+        }
+        stopSpeaking();
+      });
     }
   }
 
