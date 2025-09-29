@@ -36,66 +36,7 @@
       </div>
     </header>
 
-    <section class="capsule-stream" id="capsule-stream" aria-live="polite" aria-label="Actualizaciones de conversación">
-      <article class="capsule-message from-agent">
-        <span class="capsule-sender">Vulcano</span>
-        <p>Hola. Estoy listo para contarte qué ocurre con la IA en la región. ¿En qué quieres enfocarnos?</p>
-      </article>
-    </section>
-
-    <div class="capsule-interaction">
-      <div class="voice-primary">
-        <button type="button" class="voice-orb" id="capsule-voice" aria-pressed="false" aria-label="Hablar con Vulcano">
-          <div class="orb-glow"></div>
-          <div class="orb-core">
-            <svg width="32" height="32" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink">
-              <use href="/assets/icons.svg#mic" xlink:href="/assets/icons.svg#mic"></use>
-            </svg>
-          </div>
-          <div class="orb-pulse"></div>
-        </button>
-        <p class="voice-hint">Toca para hablar</p>
-
-      </div>
-
-      <form class="capsule-form" id="capsule-form" autocomplete="off">
-        <label class="sr-only" for="capsule-input">Escribe tu pregunta</label>
-        <input id="capsule-input" name="q" type="text" placeholder="O escribe tu pregunta aquí..." maxlength="180" />
-        <button type="button" class="capsule-audio" id="capsule-audio" aria-pressed="false"
-          aria-label="Escuchar respuestas">
-          <svg width="20" height="20" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-            <use href="/assets/icons.svg#volume" xlink:href="/assets/icons.svg#volume"></use>
-          </svg>
-        </button>
-        <button type="submit" class="capsule-send" aria-label="Enviar">
-          <svg width="20" height="20" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-            <use href="/assets/icons.svg#arrow-right" xlink:href="/assets/icons.svg#arrow-right"></use>
-          </svg>
-        </button>
-      </form>
-    </div>
-
-    <div class="capsule-suggestions" id="capsule-chips" aria-label="Sugerencias de prompts">
-      <span id="chip-instructions" class="sr-only">Desliza horizontalmente para descubrir más sugerencias de
-        prompts.</span>
-      <div class="chip-track" role="list" aria-describedby="chip-instructions">
-        <button type="button" class="capsule-chip" role="listitem"
-          data-prompt="Léeme un resumen de las noticias de IA en América Latina hoy">Escuchar briefing</button>
-        <button type="button" class="capsule-chip" role="listitem"
-          data-prompt="Actualízame sobre regulación de IA en México">Regulación MX</button>
-        <button type="button" class="capsule-chip" role="listitem"
-          data-prompt="Cuéntame si hubo financiamiento destacado en IA esta semana">Financiamiento IA</button>
-        <button type="button" class="capsule-chip" role="listitem"
-          data-prompt="Explícame el impacto de IA en empleo en Hispanoamérica">Impacto laboral</button>
-        <button type="button" class="capsule-chip" role="listitem"
-          data-prompt="Dame ejemplos de implementaciones de IA en gobiernos LATAM">Gobiernos LATAM</button>
-        <button type="button" class="capsule-chip" role="listitem"
-          data-prompt="Recomiéndame startups de IA con foco en sostenibilidad">Startups verdes</button>
-      </div>
-    </div>
+    <div id="chat-interface"></div>
 
     <footer class="capsule-footer">
       <div class="footer-content">
@@ -109,7 +50,8 @@
   </main>
 
   <script src="/assets/js/config.js"></script>
-  <script src="/assets/js/capsule.js"></script>
+  <script src="/assets/js/chat-component.js"></script>
+  <script src="/assets/js/capsule-main.js"></script>
 </body>
 
 </html>
