@@ -3926,7 +3926,7 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 80px 24px;
+  padding: 60px 24px;
   font-feature-settings: 'liga' 1;
   position: relative;
   overflow: hidden;
@@ -3949,17 +3949,17 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 
 [data-theme="ethereal"] .capsule{
   width: 100%;
-  max-width: 920px;
-  background: rgba(255,255,255,.7);
+  max-width: 900px;
+  background: rgba(255,255,255,.75);
   border: 1px solid var(--ethereal-light);
   border-radius: 32px;
-  padding: 80px 60px;
+  padding: 60px 50px;
   display: flex;
   flex-direction: column;
-  gap: 60px;
+  gap: 50px;
   box-shadow:
-    0 32px 64px rgba(139,92,246,.08),
-    0 0 0 1px rgba(255,255,255,.3);
+    0 24px 48px rgba(139,92,246,.1),
+    0 0 0 1px rgba(255,255,255,.4);
   backdrop-filter: blur(20px);
   position: relative;
   z-index: 1;
@@ -4046,8 +4046,8 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 
 [data-theme="ethereal"] .voice-orb{
   position: relative;
-  width: 140px;
-  height: 140px;
+  width: 130px;
+  height: 130px;
   border: none;
   background: none;
   cursor: pointer;
@@ -4474,12 +4474,46 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   font-weight:600;
 }
 
+/* Default Capsule Layout for Arctic/Default themes */
+.capsule-body:not([data-theme="ethereal"]){
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+}
+
+.capsule-body:not([data-theme="ethereal"]) .capsule{
+  width: 100%;
+  max-width: 900px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 60px 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.1);
+}
+
 @media (max-width:640px){
   .capsule{padding:24px; border-radius:20px; gap:20px;}
   .capsule-message{font-size:.95rem;}
   .capsule-form{padding:8px 12px; gap:8px;}
   .capsule-form input{font-size:.95rem;}
   .capsule-form button{width:34px; height:34px;}
+
+  .capsule-body:not([data-theme="ethereal"]){
+    padding: 32px 16px;
+  }
+
+  .capsule-body:not([data-theme="ethereal"]) .capsule{
+    padding: 40px 24px;
+    gap: 36px;
+  }
 }
 
 /* Hero orb (wireframe sphere) */
@@ -6626,19 +6660,19 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 
 [data-theme="ethereal"] .capsule-chip{
   background:
-    linear-gradient(135deg, rgba(255,255,255,.7) 0%, rgba(255,255,255,.5) 100%) !important;
+    linear-gradient(135deg, rgba(255,255,255,.8) 0%, rgba(255,255,255,.6) 100%) !important;
   color: var(--text) !important;
   border: 1px solid var(--ethereal-light) !important;
-  border-radius: 999px !important;
-  padding: 12px 20px !important;
-  font-size: 0.95rem !important;
+  border-radius: 18px !important;
+  padding: 12px 18px !important;
+  font-size: 0.85rem !important;
   font-weight: 500 !important;
   cursor: pointer;
   transition: all 0.3s ease !important;
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(8px);
   box-shadow:
-    0 4px 16px rgba(139,92,246,.08),
-    inset 0 1px 0 rgba(255,255,255,.3) !important;
+    0 3px 12px rgba(139,92,246,.06),
+    inset 0 1px 0 rgba(255,255,255,.4) !important;
 }
 
 [data-theme="ethereal"] .capsule-chip:hover{
@@ -6698,14 +6732,14 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 /* Ethereal Mobile Responsive */
 @media (max-width: 768px) {
   [data-theme="ethereal"] .capsule{
-    padding: 40px 32px !important;
+    padding: 40px 24px !important;
     border-radius: 24px !important;
-    gap: 40px !important;
+    gap: 36px !important;
     max-width: 100% !important;
   }
 
   [data-theme="ethereal"] .capsule-body{
-    padding: 40px 16px !important;
+    padding: 32px 16px !important;
   }
 
   [data-theme="ethereal"] .voice-orb{
