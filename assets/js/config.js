@@ -10,6 +10,11 @@ window.AILatamConfig = window.AILatamConfig || {
     // Reset‑first: usar SOLO feed-latest.json (sin fallbacks)
     feedUrl: '/data/feed-latest.json',
     capsulesDocUrl: '/data/capsules/doc-latest.txt',
+    capsulesGitHub: {
+      owner: 'vulcanoai',
+      repo: 'vulcanoai.github.io',
+      directory: 'data/capsules'
+    },
     agentsUrl: '/data/agents.json',
     sourcesUrl: '/data/sources.json',
     panoramaUrl: '/data/panorama.json',

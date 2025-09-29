@@ -39,18 +39,15 @@
   async function loadCapsules() {
     if (updatedLabel) updatedLabel.textContent = 'cargando…';
     try {
-      const res = await fetch(docUrl, { cache: 'no-store' });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const text = await res.text();
+      const { text, updatedAt, source } = await fetchLatestDocument();
       state.rawDocument = text;
+      state.source = source;
 
       const capsules = parseDocumentToCapsules(text);
       state.capsules = capsules;
       state.capsuleIndex = buildIndex(capsules);
       state.loading = false;
-
-      const lastModified = res.headers.get('last-modified');
-      state.generatedAt = lastModified ? new Date(lastModified).toISOString() : new Date().toISOString();
+      state.generatedAt = updatedAt || new Date().toISOString();
 
       if (updatedLabel) {
         updatedLabel.textContent = formatTimestamp(state.generatedAt);
@@ -63,7 +60,7 @@
       if (!capsules.length) {
         appendSystemNote([
           'Todavía no hay cápsulas registradas.',
-          `Asegúrate de que existe el archivo ${docUrl} con contenido separado por ---.`
+          'Asegúrate de que el documento tiene contenido separado por "---".'
         ]);
       }
     } catch (err) {
@@ -73,9 +70,51 @@
       console.error('capsule-main: error al cargar documento', err);
       appendSystemNote([
         'No pude obtener el documento con las cápsulas.',
-        `Verifica el archivo ${docUrl} o vuelve a intentar más tarde.`
+        'Verifica que el workflow esté publicando los archivos y que tengas conexión.'
       ]);
     }
+  }
+
+  async function fetchLatestDocument() {
+    try {
+      const res = await fetch(docUrl, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const text = await res.text();
+      const lastModified = res.headers.get('last-modified');
+      const updatedAt = lastModified ? new Date(lastModified).toISOString() : new Date().toISOString();
+      return { text, updatedAt, source: 'doc-latest' };
+    } catch (initialError) {
+      const fallback = await fetchFromGitHubDirectory(initialError);
+      return { ...fallback, source: 'github-directory' };
+    }
+  }
+
+  async function fetchFromGitHubDirectory(originalError) {
+    const gh = (api && api.capsulesGitHub) || {};
+    const owner = (gh.owner || 'vulcanoai').trim();
+    const repo = (gh.repo || 'vulcanoai.github.io').trim();
+    const directory = (gh.directory || 'data/capsules').replace(/^\/+|\/+$/g, '');
+    const listUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${directory}`;
+    const res = await fetch(listUrl, { headers: { Accept: 'application/vnd.github.v3+json' } });
+    if (!res.ok) {
+      throw originalError || new Error(`GitHub listing failed: HTTP ${res.status}`);
+    }
+    const files = await res.json();
+    const docFiles = Array.isArray(files)
+      ? files.filter(file => file && /^doc-.*\.txt$/.test(file.name) && file.download_url)
+      : [];
+    if (!docFiles.length) {
+      throw originalError || new Error('No se encontraron snapshots de cápsulas en el repositorio.');
+    }
+    docFiles.sort((a, b) => b.name.localeCompare(a.name));
+    const latest = docFiles[0];
+    const textRes = await fetch(latest.download_url, { cache: 'no-store' });
+    if (!textRes.ok) {
+      throw new Error(`Descarga de snapshot falló: HTTP ${textRes.status}`);
+    }
+    const text = await textRes.text();
+    const updatedAt = extractTimestampFromName(latest.name) || new Date().toISOString();
+    return { text, updatedAt };
   }
 
   function handleUserInput(rawQuery, helpers) {
@@ -158,8 +197,11 @@
     const normalized = String(text || '').replace(/\r\n/g, '\n');
     const segments = normalized.split(/\n-{3,}\n/g).map(seg => seg.trim()).filter(Boolean);
     const blocks = segments.length ? segments : (normalized.trim() ? [normalized.trim()] : []);
+    const orderedBlocks = blocks.slice().reverse();
 
-    return blocks.map((segment, index) => buildCapsuleFromSegment(segment, index)).filter(Boolean);
+    return orderedBlocks
+      .map((segment, index) => buildCapsuleFromSegment(segment, index))
+      .filter(Boolean);
   }
 
   function buildCapsuleFromSegment(segment, index) {
@@ -251,6 +293,18 @@
       });
     });
     return index;
+  }
+
+  function extractTimestampFromName(name) {
+    const match = /^doc-(.+)\.txt$/.exec(name || '');
+    if (!match) return null;
+    const raw = match[1];
+    const isoMatch = /^([0-9]{4}-[0-9]{2}-[0-9]{2})T([0-9]{2})-([0-9]{2})-([0-9]{2})-([0-9]{3})Z$/.exec(raw);
+    if (!isoMatch) return null;
+    const [, date, hh, mm, ss, ms] = isoMatch;
+    const iso = `${date}T${hh}:${mm}:${ss}.${ms}Z`;
+    const parsed = new Date(iso);
+    return Number.isFinite(parsed.getTime()) ? parsed.toISOString() : null;
   }
 
   function appendSystemNote(lines) {
