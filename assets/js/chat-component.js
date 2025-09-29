@@ -7,10 +7,8 @@ window.VulcanoChatComponent = (() => {
 
   // Default configuration
   const defaultConfig = {
-    hasVoiceOrb: true,          // Show the large voice orb or simple button
     hasHorizontalChips: true,    // Use horizontal scrolling chips vs simple chips
     placeholder: "O escribe tu pregunta aquí...",
-    voiceHint: "Toca para hablar",
     defaultChips: [
       { prompt: "Léeme un resumen de las noticias de IA en América Latina hoy", label: "Escuchar briefing" },
       { prompt: "Actualízame sobre regulación de IA en México", label: "Regulación MX" },
@@ -36,8 +34,6 @@ window.VulcanoChatComponent = (() => {
         ${config.initialMessage || ''}
       </section>
 
-      ${config.hasVoiceOrb ? createVoiceOrbHTML(config) : ''}
-
       ${createFormHTML(config)}
 
       ${createChipsHTML(config)}
@@ -47,54 +43,25 @@ window.VulcanoChatComponent = (() => {
     return initializeChatBehavior(container, config);
   }
 
-  function createVoiceOrbHTML(config) {
-    return `
-      <div class="capsule-interaction">
-        <div class="voice-primary">
-          <button type="button" class="voice-orb" id="capsule-voice" aria-pressed="false" aria-label="Hablar con Vulcano">
-            <div class="orb-glow"></div>
-            <div class="orb-core">
-              <svg width="32" height="32" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink">
-                <use href="/assets/icons.svg#mic" xlink:href="/assets/icons.svg#mic"></use>
-              </svg>
-            </div>
-            <div class="orb-pulse"></div>
-          </button>
-          <p class="voice-hint">${config.voiceHint}</p>
-        </div>
-    `;
-  }
 
   function createFormHTML(config) {
-    const voiceButtonHTML = config.hasVoiceOrb ? '' : `
-      <button type="button" class="capsule-voice" id="capsule-voice" aria-pressed="false" aria-label="Hablar con Vulcano">
-        <svg width="18" height="18" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink">
-          <use href="/assets/icons.svg#mic" xlink:href="/assets/icons.svg#mic"></use>
-        </svg>
-      </button>
-    `;
-
     return `
       <form class="capsule-form" id="capsule-form" autocomplete="off">
-        ${voiceButtonHTML}
-        <label class="sr-only" for="capsule-input">Escribe tu pregunta</label>
-        <input id="capsule-input" name="q" type="text" placeholder="${config.placeholder}" maxlength="180" ${config.required ? 'required' : ''} />
-        <button type="button" class="capsule-audio" id="capsule-audio" aria-pressed="false" aria-label="Escuchar respuestas">
-          <svg width="20" height="20" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+        <button type="button" class="capsule-voice" id="capsule-voice" aria-pressed="false" aria-label="Hablar con Vulcano">
+          <svg width="18" height="18" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink">
-            <use href="/assets/icons.svg#volume" xlink:href="/assets/icons.svg#volume"></use>
+            <use href="/assets/icons.svg#mic" xlink:href="/assets/icons.svg#mic"></use>
           </svg>
         </button>
-        <button type="submit" class="capsule-send" aria-label="Enviar">
+        <label class="sr-only" for="capsule-input">Escribe tu pregunta</label>
+        <input id="capsule-input" name="q" type="text" placeholder="${config.placeholder}" maxlength="180" ${config.required ? 'required' : ''} />
+        <button type="submit" class="capsule-send" id="capsule-send" aria-label="Enviar">
           <svg width="20" height="20" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink">
             <use href="/assets/icons.svg#arrow-right" xlink:href="/assets/icons.svg#arrow-right"></use>
           </svg>
         </button>
       </form>
-      ${config.hasVoiceOrb ? '</div>' : ''}
     `;
   }
 
@@ -129,7 +96,7 @@ window.VulcanoChatComponent = (() => {
     const chipsWrap = container.querySelector('#capsule-chips');
     const chipNodes = chipsWrap ? Array.from(chipsWrap.querySelectorAll('.capsule-chip')) : [];
     const voiceBtn = container.querySelector('#capsule-voice');
-    const audioBtn = container.querySelector('#capsule-audio');
+    const sendBtn = container.querySelector('#capsule-send');
 
     if (!stream || !form || !input) {
       console.error('VulcanoChatComponent: Required elements not found');
@@ -150,11 +117,7 @@ window.VulcanoChatComponent = (() => {
     const voiceState = {
       recognition: null,
       recognitionSupported: false,
-      recognitionActive: false,
-      speakingSupported: 'speechSynthesis' in window,
-      speakingEnabled: false,
-      lastResponse: [],
-      voices: []
+      recognitionActive: false
     };
 
     // Set up event listeners
@@ -186,9 +149,6 @@ window.VulcanoChatComponent = (() => {
 
     // Helper functions
     function appendUser(text) {
-      if (voiceState.speakingSupported) {
-        try { window.speechSynthesis.cancel(); } catch (_) { /* noop */ }
-      }
       const article = document.createElement('article');
       article.className = 'capsule-message from-user';
       const sender = document.createElement('span');
@@ -258,13 +218,6 @@ window.VulcanoChatComponent = (() => {
 
       stream.appendChild(article);
       scrollStream();
-
-      // Announce for voice
-      if (Array.isArray(paragraphs) && paragraphs.length) {
-        voiceState.lastResponse = paragraphs;
-        speakParagraphs(paragraphs);
-      }
-
       return article;
     }
 
@@ -288,7 +241,7 @@ window.VulcanoChatComponent = (() => {
 
     function setupVoiceInterfaces() {
       setupRecognition();
-      setupSpeech();
+      setupSendButtonStates();
 
       if (voiceBtn) {
         if (!voiceState.recognitionSupported) {
@@ -301,26 +254,6 @@ window.VulcanoChatComponent = (() => {
               stopRecognition();
             } else {
               startRecognition();
-            }
-          });
-        }
-      }
-
-      if (audioBtn) {
-        if (!voiceState.speakingSupported) {
-          audioBtn.setAttribute('aria-disabled', 'true');
-          audioBtn.disabled = true;
-          audioBtn.title = 'Tu navegador no soporta síntesis de voz.';
-        } else {
-          audioBtn.title = 'Escuchar respuestas';
-          audioBtn.addEventListener('click', () => {
-            voiceState.speakingEnabled = !voiceState.speakingEnabled;
-            audioBtn.setAttribute('aria-pressed', String(voiceState.speakingEnabled));
-            audioBtn.title = voiceState.speakingEnabled ? 'Desactivar lectura en voz' : 'Escuchar respuestas';
-            if (!voiceState.speakingEnabled) {
-              window.speechSynthesis.cancel();
-            } else {
-              speakParagraphs(voiceState.lastResponse);
             }
           });
         }
@@ -386,35 +319,34 @@ window.VulcanoChatComponent = (() => {
       updateVoiceUI();
     }
 
-    function setupSpeech() {
-      if (!voiceState.speakingSupported) return;
-      try {
-        voiceState.voices = window.speechSynthesis.getVoices();
-        window.speechSynthesis.addEventListener?.('voiceschanged', () => {
-          voiceState.voices = window.speechSynthesis.getVoices();
-        });
-        window.speechSynthesis.onvoiceschanged = () => {
-          voiceState.voices = window.speechSynthesis.getVoices();
-        };
-      } catch (_) { /* noop */ }
-    }
+    function setupSendButtonStates() {
+      if (!sendBtn || !input) return;
 
-    function speakParagraphs(paragraphs) {
-      if (!voiceState.speakingSupported || !voiceState.speakingEnabled) return;
-      if (!Array.isArray(paragraphs) || !paragraphs.length) return;
-      const text = paragraphs.join(' ').trim();
-      if (!text) return;
-      try {
-        window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(text);
-        const preferred = voiceState.voices.find(v => /es(-|_)(CO|MX|419|ES)/i.test(v.lang));
-        if (preferred) utterance.voice = preferred;
-        utterance.lang = preferred ? preferred.lang : 'es-ES';
-        utterance.rate = 1;
-        window.speechSynthesis.speak(utterance);
-      } catch (err) {
-        console.warn('VulcanoChatComponent: síntesis de voz no disponible', err);
+      // Update send button icon based on input state
+      function updateSendButtonIcon() {
+        const hasText = input.value.trim().length > 0;
+        const svg = sendBtn.querySelector('svg use');
+        if (svg) {
+          if (hasText) {
+            // Show send arrow when there's text
+            svg.setAttribute('href', '/assets/icons.svg#arrow-right');
+            svg.setAttribute('xlink:href', '/assets/icons.svg#arrow-right');
+            sendBtn.setAttribute('aria-label', 'Enviar mensaje');
+          } else {
+            // Show logo when empty (can be customized later)
+            svg.setAttribute('href', '/assets/icons.svg#logo');
+            svg.setAttribute('xlink:href', '/assets/icons.svg#logo');
+            sendBtn.setAttribute('aria-label', 'Enviar');
+          }
+        }
       }
+
+      // Listen for input changes
+      input.addEventListener('input', updateSendButtonIcon);
+      input.addEventListener('keyup', updateSendButtonIcon);
+
+      // Initial state
+      updateSendButtonIcon();
     }
 
     function updateVoiceUI() {
@@ -423,12 +355,6 @@ window.VulcanoChatComponent = (() => {
         voiceBtn.setAttribute('aria-pressed', String(voiceState.recognitionActive));
         voiceBtn.setAttribute('aria-label', voiceState.recognitionActive ? 'Detener dictado' : 'Hablar con Vulcano');
         voiceBtn.title = voiceState.recognitionActive ? 'Detener dictado' : 'Hablar con Vulcano';
-
-        // Update voice hint text
-        const hintElement = container.querySelector('.voice-hint');
-        if (hintElement) {
-          hintElement.textContent = voiceState.recognitionActive ? 'Escuchando...' : config.voiceHint;
-        }
       }
       if (form) {
         form.classList.toggle('listening', voiceState.recognitionActive);
@@ -448,7 +374,7 @@ window.VulcanoChatComponent = (() => {
         form,
         input,
         voiceBtn,
-        audioBtn,
+        sendBtn,
         chipNodes
       }
     };

@@ -7,10 +7,8 @@
 
   // Initialize the unified chat component with main page configuration
   const chatInterface = window.VulcanoChatComponent.create('chat-interface', {
-    hasVoiceOrb: true,
     hasHorizontalChips: true,
     placeholder: "O escribe tu pregunta aquí...",
-    voiceHint: "Toca para hablar",
     initialMessage: `
       <article class="capsule-message from-agent">
         <span class="capsule-sender">Vulcano</span>

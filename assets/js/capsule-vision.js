@@ -4,10 +4,8 @@
 (() => {
   // Initialize the unified chat component with Vision page configuration
   const chatInterface = window.VulcanoChatComponent.create('chat-interface', {
-    hasVoiceOrb: false,           // Simple form without voice orb
     hasHorizontalChips: false,    // Simple chips instead of horizontal scrolling
     placeholder: "Pregúntame cómo podemos llevar esta visión a tu organización",
-    voiceHint: "Toca para hablar",
     required: true,
     defaultChips: [
       { prompt: "¿Cómo puede Vulcano AI reducir el tiempo frente a pantallas en mi empresa?", label: "Impacto en equipos" },
