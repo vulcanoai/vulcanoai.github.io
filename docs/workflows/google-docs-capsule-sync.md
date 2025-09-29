@@ -52,6 +52,7 @@ You’ll also need:
 
 Import this JSON into n8n (or copy/paste into the "Code" modal when creating a new workflow). Update credential IDs after import.
 
+{% raw %}
 ```json
 {
   "name": "CAPSULES — Google Doc Sync",
@@ -305,6 +306,7 @@ return [{ json: { capsules } }];"
   }
 }
 ```
+{% endraw %}
 
 ## Usage notes
 

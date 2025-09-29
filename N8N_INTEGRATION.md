@@ -198,6 +198,7 @@ api: {
 ### **Essential Nodes**
 
 #### **RSS Feed Reader Node**
+{% raw %}
 ```json
 {
   "parameters": {
@@ -213,8 +214,10 @@ api: {
   }
 }
 ```
+{% endraw %}
 
 #### **HTTP Request Node (Classification)**  
+{% raw %}
 ```json
 {
   "parameters": {
@@ -246,8 +249,10 @@ api: {
   }
 }
 ```
+{% endraw %}
 
 #### **Webhook Response Node**
+{% raw %}
 ```json
 {
   "parameters": {
@@ -262,6 +267,7 @@ api: {
   }
 }
 ```
+{% endraw %}
 
 ## 🔒 Security Configuration
 
