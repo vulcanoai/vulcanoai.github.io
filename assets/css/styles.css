@@ -4318,6 +4318,40 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   flex-wrap:wrap;
 }
 
+.capsule-suggestions{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.capsule-suggestions .chip-track{
+  display:flex;
+  gap:12px;
+  overflow-x:auto;
+  padding:4px 12px 8px;
+  margin:0 -12px;
+  scroll-snap-type:x proximity;
+  -webkit-overflow-scrolling:touch;
+}
+
+.capsule-suggestions .chip-track::-webkit-scrollbar{display:none;}
+
+.capsule-suggestions .chip-hint{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  font-size:.85rem;
+  color:var(--muted);
+  opacity:.85;
+}
+
+.capsule-suggestions .chip-hint svg{
+  width:14px;
+  height:14px;
+}
+
 .capsule-chip{
   background:rgba(15,23,42,.06);
   color:#1f2937;
@@ -4327,6 +4361,8 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   font-size:.85rem;
   cursor:pointer;
   transition:background .2s ease, transform .2s ease;
+  flex:0 0 auto;
+  scroll-snap-align:start;
 }
 
 .capsule-chip:hover{background:rgba(255,75,0,.12); transform:translateY(-1px);}
@@ -6571,11 +6607,21 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 
 /* Ethereal Suggestions Override */
 [data-theme="ethereal"] .capsule-suggestions{
-  display: flex;
   gap: 16px;
-  flex-wrap: wrap;
-  justify-content: center;
   opacity: 0.9;
+}
+
+[data-theme="ethereal"] .capsule-suggestions .chip-track{
+  gap: 16px;
+  padding: 6px 18px 12px;
+  margin: 0 -18px;
+  mask-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 12%, rgba(0,0,0,1) 88%, rgba(0,0,0,0) 100%);
+  -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 12%, rgba(0,0,0,1) 88%, rgba(0,0,0,0) 100%);
+}
+
+[data-theme="ethereal"] .capsule-suggestions .chip-hint{
+  color: var(--muted);
+  opacity: 0.75;
 }
 
 [data-theme="ethereal"] .capsule-chip{
