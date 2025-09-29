@@ -332,18 +332,23 @@ window.VulcanoChatComponent = (() => {
             svg.setAttribute('href', '/assets/icons.svg#arrow-right');
             svg.setAttribute('xlink:href', '/assets/icons.svg#arrow-right');
             sendBtn.setAttribute('aria-label', 'Enviar mensaje');
+            sendBtn.setAttribute('title', 'Enviar mensaje');
           } else {
-            // Show logo when empty (can be customized later)
+            // Show logo when empty
             svg.setAttribute('href', '/assets/icons.svg#logo');
             svg.setAttribute('xlink:href', '/assets/icons.svg#logo');
             sendBtn.setAttribute('aria-label', 'Enviar');
+            sendBtn.setAttribute('title', 'Enviar');
           }
+        } else {
+          console.warn('VulcanoChatComponent: Send button SVG use element not found');
         }
       }
 
       // Listen for input changes
       input.addEventListener('input', updateSendButtonIcon);
       input.addEventListener('keyup', updateSendButtonIcon);
+      input.addEventListener('paste', updateSendButtonIcon);
 
       // Initial state
       updateSendButtonIcon();
