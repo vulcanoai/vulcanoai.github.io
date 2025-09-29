@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Security-Policy"
     content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <title>Vulcano AI — Conversación sobreee noticias de IA en LATAM</title>
+  <title>Vulcano AI — Conversación sobre noticias de IA en LATAM</title>
   <meta name="description"
     content="Capsula conversacional que resume noticias de inteligencia artificial en América Latina." />
   <meta property="og:title" content="Vulcano AI — Conversación sobre noticias de IA en LATAM" />
@@ -57,26 +57,6 @@
         </button>
         <p class="voice-hint">Toca para hablar</p>
 
-        <!-- Transcript preview and controls -->
-        <div class="voice-transcript" id="voice-transcript" hidden>
-          <div class="transcript-content">
-            <p class="transcript-text" id="transcript-text"></p>
-            <div class="transcript-actions">
-              <button type="button" class="transcript-send" id="transcript-send" aria-label="Enviar transcripción">
-                <svg width="16" height="16" aria-hidden="true">
-                  <use href="/assets/icons.svg#arrow-right"></use>
-                </svg>
-                Enviar
-              </button>
-              <button type="button" class="transcript-cancel" id="transcript-cancel" aria-label="Cancelar transcripción">
-                <svg width="16" height="16" aria-hidden="true">
-                  <use href="/assets/icons.svg#x"></use>
-                </svg>
-                Cancelar
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
 
       <form class="capsule-form" id="capsule-form" autocomplete="off">
@@ -87,12 +67,6 @@
           <svg width="20" height="20" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink">
             <use href="/assets/icons.svg#volume" xlink:href="/assets/icons.svg#volume"></use>
-          </svg>
-        </button>
-        <button type="button" class="capsule-audio-stop" id="capsule-audio-stop" aria-label="Detener audio" hidden>
-          <svg width="20" height="20" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-            <use href="/assets/icons.svg#x" xlink:href="/assets/icons.svg#x"></use>
           </svg>
         </button>
         <button type="submit" class="capsule-send" aria-label="Enviar">

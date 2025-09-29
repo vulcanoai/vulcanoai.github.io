@@ -40,82 +40,29 @@
         </article>
       </section>
 
-      <div class="capsule-interaction">
-        <div class="voice-primary">
-          <button type="button" class="voice-orb" id="capsule-voice" aria-pressed="false" aria-label="Hablar con Vulcano">
-            <div class="orb-glow"></div>
-            <div class="orb-core">
-              <svg width="32" height="32" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink">
-                <use href="/assets/icons.svg#mic" xlink:href="/assets/icons.svg#mic"></use>
-              </svg>
-            </div>
-            <div class="orb-pulse"></div>
-          </button>
-          <p class="voice-hint">Toca para hablar</p>
+      <form class="capsule-form" id="capsule-form" autocomplete="off">
+        <button type="button" class="capsule-voice" id="capsule-voice" aria-pressed="false" aria-label="Hablar con Vulcano">
+          <svg width="18" height="18" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"><use href="/assets/icons.svg#mic"
+              xlink:href="/assets/icons.svg#mic"></use></svg>
+        </button>
+        <label class="sr-only" for="capsule-input">Escribe tu pregunta</label>
+        <input id="capsule-input" name="q" type="text" placeholder="Pregúntame cómo podemos llevar esta visión a tu organización" maxlength="180" required />
+        <button type="button" class="capsule-audio" id="capsule-audio" aria-pressed="false" aria-label="Escuchar respuestas">
+          <svg width="18" height="18" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"><use href="/assets/icons.svg#volume"
+              xlink:href="/assets/icons.svg#volume"></use></svg>
+        </button>
+        <button type="submit" class="capsule-send" aria-label="Enviar pregunta">
+          <svg width="18" height="18" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"><use href="/assets/icons.svg#arrow-right"
+              xlink:href="/assets/icons.svg#arrow-right"></use></svg>
+        </button>
+      </form>
 
-          <!-- Transcript preview and controls -->
-          <div class="voice-transcript" id="voice-transcript" hidden>
-            <div class="transcript-content">
-              <p class="transcript-text" id="transcript-text"></p>
-              <div class="transcript-actions">
-                <button type="button" class="transcript-send" id="transcript-send" aria-label="Enviar transcripción">
-                  <svg width="16" height="16" aria-hidden="true">
-                    <use href="/assets/icons.svg#arrow-right"></use>
-                  </svg>
-                  Enviar
-                </button>
-                <button type="button" class="transcript-cancel" id="transcript-cancel" aria-label="Cancelar transcripción">
-                  <svg width="16" height="16" aria-hidden="true">
-                    <use href="/assets/icons.svg#x"></use>
-                  </svg>
-                  Cancelar
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <form class="capsule-form" id="capsule-form" autocomplete="off">
-          <label class="sr-only" for="capsule-input">Escribe tu pregunta</label>
-          <input id="capsule-input" name="q" type="text" placeholder="Pregúntame cómo podemos llevar esta visión a tu organización" maxlength="180" />
-          <button type="button" class="capsule-audio" id="capsule-audio" aria-pressed="false"
-            aria-label="Escuchar respuestas">
-            <svg width="20" height="20" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink">
-              <use href="/assets/icons.svg#volume" xlink:href="/assets/icons.svg#volume"></use>
-            </svg>
-          </button>
-          <button type="button" class="capsule-audio-stop" id="capsule-audio-stop" aria-label="Detener audio" hidden>
-            <svg width="20" height="20" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink">
-              <use href="/assets/icons.svg#x" xlink:href="/assets/icons.svg#x"></use>
-            </svg>
-          </button>
-          <button type="submit" class="capsule-send" aria-label="Enviar">
-            <svg width="20" height="20" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink">
-              <use href="/assets/icons.svg#arrow-right" xlink:href="/assets/icons.svg#arrow-right"></use>
-            </svg>
-          </button>
-        </form>
-      </div>
-
-      <div class="capsule-suggestions" id="capsule-chips" aria-label="Sugerencias de prompts">
-        <span id="chip-instructions" class="sr-only">Desliza horizontalmente para descubrir más sugerencias de prompts.</span>
-        <div class="chip-track" role="list" aria-describedby="chip-instructions">
-          <button type="button" class="capsule-chip" role="listitem"
-            data-prompt="¿Cómo puede Vulcano AI reducir el tiempo frente a pantallas en mi empresa?">Impacto en equipos</button>
-          <button type="button" class="capsule-chip" role="listitem"
-            data-prompt="Quiero un plan para llevar esta cápsula a Alexa o dispositivos de voz">Plan Alexa</button>
-        </div>
-        <div class="chip-hint" aria-hidden="true">
-          Desliza para más ideas
-          <svg width="14" height="14" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-            <use href="/assets/icons.svg#arrow-right" xlink:href="/assets/icons.svg#arrow-right"></use>
-          </svg>
-        </div>
+      <div class="capsule-chips" id="capsule-chips" aria-label="Sugerencias">
+        <button type="button" class="capsule-chip" data-prompt="¿Cómo puede Vulcano AI reducir el tiempo frente a pantallas en mi empresa?">Impacto en equipos</button>
+        <button type="button" class="capsule-chip" data-prompt="Quiero un plan para llevar esta cápsula a Alexa o dispositivos de voz">Plan Alexa</button>
       </div>
 
       <div class="capsule-links">
