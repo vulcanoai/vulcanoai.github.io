@@ -1,0 +1,35 @@
+Capsule-ID: 2025-09-29-xai-colossus-2
+Created-At: 2025-09-29T21:06:05Z
+Title: xAI presenta Colossus 2, el datacenter de un gigavatio
+Summary: xAI inaugura un centro de datos gigante para acelerar entrenamiento de modelos globales.
+Tags: infraestructura, estados unidos, xai
+Sources:
+  - SemiAnalysis | https://www.semianalysis.com/2025/09/16/xais-colossus-2-first-gigawatt-datacenter/
+Body:
+  - El equipo de Elon Musk despliega Colossus 2, un complejo de 1 GW dedicado a IA de gran escala.
+  - El diseño utiliza entrenamiento por refuerzo con datos sintéticos para reducir costos energéticos.
+  - La inversión abre la puerta a alianzas con proveedores LATAM para experimentar con modelos fundacionales.
+---
+Capsule-ID: 2025-09-29-mipt-robotica-siberia
+Created-At: 2025-09-29T18:42:00Z
+Title: Laboratorios rusos presentan enjambre de robots autónomos para clima extremo
+Summary: Investigadores del MIPT despliegan vehículos autónomos en Siberia con IA híbrida.
+Tags: rusia, robotica, energia
+Sources:
+  - CNews.ru | https://www.cnews.ru/news/top/2025-09-29_mipt_lanza_enjambre_ia
+Body:
+  - El prototipo usa modelos multimodales entrenados en ruso e inglés para navegar tormentas.
+  - El enjambre se coordina vía satélite local y promete 35% más eficiencia en mantenimiento de oleoductos.
+  - El equipo planea compartir protocolo con aliados en Kazajistán y países hispanos interesados en climas extremos.
+---
+Capsule-ID: 2025-09-29-baidu-quantum-lighthouse
+Created-At: 2025-09-29T09:15:30Z
+Title: Baidu activa iniciativa Lighthouse para detectar riesgos de IA generativa
+Summary: China lanza un consorcio que audita modelos de IA para exportaciones responsables.
+Tags: china, gobernanza, auditoria
+Sources:
+  - ITHome | https://www.ithome.com/0/123/456.htm
+Body:
+  - Lighthouse reúne a Baidu, Tsinghua y el Ministerio de Ciencia para crear protocolos de auditoría en tiempo real.
+  - Las guías buscan garantizar que modelos exportados a LATAM cumplan reglas de privacidad y trazabilidad.
+  - El consorcio abre un sandbox compartido donde socios internacionales pueden probar filtros antes de conectar sus productos.

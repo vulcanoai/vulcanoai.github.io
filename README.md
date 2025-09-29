@@ -1,97 +1,56 @@
-# Vulcano AI — Conversational Capsule
+# Vulcano AI — Stable Demo
 
-Vulcano AI ahora es una cápsula conversacional minimalista que entrega contexto y señales sobre inteligencia artificial en América Latina. Todo sucede dentro de un solo espacio: sin paneles, sin navegación secundaria y con audio disponible desde el primer momento.
+Este repositorio contiene la demo estable de Vulcano AI: una cápsula conversacional que muestra cápsulas de noticias curadas automáticamente y una página de visión premium. El objetivo es tener una base mínima, limpia y documentada para iterar con seguridad.
 
-## Visión
+## Componentes
 
-- **Propósito:** compartir noticias y análisis de IA para LATAM con tono humano, sereno y accionable.
-- **North Star:** si se siente como hablar con una guía sabia, estamos en el lugar correcto; si se siente como usar software, retrocedemos.
-- **Principios:** radical minimalism, conversación primero, cero fricción, seriedad cálida, relevancia local, calma y confianza.
+| Componente | Ruta | Descripción |
+|------------|------|-------------|
+| Cápsula principal | `index.html` | Conversa con el visitante y lee las cápsulas generadas por AUTORESEARCH. |
+| Visión premium | `pages/vision.html` | Reutiliza la misma UI con guiones predefinidos para explicar la propuesta de valor. |
+| Workflow n8n | `n8n/workflows/AUTORESEARCH.json` | Investiga YouTube y portales especializados (EE. UU., Rusia, China) y produce cápsulas estructuradas en español. |
+| Snapshot demo | `data/capsules/doc-latest.txt` | Archivo de ejemplo con tres cápsulas para probar la experiencia sin ejecutar n8n. |
+| JS compartido | `assets/js/chat-component.js` | Componente unificado de conversación; `capsule-main.js` y `capsule-vision.js` lo configuran según la página. |
 
-## Experiencia clave
+Consulta `docs/README.md` para el mapa completo y `docs/autoresearch.md` para el detalle del workflow.
 
-- **Una interacción, un resultado.** Campo centrado, chips opcionales y respuesta inmediata.
-- **Audio integrado.** Grabación de voz (Web Speech API) y lectura automática de la respuesta (Speech Synthesis) cuando el navegador lo permite.
-- **Resumen → Localización → Claridad.** El agente comprime el feed, resalta el ángulo LATAM y explica por qué importa.
-- **Fuentes transparentes.** Cada respuesta ofrece un acceso discreto a las referencias utilizadas.
-- **Confianza explícita.** Si la data está desactualizada o vacía, el agente lo menciona y sugiere el siguiente paso.
+## Cómo ejecutar la demo
 
-## Arquitectura actual
-
-```
-[data/feed-latest.json]  →  [capsule.js]  →  [UI conversacional]
-```
-
-- **Datos:** repositorio `data/` con `feed-latest.json`, snapshots y agregaciones generadas por `scripts/build-feed.js`.
-- **Frontend:** HTML + CSS puros (`index.html` / `pages/noticias.html`) más un único controlador (`assets/js/capsule.js`). La historia de marca se expande en `pages/vision.html`, una cápsula gemela orientada a la visión.
-- **Voz:** captura y lectura con APIs nativas (`SpeechRecognition` / `SpeechSynthesis`). Las funciones se degradan si el navegador no las expone.
-- **Legado:** el resto de HTML/CSS/JS del repositorio se conserva como referencia histórica. Ningún flujo productivo depende de esos archivos; se revisan en `docs/legacy-audit.md`.
-
-## Estructura relevante del repositorio
-
-```
-assets/
-  css/styles.css        # Tokens y estilo de la cápsula
-  js/capsule.js         # Lógica de conversación, voz y resumen
-  icons.svg             # Sprite de íconos (incluye micrófono y audio)
-data/                   # Feed consolidado y snapshots históricos
-pages/noticias.html     # Clon de index.html (cápsula activa)
-docs/
-  experience-manifest.md
-  legacy-audit.md
-scripts/                # Build y validaciones de datos (CI/n8n)
+```bash
+python3 -m http.server 8080
+# o cualquier servidor estático equivalente
 ```
 
-> Nota: los archivos en `pages/`, `assets/js/app.js`, `assets/css/styles.css` (secciones legacy) y documentación previa siguen en el repositorio para consulta, pero no forman parte de la experiencia actual. Se irán archivando o refactorizando conforme avancen las iteraciones.
+1. Abre `http://localhost:8080/` para la cápsula principal.
+2. Visita `http://localhost:8080/pages/vision.html` para la página de visión.
+3. Edita `data/capsules/doc-latest.txt` si quieres probar tus propias cápsulas manualmente (usa el formato mostrado en el archivo).
 
-## Ejecutar localmente
+## Integración con AUTORESEARCH
 
-1. Instala dependencias del pipeline de datos solo si vas a regenerar el feed (Node 18+). Para ver la cápsula basta con un servidor estático.
-2. Servidor rápido:
-   ```bash
-   python3 -m http.server 8080
-   # o npx serve .
-   ```
-3. Abre `http://localhost:8080/` y prueba la conversación (usa Chrome o Edge si quieres dictado y audio).
-4. Para refrescar datos manualmente:
-   ```bash
-   VULCANO_ALLOW_LOCAL_DATA_WRITE=1 node scripts/build-feed.js
-   ```
-   Ajustes disponibles en `scripts/build-feed.js` (`FEED_MAX_AGE_DAYS`, `VERIFY_LINKS`, etc.).
+- Configura las credenciales `openAiApi` y `githubApi` en n8n.
+- Importa `n8n/workflows/AUTORESEARCH.json` y ajusta tu schedule (por defecto corre cada hora).
+- El workflow publica archivos `.md` en `data/capsules/ai-researcher/` con contenido textual y el JSON embebido.
+- La web intentará leer `doc-latest.txt`. Si no existe, listará los snapshots de GitHub y tomará el más reciente (`doc-*.txt` o `<timestamp>*.md`).
+- Asegúrate de que al menos un snapshot con formato de cápsulas esté accesible públicamente para que la demo tenga contenido.
 
-## Lineamientos de diseño/contenido
+## Diseño y experiencia
 
-- Respuestas ≤ 6 líneas salvo que el usuario pida más detalle.
-- Verbos sobre sustantivos; sin relleno ni jerga innecesaria.
-- Contexto LATAM por defecto: país, impacto y por qué importa.
-- Chips: máximo dos sugerencias, siempre pertinentes a la consulta anterior.
-- Fuentes solo cuando el usuario las solicita (botón “Ver fuentes”).
+- Minimalismo total: un solo contenedor, respuestas cortas y fuentes opcionales.
+- Se prioriza español neutro, etiquetado temático y referencias claras.
+- Toda la interacción pasa por `chat-component.js`, lo que facilita extender la experiencia a futuras páginas o dispositivos.
 
-## Voz y accesibilidad
+## Datos y agentes
 
-- `capsule.js` activa dictado si existe `SpeechRecognition` (Chrome, Edge). Cuando no está disponible se deshabilita el botón de micrófono.
-- La lectura en voz alta se gobierna con el botón de audio. Queda en modo manual para evitar reproducción no deseada.
-- Todas las acciones relevantes tienen descripciones `aria-` y estados `aria-pressed`/`aria-disabled` consistentes.
-- Para integraciones futuras (Alexa, n8n, etc.) se documentan los endpoints en `docs/experience-manifest.md`.
+- `data/agents.json` documenta el estado del agente autónomo.
+- `AI_AGENTS.md` y `AI_COMMENTS.md` resumen decisiones y próximos pasos.
+- `docs/autoresearch.md` es la referencia técnica para evolucionar el pipeline.
 
-## Datos y pipeline
+## Próximos pasos sugeridos
 
-- **Entrada:** agentes n8n y fuentes validadas generan PRs sobre `data/runs/` y `data/entries/`.
-- **Consolidación:** `scripts/build-feed.js` produce `data/feed-latest.json` e índices (`data/index/*.json`).
-- **Consumo:** la cápsula solo lee `feed-latest.json`. El resto de agregaciones permanece disponible para agentes y automatizaciones.
-- **Contratos:** revisa `docs/DATA_LAYOUT.md` y `docs/DATA_PIPELINE.md` para estructuras y garantías de frescura.
+1. Automatizar la publicación de `doc-latest.txt` desde el workflow (o exponer una ruta HTTP que la web pueda leer directamente).
+2. Añadir métricas ligeras (p. ej. tiempo de última ejecución, cantidad de cápsulas) en `data/agents.json` para mostrarlas en la UI.
+3. Preparar despliegues diferenciados (demo, staging, producción) ajustando `assets/js/config.js` mediante variables de entorno o un `window.__CFG__`.
 
-## Colaborar
+---
 
-1. Respeta el manifiesto (`docs/experience-manifest.md`). Cualquier cambio de UI/UX debe preservar minimalismo, calma y conversación centrada.
-2. Añade pruebas manuales para voz/audio si tocas `capsule.js`.
-3. Documenta todo ajuste relevante en `docs/legacy-audit.md` hasta que los componentes heredados se archiven por completo.
-4. Mantén la CSP estricta definida en `index.html`.
-
-## Soporte
-
-- WhatsApp: <https://wa.me/573193620926>
-- X/Twitter: <https://x.com/VulcanoAi>
-- LinkedIn: <https://www.linkedin.com/company/vulcano-ai/>
-
-Manteniendo la cápsula ligera, humana y regional.
+Mantén este repositorio pequeño y claro: cualquier feature nueva debería comenzar actualizando los documentos y el workflow antes de tocar la UI.

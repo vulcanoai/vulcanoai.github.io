@@ -1,9 +1,9 @@
 [
   {
-    "nombre": "Codex 1",
-    "estado": "Activo",
+    "nombre": "Vulcano Researcher",
+    "estado": "Demo estable",
     "ultimo_ejecucion": "",
-    "throughput": "—",
-    "notas": "AI News Researcher"
+    "throughput": "0 cápsulas",
+    "notas": "Workflow AUTORESEARCH. Publica snapshots en data/capsules/ai-researcher/."
   }
 ]

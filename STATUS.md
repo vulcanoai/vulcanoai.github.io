@@ -1,55 +1,47 @@
-# Vulcano AI — Capsule Status (Live Ops)
+# Vulcano AI — Stable Demo Status
 
-Date: 2025‑09‑16  
-Release: Capsule v3.0 (Conversational + Voz)
+Fecha: 2025‑09‑29  
+Release: Demo estable v1 (Cápsula + Visión + AUTORESEARCH)
 
-## 🚀 Product Readiness
+## ✅ Qué está en producción
 
-| Área | Estado | Notas |
+| Área | Estado | Notas clave |
 | --- | --- | --- |
-| **Experiencia Conversacional** | ✅ Online | `index.html` / `pages/noticias.html` corren la cápsula minimalista con voz integrada. |
-| **Audio & Voz** | 🟢 Estable | Dictado y lectura disponibles en Chrome/Edge. Safari y Firefox quedan en modo texto. |
-| **Datos (feed-latest)** | 🟡 Vigilado | El feed está vacío. Requiere nuevas fuentes aprobadas en n8n para nutrir la cápsula. |
-| **Documentación** | ✅ Actualizada | `README.md`, `docs/experience-manifest.md`, `docs/legacy-audit.md`. |
-| **Componentes Legacy** | 🟡 En transición | Ver `docs/legacy-audit.md` para lista de archivos a archivar. |
+| Cápsula principal (`index.html`) | 🟢 Operativa | Carga `data/capsules/doc-latest.txt` y, si no existe, busca el snapshot más reciente en GitHub (`doc-*.txt` o `<timestamp>*.md`). |
+| Página Visión (`pages/vision.html`) | 🟢 Operativa | Usa el mismo componente de chat para guiar conversaciones comerciales. |
+| Workflow AUTORESEARCH | 🟡 Manual | JSON listo e importable. Requiere credenciales `openAiApi` y `githubApi` para correr en n8n. |
+| Documentación | 🟢 Actualizada | `README.md`, `docs/README.md`, `docs/autoresearch.md`. |
+| Assets legacy | 🔴 Retirados | Se eliminaron páginas y scripts antiguos para reducir ruido. |
 
-## 📊 Métricas críticas
+## 📊 Métricas / datos de referencia
 
-- `feed-latest.json`: 0 artículos (actualizar pipelines con urgencia).
-- Latencia objetivo: < 30 min desde publicación a respuesta.
-- Tiempo a primera interacción (TTFI): < 3 s en pruebas locales.
-- % navegadores con voz activa: ~70% (Chromium). Safari/Firefox requieren fallback manual.
+- `data/capsules/doc-latest.txt` contiene 3 cápsulas de ejemplo (EE. UU., Rusia, China).
+- `data/capsules/ai-researcher/` almacena snapshots `.md` generados por el workflow.
+- `data/agents.json` registra al agente "Vulcano Researcher" como demo estable.
 
-## 🔄 Pipeline de datos
+## 🚦 Próximos pasos mínimos
 
-1. **Ingesta (n8n)** — RSS y agentes proponen entradas en `data/runs/`.
-2. **Validación** — Revisores humanos mantienen la allowlist (`data/sources.json`).
-3. **Consolidación** — `scripts/build-feed.js` genera `data/feed-latest.json` y agregados.
-4. **Consumo** — `capsule.js` solo lee `feed-latest.json`; sin fallback a snapshots.
+1. **Automatizar `doc-latest.txt`:** ajustar `BUILD_AGENT_PUT` para que el workflow también publique el archivo `doc-latest.txt` (incluyendo `sha` al actualizar).
+2. **Monitoreo básico:** añadir fecha de última corrida y cantidad de cápsulas en `data/agents.json` para mostrarlo en la UI.
+3. **Hardening del parser:** evaluar activar `autoFix` si el agente genera JSON incompleto.
 
-### Próximos pasos de datos
-- Reactivar workflows `MERGE_AND_CLEAN_GLOBAL_FEED_fixed.json` y `PRODUCTION_AI_RESEARCH_FEED_AUTOPILOT.json`.
-- Configurar alertas cuando el feed quede vacío (>6 h sin publicaciones).
-- Documentar un script de verificación de enlaces antes de cada release.
+## 🛠 Cómo probar rápidamente
 
-## 🔊 Voz y audio
+```bash
+python3 -m http.server 8080
+# abrir http://localhost:8080/ para la cápsula
+# abrir http://localhost:8080/pages/vision.html para la visión
+```
 
-- Dictado (`SpeechRecognition`) se inicia/termina desde `capsule-voice`; errores de permiso generan feedback textual.
-- Reproducción (`SpeechSynthesis`) queda bajo control manual (`capsule-audio`).
-- Próxima iteración: fallback en servidores (TTS vía n8n / AWS Polly) para entregar briefings en Alexa.
+Para validar el workflow:
+1. Importa `n8n/workflows/AUTORESEARCH.json`.
+2. Configura credenciales y lanza una ejecución manual.
+3. Verifica que se cree un `.md` en `data/capsules/ai-researcher/` y que la web pueda leerlo (recarga la página para forzar fetch).
 
-## 🧭 Roadmap inmediato
+## Historial reciente
 
-1. **Alimentar el feed** — Prioridad crítica. Sin artículos la experiencia pierde sentido.
-2. **Archivar legacy** — Mover páginas y scripts antiguos a `legacy/` o branch separado.
-3. **Checklist de voz** — Documento de compatibilidad por navegador + guía de permisos.
-4. **Integración Alexa** — Diseñar skill que consuma resúmenes generados con el mismo pipeline.
+- 2025‑09‑29: Se eliminan páginas legacy, se documenta la demo y se agrega snapshot actualizado.
+- 2025‑09‑29: `capsule-main.js` soporta archivos `.md` generados por AUTORESEARCH.
+- 2025‑09‑29: Documentación y AI nodes actualizados para reflejar la nueva arquitectura.
 
-## ✅ Hechos recientes
-
-- Cápsula rediseñada con botones de voz/audio y chips orientados a briefing.
-- Documentación alineada con el manifiesto 2025.
-- Config de navegación limpia (sin menús legacy).
-- Audit log creado para rastrear componentes heredados.
-
-Mantener la cápsula ligera, humana y enfocada en LATAM.
+La meta es mantener este estado como baseline estable; cualquier nueva iteración debe empezar actualizando esta bitácora.

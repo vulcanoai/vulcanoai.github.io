@@ -101,19 +101,28 @@
     }
     const files = await res.json();
     const docFiles = Array.isArray(files)
-      ? files.filter(file => file && /^doc-.*\.txt$/.test(file.name) && file.download_url)
+      ? files
+          .filter(file => file && file.download_url && isCapsuleSnapshot(file.name))
+          .map(file => ({ ...file, generatedAt: extractTimestampFromName(file.name) }))
       : [];
     if (!docFiles.length) {
       throw originalError || new Error('No se encontraron snapshots de cápsulas en el repositorio.');
     }
-    docFiles.sort((a, b) => b.name.localeCompare(a.name));
+    docFiles.sort((a, b) => {
+      if (a.generatedAt && b.generatedAt) {
+        return new Date(b.generatedAt).getTime() - new Date(a.generatedAt).getTime();
+      }
+      if (a.generatedAt) return -1;
+      if (b.generatedAt) return 1;
+      return b.name.localeCompare(a.name);
+    });
     const latest = docFiles[0];
     const textRes = await fetch(latest.download_url, { cache: 'no-store' });
     if (!textRes.ok) {
       throw new Error(`Descarga de snapshot falló: HTTP ${textRes.status}`);
     }
     const text = await textRes.text();
-    const updatedAt = extractTimestampFromName(latest.name) || new Date().toISOString();
+    const updatedAt = latest.generatedAt || extractTimestampFromName(latest.name) || new Date().toISOString();
     return { text, updatedAt };
   }
 
@@ -295,16 +304,36 @@
     return index;
   }
 
+
+  function isCapsuleSnapshot(name) {
+    if (!name) return false;
+    return /^doc-.*\.(txt|md)$/i.test(name) ||
+      /^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{3}Z-.*\.md$/i.test(name);
+  }
+
   function extractTimestampFromName(name) {
-    const match = /^doc-(.+)\.txt$/.exec(name || '');
-    if (!match) return null;
-    const raw = match[1];
-    const isoMatch = /^([0-9]{4}-[0-9]{2}-[0-9]{2})T([0-9]{2})-([0-9]{2})-([0-9]{2})-([0-9]{3})Z$/.exec(raw);
-    if (!isoMatch) return null;
-    const [, date, hh, mm, ss, ms] = isoMatch;
-    const iso = `${date}T${hh}:${mm}:${ss}.${ms}Z`;
-    const parsed = new Date(iso);
-    return Number.isFinite(parsed.getTime()) ? parsed.toISOString() : null;
+    if (!name) return null;
+    const docMatch = /^doc-(.+)\.(txt|md)$/i.exec(name);
+    if (docMatch) {
+      const raw = docMatch[1];
+      const isoMatch = /^([0-9]{4}-[0-9]{2}-[0-9]{2})T([0-9]{2})-([0-9]{2})-([0-9]{2})-([0-9]{3})Z$/i.exec(raw);
+      if (isoMatch) {
+        const [, date, hh, mm, ss, ms] = isoMatch;
+        const iso = `${date}T${hh}:${mm}:${ss}.${ms}Z`;
+        const parsed = new Date(iso);
+        if (Number.isFinite(parsed.getTime())) return parsed.toISOString();
+      }
+    }
+
+    const mdMatch = /^([0-9]{4}-[0-9]{2}-[0-9]{2})T([0-9]{2})-([0-9]{2})-([0-9]{2})-([0-9]{3})Z/i.exec(name);
+    if (mdMatch) {
+      const [, date, hh, mm, ss, ms] = mdMatch;
+      const iso = `${date}T${hh}:${mm}:${ss}.${ms}Z`;
+      const parsed = new Date(iso);
+      if (Number.isFinite(parsed.getTime())) return parsed.toISOString();
+    }
+
+    return null;
   }
 
   function appendSystemNote(lines) {
