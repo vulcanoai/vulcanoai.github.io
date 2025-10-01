@@ -6930,15 +6930,33 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   opacity: 0.9;
 }
 
+.holographic-meta-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  opacity: 0.8;
+}
+
+.holographic-meta-authors {
+  font-family: 'Sohne', 'Inter', sans-serif;
+}
+
 .holographic-timestamp {
   font-size: 0.875rem;
   color: var(--muted);
   font-family: 'Monaco', 'Menlo', monospace;
   opacity: 0.7;
-  margin-bottom: 24px;
 }
 
 /* Close button */
+.holographic-actions {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
 .holographic-close {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -6964,6 +6982,79 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   height: 20px;
 }
 
+.holographic-share {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.holographic-share-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.holographic-share-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.holographic-share-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: translateY(-1px);
+}
+
+.holographic-share-btn:disabled,
+.holographic-share-btn[aria-disabled="true"] {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.holographic-share-btn.is-active {
+  background: rgba(72, 187, 120, 0.2);
+}
+
+.holographic-share-feedback {
+  font-size: 0.7rem;
+  color: var(--muted);
+  margin-left: 4px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.holographic-share-feedback.visible {
+  opacity: 0.9;
+}
+
+[data-theme="ethereal"] .holographic-share {
+  background: rgba(167, 139, 250, 0.12);
+  border-color: rgba(167, 139, 250, 0.3);
+}
+
+[data-theme="ethereal"] .holographic-share-btn:hover {
+  background: rgba(167, 139, 250, 0.3);
+  color: #fff;
+}
+
+[data-theme="ethereal"] .holographic-share-btn.is-active {
+  background: rgba(52, 211, 153, 0.25);
+}
+
 /* Content sections */
 .holographic-content {
   padding: 0 32px 32px;
@@ -6985,6 +7076,88 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   letter-spacing: 0.5px;
   margin: 0 0 16px;
   opacity: 0.8;
+}
+
+.holographic-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.holographic-overview-item {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 16px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.holographic-overview-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.holographic-main-idea,
+.holographic-authors-list,
+.holographic-primary-source {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.holographic-primary-source a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 2px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.holographic-primary-source a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.holographic-body-list {
+  margin: 0;
+  padding-left: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  counter-reset: body-steps;
+}
+
+.holographic-body-list li {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text);
+  counter-increment: body-steps;
+}
+
+.holographic-body-list li::marker {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.holographic-placeholder {
+  font-size: 0.9rem;
+  color: var(--muted);
+  opacity: 0.7;
+  margin: 0;
+}
+
+.is-muted {
+  opacity: 0.7;
+}
+
+[data-theme="ethereal"] .holographic-overview-item {
+  background: rgba(167, 139, 250, 0.12);
+  border-color: rgba(167, 139, 250, 0.25);
 }
 
 .holographic-body {
@@ -7199,6 +7372,22 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
     gap: 16px;
   }
 
+  .holographic-meta-details {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .holographic-actions {
+    width: 100%;
+    justify-content: flex-start;
+    padding-top: 12px;
+  }
+
+  .holographic-share {
+    margin-left: 0;
+  }
+
   .holographic-close {
     align-self: flex-end;
     position: absolute;
@@ -7247,5 +7436,19 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 
   .holographic-summary {
     font-size: 1rem;
+  }
+
+  .holographic-share {
+    gap: 4px;
+    padding: 6px 8px;
+  }
+
+  .holographic-share-btn {
+    width: 28px;
+    height: 28px;
+  }
+
+  .holographic-overview-grid {
+    grid-template-columns: 1fr;
   }
 }

@@ -227,101 +227,264 @@
   }
 
   function buildCapsuleFromSegment(segment, index) {
-    const lines = segment.split(/\n+/).map(line => line.trim()).filter(Boolean);
+    const lines = segment.split(/\n+/).map(line => line.trim()).filter(line => line.length);
     if (!lines.length) return null;
 
+    let inCodeBlock = false;
     let title = '';
     let summary = '';
+    let mainIdea = '';
     let createdAt = null;
     let capsuleId = '';
-    const bodyLines = [];
-    const tags = [];
+    const content = [];
+    const looseText = [];
+    const tags = new Set();
     const sources = [];
-    const rest = [];
+    const authors = new Set();
+    let currentSection = null;
 
-    lines.forEach(line => {
+    const pushContent = value => {
+      const clean = stripListMarker(value);
+      if (clean) content.push(clean);
+    };
+
+    const pushAuthor = value => {
+      const clean = stripListMarker(value);
+      if (clean) {
+        clean.split(/[,;]+/).map(name => name.trim()).filter(Boolean).forEach(name => authors.add(name));
+      }
+    };
+
+    const pushSource = value => {
+      const entry = parseSourceEntry(stripListMarker(value));
+      if (entry) {
+        sources.push(entry);
+      }
+    };
+
+    lines.forEach(rawLine => {
+      if (!rawLine) return;
+
+      if (/^```/.test(rawLine)) {
+        inCodeBlock = !inCodeBlock;
+        return;
+      }
+
+      if (inCodeBlock) return;
+
+      const line = rawLine;
+
       if (/^capsule-id[:\-]?/i.test(line)) {
-        capsuleId = line.replace(/^capsule-id[:\-]?/i, '').trim();
+        capsuleId = extractValueAfterColon(line);
+        currentSection = null;
         return;
       }
+
       if (/^created-at[:\-]?/i.test(line)) {
-        const dateStr = line.replace(/^created-at[:\-]?/i, '').trim();
-        createdAt = dateStr;
+        createdAt = extractValueAfterColon(line);
+        currentSection = null;
         return;
       }
+
       if (!title && /^#\s*capsule[:\-]?/i.test(line)) {
         title = line.replace(/^#\s*capsule[:\-]?/i, '').trim();
+        currentSection = null;
         return;
       }
+
       if (!title && /^title[:\-]?/i.test(line)) {
-        title = line.replace(/^title[:\-]?/i, '').trim();
+        title = extractValueAfterColon(line);
+        currentSection = null;
         return;
       }
+
       if (!summary && /^summary[:\-]?/i.test(line)) {
-        summary = line.replace(/^summary[:\-]?/i, '').trim();
+        summary = extractValueAfterColon(line);
+        currentSection = null;
         return;
       }
-      if (/^tags?[:\-]?/i.test(line)) {
-        const values = line.replace(/^tags?[:\-]?/i, '').split(/[,;]+/).map(tag => tag.trim()).filter(Boolean);
-        tags.push(...values);
+
+      if (!mainIdea && /^(main[\s_-]?idea|idea\s+central)[:\-]?/i.test(line)) {
+        mainIdea = extractValueAfterColon(line);
+        currentSection = null;
         return;
       }
+
+      if (/^authors?[:\-]?/i.test(line)) {
+        const value = extractValueAfterColon(line);
+        if (value) {
+          pushAuthor(value);
+          currentSection = null;
+        } else {
+          currentSection = 'authors';
+        }
+        return;
+      }
+
+      if (/^tags?[:\-]?/i.test(line) || /^etiquetas?[:\-]?/i.test(line)) {
+        const list = extractValueAfterColon(line) || '';
+        list.split(/[,;]+/).map(tag => tag.trim()).filter(Boolean).forEach(tag => tags.add(tag));
+        currentSection = null;
+        return;
+      }
+
       if (/^sources?[:\-]?/i.test(line)) {
-        const entries = line.replace(/^sources?[:\-]?/i, '').split(/[,;]+/).map(entry => entry.trim()).filter(Boolean);
-        entries.forEach(entry => {
-          const parts = entry.split('|').map(p => p.trim());
-          if (parts.length === 2) {
-            sources.push({ title: parts[0], url: parts[1] });
-          } else {
-            sources.push({ title: entry, url: entry.startsWith('http') ? entry : '' });
-          }
-        });
+        const value = extractValueAfterColon(line);
+        if (value) {
+          parseSourceList(value).forEach(entry => sources.push(entry));
+          currentSection = null;
+        } else {
+          currentSection = 'sources';
+        }
         return;
       }
-      if (/^body[:\-]?/i.test(line)) {
-        // Skip the "Body:" line itself
+
+      if (/^(body|contenido|content|highlights?)[:\-]?/i.test(line)) {
+        const inline = extractValueAfterColon(line);
+        if (inline) pushContent(inline);
+        currentSection = 'content';
         return;
       }
-      rest.push(line);
+
+      if (currentSection === 'authors') {
+        pushAuthor(line);
+        return;
+      }
+
+      if (currentSection === 'sources') {
+        pushSource(line);
+        return;
+      }
+
+      if (currentSection === 'content') {
+        pushContent(line);
+        return;
+      }
+
+      if (/^[*\-]\s+https?:\/\//i.test(line)) {
+        // bullet line with URL but without explicit section — treat as source
+        pushSource(line);
+        return;
+      }
+
+      if (/^[*\-]\s+/i.test(line)) {
+        pushContent(line);
+        return;
+      }
+
+      looseText.push(line);
     });
 
-    if (!title && rest.length) {
-      title = rest.shift();
+    if (!title && looseText.length) {
+      title = looseText.shift();
     }
     if (!title) {
       title = `Cápsula ${index + 1}`;
     }
 
-    if (!summary && rest.length) {
-      summary = rest[0];
+    if (!summary && mainIdea) {
+      summary = mainIdea;
+    }
+    if (!summary && content.length) {
+      summary = content[0];
+    }
+    if (!summary && looseText.length) {
+      summary = looseText[0];
     }
     if (!summary) {
       summary = title;
     }
 
-    const body = rest.length ? rest : [summary];
+    if (!mainIdea && summary) {
+      mainIdea = summary;
+    }
 
+    if (!content.length && looseText.length) {
+      looseText.forEach(pushContent);
+    }
+
+    if (!sources.length) {
+      looseText.filter(text => /https?:\/\//i.test(text)).forEach(pushSource);
+    }
+
+    const body = content.length ? content : [summary];
+    const authorsList = Array.from(authors);
+    const tagsList = Array.from(tags);
     const normalizedTitle = normalizeText(title);
     const id = capsuleId || `capsule-${index + 1}-${normalizedTitle || Math.random().toString(36).slice(2, 8)}`;
     const searchTokens = Array.from(new Set([
       normalizedTitle,
       normalizeText(summary),
+      normalizeText(mainIdea),
       ...body.map(normalizeText),
-      ...tags.map(normalizeText)
+      ...tagsList.map(normalizeText),
+      ...authorsList.map(normalizeText),
+      ...sources.map(source => normalizeText(source.title || source.url))
     ])).filter(Boolean);
 
     return {
       id,
       title,
       summary,
+      mainIdea,
       body,
-      tags,
+      tags: tagsList,
       sources,
+      authors: authorsList,
       createdISO: createdAt,
       createdAt: createdAt,
       normalizedTitle,
       searchTokens
     };
+  }
+
+  function extractValueAfterColon(line) {
+    if (!line) return '';
+    const colonIndex = line.indexOf(':');
+    if (colonIndex !== -1) {
+      return line.slice(colonIndex + 1).trim();
+    }
+    const dashMatch = line.match(/^[^\-]+-\s*(.+)$/);
+    return dashMatch ? dashMatch[1].trim() : '';
+  }
+
+  function stripListMarker(value) {
+    return String(value || '')
+      .replace(/^[-*+]\s+/, '')
+      .trim();
+  }
+
+  function parseSourceEntry(text) {
+    if (!text) return null;
+    const linkMatch = /\[([^\]]+)\]\((https?:[^)]+)\)/.exec(text);
+    if (linkMatch) {
+      return { title: linkMatch[1].trim(), url: linkMatch[2].trim() };
+    }
+    const parts = text.split('|').map(part => part.trim()).filter(Boolean);
+    if (parts.length === 2) {
+      return { title: parts[0], url: parts[1] };
+    }
+    if (parts.length > 2) {
+      const title = parts.slice(0, -1).join(' | ');
+      const urlCandidate = parts[parts.length - 1];
+      if (/^https?:\/\//i.test(urlCandidate)) {
+        return { title, url: urlCandidate };
+      }
+    }
+    if (/^https?:\/\//i.test(text)) {
+      return { title: text, url: text };
+    }
+    if (text) {
+      return { title: text, url: '' };
+    }
+    return null;
+  }
+
+  function parseSourceList(value) {
+    return value
+      .split(/[,;]+/)
+      .map(entry => parseSourceEntry(entry.trim()))
+      .filter(Boolean);
   }
 
   function buildIndex(capsules) {
