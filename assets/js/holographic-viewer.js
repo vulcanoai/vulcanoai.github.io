@@ -30,6 +30,12 @@ window.VulcanoHolographicViewer = (() => {
             </div>
           </div>
           <div class="holographic-actions">
+            <button class="holographic-voiceover-btn" type="button" title="Escuchar cápsula" aria-label="Escuchar cápsula">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+              </svg>
+            </button>
             <div class="holographic-share" role="group" aria-label="Compartir cápsula">
               <button class="holographic-share-btn" type="button" data-channel="native" title="Compartir">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -120,6 +126,7 @@ window.VulcanoHolographicViewer = (() => {
     const closeBtn = overlay.querySelector('.holographic-close');
     const prevBtn = overlay.querySelector('.holographic-nav.prev');
     const nextBtn = overlay.querySelector('.holographic-nav.next');
+    const voiceoverBtn = overlay.querySelector('.holographic-voiceover-btn');
 
     // Close handlers
     closeBtn.addEventListener('click', close);
@@ -130,6 +137,11 @@ window.VulcanoHolographicViewer = (() => {
     // Navigation handlers
     prevBtn.addEventListener('click', () => navigateTo(currentIndex - 1));
     nextBtn.addEventListener('click', () => navigateTo(currentIndex + 1));
+
+    // Voiceover handler
+    if (voiceoverBtn) {
+      voiceoverBtn.addEventListener('click', () => toggleVoiceover(voiceoverBtn));
+    }
 
     // Keyboard navigation
     document.addEventListener('keydown', handleKeydown);
@@ -633,6 +645,86 @@ window.VulcanoHolographicViewer = (() => {
       prevBtn.style.display = 'flex';
       nextBtn.style.display = 'flex';
     }
+  }
+
+  function toggleVoiceover(button) {
+    // Cancel any existing speech
+    if (window.speechSynthesis.speaking) {
+      window.speechSynthesis.cancel();
+      button.classList.remove('is-playing');
+      button.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+      `;
+      return;
+    }
+
+    const capsule = currentCapsules[currentIndex];
+    if (!capsule) return;
+
+    const textToRead = buildVoiceoverText(capsule);
+    if (!textToRead) return;
+
+    const utterance = new SpeechSynthesisUtterance(textToRead);
+    utterance.lang = 'es-ES';
+    utterance.rate = 0.95;
+    utterance.pitch = 1.0;
+
+    utterance.onstart = () => {
+      button.classList.add('is-playing');
+      button.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="6" y="4" width="4" height="16"></rect>
+          <rect x="14" y="4" width="4" height="16"></rect>
+        </svg>
+      `;
+    };
+
+    utterance.onend = () => {
+      button.classList.remove('is-playing');
+      button.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+      `;
+    };
+
+    utterance.onerror = () => {
+      button.classList.remove('is-playing');
+      button.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+      `;
+    };
+
+    window.speechSynthesis.speak(utterance);
+  }
+
+  function buildVoiceoverText(capsule) {
+    const parts = [];
+
+    if (capsule.title) {
+      parts.push(capsule.title);
+    }
+
+    if (capsule.summary && capsule.summary !== capsule.title) {
+      parts.push(capsule.summary);
+    }
+
+    if (capsule.body && Array.isArray(capsule.body)) {
+      capsule.body.forEach(item => {
+        if (item && item !== capsule.summary) {
+          parts.push(item);
+        }
+      });
+    }
+
+    return parts.join('. ');
   }
 
   function formatTimestamp(date) {
