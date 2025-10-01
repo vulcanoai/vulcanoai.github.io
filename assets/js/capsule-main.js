@@ -35,6 +35,7 @@
   state.rawDocument = '';
 
   loadCapsules();
+  setupArchiveToggle();
 
   async function loadCapsules() {
     if (updatedLabel) updatedLabel.textContent = 'cargando…';
@@ -128,6 +129,18 @@
 
   function handleUserInput(rawQuery, helpers) {
     const query = (rawQuery || '').trim();
+
+    // Check if this is a capsule title (from chip click)
+    const matchingCapsule = findCapsule(query);
+
+    if (matchingCapsule && window.VulcanoHolographicViewer) {
+      // Show holographic viewer for capsule
+      const capsuleIndex = state.capsules.findIndex(cap => cap.id === matchingCapsule.id);
+      window.VulcanoHolographicViewer.show(state.capsules, capsuleIndex);
+      return;
+    }
+
+    // Fallback to chat response for manual queries
     const placeholder = helpers.appendAgent(['Buscando cápsula…'], {});
     const response = buildCapsuleResponse(query);
     updateAgent(placeholder, response.paragraphs, { sources: response.sources });
@@ -219,12 +232,23 @@
 
     let title = '';
     let summary = '';
+    let createdAt = null;
+    let capsuleId = '';
     const bodyLines = [];
     const tags = [];
     const sources = [];
     const rest = [];
 
     lines.forEach(line => {
+      if (/^capsule-id[:\-]?/i.test(line)) {
+        capsuleId = line.replace(/^capsule-id[:\-]?/i, '').trim();
+        return;
+      }
+      if (/^created-at[:\-]?/i.test(line)) {
+        const dateStr = line.replace(/^created-at[:\-]?/i, '').trim();
+        createdAt = dateStr;
+        return;
+      }
       if (!title && /^#\s*capsule[:\-]?/i.test(line)) {
         title = line.replace(/^#\s*capsule[:\-]?/i, '').trim();
         return;
@@ -245,8 +269,17 @@
       if (/^sources?[:\-]?/i.test(line)) {
         const entries = line.replace(/^sources?[:\-]?/i, '').split(/[,;]+/).map(entry => entry.trim()).filter(Boolean);
         entries.forEach(entry => {
-          sources.push({ title: entry, url: entry.startsWith('http') ? entry : '' });
+          const parts = entry.split('|').map(p => p.trim());
+          if (parts.length === 2) {
+            sources.push({ title: parts[0], url: parts[1] });
+          } else {
+            sources.push({ title: entry, url: entry.startsWith('http') ? entry : '' });
+          }
         });
+        return;
+      }
+      if (/^body[:\-]?/i.test(line)) {
+        // Skip the "Body:" line itself
         return;
       }
       rest.push(line);
@@ -269,7 +302,7 @@
     const body = rest.length ? rest : [summary];
 
     const normalizedTitle = normalizeText(title);
-    const id = `capsule-${index + 1}-${normalizedTitle || Math.random().toString(36).slice(2, 8)}`;
+    const id = capsuleId || `capsule-${index + 1}-${normalizedTitle || Math.random().toString(36).slice(2, 8)}`;
     const searchTokens = Array.from(new Set([
       normalizedTitle,
       normalizeText(summary),
@@ -284,8 +317,8 @@
       body,
       tags,
       sources,
-      createdISO: null,
-      createdAt: null,
+      createdISO: createdAt,
+      createdAt: createdAt,
       normalizedTitle,
       searchTokens
     };
@@ -378,6 +411,26 @@
       day: 'numeric',
       hour: '2-digit',
       minute: '2-digit'
+    });
+  }
+
+  function setupArchiveToggle() {
+    const archiveToggle = document.getElementById('archive-toggle');
+    if (!archiveToggle) return;
+
+    archiveToggle.addEventListener('click', () => {
+      if (!state.capsules.length) {
+        appendSystemNote([
+          'No hay cápsulas disponibles en el archivo.',
+          'Espera a que se carguen las cápsulas para acceder al archivo.'
+        ]);
+        return;
+      }
+
+      // Show holographic viewer with all capsules starting from the first one
+      if (window.VulcanoHolographicViewer) {
+        window.VulcanoHolographicViewer.show(state.capsules, 0);
+      }
     });
   }
 })();
