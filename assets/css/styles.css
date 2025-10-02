@@ -7254,9 +7254,7 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   right: 0;
   bottom: 0;
   z-index: 9999;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -7273,44 +7271,21 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 
 /* Holographic capsule card */
 .holographic-capsule {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 24px;
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(255, 255, 255, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   max-width: 800px;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
-  transform: scale(0.8) translateY(50px);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: scale(0.95) translateY(20px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .holographic-overlay.active .holographic-capsule {
   transform: scale(1) translateY(0);
-}
-
-/* Ethereal theme enhancements */
-[data-theme="ethereal"] .holographic-overlay {
-  background: rgba(139, 92, 246, 0.1);
-}
-
-[data-theme="ethereal"] .holographic-capsule {
-  background: linear-gradient(135deg,
-    rgba(255, 255, 255, 0.25) 0%,
-    rgba(255, 255, 255, 0.1) 50%,
-    rgba(167, 139, 250, 0.1) 100%
-  );
-  border: 1px solid rgba(167, 139, 250, 0.3);
-  box-shadow:
-    0 8px 32px rgba(139, 92, 246, 0.2),
-    0 0 0 1px rgba(255, 255, 255, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 /* Header section */
@@ -7319,24 +7294,10 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   align-items: flex-start;
   justify-content: space-between;
   gap: 20px;
-  padding: 32px 32px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 32px 32px 24px;
+  border-bottom: 1px solid #e5e7eb;
   margin-bottom: 32px;
   position: relative;
-}
-
-.holographic-header::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 32px;
-  right: 32px;
-  height: 1px;
-  background: linear-gradient(90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.2) 50%,
-    transparent 100%
-  );
 }
 
 .holographic-meta {
@@ -7402,27 +7363,26 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--ethereal-mist);
-  border: 1px solid var(--ethereal-shimmer);
-  border-radius: 50%;
-  color: var(--brand);
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  color: var(--text);
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .holographic-voiceover-btn:hover,
 .holographic-speed-btn:hover {
-  background: var(--brand);
-  border-color: var(--brand);
-  color: white;
-  transform: scale(1.05);
+  background: #e5e7eb;
+  border-color: #a78bfa;
+  transform: scale(1.02);
 }
 
 .holographic-speed-btn {
   font-size: 0.75rem;
   font-weight: 600;
-  padding: 0 8px;
-  border-radius: 20px;
+  padding: 0 12px;
+  border-radius: 8px;
 }
 
 .holographic-speed-btn .speed-label {
@@ -7431,10 +7391,9 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 }
 
 .holographic-voiceover-btn.is-playing {
-  background: var(--brand);
-  border-color: var(--brand);
+  background: #a78bfa;
+  border-color: #8b5cf6;
   color: white;
-  animation: pulse-voiceover 1.5s ease-in-out infinite;
 }
 
 @keyframes pulse-voiceover {
@@ -7454,23 +7413,24 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 }
 
 .holographic-close {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  width: 48px;
-  height: 48px;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   color: var(--text);
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   flex-shrink: 0;
 }
 
 .holographic-close:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: scale(1.05);
+  background: #e5e7eb;
+  border-color: #dc2626;
+  color: #dc2626;
 }
 
 .holographic-close svg {
@@ -7483,11 +7443,9 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   align-items: center;
   gap: 6px;
   padding: 6px 10px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 999px;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
 }
 
 .holographic-share-btn {
@@ -7510,7 +7468,7 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 }
 
 .holographic-share-btn:hover {
-  background: rgba(255, 255, 255, 0.18);
+  background: #e5e7eb;
   transform: translateY(-1px);
 }
 
@@ -7537,34 +7495,17 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   opacity: 0.9;
 }
 
-[data-theme="ethereal"] .holographic-share {
-  background: rgba(167, 139, 250, 0.12);
-  border-color: rgba(167, 139, 250, 0.3);
-}
-
-[data-theme="ethereal"] .holographic-share-btn:hover {
-  background: rgba(167, 139, 250, 0.3);
-  color: #fff;
-}
-
-[data-theme="ethereal"] .holographic-share-btn.is-active {
-  background: rgba(52, 211, 153, 0.25);
-}
 
 .holographic-share.is-highlighted {
-  animation: share-pulse 1.6s ease-in-out 2;
-  box-shadow: 0 0 0 0 rgba(167, 139, 250, 0.4);
+  animation: share-pulse 1.2s ease-in-out;
 }
 
 @keyframes share-pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(167, 139, 250, 0.45);
+  0%, 100% {
+    border-color: #e5e7eb;
   }
   50% {
-    box-shadow: 0 0 0 8px rgba(167, 139, 250, 0.05);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(167, 139, 250, 0.0);
+    border-color: #a78bfa;
   }
 }
 
@@ -7598,9 +7539,9 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 }
 
 .holographic-overview-item {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 16px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
   padding: 16px;
   min-height: 120px;
   display: flex;
@@ -7668,10 +7609,6 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   opacity: 0.7;
 }
 
-[data-theme="ethereal"] .holographic-overview-item {
-  background: rgba(167, 139, 250, 0.12);
-  border-color: rgba(167, 139, 250, 0.25);
-}
 
 .holographic-body {
   line-height: 1.7;
@@ -7695,30 +7632,19 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 }
 
 .holographic-tag {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 20px;
-  padding: 6px 14px;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 6px 12px;
   font-size: 0.8rem;
   font-weight: 500;
-  color: var(--text);
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
+  color: #6b7280;
+  transition: all 0.2s ease;
 }
 
 .holographic-tag:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-1px);
-}
-
-[data-theme="ethereal"] .holographic-tag {
-  background: rgba(167, 139, 250, 0.15);
-  border: 1px solid rgba(167, 139, 250, 0.3);
-  color: var(--ethereal-primary);
-}
-
-[data-theme="ethereal"] .holographic-tag:hover {
-  background: rgba(167, 139, 250, 0.25);
+  background: #e5e7eb;
+  border-color: #a78bfa;
 }
 
 /* Sources section */
@@ -7733,15 +7659,16 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   align-items: center;
   gap: 12px;
   padding: 12px 16px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
   border-radius: 12px;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .holographic-source:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateX(4px);
+  background: #f3f4f6;
+  border-color: #a78bfa;
+  transform: translateX(2px);
 }
 
 .holographic-source-icon {
@@ -7860,16 +7787,15 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   position: absolute;
   top: 20px;
   left: 32px;
-  background: rgba(139, 92, 246, 0.2);
-  border: 1px solid rgba(139, 92, 246, 0.4);
-  border-radius: 20px;
+  background: #f3e8ff;
+  border: 1px solid #a78bfa;
+  border-radius: 8px;
   padding: 4px 12px;
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--ethereal-primary);
+  color: #7c3aed;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  backdrop-filter: blur(10px);
 }
 
 /* Responsive adjustments */
