@@ -3931,12 +3931,9 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   justify-content: space-between;
   gap: 48px;
   padding: 24px 32px;
-  border: 1px solid rgba(167, 139, 250, 0.2);
-  border-radius: 28px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.2) 100%);
-  box-shadow:
-    0 16px 40px rgba(139, 92, 246, 0.08),
-    inset 0 1px 0 rgba(255,255,255,0.5);
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #ffffff;
 }
 
 [data-theme="ethereal"] .hero-copy{
@@ -3981,16 +3978,15 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  border: none;
-  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
   padding: 14px 20px;
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--text);
-  background: rgba(167, 139, 250, 0.18);
-  backdrop-filter: blur(8px);
+  background: #ffffff;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
 [data-theme="ethereal"] .hero-button svg{
@@ -4003,8 +3999,7 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 
 [data-theme="ethereal"] .hero-button:hover:not(:disabled){
   transform: translateY(-1px);
-  background: rgba(167, 139, 250, 0.28);
-  box-shadow: 0 12px 24px rgba(139, 92, 246, 0.15);
+  border-color: #a78bfa;
 }
 
 [data-theme="ethereal"] .hero-button:disabled{
@@ -4013,7 +4008,8 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 }
 
 [data-theme="ethereal"] .hero-button.is-playing{
-  background: rgba(52, 211, 153, 0.25);
+  background: #d1fae5;
+  border-color: #34d399;
 }
 
 [data-theme="ethereal"] .hero-note{
@@ -4203,24 +4199,18 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 [data-theme="ethereal"] .capsule-card{
   position: relative;
   padding: 28px;
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.75);
-  border: 1px solid rgba(167, 139, 250, 0.2);
-  box-shadow:
-    0 20px 45px rgba(15, 23, 42, 0.08),
-    inset 0 1px 0 rgba(255,255,255,0.5);
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
 [data-theme="ethereal"] .capsule-card:hover{
-  transform: translateY(-4px);
-  box-shadow:
-    0 28px 56px rgba(15, 23, 42, 0.12),
-    inset 0 1px 0 rgba(255,255,255,0.6);
+  transform: translateY(-2px);
+  border-color: #a78bfa;
 }
 
 [data-theme="ethereal"] .card-header{
@@ -4239,16 +4229,13 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 
 [data-theme="ethereal"] .card-source{
   font-size: 0.85rem;
-  color: var(--ethereal-primary);
+  color: #a78bfa;
   text-decoration: none;
-  border-bottom: 1px solid rgba(167, 139, 250, 0.4);
-  padding-bottom: 2px;
-  transition: color 0.2s ease, border-color 0.2s ease;
+  transition: color 0.2s ease;
 }
 
 [data-theme="ethereal"] .card-source:hover{
-  color: var(--ethereal-secondary);
-  border-color: var(--ethereal-secondary);
+  color: #8b5cf6;
 }
 
 [data-theme="ethereal"] .card-title{
@@ -4297,18 +4284,19 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 
 [data-theme="ethereal"] .card-tag{
   padding: 6px 12px;
-  border-radius: 16px;
-  background: rgba(167, 139, 250, 0.12);
-  border: 1px solid rgba(167, 139, 250, 0.3);
+  border-radius: 8px;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
   font-size: 0.8rem;
   font-weight: 500;
-  color: var(--ethereal-primary);
+  color: #6b7280;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 [data-theme="ethereal"] .card-tag:hover{
-  background: rgba(167, 139, 250, 0.25);
+  background: #e5e7eb;
+  border-color: #a78bfa;
 }
 
 [data-theme="ethereal"] .card-tag.is-muted{
@@ -4326,16 +4314,16 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  border-radius: 16px;
-  border: 1px solid rgba(167, 139, 250, 0.3);
-  background: rgba(255,255,255,0.4);
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
   color: var(--text);
   padding: 8px 14px;
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
-  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
 [data-theme="ethereal"] .card-action svg{
@@ -4344,23 +4332,23 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 
 [data-theme="ethereal"] .card-action:hover:not(:disabled){
   transform: translateY(-1px);
-  background: rgba(167, 139, 250, 0.2);
+  border-color: #a78bfa;
 }
 
 [data-theme="ethereal"] .card-action-voice.is-playing{
-  background: rgba(52, 211, 153, 0.2);
-  border-color: rgba(52, 211, 153, 0.4);
+  background: #d1fae5;
+  border-color: #34d399;
 }
 
 [data-theme="ethereal"] .card-action-share{
-  background: rgba(167, 139, 250, 0.18);
-  color: var(--ethereal-primary);
-  border-color: rgba(167, 139, 250, 0.45);
+  background: #f3f4f6;
+  color: #a78bfa;
+  border-color: #e5e7eb;
 }
 
 [data-theme="ethereal"] .card-action-share:hover{
-  background: rgba(167, 139, 250, 0.28);
-  color: var(--text);
+  border-color: #a78bfa;
+  color: #8b5cf6;
 }
 
 [data-theme="ethereal"] .card-action:disabled{
@@ -4370,10 +4358,10 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 
 [data-theme="ethereal"] .archive-empty{
   padding: 60px 24px;
-  border-radius: 24px;
+  border-radius: 12px;
   text-align: center;
-  background: rgba(255,255,255,0.6);
-  border: 1px solid rgba(167, 139, 250, 0.2);
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
   color: var(--muted);
   font-size: 1rem;
 }
@@ -4391,9 +4379,9 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 
 [data-theme="ethereal"] .aside-card{
   padding: 20px;
-  border-radius: 20px;
-  background: rgba(255,255,255,0.7);
-  border: 1px solid rgba(167, 139, 250, 0.25);
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -4660,30 +4648,23 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 /* Ethereal Messages */
 [data-theme="ethereal"] .capsule-message{
   padding: 28px 32px;
-  border-radius: 24px;
-  background:
-    linear-gradient(135deg, rgba(255,255,255,.9) 0%, rgba(255,255,255,.8) 100%);
+  border-radius: 12px;
+  background: #ffffff;
   color: var(--text);
-  box-shadow:
-    0 8px 32px rgba(139,92,246,.08),
-    0 0 0 1px rgba(255,255,255,.4);
-  backdrop-filter: blur(10px);
+  border: 1px solid #e5e7eb;
   max-width: 100%;
   line-height: 1.6;
-  border: none;
 }
 
 [data-theme="ethereal"] .capsule-message.from-agent{
-  background:
-    linear-gradient(135deg, rgba(255,255,255,.95) 0%, rgba(248,250,252,.9) 100%);
-  border-left: 4px solid var(--ethereal-primary);
+  background: #ffffff;
+  border-left: 4px solid #a78bfa;
 }
 
 [data-theme="ethereal"] .capsule-message.from-user{
   align-self: flex-end;
-  background:
-    linear-gradient(135deg, var(--ethereal-mist) 0%, var(--ethereal-shimmer) 100%);
-  border-left: 4px solid var(--ethereal-primary);
+  background: #f9fafb;
+  border-left: 4px solid #a78bfa;
   color: var(--text);
 }
 
@@ -4713,30 +4694,20 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   display: flex;
   gap: 16px;
   align-items: center;
-  background:
-    linear-gradient(135deg, rgba(255,255,255,.6) 0%, rgba(255,255,255,.4) 100%);
-  border: 1px solid var(--ethereal-light);
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
   border-radius: 999px;
   padding: 12px 16px 12px 24px;
-  box-shadow:
-    0 8px 32px rgba(139,92,246,.06),
-    inset 0 1px 0 rgba(255,255,255,.3);
-  backdrop-filter: blur(8px);
-  opacity: 0.8;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: border-color 0.3s ease;
 }
 
 [data-theme="ethereal"] .capsule-form:hover{
-  opacity: 1;
-  transform: translateY(-2px);
+  border-color: #a78bfa;
 }
 
 [data-theme="ethereal"] .capsule-form.listening{
-  border-color: var(--ethereal-primary);
-  box-shadow:
-    0 0 0 3px var(--ethereal-mist),
-    0 8px 32px rgba(139,92,246,.12);
-  opacity: 1;
+  border-color: #a78bfa;
+  box-shadow: 0 0 0 3px #f3e8ff;
 }
 
 [data-theme="ethereal"] .capsule-form input{
@@ -7104,30 +7075,21 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 
 
 [data-theme="ethereal"] .capsule-chip{
-  background:
-    linear-gradient(135deg, rgba(255,255,255,.8) 0%, rgba(255,255,255,.6) 100%) !important;
+  background: #ffffff !important;
   color: var(--text) !important;
-  border: 1px solid var(--ethereal-light) !important;
-  border-radius: 18px !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 8px !important;
   padding: 12px 18px !important;
   font-size: 0.85rem !important;
   font-weight: 500 !important;
   cursor: pointer;
-  transition: all 0.3s ease !important;
-  backdrop-filter: blur(8px);
-  box-shadow:
-    0 3px 12px rgba(139,92,246,.06),
-    inset 0 1px 0 rgba(255,255,255,.4) !important;
+  transition: all 0.2s ease !important;
 }
 
 [data-theme="ethereal"] .capsule-chip:hover{
-  background:
-    linear-gradient(135deg, var(--ethereal-mist) 0%, var(--ethereal-shimmer) 100%) !important;
-  transform: translateY(-2px) !important;
-  box-shadow:
-    0 8px 24px rgba(139,92,246,.15),
-    inset 0 1px 0 rgba(255,255,255,.4) !important;
-  border-color: var(--ethereal-primary) !important;
+  background: #f9fafb !important;
+  transform: translateY(-1px) !important;
+  border-color: #a78bfa !important;
 }
 
 /* Ethereal Footer Override */
