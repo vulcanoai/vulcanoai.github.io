@@ -2565,16 +2565,10 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: 
+  background-image:
     linear-gradient(rgba(255,215,0,.1) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,215,0,.1) 1px, transparent 1px);
   background-size: 30px 30px;
-  animation: blockchainFlow 20s linear infinite;
-}
-
-@keyframes blockchainFlow {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(30px, 30px); }
 }
 
 .crypto-hero::before {
@@ -2585,12 +2579,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
   right: 0;
   height: 3px;
   background: linear-gradient(90deg, transparent, #ffd700, #ff6b35, #8a2be2, transparent);
-  animation: cryptoGlow 3s ease-in-out infinite;
-}
-
-@keyframes cryptoGlow {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 1; }
+  opacity: 0.6;
 }
 
 .crypto-hero::after {
@@ -2602,13 +2591,8 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
   height: 200px;
   background: radial-gradient(circle, rgba(255,215,0,.1), transparent 70%);
   border-radius: 50%;
-  animation: cryptoPulse 4s ease-in-out infinite;
+  opacity: 0.3;
   pointer-events: none;
-}
-
-@keyframes cryptoPulse {
-  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
-  50% { transform: scale(1.2) rotate(180deg); opacity: 0.6; }
 }
 
 .crypto-icon-stack {
@@ -2626,15 +2610,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
   align-items: center;
   justify-content: center;
   position: relative;
-  animation: cryptoFloat 4s ease-in-out infinite;
   margin: 0 auto;
-}
-
-@keyframes cryptoFloat {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  25% { transform: translateY(-8px) rotate(90deg); }
-  50% { transform: translateY(-4px) rotate(180deg); }
-  75% { transform: translateY(-12px) rotate(270deg); }
 }
 
 .crypto-orb .hero-icon {
@@ -2658,33 +2634,24 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
   font-size: 20px;
   font-weight: bold;
   opacity: 0.7;
-  animation: cryptoOrbit 8s linear infinite;
 }
 
 .crypto-symbol.btc {
   color: #f7931a;
   top: 10%;
   right: 10%;
-  animation-delay: 0s;
 }
 
 .crypto-symbol.eth {
   color: #627eea;
   bottom: 20%;
   left: 15%;
-  animation-delay: -2.7s;
 }
 
 .crypto-symbol.sol {
   color: #9945ff;
   top: 30%;
   left: 5%;
-  animation-delay: -5.3s;
-}
-
-@keyframes cryptoOrbit {
-  0% { transform: rotate(0deg) translateX(80px) rotate(0deg); }
-  100% { transform: rotate(360deg) translateX(80px) rotate(-360deg); }
 }
 
 .hero-text h1 {
@@ -3149,12 +3116,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
   right: 0;
   height: 3px;
   background: linear-gradient(90deg, transparent, #da3633, #1f6feb, #ffd700, transparent);
-  animation: legalPulse 4s ease-in-out infinite;
-}
-
-@keyframes legalPulse {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
+  opacity: 0.5;
 }
 
 .scales-animation {
@@ -3164,16 +3126,10 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
   right: 0;
   bottom: 0;
   opacity: 0.08;
-  background-image: 
+  background-image:
     radial-gradient(circle at 20% 80%, rgba(218,54,51,.3) 0%, transparent 50%),
     radial-gradient(circle at 80% 20%, rgba(31,111,235,.3) 0%, transparent 50%),
     radial-gradient(circle at 40% 40%, rgba(255,215,0,.2) 0%, transparent 50%);
-  animation: scalesFlow 15s ease-in-out infinite;
-}
-
-@keyframes scalesFlow {
-  0%, 100% { transform: scale(1) rotate(0deg); }
-  50% { transform: scale(1.1) rotate(180deg); }
 }
 
 .legal-icon-stack {
@@ -3191,15 +3147,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
   align-items: center;
   justify-content: center;
   position: relative;
-  animation: scalesFloat 5s ease-in-out infinite;
   margin: 0 auto;
-}
-
-@keyframes scalesFloat {
-  0%, 100% { transform: translateY(0px) scale(1); }
-  25% { transform: translateY(-6px) scale(1.02); }
-  50% { transform: translateY(0px) scale(1.05); }
-  75% { transform: translateY(-4px) scale(1.02); }
 }
 
 .scales-icon .hero-icon {
@@ -3222,30 +3170,21 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
   position: absolute;
   font-size: 18px;
   opacity: 0.8;
-  animation: legalOrbit 12s linear infinite;
 }
 
 .legal-symbol.gavel {
   top: 15%;
   right: 15%;
-  animation-delay: 0s;
 }
 
 .legal-symbol.document {
   bottom: 25%;
   left: 20%;
-  animation-delay: -4s;
 }
 
 .legal-symbol.balance {
   top: 35%;
   left: 10%;
-  animation-delay: -8s;
-}
-
-@keyframes legalOrbit {
-  0% { transform: rotate(0deg) translateX(70px) rotate(0deg); }
-  100% { transform: rotate(360deg) translateX(70px) rotate(-360deg); }
 }
 
 .hero-text h1 {
@@ -5215,15 +5154,7 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   left: 20px;
 }
 
-.satellite-node.orbiting {
-  animation: orbit 8s linear infinite;
-  animation-delay: var(--orbit-delay, 0s);
-}
-
-@keyframes orbit {
-  0% { transform: rotate(0deg) translateX(60px) rotate(0deg); }
-  100% { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
-}
+/* Satellite orbit animation removed for minimal distraction */
 
 /* AI Collaboration Styles */
 .ai-network {
@@ -5437,11 +5368,7 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 .orb{width:320px; height:320px; max-width:100%}
 .orb svg{width:100%; height:100%; display:block}
 .orb .stroke{stroke:var(--logo); fill:none; opacity:.85}
-.orb .spin-slow{animation:spin 36s linear infinite}
-.orb .spin-med{animation:spin 48s linear infinite reverse}
-.orb .spin-fast{animation:spin 64s linear infinite}
-@keyframes spin{from{transform:rotate(0turn)} to{transform:rotate(1turn)}}
-@media (prefers-reduced-motion: reduce){ .orb .spin-slow, .orb .spin-med, .orb .spin-fast{animation:none} }
+/* Orb spin animations removed for minimal distraction */
 /* Emphasize hero orb size (brand presence) */
 #hero-orb{ width: clamp(360px, 36vw, 520px); height: clamp(360px, 36vw, 520px); display:block }
 @media (max-width: 900px){
@@ -5627,28 +5554,24 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 .data-symbol {
   position: absolute;
   font-size: 24px;
-  animation: orbit 12s linear infinite;
 }
 
 .data-symbol.rss {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  animation-delay: 0s;
 }
 
 .data-symbol.api {
   right: 0;
   top: 50%;
   transform: translateY(-50%);
-  animation-delay: 4s;
 }
 
 .data-symbol.filter {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  animation-delay: 8s;
 }
 
 .sources-stats {
@@ -6097,16 +6020,11 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 .hearts-animation {
   position: absolute;
   inset: 0;
-  background-image: 
+  background-image:
     radial-gradient(circle at 20% 50%, rgba(236, 72, 153, 0.1) 2px, transparent 2px),
     radial-gradient(circle at 80% 50%, rgba(168, 85, 247, 0.1) 2px, transparent 2px);
   background-size: 100px 100px, 150px 150px;
-  animation: heartbeat 4s ease-in-out infinite;
-}
-
-@keyframes heartbeat {
-  0%, 100% { transform: scale(1); opacity: 0.7; }
-  50% { transform: scale(1.05); opacity: 1; }
+  opacity: 0.7;
 }
 
 .support-icon-stack {
@@ -6126,14 +6044,8 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   align-items: center;
   justify-content: center;
   box-shadow: 0 8px 32px rgba(236, 72, 153, 0.3);
-  animation: loveGlow 2s ease-in-out infinite alternate;
   position: relative;
   z-index: 2;
-}
-
-@keyframes loveGlow {
-  0% { box-shadow: 0 8px 32px rgba(236, 72, 153, 0.3); }
-  100% { box-shadow: 0 12px 40px rgba(236, 72, 153, 0.5); }
 }
 
 .support-orb .hero-icon {
@@ -6150,33 +6062,25 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 
 .heart-symbol {
   position: absolute;
-  animation: floatHeart 8s ease-in-out infinite;
+  opacity: 0.7;
 }
 
 .heart-symbol.small {
   top: 10%;
   right: 10%;
-  animation-delay: 0s;
   font-size: 18px;
 }
 
 .heart-symbol.medium {
   bottom: 20%;
   left: 15%;
-  animation-delay: 2.5s;
   font-size: 22px;
 }
 
 .heart-symbol.large {
   top: 15%;
   left: 10%;
-  animation-delay: 5s;
   font-size: 26px;
-}
-
-@keyframes floatHeart {
-  0%, 100% { transform: translateY(0px) scale(1); opacity: 0.7; }
-  50% { transform: translateY(-10px) scale(1.1); opacity: 1; }
 }
 
 .support-stats {
@@ -6655,16 +6559,11 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 .neural-network {
   position: absolute;
   inset: 0;
-  background-image: 
+  background-image:
     linear-gradient(90deg, transparent 48%, rgba(99, 102, 241, 0.1) 50%, transparent 52%),
     linear-gradient(0deg, transparent 48%, rgba(139, 92, 246, 0.1) 50%, transparent 52%);
   background-size: 80px 80px, 60px 60px;
-  animation: neuralPulse 8s ease-in-out infinite;
-}
-
-@keyframes neuralPulse {
-  0%, 100% { opacity: 0.7; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.02); }
+  opacity: 0.7;
 }
 
 .company-icon-stack {
@@ -6684,14 +6583,8 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   align-items: center;
   justify-content: center;
   box-shadow: 0 8px 32px rgba(99, 102, 241, 0.3);
-  animation: companyGlow 3s ease-in-out infinite;
   position: relative;
   z-index: 2;
-}
-
-@keyframes companyGlow {
-  0%, 100% { box-shadow: 0 8px 32px rgba(99, 102, 241, 0.3); }
-  50% { box-shadow: 0 12px 40px rgba(99, 102, 241, 0.5); }
 }
 
 .company-orb .hero-icon {
@@ -6708,32 +6601,23 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 
 .ai-symbol {
   position: absolute;
-  animation: floatAI 10s ease-in-out infinite;
   font-size: 20px;
+  opacity: 0.8;
 }
 
 .ai-symbol.neural {
   top: 10%;
   right: 15%;
-  animation-delay: 0s;
 }
 
 .ai-symbol.robot {
   bottom: 15%;
   left: 10%;
-  animation-delay: 3s;
 }
 
 .ai-symbol.spark {
   top: 20%;
   left: 20%;
-  animation-delay: 6s;
-}
-
-@keyframes floatAI {
-  0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
-  33% { transform: translateY(-8px) rotate(5deg); opacity: 1; }
-  66% { transform: translateY(-4px) rotate(-3deg); opacity: 0.9; }
 }
 
 .company-stats {
@@ -7248,7 +7132,6 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   height: 8px;
   border-radius: 50%;
   background: var(--ethereal-primary);
-  animation: ethereal-heartbeat 2s infinite;
 }
 
 [data-theme="ethereal"] .footer-link{
