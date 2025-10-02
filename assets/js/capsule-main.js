@@ -89,9 +89,7 @@
 
   function setLoading(value) {
     state.loading = value;
-    if (value) {
-      renderCapsules();
-    }
+    renderCapsules();
   }
 
   function updateTimestampLabel() {
