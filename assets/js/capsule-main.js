@@ -25,8 +25,11 @@
   const voiceState = {
     supported: typeof window !== 'undefined' && 'speechSynthesis' in window,
     activeId: null,
-    utterance: null
+    utterance: null,
+    playbackRate: 1.0
   };
+
+  const playbackRates = [0.75, 1.0, 1.25, 1.5];
 
   const elements = {
     updatedLabel: document.getElementById('capsule-updated'),
@@ -408,7 +411,7 @@
 
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'es-CO';
-    utterance.rate = 1;
+    utterance.rate = voiceState.playbackRate;
     utterance.pitch = 1;
     utterance.onend = () => {
       voiceState.activeId = null;

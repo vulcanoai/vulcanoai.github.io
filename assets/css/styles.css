@@ -7368,11 +7368,19 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   display: flex;
   align-items: flex-start;
   gap: 12px;
+  flex-wrap: wrap;
 }
 
-.holographic-voiceover-btn {
-  width: 40px;
-  height: 40px;
+.holographic-voice-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.holographic-voiceover-btn,
+.holographic-speed-btn {
+  min-width: 44px;
+  min-height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -7384,11 +7392,24 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   transition: all 0.2s ease;
 }
 
-.holographic-voiceover-btn:hover {
+.holographic-voiceover-btn:hover,
+.holographic-speed-btn:hover {
   background: var(--brand);
   border-color: var(--brand);
   color: white;
   transform: scale(1.05);
+}
+
+.holographic-speed-btn {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0 8px;
+  border-radius: 20px;
+}
+
+.holographic-speed-btn .speed-label {
+  font-family: 'Monaco', 'Menlo', monospace;
+  letter-spacing: 0.5px;
 }
 
 .holographic-voiceover-btn.is-playing {
@@ -7836,6 +7857,25 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   .holographic-capsule {
     border-radius: 20px;
     max-height: 95vh;
+    position: relative;
+  }
+
+  .holographic-capsule::before {
+    content: '← Desliza →';
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    color: var(--muted);
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 1000;
+    background: var(--bg-alpha-95);
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+    font-weight: 500;
   }
 
   .holographic-header {
@@ -7856,6 +7896,17 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
     width: 100%;
     justify-content: flex-start;
     padding-top: 12px;
+  }
+
+  .holographic-voiceover-btn,
+  .holographic-speed-btn {
+    min-width: 52px;
+    min-height: 52px;
+  }
+
+  .holographic-speed-btn {
+    font-size: 0.85rem;
+    padding: 0 12px;
   }
 
   .holographic-share {

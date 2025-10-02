@@ -11,6 +11,17 @@ window.VulcanoHolographicViewer = (() => {
   let isOpen = false;
   let shareFeedbackTimeout = null;
 
+  // Touch gesture state
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchEndX = 0;
+  let touchEndY = 0;
+  let isSwiping = false;
+
+  // Voice playback state
+  let currentPlaybackRate = 1.0;
+  const playbackRates = [0.75, 1.0, 1.25, 1.5];
+
   function createHolographicViewer() {
     if (currentOverlay) return currentOverlay;
 
@@ -30,12 +41,17 @@ window.VulcanoHolographicViewer = (() => {
             </div>
           </div>
           <div class="holographic-actions">
-            <button class="holographic-voiceover-btn" type="button" title="Escuchar cápsula" aria-label="Escuchar cápsula">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-              </svg>
-            </button>
+            <div class="holographic-voice-controls">
+              <button class="holographic-voiceover-btn" type="button" title="Escuchar cápsula" aria-label="Escuchar cápsula">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                </svg>
+              </button>
+              <button class="holographic-speed-btn" type="button" title="Velocidad de reproducción" aria-label="Cambiar velocidad">
+                <span class="speed-label">1.0x</span>
+              </button>
+            </div>
             <div class="holographic-share" role="group" aria-label="Compartir cápsula">
               <button class="holographic-share-btn" type="button" data-channel="native" title="Compartir">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -127,6 +143,8 @@ window.VulcanoHolographicViewer = (() => {
     const prevBtn = overlay.querySelector('.holographic-nav.prev');
     const nextBtn = overlay.querySelector('.holographic-nav.next');
     const voiceoverBtn = overlay.querySelector('.holographic-voiceover-btn');
+    const speedBtn = overlay.querySelector('.holographic-speed-btn');
+    const capsule = overlay.querySelector('.holographic-capsule');
 
     // Close handlers
     closeBtn.addEventListener('click', close);
@@ -141,6 +159,18 @@ window.VulcanoHolographicViewer = (() => {
     // Voiceover handler
     if (voiceoverBtn) {
       voiceoverBtn.addEventListener('click', () => toggleVoiceover(voiceoverBtn));
+    }
+
+    // Speed control handler
+    if (speedBtn) {
+      speedBtn.addEventListener('click', () => cyclePlaybackSpeed(speedBtn));
+    }
+
+    // Touch gesture handlers
+    if (capsule) {
+      capsule.addEventListener('touchstart', handleTouchStart, { passive: true });
+      capsule.addEventListener('touchmove', handleTouchMove, { passive: false });
+      capsule.addEventListener('touchend', handleTouchEnd, { passive: true });
     }
 
     // Keyboard navigation
@@ -192,6 +222,54 @@ window.VulcanoHolographicViewer = (() => {
         navigateTo(currentIndex + 1);
         break;
     }
+  }
+
+  function handleTouchStart(e) {
+    if (!isOpen || !e.touches || !e.touches[0]) return;
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    isSwiping = false;
+  }
+
+  function handleTouchMove(e) {
+    if (!isOpen || !e.touches || !e.touches[0]) return;
+    touchEndX = e.touches[0].clientX;
+    touchEndY = e.touches[0].clientY;
+
+    const deltaX = Math.abs(touchEndX - touchStartX);
+    const deltaY = Math.abs(touchEndY - touchStartY);
+
+    // Detect horizontal swipe (more horizontal than vertical)
+    if (deltaX > deltaY && deltaX > 10) {
+      isSwiping = true;
+      e.preventDefault(); // Prevent scroll during swipe
+    }
+  }
+
+  function handleTouchEnd(e) {
+    if (!isOpen || !isSwiping) return;
+
+    const deltaX = touchEndX - touchStartX;
+    const deltaY = Math.abs(touchEndY - touchStartY);
+    const minSwipeDistance = 50;
+
+    // Only trigger swipe if horizontal movement is significant
+    if (Math.abs(deltaX) > minSwipeDistance && Math.abs(deltaX) > deltaY * 2) {
+      if (deltaX > 0) {
+        // Swipe right - go to previous
+        navigateTo(currentIndex - 1);
+      } else {
+        // Swipe left - go to next
+        navigateTo(currentIndex + 1);
+      }
+    }
+
+    // Reset state
+    isSwiping = false;
+    touchStartX = 0;
+    touchStartY = 0;
+    touchEndX = 0;
+    touchEndY = 0;
   }
 
   function createFloatingParticles(container) {
@@ -658,6 +736,26 @@ window.VulcanoHolographicViewer = (() => {
     }
   }
 
+  function cyclePlaybackSpeed(button) {
+    const currentIndex = playbackRates.indexOf(currentPlaybackRate);
+    const nextIndex = (currentIndex + 1) % playbackRates.length;
+    currentPlaybackRate = playbackRates[nextIndex];
+
+    const label = button.querySelector('.speed-label');
+    if (label) {
+      label.textContent = `${currentPlaybackRate}x`;
+    }
+
+    // If currently playing, update the rate
+    if (window.speechSynthesis.speaking) {
+      const voiceBtn = currentOverlay?.querySelector('.holographic-voiceover-btn');
+      if (voiceBtn) {
+        window.speechSynthesis.cancel();
+        setTimeout(() => toggleVoiceover(voiceBtn), 100);
+      }
+    }
+  }
+
   function toggleVoiceover(button) {
     // Cancel any existing speech
     if (window.speechSynthesis.speaking) {
@@ -680,7 +778,7 @@ window.VulcanoHolographicViewer = (() => {
 
     const utterance = new SpeechSynthesisUtterance(textToRead);
     utterance.lang = 'es-ES';
-    utterance.rate = 0.95;
+    utterance.rate = currentPlaybackRate;
     utterance.pitch = 1.0;
 
     utterance.onstart = () => {
