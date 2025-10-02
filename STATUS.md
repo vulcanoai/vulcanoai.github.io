@@ -7,7 +7,7 @@ Release: Demo estable v1 (Cápsula + Visión + AUTORESEARCH)
 
 | Área | Estado | Notas clave |
 | --- | --- | --- |
-| Cápsula principal (`index.html`) | 🟢 Operativa | Carga `data/capsules/doc-latest.txt` y, si no existe, busca el snapshot más reciente en GitHub (`doc-*.txt` o `<timestamp>*.md`). |
+| Cápsula principal (`index.html`) | 🟢 Operativa | Intenta `doc-latest.txt`, luego descarga el snapshot más reciente vía GitHub y, como último recurso, usa `data/capsules.json`. |
 | Página Visión (`pages/vision.html`) | 🟢 Operativa | Usa el mismo componente de chat para guiar conversaciones comerciales. |
 | Workflow AUTORESEARCH | 🟡 Manual | JSON listo e importable. Requiere credenciales `openAiApi` y `githubApi` para correr en n8n. |
 | Documentación | 🟢 Actualizada | `README.md`, `docs/README.md`, `docs/autoresearch.md`. |
@@ -15,13 +15,13 @@ Release: Demo estable v1 (Cápsula + Visión + AUTORESEARCH)
 
 ## 📊 Métricas / datos de referencia
 
-- `data/capsules/doc-latest.txt` contiene 3 cápsulas de ejemplo (EE. UU., Rusia, China).
+- `data/capsules.json` contiene 2 cápsulas de ejemplo para la demo local.
 - `data/capsules/ai-researcher/` almacena snapshots `.md` generados por el workflow.
 - `data/agents.json` registra al agente "Vulcano Researcher" como demo estable.
 
 ## 🚦 Próximos pasos mínimos
 
-1. **Automatizar `doc-latest.txt`:** ajustar `BUILD_AGENT_PUT` para que el workflow también publique el archivo `doc-latest.txt` (incluyendo `sha` al actualizar).
+1. **Automatizar entrega directa:** añadir a `BUILD_AGENT_PUT` la generación de `doc-latest.txt` (o un endpoint equivalente) para evitar depender solo de la API de GitHub.
 2. **Monitoreo básico:** añadir fecha de última corrida y cantidad de cápsulas en `data/agents.json` para mostrarlo en la UI.
 3. **Hardening del parser:** evaluar activar `autoFix` si el agente genera JSON incompleto.
 

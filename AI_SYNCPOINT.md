@@ -8,7 +8,7 @@ Referencia oficial de la demo estable (`main`). Úsala antes de proponer cambios
 
 ## Qué implica esta versión
 - UI minimalista con un único componente de chat (`chat-component.js`).
-- Datos leídos desde `data/capsules/doc-latest.txt` (snapshot demo) o desde los archivos `.md` generados por el workflow.
+- Datos leídos desde `data/capsules/doc-latest.txt` (si existe), de los snapshots `.md` en GitHub o, en último caso, del snapshot local `data/capsules.json`.
 - CSP estricta en ambas páginas (`default-src 'self'`).
 - Sin navegación secundaria, sin feeds legacy, sin páginas adicionales.
 

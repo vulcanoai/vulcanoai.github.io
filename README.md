@@ -9,7 +9,7 @@ Este repositorio contiene la demo estable de Vulcano AI: una cápsula conversaci
 | Cápsula principal | `index.html` | Conversa con el visitante y lee las cápsulas generadas por AUTORESEARCH. |
 | Visión premium | `pages/vision.html` | Reutiliza la misma UI con guiones predefinidos para explicar la propuesta de valor. |
 | Workflow n8n | `n8n/workflows/AUTORESEARCH.json` | Investiga YouTube y portales especializados (EE. UU., Rusia, China) y produce cápsulas estructuradas en español. |
-| Snapshot demo | `data/capsules/doc-latest.txt` | Archivo de ejemplo con tres cápsulas para probar la experiencia sin ejecutar n8n. |
+| Snapshot demo | `data/capsules.json` | Snapshot estructurado listo para pruebas locales sin n8n. |
 | JS compartido | `assets/js/chat-component.js` | Componente unificado de conversación; `capsule-main.js` y `capsule-vision.js` lo configuran según la página. |
 
 Consulta `docs/README.md` para el mapa completo y `docs/autoresearch.md` para el detalle del workflow.
@@ -23,14 +23,14 @@ python3 -m http.server 8080
 
 1. Abre `http://localhost:8080/` para la cápsula principal.
 2. Visita `http://localhost:8080/pages/vision.html` para la página de visión.
-3. Edita `data/capsules/doc-latest.txt` si quieres probar tus propias cápsulas manualmente (usa el formato mostrado en el archivo).
+3. Edita `data/capsules.json` si quieres probar tus propias cápsulas manualmente (respeta el esquema `{ "capsules": [] }`).
 
 ## Integración con AUTORESEARCH
 
 - Configura las credenciales `openAiApi` y `githubApi` en n8n.
 - Importa `n8n/workflows/AUTORESEARCH.json` y ajusta tu schedule (por defecto corre cada hora).
 - El workflow publica archivos `.md` en `data/capsules/ai-researcher/` con contenido textual y el JSON embebido.
-- La web intentará leer `doc-latest.txt`. Si no existe, listará los snapshots de GitHub y tomará el más reciente (`doc-*.txt` o `<timestamp>*.md`).
+- La web intentará leer `doc-latest.txt`. Si no existe o retorna error, consultará la API de GitHub para descargar el snapshot más reciente que publique el workflow (`doc-*.txt` o `<timestamp>*.md`). Sólo si ambas rutas fallan usará `data/capsules.json` como respaldo local.
 - Asegúrate de que al menos un snapshot con formato de cápsulas esté accesible públicamente para que la demo tenga contenido.
 
 ## Diseño y experiencia

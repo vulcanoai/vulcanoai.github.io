@@ -26,8 +26,8 @@ Workflow n8n responsable de recolectar noticias globales de IA y convertirlas en
 
 ## Integración con la web
 
-- La demo incluye `data/capsules/doc-latest.txt` como snapshot. En producción se recomienda que el workflow actualice también ese archivo (o uno equivalente) tras cada corrida.
-- `capsule-main.js` buscará primero `doc-latest.txt`; si no existe, listará los archivos en GitHub y tomará el más reciente (`doc-*.txt` o `<timestamp>*.md`).
+- La demo incluye `data/capsules.json` como snapshot local. En producción se recomienda que el workflow exponga un archivo actual (por ejemplo `data/capsules/doc-latest.txt`) o un endpoint HTTP que la web pueda leer directamente.
+- `capsule-main.js` buscará primero `doc-latest.txt`; si no existe o falla, consultará los snapshots de GitHub y, sólo si nada está disponible, usará `data/capsules.json` como respaldo.
 - El formato de texto debe respetar los separadores `---` y los campos en español para que la UI pueda indexar títulos y fuentes.
 
 ## Personalización rápida
@@ -43,4 +43,3 @@ Workflow n8n responsable de recolectar noticias globales de IA y convertirlas en
 - (Opcional) Entorno que permita llamadas a `https://piped.video` y `https://r.jina.ai`.
 
 Mantener este workflow como verdad única: cualquier experimento nuevo debería clonarse a partir de `AUTORESEARCH` para evitar divergencias.
-

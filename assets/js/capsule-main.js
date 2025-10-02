@@ -624,16 +624,20 @@
       const updatedAt = lastModified ? new Date(lastModified).toISOString() : null;
       return { text, updatedAt, source: 'primary-doc' };
     } catch (initialError) {
-      const localJson = await tryFetchLocalJsonSnapshot(initialError);
-      if (localJson) {
-        return localJson;
+      try {
+        const fallback = await fetchFromGitHubDirectory(initialError);
+        return { ...fallback, source: 'github-directory' };
+      } catch (githubError) {
+        const localJson = await tryFetchLocalJsonSnapshot(initialError, githubError);
+        if (localJson) {
+          return localJson;
+        }
+        throw githubError;
       }
-      const fallback = await fetchFromGitHubDirectory(initialError);
-      return { ...fallback, source: 'github-directory' };
     }
   }
 
-  async function tryFetchLocalJsonSnapshot(initialError) {
+  async function tryFetchLocalJsonSnapshot(initialError, secondaryError) {
     const altUrl = '/data/capsules.json';
     if (docUrl === altUrl) {
       return null;
@@ -648,7 +652,7 @@
       const updatedAt = lastModified ? new Date(lastModified).toISOString() : null;
       return { text, updatedAt, source: 'capsules-json', url: altUrl };
     } catch (err) {
-      console.warn('capsule-main: fallback a capsules.json falló', err, initialError);
+      console.warn('capsule-main: fallback a capsules.json falló', err, initialError, secondaryError);
       return null;
     }
   }

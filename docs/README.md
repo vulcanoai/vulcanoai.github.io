@@ -11,18 +11,18 @@ Todo lo demás fue depurado o archivado. El objetivo es tener una base mínima, 
 
 ```
 AUTORESEARCH (n8n) ──▶ data/capsules/ai-researcher/*.md
-                        │
-                        └──▶ data/capsules/doc-latest.txt (snapshot demo)
+                        ├──▶ data/capsules/doc-latest.txt (opcional)
+                        └──▶ data/capsules.json (snapshot local)
                                 ↓
-                           assets/js/capsule-main.js
+                  assets/js/capsule-main.js · fallback: doc-latest → GitHub → JSON local
                                 ↓
                       index.html · chat-component.js
 ```
 
 - **Workflow:** `n8n/workflows/AUTORESEARCH.json` ejecuta la recolección autónoma de noticias globales de IA.
-- **Persistencia:** cada corrida escribe un `.md` con los hallazgos estructurados y, en producción, debe exponer un `.txt` estilo "Capsule-ID". El repo incluye `data/capsules/doc-latest.txt` como snapshot de referencia.
+- **Persistencia:** cada corrida escribe un `.md` con los hallazgos estructurados. Opcionalmente, el workflow puede actualizar `data/capsules/doc-latest.txt` para servir desde la web sin depender de la API de GitHub; como respaldo local se incluye `data/capsules.json`.
 - **Frontend:** ambas páginas comparten `chat-component.js`. La cápsula principal monta `capsule-main.js`; la visión usa `capsule-vision.js` con respuestas precargadas.
-- **Configuración:** `assets/js/config.js` centraliza paths y enlaces. Hoy solo consume `doc-latest` y la lista de cápsulas publicada en GitHub.
+- **Configuración:** `assets/js/config.js` centraliza paths y enlaces. La UI intenta `doc-latest`, luego la API de GitHub y, si todo falla, usa el snapshot JSON local.
 
 ## Archivos esenciales
 
@@ -34,12 +34,12 @@ AUTORESEARCH (n8n) ──▶ data/capsules/ai-researcher/*.md
 | `assets/js/chat-component.js` | UI unificada de conversación. |
 | `assets/js/capsule-main.js` | Lógica de lectura de cápsulas. |
 | `assets/js/capsule-vision.js` | Respuestas estáticas para la página de visión. |
-| `data/capsules/doc-latest.txt` | Snapshot de ejemplo para la demo. |
+| `data/capsules.json` | Snapshot de ejemplo para la demo local. |
 | `n8n/workflows/AUTORESEARCH.json` | Workflow autónomo de investigación. |
 
 ## Formato de cápsulas
 
-Cada cápsula en `doc-latest.txt` se separa con `---` y utiliza campos en español:
+Cada cápsula en los `.md` publicados (o en `doc-latest.txt`) se separa con `---` y utiliza campos en español:
 
 ```
 Capsule-ID: 2025-09-29-xai-colossus-2
@@ -65,11 +65,10 @@ python3 -m http.server 8080  # o cualquier servidor estático
 # abrir http://localhost:8080/
 ```
 
-Para refrescar el snapshot a mano, edita `data/capsules/doc-latest.txt` o publica un archivo compatible desde n8n. La UI detecta cambios automáticamente en cada recarga.
+Para refrescar la demo sin n8n, edita `data/capsules.json`. En producción, publica un `.md` nuevo desde el workflow o, si prefieres servirlo sin pedir a GitHub, actualiza `data/capsules/doc-latest.txt` con la última captura.
 
 ## Próximos pasos sugeridos
 
-- Conectar el workflow `AUTORESEARCH` a GitHub con credenciales de producción para que cargue `doc-latest.txt` en cada corrida.
+- Conectar el workflow `AUTORESEARCH` a GitHub con credenciales de producción y añadir, si es necesario, un paso que escriba `doc-latest.txt` (o un endpoint equivalente) para servir el último snapshot directamente.
 - Exponer un endpoint (Cloudflare Workers / Vercel) que sirva el último `.md` como `.txt` para no depender de la API de GitHub.
 - Añadir tracking de ejecución en `data/agents.json` (ver sección de agentes).
-
