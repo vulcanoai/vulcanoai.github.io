@@ -219,6 +219,13 @@ window.VulcanoHolographicViewer = (() => {
     renderCapsule(currentCapsules[currentIndex]);
     updateNavigation();
 
+    const current = currentCapsules[currentIndex];
+    if (current && typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('vulcano:holographic-open', {
+        detail: { capsuleId: current.id || null }
+      }));
+    }
+
     // Prevent body scroll
     document.body.style.overflow = 'hidden';
 
@@ -237,6 +244,10 @@ window.VulcanoHolographicViewer = (() => {
     document.body.style.overflow = '';
     clearShareFeedback();
     isOpen = false;
+
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('vulcano:holographic-close'));
+    }
 
     // Clean up after animation
     setTimeout(() => {

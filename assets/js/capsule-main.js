@@ -17,7 +17,9 @@
     error: null,
     generatedAt: null,
     source: null,
-    voiceButtons: new Map()
+    voiceButtons: new Map(),
+    capsuleIndex: new Map(),
+    pendingCapsuleId: null
   };
 
   const voiceState = {
@@ -40,6 +42,10 @@
     renderCapsules();
     renderTagFilter();
     updatePlayLatestState();
+    state.pendingCapsuleId = getCapsuleIdFromHash();
+    window.addEventListener('hashchange', handleHashChange);
+    window.addEventListener('vulcano:holographic-open', handleViewerOpen);
+    window.addEventListener('vulcano:holographic-close', handleViewerClose);
     loadCapsules();
     setupPlayLatest();
     window.addEventListener('beforeunload', cancelVoicePlayback, { once: true });
@@ -52,6 +58,7 @@
       const capsules = parseDocumentToCapsules(text);
       enhanceCapsules(capsules);
       state.capsules = capsules;
+      state.capsuleIndex = buildCapsuleIndex(capsules);
       state.filteredCapsules = applyFilterToCapsules(state.activeTag, capsules);
       state.generatedAt = updatedAt || new Date().toISOString();
       state.source = source;
@@ -59,6 +66,7 @@
       buildTagIndex(capsules);
       renderTagFilter();
       renderCapsules();
+      openPendingCapsuleIfNeeded();
       updatePlayLatestState();
       updateTimestampLabel();
     } catch (err) {
@@ -266,7 +274,8 @@
         const chip = document.createElement('span');
         chip.className = 'card-tag';
         chip.textContent = beautifyTagLabel(tag);
-        chip.addEventListener('click', () => {
+        chip.addEventListener('click', event => {
+          event.stopPropagation();
           const slug = normalizeTag(tag);
           if (!slug) return;
           state.activeTag = slug;
@@ -301,10 +310,30 @@
       voiceButton.disabled = true;
       voiceButton.title = 'Tu navegador no soporta síntesis de voz.';
     } else {
-      voiceButton.addEventListener('click', () => toggleCapsuleVoice(capsule));
+      voiceButton.addEventListener('click', event => {
+        event.stopPropagation();
+        toggleCapsuleVoice(capsule);
+      });
     }
     actions.appendChild(voiceButton);
     state.voiceButtons.set(capsule.id, voiceButton);
+
+    const shareButton = document.createElement('button');
+    shareButton.type = 'button';
+    shareButton.className = 'card-action card-action-share';
+    shareButton.innerHTML = `
+      <svg width="16" height="16" aria-hidden="true" viewBox="0 0 24 24">
+        <path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7" fill="none" stroke="currentColor" stroke-width="1.5" />
+        <path d="M16 6l-4-4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" />
+        <path d="M12 2v13" fill="none" stroke="currentColor" stroke-width="1.5" />
+      </svg>
+      Compartir
+    `;
+    shareButton.addEventListener('click', event => {
+      event.stopPropagation();
+      shareCapsule(capsule);
+    });
+    actions.appendChild(shareButton);
 
     if (capsule.sources && capsule.sources.length) {
       const primary = capsule.primarySource || capsule.sources[0];
@@ -320,6 +349,9 @@
         </svg>
         Fuente
       `;
+      sourceLink.addEventListener('click', event => {
+        event.stopPropagation();
+      });
       actions.appendChild(sourceLink);
     }
 
@@ -334,14 +366,21 @@
         </svg>
         Ver ficha completa
       `;
-      detailButton.addEventListener('click', () => {
-        window.VulcanoHolographicViewer.show(state.capsules, state.capsules.findIndex(cap => cap.id === capsule.id));
+      detailButton.addEventListener('click', event => {
+        event.stopPropagation();
+        openCapsuleDetail(capsule.id);
       });
       actions.appendChild(detailButton);
     }
 
     footer.appendChild(actions);
     article.appendChild(footer);
+
+    article.addEventListener('click', event => {
+      if (event.defaultPrevented) return;
+      if (event.target.closest('a, button')) return;
+      openCapsuleDetail(capsule.id);
+    });
 
     return article;
   }
@@ -440,6 +479,139 @@
     }
   }
 
+  function shareCapsule(capsule) {
+    if (!capsule) return;
+    const payload = buildSharePayload(capsule);
+
+    const canUseNavigator = typeof navigator !== 'undefined';
+
+    if (payload.url && canUseNavigator && typeof navigator.share === 'function') {
+      navigator.share(payload).catch(err => {
+        if (err && err.name === 'AbortError') return;
+        openCapsuleDetail(capsule.id, { highlightShare: true });
+      });
+      return;
+    }
+
+    if (payload.url && canUseNavigator && navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+      navigator.clipboard.writeText(`${payload.title} — ${payload.url}`)
+        .then(() => openCapsuleDetail(capsule.id, { highlightShare: true }))
+        .catch(() => openCapsuleDetail(capsule.id, { highlightShare: true }));
+      return;
+    }
+
+    openCapsuleDetail(capsule.id, { highlightShare: true });
+  }
+
+  function openCapsuleDetail(capsuleId, { highlightShare = false, updateHash = true } = {}) {
+    if (!capsuleId || !window.VulcanoHolographicViewer) return;
+    const index = state.capsuleIndex.get(capsuleId);
+    if (typeof index !== 'number' || index < 0 || index >= state.capsules.length) return;
+
+    if (!state.filteredCapsules.some(cap => cap.id === capsuleId)) {
+      state.activeTag = 'todos';
+      state.filteredCapsules = applyFilterToCapsules('todos', state.capsules);
+      renderTagFilter();
+      renderCapsules();
+    }
+
+    window.VulcanoHolographicViewer.show(state.capsules, index);
+    state.pendingCapsuleId = null;
+
+    if (updateHash) {
+      updateHashForCapsule(capsuleId);
+    }
+
+    if (highlightShare) {
+      requestAnimationFrame(() => highlightShareControls());
+    }
+  }
+
+  function highlightShareControls() {
+    const overlay = document.querySelector('.holographic-overlay');
+    if (!overlay) return;
+    const shareGroup = overlay.querySelector('.holographic-share');
+    if (!shareGroup) return;
+
+    shareGroup.classList.add('is-highlighted');
+    setTimeout(() => {
+      shareGroup.classList.remove('is-highlighted');
+    }, 2200);
+  }
+
+  function buildSharePayload(capsule) {
+    return {
+      title: capsule.title || 'Cápsula Vulcano',
+      text: capsule.summary || capsule.mainIdea || '',
+      url: buildCapsuleUrl(capsule)
+    };
+  }
+
+  function buildCapsuleUrl(capsule) {
+    if (!capsule || typeof window === 'undefined') return '';
+    const { location } = window;
+    if (!location) return '';
+    const base = `${location.origin}${location.pathname}${location.search}`;
+    if (!capsule.id) return base;
+    return `${base}#capsule=${encodeURIComponent(capsule.id)}`;
+  }
+
+  function updateHashForCapsule(capsuleId) {
+    if (typeof window === 'undefined') return;
+    const target = capsuleId
+      ? `#capsule=${encodeURIComponent(capsuleId)}`
+      : `${window.location.pathname}${window.location.search}`;
+    if (window.history && typeof window.history.replaceState === 'function') {
+      window.history.replaceState(null, '', target);
+    } else if (capsuleId) {
+      window.location.hash = `capsule=${encodeURIComponent(capsuleId)}`;
+    } else {
+      window.location.hash = '';
+    }
+  }
+
+  function handleViewerOpen(event) {
+    const capsuleId = event && event.detail ? event.detail.capsuleId : null;
+    if (!capsuleId) return;
+    updateHashForCapsule(capsuleId);
+  }
+
+  function handleViewerClose() {
+    updateHashForCapsule(null);
+  }
+
+  function openPendingCapsuleIfNeeded() {
+    if (!state.pendingCapsuleId) return;
+    if (!state.capsuleIndex.has(state.pendingCapsuleId)) return;
+    openCapsuleDetail(state.pendingCapsuleId, { highlightShare: false, updateHash: false });
+    state.pendingCapsuleId = null;
+  }
+
+  function handleHashChange() {
+    const capsuleId = getCapsuleIdFromHash();
+    if (!capsuleId) {
+      state.pendingCapsuleId = null;
+      if (window.VulcanoHolographicViewer && typeof window.VulcanoHolographicViewer.isOpen === 'function' && window.VulcanoHolographicViewer.isOpen()) {
+        window.VulcanoHolographicViewer.close();
+      }
+      return;
+    }
+
+    if (!state.capsuleIndex.has(capsuleId)) {
+      state.pendingCapsuleId = capsuleId;
+      return;
+    }
+
+    openCapsuleDetail(capsuleId, { highlightShare: false, updateHash: false });
+  }
+
+  function getCapsuleIdFromHash() {
+    if (typeof window === 'undefined') return null;
+    const hash = window.location.hash || '';
+    const match = hash.match(/capsule=([^&]+)/i);
+    return match ? decodeURIComponent(match[1]) : null;
+  }
+
   async function fetchLatestDocument() {
     try {
       const res = await fetch(docUrl, { cache: 'no-store' });
@@ -534,6 +706,16 @@
     state.tags = ordered.map(entry => entry[0]);
     state.tagLabels = labels;
     state.tagCounts = counts;
+  }
+
+  function buildCapsuleIndex(capsules) {
+    const index = new Map();
+    capsules.forEach((cap, idx) => {
+      if (cap && cap.id) {
+        index.set(cap.id, idx);
+      }
+    });
+    return index;
   }
 
   function beautifyTagLabel(tag) {

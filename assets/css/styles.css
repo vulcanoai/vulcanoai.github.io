@@ -4260,6 +4260,7 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   flex-direction: column;
   gap: 16px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
 }
 
 [data-theme="ethereal"] .capsule-card:hover{
@@ -4396,6 +4397,17 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 [data-theme="ethereal"] .card-action-voice.is-playing{
   background: rgba(52, 211, 153, 0.2);
   border-color: rgba(52, 211, 153, 0.4);
+}
+
+[data-theme="ethereal"] .card-action-share{
+  background: rgba(167, 139, 250, 0.18);
+  color: var(--ethereal-primary);
+  border-color: rgba(167, 139, 250, 0.45);
+}
+
+[data-theme="ethereal"] .card-action-share:hover{
+  background: rgba(167, 139, 250, 0.28);
+  color: var(--text);
 }
 
 [data-theme="ethereal"] .card-action:disabled{
@@ -7615,6 +7627,23 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
 
 [data-theme="ethereal"] .holographic-share-btn.is-active {
   background: rgba(52, 211, 153, 0.25);
+}
+
+.holographic-share.is-highlighted {
+  animation: share-pulse 1.6s ease-in-out 2;
+  box-shadow: 0 0 0 0 rgba(167, 139, 250, 0.4);
+}
+
+@keyframes share-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(167, 139, 250, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(167, 139, 250, 0.05);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(167, 139, 250, 0.0);
+  }
 }
 
 /* Content sections */
