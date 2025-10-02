@@ -28,6 +28,12 @@ window.VulcanoHolographicViewer = (() => {
     const overlay = document.createElement('div');
     overlay.className = 'holographic-overlay';
     overlay.innerHTML = `
+      <button class="holographic-nav prev" type="button" aria-label="Cápsula anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+
       <div class="holographic-capsule">
         <div class="holographic-particles"></div>
 
@@ -114,19 +120,13 @@ window.VulcanoHolographicViewer = (() => {
             <div class="holographic-sources"></div>
           </div>
         </div>
-
-        <button class="holographic-nav prev" type="button" aria-label="Cápsula anterior">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M15 18l-6-6 6-6"/>
-          </svg>
-        </button>
-
-        <button class="holographic-nav next" type="button" aria-label="Siguiente cápsula">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M9 18l6-6-6-6"/>
-          </svg>
-        </button>
       </div>
+
+      <button class="holographic-nav next" type="button" aria-label="Siguiente cápsula">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
+      </button>
     `;
 
     document.body.appendChild(overlay);

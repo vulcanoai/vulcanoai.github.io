@@ -7777,37 +7777,39 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  width: 48px;
-  height: 48px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  width: 56px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   color: var(--text);
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
+  transition: all 0.2s ease;
+  z-index: 10;
 }
 
 .holographic-nav:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-50%) scale(1.1);
+  background: #ffffff;
+  border-color: #a78bfa;
+  transform: translateY(-50%) scale(1.05);
+  box-shadow: 0 4px 12px rgba(167, 139, 250, 0.3);
 }
 
 .holographic-nav:disabled {
   opacity: 0.3;
   cursor: not-allowed;
-  transform: translateY(-50%) scale(0.9);
+  transform: translateY(-50%);
 }
 
 .holographic-nav.prev {
-  left: -24px;
+  left: 20px;
 }
 
 .holographic-nav.next {
-  right: -24px;
+  right: 20px;
 }
 
 .holographic-nav svg {
@@ -7947,7 +7949,22 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   }
 
   .holographic-nav {
-    display: none;
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  .holographic-nav.prev {
+    left: 10px;
+  }
+
+  .holographic-nav.next {
+    right: 10px;
+  }
+
+  .holographic-nav svg {
+    width: 18px;
+    height: 18px;
   }
 
   .holographic-archive-badge {
