@@ -4019,6 +4019,43 @@ pre{background:var(--panel); border:1px solid var(--line); padding:12px; border-
   opacity: 0.8;
 }
 
+[data-theme="ethereal"] .hero-social {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+[data-theme="ethereal"] .hero-social-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+[data-theme="ethereal"] .hero-social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: var(--text);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+[data-theme="ethereal"] .hero-social-link:hover {
+  border-color: #a78bfa;
+  transform: translateY(-1px);
+}
+
+[data-theme="ethereal"] .hero-social-link svg {
+  flex-shrink: 0;
+}
+
 [data-theme="ethereal"] .capsule-layout{
   display: grid;
   grid-template-columns: minmax(0, 1fr) 320px;
