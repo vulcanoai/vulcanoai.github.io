@@ -1,78 +1,442 @@
 /*
-  capsule-main.js — Main page implementation using unified chat component
+  capsule-main.js — Archive-first experience for Vulcano capsules
 */
 (() => {
   const config = window.AILatamConfig || {};
   const api = config.api || {};
   const docUrl = api.capsulesDocUrl || '/data/capsules/doc-latest.txt';
 
-  const chatInterface = window.VulcanoChatComponent.create('chat-interface', {
-    hasHorizontalChips: true,
-    placeholder: "Escribe el título de una cápsula o elige una de la lista…",
-    initialMessage: `
-      <article class="capsule-message from-agent">
-        <span class="capsule-sender">Vulcano</span>
-        <p>Hola. Tengo cápsulas listas para que pases menos tiempo frente a la pantalla.</p>
-        <p>Toca un título en la parte inferior o escribe el nombre para repasar el contenido.</p>
-      </article>
-    `,
-    defaultChips: [],
-    onSubmit: handleUserInput
-  });
+  const state = {
+    capsules: [],
+    filteredCapsules: [],
+    tags: [],
+    tagLabels: new Map(),
+    tagCounts: new Map(),
+    activeTag: 'todos',
+    loading: true,
+    error: null,
+    generatedAt: null,
+    source: null,
+    voiceButtons: new Map()
+  };
 
-  if (!chatInterface) {
-    console.error('capsule-main: no se pudo inicializar la interfaz de chat');
-    return;
+  const voiceState = {
+    supported: typeof window !== 'undefined' && 'speechSynthesis' in window,
+    activeId: null,
+    utterance: null
+  };
+
+  const elements = {
+    updatedLabel: document.getElementById('capsule-updated'),
+    archive: document.getElementById('capsule-archive'),
+    tagFilter: document.getElementById('tag-filter'),
+    playLatest: document.getElementById('play-latest-button'),
+    heroNote: document.querySelector('.hero-note')
+  };
+
+  init();
+
+  function init() {
+    renderCapsules();
+    renderTagFilter();
+    updatePlayLatestState();
+    loadCapsules();
+    setupPlayLatest();
+    window.addEventListener('beforeunload', cancelVoicePlayback, { once: true });
   }
 
-  const updatedLabel = document.getElementById('capsule-updated');
-  const state = chatInterface.state;
-  state.loading = true;
-  state.error = null;
-  state.capsules = [];
-  state.capsuleIndex = new Map();
-  state.generatedAt = null;
-  state.rawDocument = '';
-
-  loadCapsules();
-  setupArchiveToggle();
-
   async function loadCapsules() {
-    if (updatedLabel) updatedLabel.textContent = 'cargando…';
+    setLoading(true);
     try {
       const { text, updatedAt, source } = await fetchLatestDocument();
-      state.rawDocument = text;
-      state.source = source;
-
       const capsules = parseDocumentToCapsules(text);
+      enhanceCapsules(capsules);
       state.capsules = capsules;
-      state.capsuleIndex = buildIndex(capsules);
-      state.loading = false;
+      state.filteredCapsules = applyFilterToCapsules(state.activeTag, capsules);
       state.generatedAt = updatedAt || new Date().toISOString();
-
-      if (updatedLabel) {
-        updatedLabel.textContent = formatTimestamp(state.generatedAt);
-      }
-
-      const chipList = capsules.map(cap => ({ prompt: cap.title, label: cap.title }));
-      state.defaultChips = chipList;
-      chatInterface.updateChips(chipList);
-
-      if (!capsules.length) {
-        appendSystemNote([
-          'Todavía no hay cápsulas registradas.',
-          'Asegúrate de que el documento tiene contenido separado por "---".'
-        ]);
-      }
+      state.source = source;
+      state.error = null;
+      buildTagIndex(capsules);
+      renderTagFilter();
+      renderCapsules();
+      updatePlayLatestState();
+      updateTimestampLabel();
     } catch (err) {
-      state.loading = false;
-      state.error = 'No pude cargar las cápsulas en este momento.';
-      if (updatedLabel) updatedLabel.textContent = 'sin conexión';
       console.error('capsule-main: error al cargar documento', err);
-      appendSystemNote([
-        'No pude obtener el documento con las cápsulas.',
-        'Verifica que el workflow esté publicando los archivos y que tengas conexión.'
-      ]);
+      state.error = 'No pude cargar las cápsulas en este momento.';
+      renderCapsules();
+      updatePlayLatestState();
+      if (elements.updatedLabel) {
+        elements.updatedLabel.textContent = 'sin conexión';
+      }
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function setLoading(value) {
+    state.loading = value;
+    if (value) {
+      renderCapsules();
+    }
+  }
+
+  function updateTimestampLabel() {
+    if (!elements.updatedLabel || !state.generatedAt) return;
+    elements.updatedLabel.textContent = formatTimestamp(state.generatedAt);
+  }
+
+  function setupPlayLatest() {
+    if (!elements.playLatest) return;
+    if (!voiceState.supported) {
+      elements.playLatest.disabled = true;
+      if (elements.heroNote) {
+        elements.heroNote.textContent = 'El audio estará disponible en navegadores compatibles con síntesis de voz.';
+      }
+      return;
+    }
+
+    elements.playLatest.addEventListener('click', () => {
+      const latest = state.capsules[0];
+      if (!latest) return;
+      toggleCapsuleVoice(latest);
+    });
+  }
+
+  function updatePlayLatestState() {
+    if (!elements.playLatest) return;
+    const hasCapsules = Boolean(state.capsules.length);
+    if (!voiceState.supported || !hasCapsules) {
+      elements.playLatest.disabled = true;
+    } else {
+      elements.playLatest.disabled = false;
+    }
+  }
+
+  function renderTagFilter() {
+    const container = elements.tagFilter;
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    const allButton = createFilterChip({
+      slug: 'todos',
+      label: 'Todos',
+      count: state.capsules.length,
+      active: state.activeTag === 'todos'
+    });
+    container.appendChild(allButton);
+
+    state.tags.forEach(slug => {
+      const label = state.tagLabels.get(slug) || slug;
+      const count = state.tagCounts.get(slug) || 0;
+      container.appendChild(createFilterChip({
+        slug,
+        label,
+        count,
+        active: state.activeTag === slug
+      }));
+    });
+  }
+
+  function createFilterChip({ slug, label, count, active }) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'tag-filter-chip' + (active ? ' is-active' : '');
+    button.textContent = count ? `${beautifyTagLabel(label)} (${count})` : beautifyTagLabel(label);
+    button.setAttribute('role', 'radio');
+    button.setAttribute('aria-checked', active ? 'true' : 'false');
+    button.dataset.tag = slug;
+    button.addEventListener('click', () => {
+      if (state.activeTag === slug) return;
+      state.activeTag = slug;
+      state.filteredCapsules = applyFilterToCapsules(slug, state.capsules);
+      renderTagFilter();
+      renderCapsules();
+      updatePlayLatestState();
+    });
+    return button;
+  }
+
+  function renderCapsules() {
+    const container = elements.archive;
+    if (!container) return;
+
+    container.innerHTML = '';
+    state.voiceButtons.clear();
+
+    if (voiceState.activeId && !state.filteredCapsules.some(cap => cap.id === voiceState.activeId)) {
+      cancelVoicePlayback();
+    }
+
+    if (state.loading) {
+      container.appendChild(buildInfoCard('Cargando cápsulas…'));
+      return;
+    }
+
+    if (state.error) {
+      container.appendChild(buildInfoCard(state.error, true));
+      return;
+    }
+
+    if (!state.filteredCapsules.length) {
+      const message = state.activeTag === 'todos'
+        ? 'Aún no tenemos cápsulas disponibles. Vuelve pronto.'
+        : 'No hay cápsulas con esta etiqueta por ahora.';
+      container.appendChild(buildInfoCard(message));
+      return;
+    }
+
+    state.filteredCapsules.forEach(capsule => {
+      container.appendChild(buildCapsuleCard(capsule));
+    });
+
+    updateVoiceButtons();
+  }
+
+  function buildCapsuleCard(capsule) {
+    const article = document.createElement('article');
+    article.className = 'capsule-card';
+    article.dataset.capsuleId = capsule.id;
+
+    const header = document.createElement('header');
+    header.className = 'card-header';
+
+    const date = document.createElement('span');
+    date.className = 'card-date';
+    date.textContent = formatDate(capsule.createdAt || capsule.createdISO || state.generatedAt);
+    header.appendChild(date);
+
+    if (capsule.primarySource) {
+      const source = document.createElement('a');
+      source.className = 'card-source';
+      source.href = capsule.primarySource.url;
+      source.target = '_blank';
+      source.rel = 'noopener noreferrer';
+      source.textContent = capsule.primarySource.title || 'Fuente';
+      header.appendChild(source);
+    }
+
+    article.appendChild(header);
+
+    const title = document.createElement('h3');
+    title.className = 'card-title';
+    title.textContent = capsule.title || 'Sin título';
+    article.appendChild(title);
+
+    if (capsule.summary) {
+      const summary = document.createElement('p');
+      summary.className = 'card-summary';
+      summary.textContent = capsule.summary;
+      article.appendChild(summary);
+    }
+
+    if (capsule.mainIdea && capsule.mainIdea !== capsule.summary) {
+      const insight = document.createElement('p');
+      insight.className = 'card-main-idea';
+      insight.textContent = `Idea central: ${capsule.mainIdea}`;
+      article.appendChild(insight);
+    }
+
+    const bullets = document.createElement('ul');
+    bullets.className = 'card-bullets';
+    const bodyItems = Array.isArray(capsule.body) ? capsule.body : [capsule.body];
+    bodyItems
+      .map(item => (item || '').trim())
+      .filter(Boolean)
+      .forEach(text => {
+        const li = document.createElement('li');
+        li.textContent = text;
+        bullets.appendChild(li);
+      });
+    if (!bullets.children.length) {
+      const li = document.createElement('li');
+      li.textContent = 'Sin detalles adicionales.';
+      bullets.appendChild(li);
+    }
+    article.appendChild(bullets);
+
+    const footer = document.createElement('footer');
+    footer.className = 'card-footer';
+
+    const tagsWrapper = document.createElement('div');
+    tagsWrapper.className = 'card-tags';
+    if (capsule.tags && capsule.tags.length) {
+      capsule.tags.forEach(tag => {
+        const chip = document.createElement('span');
+        chip.className = 'card-tag';
+        chip.textContent = beautifyTagLabel(tag);
+        chip.addEventListener('click', () => {
+          const slug = normalizeTag(tag);
+          if (!slug) return;
+          state.activeTag = slug;
+          state.filteredCapsules = applyFilterToCapsules(slug, state.capsules);
+          renderTagFilter();
+          renderCapsules();
+        });
+        tagsWrapper.appendChild(chip);
+      });
+    } else {
+      const placeholder = document.createElement('span');
+      placeholder.className = 'card-tag is-muted';
+      placeholder.textContent = 'sin etiquetas';
+      tagsWrapper.appendChild(placeholder);
+    }
+    footer.appendChild(tagsWrapper);
+
+    const actions = document.createElement('div');
+    actions.className = 'card-actions';
+
+    const voiceButton = document.createElement('button');
+    voiceButton.type = 'button';
+    voiceButton.className = 'card-action card-action-voice';
+    voiceButton.innerHTML = `
+      <svg width="16" height="16" aria-hidden="true" viewBox="0 0 24 24">
+        <path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3zm7 9a7 7 0 0 1-7 7" fill="none" stroke="currentColor" stroke-width="1.5" />
+        <path d="M5 10v2a7 7 0 0 0 14 0v-2" fill="none" stroke="currentColor" stroke-width="1.5" />
+      </svg>
+      <span class="action-label">Escuchar cápsula</span>
+    `;
+    if (!voiceState.supported) {
+      voiceButton.disabled = true;
+      voiceButton.title = 'Tu navegador no soporta síntesis de voz.';
+    } else {
+      voiceButton.addEventListener('click', () => toggleCapsuleVoice(capsule));
+    }
+    actions.appendChild(voiceButton);
+    state.voiceButtons.set(capsule.id, voiceButton);
+
+    if (capsule.sources && capsule.sources.length) {
+      const primary = capsule.primarySource || capsule.sources[0];
+      const sourceLink = document.createElement('a');
+      sourceLink.className = 'card-action card-action-link';
+      sourceLink.href = primary.url || '#';
+      sourceLink.target = '_blank';
+      sourceLink.rel = 'noopener noreferrer';
+      sourceLink.innerHTML = `
+        <svg width="16" height="16" aria-hidden="true" viewBox="0 0 24 24">
+          <path d="M7 17L17 7" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M10 7h7v7" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        Fuente
+      `;
+      actions.appendChild(sourceLink);
+    }
+
+    if (window.VulcanoHolographicViewer) {
+      const detailButton = document.createElement('button');
+      detailButton.type = 'button';
+      detailButton.className = 'card-action card-action-detail';
+      detailButton.innerHTML = `
+        <svg width="16" height="16" aria-hidden="true" viewBox="0 0 24 24">
+          <path d="M12 5v14" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M5 12h14" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        Ver ficha completa
+      `;
+      detailButton.addEventListener('click', () => {
+        window.VulcanoHolographicViewer.show(state.capsules, state.capsules.findIndex(cap => cap.id === capsule.id));
+      });
+      actions.appendChild(detailButton);
+    }
+
+    footer.appendChild(actions);
+    article.appendChild(footer);
+
+    return article;
+  }
+
+  function buildInfoCard(message, isError = false) {
+    const div = document.createElement('div');
+    div.className = 'archive-empty' + (isError ? ' is-error' : '');
+    div.textContent = message;
+    return div;
+  }
+
+  function toggleCapsuleVoice(capsule) {
+    if (!voiceState.supported) return;
+    if (!capsule) return;
+
+    if (voiceState.activeId === capsule.id) {
+      cancelVoicePlayback();
+      return;
+    }
+
+    const text = buildVoiceText(capsule);
+    if (!text) return;
+
+    cancelVoicePlayback();
+
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'es-CO';
+    utterance.rate = 1;
+    utterance.pitch = 1;
+    utterance.onend = () => {
+      voiceState.activeId = null;
+      voiceState.utterance = null;
+      updateVoiceButtons();
+    };
+    utterance.onerror = () => {
+      voiceState.activeId = null;
+      voiceState.utterance = null;
+      updateVoiceButtons();
+    };
+
+    voiceState.activeId = capsule.id;
+    voiceState.utterance = utterance;
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(utterance);
+    updateVoiceButtons();
+  }
+
+  function cancelVoicePlayback() {
+    if (!voiceState.supported) return;
+    if (window.speechSynthesis.speaking) {
+      window.speechSynthesis.cancel();
+    }
+    voiceState.activeId = null;
+    voiceState.utterance = null;
+    updateVoiceButtons();
+  }
+
+  function buildVoiceText(capsule) {
+    if (!capsule) return '';
+    const pieces = [];
+    if (capsule.title) pieces.push(capsule.title);
+    if (capsule.summary) pieces.push(capsule.summary);
+    if (capsule.mainIdea && capsule.mainIdea !== capsule.summary) {
+      pieces.push(`Idea central: ${capsule.mainIdea}`);
+    }
+    const bodyItems = Array.isArray(capsule.body) ? capsule.body : [capsule.body];
+    bodyItems
+      .map(item => (item || '').trim())
+      .filter(Boolean)
+      .forEach((item, index) => {
+        pieces.push(`Punto ${index + 1}: ${item}`);
+      });
+    return pieces.join('. ');
+  }
+
+  function updateVoiceButtons() {
+    state.voiceButtons.forEach((button, id) => {
+      const active = voiceState.activeId === id;
+      if (!button) return;
+      button.classList.toggle('is-playing', active);
+      button.setAttribute('aria-pressed', active ? 'true' : 'false');
+      const label = button.querySelector('.action-label');
+      if (label) {
+        label.textContent = active ? 'Detener audio' : 'Escuchar cápsula';
+      }
+    });
+
+    if (elements.playLatest) {
+      const active = voiceState.activeId && state.capsules.length && state.capsules[0].id === voiceState.activeId;
+      elements.playLatest.classList.toggle('is-playing', Boolean(active));
+      elements.playLatest.setAttribute('aria-pressed', active ? 'true' : 'false');
+      const label = elements.playLatest.querySelector('.hero-button-label');
+      if (label) {
+        label.textContent = active ? 'Detener audio' : 'Escuchar la última cápsula';
+      }
     }
   }
 
@@ -127,92 +491,91 @@
     return { text, updatedAt };
   }
 
-  function handleUserInput(rawQuery, helpers) {
-    const query = (rawQuery || '').trim();
-
-    // Check if this is a capsule title (from chip click)
-    const matchingCapsule = findCapsule(query);
-
-    if (matchingCapsule && window.VulcanoHolographicViewer) {
-      // Show holographic viewer for capsule
-      const capsuleIndex = state.capsules.findIndex(cap => cap.id === matchingCapsule.id);
-      window.VulcanoHolographicViewer.show(state.capsules, capsuleIndex);
-      return;
-    }
-
-    // Fallback to chat response for manual queries
-    const placeholder = helpers.appendAgent(['Buscando cápsula…'], {});
-    const response = buildCapsuleResponse(query);
-    updateAgent(placeholder, response.paragraphs, { sources: response.sources });
-  }
-
-  function buildCapsuleResponse(query) {
-    const clean = query.trim();
-    const mention = clean ? `"${shorten(clean)}"` : 'esa cápsula';
-
-    if (state.loading) {
-      return {
-        paragraphs: ['Sigo cargando el documento. Intenta de nuevo en unos segundos.'],
-        sources: []
-      };
-    }
-
-    if (state.error) {
-      return {
-        paragraphs: [state.error, 'Puedes revisar el documento y recargar la página.'],
-        sources: []
-      };
-    }
-
-    if (!state.capsules.length) {
-      return {
-        paragraphs: ['Aún no hay cápsulas guardadas en el documento.'],
-        sources: []
-      };
-    }
-
-    const match = findCapsule(clean);
-    if (!match) {
-      const suggestions = state.capsules.slice(0, 4).map(cap => `• ${cap.title}`);
-      const followUp = suggestions.length
-        ? ['Puedes elegir una de estas cápsulas:', ...suggestions]
-        : ['Puedes escribir una cápsula nueva y actualizar el documento.'];
-      return {
-        paragraphs: [`No encontré ${mention}.`, ...followUp],
-        sources: []
-      };
-    }
-
-    const paragraphs = [];
-    if (match.summary && match.summary !== match.body[0]) {
-      paragraphs.push(match.summary);
-    }
-    match.body.forEach(line => {
-      if (line) paragraphs.push(line);
+  function enhanceCapsules(capsules) {
+    capsules.forEach(cap => {
+      const tagSlugs = Array.isArray(cap.tags)
+        ? cap.tags.map(tag => normalizeTag(tag)).filter(Boolean)
+        : [];
+      cap.tagSlugs = tagSlugs;
+      cap.primarySource = Array.isArray(cap.sources) && cap.sources.length ? cap.sources[0] : null;
     });
-    if (match.tags.length) {
-      paragraphs.push(`Etiquetas: ${match.tags.join(', ')}.`);
-    }
-    if (state.generatedAt) {
-      paragraphs.push(`Última sincronización: ${formatTimestamp(state.generatedAt)}.`);
-    }
-
-    return {
-      paragraphs,
-      sources: match.sources
-    };
   }
 
-  function findCapsule(query) {
-    if (!query) return null;
-    const normalized = normalizeText(query);
-    if (!normalized) return null;
+  function applyFilterToCapsules(slug, capsules) {
+    if (!slug || slug === 'todos') {
+      return capsules.slice();
+    }
+    return capsules.filter(cap => Array.isArray(cap.tagSlugs) && cap.tagSlugs.includes(slug));
+  }
 
-    const exact = state.capsuleIndex.get(normalized);
-    if (exact) return exact;
+  function buildTagIndex(capsules) {
+    const counts = new Map();
+    const labels = new Map();
 
-    const partial = state.capsules.find(cap => cap.searchTokens.some(token => token.includes(normalized) || normalized.includes(token)));
-    return partial || null;
+    capsules.forEach(cap => {
+      (cap.tags || []).forEach(tag => {
+        const slug = normalizeTag(tag);
+        if (!slug) return;
+        counts.set(slug, (counts.get(slug) || 0) + 1);
+        if (!labels.has(slug)) {
+          labels.set(slug, tag);
+        }
+      });
+    });
+
+    const ordered = Array.from(counts.entries()).sort((a, b) => {
+      const countDiff = b[1] - a[1];
+      if (countDiff !== 0) return countDiff;
+      const labelA = (labels.get(a[0]) || a[0]).toString();
+      const labelB = (labels.get(b[0]) || b[0]).toString();
+      return labelA.localeCompare(labelB, 'es');
+    });
+
+    state.tags = ordered.map(entry => entry[0]);
+    state.tagLabels = labels;
+    state.tagCounts = counts;
+  }
+
+  function beautifyTagLabel(tag) {
+    return String(tag || '')
+      .replace(/[-_]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .replace(/(^|\s)\p{L}/gu, match => match.toUpperCase());
+  }
+
+  function normalizeTag(tag) {
+    return String(tag || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '')
+      .trim();
+  }
+
+  function formatDate(dateLike) {
+    if (!dateLike) return 'Fecha no disponible';
+    const date = new Date(dateLike);
+    if (!Number.isFinite(date.getTime())) return 'Fecha no disponible';
+    return date.toLocaleDateString('es-CO', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    });
+  }
+
+  function formatTimestamp(dateLike) {
+    if (!dateLike) return 'fecha desconocida';
+    const date = new Date(dateLike);
+    if (!Number.isFinite(date.getTime())) return 'fecha desconocida';
+    return date.toLocaleString('es-CO', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
   }
 
   function parseDocumentToCapsules(text) {
@@ -328,7 +691,7 @@
         return;
       }
 
-      if (/^sources?[:\-]?/i.test(line)) {
+      if (/^sources?[:\-]?/i.test(line) || /^source[:\-]?/i.test(line)) {
         const value = extractValueAfterColon(line);
         if (value) {
           parseSourceList(value).forEach(entry => sources.push(entry));
@@ -362,7 +725,6 @@
       }
 
       if (/^[*\-]\s+https?:\/\//i.test(line)) {
-        // bullet line with URL but without explicit section — treat as source
         pushSource(line);
         return;
       }
@@ -487,20 +849,6 @@
       .filter(Boolean);
   }
 
-  function buildIndex(capsules) {
-    const index = new Map();
-    capsules.forEach(cap => {
-      if (cap.normalizedTitle) index.set(cap.normalizedTitle, cap);
-      cap.searchTokens.forEach(token => {
-        if (token && !index.has(token)) {
-          index.set(token, cap);
-        }
-      });
-    });
-    return index;
-  }
-
-
   function isCapsuleSnapshot(name) {
     if (!name) return false;
     return /^doc-.*\.(txt|md)$/i.test(name) ||
@@ -532,23 +880,6 @@
     return null;
   }
 
-  function appendSystemNote(lines) {
-    const stream = chatInterface?.elements?.stream;
-    if (!stream) return;
-    const article = document.createElement('article');
-    article.className = 'capsule-message from-agent';
-    const sender = document.createElement('span');
-    sender.className = 'capsule-sender';
-    sender.textContent = 'Vulcano';
-    article.appendChild(sender);
-    lines.forEach(text => {
-      const p = document.createElement('p');
-      p.textContent = text;
-      article.appendChild(p);
-    });
-    stream.appendChild(article);
-  }
-
   function normalizeText(value) {
     return String(value || '')
       .toLowerCase()
@@ -556,44 +887,5 @@
       .replace(/[^a-z0-9\s]/g, ' ')
       .replace(/\s+/g, ' ')
       .trim();
-  }
-
-  function shorten(value, max = 48) {
-    const text = String(value || '').trim();
-    if (text.length <= max) return text;
-    return `${text.slice(0, max - 1)}…`;
-  }
-
-  function formatTimestamp(dateLike) {
-    if (!dateLike) return 'fecha desconocida';
-    const date = new Date(dateLike);
-    if (!Number.isFinite(date.getTime())) return 'fecha desconocida';
-    return date.toLocaleString('es-CO', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-  }
-
-  function setupArchiveToggle() {
-    const archiveToggle = document.getElementById('archive-toggle');
-    if (!archiveToggle) return;
-
-    archiveToggle.addEventListener('click', () => {
-      if (!state.capsules.length) {
-        appendSystemNote([
-          'No hay cápsulas disponibles en el archivo.',
-          'Espera a que se carguen las cápsulas para acceder al archivo.'
-        ]);
-        return;
-      }
-
-      // Show holographic viewer with all capsules starting from the first one
-      if (window.VulcanoHolographicViewer) {
-        window.VulcanoHolographicViewer.show(state.capsules, 0);
-      }
-    });
   }
 })();

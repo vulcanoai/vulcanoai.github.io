@@ -32,34 +32,85 @@
         </div>
         <div class="capsule-heading">
           <p class="capsule-title">Vulcano AI</p>
-          <p class="capsule-subtitle">Conversación inteligente sobre IA en LATAM</p>
+          <p class="capsule-subtitle">Archivo de inteligencia artificial en América Latina</p>
         </div>
+      </div>
+      <div class="capsule-header-meta">
+        <span class="status-indicator">
+          <span class="status-dot"></span>
+          Última actualización: <span id="capsule-updated">—</span>
+        </span>
+        <a class="capsule-link" href="/pages/vision.html">Visión Vulcano</a>
       </div>
     </header>
 
-    <div id="chat-interface"></div>
+    <section class="capsule-hero" aria-label="Resumen de la colección">
+      <div class="hero-copy">
+        <p class="hero-kicker">Curaduría diaria</p>
+        <h1 class="hero-title">Panorama de IA en LATAM en un vistazo</h1>
+        <p class="hero-description">
+          Organizamos cápsulas breves con hallazgos verificables sobre la IA que impacta a América Latina. Todo está catalogado por temática y preparado para que pases menos tiempo frente a la pantalla.
+        </p>
+      </div>
+      <div class="hero-actions">
+        <button class="hero-button" id="play-latest-button" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 5v14l11-7z" fill="currentColor"></path>
+          </svg>
+          <span class="hero-button-label">Escuchar la última cápsula</span>
+        </button>
+        <p class="hero-note">Audio generado con voz sintética neutra. Ideal para escuchar mientras trabajas.</p>
+      </div>
+    </section>
+
+    <section class="capsule-layout" aria-label="Archivo de cápsulas">
+      <div class="archive-panel">
+        <div class="archive-toolbar">
+          <div class="toolbar-header">
+            <h2 class="toolbar-title">Cápsulas recientes</h2>
+            <p class="toolbar-subtitle">Agrupadas por foco temático y origen geográfico.</p>
+          </div>
+          <div class="tag-filter" id="tag-filter" role="radiogroup" aria-label="Filtrar por etiqueta">
+            <!-- filtros generados por JS -->
+          </div>
+        </div>
+        <div class="archive-list" id="capsule-archive" aria-live="polite">
+          <!-- cápsulas -->
+        </div>
+      </div>
+
+      <aside class="capsule-aside" aria-label="Herramientas complementarias">
+        <section class="aside-card" aria-labelledby="chat-soon-title">
+          <h3 class="aside-title" id="chat-soon-title">Conversación Vulcano (muy pronto)</h3>
+          <p class="aside-text">Estamos afinando el módulo interactivo para que puedas preguntarle a las cápsulas. Recibirás una experiencia guiada con contexto científico.</p>
+          <button class="aside-button" type="button" disabled>
+            <svg width="16" height="16" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 4h16v12h-6l-4 4v-4H4z" fill="currentColor" />
+            </svg>
+            Chat disponible pronto
+          </button>
+        </section>
+
+        <section class="aside-card" aria-labelledby="methodology-title">
+          <h3 class="aside-title" id="methodology-title">Metodología</h3>
+          <p class="aside-text">Cada cápsula resume fuentes públicas verificadas (&lt;24 h) con prioridad a impactos para gobiernos, energía, salud y talento en la región.</p>
+          <p class="aside-text">Las etiquetas ayudan a navegar el ecosistema: sector, país y tipo de avance.</p>
+        </section>
+      </aside>
+    </section>
 
     <footer class="capsule-footer">
       <div class="footer-content">
-        <span class="status-indicator">
-          <span class="status-dot"></span>
-          Actualización: <span id="capsule-updated">—</span>
-        </span>
+        <p class="footer-credit">Curado por Vulcano AI · Bogotá, Colombia</p>
         <div class="footer-links">
-          <button class="footer-link archive-toggle" id="archive-toggle" type="button">
-            <svg width="16" height="16" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-              <use href="/assets/icons.svg#archive" xlink:href="/assets/icons.svg#archive"></use>
-            </svg>
-            Archivo
-          </button>
-          <a class="footer-link" href="/pages/vision.html">Vulcano Premium</a>
+          <a class="footer-link" href="mailto:ivan@vulcano.ai">Contacto</a>
+          <a class="footer-link" href="https://wa.me/573193620926" target="_blank" rel="noopener noreferrer">WhatsApp</a>
         </div>
       </div>
     </footer>
   </main>
 
   <script src="/assets/js/config.js"></script>
-  <script src="/assets/js/chat-component.js"></script>
   <script src="/assets/js/holographic-viewer.js"></script>
   <script src="/assets/js/capsule-main.js"></script>
 </body>
