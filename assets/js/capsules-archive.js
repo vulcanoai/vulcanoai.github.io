@@ -10,7 +10,8 @@
     loading: true,
     error: null,
     capsules: [],
-    generatedAt: null
+    generatedAt: null,
+    source: null
   };
 
   const elements = {
@@ -26,11 +27,14 @@
     if (elements.updatedLabel) elements.updatedLabel.textContent = 'cargando…';
 
     try {
-      const { text, updatedAt } = await fetchLatestDocument();
-      const capsules = parseDocumentToCapsules(text);
+      const { text, updatedAt, source } = await fetchLatestDocument();
+      const capsules = parseDocumentToCapsules(text) || [];
 
       state.capsules = capsules;
-      state.generatedAt = updatedAt || new Date().toISOString();
+      const payloadGeneratedAt = normalizeDateInput(capsules.generatedAt);
+      const fallbackUpdatedAt = normalizeDateInput(updatedAt);
+      state.generatedAt = payloadGeneratedAt || fallbackUpdatedAt || new Date().toISOString();
+      state.source = source || capsules.source || null;
       state.loading = false;
 
       if (elements.updatedLabel) {
@@ -55,10 +59,35 @@
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const text = await res.text();
       const lastModified = res.headers.get('last-modified');
-      const updatedAt = lastModified ? new Date(lastModified).toISOString() : new Date().toISOString();
-      return { text, updatedAt };
+      const updatedAt = lastModified ? new Date(lastModified).toISOString() : null;
+      return { text, updatedAt, source: 'primary-doc' };
     } catch (initialError) {
-      return await fetchFromGitHubDirectory(initialError);
+      const localJson = await tryFetchLocalJsonSnapshot(initialError);
+      if (localJson) {
+        return localJson;
+      }
+      const fallback = await fetchFromGitHubDirectory(initialError);
+      return { ...fallback, source: 'github-directory' };
+    }
+  }
+
+  async function tryFetchLocalJsonSnapshot(initialError) {
+    const altUrl = '/data/capsules.json';
+    if (docUrl === altUrl) {
+      return null;
+    }
+    try {
+      const res = await fetch(altUrl, { cache: 'no-store' });
+      if (!res.ok) {
+        return null;
+      }
+      const text = await res.text();
+      const lastModified = res.headers.get('last-modified');
+      const updatedAt = lastModified ? new Date(lastModified).toISOString() : null;
+      return { text, updatedAt, source: 'capsules-json', url: altUrl };
+    } catch (err) {
+      console.warn('capsules-archive: fallback a capsules.json falló', err, initialError);
+      return null;
     }
   }
 
@@ -281,6 +310,11 @@
   }
 
   function parseDocumentToCapsules(text) {
+    const jsonCapsules = parseJsonCapsules(text);
+    if (jsonCapsules) {
+      return jsonCapsules;
+    }
+
     const normalized = String(text || '').replace(/\r\n/g, '\n');
     const segments = normalized.split(/\n-{3,}\n/g).map(seg => seg.trim()).filter(Boolean);
     const blocks = segments.length ? segments : (normalized.trim() ? [normalized.trim()] : []);
@@ -289,6 +323,222 @@
     return orderedBlocks
       .map((segment, index) => buildCapsuleFromSegment(segment, index))
       .filter(Boolean);
+  }
+
+  function parseJsonCapsules(payload) {
+    if (payload === null || payload === undefined) {
+      return null;
+    }
+
+    let data = payload;
+    if (typeof payload === 'string') {
+      const trimmed = payload.trim();
+      if (!trimmed || (trimmed[0] !== '{' && trimmed[0] !== '[')) {
+        return null;
+      }
+      try {
+        data = JSON.parse(trimmed);
+      } catch (err) {
+        console.warn('capsules-archive: no pude interpretar cápsulas JSON', err);
+        return null;
+      }
+    }
+
+    const rawCapsules = Array.isArray(data) ? data : data && typeof data === 'object' ? data.capsules : null;
+    if (!Array.isArray(rawCapsules)) {
+      return null;
+    }
+
+    const normalized = rawCapsules
+      .map((entry, index) => normalizeJsonCapsuleEntry(entry, index))
+      .filter(Boolean);
+
+    const generatedAt = extractGeneratedAtFromJson(data);
+    if (generatedAt) {
+      normalized.generatedAt = generatedAt;
+    }
+
+    if (data && typeof data === 'object' && !Array.isArray(data)) {
+      const source = data.source || data.origin || null;
+      if (source) {
+        normalized.source = source;
+      }
+      if (typeof data.version === 'string') {
+        normalized.version = data.version;
+      }
+    }
+
+    return normalized;
+  }
+
+  function normalizeJsonCapsuleEntry(entry, index) {
+    if (!entry || typeof entry !== 'object') {
+      return null;
+    }
+
+    const title = safeString(entry.title || entry.name);
+    const mainIdea = safeString(entry.mainIdea || entry.ideaPrincipal || entry.idea_central);
+    const summary = safeString(entry.summary || entry.resumen || mainIdea);
+    const body = normalizeJsonBody(entry.body || entry.content || entry.highlights, summary || mainIdea);
+
+    let id = safeString(entry.id || entry.capsule_id || entry.capsuleId || entry.slug);
+    if (!id && title) {
+      const slug = normalizeTag(title);
+      if (slug) {
+        id = `capsule-${slug}`;
+      }
+    }
+    if (!id) {
+      id = `capsule-${index + 1}`;
+    }
+
+    const createdRaw = entry.createdAt || entry.created_at || entry.createdISO || entry.created_iso || entry.created;
+    const createdAt = normalizeDateInput(createdRaw);
+    const tags = Array.from(new Set(normalizeJsonTags(entry.tags || entry.labels || entry.topics)));
+    const sources = normalizeJsonSources(entry.sources || entry.references || entry.links);
+    const authors = normalizeJsonAuthors(entry.authors || entry.author);
+
+    const capsule = {
+      id,
+      title: title || summary || body[0] || `Cápsula ${index + 1}`,
+      summary: summary || body[0] || title || '',
+      mainIdea: mainIdea || summary || body[0] || '',
+      body,
+      tags,
+      sources,
+      authors,
+      createdAt: createdAt || null,
+      createdISO: createdAt || safeString(entry.createdISO) || null
+    };
+
+    if (!capsule.summary && capsule.body.length) {
+      capsule.summary = capsule.body[0];
+    }
+    if (!capsule.mainIdea && capsule.summary) {
+      capsule.mainIdea = capsule.summary;
+    }
+
+    return capsule;
+  }
+
+  function normalizeJsonBody(value, fallback) {
+    if (!value && fallback) {
+      return [fallback];
+    }
+    if (!value) {
+      return [];
+    }
+    if (Array.isArray(value)) {
+      return value.map(safeString).filter(Boolean);
+    }
+    if (typeof value === 'string') {
+      const parts = value
+        .split(/\n+/)
+        .map(part => safeString(part))
+        .filter(Boolean);
+      if (parts.length) {
+        return parts;
+      }
+    }
+    return fallback ? [fallback] : [];
+  }
+
+  function normalizeJsonTags(value) {
+    if (!value) return [];
+    if (Array.isArray(value)) {
+      return value.map(safeString).filter(Boolean);
+    }
+    if (typeof value === 'string') {
+      return value
+        .split(/[,;]+/)
+        .map(part => safeString(part))
+        .filter(Boolean);
+    }
+    return [];
+  }
+
+  function normalizeJsonSources(value) {
+    if (!value) return [];
+    const list = Array.isArray(value) ? value : [value];
+    return list
+      .map(entry => {
+        if (!entry) return null;
+        if (typeof entry === 'string') {
+          const text = safeString(entry);
+          if (!text) return null;
+          if (/^https?:\/\//i.test(text)) {
+            return { title: '', url: text };
+          }
+          return { title: text, url: '' };
+        }
+        if (typeof entry === 'object') {
+          const url = safeString(entry.url || entry.href || entry.link || entry.permalink);
+          let title = safeString(entry.title || entry.name || entry.label || entry.text || entry.source);
+          if (!title && url) {
+            title = url;
+          }
+          if (!title && !url) {
+            return null;
+          }
+          return { title, url };
+        }
+        return null;
+      })
+      .filter(Boolean);
+  }
+
+  function normalizeJsonAuthors(value) {
+    if (!value) return [];
+    const list = Array.isArray(value) ? value : [value];
+    return list
+      .map(author => safeString(author))
+      .filter(Boolean);
+  }
+
+  function extractGeneratedAtFromJson(data) {
+    if (!data || typeof data !== 'object' || Array.isArray(data)) {
+      return null;
+    }
+    return normalizeDateInput(
+      data.generated_at ||
+        data.generatedAt ||
+        data.updated_at ||
+        data.updatedAt ||
+        data.generated_at_iso ||
+        data.generatedISO ||
+        null
+    );
+  }
+
+  function normalizeDateInput(value) {
+    if (!value) return null;
+    if (value instanceof Date) {
+      if (!Number.isFinite(value.getTime())) return null;
+      return value.toISOString();
+    }
+    if (typeof value === 'number') {
+      const dateFromNumber = new Date(value);
+      if (!Number.isFinite(dateFromNumber.getTime())) return null;
+      return dateFromNumber.toISOString();
+    }
+    if (typeof value === 'string') {
+      const trimmed = value.trim();
+      if (!trimmed) return null;
+      const dateFromString = new Date(trimmed);
+      if (!Number.isFinite(dateFromString.getTime())) return null;
+      return dateFromString.toISOString();
+    }
+    return null;
+  }
+
+  function safeString(value) {
+    if (typeof value === 'string') {
+      return value.trim();
+    }
+    if (typeof value === 'number' && Number.isFinite(value)) {
+      return String(value);
+    }
+    return '';
   }
 
   function buildCapsuleFromSegment(segment, index) {
