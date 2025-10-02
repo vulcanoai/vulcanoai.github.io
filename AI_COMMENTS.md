@@ -11,7 +11,7 @@
 - Eliminados HTML y JS legacy; sólo quedan los módulos requeridos (`config.js`, `chat-component.js`, `capsule-main.js`, `capsule-vision.js`).
 - Soporte en `capsule-main.js` para snapshots `.md` generados por AUTORESEARCH.
 - Documentación reescrita (`README.md`, `docs/README.md`, `docs/autoresearch.md`).
-- Estado de agente actualizado (`AI_AGENTS.md`, `data/agents.json`).
+- Limpieza del repositorio (v1.1.0): se retiraron APIs, scripts y páginas fuera de alcance.
 
 ## 🔜 Tareas cortas
 1. [ ] Ajustar `BUILD_AGENT_PUT` para publicar también `doc-latest.txt` (requiere buscar `sha`).

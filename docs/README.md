@@ -1,6 +1,6 @@
 # Vulcano AI — Stable Demo Overview
 
-Este repositorio entrega la primera demo estable de Vulcano AI. El producto público se reduce a dos piezas:
+Este repositorio entrega la demo estable `v1.1.0` de Vulcano AI. El producto público se reduce a dos piezas:
 
 1. **Cápsula principal (`index.html`)** — lee un documento de cápsulas generado por el workflow `AUTORESEARCH` y lo sirve en formato conversacional.
 2. **Página de visión (`pages/vision.html`)** — reutiliza el mismo componente de chat para explicar el manifiesto premium.

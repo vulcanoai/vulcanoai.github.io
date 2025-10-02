@@ -1,7 +1,7 @@
-# n8n Repository Assets
+# n8n Assets
 
-**Important:** Workflow JSON files are managed privately in n8n Cloud/Server and should not be committed here.
+Este repositorio incluye únicamente el workflow `AUTORESEARCH.json`, base del agente Vulcano Researcher.
 
-- Keep `n8n/workflows/` empty (only this README and a placeholder).
-- Add human-readable documentation under `docs/workflows/` when required.
-- If you need to restore a workflow locally, import it into n8n rather than storing the JSON in git.
+- Importa el archivo desde `n8n/workflows/AUTORESEARCH.json` en tu instancia.
+- Ajusta las credenciales `openAiApi` y `githubApi` antes de ejecutar.
+- Documentación complementaria: `docs/autoresearch.md`.

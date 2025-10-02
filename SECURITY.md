@@ -4,9 +4,9 @@ Vulcano Ai es un sitio estático. No almacena secretos ni credenciales en el rep
 
 ## Principios
 
-- Solo lectura desde el navegador: el cliente hace `GET` a JSON públicos (sin claves).
+- Solo lectura desde el navegador: el cliente hace `GET` al documento de cápsulas (`doc-latest.txt`/snapshots en GitHub) o al respaldo local `data/capsules.json`.
 - Secretos y automatizaciones viven en n8n (servidor controlado por la administración).
-- Publicación gated: los datos visibles provienen de PRs aprobados o de un endpoint controlado (CDN), nunca de inputs arbitrarios de terceros.
+- Publicación gated: los datos visibles provienen de PRs aprobados o del workflow `AUTORESEARCH` autenticado contra GitHub.
 - Cabeceras/Meta de seguridad: usamos una CSP estricta (ver HTML), `rel="noopener"`, y no cargamos recursos remotos por defecto.
 
 ## Reporte de vulnerabilidades
@@ -20,5 +20,5 @@ No reportes secretos; no existen claves en el repositorio por diseño. Si detect
 ## Buenas prácticas recomendadas (operación)
 
 - En n8n: guarda tokens/keys únicamente en credenciales seguras; no expongas webhooks de escritura sin protección. Prefiere webhooks de salida (POST a GitHub API para abrir PRs) o escritura a un bucket privado/CDN con claves de servicio.
-- Si expones `feedUrl`/`legalUrl`/`panoramaUrl` hacia un CDN, restringe CORS a tu dominio y usa reglas de solo lectura.
+- Si expones el documento de cápsulas desde un CDN propio, restringe CORS a tu dominio y usa reglas de solo lectura.
 - Cuando sea posible, publica datos vía PRs (GitHub App / Tokens con mínimos permisos) para mantener historial y revisión humana.

@@ -1,6 +1,6 @@
 # Punto de sincronización (AI Syncpoint)
 
-Referencia oficial de la demo estable (`main`). Úsala antes de proponer cambios.
+Referencia oficial de la demo estable (`main`). Úsala antes de proponer cambios. Versión vigente: **v1.1.0**.
 
 - Rama: `main`
 - Componentes vivos: `index.html`, `pages/vision.html`, workflow `AUTORESEARCH`.
@@ -14,7 +14,7 @@ Referencia oficial de la demo estable (`main`). Úsala antes de proponer cambios
 
 ## Validación rápida (≤30 s)
 1. Servir el proyecto (`python3 -m http.server 8080`).
-2. Abrir `http://localhost:8080/` → deben aparecer las 3 cápsulas de ejemplo.
+2. Abrir `http://localhost:8080/` → deben aparecer las cápsulas de ejemplo del snapshot local (2 entradas).
 3. Abrir `http://localhost:8080/pages/vision.html` → debe mostrar los prompts predefinidos.
 4. (Opcional) Importar `AUTORESEARCH.json` en n8n y ejecutar una corrida manual para confirmar que se genera un `.md` en `data/capsules/ai-researcher/`.
 

@@ -1,6 +1,6 @@
-# Vulcano AI — Stable Demo
+# Vulcano AI — Stable Demo (v1.1.0)
 
-Este repositorio contiene la demo estable de Vulcano AI: una cápsula conversacional que muestra cápsulas de noticias curadas automáticamente y una página de visión premium. El objetivo es tener una base mínima, limpia y documentada para iterar con seguridad.
+Este repositorio contiene la demo estable de Vulcano AI (dos páginas públicas): la cápsula principal (`index.html`) que presenta las cápsulas de investigación y la página de visión (`pages/vision.html`). El objetivo es tener una base mínima, limpia y documentada para iterar con seguridad.
 
 ## Componentes
 
@@ -30,7 +30,7 @@ python3 -m http.server 8080
 - Configura las credenciales `openAiApi` y `githubApi` en n8n.
 - Importa `n8n/workflows/AUTORESEARCH.json` y ajusta tu schedule (por defecto corre cada hora).
 - El workflow publica archivos `.md` en `data/capsules/ai-researcher/` con contenido textual y el JSON embebido.
-- La web intentará leer `doc-latest.txt`. Si no existe o retorna error, consultará la API de GitHub para descargar el snapshot más reciente que publique el workflow (`doc-*.txt` o `<timestamp>*.md`). Sólo si ambas rutas fallan usará `data/capsules.json` como respaldo local.
+- La web intenta leer `doc-latest.txt`. Si no existe o retorna error, consulta la API de GitHub para descargar el snapshot más reciente (`doc-*.txt` o `<timestamp>*.md`). Solo si ambas rutas fallan usa `data/capsules.json` como respaldo local.
 - Asegúrate de que al menos un snapshot con formato de cápsulas esté accesible públicamente para que la demo tenga contenido.
 
 ## Diseño y experiencia
@@ -47,8 +47,8 @@ python3 -m http.server 8080
 
 ## Próximos pasos sugeridos
 
-1. Automatizar la publicación de `doc-latest.txt` desde el workflow (o exponer una ruta HTTP que la web pueda leer directamente).
-2. Añadir métricas ligeras (p. ej. tiempo de última ejecución, cantidad de cápsulas) en `data/agents.json` para mostrarlas en la UI.
+1. Añadir un paso en `AUTORESEARCH` para publicar también `doc-latest.txt` (o un endpoint equivalente) y así evitar la dependencia de la API de GitHub.
+2. Registrar métricas ligeras del agente (fecha de última ejecución, cápsulas generadas) en un JSON dedicado si se requiere monitoreo público.
 3. Preparar despliegues diferenciados (demo, staging, producción) ajustando `assets/js/config.js` mediante variables de entorno o un `window.__CFG__`.
 
 ---

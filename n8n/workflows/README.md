@@ -1,6 +1,6 @@
-# n8n Workflows (local only)
+# Workflow Repository
 
-All workflow JSON files are managed offline in the private n8n instance.
+Este directorio alberga los archivos JSON exportados desde n8n que forman parte de la demo estable. Actualmente sólo contiene `AUTORESEARCH.json`.
 
-To avoid merge conflicts and exposure of credentials, keep this folder empty in git.
-If you need to document a workflow, add a markdown file under `docs/workflows/`.
+- Importa el workflow en tu instancia n8n y configura las credenciales requeridas.
+- Si se agregan nuevos workflows, documentarlos primero en `docs/` y mantener sólo los que respalden las superficies públicas del sitio.

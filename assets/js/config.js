@@ -6,35 +6,17 @@
 */
 window.AILatamConfig = window.AILatamConfig || {
   api: {
-    // Configuración para trabajar con el workflow n8n existente
-    // Reset‑first: usar SOLO feed-latest.json (sin fallbacks)
-    feedUrl: '/data/feed-latest.json',
     capsulesDocUrl: '/data/capsules/doc-latest.txt',
     capsulesGitHub: {
       owner: 'vulcanoai',
       repo: 'vulcanoai.github.io',
       directory: 'data/capsules'
-    },
-    agentsUrl: '/data/agents.json',
-    sourcesUrl: '/data/sources.json',
-    panoramaUrl: '/data/panorama.json',
-    legalUrl: '/data/legal-realtime.json',
-    // Endpoints n8n (ajustar según tu instancia)
-    // Endpoint opcional n8n para recibir envíos independientes (POST JSON)
-    indieSubmitUrl: '',
-    // Agente de búsqueda personalizada (POST {prompt, country?, topics?} -> [{...article}])
-    searchAgentUrl: '',
-    // Disparador de actualización manual (usarás el botón de tu n8n)
-    updateTriggerUrl: '',
-    // Reclamación de autoría (POST {hash, alias, email})
-    claimAuthorUrl: ''
+    }
   },
   site: {
-    name: 'Vulcano Ai',
+    name: 'Vulcano AI',
     baseUrl: '/',
-    resetMode: true,
-    nav: [],
-    extraNav: []
+    version: 'v1.1.0'
   },
   social: {
     instagram: 'https://instagram.com/vulcanoai.solutions',
@@ -49,11 +31,6 @@ window.AILatamConfig = window.AILatamConfig || {
     mercadopago: 'https://link.mercadopago.com.co/vulcanoai',
     nequiNumber: '+57 319 362 0926',
     discord: 'https://discord.gg/7AjU7kkH',
-    twitch: 'https://www.twitch.tv/vulcanoai',
-    brebKeys: [
-      // Llaves Bre-b (ejemplos). Reemplazar por las verdaderas si aplica.
-      { etiqueta: 'Bre-b Principal', llave: 'breb1qxy2kgdygjrsqtzq2n0...' },
-      { etiqueta: 'Bre-b Respaldo', llave: 'breb1l9hk0t5jv7w3kz8m2a...' }
-    ]
+    twitch: 'https://www.twitch.tv/vulcanoai'
   }
 };

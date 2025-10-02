@@ -5,7 +5,7 @@ Gracias por tu interés. Buscamos un flujo claro y auditable.
 ## Flujo de trabajo
 
 1. Crea un fork y una rama descriptiva.
-2. Si agregas datos, incluye archivos JSON en `data/` o `submissions/independiente/AAAA-MM/`.
+2. Si agregas datos, actualiza `data/capsules.json` (para pruebas locales) o proporciona indicaciones claras para el workflow `AUTORESEARCH`.
 3. Abre un Pull Request con descripción concisa (qué, por qué, fuentes).
 4. El equipo revisa y aprueba.
 

@@ -30,7 +30,7 @@ Solo existe un agente operativo en esta versión: **Vulcano Researcher**. El obj
 
 ## 4. Observabilidad
 
-`data/agents.json` debe reflejar los siguientes campos:
+Si se requiere monitoreo público, crea un `data/agents.json` con los siguientes campos:
 
 ```json
 [
@@ -44,7 +44,7 @@ Solo existe un agente operativo en esta versión: **Vulcano Researcher**. El obj
 ]
 ```
 
-Actualizar `ultimo_ejecucion` y `throughput` una vez que el workflow se ejecute en producción.
+Completa `ultimo_ejecucion` y `throughput` una vez que el workflow se ejecute en producción.
 
 ## 5. Roadmap de agentes
 

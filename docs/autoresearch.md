@@ -1,6 +1,6 @@
 # Workflow `AUTORESEARCH`
 
-Workflow n8n responsable de recolectar noticias globales de IA y convertirlas en cápsulas listas para la web. El archivo JSON se encuentra en `n8n/workflows/AUTORESEARCH.json`.
+Workflow n8n responsable de recolectar noticias globales de IA y convertirlas en cápsulas listas para la web. El archivo JSON se encuentra en `n8n/workflows/AUTORESEARCH.json` y corresponde a la versión estable `v1.1.0`.
 
 ## Resumen
 

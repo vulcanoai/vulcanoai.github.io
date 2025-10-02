@@ -1,7 +1,7 @@
 # Vulcano AI — Stable Demo Status
 
-Fecha: 2025‑09‑29  
-Release: Demo estable v1 (Cápsula + Visión + AUTORESEARCH)
+Fecha: 2025‑10‑02  
+Release: Demo estable v1.1.0 (Cápsula + Visión + AUTORESEARCH)
 
 ## ✅ Qué está en producción
 
@@ -17,7 +17,7 @@ Release: Demo estable v1 (Cápsula + Visión + AUTORESEARCH)
 
 - `data/capsules.json` contiene 2 cápsulas de ejemplo para la demo local.
 - `data/capsules/ai-researcher/` almacena snapshots `.md` generados por el workflow.
-- `data/agents.json` registra al agente "Vulcano Researcher" como demo estable.
+- Las cápsulas históricas continúan disponibles en `data/capsules/ai-researcher/` (vía GitHub).
 
 ## 🚦 Próximos pasos mínimos
 
@@ -40,7 +40,7 @@ Para validar el workflow:
 
 ## Historial reciente
 
-- 2025‑09‑29: Se eliminan páginas legacy, se documenta la demo y se agrega snapshot actualizado.
+- 2025‑10‑02: Limpieza completa del repositorio, solo quedan `index.html` y `pages/vision.html` como superficies públicas; se publica la versión `v1.1.0`.
 - 2025‑09‑29: `capsule-main.js` soporta archivos `.md` generados por AUTORESEARCH.
 - 2025‑09‑29: Documentación y AI nodes actualizados para reflejar la nueva arquitectura.
 
